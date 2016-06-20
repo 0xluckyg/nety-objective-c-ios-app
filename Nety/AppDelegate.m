@@ -18,7 +18,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [self initializeTabBar];
-
+    
     return YES;
 }
 
@@ -56,6 +56,10 @@
     //initialize tabBar
     [self.window makeKeyAndVisible];
     [self.window setRootViewController:tabBarRootController];
+    
+    //make status bar text color white
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

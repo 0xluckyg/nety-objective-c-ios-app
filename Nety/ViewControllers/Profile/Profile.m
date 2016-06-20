@@ -1,19 +1,18 @@
 //
-//  Network.m
+//  Profile.m
 //  Nety
 //
 //  Created by Scott Cho on 6/20/16.
 //  Copyright © 2016 Scott Cho. All rights reserved.
 //
 
-#import "Network.h"
-#import "UIPrinciples.h"
+#import "Profile.h"
 
-@interface Network ()
+@interface Profile ()
 
 @end
 
-@implementation Network
+@implementation Profile
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,14 +21,8 @@
     [self initializeDesign];
 }
 
--(void) initializeDesign {
-    
-    // UIPrinciples class from Util folder
-    UIPrinciples *UIPrinciple = [[UIPrinciples alloc] init];
-    
-    //Set navbar color
-    self.topBar.backgroundColor = UIPrinciple.color;
-    [[UINavigationBar appearance] setBarTintColor:UIPrinciple.color];
+- (void)initializeDesign {
+    self.profileBackground.backgroundColor = [UIColor blueColor];
 }
 
 - (void)didReceiveMemoryWarning {
