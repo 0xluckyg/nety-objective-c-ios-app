@@ -9,10 +9,16 @@
 /* Begin PBXBuildFile section */
 		67DD1A7C1D17BEB500FBEA0F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DD1A7B1D17BEB500FBEA0F /* main.m */; };
 		67DD1A7F1D17BEB500FBEA0F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DD1A7E1D17BEB500FBEA0F /* AppDelegate.m */; };
-		67DD1A821D17BEB500FBEA0F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DD1A811D17BEB500FBEA0F /* ViewController.m */; };
-		67DD1A851D17BEB500FBEA0F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1A831D17BEB500FBEA0F /* Main.storyboard */; };
 		67DD1A871D17BEB500FBEA0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1A861D17BEB500FBEA0F /* Assets.xcassets */; };
 		67DD1A8A1D17BEB500FBEA0F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1A881D17BEB500FBEA0F /* LaunchScreen.storyboard */; };
+		67DD1A981D17BF1700FBEA0F /* Network.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DD1A971D17BF1700FBEA0F /* Network.m */; };
+		67DD1A9A1D17BF2100FBEA0F /* Network.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1A991D17BF2100FBEA0F /* Network.storyboard */; };
+		67DD1A9D1D17BF6900FBEA0F /* MyNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DD1A9C1D17BF6900FBEA0F /* MyNetwork.m */; };
+		67DD1A9F1D17BF7200FBEA0F /* MyNetwork.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1A9E1D17BF7200FBEA0F /* MyNetwork.storyboard */; };
+		67DD1AA21D17BFC300FBEA0F /* Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DD1AA11D17BFC300FBEA0F /* Chat.m */; };
+		67DD1AA41D17BFCC00FBEA0F /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1AA31D17BFCC00FBEA0F /* Chat.storyboard */; };
+		67DD1AA71D17BFFF00FBEA0F /* MyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DD1AA61D17BFFF00FBEA0F /* MyInfo.m */; };
+		67DD1AA91D17C00600FBEA0F /* MyInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1AA81D17C00600FBEA0F /* MyInfo.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,12 +26,21 @@
 		67DD1A7B1D17BEB500FBEA0F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		67DD1A7D1D17BEB500FBEA0F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		67DD1A7E1D17BEB500FBEA0F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		67DD1A801D17BEB500FBEA0F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		67DD1A811D17BEB500FBEA0F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		67DD1A841D17BEB500FBEA0F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		67DD1A861D17BEB500FBEA0F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		67DD1A891D17BEB500FBEA0F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		67DD1A8B1D17BEB500FBEA0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		67DD1A961D17BF1700FBEA0F /* Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Network.h; sourceTree = "<group>"; };
+		67DD1A971D17BF1700FBEA0F /* Network.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Network.m; sourceTree = "<group>"; };
+		67DD1A991D17BF2100FBEA0F /* Network.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Network.storyboard; sourceTree = "<group>"; };
+		67DD1A9B1D17BF6900FBEA0F /* MyNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNetwork.h; sourceTree = "<group>"; };
+		67DD1A9C1D17BF6900FBEA0F /* MyNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNetwork.m; sourceTree = "<group>"; };
+		67DD1A9E1D17BF7200FBEA0F /* MyNetwork.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyNetwork.storyboard; sourceTree = "<group>"; };
+		67DD1AA01D17BFC300FBEA0F /* Chat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chat.h; sourceTree = "<group>"; };
+		67DD1AA11D17BFC300FBEA0F /* Chat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chat.m; sourceTree = "<group>"; };
+		67DD1AA31D17BFCC00FBEA0F /* Chat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
+		67DD1AA51D17BFFF00FBEA0F /* MyInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfo.h; sourceTree = "<group>"; };
+		67DD1AA61D17BFFF00FBEA0F /* MyInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfo.m; sourceTree = "<group>"; };
+		67DD1AA81D17C00600FBEA0F /* MyInfo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyInfo.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,14 +73,7 @@
 		67DD1A791D17BEB500FBEA0F /* Nety */ = {
 			isa = PBXGroup;
 			children = (
-				67DD1A7D1D17BEB500FBEA0F /* AppDelegate.h */,
-				67DD1A7E1D17BEB500FBEA0F /* AppDelegate.m */,
-				67DD1A801D17BEB500FBEA0F /* ViewController.h */,
-				67DD1A811D17BEB500FBEA0F /* ViewController.m */,
-				67DD1A831D17BEB500FBEA0F /* Main.storyboard */,
-				67DD1A861D17BEB500FBEA0F /* Assets.xcassets */,
-				67DD1A881D17BEB500FBEA0F /* LaunchScreen.storyboard */,
-				67DD1A8B1D17BEB500FBEA0F /* Info.plist */,
+				67DD1A911D17BEF200FBEA0F /* ViewControllers */,
 				67DD1A7A1D17BEB500FBEA0F /* Supporting Files */,
 			);
 			path = Nety;
@@ -74,9 +82,65 @@
 		67DD1A7A1D17BEB500FBEA0F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				67DD1A7D1D17BEB500FBEA0F /* AppDelegate.h */,
+				67DD1A7E1D17BEB500FBEA0F /* AppDelegate.m */,
+				67DD1A861D17BEB500FBEA0F /* Assets.xcassets */,
+				67DD1A881D17BEB500FBEA0F /* LaunchScreen.storyboard */,
+				67DD1A8B1D17BEB500FBEA0F /* Info.plist */,
 				67DD1A7B1D17BEB500FBEA0F /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		67DD1A911D17BEF200FBEA0F /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				67DD1A951D17BEF200FBEA0F /* Network */,
+				67DD1A941D17BEF200FBEA0F /* MyNetwork */,
+				67DD1A921D17BEF200FBEA0F /* Chat */,
+				67DD1A931D17BEF200FBEA0F /* MyInfo */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		67DD1A921D17BEF200FBEA0F /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				67DD1AA01D17BFC300FBEA0F /* Chat.h */,
+				67DD1AA11D17BFC300FBEA0F /* Chat.m */,
+				67DD1AA31D17BFCC00FBEA0F /* Chat.storyboard */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		67DD1A931D17BEF200FBEA0F /* MyInfo */ = {
+			isa = PBXGroup;
+			children = (
+				67DD1AA51D17BFFF00FBEA0F /* MyInfo.h */,
+				67DD1AA61D17BFFF00FBEA0F /* MyInfo.m */,
+				67DD1AA81D17C00600FBEA0F /* MyInfo.storyboard */,
+			);
+			path = MyInfo;
+			sourceTree = "<group>";
+		};
+		67DD1A941D17BEF200FBEA0F /* MyNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				67DD1A9B1D17BF6900FBEA0F /* MyNetwork.h */,
+				67DD1A9C1D17BF6900FBEA0F /* MyNetwork.m */,
+				67DD1A9E1D17BF7200FBEA0F /* MyNetwork.storyboard */,
+			);
+			path = MyNetwork;
+			sourceTree = "<group>";
+		};
+		67DD1A951D17BEF200FBEA0F /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				67DD1A961D17BF1700FBEA0F /* Network.h */,
+				67DD1A971D17BF1700FBEA0F /* Network.m */,
+				67DD1A991D17BF2100FBEA0F /* Network.storyboard */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,9 +200,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67DD1A9A1D17BF2100FBEA0F /* Network.storyboard in Resources */,
 				67DD1A8A1D17BEB500FBEA0F /* LaunchScreen.storyboard in Resources */,
 				67DD1A871D17BEB500FBEA0F /* Assets.xcassets in Resources */,
-				67DD1A851D17BEB500FBEA0F /* Main.storyboard in Resources */,
+				67DD1AA41D17BFCC00FBEA0F /* Chat.storyboard in Resources */,
+				67DD1AA91D17C00600FBEA0F /* MyInfo.storyboard in Resources */,
+				67DD1A9F1D17BF7200FBEA0F /* MyNetwork.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,23 +216,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				67DD1A821D17BEB500FBEA0F /* ViewController.m in Sources */,
+				67DD1AA21D17BFC300FBEA0F /* Chat.m in Sources */,
 				67DD1A7F1D17BEB500FBEA0F /* AppDelegate.m in Sources */,
+				67DD1A981D17BF1700FBEA0F /* Network.m in Sources */,
+				67DD1A9D1D17BF6900FBEA0F /* MyNetwork.m in Sources */,
 				67DD1A7C1D17BEB500FBEA0F /* main.m in Sources */,
+				67DD1AA71D17BFFF00FBEA0F /* MyInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		67DD1A831D17BEB500FBEA0F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				67DD1A841D17BEB500FBEA0F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		67DD1A881D17BEB500FBEA0F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

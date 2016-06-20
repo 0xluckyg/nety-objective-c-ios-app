@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MyInfo.h
 //  Nety
 //
 //  Created by Scott Cho on 6/20/16.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface MyInfo : UIViewController
 
 @end
-

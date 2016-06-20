@@ -17,7 +17,45 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [self initializeTabBar];
+
     return YES;
+}
+
+-(void)initializeTabBar {
+    //Create a tabBar instance
+    UITabBarController *tabBarRootController = [[UITabBarController alloc] init];
+    
+    //Create storyboard instances
+    UIStoryboard *networkStoryboard = [UIStoryboard storyboardWithName:@"Network" bundle:nil];
+    UIStoryboard *myNetworkStoryboard = [UIStoryboard storyboardWithName:@"MyNetwork" bundle:nil];
+    UIStoryboard *chatStoryboard = [UIStoryboard storyboardWithName:@"Chat" bundle:nil];
+    UIStoryboard *myInfoStoryboard = [UIStoryboard storyboardWithName:@"MyInfo" bundle:nil];
+    
+    //Create view controller instances inside each storyboard
+    UIViewController *networkViewController = [networkStoryboard instantiateViewControllerWithIdentifier:@"Network"];
+    UIViewController *myNetworkViewController = [myNetworkStoryboard instantiateViewControllerWithIdentifier:@"MyNetwork"];
+    UIViewController *chatViewController = [chatStoryboard instantiateViewControllerWithIdentifier:@"Chat"];
+    UIViewController *myInfoViewController = [myInfoStoryboard instantiateViewControllerWithIdentifier:@"MyInfo"];
+    
+    //Set title and image of each tabBar item
+    [networkViewController.tabBarItem setTitle:@"Net"];
+    [myNetworkViewController.tabBarItem setTitle:@"My Net"];
+    [chatViewController.tabBarItem setTitle:@"Chat"];
+    [myInfoViewController.tabBarItem setTitle:@"Me"];
+    
+    //Set tabBar style
+    [[UITabBar appearance] setBackgroundColor:[UIColor whiteColor]];
+    [[UITabBar appearance] setBackgroundImage:[[UIImage alloc] init]];
+    [[UITabBar appearance] setShadowImage:[[UIImage alloc] init]];
+    
+    //Connect tabBar and view controllers together
+    NSArray* controllers = [NSArray arrayWithObjects:networkViewController, myNetworkViewController, chatViewController, myInfoViewController, nil];
+    tabBarRootController.viewControllers = controllers;
+    
+    //initialize tabBar
+    [self.window makeKeyAndVisible];
+    [self.window setRootViewController:tabBarRootController];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
