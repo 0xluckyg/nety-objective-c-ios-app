@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--MyNetwork-->
@@ -17,16 +18,121 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="My Net" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rP4-No-ahU">
-                                <rect key="frame" x="172" y="311" width="56" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wwD-cr-4zv">
+                                <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="0.0"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="My Network" id="iD2-vP-j0f"/>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k90-qP-cqH">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="20"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vex-kh-xZF">
+                                <rect key="frame" x="0.0" y="108" width="414" height="628"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyNetworkCell" rowHeight="75" id="zIg-HZ-xIR" customClass="MyNetworkCell">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zIg-HZ-xIR" id="p9W-g7-qIt">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="74.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u1h-IT-HzY">
+                                                    <rect key="frame" x="16" y="10" width="54" height="54"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="u1h-IT-HzY" secondAttribute="height" multiplier="1:1" id="EYO-Ip-O3n"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g8I-h3-Tmx">
+                                                    <rect key="frame" x="86" y="10" width="165" height="21"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C04-E7-jLh">
+                                                    <rect key="frame" x="86" y="27" width="299" height="21"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YPk-uH-05s">
+                                                    <rect key="frame" x="356" y="46" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="11"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="YPk-uH-05s" secondAttribute="trailing" constant="16" id="6Io-U7-IDk"/>
+                                                <constraint firstItem="u1h-IT-HzY" firstAttribute="top" secondItem="p9W-g7-qIt" secondAttribute="top" constant="10" id="JqT-dj-Wfi"/>
+                                                <constraint firstAttribute="bottom" secondItem="YPk-uH-05s" secondAttribute="bottom" constant="7.5" id="OqM-0Q-9UT"/>
+                                                <constraint firstItem="g8I-h3-Tmx" firstAttribute="top" secondItem="p9W-g7-qIt" secondAttribute="top" constant="10" id="TKV-9g-OKZ"/>
+                                                <constraint firstItem="C04-E7-jLh" firstAttribute="top" secondItem="g8I-h3-Tmx" secondAttribute="bottom" constant="-4" id="VSZ-zd-4GG"/>
+                                                <constraint firstItem="g8I-h3-Tmx" firstAttribute="leading" secondItem="u1h-IT-HzY" secondAttribute="trailing" constant="16" id="WXb-QI-TJm"/>
+                                                <constraint firstItem="u1h-IT-HzY" firstAttribute="leading" secondItem="p9W-g7-qIt" secondAttribute="leading" constant="16" id="X8o-zw-jv5"/>
+                                                <constraint firstAttribute="bottom" secondItem="C04-E7-jLh" secondAttribute="bottom" constant="26.5" id="ipV-zJ-M79"/>
+                                                <constraint firstAttribute="bottom" secondItem="u1h-IT-HzY" secondAttribute="bottom" constant="10.5" id="qXw-30-O7U"/>
+                                                <constraint firstItem="C04-E7-jLh" firstAttribute="leading" secondItem="u1h-IT-HzY" secondAttribute="trailing" constant="16" id="xyL-dQ-3FD"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="myNetworkUserDescription" destination="C04-E7-jLh" id="0bD-38-DIz"/>
+                                            <outlet property="myNetworkUserImage" destination="u1h-IT-HzY" id="khF-7c-cqT"/>
+                                            <outlet property="myNetworkUserJob" destination="YPk-uH-05s" id="g6K-8u-mMG"/>
+                                            <outlet property="myNetworkUserName" destination="g8I-h3-Tmx" id="Bp2-44-y6V"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="jIs-UK-NWL" id="diF-aG-8oK"/>
+                                    <outlet property="delegate" destination="jIs-UK-NWL" id="Qdx-6e-LeB"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jHz-1u-AaC">
+                                <rect key="frame" x="0.0" y="64" width="414" height="44"/>
+                                <subviews>
+                                    <searchBar contentMode="redraw" searchBarStyle="prominent" text="" placeholder="Search your chats!" translatesAutoresizingMaskIntoConstraints="NO" id="xTf-kD-6Ae">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                        <color key="tintColor" red="0.43521448759999998" green="0.56477015090000005" blue="0.90839741490000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="xTf-kD-6Ae" secondAttribute="trailing" id="W5B-XJ-AY4"/>
+                                    <constraint firstItem="xTf-kD-6Ae" firstAttribute="top" secondItem="jHz-1u-AaC" secondAttribute="top" id="WnZ-RA-za3"/>
+                                    <constraint firstAttribute="bottom" secondItem="xTf-kD-6Ae" secondAttribute="bottom" id="myU-or-EV4"/>
+                                    <constraint firstItem="xTf-kD-6Ae" firstAttribute="leading" secondItem="jHz-1u-AaC" secondAttribute="leading" id="ukO-v4-2w9"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wwD-cr-4zv" firstAttribute="top" secondItem="Neo-U7-ega" secondAttribute="bottom" id="7ag-6z-xhX"/>
+                            <constraint firstItem="Vex-kh-xZF" firstAttribute="top" secondItem="jHz-1u-AaC" secondAttribute="bottom" id="KMR-Wb-smz"/>
+                            <constraint firstAttribute="trailing" secondItem="Vex-kh-xZF" secondAttribute="trailing" id="Mjd-c7-7Le"/>
+                            <constraint firstItem="ZwW-Jb-H6M" firstAttribute="top" secondItem="Vex-kh-xZF" secondAttribute="bottom" id="NIt-mK-y1P"/>
+                            <constraint firstItem="jHz-1u-AaC" firstAttribute="top" secondItem="wwD-cr-4zv" secondAttribute="bottom" id="O2Y-Vi-Wkj"/>
+                            <constraint firstItem="jHz-1u-AaC" firstAttribute="leading" secondItem="cjc-bb-ExB" secondAttribute="leading" id="eZe-Gx-J80"/>
+                            <constraint firstItem="wwD-cr-4zv" firstAttribute="leading" secondItem="cjc-bb-ExB" secondAttribute="leading" id="jTL-bh-5Tk"/>
+                            <constraint firstAttribute="trailing" secondItem="jHz-1u-AaC" secondAttribute="trailing" id="kyd-Dc-UTG"/>
+                            <constraint firstItem="Vex-kh-xZF" firstAttribute="leading" secondItem="cjc-bb-ExB" secondAttribute="leading" id="mI2-VJ-dI8"/>
+                            <constraint firstAttribute="trailing" secondItem="wwD-cr-4zv" secondAttribute="trailing" id="sdX-Sw-vhP"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="searchBar" destination="xTf-kD-6Ae" id="wGp-Co-qNi"/>
+                        <outlet property="searchBarView" destination="jHz-1u-AaC" id="Xa3-Zv-PtB"/>
+                        <outlet property="tableView" destination="Vex-kh-xZF" id="uYd-Ll-m2l"/>
+                        <outlet property="topBar" destination="k90-qP-cqH" id="v8L-47-iYc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c28-1e-QBr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

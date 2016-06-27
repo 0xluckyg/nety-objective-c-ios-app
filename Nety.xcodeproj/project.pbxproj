@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		673338F71D20937C00A8009F /* MyNetworkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 673338F61D20937C00A8009F /* MyNetworkCell.m */; };
+		673339061D2098D200A8009F /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 673338FB1D2098D200A8009F /* NSMutableArray+SWUtilityButtons.m */; };
+		673339071D2098D200A8009F /* SWCellScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 673338FD1D2098D200A8009F /* SWCellScrollView.m */; };
+		673339081D2098D200A8009F /* SWLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 673338FF1D2098D200A8009F /* SWLongPressGestureRecognizer.m */; };
+		673339091D2098D200A8009F /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 673339011D2098D200A8009F /* SWTableViewCell.m */; };
+		6733390A1D2098D200A8009F /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 673339031D2098D200A8009F /* SWUtilityButtonTapGestureRecognizer.m */; };
+		6733390B1D2098D200A8009F /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 673339051D2098D200A8009F /* SWUtilityButtonView.m */; };
+		6733390E1D20B5ED00A8009F /* ChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6733390D1D20B5ED00A8009F /* ChatCell.m */; };
 		67DD1A7C1D17BEB500FBEA0F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DD1A7B1D17BEB500FBEA0F /* main.m */; };
 		67DD1A7F1D17BEB500FBEA0F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DD1A7E1D17BEB500FBEA0F /* AppDelegate.m */; };
 		67DD1A871D17BEB500FBEA0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1A861D17BEB500FBEA0F /* Assets.xcassets */; };
@@ -22,9 +30,32 @@
 		67DD1AAD1D17C3E600FBEA0F /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DD1AAC1D17C3E600FBEA0F /* Profile.m */; };
 		67DD1AAF1D17C3EF00FBEA0F /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1AAE1D17C3EF00FBEA0F /* Profile.storyboard */; };
 		67DD1AB31D17D40D00FBEA0F /* UIPrinciples.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DD1AB21D17D40D00FBEA0F /* UIPrinciples.m */; };
+		67DD1AB61D17E04F00FBEA0F /* NetworkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DD1AB51D17E04F00FBEA0F /* NetworkCell.m */; };
+		67DD1AB91D17E39B00FBEA0F /* NetworkData.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DD1AB81D17E39B00FBEA0F /* NetworkData.m */; };
+		67DD1AC01D17E42D00FBEA0F /* duck.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1ABB1D17E42D00FBEA0F /* duck.jpg */; };
+		67DD1AC11D17E42D00FBEA0F /* girl1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1ABC1D17E42D00FBEA0F /* girl1.jpg */; };
+		67DD1AC21D17E42D00FBEA0F /* girl2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1ABD1D17E42D00FBEA0F /* girl2.jpg */; };
+		67DD1AC31D17E42D00FBEA0F /* man.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1ABE1D17E42D00FBEA0F /* man.jpg */; };
+		67DD1AC41D17E42D00FBEA0F /* water.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1ABF1D17E42D00FBEA0F /* water.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		673338F51D20937C00A8009F /* MyNetworkCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNetworkCell.h; sourceTree = "<group>"; };
+		673338F61D20937C00A8009F /* MyNetworkCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNetworkCell.m; sourceTree = "<group>"; };
+		673338FA1D2098D200A8009F /* NSMutableArray+SWUtilityButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+SWUtilityButtons.h"; sourceTree = "<group>"; };
+		673338FB1D2098D200A8009F /* NSMutableArray+SWUtilityButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+SWUtilityButtons.m"; sourceTree = "<group>"; };
+		673338FC1D2098D200A8009F /* SWCellScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWCellScrollView.h; sourceTree = "<group>"; };
+		673338FD1D2098D200A8009F /* SWCellScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWCellScrollView.m; sourceTree = "<group>"; };
+		673338FE1D2098D200A8009F /* SWLongPressGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWLongPressGestureRecognizer.h; sourceTree = "<group>"; };
+		673338FF1D2098D200A8009F /* SWLongPressGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWLongPressGestureRecognizer.m; sourceTree = "<group>"; };
+		673339001D2098D200A8009F /* SWTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWTableViewCell.h; sourceTree = "<group>"; };
+		673339011D2098D200A8009F /* SWTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWTableViewCell.m; sourceTree = "<group>"; };
+		673339021D2098D200A8009F /* SWUtilityButtonTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonTapGestureRecognizer.h; sourceTree = "<group>"; };
+		673339031D2098D200A8009F /* SWUtilityButtonTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonTapGestureRecognizer.m; sourceTree = "<group>"; };
+		673339041D2098D200A8009F /* SWUtilityButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonView.h; sourceTree = "<group>"; };
+		673339051D2098D200A8009F /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonView.m; sourceTree = "<group>"; };
+		6733390C1D20B5ED00A8009F /* ChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatCell.h; sourceTree = "<group>"; };
+		6733390D1D20B5ED00A8009F /* ChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatCell.m; sourceTree = "<group>"; };
 		67DD1A771D17BEB500FBEA0F /* Nety.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nety.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67DD1A7B1D17BEB500FBEA0F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		67DD1A7D1D17BEB500FBEA0F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -49,6 +80,15 @@
 		67DD1AAE1D17C3EF00FBEA0F /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		67DD1AB11D17D40D00FBEA0F /* UIPrinciples.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPrinciples.h; sourceTree = "<group>"; };
 		67DD1AB21D17D40D00FBEA0F /* UIPrinciples.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPrinciples.m; sourceTree = "<group>"; };
+		67DD1AB41D17E04F00FBEA0F /* NetworkCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkCell.h; sourceTree = "<group>"; };
+		67DD1AB51D17E04F00FBEA0F /* NetworkCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkCell.m; sourceTree = "<group>"; };
+		67DD1AB71D17E39B00FBEA0F /* NetworkData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkData.h; sourceTree = "<group>"; };
+		67DD1AB81D17E39B00FBEA0F /* NetworkData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkData.m; sourceTree = "<group>"; };
+		67DD1ABB1D17E42D00FBEA0F /* duck.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = duck.jpg; sourceTree = "<group>"; };
+		67DD1ABC1D17E42D00FBEA0F /* girl1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = girl1.jpg; sourceTree = "<group>"; };
+		67DD1ABD1D17E42D00FBEA0F /* girl2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = girl2.jpg; sourceTree = "<group>"; };
+		67DD1ABE1D17E42D00FBEA0F /* man.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = man.jpg; sourceTree = "<group>"; };
+		67DD1ABF1D17E42D00FBEA0F /* water.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = water.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +102,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		673338F81D2098D200A8009F /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				673338F91D2098D200A8009F /* SWTableViewCell */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		673338F91D2098D200A8009F /* SWTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				673338FA1D2098D200A8009F /* NSMutableArray+SWUtilityButtons.h */,
+				673338FB1D2098D200A8009F /* NSMutableArray+SWUtilityButtons.m */,
+				673338FC1D2098D200A8009F /* SWCellScrollView.h */,
+				673338FD1D2098D200A8009F /* SWCellScrollView.m */,
+				673338FE1D2098D200A8009F /* SWLongPressGestureRecognizer.h */,
+				673338FF1D2098D200A8009F /* SWLongPressGestureRecognizer.m */,
+				673339001D2098D200A8009F /* SWTableViewCell.h */,
+				673339011D2098D200A8009F /* SWTableViewCell.m */,
+				673339021D2098D200A8009F /* SWUtilityButtonTapGestureRecognizer.h */,
+				673339031D2098D200A8009F /* SWUtilityButtonTapGestureRecognizer.m */,
+				673339041D2098D200A8009F /* SWUtilityButtonView.h */,
+				673339051D2098D200A8009F /* SWUtilityButtonView.m */,
+			);
+			path = SWTableViewCell;
+			sourceTree = "<group>";
+		};
 		67DD1A6E1D17BEB500FBEA0F = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +148,7 @@
 		67DD1A791D17BEB500FBEA0F /* Nety */ = {
 			isa = PBXGroup;
 			children = (
+				673338F81D2098D200A8009F /* Lib */,
 				67DD1AB01D17D3DF00FBEA0F /* Util */,
 				67DD1A911D17BEF200FBEA0F /* ViewControllers */,
 				67DD1A7A1D17BEB500FBEA0F /* Supporting Files */,
@@ -91,6 +159,7 @@
 		67DD1A7A1D17BEB500FBEA0F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				67DD1ABA1D17E42D00FBEA0F /* TemporaryImages */,
 				67DD1A7D1D17BEB500FBEA0F /* AppDelegate.h */,
 				67DD1A7E1D17BEB500FBEA0F /* AppDelegate.m */,
 				67DD1A861D17BEB500FBEA0F /* Assets.xcassets */,
@@ -119,6 +188,8 @@
 				67DD1AA01D17BFC300FBEA0F /* Chat.h */,
 				67DD1AA11D17BFC300FBEA0F /* Chat.m */,
 				67DD1AA31D17BFCC00FBEA0F /* Chat.storyboard */,
+				6733390C1D20B5ED00A8009F /* ChatCell.h */,
+				6733390D1D20B5ED00A8009F /* ChatCell.m */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -139,6 +210,8 @@
 				67DD1A9B1D17BF6900FBEA0F /* MyNetwork.h */,
 				67DD1A9C1D17BF6900FBEA0F /* MyNetwork.m */,
 				67DD1A9E1D17BF7200FBEA0F /* MyNetwork.storyboard */,
+				673338F51D20937C00A8009F /* MyNetworkCell.h */,
+				673338F61D20937C00A8009F /* MyNetworkCell.m */,
 			);
 			path = MyNetwork;
 			sourceTree = "<group>";
@@ -149,6 +222,8 @@
 				67DD1A961D17BF1700FBEA0F /* Network.h */,
 				67DD1A971D17BF1700FBEA0F /* Network.m */,
 				67DD1A991D17BF2100FBEA0F /* Network.storyboard */,
+				67DD1AB41D17E04F00FBEA0F /* NetworkCell.h */,
+				67DD1AB51D17E04F00FBEA0F /* NetworkCell.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -168,8 +243,22 @@
 			children = (
 				67DD1AB11D17D40D00FBEA0F /* UIPrinciples.h */,
 				67DD1AB21D17D40D00FBEA0F /* UIPrinciples.m */,
+				67DD1AB71D17E39B00FBEA0F /* NetworkData.h */,
+				67DD1AB81D17E39B00FBEA0F /* NetworkData.m */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		67DD1ABA1D17E42D00FBEA0F /* TemporaryImages */ = {
+			isa = PBXGroup;
+			children = (
+				67DD1ABB1D17E42D00FBEA0F /* duck.jpg */,
+				67DD1ABC1D17E42D00FBEA0F /* girl1.jpg */,
+				67DD1ABD1D17E42D00FBEA0F /* girl2.jpg */,
+				67DD1ABE1D17E42D00FBEA0F /* man.jpg */,
+				67DD1ABF1D17E42D00FBEA0F /* water.jpg */,
+			);
+			path = TemporaryImages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,12 +319,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				67DD1A9A1D17BF2100FBEA0F /* Network.storyboard in Resources */,
+				67DD1AC31D17E42D00FBEA0F /* man.jpg in Resources */,
+				67DD1AC11D17E42D00FBEA0F /* girl1.jpg in Resources */,
 				67DD1A8A1D17BEB500FBEA0F /* LaunchScreen.storyboard in Resources */,
 				67DD1A871D17BEB500FBEA0F /* Assets.xcassets in Resources */,
 				67DD1AA41D17BFCC00FBEA0F /* Chat.storyboard in Resources */,
 				67DD1AA91D17C00600FBEA0F /* MyInfo.storyboard in Resources */,
 				67DD1AAF1D17C3EF00FBEA0F /* Profile.storyboard in Resources */,
+				67DD1AC01D17E42D00FBEA0F /* duck.jpg in Resources */,
+				67DD1AC21D17E42D00FBEA0F /* girl2.jpg in Resources */,
 				67DD1A9F1D17BF7200FBEA0F /* MyNetwork.storyboard in Resources */,
+				67DD1AC41D17E42D00FBEA0F /* water.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,13 +341,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				67DD1AB31D17D40D00FBEA0F /* UIPrinciples.m in Sources */,
+				673339081D2098D200A8009F /* SWLongPressGestureRecognizer.m in Sources */,
 				67DD1AA21D17BFC300FBEA0F /* Chat.m in Sources */,
+				6733390E1D20B5ED00A8009F /* ChatCell.m in Sources */,
+				6733390B1D2098D200A8009F /* SWUtilityButtonView.m in Sources */,
+				673339061D2098D200A8009F /* NSMutableArray+SWUtilityButtons.m in Sources */,
 				67DD1A7F1D17BEB500FBEA0F /* AppDelegate.m in Sources */,
 				67DD1A981D17BF1700FBEA0F /* Network.m in Sources */,
+				6733390A1D2098D200A8009F /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
 				67DD1A9D1D17BF6900FBEA0F /* MyNetwork.m in Sources */,
 				67DD1A7C1D17BEB500FBEA0F /* main.m in Sources */,
+				673339071D2098D200A8009F /* SWCellScrollView.m in Sources */,
+				67DD1AB91D17E39B00FBEA0F /* NetworkData.m in Sources */,
+				673338F71D20937C00A8009F /* MyNetworkCell.m in Sources */,
+				673339091D2098D200A8009F /* SWTableViewCell.m in Sources */,
 				67DD1AAD1D17C3E600FBEA0F /* Profile.m in Sources */,
 				67DD1AA71D17BFFF00FBEA0F /* MyInfo.m in Sources */,
+				67DD1AB61D17E04F00FBEA0F /* NetworkCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +498,7 @@
 				67DD1A901D17BEB500FBEA0F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

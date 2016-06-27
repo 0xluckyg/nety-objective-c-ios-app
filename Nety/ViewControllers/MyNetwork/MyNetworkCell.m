@@ -1,25 +1,30 @@
 //
-//  NetworkCell.m
+//  MyNetworkCell.m
 //  Nety
 //
-//  Created by Scott Cho on 6/20/16.
+//  Created by Scott Cho on 6/26/16.
 //  Copyright © 2016 Scott Cho. All rights reserved.
 //
 
-#import "NetworkCell.h"
+#import "MyNetworkCell.h"
 
-@implementation NetworkCell
+@implementation MyNetworkCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    // Initialization code
     [self initializeDesign];
+    
 }
 
 - (void)initializeDesign {
-    self.networkUserImage.layer.cornerRadius = self.networkUserImage.frame.size.height /2;
-    self.networkUserImage.layer.masksToBounds = YES;
-    self.networkUserImage.layer.borderWidth = 0;
+    self.myNetworkUserImage.layer.cornerRadius = self.myNetworkUserImage.frame.size.height /2;
+    self.myNetworkUserImage.layer.masksToBounds = YES;
+    self.myNetworkUserImage.layer.borderWidth = 0;
+    
 }
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

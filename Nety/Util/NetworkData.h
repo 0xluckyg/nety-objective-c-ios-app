@@ -7,7 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+extern NSString *const keyName;
+extern NSString *const keyJob;
+extern NSString *const keyDescription;
+extern NSString *const keyImage;
 
 @interface NetworkData : NSObject
+
+@property (nonatomic, strong) NSMutableArray *userDataArray;
 
 @end

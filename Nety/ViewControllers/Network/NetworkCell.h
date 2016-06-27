@@ -10,4 +10,10 @@
 
 @interface NetworkCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *networkUserImage;
+
+@property (weak, nonatomic) IBOutlet UILabel *networkUserName;
+@property (weak, nonatomic) IBOutlet UILabel *networkUserJob;
+@property (weak, nonatomic) IBOutlet UILabel *networkUserDescription;
+
 @end

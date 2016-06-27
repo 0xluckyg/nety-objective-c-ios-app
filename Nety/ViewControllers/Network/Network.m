@@ -8,6 +8,8 @@
 
 #import "Network.h"
 #import "UIPrinciples.h"
+#import "NetworkCell.h"
+#import "NetworkData.h"
 
 @interface Network ()
 
@@ -19,17 +21,29 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [self initializeSettings];
     [self initializeDesign];
 }
 
--(void) initializeDesign {
+- (void)initializeSettings {
+    self.userData = [[NetworkData alloc] init];
+}
+
+- (void)initializeDesign {
+    
+    //No separator
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     // UIPrinciples class from Util folder
-    UIPrinciples *UIPrinciple = [[UIPrinciples alloc] init];
+    self.UIPrinciple = [[UIPrinciples alloc] init];
     
     //Set navbar color
-    self.topBar.backgroundColor = UIPrinciple.color;
-    [[UINavigationBar appearance] setBarTintColor:UIPrinciple.color];
+    self.topBar.backgroundColor = self.UIPrinciple.netyBlue;
+    [[UINavigationBar appearance] setBarTintColor:self.UIPrinciple.netyBlue];
+    
+    //Set searchbar
+    [self.searchBar setBackgroundImage:[[UIImage alloc]init]];
+    [self.searchBarView setBackgroundColor:self.UIPrinciple.netyBlue];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,14 +51,65 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
 }
-*/
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return [self.userData.userDataArray count];
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    //Configure cell
+    NetworkCell *networkCell = [tableView dequeueReusableCellWithIdentifier:@"NetworkCell" forIndexPath:indexPath];
+    int row = (int)[indexPath row];
+    
+    //Setting cell data
+    NSDictionary *userDataDictionary = self.userData.userDataArray[row];
+    networkCell.networkUserImage.image = [UIImage imageNamed:[userDataDictionary objectForKey:keyImage]];
+    
+    //Set name
+    networkCell.networkUserName.text = [userDataDictionary objectForKey:keyName];
+    //Set job
+    networkCell.networkUserJob.text = [userDataDictionary objectForKey:keyJob];
+    //Cutting Description if too long
+    NSString *descriptionText = [userDataDictionary objectForKey:keyDescription];
+    if ([descriptionText length] > 35) {
+        descriptionText = [descriptionText substringWithRange:NSMakeRange(0,35)];
+        descriptionText = [descriptionText stringByAppendingString:@" ..."];
+    }
+    //Set description
+    networkCell.networkUserDescription.text = descriptionText;
+    
+    //DESIGN
+    //Setting font color of cells to black
+    networkCell.networkUserJob.textColor = [UIColor blackColor];
+    networkCell.networkUserName.textColor = [UIColor blackColor];
+    networkCell.networkUserDescription.textColor = [UIColor blackColor];
+    
+    //Set selection color to blue
+    UIView *bgColorView = [[UIView alloc] init];
+    bgColorView.backgroundColor = self.UIPrinciple.netyBlue;
+    [networkCell setSelectedBackgroundView:bgColorView];
+    
+    return networkCell;    
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    //Set design
+    NetworkCell *networkCell = [tableView cellForRowAtIndexPath:indexPath];
+    networkCell.networkUserJob.textColor = [UIColor whiteColor];
+    networkCell.networkUserName.textColor = [UIColor whiteColor];
+    networkCell.networkUserDescription.textColor = [UIColor whiteColor];
+    
+    [self performSegueWithIdentifier:@"ShowProfileSegue" sender:indexPath];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+}
 
 @end

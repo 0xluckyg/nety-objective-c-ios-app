@@ -7,9 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NetworkData.h"
+#import "UIPrinciples.h"
 
-@interface Network : UIViewController
+@interface Network : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UIView *topBar;
+
+@property (weak, nonatomic) IBOutlet UIView *searchBarView;
+
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (strong, nonatomic) UIPrinciples *UIPrinciple;
+
+@property (strong, nonatomic) NetworkData *userData;
 
 @end

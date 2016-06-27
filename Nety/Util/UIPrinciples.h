@@ -11,6 +11,7 @@
 
 @interface UIPrinciples : NSObject
 
-@property (nonatomic, strong) UIColor *color;
+@property (nonatomic, strong) UIColor *netyBlue;
+@property (nonatomic, strong) UIColor *netyRed;
 
 @end

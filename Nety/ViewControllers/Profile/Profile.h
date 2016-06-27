@@ -7,14 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIPrinciples.h"
 
-@interface Profile : UIViewController
+@interface Profile : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *profileBackground;
-
-@property (weak, nonatomic) IBOutlet UIScrollView *profileScrollView;
-
-@property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "UIPrinciples.h"
 
 @interface AppDelegate ()
 
@@ -45,9 +46,11 @@
     [myInfoViewController.tabBarItem setTitle:@"Me"];
     
     //Set tabBar style
-    [[UITabBar appearance] setBackgroundColor:[UIColor whiteColor]];
+    UIPrinciples *UIPrinciple = [[UIPrinciples alloc] init];
+    [[UITabBar appearance] setBackgroundColor:UIPrinciple.netyBlue];
     [[UITabBar appearance] setBackgroundImage:[[UIImage alloc] init]];
     [[UITabBar appearance] setShadowImage:[[UIImage alloc] init]];
+    [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
     
     //Connect tabBar and view controllers together
     NSArray* controllers = [NSArray arrayWithObjects:networkViewController, myNetworkViewController, chatViewController, myInfoViewController, nil];

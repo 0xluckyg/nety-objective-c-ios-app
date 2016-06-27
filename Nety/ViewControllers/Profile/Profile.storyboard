@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="UGB-gc-JUy">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Profile-->
@@ -17,46 +16,13 @@
                     <view key="view" contentMode="scaleToFill" id="Er7-Ec-1qq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HLn-Tk-VIN">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="370"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="HLn-Tk-VIN" secondAttribute="height" multiplier="207:185" id="e2S-9Y-i0j"/>
-                                </constraints>
-                            </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dE3-W1-vBl">
-                                <rect key="frame" x="0.0" y="335" width="414" height="401"/>
-                                <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AR6-Rh-AZE">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="401"/>
-                                    </scrollView>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="dE3-W1-vBl" secondAttribute="height" multiplier="414:401" id="Ugs-DM-aRQ"/>
-                                </constraints>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="dE3-W1-vBl" firstAttribute="leading" secondItem="Er7-Ec-1qq" secondAttribute="leading" id="3dR-pT-sqF"/>
-                            <constraint firstAttribute="trailing" secondItem="HLn-Tk-VIN" secondAttribute="trailing" id="Ax4-Fj-DUP"/>
-                            <constraint firstAttribute="trailing" secondItem="dE3-W1-vBl" secondAttribute="trailing" id="EOx-21-KOV"/>
-                            <constraint firstItem="HLn-Tk-VIN" firstAttribute="top" secondItem="Er7-Ec-1qq" secondAttribute="top" id="VUI-gE-Lwr"/>
-                            <constraint firstItem="HLn-Tk-VIN" firstAttribute="leading" secondItem="Er7-Ec-1qq" secondAttribute="leading" id="f0U-Ks-tAc"/>
-                            <constraint firstItem="Nax-tE-B2z" firstAttribute="top" secondItem="dE3-W1-vBl" secondAttribute="bottom" id="p0O-2h-Ciu"/>
-                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
-                    <connections>
-                        <outlet property="profileBackground" destination="dE3-W1-vBl" id="2x0-py-8xP"/>
-                        <outlet property="profileImage" destination="HLn-Tk-VIN" id="OGg-fI-RFF"/>
-                        <outlet property="profileScrollView" destination="AR6-Rh-AZE" id="hS7-Ya-jr5"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lwG-57-EOX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="515" y="359"/>
+            <point key="canvasLocation" x="224" y="27"/>
         </scene>
     </scenes>
 </document>
