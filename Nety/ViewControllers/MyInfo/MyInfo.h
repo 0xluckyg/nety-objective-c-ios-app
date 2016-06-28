@@ -7,7 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIPrinciples.h"
 
 @interface MyInfo : UIViewController
+
+@property (weak, nonatomic) IBOutlet UIImageView *userProfileImage;
+
+@property (weak, nonatomic) IBOutlet UIView *userBasicInfoView;
+
+@property (weak, nonatomic) IBOutlet UIView *userInfoView;
+
+@property (weak, nonatomic) IBOutlet UILabel *userStatusInfo;
+
+@property (weak, nonatomic) IBOutlet UILabel *userSummaryInfo;
+
+@property (weak, nonatomic) IBOutlet UILabel *userExperienceInfo;
+
+
+@property (strong, nonatomic) UIPrinciples *UIPrinciple;
 
 @end

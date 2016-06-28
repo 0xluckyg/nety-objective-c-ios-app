@@ -7,6 +7,7 @@
 //
 
 #import "MyInfo.h"
+#import "UIPrinciples.h"
 
 @interface MyInfo ()
 
@@ -17,6 +18,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self initializeDesign];
+}
+
+- (void)initializeDesign {
+    
+    self.UIPrinciple = [[UIPrinciples alloc] init];
+
+    //Profile image setup
+    self.userProfileImage.image = [UIImage imageNamed:@"girl2.jpg"];
+    
+    //Color for the small view
+    self.userBasicInfoView.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.4f];
+    
+    //Color for the big view
+    self.userInfoView.backgroundColor = self.UIPrinciple.netyBlue;
+    
+    //Info content
+    self.userStatusInfo.text = @"lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum";
+    
+    self.userSummaryInfo.text = @"lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum";
+
+    
+    self.userExperienceInfo.text = @"lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum ipsumlorem ipsumlorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum";
+
+    
 }
 
 - (void)didReceiveMemoryWarning {

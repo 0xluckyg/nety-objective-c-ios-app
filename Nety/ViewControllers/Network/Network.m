@@ -25,9 +25,17 @@
     [self initializeDesign];
 }
 
+//Clicked cell will reset
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.tableView reloadData];
+}
+
+
 - (void)initializeSettings {
     self.userData = [[NetworkData alloc] init];
 }
+
+
 
 - (void)initializeDesign {
     
@@ -109,7 +117,7 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
+
 }
 
 @end
