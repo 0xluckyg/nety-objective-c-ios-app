@@ -28,6 +28,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *bottomChatNowButtonOutlet;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *infoViewTopConstraint;
+
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
 
 - (IBAction)backButton:(id)sender;

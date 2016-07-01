@@ -20,6 +20,7 @@
     // Do any additional setup after loading the view.
     
     [self initializeDesign];
+
 }
 
 - (void)initializeDesign {
@@ -42,7 +43,9 @@
 
     
     self.userExperienceInfo.text = @"lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum ipsumlorem ipsumlorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum";
-
+    
+    self.userInfoViewTopConstraint.constant = self.view.frame.size.height / 2.3;
+    
     
 }
 

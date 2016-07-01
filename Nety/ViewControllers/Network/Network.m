@@ -101,6 +101,11 @@
     UIView *bgColorView = [[UIView alloc] init];
     bgColorView.backgroundColor = self.UIPrinciple.netyBlue;
     [networkCell setSelectedBackgroundView:bgColorView];
+    //Set highlighted color to white
+    networkCell.networkUserJob.highlightedTextColor = [UIColor whiteColor];
+    networkCell.networkUserName.highlightedTextColor = [UIColor whiteColor];
+    networkCell.networkUserDescription.highlightedTextColor = [UIColor whiteColor];
+    
     
     return networkCell;    
 }

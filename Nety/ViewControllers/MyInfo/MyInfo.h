@@ -23,6 +23,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *userExperienceInfo;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *userInfoViewTopConstraint;
 
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
 

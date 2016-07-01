@@ -26,13 +26,13 @@
     [self initializeDesign];
 }
 
-- (void)initializeSettings {
-    self.userData = [[NetworkData alloc] init];
-}
-
 //Swiped cell will reset
 - (void)viewWillDisappear:(BOOL)animated {
     [self.tableView reloadData];
+}
+
+- (void)initializeSettings {
+    self.userData = [[NetworkData alloc] init];
 }
 
 - (void)initializeDesign {
@@ -90,20 +90,18 @@
     //Set description
     chatCell.chatDescription.text = descriptionText;
     
-    //DESIGN
-    //Setting font color of cells to black
-    chatCell.chatTime.textColor = [UIColor blackColor];
-    chatCell.chatUserName.textColor = [UIColor blackColor];
-    chatCell.chatDescription.textColor = [UIColor blackColor];
-    
     //Set selection color to blue
     UIView *bgColorView = [[UIView alloc] init];
     bgColorView.backgroundColor = self.UIPrinciple.netyBlue;
     [chatCell setSelectedBackgroundView:bgColorView];
-    
+    //Set highlighted color to white
+    chatCell.chatUserName.highlightedTextColor = [UIColor whiteColor];
+    chatCell.chatTime.highlightedTextColor = [UIColor whiteColor];
+    chatCell.chatDescription.highlightedTextColor = [UIColor whiteColor];
+
+    //SWTableViewCell configuration
     NSMutableArray *chatRightUtilityButtons = [[NSMutableArray alloc] init];
     
-    //SWTableViewCell configuration
     if (self.oldNewSegmentedControl.selectedSegmentIndex == 1) {
 
         [chatRightUtilityButtons sw_addUtilityButtonWithColor:
@@ -114,11 +112,9 @@
                                                              title:@"Delete"];
     
     } else {
-        
-        chatRightUtilityButtons = [[NSMutableArray alloc] init];
 
         [chatRightUtilityButtons sw_addUtilityButtonWithColor:
-         [UIColor grayColor]
+         self.UIPrinciple.netyGray
                                                         title:@"Block"];
         
         [chatRightUtilityButtons sw_addUtilityButtonWithColor:
@@ -143,15 +139,13 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    ChatCell *chatCell = [tableView cellForRowAtIndexPath:indexPath];
-    chatCell.chatTime.textColor = [UIColor whiteColor];
-    chatCell.chatUserName.textColor = [UIColor whiteColor];
-    chatCell.chatDescription.textColor = [UIColor whiteColor];
+    
 }
 
 //Close cell when other is cell is opened
 -(BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell { return YES; }
 
+//Actions when right swipe buttons are tapped
 -(void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
     if (self.oldNewSegmentedControl.selectedSegmentIndex == 1) {
     switch (index) {

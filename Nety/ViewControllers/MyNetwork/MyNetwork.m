@@ -90,17 +90,16 @@
     //Set description
     myNetworkCell.myNetworkUserDescription.text = descriptionText;
     
-    //DESIGN
-    //Setting font color of cells to black
-    myNetworkCell.myNetworkUserJob.textColor = [UIColor blackColor];
-    myNetworkCell.myNetworkUserName.textColor = [UIColor blackColor];
-    myNetworkCell.myNetworkUserDescription.textColor = [UIColor blackColor];
-    
     //Set selection color to blue
     UIView *bgColorView = [[UIView alloc] init];
     bgColorView.backgroundColor = self.UIPrinciple.netyBlue;
     [myNetworkCell setSelectedBackgroundView:bgColorView];
-        
+    //Set highlighted color to white
+    myNetworkCell.myNetworkUserJob.highlightedTextColor = [UIColor whiteColor];
+    myNetworkCell.myNetworkUserName.highlightedTextColor = [UIColor whiteColor];
+    myNetworkCell.myNetworkUserDescription.highlightedTextColor = [UIColor whiteColor];
+    
+    
     //SWTableViewCell configuration
     NSMutableArray *myNetworkRightUtilityButtons = [[NSMutableArray alloc] init];
     
@@ -118,10 +117,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    MyNetworkCell *myNetworkCell = [tableView cellForRowAtIndexPath:indexPath];
-    myNetworkCell.myNetworkUserJob.textColor = [UIColor whiteColor];
-    myNetworkCell.myNetworkUserName.textColor = [UIColor whiteColor];
-    myNetworkCell.myNetworkUserDescription.textColor = [UIColor whiteColor];
+
 }
 
 //Close cell when other is cell is opened

@@ -13,6 +13,10 @@ NSString *const keyJob = @"Job";
 NSString *const keyDescription = @"Description";
 NSString *const keyImage = @"Image";
 
+NSString *const keyExperienceName = @"experienceName";
+NSString *const keyExperienceTime = @"experienceTime";
+NSString *const keyExperienceDescription = @"experienceDescription";
+
 @implementation NetworkData
 
 - (instancetype)init
@@ -44,6 +48,29 @@ NSString *const keyImage = @"Image";
                        keyJob: @"CEO at Pied Pipper",
                        keyDescription: @"Pied Pipper for life",
                        keyImage: @"water.jpg"}, nil];
+        
+        
+        _userExperienceArray = [NSMutableArray arrayWithObjects:
+                        @{keyExperienceName: @"Worked at Linked In",
+                          keyExperienceTime: @"2015/4/15 to 2016/2/3",
+                          keyExperienceDescription: @"Worked at Linked in to build relationships"},
+                          
+                        @{keyExperienceName: @"Worked at Facebook",
+                          keyExperienceTime: @"2013/4/15 to 2016/5/3",
+                          keyExperienceDescription: @"Built some good stuff and all that shit"},
+                          
+                        @{keyExperienceName: @"Worked at Goldman Sachs",
+                          keyExperienceTime: @"2011/4/15 to 2012/5/25",
+                          keyExperienceDescription: @"Finance and merger and all that"},
+                          
+                        @{keyExperienceName: @"Worked at Freelancer.com",
+                          keyExperienceTime: @"2013/3/15 to 2014/1/13",
+                          keyExperienceDescription: @"Freelancer.com sucks."},
+                          
+                        @{keyExperienceName: @"Worked at Nety",
+                          keyExperienceTime: @"2016/7/15 to 2016/9/3",
+                          keyExperienceDescription: @"Nety will be the next big thing in the world"}, nil];
+        
     }
     return self;
 }

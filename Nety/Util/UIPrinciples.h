@@ -13,5 +13,7 @@
 
 @property (nonatomic, strong) UIColor *netyBlue;
 @property (nonatomic, strong) UIColor *netyRed;
+@property (nonatomic, strong) UIColor *netyGray;
+@property (nonatomic, strong) UIColor *netyTransparent;
 
 @end

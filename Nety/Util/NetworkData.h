@@ -14,8 +14,14 @@ extern NSString *const keyJob;
 extern NSString *const keyDescription;
 extern NSString *const keyImage;
 
+extern NSString *const keyExperienceName;
+extern NSString *const keyExperienceTime;
+extern NSString *const keyExperienceDescription;
+
 @interface NetworkData : NSObject
 
 @property (nonatomic, strong) NSMutableArray *userDataArray;
+
+@property (nonatomic, strong) NSMutableArray *userExperienceArray;
 
 @end
