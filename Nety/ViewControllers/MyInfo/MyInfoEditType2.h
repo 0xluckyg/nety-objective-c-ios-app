@@ -9,15 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "UIPrinciples.h"
 
-@interface MyInfoEditType2 : UIViewController <UITextViewDelegate>
+@interface MyInfoEditType2 : UIViewController <UITextViewDelegate> {
+    NSString *editType2PlacementText;
+}
 
 @property (weak, nonatomic) IBOutlet UIView *topBar;
 
 @property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
 
 @property (weak, nonatomic) IBOutlet UILabel *editType2Label;
-
-@property (weak, nonatomic) IBOutlet UIView *editType2TextFieldView;
 
 @property (weak, nonatomic) IBOutlet UITextView *editType2TextField;
 

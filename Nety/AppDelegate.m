@@ -18,6 +18,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    //Check if user is signed in, and move on
+    
     [self initializeTabBar];
     
     return YES;

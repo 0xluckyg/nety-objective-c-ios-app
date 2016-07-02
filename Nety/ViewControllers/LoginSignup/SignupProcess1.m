@@ -1,18 +1,18 @@
 //
-//  MyInfoEditType2.m
+//  SignupProcess1.m
 //  Nety
 //
-//  Created by Scott Cho on 6/28/16.
+//  Created by Scott Cho on 7/2/16.
 //  Copyright © 2016 Scott Cho. All rights reserved.
 //
 
-#import "MyInfoEditType2.h"
+#import "SignupProcess1.h"
 
-@interface MyInfoEditType2 ()
+@interface SignupProcess1 ()
 
 @end
 
-@implementation MyInfoEditType2
+@implementation SignupProcess1
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,8 +22,8 @@
 }
 
 - (void)initializeSettings {
-    //initialize textfield description placeholder
-    editType2PlacementText = @"Write a summary about yourself!";
+
+
 }
 
 - (void)initializeDesign {
@@ -34,20 +34,20 @@
     
     //navbar design
     self.topBar.backgroundColor = self.UIPrinciple.netyBlue;
-    self.navBar.backgroundColor = self.UIPrinciple.netyBlue;
+    [[UINavigationBar appearance] setBarTintColor:self.UIPrinciple.netyBlue];
     [[UINavigationBar appearance]setShadowImage:[[UIImage alloc] init]];
     
     //Label
-    self.editType2Label.text = @"Summary";
-    self.editType2Label.textColor = [UIColor whiteColor];
+    self.jobLabel.textColor = [UIColor whiteColor];
+    self.summaryLabel.textColor = [UIColor whiteColor];
     
     //textfield
-    self.editType2TextField.text = editType2PlacementText;
-    self.editType2TextField.textColor = self.UIPrinciple.netyBlue;
-    self.editType2TextField.layer.cornerRadius = 8;
-
+    self.summaryTextField.text = @"ex. I'm an energetic developer at Nety who loves Chipotle and enjoys playing piano during free times";
+    self.summaryTextField.textColor = self.UIPrinciple.defaultGray;
+    self.summaryTextField.layer.cornerRadius = 8;
+    
     //save button
-    [self.saveButtonOutlet setTintColor:[UIColor whiteColor]];
+    [self.nextButtonOutlet setTintColor:[UIColor whiteColor]];
     
     
 }
@@ -65,7 +65,7 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:.3];
     [UIView setAnimationBeginsFromCurrentState:TRUE];
-    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y -50., self.view.frame.size.width, self.view.frame.size.height);
+    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y -100., self.view.frame.size.width, self.view.frame.size.height);
     
     [UIView commitAnimations];
     
@@ -77,7 +77,7 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:.3];
     [UIView setAnimationBeginsFromCurrentState:TRUE];
-    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y +50., self.view.frame.size.width, self.view.frame.size.height);
+    self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y +100., self.view.frame.size.width, self.view.frame.size.height);
     
     [UIView commitAnimations];
 }
@@ -94,10 +94,14 @@
 }
 
 //save and go back to my info
-- (IBAction)saveButton:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+- (IBAction)nextButton:(id)sender {
+    [self performSegueWithIdentifier:@"signupProcess2Segue" sender:self];
 }
 
+//Moves on without saving
+- (IBAction)laterButton:(id)sender {
+    [self performSegueWithIdentifier:@"signupProcess2Segue" sender:self];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

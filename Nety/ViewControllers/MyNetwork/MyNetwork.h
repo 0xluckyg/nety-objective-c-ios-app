@@ -11,7 +11,7 @@
 #import "SWTableViewCell.h"
 #import "UIPrinciples.h"
 
-@interface MyNetwork : UIViewController <UITableViewDelegate, UITableViewDataSource, SWTableViewCellDelegate>
+@interface MyNetwork : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, SWTableViewCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *topBar;
 

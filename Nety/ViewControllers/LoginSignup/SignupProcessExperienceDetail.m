@@ -1,18 +1,18 @@
 //
-//  MyInfoEditExperience.m
+//  SignupProcessExperienceDetail.m
 //  Nety
 //
-//  Created by Scott Cho on 6/29/16.
+//  Created by Scott Cho on 7/2/16.
 //  Copyright © 2016 Scott Cho. All rights reserved.
 //
 
-#import "MyInfoEditExperience.h"
+#import "SignupProcessExperienceDetail.h"
 
-@interface MyInfoEditExperience ()
+@interface SignupProcessExperienceDetail ()
 
 @end
 
-@implementation MyInfoEditExperience
+@implementation SignupProcessExperienceDetail
 
 - (void)viewDidLoad {
     [super viewDidLoad];

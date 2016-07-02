@@ -45,13 +45,13 @@
     // UIPrinciples class from Util folder
     self.UIPrinciple = [[UIPrinciples alloc] init];
     
-    //Set navbar color
-    self.topBar.backgroundColor = self.UIPrinciple.netyBlue;
-    [[UINavigationBar appearance] setBarTintColor:self.UIPrinciple.netyBlue];
-    
     //Set searchbar
     [self.searchBar setBackgroundImage:[[UIImage alloc]init]];
     [self.searchBarView setBackgroundColor:self.UIPrinciple.netyBlue];
+    
+    //Set navbar color
+    self.topBar.backgroundColor = self.UIPrinciple.netyBlue;
+    [[UINavigationBar appearance] setBarTintColor:self.UIPrinciple.netyBlue];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,13 +82,8 @@
     networkCell.networkUserName.text = [userDataDictionary objectForKey:keyName];
     //Set job
     networkCell.networkUserJob.text = [userDataDictionary objectForKey:keyJob];
-    //Cutting Description if too long
-    NSString *descriptionText = [userDataDictionary objectForKey:keyDescription];
-    if ([descriptionText length] > 35) {
-        descriptionText = [descriptionText substringWithRange:NSMakeRange(0,35)];
-        descriptionText = [descriptionText stringByAppendingString:@" ..."];
-    }
     //Set description
+    NSString *descriptionText = [userDataDictionary objectForKey:keyDescription];
     networkCell.networkUserDescription.text = descriptionText;
     
     //DESIGN
@@ -123,6 +118,11 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 
+}
+
+//Hide keyboard when search button pressed
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [searchBar endEditing:YES];
 }
 
 @end

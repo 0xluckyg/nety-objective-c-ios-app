@@ -10,7 +10,7 @@
 #import "NetworkData.h"
 #import "UIPrinciples.h"
 
-@interface Network : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface Network : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *topBar;
 

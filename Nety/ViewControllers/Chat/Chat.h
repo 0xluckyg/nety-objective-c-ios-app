@@ -11,7 +11,7 @@
 #import "SWTableViewCell.h"
 #import "UIPrinciples.h"
 
-@interface Chat : UIViewController <UITableViewDataSource, UITableViewDelegate, SWTableViewCellDelegate>
+@interface Chat : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SWTableViewCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 

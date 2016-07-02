@@ -80,14 +80,9 @@
     chatCell.chatUserName.text = [userDataDictionary objectForKey:keyName];
     //Set job
     chatCell.chatTime.text = [userDataDictionary objectForKey:keyJob];
-    //Cutting Description if too long
-    NSString *descriptionText = [userDataDictionary objectForKey:keyDescription];
-    if ([descriptionText length] > 35) {
-        descriptionText = [descriptionText substringWithRange:NSMakeRange(0,35)];
-        descriptionText = [descriptionText stringByAppendingString:@" ..."];
-    }
-    
+
     //Set description
+    NSString *descriptionText = [userDataDictionary objectForKey:keyDescription];
     chatCell.chatDescription.text = descriptionText;
     
     //Set selection color to blue
@@ -193,6 +188,11 @@
             }
         }
     }
+}
+
+//Hide keyboard when search button pressed
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [searchBar endEditing:YES];
 }
 
 @end

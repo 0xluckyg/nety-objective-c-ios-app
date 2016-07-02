@@ -29,6 +29,9 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                         <color key="tintColor" red="0.43521448759999998" green="0.56477015090000005" blue="0.90839741490000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="kXz-iq-cgA" id="EIh-FN-obg"/>
+                                        </connections>
                                     </searchBar>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -81,7 +84,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGx-B1-VOC">
-                                                    <rect key="frame" x="86" y="27" width="234" height="21"/>
+                                                    <rect key="frame" x="86" y="27" width="251" height="21"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -92,7 +95,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X44-Te-bgz">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X44-Te-bgz">
                                                     <rect key="frame" x="364" y="25" width="34" height="23"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r1Q-5Y-Okj">
@@ -105,11 +108,13 @@
                                                     <color key="backgroundColor" red="0.21664842870000001" green="0.34136130840000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstItem="r1Q-5Y-Okj" firstAttribute="centerX" secondItem="X44-Te-bgz" secondAttribute="centerX" id="0jx-W4-tVX"/>
+                                                        <constraint firstAttribute="height" constant="23" id="32E-my-Upz"/>
+                                                        <constraint firstAttribute="width" constant="34" id="Qfa-bi-eZA"/>
                                                         <constraint firstItem="r1Q-5Y-Okj" firstAttribute="centerY" secondItem="X44-Te-bgz" secondAttribute="centerY" id="S3P-og-jOC"/>
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TNy-jn-Ig0">
-                                                    <rect key="frame" x="86" y="10" width="165" height="21"/>
+                                                    <rect key="frame" x="86" y="10" width="251" height="21"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -118,14 +123,17 @@
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="Iyd-Vf-3p4" secondAttribute="trailing" constant="16" id="1lt-oa-ZXZ"/>
                                                 <constraint firstItem="bGx-B1-VOC" firstAttribute="leading" secondItem="47a-Nb-ipR" secondAttribute="trailing" constant="16" id="2sg-MF-Pc2"/>
+                                                <constraint firstItem="Iyd-Vf-3p4" firstAttribute="top" secondItem="X44-Te-bgz" secondAttribute="bottom" constant="6" id="37p-MM-Kgl"/>
                                                 <constraint firstAttribute="bottom" secondItem="47a-Nb-ipR" secondAttribute="bottom" constant="10.5" id="653-Me-Gnu"/>
                                                 <constraint firstItem="47a-Nb-ipR" firstAttribute="top" secondItem="Onk-iQ-XQj" secondAttribute="top" constant="10" id="6hR-W4-jbD"/>
                                                 <constraint firstAttribute="bottom" secondItem="Iyd-Vf-3p4" secondAttribute="bottom" constant="7.5" id="AfA-kU-ThO"/>
                                                 <constraint firstItem="47a-Nb-ipR" firstAttribute="leading" secondItem="Onk-iQ-XQj" secondAttribute="leading" constant="16" id="ECB-LB-sQX"/>
+                                                <constraint firstItem="X44-Te-bgz" firstAttribute="top" secondItem="Onk-iQ-XQj" secondAttribute="top" constant="25" id="GQB-hv-cIC"/>
                                                 <constraint firstItem="bGx-B1-VOC" firstAttribute="top" secondItem="TNy-jn-Ig0" secondAttribute="bottom" constant="-4" id="TuD-de-AGd"/>
-                                                <constraint firstItem="X44-Te-bgz" firstAttribute="centerY" secondItem="Onk-iQ-XQj" secondAttribute="centerY" id="Wtg-MT-0p0"/>
+                                                <constraint firstItem="r1Q-5Y-Okj" firstAttribute="leading" secondItem="TNy-jn-Ig0" secondAttribute="trailing" constant="30" id="f3N-or-fS9"/>
                                                 <constraint firstAttribute="bottom" secondItem="bGx-B1-VOC" secondAttribute="bottom" constant="26.5" id="icu-fT-ItH"/>
                                                 <constraint firstItem="TNy-jn-Ig0" firstAttribute="leading" secondItem="47a-Nb-ipR" secondAttribute="trailing" constant="16" id="mxF-50-P0B"/>
+                                                <constraint firstItem="r1Q-5Y-Okj" firstAttribute="leading" secondItem="bGx-B1-VOC" secondAttribute="trailing" constant="30" id="peb-3A-jCJ"/>
                                                 <constraint firstItem="TNy-jn-Ig0" firstAttribute="top" secondItem="Onk-iQ-XQj" secondAttribute="top" constant="10" id="sIx-Cb-f2D"/>
                                                 <constraint firstAttribute="trailing" secondItem="X44-Te-bgz" secondAttribute="trailing" constant="16" id="z3a-ub-xQD"/>
                                             </constraints>

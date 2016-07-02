@@ -1,19 +1,20 @@
 //
-//  MyInfoEditTable.m
+//  SignupProcess2.m
 //  Nety
 //
-//  Created by Scott Cho on 6/28/16.
+//  Created by Scott Cho on 7/2/16.
 //  Copyright © 2016 Scott Cho. All rights reserved.
 //
 
-#import "MyInfoEditTable.h"
+#import "SignupProcess2.h"
 #import "MyInfoEditTableCell.h"
 
-@interface MyInfoEditTable ()
+
+@interface SignupProcess2 ()
 
 @end
 
-@implementation MyInfoEditTable
+@implementation SignupProcess2
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -40,9 +41,13 @@
     // UIPrinciples class from Util folder
     self.UIPrinciple = [[UIPrinciples alloc] init];
     
+    //Background blue
+    self.view.backgroundColor = self.UIPrinciple.netyBlue;
+    self.tableView.backgroundColor = self.UIPrinciple.netyBlue;
+    
     //Edit and add buttons
-    [self.editButtonOutlet setTintColor:self.UIPrinciple.netyBlue];
-    [self.addButtonOutlet setTintColor:self.UIPrinciple.netyBlue];
+    [self.editButtonOutlet setTintColor:[UIColor whiteColor]];
+    [self.addButtonOutlet setTintColor:[UIColor whiteColor]];
     
     //No separator
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -63,7 +68,6 @@
     //Initialize cell
     MyInfoEditTableCell *experienceCell = [tableView dequeueReusableCellWithIdentifier:@"MyInfoEditTableCell"];
     
-    
     if ([self.experienceData.userExperienceArray count] == 0) {
         //Set cell data
         experienceCell.experienceName.text = @"You didn't add any experience yet";
@@ -74,6 +78,12 @@
         experienceCell.experienceDate.text = [rowData objectForKey: keyExperienceTime];
         experienceCell.experienceDescription.text = [rowData objectForKey: keyExperienceDescription];
     }
+    
+    //Set cell style
+    experienceCell.backgroundColor = self.UIPrinciple.netyBlue;
+    experienceCell.experienceName.textColor = [UIColor whiteColor];
+    experienceCell.experienceDate.textColor = [UIColor whiteColor];
+    experienceCell.experienceDescription.textColor = [UIColor whiteColor];
     
     //Set selection color to blue
     UIView *bgColorView = [[UIView alloc] init];

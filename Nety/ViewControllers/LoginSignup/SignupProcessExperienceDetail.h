@@ -1,15 +1,15 @@
 //
-//  MyInfoEditExperience.h
+//  SignupProcessExperienceDetail.h
 //  Nety
 //
-//  Created by Scott Cho on 6/29/16.
+//  Created by Scott Cho on 7/2/16.
 //  Copyright © 2016 Scott Cho. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "UIPrinciples.h"
 
-@interface MyInfoEditExperience : UIViewController <UITextViewDelegate, UITextFieldDelegate> {
+@interface SignupProcessExperienceDetail : UIViewController <UITextViewDelegate, UITextFieldDelegate> {
     UIDatePicker *datePicker;
     NSString *namePlacementText;
     NSString *dateToPlacementText;
