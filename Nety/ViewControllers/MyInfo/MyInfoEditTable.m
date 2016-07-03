@@ -40,9 +40,13 @@
     // UIPrinciples class from Util folder
     self.UIPrinciple = [[UIPrinciples alloc] init];
     
+    //Background blue
+    self.view.backgroundColor = self.UIPrinciple.netyBlue;
+    self.tableView.backgroundColor = self.UIPrinciple.netyBlue;
+    
     //Edit and add buttons
-    [self.editButtonOutlet setTintColor:self.UIPrinciple.netyBlue];
-    [self.addButtonOutlet setTintColor:self.UIPrinciple.netyBlue];
+    [self.editButtonOutlet setTintColor:[UIColor whiteColor]];
+    [self.addButtonOutlet setTintColor:[UIColor whiteColor]];
     
     //No separator
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -74,6 +78,12 @@
         experienceCell.experienceDate.text = [rowData objectForKey: keyExperienceTime];
         experienceCell.experienceDescription.text = [rowData objectForKey: keyExperienceDescription];
     }
+    
+    //Set cell style
+    experienceCell.backgroundColor = self.UIPrinciple.netyBlue;
+    experienceCell.experienceName.textColor = [UIColor whiteColor];
+    experienceCell.experienceDate.textColor = [UIColor whiteColor];
+    experienceCell.experienceDescription.textColor = [UIColor whiteColor];
     
     //Set selection color to blue
     UIView *bgColorView = [[UIView alloc] init];

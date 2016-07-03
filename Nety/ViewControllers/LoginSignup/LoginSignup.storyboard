@@ -105,7 +105,7 @@
                                             <constraint firstAttribute="width" secondItem="lVg-7z-32W" secondAttribute="height" multiplier="19:3" id="CPt-6T-Z0c"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
-                                        <textInputTraits key="textInputTraits" spellCheckingType="no" returnKeyType="done"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Rb2-WJ-mSA">
                                         <rect key="frame" x="25" y="102" width="190" height="30"/>
@@ -113,7 +113,7 @@
                                             <constraint firstAttribute="width" secondItem="Rb2-WJ-mSA" secondAttribute="height" multiplier="19:3" id="Z37-ta-Rgc"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AN5-wS-k4M">
                                         <rect key="frame" x="100" y="178" width="40" height="30"/>
@@ -172,25 +172,16 @@
                         <outlet property="email" destination="lVg-7z-32W" id="70D-7i-Lsh"/>
                         <outlet property="holdingView" destination="yaJ-kx-Dyw" id="vIc-el-REq"/>
                         <outlet property="password" destination="Rb2-WJ-mSA" id="SEq-Et-eim"/>
-                        <segue destination="NaR-sX-RtB" kind="show" identifier="networkSegue" id="GVG-IB-BJc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uTt-Pd-tRD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1551" y="-39"/>
         </scene>
-        <!--Network-->
-        <scene sceneID="au4-Gm-i7g">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="Network" storyboardName="Network" referencedIdentifier="Network" id="NaR-sX-RtB" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lYP-4A-1BU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2164.5" y="64"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="zMB-zJ-awG">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="MXR-kz-CZQ" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MainPageNav" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="MXR-kz-CZQ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="NbT-ba-dU2">
@@ -247,7 +238,7 @@
                                             <constraint firstAttribute="width" secondItem="8fX-8t-k1w" secondAttribute="height" multiplier="19:3" id="dTL-dy-u8m"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
-                                        <textInputTraits key="textInputTraits" spellCheckingType="no" returnKeyType="done"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name ex. Steve Jobs" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qny-6A-Uti">
                                         <rect key="frame" x="25" y="149" width="190" height="30"/>
@@ -255,7 +246,7 @@
                                             <constraint firstAttribute="width" secondItem="qny-6A-Uti" secondAttribute="height" multiplier="19:3" id="u6x-VV-NZH"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
-                                        <textInputTraits key="textInputTraits" spellCheckingType="no" returnKeyType="done"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Age" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sW0-Ef-jem">
                                         <rect key="frame" x="25" y="205" width="190" height="30"/>
@@ -263,7 +254,7 @@
                                             <constraint firstAttribute="width" secondItem="sW0-Ef-jem" secondAttribute="height" multiplier="19:3" id="K3I-w3-0eo"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
-                                        <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="done"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="done"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="xzG-JF-eRz">
                                         <rect key="frame" x="25" y="93" width="190" height="30"/>
@@ -271,7 +262,7 @@
                                             <constraint firstAttribute="width" secondItem="xzG-JF-eRz" secondAttribute="height" multiplier="19:3" id="Xrt-dM-nes"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES"/>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" red="0.43521448759999998" green="0.56477015090000005" blue="0.90839741490000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -351,6 +342,9 @@
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Later" id="1Hc-VM-aGc">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="laterButton:" destination="af4-R8-uFT" id="fQU-CM-akp"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -480,7 +474,7 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Title" prompt="Experience" id="i4T-7B-1Xj">
+                                    <navigationItem title="Experience" prompt="" id="i4T-7B-1Xj">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="zhR-N9-80f">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             <connections>

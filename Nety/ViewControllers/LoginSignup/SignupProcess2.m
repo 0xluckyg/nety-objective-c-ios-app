@@ -8,7 +8,7 @@
 
 #import "SignupProcess2.h"
 #import "MyInfoEditTableCell.h"
-
+#import "AppDelegate.h"
 
 @interface SignupProcess2 ()
 
@@ -125,9 +125,21 @@
 - (IBAction)addButton:(id)sender {
 }
 
-//-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    return UITableViewCellEditingStyleNone;
-//}
+- (IBAction)laterButton:(id)sender {
+    //Set root controller to tabbar with cross dissolve animation
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    [UIView
+     transitionWithView:self.view.window
+     duration:0.5
+     options:UIViewAnimationOptionTransitionCrossDissolve
+     animations:^(void) {
+         BOOL oldState = [UIView areAnimationsEnabled];
+         [UIView setAnimationsEnabled:NO];
+         [appDelegate.window setRootViewController:appDelegate.tabBarRootController];
+         [UIView setAnimationsEnabled:oldState];
+     }
+     completion:nil];
+}
 
 -(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;

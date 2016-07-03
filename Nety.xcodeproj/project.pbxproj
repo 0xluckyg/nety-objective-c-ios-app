@@ -179,10 +179,10 @@
 		67391DEC1D27F76D00A50C03 /* Signup */ = {
 			isa = PBXGroup;
 			children = (
-				67391DF61D28096800A50C03 /* Process1 */,
-				67391DF71D28097000A50C03 /* Process2 */,
 				67391DE81D27ED0200A50C03 /* Signup.h */,
 				67391DE91D27ED0200A50C03 /* Signup.m */,
+				67391DF61D28096800A50C03 /* Process1 */,
+				67391DF71D28097000A50C03 /* Process2 */,
 			);
 			name = Signup;
 			sourceTree = "<group>";

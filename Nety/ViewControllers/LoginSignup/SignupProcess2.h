@@ -25,6 +25,8 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+
+
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
 
 @property (strong, nonatomic) NetworkData *experienceData;
@@ -34,5 +36,8 @@
 - (IBAction)editButton:(id)sender;
 
 - (IBAction)addButton:(id)sender;
+
+- (IBAction)laterButton:(id)sender;
+
 
 @end

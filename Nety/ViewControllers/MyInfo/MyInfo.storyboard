@@ -578,7 +578,7 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Title" id="8NH-nK-jiJ">
+                                    <navigationItem title="Experience" id="8NH-nK-jiJ">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="R5e-jx-Yux">
                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             <connections>

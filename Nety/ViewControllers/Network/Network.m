@@ -51,6 +51,7 @@
     
     //Set navbar color
     self.topBar.backgroundColor = self.UIPrinciple.netyBlue;
+    [UINavigationBar appearance].clipsToBounds = YES;
     [[UINavigationBar appearance] setBarTintColor:self.UIPrinciple.netyBlue];
 }
 

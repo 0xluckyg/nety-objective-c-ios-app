@@ -36,6 +36,7 @@
     self.topBar.backgroundColor = self.UIPrinciple.netyBlue;
     [[UINavigationBar appearance] setBarTintColor:self.UIPrinciple.netyBlue];
     [[UINavigationBar appearance]setShadowImage:[[UIImage alloc] init]];
+    [UINavigationBar appearance].clipsToBounds = YES;
     
     //Label
     self.jobLabel.textColor = [UIColor whiteColor];
@@ -56,6 +57,7 @@
 - (BOOL)textViewShouldBeginEditing:(UITextField *)textView
 {
     textView.attributedText = nil;
+    textView.textColor = self.UIPrinciple.netyBlue;
     return YES;
 }
 

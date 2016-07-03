@@ -20,15 +20,24 @@
     // Override point for customization after application launch.
     
     //Check if user is signed in, and move on
-    
+
+    [self initializeLoginView];
     [self initializeTabBar];
-    
+
     return YES;
+}
+
+-(void)initializeLoginView {
+    
+    UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"LoginSignup" bundle:nil];
+    UIViewController *myNetworkViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"MainPageNav"];
+
+    [self.window setRootViewController:myNetworkViewController];
 }
 
 -(void)initializeTabBar {
     //Create a tabBar instance
-    UITabBarController *tabBarRootController = [[UITabBarController alloc] init];
+    self.tabBarRootController = [[UITabBarController alloc] init];
     
     //Create storyboard instances
     UIStoryboard *networkStoryboard = [UIStoryboard storyboardWithName:@"Network" bundle:nil];
@@ -57,11 +66,7 @@
     
     //Connect tabBar and view controllers together
     NSArray* controllers = [NSArray arrayWithObjects:networkViewController, myNetworkViewController, chatViewController, myInfoViewController, nil];
-    tabBarRootController.viewControllers = controllers;
-    
-    //initialize tabBar
-    [self.window makeKeyAndVisible];
-    [self.window setRootViewController:tabBarRootController];
+    self.tabBarRootController.viewControllers = controllers;
     
     //make status bar text color white
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];

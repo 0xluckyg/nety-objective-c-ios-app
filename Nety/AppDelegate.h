@@ -13,6 +13,8 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+@property (strong, nonatomic) UITabBarController *tabBarRootController;
+
 @property (weak, nonatomic) Login *login;
 
 @end
