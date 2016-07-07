@@ -14,11 +14,6 @@
     bool editButtonClicked;
 }
 
-
-@property (weak, nonatomic) IBOutlet UIView *topBar;
-
-@property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
-
 @property (weak, nonatomic) IBOutlet UIButton *editButtonOutlet;
 
 @property (weak, nonatomic) IBOutlet UIButton *addButtonOutlet;

@@ -52,9 +52,17 @@
     UIViewController *myInfoViewController = [myInfoStoryboard instantiateViewControllerWithIdentifier:@"MyInfo"];
     
     //Set title and image of each tabBar item
+    
+    [networkViewController.tabBarItem setImage:[UIImage imageNamed:@"Network"]];
     [networkViewController.tabBarItem setTitle:@"Net"];
+    
+    [myNetworkViewController.tabBarItem setImage:[UIImage imageNamed:@"MyNetwork"]];
     [myNetworkViewController.tabBarItem setTitle:@"My Net"];
+    
+    [chatViewController.tabBarItem setImage:[UIImage imageNamed:@"Chat"]];
     [chatViewController.tabBarItem setTitle:@"Chat"];
+    
+    [myInfoViewController.tabBarItem setImage:[UIImage imageNamed:@"Profile"]];
     [myInfoViewController.tabBarItem setTitle:@"Me"];
     
     //Set tabBar style
@@ -71,6 +79,10 @@
     //make status bar text color white
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

@@ -20,6 +20,7 @@
 		67391DF21D27FBC400A50C03 /* SignupProcess2.m in Sources */ = {isa = PBXBuildFile; fileRef = 67391DF11D27FBC400A50C03 /* SignupProcess2.m */; };
 		67391DF51D27FBD800A50C03 /* SignupProcessExperienceDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 67391DF41D27FBD800A50C03 /* SignupProcessExperienceDetail.m */; };
 		67391DFB1D280A9600A50C03 /* SignupProcessExperienceDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 67391DFA1D280A9600A50C03 /* SignupProcessExperienceDetailCell.m */; };
+		674918EA1D2D8ACE0015EFE9 /* SignupProcess3.m in Sources */ = {isa = PBXBuildFile; fileRef = 674918E91D2D8ACE0015EFE9 /* SignupProcess3.m */; };
 		67606C6E1D24888700AD127E /* MyInfoEditExperience.m in Sources */ = {isa = PBXBuildFile; fileRef = 67606C6D1D24888700AD127E /* MyInfoEditExperience.m */; };
 		679B9EE71D236DF900C426F2 /* MyInfoEditType1.m in Sources */ = {isa = PBXBuildFile; fileRef = 679B9EE61D236DF900C426F2 /* MyInfoEditType1.m */; };
 		679B9EEA1D236E0A00C426F2 /* MyInfoEditType2.m in Sources */ = {isa = PBXBuildFile; fileRef = 679B9EE91D236E0A00C426F2 /* MyInfoEditType2.m */; };
@@ -79,6 +80,8 @@
 		67391DF41D27FBD800A50C03 /* SignupProcessExperienceDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupProcessExperienceDetail.m; sourceTree = "<group>"; };
 		67391DF91D280A9600A50C03 /* SignupProcessExperienceDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupProcessExperienceDetailCell.h; sourceTree = "<group>"; };
 		67391DFA1D280A9600A50C03 /* SignupProcessExperienceDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupProcessExperienceDetailCell.m; sourceTree = "<group>"; };
+		674918E81D2D8ACE0015EFE9 /* SignupProcess3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupProcess3.h; sourceTree = "<group>"; };
+		674918E91D2D8ACE0015EFE9 /* SignupProcess3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupProcess3.m; sourceTree = "<group>"; };
 		67606C6C1D24888700AD127E /* MyInfoEditExperience.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoEditExperience.h; sourceTree = "<group>"; };
 		67606C6D1D24888700AD127E /* MyInfoEditExperience.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoEditExperience.m; sourceTree = "<group>"; };
 		679B9EE51D236DF900C426F2 /* MyInfoEditType1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoEditType1.h; sourceTree = "<group>"; };
@@ -183,6 +186,7 @@
 				67391DE91D27ED0200A50C03 /* Signup.m */,
 				67391DF61D28096800A50C03 /* Process1 */,
 				67391DF71D28097000A50C03 /* Process2 */,
+				674918E41D2D8A6D0015EFE9 /* Process3 */,
 			);
 			name = Signup;
 			sourceTree = "<group>";
@@ -207,6 +211,15 @@
 				67391DFA1D280A9600A50C03 /* SignupProcessExperienceDetailCell.m */,
 			);
 			name = Process2;
+			sourceTree = "<group>";
+		};
+		674918E41D2D8A6D0015EFE9 /* Process3 */ = {
+			isa = PBXGroup;
+			children = (
+				674918E81D2D8ACE0015EFE9 /* SignupProcess3.h */,
+				674918E91D2D8ACE0015EFE9 /* SignupProcess3.m */,
+			);
+			name = Process3;
 			sourceTree = "<group>";
 		};
 		679B9EF11D23971E00C426F2 /* MyInfoEditType1 */ = {
@@ -499,6 +512,7 @@
 				67DD1AA71D17BFFF00FBEA0F /* MyInfo.m in Sources */,
 				67DD1AB61D17E04F00FBEA0F /* NetworkCell.m in Sources */,
 				679B9EE71D236DF900C426F2 /* MyInfoEditType1.m in Sources */,
+				674918EA1D2D8ACE0015EFE9 /* SignupProcess3.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

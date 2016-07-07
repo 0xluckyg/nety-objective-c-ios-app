@@ -14,10 +14,6 @@
     NSString *editType1JobPlacementText;
 }
 
-@property (weak, nonatomic) IBOutlet UIView *topBar;
-
-@property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
-
 @property (weak, nonatomic) IBOutlet UILabel *editType1NameLabel;
 
 @property (weak, nonatomic) IBOutlet UITextField *editType1NameTextField;

@@ -16,10 +16,6 @@
     NSString *descriptionPlacementText;
 }
 
-@property (weak, nonatomic) IBOutlet UIView *topBar;
-
-@property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
-
 
 @property (weak, nonatomic) IBOutlet UITextField *experienceNameTextField;
 

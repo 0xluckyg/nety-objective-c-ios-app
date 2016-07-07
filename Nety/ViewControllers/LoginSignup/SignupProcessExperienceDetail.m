@@ -46,11 +46,6 @@
     //UIPrinciple allocation
     self.UIPrinciple = [[UIPrinciples alloc] init];
     
-    //Topbar and navbar colors
-    self.topBar.backgroundColor = self.UIPrinciple.netyBlue;
-    self.navBar.backgroundColor = self.UIPrinciple.netyBlue;
-    [[UINavigationBar appearance]setShadowImage:[[UIImage alloc] init]];
-    
     //View color
     self.view.backgroundColor = self.UIPrinciple.netyBlue;
     

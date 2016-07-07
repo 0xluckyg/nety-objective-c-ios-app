@@ -44,18 +44,9 @@
     self.view.backgroundColor = self.UIPrinciple.netyBlue;
     self.tableView.backgroundColor = self.UIPrinciple.netyBlue;
     
-    //Edit and add buttons
-    [self.editButtonOutlet setTintColor:[UIColor whiteColor]];
-    [self.addButtonOutlet setTintColor:[UIColor whiteColor]];
-    
     //No separator
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    //Topbar and navbar colors to blue
-    self.topBar.backgroundColor = self.UIPrinciple.netyBlue;
-    self.navBar.backgroundColor = self.UIPrinciple.netyBlue;
-    [[UINavigationBar appearance]setShadowImage:[[UIImage alloc] init]];
-    
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -112,11 +103,9 @@
     
     if (editButtonClicked == YES) {
         [self.tableView setEditing:YES animated:YES];
-        [self.editButtonOutlet setTitle:@"Done" forState:UIControlStateNormal];
         editButtonClicked = NO;
     } else {
         [self.tableView setEditing:NO animated:NO];
-        [self.editButtonOutlet setTitle:@"Edit" forState:UIControlStateNormal];
         editButtonClicked = YES;
     }
     

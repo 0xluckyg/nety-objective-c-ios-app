@@ -33,11 +33,6 @@
     //Background of page
     self.view.backgroundColor = self.UIPrinciple.netyBlue;
 
-    //navbar design
-    self.topBar.backgroundColor = self.UIPrinciple.netyBlue;
-    self.navBar.backgroundColor = self.UIPrinciple.netyBlue;
-    [[UINavigationBar appearance]setShadowImage:[[UIImage alloc] init]];
-    
     //Name Label
     self.editType1NameLabel.text = @"Name";
     self.editType1NameLabel.textColor = [UIColor whiteColor];

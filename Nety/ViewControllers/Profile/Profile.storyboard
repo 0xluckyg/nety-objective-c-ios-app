@@ -133,10 +133,9 @@
                                             <constraint firstItem="4Um-8g-s4e" firstAttribute="top" secondItem="HZ1-a6-2IA" secondAttribute="bottom" constant="9" id="xTj-rB-siW"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ytb-bu-QIl">
-                                        <rect key="frame" x="29" y="29" width="34" height="30"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
-                                        <state key="normal" title="Back">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ytb-bu-QIl">
+                                        <rect key="frame" x="20" y="40" width="25" height="25"/>
+                                        <state key="normal" image="Back">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -145,14 +144,14 @@
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="ytb-bu-QIl" firstAttribute="top" secondItem="oTP-Ri-c9z" secondAttribute="top" constant="40" id="4jU-77-rOn"/>
                                     <constraint firstItem="Vv7-TQ-Bjl" firstAttribute="leading" secondItem="oTP-Ri-c9z" secondAttribute="leading" id="8XJ-Gc-sil"/>
                                     <constraint firstAttribute="bottom" secondItem="Vv7-TQ-Bjl" secondAttribute="bottom" id="E9D-1P-cPs"/>
                                     <constraint firstAttribute="trailing" secondItem="Vv7-TQ-Bjl" secondAttribute="trailing" id="VQ7-qu-oEx"/>
                                     <constraint firstItem="Vv7-TQ-Bjl" firstAttribute="top" secondItem="oTP-Ri-c9z" secondAttribute="top" constant="325" id="ZJC-8B-b38"/>
                                     <constraint firstAttribute="trailing" secondItem="MLP-s6-2Ce" secondAttribute="trailing" id="e1Q-sK-oXR"/>
                                     <constraint firstItem="Vv7-TQ-Bjl" firstAttribute="top" secondItem="MLP-s6-2Ce" secondAttribute="bottom" id="eJN-R0-Y2s"/>
-                                    <constraint firstItem="ytb-bu-QIl" firstAttribute="leading" secondItem="oTP-Ri-c9z" secondAttribute="leading" constant="29" id="edz-yO-ynL"/>
-                                    <constraint firstItem="ytb-bu-QIl" firstAttribute="top" secondItem="oTP-Ri-c9z" secondAttribute="top" constant="29" id="u2t-ha-9XR"/>
+                                    <constraint firstItem="ytb-bu-QIl" firstAttribute="leading" secondItem="oTP-Ri-c9z" secondAttribute="leading" constant="20" id="uEB-0n-oVC"/>
                                     <constraint firstItem="MLP-s6-2Ce" firstAttribute="leading" secondItem="oTP-Ri-c9z" secondAttribute="leading" id="wzH-L7-cjE"/>
                                 </constraints>
                             </scrollView>
@@ -188,4 +187,7 @@
             <point key="canvasLocation" x="425" y="270.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Back" width="25" height="25"/>
+    </resources>
 </document>

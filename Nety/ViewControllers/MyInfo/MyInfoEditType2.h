@@ -13,10 +13,6 @@
     NSString *editType2PlacementText;
 }
 
-@property (weak, nonatomic) IBOutlet UIView *topBar;
-
-@property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
-
 @property (weak, nonatomic) IBOutlet UILabel *editType2Label;
 
 @property (weak, nonatomic) IBOutlet UITextView *editType2TextField;

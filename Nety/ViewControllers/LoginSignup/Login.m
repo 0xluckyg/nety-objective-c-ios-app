@@ -29,6 +29,8 @@
     self.view.backgroundColor = self.UIPrinciple.netyBlue;
     self.holdingView.backgroundColor = self.UIPrinciple.netyBlue;
     
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {

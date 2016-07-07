@@ -31,12 +31,7 @@
     
     //Background of page
     self.view.backgroundColor = self.UIPrinciple.netyBlue;
-    
-    //navbar design
-    self.topBar.backgroundColor = self.UIPrinciple.netyBlue;
-    self.navBar.backgroundColor = self.UIPrinciple.netyBlue;
-    [[UINavigationBar appearance]setShadowImage:[[UIImage alloc] init]];
-    
+
     //Label
     self.editType2Label.text = @"Summary";
     self.editType2Label.textColor = [UIColor whiteColor];

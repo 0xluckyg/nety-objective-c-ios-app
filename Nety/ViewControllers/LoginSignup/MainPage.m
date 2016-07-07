@@ -29,7 +29,6 @@
     
     self.logoImage.image = [UIImage imageNamed:@"LogoTransparent"];
     
-    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -11,10 +11,6 @@
 
 @interface SignupProcess1 : UIViewController <UITextViewDelegate, UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *topBar;
-
-@property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
-
 @property (weak, nonatomic) IBOutlet UILabel *jobLabel;
 
 @property (weak, nonatomic) IBOutlet UITextField *jobTextField;
