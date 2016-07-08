@@ -53,6 +53,10 @@
     self.topBar.backgroundColor = self.UIPrinciple.netyBlue;
     [UINavigationBar appearance].clipsToBounds = YES;
     [[UINavigationBar appearance] setBarTintColor:self.UIPrinciple.netyBlue];
+    
+    //Set statusbar color
+    [self.UIPrinciple addTopbarColor:self];
+    
 }
 
 - (void)didReceiveMemoryWarning {

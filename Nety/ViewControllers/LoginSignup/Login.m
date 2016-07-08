@@ -66,6 +66,7 @@
         
         //Set root controller to tabbar with cross dissolve animation
         AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+        
         [UIView
          transitionWithView:self.view.window
          duration:0.5
@@ -77,8 +78,8 @@
              [UIView setAnimationsEnabled:oldState];
          }
          completion:nil];
+        
     }
-
 }
 
 - (IBAction)loginWithLinkedinButton:(id)sender {

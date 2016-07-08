@@ -834,9 +834,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Back" width="50" height="50"/>
-        <image name="Edit" width="50" height="50"/>
-        <image name="Forward" width="50" height="50"/>
-        <image name="Plus" width="50" height="50"/>
+        <image name="Back" width="25" height="25"/>
+        <image name="Edit" width="25" height="25"/>
+        <image name="Forward" width="25" height="25"/>
+        <image name="Plus" width="25" height="25"/>
     </resources>
 </document>

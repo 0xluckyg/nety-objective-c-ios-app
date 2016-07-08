@@ -1,0 +1,18 @@
+PODS:
+  - JSQMessagesViewController (7.3.3):
+    - JSQSystemSoundPlayer (~> 2.0.1)
+  - JSQSystemSoundPlayer (2.0.1)
+  - SWTableViewCell (0.3.7)
+
+DEPENDENCIES:
+  - JSQMessagesViewController
+  - SWTableViewCell (~> 0.3.7)
+
+SPEC CHECKSUMS:
+  JSQMessagesViewController: 0ee3f80237268192a3e8337fd0d787f1a1bf5a7a
+  JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
+  SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
+
+PODFILE CHECKSUM: 75ea576fd4a8c30a8f71b04d0687e6293760b962
+
+COCOAPODS: 1.0.1

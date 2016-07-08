@@ -8,12 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		673338F71D20937C00A8009F /* MyNetworkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 673338F61D20937C00A8009F /* MyNetworkCell.m */; };
-		673339061D2098D200A8009F /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 673338FB1D2098D200A8009F /* NSMutableArray+SWUtilityButtons.m */; };
-		673339071D2098D200A8009F /* SWCellScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 673338FD1D2098D200A8009F /* SWCellScrollView.m */; };
-		673339081D2098D200A8009F /* SWLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 673338FF1D2098D200A8009F /* SWLongPressGestureRecognizer.m */; };
-		673339091D2098D200A8009F /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 673339011D2098D200A8009F /* SWTableViewCell.m */; };
-		6733390A1D2098D200A8009F /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 673339031D2098D200A8009F /* SWUtilityButtonTapGestureRecognizer.m */; };
-		6733390B1D2098D200A8009F /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 673339051D2098D200A8009F /* SWUtilityButtonView.m */; };
 		6733390E1D20B5ED00A8009F /* ChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6733390D1D20B5ED00A8009F /* ChatCell.m */; };
 		67391DEA1D27ED0200A50C03 /* Signup.m in Sources */ = {isa = PBXBuildFile; fileRef = 67391DE91D27ED0200A50C03 /* Signup.m */; };
 		67391DEF1D27FBB900A50C03 /* SignupProcess1.m in Sources */ = {isa = PBXBuildFile; fileRef = 67391DEE1D27FBB900A50C03 /* SignupProcess1.m */; };
@@ -21,6 +15,8 @@
 		67391DF51D27FBD800A50C03 /* SignupProcessExperienceDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 67391DF41D27FBD800A50C03 /* SignupProcessExperienceDetail.m */; };
 		67391DFB1D280A9600A50C03 /* SignupProcessExperienceDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 67391DFA1D280A9600A50C03 /* SignupProcessExperienceDetailCell.m */; };
 		674918EA1D2D8ACE0015EFE9 /* SignupProcess3.m in Sources */ = {isa = PBXBuildFile; fileRef = 674918E91D2D8ACE0015EFE9 /* SignupProcess3.m */; };
+		67602F501D2EC75F00DA2F3A /* Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = 67602F4F1D2EC75F00DA2F3A /* Messages.m */; };
+		67602F521D2EC76900DA2F3A /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67602F511D2EC76900DA2F3A /* Messages.storyboard */; };
 		67606C6E1D24888700AD127E /* MyInfoEditExperience.m in Sources */ = {isa = PBXBuildFile; fileRef = 67606C6D1D24888700AD127E /* MyInfoEditExperience.m */; };
 		679B9EE71D236DF900C426F2 /* MyInfoEditType1.m in Sources */ = {isa = PBXBuildFile; fileRef = 679B9EE61D236DF900C426F2 /* MyInfoEditType1.m */; };
 		679B9EEA1D236E0A00C426F2 /* MyInfoEditType2.m in Sources */ = {isa = PBXBuildFile; fileRef = 679B9EE91D236E0A00C426F2 /* MyInfoEditType2.m */; };
@@ -51,23 +47,15 @@
 		67DD1AC21D17E42D00FBEA0F /* girl2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1ABD1D17E42D00FBEA0F /* girl2.jpg */; };
 		67DD1AC31D17E42D00FBEA0F /* man.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1ABE1D17E42D00FBEA0F /* man.jpg */; };
 		67DD1AC41D17E42D00FBEA0F /* water.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1ABF1D17E42D00FBEA0F /* water.jpg */; };
+		97677F0633DE3705741AEB8E /* libPods-Nety.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F5D56FDB372FC5465929EE /* libPods-Nety.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01F5D56FDB372FC5465929EE /* libPods-Nety.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Nety.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A3CCF7D46442EF40346F17A /* Pods-Nety.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nety.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Nety/Pods-Nety.debug.xcconfig"; sourceTree = "<group>"; };
+		35F89FE34D38A372A0738678 /* Pods-Nety.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nety.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nety/Pods-Nety.release.xcconfig"; sourceTree = "<group>"; };
 		673338F51D20937C00A8009F /* MyNetworkCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNetworkCell.h; sourceTree = "<group>"; };
 		673338F61D20937C00A8009F /* MyNetworkCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNetworkCell.m; sourceTree = "<group>"; };
-		673338FA1D2098D200A8009F /* NSMutableArray+SWUtilityButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+SWUtilityButtons.h"; sourceTree = "<group>"; };
-		673338FB1D2098D200A8009F /* NSMutableArray+SWUtilityButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+SWUtilityButtons.m"; sourceTree = "<group>"; };
-		673338FC1D2098D200A8009F /* SWCellScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWCellScrollView.h; sourceTree = "<group>"; };
-		673338FD1D2098D200A8009F /* SWCellScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWCellScrollView.m; sourceTree = "<group>"; };
-		673338FE1D2098D200A8009F /* SWLongPressGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWLongPressGestureRecognizer.h; sourceTree = "<group>"; };
-		673338FF1D2098D200A8009F /* SWLongPressGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWLongPressGestureRecognizer.m; sourceTree = "<group>"; };
-		673339001D2098D200A8009F /* SWTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWTableViewCell.h; sourceTree = "<group>"; };
-		673339011D2098D200A8009F /* SWTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWTableViewCell.m; sourceTree = "<group>"; };
-		673339021D2098D200A8009F /* SWUtilityButtonTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonTapGestureRecognizer.h; sourceTree = "<group>"; };
-		673339031D2098D200A8009F /* SWUtilityButtonTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonTapGestureRecognizer.m; sourceTree = "<group>"; };
-		673339041D2098D200A8009F /* SWUtilityButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonView.h; sourceTree = "<group>"; };
-		673339051D2098D200A8009F /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonView.m; sourceTree = "<group>"; };
 		6733390C1D20B5ED00A8009F /* ChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatCell.h; sourceTree = "<group>"; };
 		6733390D1D20B5ED00A8009F /* ChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatCell.m; sourceTree = "<group>"; };
 		67391DE81D27ED0200A50C03 /* Signup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Signup.h; sourceTree = "<group>"; };
@@ -82,6 +70,9 @@
 		67391DFA1D280A9600A50C03 /* SignupProcessExperienceDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupProcessExperienceDetailCell.m; sourceTree = "<group>"; };
 		674918E81D2D8ACE0015EFE9 /* SignupProcess3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupProcess3.h; sourceTree = "<group>"; };
 		674918E91D2D8ACE0015EFE9 /* SignupProcess3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupProcess3.m; sourceTree = "<group>"; };
+		67602F4E1D2EC75F00DA2F3A /* Messages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Messages.h; sourceTree = "<group>"; };
+		67602F4F1D2EC75F00DA2F3A /* Messages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Messages.m; sourceTree = "<group>"; };
+		67602F511D2EC76900DA2F3A /* Messages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
 		67606C6C1D24888700AD127E /* MyInfoEditExperience.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoEditExperience.h; sourceTree = "<group>"; };
 		67606C6D1D24888700AD127E /* MyInfoEditExperience.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoEditExperience.m; sourceTree = "<group>"; };
 		679B9EE51D236DF900C426F2 /* MyInfoEditType1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoEditType1.h; sourceTree = "<group>"; };
@@ -137,6 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97677F0633DE3705741AEB8E /* libPods-Nety.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,28 +138,8 @@
 		673338F81D2098D200A8009F /* Lib */ = {
 			isa = PBXGroup;
 			children = (
-				673338F91D2098D200A8009F /* SWTableViewCell */,
 			);
 			path = Lib;
-			sourceTree = "<group>";
-		};
-		673338F91D2098D200A8009F /* SWTableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				673338FA1D2098D200A8009F /* NSMutableArray+SWUtilityButtons.h */,
-				673338FB1D2098D200A8009F /* NSMutableArray+SWUtilityButtons.m */,
-				673338FC1D2098D200A8009F /* SWCellScrollView.h */,
-				673338FD1D2098D200A8009F /* SWCellScrollView.m */,
-				673338FE1D2098D200A8009F /* SWLongPressGestureRecognizer.h */,
-				673338FF1D2098D200A8009F /* SWLongPressGestureRecognizer.m */,
-				673339001D2098D200A8009F /* SWTableViewCell.h */,
-				673339011D2098D200A8009F /* SWTableViewCell.m */,
-				673339021D2098D200A8009F /* SWUtilityButtonTapGestureRecognizer.h */,
-				673339031D2098D200A8009F /* SWUtilityButtonTapGestureRecognizer.m */,
-				673339041D2098D200A8009F /* SWUtilityButtonView.h */,
-				673339051D2098D200A8009F /* SWUtilityButtonView.m */,
-			);
-			path = SWTableViewCell;
 			sourceTree = "<group>";
 		};
 		67391DEB1D27F75800A50C03 /* Login */ = {
@@ -222,6 +194,16 @@
 			name = Process3;
 			sourceTree = "<group>";
 		};
+		67602F4A1D2EBEB900DA2F3A /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				67602F4E1D2EC75F00DA2F3A /* Messages.h */,
+				67602F4F1D2EC75F00DA2F3A /* Messages.m */,
+				67602F511D2EC76900DA2F3A /* Messages.storyboard */,
+			);
+			path = Messages;
+			sourceTree = "<group>";
+		};
 		679B9EF11D23971E00C426F2 /* MyInfoEditType1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -270,6 +252,8 @@
 			children = (
 				67DD1A791D17BEB500FBEA0F /* Nety */,
 				67DD1A781D17BEB500FBEA0F /* Products */,
+				8FCFFEDB2731DDDE96F8924A /* Pods */,
+				B852F7677337544B123B08BC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -314,6 +298,7 @@
 				67DD1A951D17BEF200FBEA0F /* Network */,
 				67DD1A941D17BEF200FBEA0F /* MyNetwork */,
 				67DD1A921D17BEF200FBEA0F /* Chat */,
+				67602F4A1D2EBEB900DA2F3A /* Messages */,
 				67DD1A931D17BEF200FBEA0F /* MyInfo */,
 			);
 			path = ViewControllers;
@@ -401,6 +386,23 @@
 			path = TemporaryImages;
 			sourceTree = "<group>";
 		};
+		8FCFFEDB2731DDDE96F8924A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0A3CCF7D46442EF40346F17A /* Pods-Nety.debug.xcconfig */,
+				35F89FE34D38A372A0738678 /* Pods-Nety.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B852F7677337544B123B08BC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				01F5D56FDB372FC5465929EE /* libPods-Nety.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -408,9 +410,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 67DD1A8E1D17BEB500FBEA0F /* Build configuration list for PBXNativeTarget "Nety" */;
 			buildPhases = (
+				025C548BB88FCE5D90F8820E /* [CP] Check Pods Manifest.lock */,
 				67DD1A731D17BEB500FBEA0F /* Sources */,
 				67DD1A741D17BEB500FBEA0F /* Frameworks */,
 				67DD1A751D17BEB500FBEA0F /* Resources */,
+				0DCCBF50CAECF70D5D5A83E4 /* [CP] Embed Pods Frameworks */,
+				DB182F33186AD0583C888900 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -463,6 +468,7 @@
 				67DD1AC31D17E42D00FBEA0F /* man.jpg in Resources */,
 				67DD1AC11D17E42D00FBEA0F /* girl1.jpg in Resources */,
 				67DD1A8A1D17BEB500FBEA0F /* LaunchScreen.storyboard in Resources */,
+				67602F521D2EC76900DA2F3A /* Messages.storyboard in Resources */,
 				67DD1A871D17BEB500FBEA0F /* Assets.xcassets in Resources */,
 				67DD1AA41D17BFCC00FBEA0F /* Chat.storyboard in Resources */,
 				67D4AD5F1D26333D00F42B7F /* LoginSignup.storyboard in Resources */,
@@ -477,35 +483,78 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		025C548BB88FCE5D90F8820E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		0DCCBF50CAECF70D5D5A83E4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Nety/Pods-Nety-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DB182F33186AD0583C888900 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Nety/Pods-Nety-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		67DD1A731D17BEB500FBEA0F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				67DD1AB31D17D40D00FBEA0F /* UIPrinciples.m in Sources */,
-				673339081D2098D200A8009F /* SWLongPressGestureRecognizer.m in Sources */,
 				67606C6E1D24888700AD127E /* MyInfoEditExperience.m in Sources */,
 				67DD1AA21D17BFC300FBEA0F /* Chat.m in Sources */,
+				67602F501D2EC75F00DA2F3A /* Messages.m in Sources */,
 				6733390E1D20B5ED00A8009F /* ChatCell.m in Sources */,
 				67391DEA1D27ED0200A50C03 /* Signup.m in Sources */,
 				67D4AD651D265A7E00F42B7F /* Login.m in Sources */,
-				6733390B1D2098D200A8009F /* SWUtilityButtonView.m in Sources */,
-				673339061D2098D200A8009F /* NSMutableArray+SWUtilityButtons.m in Sources */,
 				67391DEF1D27FBB900A50C03 /* SignupProcess1.m in Sources */,
 				679B9EF01D2396A700C426F2 /* MyInfoEditTableCell.m in Sources */,
 				67DD1A7F1D17BEB500FBEA0F /* AppDelegate.m in Sources */,
 				67DD1A981D17BF1700FBEA0F /* Network.m in Sources */,
 				67391DF51D27FBD800A50C03 /* SignupProcessExperienceDetail.m in Sources */,
-				6733390A1D2098D200A8009F /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
 				67391DF21D27FBC400A50C03 /* SignupProcess2.m in Sources */,
 				67DD1A9D1D17BF6900FBEA0F /* MyNetwork.m in Sources */,
 				67DD1A7C1D17BEB500FBEA0F /* main.m in Sources */,
-				673339071D2098D200A8009F /* SWCellScrollView.m in Sources */,
 				679B9EEA1D236E0A00C426F2 /* MyInfoEditType2.m in Sources */,
 				67D4AD621D26536000F42B7F /* MainPage.m in Sources */,
 				67DD1AB91D17E39B00FBEA0F /* NetworkData.m in Sources */,
 				673338F71D20937C00A8009F /* MyNetworkCell.m in Sources */,
-				673339091D2098D200A8009F /* SWTableViewCell.m in Sources */,
 				67391DFB1D280A9600A50C03 /* SignupProcessExperienceDetailCell.m in Sources */,
 				67DD1AAD1D17C3E600FBEA0F /* Profile.m in Sources */,
 				679B9EED1D236E1C00C426F2 /* MyInfoEditTable.m in Sources */,
@@ -614,6 +663,7 @@
 		};
 		67DD1A8F1D17BEB500FBEA0F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A3CCF7D46442EF40346F17A /* Pods-Nety.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -626,6 +676,7 @@
 		};
 		67DD1A901D17BEB500FBEA0F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 35F89FE34D38A372A0738678 /* Pods-Nety.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

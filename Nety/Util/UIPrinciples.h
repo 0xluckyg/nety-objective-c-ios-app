@@ -17,4 +17,6 @@
 @property (nonatomic, strong) UIColor *netyTransparent;
 @property (nonatomic, strong) UIColor *defaultGray;
 
+-(void)addTopbarColor: (UIViewController *)viewController;
+
 @end

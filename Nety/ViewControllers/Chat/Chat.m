@@ -134,7 +134,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    [self performSegueWithIdentifier:@"MessagesSegue" sender:self];
 }
 
 //Close cell when other is cell is opened

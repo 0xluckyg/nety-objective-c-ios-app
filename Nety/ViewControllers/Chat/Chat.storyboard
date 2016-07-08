@@ -6,6 +6,14 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
+        <!--Messages-->
+        <scene sceneID="ZQI-bn-cSq">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Messages" id="Noh-oX-bAP" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qlm-xF-lxl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1520.5" y="-22"/>
+        </scene>
         <!--Chat-->
         <scene sceneID="dUZ-tc-CzZ">
             <objects>
@@ -180,6 +188,7 @@
                         <outlet property="searchBarView" destination="pm6-lj-cf1" id="0fb-9T-MwP"/>
                         <outlet property="tableView" destination="G0f-Xn-GSp" id="VQx-td-DrQ"/>
                         <outlet property="topBar" destination="9aM-0c-YzD" id="Fab-CE-jQ1"/>
+                        <segue destination="Noh-oX-bAP" kind="show" identifier="MessagesSegue" id="FGT-lL-4ne"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v4T-CZ-jpw" userLabel="First Responder" sceneMemberID="firstResponder"/>
