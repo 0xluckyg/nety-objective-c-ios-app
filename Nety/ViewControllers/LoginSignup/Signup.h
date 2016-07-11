@@ -21,6 +21,13 @@
 
 @property (weak, nonatomic) IBOutlet UIView *holdingView;
 
+@property (weak, nonatomic) IBOutlet UIButton *signupButtonOutlet;
+
+@property (weak, nonatomic) IBOutlet UIButton *signupWithLinkedinButtonOutlet;
+
+
+
+
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
 
 - (IBAction)signupButton:(id)sender;

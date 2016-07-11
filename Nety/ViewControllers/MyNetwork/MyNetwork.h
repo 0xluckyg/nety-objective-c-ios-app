@@ -15,6 +15,8 @@
 
 @property (weak, nonatomic) IBOutlet UIView *topBar;
 
+@property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
+
 @property (weak, nonatomic) IBOutlet UIView *searchBarView;
 
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;

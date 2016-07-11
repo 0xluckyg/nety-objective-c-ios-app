@@ -56,6 +56,7 @@
     //Change buttons
     
     [self.inputToolbar.contentView.leftBarButtonItem setImage:[[UIImage imageNamed:@"Camera"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:normal];
+    [self.inputToolbar.contentView.leftBarButtonItem setImage:[[UIImage imageNamed:@"Camera"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateSelected];
     self.inputToolbar.contentView.leftBarButtonItem.tintColor = self.UIPrinciple.netyGray;
     self.inputToolbar.contentView.textView.font = [self.UIPrinciple netyFontWithSize:15];
     [self.inputToolbar.contentView.rightBarButtonItem setTitle:@"Send" forState:normal];

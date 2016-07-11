@@ -48,7 +48,13 @@
     
     //Set navbar color
     self.topBar.backgroundColor = self.UIPrinciple.netyBlue;
-    [[UINavigationBar appearance] setBarTintColor:self.UIPrinciple.netyBlue];
+    
+    //Style navbar
+    self.topBar.backgroundColor = self.UIPrinciple.netyBlue;
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
+                                [UIColor whiteColor], NSForegroundColorAttributeName, nil];
+    [self.navBar setTitleTextAttributes:attributes];
 
 }
 

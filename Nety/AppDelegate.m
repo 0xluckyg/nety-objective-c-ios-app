@@ -51,12 +51,14 @@
     UIStoryboard *myNetworkStoryboard = [UIStoryboard storyboardWithName:@"MyNetwork" bundle:nil];
     UIStoryboard *chatStoryboard = [UIStoryboard storyboardWithName:@"Chat" bundle:nil];
     UIStoryboard *myInfoStoryboard = [UIStoryboard storyboardWithName:@"MyInfo" bundle:nil];
+    UIStoryboard *settingsStoryboard = [UIStoryboard storyboardWithName:@"Settings" bundle:nil];
     
     //Create view controller instances inside each storyboard
     UIViewController *networkViewController = [networkStoryboard instantiateViewControllerWithIdentifier:@"Network"];
     UIViewController *myNetworkViewController = [myNetworkStoryboard instantiateViewControllerWithIdentifier:@"MyNetwork"];
     UIViewController *chatViewController = [chatStoryboard instantiateViewControllerWithIdentifier:@"Chat"];
     UIViewController *myInfoViewController = [myInfoStoryboard instantiateViewControllerWithIdentifier:@"MyInfo"];
+    UIViewController *settingsViewController = [settingsStoryboard instantiateViewControllerWithIdentifier:@"Settings"];
     
     //Set title and image of each tabBar item
     
@@ -72,14 +74,27 @@
     [myInfoViewController.tabBarItem setImage:[UIImage imageNamed:@"Profile"]];
     [myInfoViewController.tabBarItem setTitle:@"Me"];
     
+    [settingsViewController.tabBarItem setImage:[UIImage imageNamed:@"Settings"]];
+    [settingsViewController.tabBarItem setTitle:@"Settings"];
+    
     //Set tabBar style
     [[UITabBar appearance] setBackgroundColor:self.UIPrinciple.netyBlue];
     [[UITabBar appearance] setBackgroundImage:[[UIImage alloc] init]];
     [[UITabBar appearance] setShadowImage:[[UIImage alloc] init]];
     [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
     
+//    [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : self.UIPrinciple.netyGray}
+//                                             forState:UIControlStateNormal];
+//    [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor] }
+//                                             forState:UIControlStateSelected];
+    
     //Connect tabBar and view controllers together
-    NSArray* controllers = [NSArray arrayWithObjects:networkViewController, myNetworkViewController, chatViewController, myInfoViewController, nil];
+    NSArray* controllers = [NSArray arrayWithObjects:networkViewController,
+                                                    myNetworkViewController,
+                                                    chatViewController,
+                                                    myInfoViewController,
+                                                    settingsViewController, nil];
+        
     self.tabBarRootController.viewControllers = controllers;
     
 }

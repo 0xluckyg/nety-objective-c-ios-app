@@ -141,6 +141,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
+                        <outlet property="navBar" destination="YyK-LW-0p6" id="DUR-c5-P9E"/>
                         <outlet property="searchBar" destination="DQs-oT-s2Y" id="rCa-gz-Xjc"/>
                         <outlet property="searchBarView" destination="9m3-pH-x75" id="l9B-Fd-irl"/>
                         <outlet property="tableView" destination="XnD-77-aw2" id="n9J-Rb-Gxt"/>

@@ -23,7 +23,7 @@
                                 <rect key="frame" x="66" y="154" width="282" height="429"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ohl-8S-SdE">
-                                        <rect key="frame" x="21" y="49" width="240" height="240"/>
+                                        <rect key="frame" x="21" y="43" width="240" height="240"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="240" id="BtO-Fz-crk"/>
                                             <constraint firstAttribute="height" constant="240" id="caV-uw-J2D"/>
@@ -41,7 +41,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XJ5-h9-g37">
-                                        <rect key="frame" x="60" y="309" width="162" height="30"/>
+                                        <rect key="frame" x="60" y="303" width="162" height="30"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                         <state key="normal" title="Login">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -55,12 +55,12 @@
                                 <color key="backgroundColor" red="0.43521448759999998" green="0.56477015090000005" blue="0.90839741490000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="XJ5-h9-g37" firstAttribute="leading" secondItem="dzw-h8-dqd" secondAttribute="leading" constant="60" id="81x-ma-3YQ"/>
-                                    <constraint firstItem="Ohl-8S-SdE" firstAttribute="top" secondItem="dzw-h8-dqd" secondAttribute="top" constant="49" id="L72-Hq-MhT"/>
+                                    <constraint firstItem="2lL-8E-NXk" firstAttribute="top" secondItem="XJ5-h9-g37" secondAttribute="bottom" constant="26" id="Js5-n0-ujq"/>
                                     <constraint firstItem="XJ5-h9-g37" firstAttribute="top" secondItem="Ohl-8S-SdE" secondAttribute="bottom" constant="20" id="SgR-83-pLD"/>
                                     <constraint firstAttribute="trailing" secondItem="XJ5-h9-g37" secondAttribute="trailing" constant="60" id="Xrh-ID-p27"/>
                                     <constraint firstAttribute="trailing" secondItem="2lL-8E-NXk" secondAttribute="trailing" constant="60" id="cEs-TE-o50"/>
-                                    <constraint firstItem="2lL-8E-NXk" firstAttribute="top" secondItem="XJ5-h9-g37" secondAttribute="bottom" constant="20" id="d1l-TY-y16"/>
                                     <constraint firstItem="Ohl-8S-SdE" firstAttribute="centerX" secondItem="dzw-h8-dqd" secondAttribute="centerX" id="hwk-FN-iT8"/>
+                                    <constraint firstItem="Ohl-8S-SdE" firstAttribute="top" secondItem="dzw-h8-dqd" secondAttribute="top" constant="43" id="k7L-yK-I2x"/>
                                     <constraint firstAttribute="height" constant="429" id="kPo-zA-DvE"/>
                                     <constraint firstAttribute="width" constant="282" id="nyc-ae-i1i"/>
                                     <constraint firstItem="2lL-8E-NXk" firstAttribute="leading" secondItem="dzw-h8-dqd" secondAttribute="leading" constant="60" id="xxi-gd-SSd"/>
@@ -77,7 +77,9 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="holdingView" destination="dzw-h8-dqd" id="GYl-3D-lzd"/>
+                        <outlet property="loginButtonOutlet" destination="XJ5-h9-g37" id="tbf-ot-Sx7"/>
                         <outlet property="logoImage" destination="Ohl-8S-SdE" id="5vh-r1-Dlh"/>
+                        <outlet property="signupButtonOutlet" destination="2lL-8E-NXk" id="tm8-vQ-bkr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="psa-H1-xIB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -116,7 +118,7 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AN5-wS-k4M">
-                                        <rect key="frame" x="100" y="178" width="40" height="30"/>
+                                        <rect key="frame" x="35" y="198" width="170" height="30"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                         <state key="normal" title="Login!">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -126,7 +128,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kTq-O3-2WW">
-                                        <rect key="frame" x="56" y="254" width="128" height="30"/>
+                                        <rect key="frame" x="35" y="254" width="170" height="30"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                         <state key="normal" title="Login with Linkedin!">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -140,14 +142,16 @@
                                 <constraints>
                                     <constraint firstItem="Rb2-WJ-mSA" firstAttribute="centerX" secondItem="yaJ-kx-Dyw" secondAttribute="centerX" id="4BH-f8-qDH"/>
                                     <constraint firstAttribute="height" constant="339" id="74d-nL-YdR"/>
-                                    <constraint firstItem="AN5-wS-k4M" firstAttribute="top" secondItem="Rb2-WJ-mSA" secondAttribute="bottom" constant="46" id="9gA-sa-1yF"/>
+                                    <constraint firstItem="kTq-O3-2WW" firstAttribute="top" secondItem="AN5-wS-k4M" secondAttribute="bottom" constant="26" id="DLp-iv-ebN"/>
+                                    <constraint firstItem="AN5-wS-k4M" firstAttribute="leading" secondItem="yaJ-kx-Dyw" secondAttribute="leading" constant="35" id="RQh-kv-xG7"/>
+                                    <constraint firstItem="AN5-wS-k4M" firstAttribute="top" secondItem="Rb2-WJ-mSA" secondAttribute="bottom" constant="66" id="XLj-YC-Jom"/>
                                     <constraint firstItem="Rb2-WJ-mSA" firstAttribute="top" secondItem="lVg-7z-32W" secondAttribute="bottom" constant="26" id="XU2-5A-5YZ"/>
                                     <constraint firstAttribute="width" constant="240" id="ZgH-Tl-GMX"/>
+                                    <constraint firstAttribute="trailing" secondItem="kTq-O3-2WW" secondAttribute="trailing" constant="35" id="dgP-5v-5C6"/>
+                                    <constraint firstAttribute="trailing" secondItem="AN5-wS-k4M" secondAttribute="trailing" constant="35" id="hHQ-va-SY1"/>
                                     <constraint firstItem="lVg-7z-32W" firstAttribute="centerX" secondItem="yaJ-kx-Dyw" secondAttribute="centerX" id="k5l-5X-xDZ"/>
-                                    <constraint firstItem="kTq-O3-2WW" firstAttribute="centerX" secondItem="yaJ-kx-Dyw" secondAttribute="centerX" id="lVG-Q8-FOc"/>
-                                    <constraint firstItem="kTq-O3-2WW" firstAttribute="top" secondItem="AN5-wS-k4M" secondAttribute="bottom" constant="46" id="rLk-aq-87l"/>
+                                    <constraint firstItem="kTq-O3-2WW" firstAttribute="leading" secondItem="yaJ-kx-Dyw" secondAttribute="leading" constant="35" id="osr-hp-zpZ"/>
                                     <constraint firstItem="lVg-7z-32W" firstAttribute="top" secondItem="yaJ-kx-Dyw" secondAttribute="top" constant="46" id="utg-O1-N56"/>
-                                    <constraint firstItem="AN5-wS-k4M" firstAttribute="centerX" secondItem="yaJ-kx-Dyw" secondAttribute="centerX" id="ziY-3J-xym"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qjC-pd-ukM">
@@ -176,6 +180,8 @@
                     <connections>
                         <outlet property="email" destination="lVg-7z-32W" id="70D-7i-Lsh"/>
                         <outlet property="holdingView" destination="yaJ-kx-Dyw" id="vIc-el-REq"/>
+                        <outlet property="loginButtonOutlet" destination="AN5-wS-k4M" id="QMB-gU-o2x"/>
+                        <outlet property="loginWithLinkedinOutlet" destination="kTq-O3-2WW" id="NI7-lx-qx8"/>
                         <outlet property="password" destination="Rb2-WJ-mSA" id="SEq-Et-eim"/>
                     </connections>
                 </viewController>
@@ -218,23 +224,13 @@
                                 <rect key="frame" x="87" y="161" width="240" height="413"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rde-EH-6ZI">
-                                        <rect key="frame" x="51" y="355" width="138" height="30"/>
+                                        <rect key="frame" x="35" y="355" width="170" height="30"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                         <state key="normal" title="Signup with Linkedin!">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="signupWithLinkedinButton:" destination="tVr-X4-ba6" eventType="touchUpInside" id="FD7-1x-oAt"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vtw-Tg-Bs7">
-                                        <rect key="frame" x="96" y="280" width="49" height="30"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
-                                        <state key="normal" title="Signup!">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="signupButton:" destination="tVr-X4-ba6" eventType="touchUpInside" id="taq-rK-gG3"/>
                                         </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8fX-8t-k1w">
@@ -269,22 +265,34 @@
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES"/>
                                     </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vtw-Tg-Bs7">
+                                        <rect key="frame" x="35" y="299" width="170" height="30"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                        <state key="normal" title="Signup!">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="signupButton:" destination="tVr-X4-ba6" eventType="touchUpInside" id="taq-rK-gG3"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.43521448759999998" green="0.56477015090000005" blue="0.90839741490000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="qny-6A-Uti" firstAttribute="top" secondItem="xzG-JF-eRz" secondAttribute="bottom" constant="26" id="0Zj-r9-mpe"/>
-                                    <constraint firstItem="rde-EH-6ZI" firstAttribute="top" secondItem="Vtw-Tg-Bs7" secondAttribute="bottom" constant="45" id="2b6-FN-vlr"/>
                                     <constraint firstAttribute="height" constant="413" id="5f0-bO-RPh"/>
+                                    <constraint firstItem="Vtw-Tg-Bs7" firstAttribute="top" secondItem="sW0-Ef-jem" secondAttribute="bottom" constant="64" id="Ese-2k-Tbd"/>
                                     <constraint firstItem="8fX-8t-k1w" firstAttribute="centerX" secondItem="6Xr-P2-0If" secondAttribute="centerX" id="FWH-Yd-KFa"/>
                                     <constraint firstItem="sW0-Ef-jem" firstAttribute="top" secondItem="qny-6A-Uti" secondAttribute="bottom" constant="26" id="HHr-eM-Cog"/>
-                                    <constraint firstItem="rde-EH-6ZI" firstAttribute="centerX" secondItem="6Xr-P2-0If" secondAttribute="centerX" id="OAf-cl-dQW"/>
                                     <constraint firstItem="xzG-JF-eRz" firstAttribute="centerX" secondItem="6Xr-P2-0If" secondAttribute="centerX" id="OV0-Li-P5e"/>
                                     <constraint firstItem="sW0-Ef-jem" firstAttribute="centerX" secondItem="6Xr-P2-0If" secondAttribute="centerX" id="SbJ-87-3Y4"/>
+                                    <constraint firstItem="rde-EH-6ZI" firstAttribute="top" secondItem="Vtw-Tg-Bs7" secondAttribute="bottom" constant="26" id="Tq6-Kd-gk0"/>
                                     <constraint firstItem="qny-6A-Uti" firstAttribute="centerX" secondItem="6Xr-P2-0If" secondAttribute="centerX" id="YCn-qM-sVA"/>
-                                    <constraint firstItem="Vtw-Tg-Bs7" firstAttribute="centerX" secondItem="6Xr-P2-0If" secondAttribute="centerX" id="Ylm-aY-VeE"/>
-                                    <constraint firstItem="Vtw-Tg-Bs7" firstAttribute="top" secondItem="sW0-Ef-jem" secondAttribute="bottom" constant="45" id="ZAw-nA-uDE"/>
+                                    <constraint firstAttribute="trailing" secondItem="rde-EH-6ZI" secondAttribute="trailing" constant="35" id="fSy-us-kHU"/>
                                     <constraint firstItem="xzG-JF-eRz" firstAttribute="top" secondItem="8fX-8t-k1w" secondAttribute="bottom" constant="26" id="hKB-0b-IoY"/>
                                     <constraint firstAttribute="width" constant="240" id="jow-4z-7MH"/>
+                                    <constraint firstAttribute="trailing" secondItem="Vtw-Tg-Bs7" secondAttribute="trailing" constant="35" id="nLB-nJ-qe0"/>
+                                    <constraint firstItem="Vtw-Tg-Bs7" firstAttribute="leading" secondItem="6Xr-P2-0If" secondAttribute="leading" constant="35" id="okK-MC-pTA"/>
+                                    <constraint firstItem="rde-EH-6ZI" firstAttribute="leading" secondItem="6Xr-P2-0If" secondAttribute="leading" constant="35" id="vNA-AM-lRb"/>
                                     <constraint firstItem="8fX-8t-k1w" firstAttribute="top" secondItem="6Xr-P2-0If" secondAttribute="top" constant="37" id="zmC-d3-9Nj"/>
                                 </constraints>
                             </view>
@@ -317,6 +325,8 @@
                         <outlet property="holdingView" destination="6Xr-P2-0If" id="cvb-zh-uZR"/>
                         <outlet property="name" destination="qny-6A-Uti" id="V4a-bj-CLm"/>
                         <outlet property="password" destination="xzG-JF-eRz" id="5zA-sf-40t"/>
+                        <outlet property="signupButtonOutlet" destination="Vtw-Tg-Bs7" id="y0s-HB-WLz"/>
+                        <outlet property="signupWithLinkedinButtonOutlet" destination="rde-EH-6ZI" id="IEP-Zt-BqW"/>
                         <segue destination="MIp-ew-6h3" kind="show" identifier="signupProcess1Segue" id="1AG-Bc-qCN"/>
                     </connections>
                 </viewController>

@@ -26,6 +26,13 @@
     
     self.view.backgroundColor = self.UIPrinciple.netyBlue;
     self.holdingView.backgroundColor = self.UIPrinciple.netyBlue;
+    
+    [self.signupButtonOutlet.layer setBorderWidth:1.0];
+    [self.signupButtonOutlet.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    [self.signupButtonOutlet.layer setCornerRadius:self.signupButtonOutlet.frame.size.height/2];
+    
+    self.signupWithLinkedinButtonOutlet.backgroundColor = self.UIPrinciple.linkedInBlue;
+    [self.signupWithLinkedinButtonOutlet.layer setCornerRadius:self.signupWithLinkedinButtonOutlet.frame.size.height/2];
 }
 
 - (void)didReceiveMemoryWarning {

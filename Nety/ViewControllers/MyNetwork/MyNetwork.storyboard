@@ -134,6 +134,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
+                        <outlet property="navBar" destination="wwD-cr-4zv" id="Sbq-od-El0"/>
                         <outlet property="searchBar" destination="xTf-kD-6Ae" id="wGp-Co-qNi"/>
                         <outlet property="searchBarView" destination="jHz-1u-AaC" id="Xa3-Zv-PtB"/>
                         <outlet property="tableView" destination="Vex-kh-xZF" id="uYd-Ll-m2l"/>

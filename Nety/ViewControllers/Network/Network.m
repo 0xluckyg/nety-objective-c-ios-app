@@ -7,7 +7,6 @@
 //
 
 #import "Network.h"
-#import "UIPrinciples.h"
 #import "NetworkCell.h"
 #import "NetworkData.h"
 
@@ -33,6 +32,10 @@
 
 - (void)initializeSettings {
     self.userData = [[NetworkData alloc] init];
+    
+    //Set up notifications
+    [[self.tabBarController.tabBar.items objectAtIndex:2] setBadgeValue:@"4"];
+
 }
 
 
@@ -49,8 +52,13 @@
     [self.searchBar setBackgroundImage:[[UIImage alloc]init]];
     [self.searchBarView setBackgroundColor:self.UIPrinciple.netyBlue];
     
-    //Set navbar color
+    //Style navbar
     self.topBar.backgroundColor = self.UIPrinciple.netyBlue;
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
+                                [UIColor whiteColor], NSForegroundColorAttributeName, nil];
+    
+    [self.navBar setTitleTextAttributes:attributes];
     
     //Set statusbar color
     [self.UIPrinciple addTopbarColor:self];

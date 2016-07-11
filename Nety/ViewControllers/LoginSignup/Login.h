@@ -17,6 +17,11 @@
 
 @property (weak, nonatomic) IBOutlet UIView *holdingView;
 
+@property (weak, nonatomic) IBOutlet UIButton *loginButtonOutlet;
+
+@property (weak, nonatomic) IBOutlet UIButton *loginWithLinkedinOutlet;
+
+
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
 
 - (IBAction)loginButton:(id)sender;

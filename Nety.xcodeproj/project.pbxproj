@@ -18,6 +18,8 @@
 		67602F501D2EC75F00DA2F3A /* Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = 67602F4F1D2EC75F00DA2F3A /* Messages.m */; };
 		67602F521D2EC76900DA2F3A /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67602F511D2EC76900DA2F3A /* Messages.storyboard */; };
 		67606C6E1D24888700AD127E /* MyInfoEditExperience.m in Sources */ = {isa = PBXBuildFile; fileRef = 67606C6D1D24888700AD127E /* MyInfoEditExperience.m */; };
+		678138A81D33A94E00BFBF48 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 678138A71D33A94E00BFBF48 /* Settings.storyboard */; };
+		678138AB1D33B2DD00BFBF48 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 678138AA1D33B2DD00BFBF48 /* Settings.m */; };
 		679B9EE71D236DF900C426F2 /* MyInfoEditType1.m in Sources */ = {isa = PBXBuildFile; fileRef = 679B9EE61D236DF900C426F2 /* MyInfoEditType1.m */; };
 		679B9EEA1D236E0A00C426F2 /* MyInfoEditType2.m in Sources */ = {isa = PBXBuildFile; fileRef = 679B9EE91D236E0A00C426F2 /* MyInfoEditType2.m */; };
 		679B9EED1D236E1C00C426F2 /* MyInfoEditTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 679B9EEC1D236E1C00C426F2 /* MyInfoEditTable.m */; };
@@ -75,6 +77,9 @@
 		67602F511D2EC76900DA2F3A /* Messages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
 		67606C6C1D24888700AD127E /* MyInfoEditExperience.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoEditExperience.h; sourceTree = "<group>"; };
 		67606C6D1D24888700AD127E /* MyInfoEditExperience.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoEditExperience.m; sourceTree = "<group>"; };
+		678138A71D33A94E00BFBF48 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		678138A91D33B2DD00BFBF48 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
+		678138AA1D33B2DD00BFBF48 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
 		679B9EE51D236DF900C426F2 /* MyInfoEditType1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoEditType1.h; sourceTree = "<group>"; };
 		679B9EE61D236DF900C426F2 /* MyInfoEditType1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoEditType1.m; sourceTree = "<group>"; };
 		679B9EE81D236E0A00C426F2 /* MyInfoEditType2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoEditType2.h; sourceTree = "<group>"; };
@@ -204,6 +209,16 @@
 			path = Messages;
 			sourceTree = "<group>";
 		};
+		678138A31D33A92B00BFBF48 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				678138A91D33B2DD00BFBF48 /* Settings.h */,
+				678138AA1D33B2DD00BFBF48 /* Settings.m */,
+				678138A71D33A94E00BFBF48 /* Settings.storyboard */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		679B9EF11D23971E00C426F2 /* MyInfoEditType1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -298,6 +313,7 @@
 				67DD1A951D17BEF200FBEA0F /* Network */,
 				67DD1A941D17BEF200FBEA0F /* MyNetwork */,
 				67DD1A921D17BEF200FBEA0F /* Chat */,
+				678138A31D33A92B00BFBF48 /* Settings */,
 				67602F4A1D2EBEB900DA2F3A /* Messages */,
 				67DD1A931D17BEF200FBEA0F /* MyInfo */,
 			);
@@ -473,6 +489,7 @@
 				67DD1AA41D17BFCC00FBEA0F /* Chat.storyboard in Resources */,
 				67D4AD5F1D26333D00F42B7F /* LoginSignup.storyboard in Resources */,
 				67DD1AA91D17C00600FBEA0F /* MyInfo.storyboard in Resources */,
+				678138A81D33A94E00BFBF48 /* Settings.storyboard in Resources */,
 				67DD1AAF1D17C3EF00FBEA0F /* Profile.storyboard in Resources */,
 				67DD1AC01D17E42D00FBEA0F /* duck.jpg in Resources */,
 				67DD1AC21D17E42D00FBEA0F /* girl2.jpg in Resources */,
@@ -538,6 +555,7 @@
 			files = (
 				67DD1AB31D17D40D00FBEA0F /* UIPrinciples.m in Sources */,
 				67606C6E1D24888700AD127E /* MyInfoEditExperience.m in Sources */,
+				678138AB1D33B2DD00BFBF48 /* Settings.m in Sources */,
 				67DD1AA21D17BFC300FBEA0F /* Chat.m in Sources */,
 				67602F501D2EC75F00DA2F3A /* Messages.m in Sources */,
 				6733390E1D20B5ED00A8009F /* ChatCell.m in Sources */,

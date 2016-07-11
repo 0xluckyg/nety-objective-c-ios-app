@@ -29,6 +29,14 @@
     
     self.logoImage.image = [UIImage imageNamed:@"LogoTransparent"];
     
+    [self.loginButtonOutlet.layer setBorderWidth:1.0];
+    [self.loginButtonOutlet.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    [self.loginButtonOutlet.layer setCornerRadius:self.loginButtonOutlet.frame.size.height/2];
+    
+    [self.signupButtonOutlet.layer setBorderWidth:1.0];
+    [self.signupButtonOutlet.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    [self.signupButtonOutlet.layer setCornerRadius:self.signupButtonOutlet.frame.size.height/2];
+    
 }
 
 - (void)didReceiveMemoryWarning {

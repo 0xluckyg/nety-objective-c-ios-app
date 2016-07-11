@@ -29,6 +29,12 @@
     self.view.backgroundColor = self.UIPrinciple.netyBlue;
     self.holdingView.backgroundColor = self.UIPrinciple.netyBlue;
     
+    [self.loginButtonOutlet.layer setBorderWidth:1.0];
+    [self.loginButtonOutlet.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    [self.loginButtonOutlet.layer setCornerRadius:self.loginButtonOutlet.frame.size.height/2];
+    
+    self.loginWithLinkedinOutlet.backgroundColor = self.UIPrinciple.linkedInBlue;
+    [self.loginWithLinkedinOutlet.layer setCornerRadius:self.loginWithLinkedinOutlet.frame.size.height/2];
     
     
 }
