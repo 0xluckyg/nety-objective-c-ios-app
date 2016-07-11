@@ -64,5 +64,11 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction)chatNowButton:(id)sender {
+    
+    [self performSegueWithIdentifier:@"MessagesSegue" sender:self];
+    
+}
+
 
 @end

@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "Login.h"
+#import "UIPrinciples.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
 @property (strong, nonatomic) UITabBarController *tabBarRootController;
+
+@property (strong, nonatomic) UIPrinciples *UIPrinciple;
 
 @property (weak, nonatomic) Login *login;
 

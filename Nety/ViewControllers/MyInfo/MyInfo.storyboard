@@ -426,7 +426,7 @@
                                         <state key="normal" image="Plus"/>
                                         <connections>
                                             <action selector="addButton:" destination="Sc4-ZP-enR" eventType="touchUpInside" id="ZMT-X2-BoZ"/>
-                                            <segue destination="hzx-7e-tkL" kind="show" id="LHe-yn-mbO"/>
+                                            <segue destination="hzx-7e-tkL" kind="show" identifier="experienceDetailSegue" id="LHe-yn-mbO"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -731,9 +731,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Back" width="50" height="50"/>
-        <image name="Edit" width="50" height="50"/>
-        <image name="Plus" width="50" height="50"/>
+        <image name="Back" width="25" height="25"/>
+        <image name="Edit" width="25" height="25"/>
+        <image name="Plus" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="keI-uC-p8d"/>

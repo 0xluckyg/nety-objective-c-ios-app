@@ -16,7 +16,9 @@
 @property (nonatomic, strong) UIColor *netyGray;
 @property (nonatomic, strong) UIColor *netyTransparent;
 @property (nonatomic, strong) UIColor *defaultGray;
+@property (nonatomic, strong) UIFont *netyFont;
 
 -(void)addTopbarColor: (UIViewController *)viewController;
+-(UIFont*)netyFontWithSize: (int)size;
 
 @end

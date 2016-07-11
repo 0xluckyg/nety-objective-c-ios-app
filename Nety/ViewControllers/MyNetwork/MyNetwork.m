@@ -112,6 +112,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
+    [self performSegueWithIdentifier:@"ShowProfileSegue" sender:indexPath];
+    
 }
 
 //Close cell when other is cell is opened

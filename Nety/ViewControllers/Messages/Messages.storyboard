@@ -14,9 +14,8 @@
                         <viewControllerLayoutGuide type="bottom" id="u2x-wi-wjD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="gbP-mc-fyZ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Wzl-0I-Twa"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
@@ -28,22 +27,26 @@
         <!--Navigation Controller-->
         <scene sceneID="Txq-kc-fun">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="mTM-9r-fN0" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RQg-rP-cTN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mTM-9r-fN0" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <nil key="simulatedTopBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Bxk-FC-cIu">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Bxk-FC-cIu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Dms-mz-je2">
+                        <rect key="frame" x="0.0" y="692" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="vKo-LV-MMT" kind="relationship" relationship="rootViewController" id="X7c-AH-diC"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RQg-rP-cTN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1202" y="-123"/>
+            <point key="canvasLocation" x="1385" y="-123"/>
         </scene>
     </scenes>
 </document>

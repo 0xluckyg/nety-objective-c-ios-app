@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
     [self initializeSettings];
     [self initializeDesign];
     [self addDemoMessages];
@@ -34,38 +34,61 @@
     self.UIPrinciple = [[UIPrinciples alloc] init];
     
     //Set up message style
-    JSQMessagesBubbleImageFactory *incomingImage = [[JSQMessagesBubbleImageFactory alloc] init];
-    JSQMessagesBubbleImageFactory *outgoingImage = [[JSQMessagesBubbleImageFactory alloc] init];
+    JSQMessagesBubbleImageFactory *incomingImage = [[JSQMessagesBubbleImageFactory alloc] initWithBubbleImage:[UIImage jsq_bubbleCompactTaillessImage] capInsets:UIEdgeInsetsZero];
+    JSQMessagesBubbleImageFactory *outgoingImage = [[JSQMessagesBubbleImageFactory alloc] initWithBubbleImage:[UIImage jsq_bubbleCompactTaillessImage] capInsets:UIEdgeInsetsZero];
+
     
     self.outgoingBubbleImageView = [outgoingImage outgoingMessagesBubbleImageWithColor:self.UIPrinciple.netyBlue];
     self.incomingBubbleImageView = [incomingImage incomingMessagesBubbleImageWithColor:self.UIPrinciple.netyGray];
 
     //Set up avatar image
-    self.incomingBubbleAvatarImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"NetyBlueLogo"] diameter:37.0f];
+    self.incomingBubbleAvatarImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"NetyBlueLogo"] diameter:35.0f];
+    
     
     //Set user avatar size to zero
     [[self.collectionView collectionViewLayout] setOutgoingAvatarViewSize:CGSizeZero];
-    [[self.collectionView collectionViewLayout] setIncomingAvatarViewSize:CGSizeMake(37.0f, 37.0f)];
+    [[self.collectionView collectionViewLayout] setIncomingAvatarViewSize:CGSizeMake(35.0f, 35.0f)];
     [[self.collectionView collectionViewLayout] setMessageBubbleLeftRightMargin:150.0f];
     
-    //Add top bar
-    [self.UIPrinciple addTopbarColor:self];
-    [self.navigationController.navigationBar setBarStyle:UIBarStyleDefault];
+    //Set font
+    [[self.collectionView collectionViewLayout] setMessageBubbleFont:[self.UIPrinciple netyFontWithSize:15]];
+    
+    //Change buttons
+    
+    [self.inputToolbar.contentView.leftBarButtonItem setImage:[[UIImage imageNamed:@"Camera"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:normal];
+    self.inputToolbar.contentView.leftBarButtonItem.tintColor = self.UIPrinciple.netyGray;
+    self.inputToolbar.contentView.textView.font = [self.UIPrinciple netyFontWithSize:15];
+    [self.inputToolbar.contentView.rightBarButtonItem setTitle:@"Send" forState:normal];
+
     
     
-    UINavigationBar *navbar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0, 20, [UIScreen mainScreen].bounds.size.width, 50)];
-    navbar.backgroundColor = self.UIPrinciple.netyBlue;
-    [navbar setTranslucent:NO];
-    
+    //Style the navigation bar
     UINavigationItem *navItem= [[UINavigationItem alloc] init];
     navItem.title = @"chat";
-    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Back"] style:UIBarButtonItemStylePlain target:self action:nil];
+    
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"Back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:normal target:self action:@selector(bacButtonPressed)];
     
     navItem.leftBarButtonItem = leftButton;
     
-    navbar.items = @[navItem];
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
+                                [UIColor whiteColor], NSForegroundColorAttributeName, nil];
     
-    [self.view addSubview:navbar];
+    [[UINavigationBar appearance] setTitleTextAttributes:attributes];
+    
+    [self.navigationController.navigationBar setItems:@[navItem]];
+    [self.navigationController.navigationBar setBarTintColor:self.UIPrinciple.netyBlue];
+    [self.navigationController.navigationBar setBackgroundColor:self.UIPrinciple.netyBlue];
+    
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
+-(void)bacButtonPressed {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)addDemoMessages {
@@ -135,10 +158,97 @@
     
 }
 
--(void)didPressAccessoryButton:(UIButton *)sender {
-
+- (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    /**
+     *  Override point for customizing cells
+     */
+    JSQMessagesCollectionViewCell *cell = (JSQMessagesCollectionViewCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    
+    JSQMessage *msg = [self.messages objectAtIndex:indexPath.item];
+    
+    if (!msg.isMediaMessage) {
+        
+        if ([msg.senderId isEqualToString:self.senderId]) {
+            cell.textView.textColor = [UIColor whiteColor];
+        }
+        else {
+            cell.textView.textColor = [UIColor blackColor];
+        }
+        
+        cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
+                                              NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
+    }
+    
+    return cell;
 }
 
+//Date for top labels
+- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+    /**
+     *  This logic should be consistent with what you return from `heightForCellTopLabelAtIndexPath:`
+     *  The other label text delegate methods should follow a similar pattern.
+     *
+     *  Show a timestamp for every 3rd message
+     */
+    if (indexPath.item % 6 == 0) {
+//        JSQMessage *message = [self.messages objectAtIndex:indexPath.item];
+        return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:[NSDate date]];
+    }
+
+    return nil;
+}
+
+
+//Height for top labels
+- (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
+                   layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+    /**
+     *  Each label in a cell has a `height` delegate method that corresponds to its text dataSource method
+     */
+    
+    /**
+     *  This logic should be consistent with what you return from `attributedTextForCellTopLabelAtIndexPath:`
+     *  The other label height delegate methods should follow similarly
+     *
+     *  Show a timestamp for every 3rd message
+     */
+    if (indexPath.item % 6 == 0) {
+        return kJSQMessagesCollectionViewCellLabelHeightDefault;
+    }
+    
+    return 0.0f;
+}
+
+
+- (void)didPressAccessoryButton:(UIButton *)sender
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Image Source"
+                                                                   message:@"This is an alert."
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *camera = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * action) {
+                                                       
+                                                   }];
+    
+    UIAlertAction *library = [UIAlertAction actionWithTitle:@"Library" style:UIAlertActionStyleDefault
+                                                      handler:^(UIAlertAction * action) {
+                                                          
+                                                      }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * action) {
+                                                       
+                                                   }];
+    
+    [alert addAction:camera];
+    [alert addAction:library];
+    [alert addAction:cancel];
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

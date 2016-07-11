@@ -34,4 +34,8 @@
 
 - (IBAction)backButton:(id)sender;
 
+- (IBAction)chatNowButton:(id)sender;
+
+
+
 @end

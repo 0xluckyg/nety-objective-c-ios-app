@@ -51,8 +51,6 @@
     
     //Set navbar color
     self.topBar.backgroundColor = self.UIPrinciple.netyBlue;
-    [UINavigationBar appearance].clipsToBounds = YES;
-    [[UINavigationBar appearance] setBarTintColor:self.UIPrinciple.netyBlue];
     
     //Set statusbar color
     [self.UIPrinciple addTopbarColor:self];
@@ -111,12 +109,6 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    //Set design
-    NetworkCell *networkCell = [tableView cellForRowAtIndexPath:indexPath];
-    networkCell.networkUserJob.textColor = [UIColor whiteColor];
-    networkCell.networkUserName.textColor = [UIColor whiteColor];
-    networkCell.networkUserDescription.textColor = [UIColor whiteColor];
     
     [self performSegueWithIdentifier:@"ShowProfileSegue" sender:indexPath];
 }

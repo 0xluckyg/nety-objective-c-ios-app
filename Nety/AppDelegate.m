@@ -20,10 +20,11 @@
     // Override point for customization after application launch.
     
     //Check if user is signed in, and move on
-
+    self.UIPrinciple = [[UIPrinciples alloc] init];
     [self initializeLoginView];
+    [self initializeDesign];
     [self initializeTabBar];
-
+    
     return YES;
 }
 
@@ -33,6 +34,12 @@
     UIViewController *myNetworkViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"MainPageNav"];
 
     [self.window setRootViewController:myNetworkViewController];
+}
+
+-(void)initializeDesign {
+    [self.window setBackgroundColor:self.UIPrinciple.netyBlue];
+    [UINavigationBar appearance].clipsToBounds = YES;
+    [[UINavigationBar appearance] setBarTintColor:self.UIPrinciple.netyBlue];
 }
 
 -(void)initializeTabBar {
@@ -66,8 +73,7 @@
     [myInfoViewController.tabBarItem setTitle:@"Me"];
     
     //Set tabBar style
-    UIPrinciples *UIPrinciple = [[UIPrinciples alloc] init];
-    [[UITabBar appearance] setBackgroundColor:UIPrinciple.netyBlue];
+    [[UITabBar appearance] setBackgroundColor:self.UIPrinciple.netyBlue];
     [[UITabBar appearance] setBackgroundImage:[[UIImage alloc] init]];
     [[UITabBar appearance] setShadowImage:[[UIImage alloc] init]];
     [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
@@ -76,13 +82,6 @@
     NSArray* controllers = [NSArray arrayWithObjects:networkViewController, myNetworkViewController, chatViewController, myInfoViewController, nil];
     self.tabBarRootController.viewControllers = controllers;
     
-    //make status bar text color white
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
