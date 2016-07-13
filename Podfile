@@ -9,4 +9,7 @@ target 'Nety' do
 
     pod 'JSQMessagesViewController'
     pod 'SWTableViewCell', '~> 0.3.7'
+    pod 'Firebase'
+    pod 'Firebase/RemoteConfig'
+    pod 'Firebase/Database'
 end

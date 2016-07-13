@@ -11,6 +11,7 @@
 #import "NetworkData.h"
 #import "SWTableViewCell.h"
 #import "UIPrinciples.h"
+#import "Messages.h"
 
 @interface Chat ()
 
@@ -194,5 +195,10 @@
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [searchBar endEditing:YES];
 }
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+}
+
 
 @end

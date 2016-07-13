@@ -48,20 +48,25 @@
     // UIPrinciples class from Util folder
     self.UIPrinciple = [[UIPrinciples alloc] init];
     
-    //Set searchbar
-    [self.searchBar setBackgroundImage:[[UIImage alloc]init]];
-    [self.searchBarView setBackgroundColor:self.UIPrinciple.netyBlue];
+    //Style the navigation bar
+    UINavigationItem *navItem= [[UINavigationItem alloc] init];
+    navItem.title = @"Near me";
     
     //Style navbar
-    self.topBar.backgroundColor = self.UIPrinciple.netyBlue;
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
                                 [UIColor whiteColor], NSForegroundColorAttributeName, nil];
     
-    [self.navBar setTitleTextAttributes:attributes];
+    [self.navigationController.navigationBar setTitleTextAttributes:attributes];
     
-    //Set statusbar color
-    [self.UIPrinciple addTopbarColor:self];
+    [self.navigationController.navigationBar setItems:@[navItem]];
+    [self.navigationController.navigationBar setBarTintColor:self.UIPrinciple.netyBlue];
+    [self.navigationController.navigationBar setBackgroundColor:self.UIPrinciple.netyBlue];
+    
+    
+    //Set searchbar
+    [self.searchBar setBackgroundImage:[[UIImage alloc]init]];
+    [self.searchBarView setBackgroundColor:self.UIPrinciple.netyBlue];
     
 }
 
@@ -122,7 +127,6 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-
 }
 
 //Hide keyboard when search button pressed

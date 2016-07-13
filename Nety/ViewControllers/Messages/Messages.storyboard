@@ -8,7 +8,7 @@
         <!--Messages-->
         <scene sceneID="5Gk-wC-KNQ">
             <objects>
-                <viewController storyboardIdentifier="Messages" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vKo-LV-MMT" customClass="Messages" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Messages" title="Messages" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vKo-LV-MMT" customClass="Messages" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="K6M-9S-882"/>
                         <viewControllerLayoutGuide type="bottom" id="u2x-wi-wjD"/>
@@ -27,7 +27,6 @@
         <!--Navigation Controller-->
         <scene sceneID="Txq-kc-fun">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RQg-rP-cTN" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mTM-9r-fN0" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO"/>
@@ -45,6 +44,7 @@
                         <segue destination="vKo-LV-MMT" kind="relationship" relationship="rootViewController" id="X7c-AH-diC"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RQg-rP-cTN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1385" y="-123"/>
         </scene>

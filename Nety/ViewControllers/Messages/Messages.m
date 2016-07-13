@@ -67,7 +67,7 @@
     UINavigationItem *navItem= [[UINavigationItem alloc] init];
     navItem.title = @"chat";
     
-    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"Back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:normal target:self action:@selector(bacButtonPressed)];
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"Back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:normal target:self action:@selector(backButtonPressed)];
     
     navItem.leftBarButtonItem = leftButton;
     
@@ -88,7 +88,7 @@
     return UIStatusBarStyleLightContent;
 }
 
--(void)bacButtonPressed {
+-(void)backButtonPressed {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

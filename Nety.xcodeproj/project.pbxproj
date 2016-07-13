@@ -27,6 +27,7 @@
 		67D4AD5F1D26333D00F42B7F /* LoginSignup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67D4AD5E1D26333D00F42B7F /* LoginSignup.storyboard */; };
 		67D4AD621D26536000F42B7F /* MainPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D4AD611D26536000F42B7F /* MainPage.m */; };
 		67D4AD651D265A7E00F42B7F /* Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D4AD641D265A7E00F42B7F /* Login.m */; };
+		67D992301D36B8AD0056D9B9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 67D9922F1D36B8AD0056D9B9 /* GoogleService-Info.plist */; };
 		67DD1A7C1D17BEB500FBEA0F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DD1A7B1D17BEB500FBEA0F /* main.m */; };
 		67DD1A7F1D17BEB500FBEA0F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DD1A7E1D17BEB500FBEA0F /* AppDelegate.m */; };
 		67DD1A871D17BEB500FBEA0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1A861D17BEB500FBEA0F /* Assets.xcassets */; };
@@ -93,6 +94,7 @@
 		67D4AD611D26536000F42B7F /* MainPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPage.m; sourceTree = "<group>"; };
 		67D4AD631D265A7E00F42B7F /* Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Login.h; sourceTree = "<group>"; };
 		67D4AD641D265A7E00F42B7F /* Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Login.m; sourceTree = "<group>"; };
+		67D9922F1D36B8AD0056D9B9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		67DD1A771D17BEB500FBEA0F /* Nety.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nety.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67DD1A7B1D17BEB500FBEA0F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		67DD1A7D1D17BEB500FBEA0F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 				67DD1A7E1D17BEB500FBEA0F /* AppDelegate.m */,
 				67DD1A861D17BEB500FBEA0F /* Assets.xcassets */,
 				67DD1A881D17BEB500FBEA0F /* LaunchScreen.storyboard */,
+				67D9922F1D36B8AD0056D9B9 /* GoogleService-Info.plist */,
 				67DD1A8B1D17BEB500FBEA0F /* Info.plist */,
 				67DD1A7B1D17BEB500FBEA0F /* main.m */,
 			);
@@ -489,6 +492,7 @@
 				67DD1AA41D17BFCC00FBEA0F /* Chat.storyboard in Resources */,
 				67D4AD5F1D26333D00F42B7F /* LoginSignup.storyboard in Resources */,
 				67DD1AA91D17C00600FBEA0F /* MyInfo.storyboard in Resources */,
+				67D992301D36B8AD0056D9B9 /* GoogleService-Info.plist in Resources */,
 				678138A81D33A94E00BFBF48 /* Settings.storyboard in Resources */,
 				67DD1AAF1D17C3EF00FBEA0F /* Profile.storyboard in Resources */,
 				67DD1AC01D17E42D00FBEA0F /* duck.jpg in Resources */,

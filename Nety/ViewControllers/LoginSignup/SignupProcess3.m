@@ -53,8 +53,18 @@
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
     //Customizing view controller here
-    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
-
+    [viewController.navigationController.navigationBar setBackgroundColor:self.UIPrinciple.netyBlue];
+    [viewController.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    [viewController.navigationController.navigationBar setTranslucent:NO];
+    [self.UIPrinciple addTopbarColor:viewController];
+    
+    //Style navbar
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
+                                [UIColor whiteColor], NSForegroundColorAttributeName, nil];
+    
+    [viewController.navigationController.navigationBar setTitleTextAttributes:attributes];
+    
 }
 
 // This method is called when an image has been chosen from the library or taken from the camera.
@@ -66,9 +76,6 @@
     [self.doneButtonOutlet setTitle:@"Done" forState:UIControlStateNormal];
     
     [picker dismissViewControllerAnimated:YES completion:nil];
-    
-    [[UINavigationBar appearance] setBarTintColor:self.UIPrinciple.netyBlue];
-
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

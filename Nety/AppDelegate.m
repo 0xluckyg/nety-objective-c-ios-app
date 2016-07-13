@@ -20,7 +20,7 @@
     // Override point for customization after application launch.
     
     //Check if user is signed in, and move on
-    self.UIPrinciple = [[UIPrinciples alloc] init];
+    [self initializeSettings];
     [self initializeLoginView];
     [self initializeDesign];
     [self initializeTabBar];
@@ -40,6 +40,13 @@
     [self.window setBackgroundColor:self.UIPrinciple.netyBlue];
     [UINavigationBar appearance].clipsToBounds = YES;
     [[UINavigationBar appearance] setBarTintColor:self.UIPrinciple.netyBlue];
+}
+
+-(void)initializeSettings {
+    self.UIPrinciple = [[UIPrinciples alloc] init];
+    
+    //Configure Firebase
+    [FIRApp configure];
 }
 
 -(void)initializeTabBar {
