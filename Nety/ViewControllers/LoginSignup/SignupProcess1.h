@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "UIPrinciples.h"
 
-@interface SignupProcess1 : UIViewController <UITextViewDelegate, UITextFieldDelegate>
+@interface SignupProcess1 : UIViewController <UITextViewDelegate, UITextFieldDelegate> {
+    NSString *summaryPlaceholder;
+}
 
 @property (weak, nonatomic) IBOutlet UILabel *jobLabel;
 
@@ -21,6 +23,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *nextButtonOutlet;
 
+
+@property (strong, nonatomic) NSMutableArray *userInfo;
 
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
 

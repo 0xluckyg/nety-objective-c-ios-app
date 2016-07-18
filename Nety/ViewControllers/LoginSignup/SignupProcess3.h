@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UIPrinciples.h"
+#import <Firebase/Firebase.h>
 
 @interface SignupProcess3 : UIViewController
 
@@ -17,6 +18,10 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *doneButtonOutlet;
 
+
+
+
+@property (strong, nonatomic) FIRDatabase *firdatabase;
 
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
 

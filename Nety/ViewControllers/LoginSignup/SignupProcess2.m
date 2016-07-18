@@ -31,9 +31,14 @@
     
     editButtonClicked = YES;
     
-    self.experienceData = [[NetworkData alloc] init];
+    self.experienceArray = [[NSMutableArray alloc] init];
     
+    //Table editable
     [self.tableView setEditing:NO animated:NO];
+    
+    
+    NSLog(@"%@, %@, %@, %@, %@, %@, %@", self.userInfo[0], self.userInfo[1], self.userInfo[2], self.userInfo[3] ,self.userInfo[4], self.userInfo[5], self.userInfo[6]);
+    
 }
 
 - (void)initializeDesign {
@@ -53,24 +58,22 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [[UINavigationBar appearance]setShadowImage:[[UIImage alloc] init]];
-    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.experienceData.userExperienceArray count];
+    return [self.experienceArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     //Initialize cell
     MyInfoEditTableCell *experienceCell = [tableView dequeueReusableCellWithIdentifier:@"MyInfoEditTableCell"];
-    
-    if ([self.experienceData.userExperienceArray count] == 0) {
+    if ([self.experienceArray count] == 0) {
         //Set cell data
         experienceCell.experienceName.text = @"You didn't add any experience yet";
     } else {
         //Set cell data
-        NSDictionary *rowData = [self.experienceData.userExperienceArray objectAtIndex:indexPath.row];
+        NSDictionary *rowData = [self.experienceArray objectAtIndex:indexPath.row];
         experienceCell.experienceName.text = [rowData objectForKey: keyExperienceName];
         experienceCell.experienceDate.text = [rowData objectForKey: keyExperienceTime];
         experienceCell.experienceDescription.text = [rowData objectForKey: keyExperienceDescription];
@@ -133,7 +136,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
-    [self.experienceData.userExperienceArray exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
+    [self.experienceArray exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
     
 }
 

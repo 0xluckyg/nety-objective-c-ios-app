@@ -7,6 +7,7 @@
 //
 
 #import "Signup.h"
+#import "SignupProcess1.h"
 
 @interface Signup ()
 
@@ -18,7 +19,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [self initializeSettings];
     [self initializeDesign];
+}
+
+- (void)initializeSettings {
+    
 }
 
 - (void)initializeDesign {
@@ -70,7 +76,7 @@
     } else if (!valid || self.age.text.integerValue < 5 || self.age.text.integerValue > 100) {
         UIAlertController *alert = [UIAlertController
                                     alertControllerWithTitle:@"Please enter a valid age"
-                                    message:@"That's not your age, is it?"
+                                    message:@"ex. 24"
                                     preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:okay];
         [self presentViewController:alert animated:YES completion:nil];
@@ -83,7 +89,17 @@
         [alert addAction:okay];
         [self presentViewController:alert animated:YES completion:nil];
         
+    } else if ([self.name.text rangeOfString:@" "].location == NSNotFound){
+        
+        UIAlertController *alert = [UIAlertController
+                                    alertControllerWithTitle:@"Please enter a valid name"
+                                    message:@"Please separate your first and last name with a space"
+                                    preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:okay];
+        [self presentViewController:alert animated:YES completion:nil];
+        
     } else {
+        
         [self performSegueWithIdentifier:@"signupProcess1Segue" sender:self];
     }
 
@@ -104,4 +120,32 @@
     [self.navigationController popViewControllerAnimated:YES];
     
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"signupProcess1Segue"])
+    {
+        
+        NSArray *nameArray = [self.name.text componentsSeparatedByString:@" "];
+        
+        self.userInfo = [[NSMutableArray alloc] initWithArray:@[
+                                                                self.email.text,
+                                                                self.password.text,
+                                                                nameArray[0],
+                                                                nameArray[1],
+                                                                self.age.text ]];
+        
+        
+        [self.email endEditing:YES];
+        [self.name endEditing:YES];
+        [self.age endEditing:YES];
+        [self.password endEditing:YES];
+        
+        // Get reference to the destination view controller
+        SignupProcess1 *process1 = [segue destinationViewController];
+        
+        process1.userInfo = self.userInfo;
+        
+    }
+}
+
 @end

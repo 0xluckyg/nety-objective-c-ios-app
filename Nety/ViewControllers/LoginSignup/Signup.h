@@ -25,8 +25,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *signupWithLinkedinButtonOutlet;
 
-
-
+@property (strong, nonatomic) NSMutableArray *userInfo;
 
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
 

@@ -21,10 +21,12 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 
+@property (strong, nonatomic) NSMutableArray *userInfo;
 
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
 
-@property (strong, nonatomic) NetworkData *experienceData;
+
+@property (strong, nonatomic) NSMutableArray *experienceArray;
 
 - (IBAction)backButton:(id)sender;
 

@@ -19,7 +19,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [self initializeSettings];
     [self initializeDesign];
+}
+
+- (void)initializeSettings {
+    FIRDatabaseReference *ref = [[FIRDatabase database] reference];
+    
+    [ref observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        NSLog(@"%@", snapshot.value);
+    }];
 }
 
 - (void)initializeDesign {

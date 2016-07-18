@@ -7,6 +7,7 @@
 //
 
 #import "SignupProcess1.h"
+#import "SignupProcess2.h"
 
 @interface SignupProcess1 ()
 
@@ -23,11 +24,15 @@
 
 - (void)initializeSettings {
 
-
+    NSLog(@"%@, %@, %@, %@, %@", self.userInfo[0], self.userInfo[1], self.userInfo[2], self.userInfo[3] ,self.userInfo[4]);
+    
 }
 
 - (void)initializeDesign {
     self.UIPrinciple = [[UIPrinciples alloc] init];
+    
+    //Set placeholder for the big box
+    summaryPlaceholder = @"ex. I'm an energetic developer at Nety who loves Chipotle and enjoys playing piano during free times";
     
     //Background of page
     self.view.backgroundColor = self.UIPrinciple.netyBlue;
@@ -37,7 +42,7 @@
     self.summaryLabel.textColor = [UIColor whiteColor];
     
     //textfield
-    self.summaryTextField.text = @"ex. I'm an energetic developer at Nety who loves Chipotle and enjoys playing piano during free times";
+    self.summaryTextField.text = summaryPlaceholder;
     self.summaryTextField.textColor = self.UIPrinciple.defaultGray;
     self.summaryTextField.layer.cornerRadius = 8;
     
@@ -103,6 +108,34 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([[segue identifier] isEqualToString:@"signupProcess2Segue"])
+    {
+        NSString *summary = [[NSString alloc] init];
+        
+        if ([self.summaryTextField.text isEqualToString:summaryPlaceholder]) {
+            summary = @"";
+        } else {
+            summary = self.summaryTextField.text;
+        }
+        
+        [self.userInfo insertObject:self.jobTextField.text atIndex:5];
+        [self.userInfo insertObject:summary atIndex:6];
+        
+        [self.jobTextField endEditing:YES];
+        [self.summaryTextField endEditing:YES];
+        
+        // Get reference to the destination view controller
+        SignupProcess2 *process2 = [segue destinationViewController];
+        
+        process2.userInfo = self.userInfo;
+        
+    }
+    
+}
+
 @end
 
 
