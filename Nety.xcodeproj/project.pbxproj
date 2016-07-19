@@ -24,6 +24,8 @@
 		679B9EEA1D236E0A00C426F2 /* MyInfoEditType2.m in Sources */ = {isa = PBXBuildFile; fileRef = 679B9EE91D236E0A00C426F2 /* MyInfoEditType2.m */; };
 		679B9EED1D236E1C00C426F2 /* MyInfoEditTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 679B9EEC1D236E1C00C426F2 /* MyInfoEditTable.m */; };
 		679B9EF01D2396A700C426F2 /* MyInfoEditTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 679B9EEF1D2396A700C426F2 /* MyInfoEditTableCell.m */; };
+		67CD9C2E1D3C75E800823701 /* NoContent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67CD9C2D1D3C75E800823701 /* NoContent.xib */; };
+		67CD9C311D3C795600823701 /* NoContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CD9C301D3C795600823701 /* NoContent.m */; };
 		67D4AD5F1D26333D00F42B7F /* LoginSignup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67D4AD5E1D26333D00F42B7F /* LoginSignup.storyboard */; };
 		67D4AD621D26536000F42B7F /* MainPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D4AD611D26536000F42B7F /* MainPage.m */; };
 		67D4AD651D265A7E00F42B7F /* Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D4AD641D265A7E00F42B7F /* Login.m */; };
@@ -89,6 +91,9 @@
 		679B9EEC1D236E1C00C426F2 /* MyInfoEditTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoEditTable.m; sourceTree = "<group>"; };
 		679B9EEE1D2396A700C426F2 /* MyInfoEditTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoEditTableCell.h; sourceTree = "<group>"; };
 		679B9EEF1D2396A700C426F2 /* MyInfoEditTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoEditTableCell.m; sourceTree = "<group>"; };
+		67CD9C2D1D3C75E800823701 /* NoContent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoContent.xib; sourceTree = "<group>"; };
+		67CD9C2F1D3C795600823701 /* NoContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoContent.h; sourceTree = "<group>"; };
+		67CD9C301D3C795600823701 /* NoContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoContent.m; sourceTree = "<group>"; };
 		67D4AD5E1D26333D00F42B7F /* LoginSignup.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginSignup.storyboard; sourceTree = "<group>"; };
 		67D4AD601D26536000F42B7F /* MainPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPage.h; sourceTree = "<group>"; };
 		67D4AD611D26536000F42B7F /* MainPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPage.m; sourceTree = "<group>"; };
@@ -145,6 +150,9 @@
 		673338F81D2098D200A8009F /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				67CD9C2D1D3C75E800823701 /* NoContent.xib */,
+				67CD9C2F1D3C795600823701 /* NoContent.h */,
+				67CD9C301D3C795600823701 /* NoContent.m */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -498,6 +506,7 @@
 				67DD1AC01D17E42D00FBEA0F /* duck.jpg in Resources */,
 				67DD1AC21D17E42D00FBEA0F /* girl2.jpg in Resources */,
 				67DD1A9F1D17BF7200FBEA0F /* MyNetwork.storyboard in Resources */,
+				67CD9C2E1D3C75E800823701 /* NoContent.xib in Resources */,
 				67DD1AC41D17E42D00FBEA0F /* water.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -567,6 +576,7 @@
 				67D4AD651D265A7E00F42B7F /* Login.m in Sources */,
 				67391DEF1D27FBB900A50C03 /* SignupProcess1.m in Sources */,
 				679B9EF01D2396A700C426F2 /* MyInfoEditTableCell.m in Sources */,
+				67CD9C311D3C795600823701 /* NoContent.m in Sources */,
 				67DD1A7F1D17BEB500FBEA0F /* AppDelegate.m in Sources */,
 				67DD1A981D17BF1700FBEA0F /* Network.m in Sources */,
 				67391DF51D27FBD800A50C03 /* SignupProcessExperienceDetail.m in Sources */,

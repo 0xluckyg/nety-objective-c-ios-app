@@ -9,11 +9,21 @@
 #import <UIKit/UIKit.h>
 #import "UIPrinciples.h"
 
+@protocol experienceDataDelegate <NSObject>
+
+-(void) sendExperienceData: (NSMutableArray *)experienceData;
+
+@end
+
+
 @interface SignupProcessExperienceDetail : UIViewController <UITextViewDelegate, UITextFieldDelegate> {
     UIDatePicker *datePicker;
     NSString *namePlacementText;
     NSString *dateToPlacementText;
     NSString *descriptionPlacementText;
+    
+    bool saved;
+    bool changed;
 }
 
 
@@ -40,14 +50,26 @@
 
 
 
+@property (weak, nonatomic) IBOutlet UIButton *noDateButtonOutlet;
 
 @property (weak, nonatomic) IBOutlet UIButton *saveButtonOutlet;
 
 @property (weak, nonatomic) IBOutlet UIButton *presentButtonOutlet;
 
+@property (weak, nonatomic) id<experienceDataDelegate>delegate;
+
+@property (strong, nonatomic) NSMutableArray *experienceArray;
+
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
 
+
+
+@property (nonatomic) bool add;
+@property (nonatomic) NSUInteger arrayIndex;
+
 - (IBAction)presentButton:(id)sender;
+
+- (IBAction)noDateButton:(id)sender;
 
 - (IBAction)backButton:(id)sender;
 

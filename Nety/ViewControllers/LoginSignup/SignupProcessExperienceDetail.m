@@ -17,11 +17,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self initizlieSetting];
+    [self initizlieSettings];
     [self initializeDesign];
 }
 
-- (void)initizlieSetting {
+- (void)initizlieSettings {
+    
+    saved = false;
+    changed = false;
     
     namePlacementText = @"Where did you work at, or what did you do?";
     dateToPlacementText = @"Present";
@@ -52,7 +55,6 @@
     //Name section
     self.experienceNameLabel.textColor = [UIColor whiteColor];
     self.experienceNameTextField.textColor = self.UIPrinciple.netyBlue;
-    self.experienceNameTextField.text = namePlacementText;
     
     //Date section
     self.dateLabel.textColor = [UIColor whiteColor];
@@ -63,8 +65,31 @@
     //Description section
     self.experienceDescriptionLabel.textColor = [UIColor whiteColor];
     self.experienceDescriptionTextField.layer.cornerRadius = 8;
-    self.experienceDescriptionTextField.text = descriptionPlacementText;
     self.experienceDescriptionTextField.textColor = self.UIPrinciple.netyBlue;
+    
+    if (self.add == true) {
+    
+        //name
+        self.experienceNameTextField.text = namePlacementText;
+        //description
+        self.experienceDescriptionTextField.text = descriptionPlacementText;
+    
+    } else {
+        
+        NSDictionary *experienceDict = [self.experienceArray objectAtIndex:self.arrayIndex];
+
+        //name
+        self.experienceNameTextField.text = [experienceDict objectForKey:@"name"];
+        //date
+        self.dateFromTextField.text = [experienceDict objectForKey:@"startDate"];
+        self.dateToTextField.text = [experienceDict objectForKey:@"endDate"];
+        //description
+        self.experienceDescriptionTextField.text = [experienceDict objectForKey:@"description"];
+        
+    }
+    
+    //Nodate button
+    [self.noDateButtonOutlet setTintColor:[UIColor whiteColor]];
     
     //Present button
     [self.presentButtonOutlet setTintColor:[UIColor whiteColor]];
@@ -86,6 +111,8 @@
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    changed = true;
+    
     if ([textField.text isEqual: namePlacementText]) {
         textField.attributedText = nil;
     }
@@ -109,6 +136,8 @@
 //Move screen up when Keyboard appears for Description only
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
+    changed = true;
+    
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:.3];
     [UIView setAnimationBeginsFromCurrentState:TRUE];
@@ -135,6 +164,12 @@
     [self.view endEditing:YES];
 }
 
+- (IBAction)noDateButton:(id)sender {
+    //Reset date
+    self.dateFromTextField.text = @"";
+    self.dateToTextField.text = @"";
+}
+
 //Set date to present
 - (IBAction)presentButton:(id)sender {
     self.dateToTextField.text = dateToPlacementText;
@@ -142,12 +177,74 @@
 
 //Going back to experience table view
 - (IBAction)backButton:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    if (saved == false && changed == true) {
+        
+        UIAlertAction *cont = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+        
+        UIAlertAction *okay = [UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            
+        }];
+        
+        UIAlertController *alert = [UIAlertController
+                                    alertControllerWithTitle:@"Not saved"
+                                    message:@"You haven't saved your interest or experience. Continue anyway?"
+                                    preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:cont];
+        [alert addAction:okay];
+        [self presentViewController:alert animated:YES completion:nil];
+    
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
 }
 
 //Saving and going back to experience table view
 - (IBAction)saveButton:(id)sender {
+    
+    saved = true;
+    
+    NSString *experienceDescription = [[NSString alloc] init];
+    
+    if (self.experienceDescriptionTextField.text == descriptionPlacementText) {
+        experienceDescription = @"";
+        
+    } else {
+        experienceDescription = self.experienceDescriptionTextField.text;
+    }
+    
+    NSDictionary *experienceDict = @{
+                                     @"name": self.experienceNameTextField.text,
+                                     @"startDate": self.dateFromTextField.text,
+                                     @"endDate": self.dateToTextField.text,
+                                     @"description": experienceDescription
+                                     };
+    
+    //If adding, then put it in the array.
+    if (self.add == true && changed == true) {
+        
+        [self.experienceArray addObject:experienceDict];
+        [self sendExperienceData];
+        
+    //If editing, then simply change object
+    } else {
+        
+        [self.experienceArray replaceObjectAtIndex:self.arrayIndex withObject:experienceDict];
+        [self sendExperienceData];
+        
+    }
+    
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+- (void)sendExperienceData {
+    
+    [self.delegate sendExperienceData:self.experienceArray];
+    
 }
 
 - (void)didReceiveMemoryWarning {

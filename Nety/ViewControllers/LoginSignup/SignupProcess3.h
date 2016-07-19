@@ -25,6 +25,8 @@
 
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
 
+@property (strong, nonatomic) NSMutableArray *userInfo;
+
 - (IBAction)addProfileImage:(id)sender;
 
 - (IBAction)doneButton:(id)sender;

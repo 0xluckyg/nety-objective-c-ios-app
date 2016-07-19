@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "NoContent.h"
 
 @interface UIPrinciples : NSObject
 
@@ -23,5 +24,9 @@
 
 -(void)addTopbarColor: (UIViewController *)viewController;
 -(UIFont*)netyFontWithSize: (int)size;
+
+-(void)addNoContent: (UIViewController *)viewController setText:(NSString*)text noContentController:(NoContent *)noContentController;
+
+-(void)removeNoContent: (NoContent *)noContentController;
 
 @end

@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "UIPrinciples.h"
 #import "NetworkData.h"
+#import "NoContent.h"
+#import "SignupProcessExperienceDetail.h"
 
-@interface SignupProcess2 : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+@interface SignupProcess2 : UIViewController <UITableViewDelegate, UITableViewDataSource, experienceDataDelegate> {
     bool editButtonClicked;
 }
 
@@ -23,10 +25,16 @@
 
 @property (strong, nonatomic) NSMutableArray *userInfo;
 
+@property (strong, nonatomic) NoContent *noContentController;
+
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
 
-
 @property (strong, nonatomic) NSMutableArray *experienceArray;
+
+
+@property (nonatomic) bool add;
+
+@property (nonatomic) NSUInteger arrayIndex;
 
 - (IBAction)backButton:(id)sender;
 

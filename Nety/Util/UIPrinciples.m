@@ -8,6 +8,7 @@
 
 #import "UIPrinciples.h"
 #import "AppDelegate.h"
+#import "NoContent.h"
 
 @implementation UIPrinciples
 
@@ -57,6 +58,25 @@
     
     [viewController.view addSubview:navbar];
 
+}
+
+-(void)addNoContent: (UIViewController *)viewController setText:(NSString*)text noContentController:(NoContent *)noContentController {
+    
+    noContentController.view.frame = CGRectMake(0, viewController.view.frame.size.height/2 - 50, viewController.view.frame.size.width, 150);
+    
+    [noContentController.view setBackgroundColor:self.netyTransparent];
+    
+    [noContentController.label setTextColor:[UIColor whiteColor]];
+    
+    noContentController.label.text = text;
+    
+    [viewController.navigationController.view addSubview:noContentController.view];
+}
+
+-(void)removeNoContent: (NoContent *)noContentController {
+    
+    [noContentController.view removeFromSuperview];
+    
 }
 
 @end
