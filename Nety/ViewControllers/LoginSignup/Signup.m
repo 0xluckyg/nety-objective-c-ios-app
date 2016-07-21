@@ -48,59 +48,50 @@
 
 - (IBAction)signupButton:(id)sender {
     
-    UIAlertAction *okay = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        
-    }];
-    
+    //Age char check
     BOOL valid;
     NSCharacterSet *alphaNums = [NSCharacterSet decimalDigitCharacterSet];
     NSCharacterSet *inStringSet = [NSCharacterSet characterSetWithCharactersInString:self.age.text];
     valid = [alphaNums isSupersetOfSet:inStringSet];
     
     if (self.email.text.length < 10) {
-        UIAlertController *alert = [UIAlertController
-                                    alertControllerWithTitle:@"Please enter a valid email"
-                                    message:@"Your email is too short!"
-                                    preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:okay];
-        [self presentViewController:alert animated:YES completion:nil];
+        
+        [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Please enter a valid email" message:@"Your email is too short!" viewController:self];
         
     } else if (self.password.text.length > 15 || self.password.text.length < 6) {
-        UIAlertController *alert = [UIAlertController
-                                    alertControllerWithTitle:@"Please enter a valid password"
-                                    message:@"Your password has to be between 6 to 15 characters"
-                                    preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:okay];
-        [self presentViewController:alert animated:YES completion:nil];
+        
+        [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Please enter a valid password" message:@"Your password has to be between 6 to 15 characters" viewController:self];
         
     } else if (!valid || self.age.text.integerValue < 5 || self.age.text.integerValue > 100) {
-        UIAlertController *alert = [UIAlertController
-                                    alertControllerWithTitle:@"Please enter a valid age"
-                                    message:@"ex. 24"
-                                    preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:okay];
-        [self presentViewController:alert animated:YES completion:nil];
         
-    } else if (self.name.text.length < 2 || self.name.text.length > 25) {
-        UIAlertController *alert = [UIAlertController
-                                    alertControllerWithTitle:@"Please enter a valid name"
-                                    message:@"What's your real name?"
-                                    preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:okay];
-        [self presentViewController:alert animated:YES completion:nil];
+        [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Please enter a valid age" message:@"ex. 24" viewController:self];
+        
+    } else if (self.name.text.length < 2 || self.name.text.length > 30 || [[self.name.text componentsSeparatedByString:@" "] count] > 2 ) {
+        
+        [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Please enter a valid name" message:@"ex. Firstname Lastname" viewController:self];
         
     } else if ([self.name.text rangeOfString:@" "].location == NSNotFound){
         
-        UIAlertController *alert = [UIAlertController
-                                    alertControllerWithTitle:@"Please enter a valid name"
-                                    message:@"Please separate your first and last name with a space"
-                                    preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:okay];
-        [self presentViewController:alert animated:YES completion:nil];
+        [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Please enter a valid name" message:@"Please separate your first and last name with a space" viewController:self];
         
     } else {
         
-        [self performSegueWithIdentifier:@"signupProcess1Segue" sender:self];
+        [[FIRAuth auth]
+         createUserWithEmail: [self.userInfo objectAtIndex:0]
+         password: [self.userInfo objectAtIndex:1]
+         completion:^(FIRUser *_Nullable user,
+                      NSError *_Nullable error) {
+             
+             if (error) {
+                 NSLog(@"%@", error.localizedDescription);
+                 
+                 [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Problem signing in" message:error.localizedDescription viewController:self];
+                 
+             } else {
+                 [self performSegueWithIdentifier:@"signupProcess1Segue" sender:self];
+             }
+             
+         }];
     }
 
 }

@@ -22,6 +22,11 @@
 
 @property (nonatomic, strong) UIFont *netyFont;
 
+- (void)oneButtonAlert: (NSString *)buttonTitle controllerTitle:(NSString *)controllerTitle message:(NSString *)message viewController:(UIViewController *)viewController;
+
+- (void)twoButtonAlert: (UIAlertAction *)leftButton rightButton:(UIAlertAction *)rightButton controller:(NSString *)controllerTitle message:(NSString *)message viewController:(UIViewController *)viewController;
+
+
 -(void)addTopbarColor: (UIViewController *)viewController;
 -(UIFont*)netyFontWithSize: (int)size;
 

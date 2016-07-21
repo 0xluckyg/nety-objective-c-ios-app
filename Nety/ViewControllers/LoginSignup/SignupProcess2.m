@@ -180,6 +180,15 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.experienceArray removeObjectAtIndex:indexPath.row];
     [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+    
+    if ([self.experienceArray count] == 0) {
+        
+        //If deleted and array is 0
+        self.noContentController = [[NoContent alloc] init];
+        
+        [self.UIPrinciple addNoContent:self setText:@"You haven't added an experience or interest yet" noContentController:self.noContentController];
+    }
+    
 }
 
 
@@ -200,6 +209,8 @@
     } else if ([segue.identifier isEqualToString:@"signupProcess3Segue"]) {
         
         SignupProcess3 *process3 = [segue destinationViewController];
+        
+        [self.userInfo addObject:self.experienceArray];
         
         process3.userInfo = self.userInfo;
         

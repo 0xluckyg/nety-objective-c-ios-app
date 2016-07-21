@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "UIPrinciples.h"
-#import <Firebase/Firebase.h>
+
+
+@import Firebase;
 
 @interface SignupProcess3 : UIViewController
 
@@ -21,7 +23,7 @@
 
 
 
-@property (strong, nonatomic) FIRDatabase *firdatabase;
+@property (strong, nonatomic) FIRDatabaseReference *firdatabase;
 
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
 

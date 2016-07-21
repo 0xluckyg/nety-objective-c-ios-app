@@ -23,6 +23,7 @@
     [self initializeDesign];
 }
 
+
 - (void)initializeDesign {
     self.UIPrinciple = [[UIPrinciples alloc] init];
     
@@ -47,26 +48,13 @@
 //Log in the user after checking pw/id
 - (IBAction)loginButton:(id)sender {
     
-    UIAlertAction *okay = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    }];
-
-    
     if (self.email.text.length < 10) {
         
-        UIAlertController *alert = [UIAlertController
-                                    alertControllerWithTitle:@"Please enter a valid email"
-                                    message:@"Your email is too short!"
-                                    preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:okay];
-        [self presentViewController:alert animated:YES completion:nil];
+        [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Please enter a valid email" message:@"Your email is too short!" viewController:self];
         
     } else if (self.password.text.length > 15 || self.password.text.length < 6) {
-        UIAlertController *alert = [UIAlertController
-                                    alertControllerWithTitle:@"Please enter a valid password"
-                                    message:@"Your password has to be between 6 to 15 characters"
-                                    preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:okay];
-        [self presentViewController:alert animated:YES completion:nil];
+        
+        [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Please enter a valid password" message:@"Your password has to be between 6 to 15 characters" viewController:self];
         
     } else {
         

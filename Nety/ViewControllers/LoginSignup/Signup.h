@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "UIPrinciples.h"
 
+@import Firebase;
+
 @interface Signup : UIViewController
 
 @property (weak, nonatomic) IBOutlet UITextField *email;

@@ -24,9 +24,10 @@
 }
 
 - (void)initializeSettings {
-    FIRDatabaseReference *ref = [[FIRDatabase database] reference];
     
-    [ref observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    self.firdatabase = [[FIRDatabase database] reference];
+    
+    [self.firdatabase observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSLog(@"%@", snapshot.value);
     }];
 }
@@ -98,6 +99,45 @@
 
 //Moving to the main screen
 - (IBAction)doneButton:(id)sender {
+    
+    // 0: email
+    // 1: password
+    // 2: first name
+    // 3: last name
+    // 4: age
+    // 5: identity
+    // 6: summary
+    // 7: array of experiences
+    //     7-0: name
+    //     7-1: startDate
+    //     7-2: endDate
+    //     7-3: description
+    
+    NSMutableDictionary *experiences = [[NSMutableDictionary alloc] init];
+    NSMutableArray *experienceArray = [self.userInfo objectAtIndex:7];
+    NSString *userID = [[[self.userInfo objectAtIndex:0] stringByReplacingOccurrencesOfString:@"@" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
+    
+    for (int i = 0; i < [experienceArray count]; i ++) {
+        NSString *experienceKey = [NSString stringWithFormat:@"experience%@",[@(i) stringValue]];
+        [experiences setObject:[experienceArray objectAtIndex:i] forKey:experienceKey];
+    }
+    
+    NSDictionary *post = @{@"firstName": [self.userInfo objectAtIndex:2],
+                           @"lastName": [self.userInfo objectAtIndex:3],
+                           @"age": [self.userInfo objectAtIndex:4],
+                           @"status": @"",
+                           @"identity": [self.userInfo objectAtIndex:5],
+                           @"summary": [self.userInfo objectAtIndex:6],
+                           @"experiences": experiences};
+    
+    [[[self.firdatabase child:@"users"] child:userID] setValue:post];
+    
+    [self changeRoot];
+    
+}
+
+-(void)changeRoot {
+    
     //Set root controller to tabbar with cross dissolve animation
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     [UIView
@@ -111,7 +151,7 @@
          [UIView setAnimationsEnabled:oldState];
      }
      completion:nil];
-    
+
 }
 
 - (IBAction)backButton:(id)sender {

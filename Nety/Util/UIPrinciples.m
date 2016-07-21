@@ -30,34 +30,41 @@
     return self;
 }
 
--(void)addTopbarColor: (UIViewController *)viewController {
-    UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, 0,[UIScreen mainScreen].bounds.size.width, 20)];
-    view.backgroundColor=self.netyBlue;
-    [viewController.view addSubview:view];
+- (void)oneButtonAlert: (NSString *)buttonTitle controllerTitle:(NSString *)controllerTitle message:(NSString *)message viewController:(UIViewController *)viewController {
+    
+    UIAlertAction *button = [UIAlertAction actionWithTitle:buttonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+    }];
+    
+    UIAlertController *alert = [UIAlertController
+                                alertControllerWithTitle:controllerTitle
+                                message:message
+                                preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:button];
+    [viewController presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)twoButtonAlert: (UIAlertAction *)leftButton rightButton:(UIAlertAction *)rightButton controller:(NSString *)controllerTitle message:(NSString *)message viewController:(UIViewController *)viewController {
+    
+    UIAlertController *alert = [UIAlertController
+                                alertControllerWithTitle:controllerTitle
+                                message:message
+                                preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:leftButton];
+    [alert addAction:rightButton];
+    [viewController presentViewController:alert animated:YES completion:nil];
+    
+    
 }
 
 -(UIFont*)netyFontWithSize: (int)size {
     return [UIFont fontWithName:@"HelveticaNeue-Light" size:size];
 }
 
--(void)addNavBar: (UIViewController *)viewController setTitle:(NSString *)setTitle{
-
-    //Set navbar
-    UINavigationBar *navbar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0, 20, [UIScreen mainScreen].bounds.size.width, 50)];
-    navbar.backgroundColor = self.netyBlue;
-    [navbar setTranslucent:NO];
-
-    //Set navbar items
-    UINavigationItem *navItem= [[UINavigationItem alloc] init];
-    navItem.title = setTitle;
-    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Back"] style:UIBarButtonItemStylePlain target:self action:nil];
+-(void)removeNoContent: (NoContent *)noContentController {
     
-    navItem.leftBarButtonItem = leftButton;
+    [noContentController.view removeFromSuperview];
     
-    navbar.items = @[navItem];
-    
-    [viewController.view addSubview:navbar];
-
 }
 
 -(void)addNoContent: (UIViewController *)viewController setText:(NSString*)text noContentController:(NoContent *)noContentController {
@@ -73,9 +80,29 @@
     [viewController.navigationController.view addSubview:noContentController.view];
 }
 
--(void)removeNoContent: (NoContent *)noContentController {
+-(void)addTopbarColor: (UIViewController *)viewController {
+    UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, 0,[UIScreen mainScreen].bounds.size.width, 20)];
+    view.backgroundColor=self.netyBlue;
+    [viewController.view addSubview:view];
+}
+
+-(void)addNavBar: (UIViewController *)viewController setTitle:(NSString *)setTitle{
     
-    [noContentController.view removeFromSuperview];
+    //Set navbar
+    UINavigationBar *navbar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0, 20, [UIScreen mainScreen].bounds.size.width, 50)];
+    navbar.backgroundColor = self.netyBlue;
+    [navbar setTranslucent:NO];
+    
+    //Set navbar items
+    UINavigationItem *navItem= [[UINavigationItem alloc] init];
+    navItem.title = setTitle;
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Back"] style:UIBarButtonItemStylePlain target:self action:nil];
+    
+    navItem.leftBarButtonItem = leftButton;
+    
+    navbar.items = @[navItem];
+    
+    [viewController.view addSubview:navbar];
     
 }
 
