@@ -201,6 +201,8 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="414" height="592"/>
                     <connections>
+                        <outlet property="identityLabel" destination="Uhh-vT-unP" id="sj5-Gx-faE"/>
+                        <outlet property="nameLabel" destination="gNw-iV-Mx1" id="Lbq-yk-m2Y"/>
                         <outlet property="userBasicInfoView" destination="XCA-ee-oZP" id="ivR-Mc-Pqi"/>
                         <outlet property="userExperienceInfo" destination="emp-nB-BTf" id="TLr-qC-sVe"/>
                         <outlet property="userInfoView" destination="ixx-8P-liu" id="c9x-p6-yLB"/>

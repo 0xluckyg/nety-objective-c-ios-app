@@ -30,10 +30,26 @@
 
 -(void)initializeLoginView {
     
+//    [[FIRAuth auth] addAuthStateDidChangeListener:^(FIRAuth *_Nonnull auth,
+//                                                    FIRUser *_Nullable user) {
+//        if (user != nil) {
+//            // User is signed in.
+//            [self.window setRootViewController:self.tabBarRootController];
+//            
+//        } else {
+//            
+//            UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"LoginSignup" bundle:nil];
+//            UIViewController *myNetworkViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"MainPageNav"];
+//            
+//            [self.window setRootViewController:myNetworkViewController];
+//        }
+//    }];
+    
     UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"LoginSignup" bundle:nil];
     UIViewController *myNetworkViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"MainPageNav"];
-
+    
     [self.window setRootViewController:myNetworkViewController];
+
 }
 
 -(void)initializeDesign {

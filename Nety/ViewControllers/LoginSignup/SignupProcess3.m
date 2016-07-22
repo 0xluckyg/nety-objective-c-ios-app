@@ -8,6 +8,8 @@
 
 #import "SignupProcess3.h"
 #import "AppDelegate.h"
+#import "Constants.h"
+#import "SingletonUserData.h"
 
 @interface SignupProcess3 ()
 
@@ -27,9 +29,6 @@
     
     self.firdatabase = [[FIRDatabase database] reference];
     
-    [self.firdatabase observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-        NSLog(@"%@", snapshot.value);
-    }];
 }
 
 - (void)initializeDesign {
@@ -54,6 +53,7 @@
     
     UIImagePickerController *pickerLibrary = [[UIImagePickerController alloc] init];
     pickerLibrary.delegate = (id)self;
+    pickerLibrary.allowsEditing = YES;
     pickerLibrary.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
     [self presentViewController:pickerLibrary animated:YES completion:nil];
     
@@ -81,8 +81,16 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     //You can retrieve the actual UIImage
-    UIImage *pickedImage = [info valueForKey:UIImagePickerControllerOriginalImage];
-    self.profileImage.image = pickedImage;
+    
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    
+    UIImage *editedimage = [info objectForKey:UIImagePickerControllerEditedImage];
+    
+    if (![UIImagePNGRepresentation(image) isEqualToData:UIImagePNGRepresentation(editedimage)]) {
+        image = editedimage;
+    }
+    
+    self.profileImage.image = image;
     [self.doneButtonOutlet setTitle:@"Done" forState:UIControlStateNormal];
     
     [picker dismissViewControllerAnimated:YES completion:nil];
@@ -113,26 +121,68 @@
     //     7-2: endDate
     //     7-3: description
     
+    //Get userID and save to database
+    NSString *userID = [[[self.userInfo objectAtIndex:0] stringByReplacingOccurrencesOfString:@"@" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
+    SingletonUserData *singletonUserData = [SingletonUserData sharedInstance];
+    singletonUserData.userID = userID;
+    
+    
+    //Uploading profile image
+    NSString *uniqueImageID = [[NSUUID UUID] UUIDString];
+    
+    FIRStorage *storage = [FIRStorage storage];
+    FIRStorageReference *profileImageRef = [[[storage reference] child:@"profileImages"] child:uniqueImageID];
+    
+    //If user doesn't set profile image, set it to default image without uploading it.
+    if (self.profileImage.image == [UIImage imageNamed:@"NetyBlueLogo"]) {
+        
+        [self registerUserInfo:userID metaDataUid:@"NetyBlueLogo"];
+        
+    } else {
+    
+        NSData *uploadData = UIImagePNGRepresentation(self.profileImage.image);
+        
+        [profileImageRef putData:uploadData metadata:nil completion:^(FIRStorageMetadata * _Nullable metadata, NSError * _Nullable error) {
+            
+            if (error) {
+                NSLog(@"%@", error.localizedDescription);
+                [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Can not upload image" message:@"Please try again at another time" viewController:self];
+                
+            } else {
+                NSLog(@"%@", metadata);
+                
+                [self registerUserInfo:userID metaDataUid:[[metadata downloadURL] absoluteString]];
+                
+            }
+            
+        }];
+        
+    }
+    
+    [self changeRoot];
+    
+}
+
+-(void)registerUserInfo: (NSString *)userID metaDataUid:(NSString *)metaDataUid {
+    
     NSMutableDictionary *experiences = [[NSMutableDictionary alloc] init];
     NSMutableArray *experienceArray = [self.userInfo objectAtIndex:7];
-    NSString *userID = [[[self.userInfo objectAtIndex:0] stringByReplacingOccurrencesOfString:@"@" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
     
     for (int i = 0; i < [experienceArray count]; i ++) {
         NSString *experienceKey = [NSString stringWithFormat:@"experience%@",[@(i) stringValue]];
         [experiences setObject:[experienceArray objectAtIndex:i] forKey:experienceKey];
     }
     
-    NSDictionary *post = @{@"firstName": [self.userInfo objectAtIndex:2],
-                           @"lastName": [self.userInfo objectAtIndex:3],
-                           @"age": [self.userInfo objectAtIndex:4],
-                           @"status": @"",
-                           @"identity": [self.userInfo objectAtIndex:5],
-                           @"summary": [self.userInfo objectAtIndex:6],
-                           @"experiences": experiences};
+    NSDictionary *post = @{kFirstName: [self.userInfo objectAtIndex:2],
+                           kLastName: [self.userInfo objectAtIndex:3],
+                           kAge: [self.userInfo objectAtIndex:4],
+                           kStatus: @"",
+                           kIdentity: [self.userInfo objectAtIndex:5],
+                           kSummary: [self.userInfo objectAtIndex:6],
+                           kExperiences: experiences,
+                           kProfilePhoto: metaDataUid};
     
     [[[self.firdatabase child:@"users"] child:userID] setValue:post];
-    
-    [self changeRoot];
     
 }
 

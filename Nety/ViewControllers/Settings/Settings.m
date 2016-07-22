@@ -59,51 +59,52 @@
     //Set buttons for alert control
     UIAlertAction *yes = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
-        //Set root controller to tabbar with cross dissolve animation
-        AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-        
-        //Set login storyboard
-        UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"LoginSignup" bundle:nil];
-        UIViewController *myNetworkViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"MainPageNav"];
-        //With transition
-        [UIView
-         transitionWithView:self.view.window
-         duration:0.5
-         options:UIViewAnimationOptionTransitionCrossDissolve
-         animations:^(void) {
-             BOOL oldState = [UIView areAnimationsEnabled];
-             [UIView setAnimationsEnabled:NO];
-             [appDelegate.window setRootViewController:myNetworkViewController];
-             [UIView setAnimationsEnabled:oldState];
-         }
-         completion:nil];
+        NSError *error;
+        [[FIRAuth auth] signOut:&error];
+        if (!error) {
+            [self changeRoot];
+        }
         
     }];
+    
     UIAlertAction *no = [UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     }];
     
     if (indexPath.section == 3) {
         if (indexPath.row == 0) {
-            UIAlertController *alert = [UIAlertController
-                                        alertControllerWithTitle:@"Log out"
-                                        message:@"Are you sure to log out?"
-                                        preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:yes];
-            [alert addAction:no];
-            [self presentViewController:alert animated:YES completion:nil];
+            
+            [self.UIPrinciple twoButtonAlert:yes rightButton:no controller:@"Log out" message:@"Are you sure to log out?" viewController:self];
+            
         } else {
-            UIAlertController *alert = [UIAlertController
-                                        alertControllerWithTitle:@"Delete account"
-                                        message:@"Are you sure to delete your account? All the friends you've made will miss you."
-                                        preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:yes];
-            [alert addAction:no];
-            [self presentViewController:alert animated:YES completion:nil];
+            
+            [self.UIPrinciple twoButtonAlert:yes rightButton:no controller:@"Delete account" message:@"Are you sure to delete your account? All the friends you've made will miss you." viewController:self];
         }
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+}
+-(void)changeRoot {
+
+    //Set root controller to tabbar with cross dissolve animation
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    
+    //Set login storyboard
+    UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"LoginSignup" bundle:nil];
+    UIViewController *myNetworkViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"MainPageNav"];
+    //With transition
+    [UIView
+     transitionWithView:self.view.window
+     duration:0.5
+     options:UIViewAnimationOptionTransitionCrossDissolve
+     animations:^(void) {
+         BOOL oldState = [UIView areAnimationsEnabled];
+         [UIView setAnimationsEnabled:NO];
+         [appDelegate.window setRootViewController:myNetworkViewController];
+         [UIView setAnimationsEnabled:oldState];
+     }
+     completion:nil];
+
 }
 
 - (void)didReceiveMemoryWarning {

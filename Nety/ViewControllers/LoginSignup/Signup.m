@@ -8,6 +8,8 @@
 
 #import "Signup.h"
 #import "SignupProcess1.h"
+#import "Constants.h"
+#import "SingletonUserData.h"
 
 @interface Signup ()
 
@@ -24,6 +26,8 @@
 }
 
 - (void)initializeSettings {
+    
+    self.firdatabase = [[FIRDatabase database] reference];
     
 }
 
@@ -76,6 +80,18 @@
         
     } else {
         
+        
+        NSArray *nameArray = [self.name.text componentsSeparatedByString:@" "];
+        
+        self.userInfo = [[NSMutableArray alloc] initWithArray:@[
+                                                                self.email.text,
+                                                                self.password.text,
+                                                                nameArray[0],
+                                                                nameArray[1],
+                                                                self.age.text ]];
+        
+        
+        //Sign up the user
         [[FIRAuth auth]
          createUserWithEmail: [self.userInfo objectAtIndex:0]
          password: [self.userInfo objectAtIndex:1]
@@ -83,11 +99,25 @@
                       NSError *_Nullable error) {
              
              if (error) {
+                 
                  NSLog(@"%@", error.localizedDescription);
                  
-                 [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Problem signing in" message:error.localizedDescription viewController:self];
+                 [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Problem signing up" message:error.localizedDescription viewController:self];
                  
              } else {
+                 
+                 //User ID is supposed to be the email without . and @
+                 NSString *userID = [[[self.userInfo objectAtIndex:0] stringByReplacingOccurrencesOfString:@"@" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
+                 
+                 SingletonUserData *singletonUserData = [SingletonUserData sharedInstance];
+                 singletonUserData.userID = userID;
+                 
+                 //Save name and age to the database
+                 [[[self.firdatabase child:kUsers] child:userID] setValue:@{kFirstName: [self.userInfo objectAtIndex:2],
+                                                                              kLastName: [self.userInfo objectAtIndex:3],
+                                                                              kAge: [self.userInfo objectAtIndex:4]}];
+                 
+                 
                  [self performSegueWithIdentifier:@"signupProcess1Segue" sender:self];
              }
              
@@ -115,16 +145,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"signupProcess1Segue"])
     {
-        
-        NSArray *nameArray = [self.name.text componentsSeparatedByString:@" "];
-        
-        self.userInfo = [[NSMutableArray alloc] initWithArray:@[
-                                                                self.email.text,
-                                                                self.password.text,
-                                                                nameArray[0],
-                                                                nameArray[1],
-                                                                self.age.text ]];
-        
         
         [self.email endEditing:YES];
         [self.name endEditing:YES];

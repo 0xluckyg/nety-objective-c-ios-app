@@ -32,7 +32,7 @@
     self.UIPrinciple = [[UIPrinciples alloc] init];
     
     //Set placeholder for the big box
-    summaryPlaceholder = @"ex. I'm an energetic developer at Nety who loves Chipotle and enjoys playing piano during free times";
+    summaryPlaceholder = @"Please decribe yourself!";
     
     //Background of page
     self.view.backgroundColor = self.UIPrinciple.netyBlue;

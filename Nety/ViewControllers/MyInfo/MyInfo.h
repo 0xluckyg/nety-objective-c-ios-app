@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SingletonUserData.h"
 #import "UIPrinciples.h"
+
+@import Firebase;
 
 @interface MyInfo : UIViewController
 
@@ -23,8 +26,18 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *userExperienceInfo;
 
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *identityLabel;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *userInfoViewTopConstraint;
 
+@property (strong, nonatomic) NSMutableDictionary *userData;
+
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
+
+@property (strong, nonatomic) FIRDatabaseReference *firdatabase;
+
+@property (strong, nonatomic) NSMutableArray *experienceArray;
 
 @end

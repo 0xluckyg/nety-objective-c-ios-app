@@ -31,6 +31,8 @@
 
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
 
+@property (strong, nonatomic) FIRDatabaseReference *firdatabase;
+
 - (IBAction)signupButton:(id)sender;
 
 - (IBAction)signupWithLinkedinButton:(id)sender;

@@ -8,7 +8,9 @@
 
 #import "Login.h"
 #import "AppDelegate.h"
+#import "SingletonUserData.h"
 #import <UIKit/UIKit.h>
+#import "Constants.h"
 
 @interface Login ()
 
@@ -58,22 +60,41 @@
         
     } else {
         
-        //Set root controller to tabbar with cross dissolve animation
-        AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-        
-        [UIView
-         transitionWithView:self.view.window
-         duration:0.5
-         options:UIViewAnimationOptionTransitionCrossDissolve
-         animations:^(void) {
-             BOOL oldState = [UIView areAnimationsEnabled];
-             [UIView setAnimationsEnabled:NO];
-             [appDelegate.window setRootViewController:appDelegate.tabBarRootController];
-             [UIView setAnimationsEnabled:oldState];
-         }
-         completion:nil];
-        
+        [[FIRAuth auth] signInWithEmail:self.email.text
+                               password:self.password.text
+                             completion:^(FIRUser *user, NSError *error) {
+                                 
+                                 if (error) {
+                                     [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Problem signing in" message:error.localizedDescription viewController:self];
+                                 } else {
+                                     
+                                     NSString *userID = [[self.email.text stringByReplacingOccurrencesOfString:@"@" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
+                                     
+                                     SingletonUserData *singletonUserData = [SingletonUserData sharedInstance];
+                                     singletonUserData.userID = userID;
+                                     
+                                     [self changeRoot];
+                                 }
+                                 
+                             }];
     }
+}
+
+- (void)changeRoot {
+    //Set root controller to tabbar with cross dissolve animation
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    
+    [UIView
+     transitionWithView:self.view.window
+     duration:0.5
+     options:UIViewAnimationOptionTransitionCrossDissolve
+     animations:^(void) {
+         BOOL oldState = [UIView areAnimationsEnabled];
+         [UIView setAnimationsEnabled:NO];
+         [appDelegate.window setRootViewController:appDelegate.tabBarRootController];
+         [UIView setAnimationsEnabled:oldState];
+     }
+     completion:nil];
 }
 
 - (IBAction)loginWithLinkedinButton:(id)sender {

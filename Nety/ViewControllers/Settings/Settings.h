@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "UIPrinciples.h"
 
+@import Firebase;
+
 @interface Settings : UITableViewController
 
 @property (strong,nonatomic) UIPrinciples *UIPrinciple;

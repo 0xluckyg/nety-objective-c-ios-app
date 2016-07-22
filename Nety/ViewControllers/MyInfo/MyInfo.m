@@ -8,6 +8,8 @@
 
 #import "MyInfo.h"
 #import "UIPrinciples.h"
+#import "Constants.h"
+#import "SingletonUserData.h"
 
 @interface MyInfo ()
 
@@ -19,14 +21,82 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [self initializeSettings];
     [self initializeDesign];
 
+}
+
+- (void)initializeSettings {
+    
+    self.firdatabase = [[FIRDatabase database] reference];
+    
+    SingletonUserData *singletonUserData = [SingletonUserData sharedInstance];
+    NSLog(@"%@", singletonUserData.userID);
+    
+    [[[self.firdatabase child:kUsers] child:singletonUserData.userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        // Get user value
+        
+        NSLog(@"%@", snapshot);
+        
+        self.userData = snapshot.value;
+        
+        self.nameLabel.text = [NSString stringWithFormat:@"%@ %@ %@", [self.userData objectForKey:kFirstName], [self.userData objectForKey:kLastName], [self.userData objectForKey:kAge]];
+        
+        self.identityLabel.text = [self.userData objectForKey:kIdentity];
+        
+        if ([[self.userData objectForKey:kStatus] isEqualToString:@""]) {
+            self.userStatusInfo.text = @"You haven't set a status yet!";
+        } else {
+            self.userStatusInfo.text = [self.userData objectForKey:kStatus];
+        }
+        
+        self.userSummaryInfo.text = [self.userData objectForKey:kSummary];
+        
+        if ([self.userData objectForKey:kExperiences]) {
+            
+            NSLog(@"%lu", [[self.userData objectForKey:kExperiences] count]);
+            
+            self.experienceArray = [[NSMutableArray alloc] initWithArray:[[self.userData objectForKey:kExperiences] allValues]];
+            
+            NSLog(@"%lu", [self.experienceArray count]);
+            
+            NSString *experienceString = @"";
+            
+            for (int i = 0; i < [self.experienceArray count]; i ++) {
+                
+                NSString *experienceStringAdd = [NSString stringWithFormat:@"%@\r%@ ~ %@\r\r%@\r\r\r",
+                                                 [[self.experienceArray objectAtIndex:i] objectForKey:kExperienceName],
+                                                 [[self.experienceArray objectAtIndex:i] objectForKey:kExperienceStartDate],
+                                                 [[self.experienceArray objectAtIndex:i] objectForKey:kExperienceEndDate],
+                                                 [[self.experienceArray objectAtIndex:i] objectForKey:kExperienceDescription]
+                                                 ];
+                
+                NSLog(@"%@", experienceStringAdd);
+                
+                experienceString = [experienceString stringByAppendingString:experienceStringAdd];
+            }
+            
+            self.userExperienceInfo.text = experienceString;
+            
+        } else {
+            self.userExperienceInfo.text = @"You didn't add any experience or interest yet";
+        }
+        
+        // ...
+    } withCancelBlock:^(NSError * _Nonnull error) {
+        NSLog(@"%@", error.localizedDescription);
+        
+    }];
+    
 }
 
 - (void)initializeDesign {
     
     self.UIPrinciple = [[UIPrinciples alloc] init];
-
+    
+    //Set background color
+    [self.view setBackgroundColor:self.UIPrinciple.netyBlue];
+    
     //Profile image setup
     self.userProfileImage.image = [UIImage imageNamed:@"girl2.jpg"];
     
@@ -35,14 +105,6 @@
     
     //Color for the big view
     self.userInfoView.backgroundColor = self.UIPrinciple.netyBlue;
-    
-    //Info content
-    self.userStatusInfo.text = @"lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum";
-    
-    self.userSummaryInfo.text = @"lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum";
-
-    
-    self.userExperienceInfo.text = @"lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum ipsumlorem ipsumlorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum";
     
     self.userInfoViewTopConstraint.constant = self.view.frame.size.height / 2.3;
     
