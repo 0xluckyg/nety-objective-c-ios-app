@@ -12,13 +12,13 @@
 #import "NoContent.h"
 #import "MyInfoEditTable.h"
 #import "MyInfoEditExperience.h"
+#import "UserInformation.h"
+#import "MyInfoEditTableCell.h"
+#import "MyInfoEditExperience.h"
+#import "Constants.h"
 
-@protocol experienceDataToMyInfoDelegate <NSObject>
 
--(void) experienceDataToMyInfo: (NSMutableArray *)experienceData;
-
-@end
-
+@import Firebase;
 
 @interface MyInfoEditTable : UIViewController <UITableViewDelegate, UITableViewDataSource, experienceDataDelegate> {
     bool editButtonClicked;
@@ -27,8 +27,6 @@
 
 //VARIABLES----------------------------------------
 
-
-@property (weak, nonatomic) id<experienceDataToMyInfoDelegate>delegate;
 
 @property (strong, nonatomic) NSMutableArray *experienceArray;
 
@@ -48,7 +46,7 @@
 //LIB CLASSES----------------------------------------
 
 
-
+@property (strong, nonatomic) FIRDatabaseReference *firdatabase;
 
 
 //IBOUTLETS----------------------------------------

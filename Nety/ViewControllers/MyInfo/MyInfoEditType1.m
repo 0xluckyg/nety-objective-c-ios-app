@@ -32,8 +32,8 @@
 
 
 - (void)initializeSettings {
-    editType1NamePlacementText = @"Scott Cho";
-    editType1JobPlacementText = @"Founder";
+    editType1NamePlacementText = [UserInformation getName];
+    editType1JobPlacementText = [UserInformation getIdentity];
     
 }
 
@@ -44,6 +44,7 @@
     self.view.backgroundColor = self.UIPrinciple.netyBlue;
     
     //Name Label
+    
     self.editType1NameLabel.text = @"Name";
     self.editType1NameLabel.textColor = [UIColor whiteColor];
     
@@ -116,7 +117,9 @@
 //---------------------------------------------------------
 
 
-
+- (void)viewWillDisappear:(BOOL)animated {
+    
+}
 
 
 #pragma mark - Custom methods

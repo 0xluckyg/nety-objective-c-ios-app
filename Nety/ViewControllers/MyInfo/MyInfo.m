@@ -35,8 +35,6 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    MyInfoEditTable *experienceDataVC = [[MyInfoEditTable alloc] init];
-    [experienceDataVC setDelegate:self];
     
     [self initializeSettings];
     
@@ -98,6 +96,9 @@
         self.userExperienceInfo.text = experienceString;
         
     } else {
+        
+        self.experienceArray = [[NSMutableArray alloc] init];
+        
         self.userExperienceInfo.text = @"You didn't add any experience or interest yet";
     }
     

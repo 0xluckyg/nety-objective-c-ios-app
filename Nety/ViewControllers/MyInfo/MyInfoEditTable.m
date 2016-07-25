@@ -7,8 +7,7 @@
 //
 
 #import "MyInfoEditTable.h"
-#import "MyInfoEditTableCell.h"
-#import "MyInfoEditExperience.h"
+
 
 @interface MyInfoEditTable ()
 
@@ -53,6 +52,8 @@
 - (void)initializeSettings {
     
     editButtonClicked = YES;
+    
+    self.firdatabase = [[FIRDatabase database] reference];
     
     [self.tableView setEditing:NO animated:NO];
 }
@@ -158,8 +159,6 @@
 
 - (IBAction)backButton:(id)sender {
     
-    [self sendExperienceDataToMyInfo];
-    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -188,8 +187,24 @@
 
 
 - (void)viewWillDisappear:(BOOL)animated {
+    
     [self.tableView reloadData];
     
+    
+    //Save locally
+    [UserInformation setExperiences:self.experienceArray];
+    
+    //Save to database
+    NSMutableDictionary *experiences = [[NSMutableDictionary alloc] init];
+    
+    for (int i = 0; i < [self.experienceArray count]; i ++) {
+        NSString *experienceKey = [NSString stringWithFormat:@"experience%@",[@(i) stringValue]];
+        [experiences setObject:[self.experienceArray objectAtIndex:i] forKey:experienceKey];
+    }
+    
+    [[[[self.firdatabase child:kUsers] child:[UserInformation getUserID]] child:kExperiences] setValue:experiences];
+    
+
     [self.UIPrinciple removeNoContent:self.noContentController];
 }
 
@@ -218,13 +233,6 @@
 -(void)sendExperienceData:(NSMutableArray *)experienceData {
     
     self.experienceArray = experienceData;
-    
-}
-
-//To send data
-- (void)sendExperienceDataToMyInfo {
-    
-    [self.delegate experienceDataToMyInfo:self.experienceArray];
     
 }
 

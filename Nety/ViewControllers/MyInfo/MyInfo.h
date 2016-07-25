@@ -15,7 +15,7 @@
 
 @import Firebase;
 
-@interface MyInfo : UIViewController <experienceDataToMyInfoDelegate>
+@interface MyInfo : UIViewController
 
 
 //VARIABLES----------------------------------------

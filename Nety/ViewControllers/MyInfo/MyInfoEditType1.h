@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "UIPrinciples.h"
+#import "UserInformation.h"
+
+@import Firebase;
 
 @interface MyInfoEditType1 : UIViewController <UITextFieldDelegate> {
     NSString *editType1NamePlacementText;
@@ -30,7 +33,7 @@
 //LIB CLASSES----------------------------------------
 
 
-
+@property (strong, nonatomic) FIRDatabaseReference *firdatabase;
 
 
 //IBOUTLETS----------------------------------------
