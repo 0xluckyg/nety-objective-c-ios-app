@@ -14,12 +14,22 @@
 
 @implementation MyInfoEditType2
 
+
+#pragma mark - View Load
+//---------------------------------------------------------
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initializeSettings];
     [self initializeDesign];
 }
+
+
+#pragma mark - Initialization
+//---------------------------------------------------------
+
 
 - (void)initializeSettings {
     //initialize textfield description placeholder
@@ -31,7 +41,7 @@
     
     //Background of page
     self.view.backgroundColor = self.UIPrinciple.netyBlue;
-
+    
     //Label
     self.editType2Label.text = @"Summary";
     self.editType2Label.textColor = [UIColor whiteColor];
@@ -40,23 +50,26 @@
     self.editType2TextField.text = editType2PlacementText;
     self.editType2TextField.textColor = self.UIPrinciple.netyBlue;
     self.editType2TextField.layer.cornerRadius = 8;
-
+    
     //save button
     [self.saveButtonOutlet setTintColor:[UIColor whiteColor]];
     
     
 }
 
+
+#pragma mark - Protocols and Delegates
+//---------------------------------------------------------
+
+
 //When begins editing, set textfield to none
-- (BOOL)textViewShouldBeginEditing:(UITextField *)textView
-{
+- (BOOL)textViewShouldBeginEditing:(UITextField *)textView {
     textView.attributedText = nil;
     return YES;
 }
 
 //Move screen up a bit when Keyboard appears for Description only
--(void)textViewDidBeginEditing:(UITextView *)textView
-{
+-(void)textViewDidBeginEditing:(UITextView *)textView {
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:.3];
     [UIView setAnimationBeginsFromCurrentState:TRUE];
@@ -67,8 +80,7 @@
 }
 
 //Move screen down a bit when Keyboard appears for Description only
--(void)textViewDidEndEditing:(UITextView *)textView
-{
+-(void)textViewDidEndEditing:(UITextView *)textView {
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:.3];
     [UIView setAnimationBeginsFromCurrentState:TRUE];
@@ -78,10 +90,14 @@
 }
 
 //Touching on sceen will make keyboard disappear
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
 }
+
+
+#pragma mark - Buttons
+//---------------------------------------------------------
+
 
 //Back button to go back to my info
 - (IBAction)backButton:(id)sender {
@@ -94,10 +110,30 @@
 }
 
 
+#pragma mark - View Disappear
+//---------------------------------------------------------
+
+
+
+
+
+#pragma mark - Custom methods
+//---------------------------------------------------------
+
+
+
+
+
+
+//---------------------------------------------------------
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 @end
 
 

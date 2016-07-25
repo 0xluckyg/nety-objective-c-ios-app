@@ -13,6 +13,28 @@
 
 @interface Signup : UIViewController
 
+
+//VARIABLES----------------------------------------
+
+
+@property (strong, nonatomic) NSMutableArray *userInfo;
+
+
+//UTIL CLASSES----------------------------------------
+
+
+@property (strong, nonatomic) UIPrinciples *UIPrinciple;
+
+
+//LIB CLASSES----------------------------------------
+
+
+@property (strong, nonatomic) FIRDatabaseReference *firdatabase;
+
+
+//IBOUTLETS----------------------------------------
+
+
 @property (weak, nonatomic) IBOutlet UITextField *email;
 
 @property (weak, nonatomic) IBOutlet UITextField *password;
@@ -27,11 +49,9 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *signupWithLinkedinButtonOutlet;
 
-@property (strong, nonatomic) NSMutableArray *userInfo;
 
-@property (strong, nonatomic) UIPrinciples *UIPrinciple;
+//IBACTIONS----------------------------------------
 
-@property (strong, nonatomic) FIRDatabaseReference *firdatabase;
 
 - (IBAction)signupButton:(id)sender;
 
@@ -39,6 +59,8 @@
 
 - (IBAction)backButton:(id)sender;
 
+
+//-------------------------------------------------
 
 
 @end

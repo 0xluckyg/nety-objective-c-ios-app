@@ -17,6 +17,11 @@
 
 @implementation Signup
 
+
+#pragma mark - View Load
+//---------------------------------------------------------
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -24,6 +29,11 @@
     [self initializeSettings];
     [self initializeDesign];
 }
+
+
+#pragma mark - Initialization
+//---------------------------------------------------------
+
 
 - (void)initializeSettings {
     
@@ -45,10 +55,21 @@
     [self.signupWithLinkedinButtonOutlet.layer setCornerRadius:self.signupWithLinkedinButtonOutlet.frame.size.height/2];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+#pragma mark - Protocols and Delegates
+//---------------------------------------------------------
+
+
+//Touching on sceen will make keyboard disappear
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
 }
+
+
+#pragma mark - Buttons
+//---------------------------------------------------------
+
 
 - (IBAction)signupButton:(id)sender {
     
@@ -114,8 +135,8 @@
                  
                  //Save name and age to the database
                  [[[self.firdatabase child:kUsers] child:userID] setValue:@{kFirstName: [self.userInfo objectAtIndex:2],
-                                                                              kLastName: [self.userInfo objectAtIndex:3],
-                                                                              kAge: [self.userInfo objectAtIndex:4]}];
+                                                                            kLastName: [self.userInfo objectAtIndex:3],
+                                                                            kAge: [self.userInfo objectAtIndex:4]}];
                  
                  
                  [self performSegueWithIdentifier:@"signupProcess1Segue" sender:self];
@@ -123,17 +144,11 @@
              
          }];
     }
-
+    
 }
 
 - (IBAction)signupWithLinkedinButton:(id)sender {
     
-}
-
-//Touching on sceen will make keyboard disappear
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [self.view endEditing:YES];
 }
 
 //Go back to main screen
@@ -141,6 +156,11 @@
     [self.navigationController popViewControllerAnimated:YES];
     
 }
+
+
+#pragma mark - View Disappear
+//---------------------------------------------------------
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"signupProcess1Segue"])
@@ -158,5 +178,23 @@
         
     }
 }
+
+
+#pragma mark - Custom methods
+//---------------------------------------------------------
+
+
+
+
+
+
+//---------------------------------------------------------
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 
 @end

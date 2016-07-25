@@ -16,17 +16,16 @@
 
 @implementation MyInfoEditTable
 
+
+#pragma mark - View Load
+//---------------------------------------------------------
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initializeSettings];
     [self initializeDesign];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [self.tableView reloadData];
-    
-    [self.UIPrinciple removeNoContent:self.noContentController];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -40,11 +39,16 @@
         [self.UIPrinciple addNoContent:self setText:@"You haven't added an experience or interest yet" noContentController:self.noContentController];
     }
     
-     MyInfoEditExperience *experienceDataVC = [[MyInfoEditExperience alloc] init];
+    MyInfoEditExperience *experienceDataVC = [[MyInfoEditExperience alloc] init];
     [experienceDataVC setDelegate:self];
     
     [self.tableView reloadData];
 }
+
+
+#pragma mark - Initialization
+//---------------------------------------------------------
+
 
 - (void)initializeSettings {
     
@@ -64,8 +68,13 @@
     
     //No separator
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-
+    
 }
+
+
+#pragma mark - Protocols and Delegates
+//---------------------------------------------------------
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.experienceArray count];
@@ -78,7 +87,7 @@
     
     
     if ([self.experienceArray count] != 0) {
-
+        
         //Set cell data
         NSDictionary *rowData = [self.experienceArray objectAtIndex:indexPath.row];
         //Change format of date
@@ -119,35 +128,9 @@
     [self performSegueWithIdentifier:@"experienceDetailSegue" sender:self];
 }
 
-- (IBAction)backButton:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-
-- (IBAction)editButton:(id)sender {
-    
-    if (editButtonClicked == YES) {
-        [self.tableView setEditing:YES animated:YES];
-        editButtonClicked = NO;
-    } else {
-        [self.tableView setEditing:NO animated:NO];
-        editButtonClicked = YES;
-    }
-    
-}
-
-- (IBAction)addButton:(id)sender {
-    //Indicate that user is going to add an experience instead of editing
-    self.add = true;
-    
-    [self performSegueWithIdentifier:@"experienceDetailSegue" sender:self];
-}
-
 -(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
-
-
 
 -(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
     [self.experienceArray exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
@@ -168,6 +151,48 @@
     
 }
 
+
+#pragma mark - Buttons
+//---------------------------------------------------------
+
+
+- (IBAction)backButton:(id)sender {
+    
+    [self sendExperienceDataToMyInfo];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)editButton:(id)sender {
+    
+    if (editButtonClicked == YES) {
+        [self.tableView setEditing:YES animated:YES];
+        editButtonClicked = NO;
+    } else {
+        [self.tableView setEditing:NO animated:NO];
+        editButtonClicked = YES;
+    }
+    
+}
+
+- (IBAction)addButton:(id)sender {
+    //Indicate that user is going to add an experience instead of editing
+    self.add = true;
+    
+    [self performSegueWithIdentifier:@"experienceDetailSegue" sender:self];
+}
+
+
+#pragma mark - View Disappear
+//---------------------------------------------------------
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.tableView reloadData];
+    
+    [self.UIPrinciple removeNoContent:self.noContentController];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqualToString:@"experienceDetailSegue"]) {
@@ -184,16 +209,34 @@
     }
 }
 
+
+#pragma mark - Custom methods
+//---------------------------------------------------------
+
+
+//To receive data
 -(void)sendExperienceData:(NSMutableArray *)experienceData {
     
     self.experienceArray = experienceData;
     
 }
 
+//To send data
+- (void)sendExperienceDataToMyInfo {
+    
+    [self.delegate experienceDataToMyInfo:self.experienceArray];
+    
+}
+
+
+//---------------------------------------------------------
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 @end
 
 

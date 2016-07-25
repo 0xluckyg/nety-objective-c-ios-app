@@ -13,6 +13,28 @@
     NSString *editType2PlacementText;
 }
 
+
+//VARIABLES----------------------------------------
+
+
+
+
+
+//UTIL CLASSES----------------------------------------
+
+
+@property (strong, nonatomic) UIPrinciples *UIPrinciple;
+
+
+//LIB CLASSES----------------------------------------
+
+
+
+
+
+//IBOUTLETS----------------------------------------
+
+
 @property (weak, nonatomic) IBOutlet UILabel *editType2Label;
 
 @property (weak, nonatomic) IBOutlet UITextView *editType2TextField;
@@ -20,10 +42,15 @@
 @property (weak, nonatomic) IBOutlet UIButton *saveButtonOutlet;
 
 
-@property (strong, nonatomic) UIPrinciples *UIPrinciple;
+//IBACTIONS----------------------------------------
+
 
 - (IBAction)backButton:(id)sender;
 
 - (IBAction)saveButton:(id)sender;
+
+
+//-------------------------------------------------
+
 
 @end

@@ -18,6 +18,11 @@
 
 @implementation Login
 
+
+#pragma mark - View Load
+//---------------------------------------------------------
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -25,6 +30,11 @@
     [self initializeSettings];
     [self initializeDesign];
 }
+
+
+#pragma mark - Initialization
+//---------------------------------------------------------
+
 
 - (void)initializeSettings {
     self.firdatabase = [[FIRDatabase database] reference];
@@ -46,10 +56,21 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+#pragma mark - Protocols and Delegates
+//---------------------------------------------------------
+
+
+//Touching on sceen will make keyboard disappear
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
 }
+
+
+#pragma mark - Buttons
+//---------------------------------------------------------
+
 
 //Log in the user after checking pw/id
 - (IBAction)loginButton:(id)sender {
@@ -93,6 +114,34 @@
                              }];
     }
 }
+
+- (IBAction)loginWithLinkedinButton:(id)sender {
+    
+    //Just set root controller to tabbar
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    [appDelegate.window setRootViewController:appDelegate.tabBarRootController];
+    
+}
+
+//Go back to main screen
+- (IBAction)backButton:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
+
+
+#pragma mark - View Disappear
+//---------------------------------------------------------
+
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+}
+
+
+#pragma mark - Custom methods
+//---------------------------------------------------------
+
 
 - (void)saveUserInformationLocally: (NSDictionary *)firbaseUserInfo userID:(NSString *)userID profileImageUrl:(NSString *)profileImageUrl{
     
@@ -139,28 +188,13 @@
      completion:nil];
 }
 
-- (IBAction)loginWithLinkedinButton:(id)sender {
-    
-    //Just set root controller to tabbar
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    [appDelegate.window setRootViewController:appDelegate.tabBarRootController];
-    
-}
 
-//Touching on sceen will make keyboard disappear
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [self.view endEditing:YES];
-}
+//---------------------------------------------------------
 
-//Go back to main screen
-- (IBAction)backButton:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
 
-}
-
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 

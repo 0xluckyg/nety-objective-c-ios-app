@@ -18,18 +18,16 @@
 
 @implementation SignupProcess2
 
+
+#pragma mark - View Load
+//---------------------------------------------------------
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initializeSettings];
     [self initializeDesign];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [self.tableView reloadData];
-    
-    [self.UIPrinciple removeNoContent:self.noContentController];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -49,6 +47,11 @@
     
     [self.tableView reloadData];
 }
+
+
+#pragma mark - Initialization
+//---------------------------------------------------------
+
 
 - (void)initializeSettings {
     
@@ -84,6 +87,11 @@
     
 }
 
+
+#pragma mark - Protocols and Delegates
+//---------------------------------------------------------
+
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.experienceArray count];
 }
@@ -94,7 +102,7 @@
     MyInfoEditTableCell *experienceCell = [tableView dequeueReusableCellWithIdentifier:@"MyInfoEditTableCell"];
     
     if ([self.experienceArray count] != 0) {
-
+        
         //Set cell data
         NSDictionary *rowData = [self.experienceArray objectAtIndex:indexPath.row];
         //Change format of date
@@ -135,10 +143,38 @@
     [self performSegueWithIdentifier:@"experienceDetailSegue" sender:self];
 }
 
+
+-(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+-(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    [self.experienceArray exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
+    
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.experienceArray removeObjectAtIndex:indexPath.row];
+    [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+    
+    if ([self.experienceArray count] == 0) {
+        
+        //If deleted and array is 0
+        self.noContentController = [[NoContent alloc] init];
+        
+        [self.UIPrinciple addNoContent:self setText:@"You haven't added an experience or interest yet" noContentController:self.noContentController];
+    }
+    
+}
+
+
+#pragma mark - Buttons
+//---------------------------------------------------------
+
+
 - (IBAction)backButton:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
 
 - (IBAction)editButton:(id)sender {
     
@@ -164,32 +200,20 @@
 - (IBAction)laterButton:(id)sender {
     
     [self performSegueWithIdentifier:@"signupProcess3Segue" sender:self];
-
-}
-
--(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-
--(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
-    [self.experienceArray exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
     
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.experienceArray removeObjectAtIndex:indexPath.row];
-    [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+
+#pragma mark - View Disappear
+//---------------------------------------------------------
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.tableView reloadData];
     
-    if ([self.experienceArray count] == 0) {
-        
-        //If deleted and array is 0
-        self.noContentController = [[NoContent alloc] init];
-        
-        [self.UIPrinciple addNoContent:self setText:@"You haven't added an experience or interest yet" noContentController:self.noContentController];
-    }
+    [self.UIPrinciple removeNoContent:self.noContentController];
     
 }
-
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -217,6 +241,12 @@
     
 }
 
+
+#pragma mark - Custom methods
+//---------------------------------------------------------
+
+
+//Protocol to receive data
 -(void)sendExperienceData:(NSMutableArray *)experienceData {
     
     self.experienceArray = experienceData;
@@ -224,10 +254,15 @@
 }
 
 
+//---------------------------------------------------------
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 @end
 
 

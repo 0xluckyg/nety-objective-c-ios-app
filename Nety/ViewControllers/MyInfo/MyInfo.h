@@ -15,7 +15,32 @@
 
 @import Firebase;
 
-@interface MyInfo : UIViewController
+@interface MyInfo : UIViewController <experienceDataToMyInfoDelegate>
+
+
+//VARIABLES----------------------------------------
+
+
+@property (strong, nonatomic) NSMutableDictionary *userData;
+
+@property (strong, nonatomic) NSMutableArray *experienceArray;
+
+
+//UTIL CLASSES----------------------------------------
+
+
+@property (strong, nonatomic) UserInformation *userInformation;
+
+@property (strong, nonatomic) UIPrinciples *UIPrinciple;
+
+
+//LIB CLASSES----------------------------------------
+
+
+@property (strong, nonatomic) FIRDatabaseReference *firdatabase;
+
+
+//IBOUTLETS----------------------------------------
 
 
 @property (weak, nonatomic) IBOutlet UIImageView *userProfileImage;
@@ -36,14 +61,14 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *userInfoViewTopConstraint;
 
-@property (strong, nonatomic) NSMutableDictionary *userData;
 
-@property (strong, nonatomic) UserInformation *userInformation;
+//IBACTIONS----------------------------------------
 
-@property (strong, nonatomic) UIPrinciples *UIPrinciple;
 
-@property (strong, nonatomic) FIRDatabaseReference *firdatabase;
 
-@property (strong, nonatomic) NSMutableArray *experienceArray;
+
+
+//-------------------------------------------------
+
 
 @end

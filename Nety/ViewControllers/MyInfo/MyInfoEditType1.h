@@ -14,6 +14,28 @@
     NSString *editType1JobPlacementText;
 }
 
+
+//VARIABLES----------------------------------------
+
+
+
+
+
+//UTIL CLASSES----------------------------------------
+
+
+@property (strong, nonatomic) UIPrinciples *UIPrinciple;
+
+
+//LIB CLASSES----------------------------------------
+
+
+
+
+
+//IBOUTLETS----------------------------------------
+
+
 @property (weak, nonatomic) IBOutlet UILabel *editType1NameLabel;
 
 @property (weak, nonatomic) IBOutlet UITextField *editType1NameTextField;
@@ -24,11 +46,16 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *saveButtonOutlet;
 
-@property (strong, nonatomic) UIPrinciples *UIPrinciple;
+
+//IBACTIONS----------------------------------------
+
 
 - (IBAction)backButton:(id)sender;
 
 - (IBAction)saveButton:(id)sender;
+
+
+//-------------------------------------------------
 
 
 @end

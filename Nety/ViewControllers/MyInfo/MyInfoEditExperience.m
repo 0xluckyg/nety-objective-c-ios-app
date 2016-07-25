@@ -14,12 +14,22 @@
 
 @implementation MyInfoEditExperience
 
+
+#pragma mark - View Load
+//---------------------------------------------------------
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initizlieSetting];
     [self initializeDesign];
 }
+
+
+#pragma mark - Initialization
+//---------------------------------------------------------
+
 
 - (void)initizlieSetting {
     
@@ -99,9 +109,13 @@
     
 }
 
+
+#pragma mark - Protocols and Delegates
+//---------------------------------------------------------
+
+
 //Clear description box if the text is default
-- (BOOL)textViewShouldBeginEditing:(UITextField *)textView
-{
+- (BOOL)textViewShouldBeginEditing:(UITextField *)textView {
     if ([textView.text isEqual: descriptionPlacementText]) {
         textView.attributedText = nil;
     } else if ([textView.text isEqual: dateToPlacementText]) {
@@ -134,10 +148,9 @@
 }
 
 //Move screen up when Keyboard appears for Description only
--(void)textViewDidBeginEditing:(UITextView *)textView
-{
+-(void)textViewDidBeginEditing:(UITextView *)textView {
     changed = true;
-
+    
     
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:.3];
@@ -149,8 +162,7 @@
 }
 
 //Move screen down when Keyboard appears for Description only
--(void)textViewDidEndEditing:(UITextView *)textView
-{
+-(void)textViewDidEndEditing:(UITextView *)textView {
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:.3];
     [UIView setAnimationBeginsFromCurrentState:TRUE];
@@ -159,16 +171,20 @@
     [UIView commitAnimations];
 }
 
+//Touching on sceen will make keyboard disappear
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+}
+
+
+#pragma mark - Buttons
+//---------------------------------------------------------
+
+
 - (IBAction)noDateButton:(id)sender {
     //Reset date
     self.dateFromTextField.text = @"";
     self.dateToTextField.text = @"";
-}
-
-//Touching on sceen will make keyboard disappear
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [self.view endEditing:YES];
 }
 
 //Set date to present
@@ -237,11 +253,26 @@
 }
 
 
+#pragma mark - View Disappear
+//---------------------------------------------------------
+
+
+
+
+
+#pragma mark - Custom methods
+//---------------------------------------------------------
+
+
 - (void)sendExperienceData {
     
     [self.delegate sendExperienceData:self.experienceArray];
     
 }
+
+
+//---------------------------------------------------------
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

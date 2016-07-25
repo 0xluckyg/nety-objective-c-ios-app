@@ -16,6 +16,36 @@
     bool editButtonClicked;
 }
 
+
+//VARIABLES----------------------------------------
+
+
+@property (nonatomic) bool add;
+
+@property (nonatomic) NSUInteger arrayIndex;
+
+@property (strong, nonatomic) NSMutableArray *userInfo;
+
+@property (strong, nonatomic) NSMutableArray *experienceArray;
+
+
+//UTIL CLASSES----------------------------------------
+
+
+@property (strong, nonatomic) UIPrinciples *UIPrinciple;
+
+@property (strong, nonatomic) NoContent *noContentController;
+
+
+//LIB CLASSES----------------------------------------
+
+
+
+
+
+//IBOUTLETS----------------------------------------
+
+
 @property (weak, nonatomic) IBOutlet UIButton *editButtonOutlet;
 
 @property (weak, nonatomic) IBOutlet UIButton *addButtonOutlet;
@@ -23,18 +53,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 
-@property (strong, nonatomic) NSMutableArray *userInfo;
+//IBACTIONS----------------------------------------
 
-@property (strong, nonatomic) NoContent *noContentController;
-
-@property (strong, nonatomic) UIPrinciples *UIPrinciple;
-
-@property (strong, nonatomic) NSMutableArray *experienceArray;
-
-
-@property (nonatomic) bool add;
-
-@property (nonatomic) NSUInteger arrayIndex;
 
 - (IBAction)backButton:(id)sender;
 
@@ -43,6 +63,9 @@
 - (IBAction)addButton:(id)sender;
 
 - (IBAction)laterButton:(id)sender;
+
+
+//-------------------------------------------------
 
 
 @end

@@ -13,6 +13,28 @@
     NSString *summaryPlaceholder;
 }
 
+
+//VARIABLES----------------------------------------
+
+
+@property (strong, nonatomic) NSMutableArray *userInfo;
+
+
+//UTIL CLASSES----------------------------------------
+
+
+@property (strong, nonatomic) UIPrinciples *UIPrinciple;
+
+
+//LIB CLASSES----------------------------------------
+
+
+
+
+
+//IBOUTLETS----------------------------------------
+
+
 @property (weak, nonatomic) IBOutlet UILabel *jobLabel;
 
 @property (weak, nonatomic) IBOutlet UITextField *jobTextField;
@@ -24,13 +46,17 @@
 @property (weak, nonatomic) IBOutlet UIButton *nextButtonOutlet;
 
 
-@property (strong, nonatomic) NSMutableArray *userInfo;
+//IBACTIONS----------------------------------------
 
-@property (strong, nonatomic) UIPrinciples *UIPrinciple;
 
 - (IBAction)backButton:(id)sender;
 
 - (IBAction)nextButton:(id)sender;
 
 - (IBAction)laterButton:(id)sender;
+
+
+//-------------------------------------------------
+
+
 @end

@@ -14,12 +14,22 @@
 
 @implementation SignupProcessExperienceDetail
 
+
+#pragma mark - View Load
+//---------------------------------------------------------
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initizlieSettings];
     [self initializeDesign];
 }
+
+
+#pragma mark - Initialization
+//---------------------------------------------------------
+
 
 - (void)initizlieSettings {
     
@@ -68,16 +78,16 @@
     self.experienceDescriptionTextField.textColor = self.UIPrinciple.netyBlue;
     
     if (self.add == true) {
-    
+        
         //name
         self.experienceNameTextField.text = namePlacementText;
         //description
         self.experienceDescriptionTextField.text = descriptionPlacementText;
-    
+        
     } else {
         
         NSDictionary *experienceDict = [self.experienceArray objectAtIndex:self.arrayIndex];
-
+        
         //name
         self.experienceNameTextField.text = [experienceDict objectForKey:@"name"];
         //date
@@ -99,9 +109,13 @@
     
 }
 
+
+#pragma mark - Protocols and Delegates
+//---------------------------------------------------------
+
+
 //Clear description box if the text is default
-- (BOOL)textViewShouldBeginEditing:(UITextField *)textView
-{
+- (BOOL)textViewShouldBeginEditing:(UITextField *)textView {
     if ([textView.text isEqual: descriptionPlacementText]) {
         textView.attributedText = nil;
     } else if ([textView.text isEqual: dateToPlacementText]) {
@@ -134,8 +148,7 @@
 }
 
 //Move screen up when Keyboard appears for Description only
--(void)textViewDidBeginEditing:(UITextView *)textView
-{
+-(void)textViewDidBeginEditing:(UITextView *)textView {
     changed = true;
     
     [UIView beginAnimations:nil context:nil];
@@ -148,8 +161,7 @@
 }
 
 //Move screen down when Keyboard appears for Description only
--(void)textViewDidEndEditing:(UITextView *)textView
-{
+-(void)textViewDidEndEditing:(UITextView *)textView {
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:.3];
     [UIView setAnimationBeginsFromCurrentState:TRUE];
@@ -159,10 +171,14 @@
 }
 
 //Touching on sceen will make keyboard disappear
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
 }
+
+
+#pragma mark - Buttons
+//---------------------------------------------------------
+
 
 - (IBAction)noDateButton:(id)sender {
     //Reset date
@@ -190,7 +206,7 @@
         }];
         
         [self.UIPrinciple twoButtonAlert:cont rightButton:okay controller:@"Not saved" message:@"You haven't saved your interest or experience. Continue anyway?" viewController:self];
-    
+        
     } else {
         [self.navigationController popViewControllerAnimated:YES];
     }
@@ -224,7 +240,7 @@
         [self.experienceArray addObject:experienceDict];
         [self sendExperienceData];
         
-    //If editing, then simply change object
+        //If editing, then simply change object
     } else {
         
         [self.experienceArray replaceObjectAtIndex:self.arrayIndex withObject:experienceDict];
@@ -236,11 +252,26 @@
 }
 
 
+#pragma mark - View Disappear
+//---------------------------------------------------------
+
+
+
+
+
+#pragma mark - Custom methods
+//---------------------------------------------------------
+
+
 - (void)sendExperienceData {
     
     [self.delegate sendExperienceData:self.experienceArray];
     
 }
+
+
+//---------------------------------------------------------
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

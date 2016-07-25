@@ -13,21 +13,78 @@
     NSInteger loginOrSignup;
 }
 
+//VARIABLES----------------------------------------
+
+
+
+
+
+//UTIL CLASSES----------------------------------------
+
+
+
+
+
+//LIB CLASSES----------------------------------------
+
+
+
+
+
+//IBOUTLETS----------------------------------------
+
+
+
+
+
+//IBACTIONS----------------------------------------
+
+
+
+
+
+//-------------------------------------------------
+
+
+
+//VARIABLES----------------------------------------
+
+
+
+
+
+//UTIL CLASSES----------------------------------------
+
+
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
 
-@property (weak, nonatomic) IBOutlet UIImageView *logoImage;
+
+//LIB CLASSES----------------------------------------
+
+
+
+
+//IBOUTLETS----------------------------------------
+
 
 @property (weak, nonatomic) IBOutlet UIView *holdingView;
+
+@property (weak, nonatomic) IBOutlet UIImageView *logoImage;
 
 @property (weak, nonatomic) IBOutlet UIButton *loginButtonOutlet;
 
 @property (weak, nonatomic) IBOutlet UIButton *signupButtonOutlet;
 
 
+//IBACTIONS----------------------------------------
+
 
 - (IBAction)loginButton:(id)sender;
 
 - (IBAction)signupButton:(id)sender;
+
+
+//-------------------------------------------------
 
 
 @end

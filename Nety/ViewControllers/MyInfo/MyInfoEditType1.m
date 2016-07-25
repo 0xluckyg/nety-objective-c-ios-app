@@ -14,12 +14,22 @@
 
 @implementation MyInfoEditType1
 
+
+#pragma mark - View Load
+//---------------------------------------------------------
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initializeSettings];
     [self initializeDesign];
 }
+
+
+#pragma mark - Initialization
+//---------------------------------------------------------
+
 
 - (void)initializeSettings {
     editType1NamePlacementText = @"Scott Cho";
@@ -32,7 +42,7 @@
     
     //Background of page
     self.view.backgroundColor = self.UIPrinciple.netyBlue;
-
+    
     //Name Label
     self.editType1NameLabel.text = @"Name";
     self.editType1NameLabel.textColor = [UIColor whiteColor];
@@ -55,15 +65,18 @@
     
 }
 
+
+#pragma mark - Protocols and Delegates
+//---------------------------------------------------------
+
+
 //Touching on sceen will make keyboard disappear
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
 }
 
 //Move screen up a bit when Keyboard appears for Description only
--(void)textFieldDidBeginEditing:(UITextField *)textField
-{
+-(void)textFieldDidBeginEditing:(UITextField *)textField {
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:.3];
     [UIView setAnimationBeginsFromCurrentState:TRUE];
@@ -74,8 +87,7 @@
 }
 
 //Move screen down a bit when Keyboard appears for Description only
--(void)textFieldDidEndEditing:(UITextField *)textField
-{
+-(void)textFieldDidEndEditing:(UITextField *)textField {
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:.3];
     [UIView setAnimationBeginsFromCurrentState:TRUE];
@@ -83,6 +95,11 @@
     
     [UIView commitAnimations];
 }
+
+
+#pragma mark - Buttons
+//---------------------------------------------------------
+
 
 //Go back
 - (IBAction)backButton:(id)sender {
@@ -95,10 +112,29 @@
 }
 
 
+#pragma mark - View Disappear
+//---------------------------------------------------------
+
+
+
+
+
+#pragma mark - Custom methods
+//---------------------------------------------------------
+
+
+
+
+
+
+//---------------------------------------------------------
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 @end
 

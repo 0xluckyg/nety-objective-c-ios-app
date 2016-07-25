@@ -13,22 +13,51 @@
 #import "MyInfoEditTable.h"
 #import "MyInfoEditExperience.h"
 
+@protocol experienceDataToMyInfoDelegate <NSObject>
+
+-(void) experienceDataToMyInfo: (NSMutableArray *)experienceData;
+
+@end
+
+
 @interface MyInfoEditTable : UIViewController <UITableViewDelegate, UITableViewDataSource, experienceDataDelegate> {
     bool editButtonClicked;
 }
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (strong, nonatomic) UIPrinciples *UIPrinciple;
+//VARIABLES----------------------------------------
+
+
+@property (weak, nonatomic) id<experienceDataToMyInfoDelegate>delegate;
 
 @property (strong, nonatomic) NSMutableArray *experienceArray;
-
-@property (strong, nonatomic) NoContent *noContentController;
-
 
 @property (nonatomic) bool add;
 
 @property (nonatomic) NSUInteger arrayIndex;
+
+
+//UTIL CLASSES----------------------------------------
+
+
+@property (strong, nonatomic) UIPrinciples *UIPrinciple;
+
+@property (strong, nonatomic) NoContent *noContentController;
+
+
+//LIB CLASSES----------------------------------------
+
+
+
+
+
+//IBOUTLETS----------------------------------------
+
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+
+//IBACTIONS----------------------------------------
 
 
 - (IBAction)backButton:(id)sender;
@@ -36,5 +65,9 @@
 - (IBAction)editButton:(id)sender;
 
 - (IBAction)addButton:(id)sender;
+
+
+//-------------------------------------------------
+
 
 @end

@@ -14,6 +14,11 @@
 
 @implementation MyInfo
 
+
+#pragma mark - View Load
+//---------------------------------------------------------
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -30,12 +35,21 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    MyInfoEditTable *experienceDataVC = [[MyInfoEditTable alloc] init];
+    [experienceDataVC setDelegate:self];
+    
     [self initializeSettings];
+    
 }
+
+
+#pragma mark - Initialization
+//---------------------------------------------------------
+
 
 - (void)initializeSettings {
     
-//    self.firdatabase = [[FIRDatabase database] reference];
+    //    self.firdatabase = [[FIRDatabase database] reference];
     
     self.nameLabel.text = [UserInformation getName];
     
@@ -112,10 +126,24 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
+#pragma mark - Protocols and Delegates
+//---------------------------------------------------------
+
+
+
+
+
+#pragma mark - Buttons
+//---------------------------------------------------------
+
+
+
+
+
+#pragma mark - View Disappear
+//---------------------------------------------------------
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"myInfoEditTableSegue"]) {
@@ -125,5 +153,25 @@
         
     }
 }
+
+
+#pragma mark - Custom methods
+//---------------------------------------------------------
+
+
+//Receive data through protocol
+-(void)experienceDataToMyInfo:(NSMutableArray *)experienceData {
+    self.experienceArray = experienceData;
+}
+
+
+//---------------------------------------------------------
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 
 @end

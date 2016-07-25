@@ -14,25 +14,48 @@
 
 @interface Login : UIViewController
 
+
+//VARIABLES----------------------------------------
+
+
+
+
+
+//UTIL CLASSES----------------------------------------
+
+
+@property (strong, nonatomic) UIPrinciples *UIPrinciple;
+
+
+//LIB CLASSES----------------------------------------
+
+
+@property (strong, nonatomic) FIRDatabaseReference *firdatabase;
+
+
+//IBOUTLETS----------------------------------------
+
+
+@property (weak, nonatomic) IBOutlet UIView *holdingView;
+
 @property (weak, nonatomic) IBOutlet UITextField *email;
 
 @property (weak, nonatomic) IBOutlet UITextField *password;
-
-@property (weak, nonatomic) IBOutlet UIView *holdingView;
 
 @property (weak, nonatomic) IBOutlet UIButton *loginButtonOutlet;
 
 @property (weak, nonatomic) IBOutlet UIButton *loginWithLinkedinOutlet;
 
-@property (strong, nonatomic) FIRDatabaseReference *firdatabase;
 
-@property (strong, nonatomic) UIPrinciples *UIPrinciple;
+//IBACTIONS----------------------------------------
+
+- (IBAction)backButton:(id)sender;
 
 - (IBAction)loginButton:(id)sender;
 
 - (IBAction)loginWithLinkedinButton:(id)sender;
 
-- (IBAction)backButton:(id)sender;
 
+//-------------------------------------------------
 
 @end

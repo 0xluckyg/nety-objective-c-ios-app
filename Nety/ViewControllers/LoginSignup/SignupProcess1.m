@@ -15,6 +15,11 @@
 
 @implementation SignupProcess1
 
+
+#pragma mark - View Load
+//---------------------------------------------------------
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -22,8 +27,13 @@
     [self initializeDesign];
 }
 
-- (void)initializeSettings {
 
+#pragma mark - Initialization
+//---------------------------------------------------------
+
+
+- (void)initializeSettings {
+    
     NSLog(@"%@, %@, %@, %@, %@", self.userInfo[0], self.userInfo[1], self.userInfo[2], self.userInfo[3] ,self.userInfo[4]);
     
 }
@@ -51,6 +61,11 @@
     
     
 }
+
+
+#pragma mark - Protocols and Delegates
+//---------------------------------------------------------
+
 
 //When begins editing, set textfield to none
 - (BOOL)textViewShouldBeginEditing:(UITextField *)textView
@@ -89,6 +104,12 @@
     [self.view endEditing:YES];
 }
 
+
+
+#pragma mark - Buttons
+//---------------------------------------------------------
+
+
 //Back button to go back to my info
 - (IBAction)backButton:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
@@ -108,6 +129,10 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+#pragma mark - View Disappear
+//---------------------------------------------------------
 
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -135,6 +160,18 @@
     }
     
 }
+
+
+#pragma mark - Custom methods
+//---------------------------------------------------------
+
+
+
+
+
+
+//---------------------------------------------------------
+
 
 @end
 

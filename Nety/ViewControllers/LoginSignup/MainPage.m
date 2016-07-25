@@ -14,12 +14,72 @@
 
 @implementation MainPage
 
+#pragma mark - View Load
+//---------------------------------------------------------
+
+
+
+
+#pragma mark - Initialization
+//---------------------------------------------------------
+
+
+
+
+
+#pragma mark - Protocols and Delegates
+//---------------------------------------------------------
+
+
+
+
+
+#pragma mark - Buttons
+//---------------------------------------------------------
+
+
+
+
+
+#pragma mark - View Disappear
+//---------------------------------------------------------
+
+
+
+
+
+#pragma mark - Custom methods
+//---------------------------------------------------------
+
+
+
+
+
+
+//---------------------------------------------------------
+
+
+
+
+
+
+
+
+#pragma mark - View Load
+//---------------------------------------------------------
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     [self initializeDesign];
 }
+
+
+#pragma mark - Initialization
+//---------------------------------------------------------
+
 
 - (void)initializeDesign {
     self.UIPrinciple = [[UIPrinciples alloc] init];
@@ -39,10 +99,17 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
+#pragma mark - Protocols and Delegates
+//---------------------------------------------------------
+
+
+
+
+
+#pragma mark - Buttons
+//---------------------------------------------------------
+
 
 - (IBAction)loginButton:(id)sender {
 }
@@ -51,19 +118,31 @@
 }
 
 
+#pragma mark - View Disappear
+//---------------------------------------------------------
 
 
 
 
 
+#pragma mark - Custom methods
+//---------------------------------------------------------
 
 
 
 
 
+#pragma mark - Warnings
+//---------------------------------------------------------
 
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
+
+//---------------------------------------------------------
 
 
 @end

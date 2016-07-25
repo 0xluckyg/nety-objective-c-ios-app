@@ -18,6 +18,10 @@
 
 @implementation SignupProcess3
 
+#pragma mark - View Load
+//---------------------------------------------------------
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -25,6 +29,11 @@
     [self initializeSettings];
     [self initializeDesign];
 }
+
+
+#pragma mark - Initialization
+//---------------------------------------------------------
+
 
 - (void)initializeSettings {
     
@@ -45,24 +54,13 @@
     [self.addProfileImageOutlet setTintColor:[UIColor whiteColor]];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-- (IBAction)addProfileImage:(id)sender {
-    
-    UIImagePickerController *pickerLibrary = [[UIImagePickerController alloc] init];
-    pickerLibrary.delegate = (id)self;
-    pickerLibrary.allowsEditing = YES;
-    pickerLibrary.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-    [self presentViewController:pickerLibrary animated:YES completion:nil];
-    
-}
+#pragma mark - Protocols and Delegates
+//---------------------------------------------------------
+
 
 //When photo choosing screen shows, customize nav controller
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
-{
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
     //Customizing view controller here
     [viewController.navigationController.navigationBar setBackgroundColor:self.UIPrinciple.netyBlue];
     [viewController.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
@@ -79,8 +77,7 @@
 }
 
 // This method is called when an image has been chosen from the library or taken from the camera.
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     //You can retrieve the actual UIImage
     
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
@@ -97,14 +94,20 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-}
 
-- (BOOL)prefersStatusBarHidden {
-    return NO;
-}
+#pragma mark - Buttons
+//---------------------------------------------------------
 
+
+- (IBAction)addProfileImage:(id)sender {
+    
+    UIImagePickerController *pickerLibrary = [[UIImagePickerController alloc] init];
+    pickerLibrary.delegate = (id)self;
+    pickerLibrary.allowsEditing = YES;
+    pickerLibrary.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    [self presentViewController:pickerLibrary animated:YES completion:nil];
+    
+}
 
 //Moving to the main screen
 - (IBAction)doneButton:(id)sender {
@@ -124,8 +127,8 @@
     
     //Get userID and save to database
     NSString *userID = [[[self.userInfo objectAtIndex:0] stringByReplacingOccurrencesOfString:@"@" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
-//    SingletonUserData *singletonUserData = [SingletonUserData sharedInstance];
-//    singletonUserData.userID = userID;
+    //    SingletonUserData *singletonUserData = [SingletonUserData sharedInstance];
+    //    singletonUserData.userID = userID;
     
     
     //Uploading profile image
@@ -140,7 +143,7 @@
         [self registerUserInfo:userID metaDataUid:@"NetyBlueLogo"];
         
     } else {
-    
+        
         NSData *uploadData = UIImagePNGRepresentation(self.profileImage.image);
         
         [profileImageRef putData:uploadData metadata:nil completion:^(FIRStorageMetadata * _Nullable metadata, NSError * _Nullable error) {
@@ -160,6 +163,40 @@
         }];
         
     }
+}
+
+- (IBAction)backButton:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+#pragma mark - View Disappear
+//---------------------------------------------------------
+
+
+
+
+
+#pragma mark - Custom methods
+//---------------------------------------------------------
+
+
+-(void)changeRoot {
+    
+    //Set root controller to tabbar with cross dissolve animation
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    [UIView
+     transitionWithView:self.view.window
+     duration:0.5
+     options:UIViewAnimationOptionTransitionCrossDissolve
+     animations:^(void) {
+         BOOL oldState = [UIView areAnimationsEnabled];
+         [UIView setAnimationsEnabled:NO];
+         [appDelegate.window setRootViewController:appDelegate.tabBarRootController];
+         [UIView setAnimationsEnabled:oldState];
+     }
+     completion:nil];
+    
 }
 
 -(void)registerUserInfo: (NSString *)userID metaDataUid:(NSString *)metaDataUid {
@@ -196,26 +233,13 @@
     
 }
 
--(void)changeRoot {
-    
-    //Set root controller to tabbar with cross dissolve animation
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    [UIView
-     transitionWithView:self.view.window
-     duration:0.5
-     options:UIViewAnimationOptionTransitionCrossDissolve
-     animations:^(void) {
-         BOOL oldState = [UIView areAnimationsEnabled];
-         [UIView setAnimationsEnabled:NO];
-         [appDelegate.window setRootViewController:appDelegate.tabBarRootController];
-         [UIView setAnimationsEnabled:oldState];
-     }
-     completion:nil];
 
-}
+//---------------------------------------------------------
 
-- (IBAction)backButton:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 
