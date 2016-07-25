@@ -189,13 +189,7 @@
             
         }];
         
-        UIAlertController *alert = [UIAlertController
-                                    alertControllerWithTitle:@"Not saved"
-                                    message:@"You haven't saved your interest or experience. Continue anyway?"
-                                    preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:cont];
-        [alert addAction:okay];
-        [self presentViewController:alert animated:YES completion:nil];
+        [self.UIPrinciple twoButtonAlert:cont rightButton:okay controller:@"Not saved" message:@"You haven't saved your interest or experience. Continue anyway?" viewController:self];
     
     } else {
         [self.navigationController popViewControllerAnimated:YES];

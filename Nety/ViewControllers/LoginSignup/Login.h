@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UIPrinciples.h"
+#import "UserInformation.h"
 
 @import Firebase;
 
@@ -23,6 +24,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *loginWithLinkedinOutlet;
 
+@property (strong, nonatomic) FIRDatabaseReference *firdatabase;
 
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
 

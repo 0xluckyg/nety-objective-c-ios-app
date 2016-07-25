@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UIPrinciples.h"
-
+#import "UserInformation.h"
 
 @import Firebase;
 
@@ -19,9 +19,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *addProfileImageOutlet;
 
 @property (weak, nonatomic) IBOutlet UIButton *doneButtonOutlet;
-
-
-
 
 @property (strong, nonatomic) FIRDatabaseReference *firdatabase;
 

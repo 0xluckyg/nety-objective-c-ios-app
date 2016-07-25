@@ -22,9 +22,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [self initializeSettings];
     [self initializeDesign];
 }
 
+- (void)initializeSettings {
+    self.firdatabase = [[FIRDatabase database] reference];
+}
 
 - (void)initializeDesign {
     self.UIPrinciple = [[UIPrinciples alloc] init];
@@ -70,14 +74,52 @@
                                      
                                      NSString *userID = [[self.email.text stringByReplacingOccurrencesOfString:@"@" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
                                      
-                                     SingletonUserData *singletonUserData = [SingletonUserData sharedInstance];
-                                     singletonUserData.userID = userID;
+                                     [[[self.firdatabase child:kUsers] child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+                                         // Get user value
+                                         
+                                         NSLog(@"%@", snapshot.value);
+                                         
+                                         NSDictionary *firebaseUserInfo = snapshot.value;
+                                         
+                                         //Set user information inside global variables
+                                         [self saveUserInformationLocally:firebaseUserInfo userID:userID profileImageUrl:[firebaseUserInfo objectForKey:kProfilePhoto]];
+                                         
+                                     } withCancelBlock:^(NSError * _Nonnull error) {
+                                         NSLog(@"%@", error.localizedDescription);
+                                     }];
                                      
-                                     [self changeRoot];
                                  }
                                  
                              }];
     }
+}
+
+- (void)saveUserInformationLocally: (NSDictionary *)firbaseUserInfo userID:(NSString *)userID profileImageUrl:(NSString *)profileImageUrl{
+    
+    //Set user information inside global variables
+    [UserInformation setUserID:userID];
+    [UserInformation setName:[NSString stringWithFormat:@"%@ %@", [firbaseUserInfo objectForKey:kFirstName], [firbaseUserInfo objectForKey:kLastName]]];
+    [UserInformation setAge:[[firbaseUserInfo objectForKey:kAge] integerValue]];
+    [UserInformation setStatus:[firbaseUserInfo objectForKey:kStatus]];
+    [UserInformation setSummary:[firbaseUserInfo objectForKey:kSummary]];
+    [UserInformation setIdentity:[firbaseUserInfo objectForKey:kIdentity]];
+    
+    NSMutableArray *experienceArray = [NSMutableArray arrayWithArray:[[firbaseUserInfo objectForKey:kExperiences] allValues]];
+    
+    [UserInformation setExperiences:experienceArray];
+    
+    // Create a reference to the file you want to download
+    FIRStorageReference *userProfileImageRef = [[FIRStorage storage] referenceForURL:profileImageUrl];
+    
+    // Fetch the download URL
+    [userProfileImageRef dataWithMaxSize:1 * 1024 * 1024 completion:^(NSData *data, NSError *error){
+        if (error != nil) {
+            [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Problem signing in" message:error.localizedDescription viewController:self];
+        } else {
+            [UserInformation setProfileImage:[UIImage imageWithData:data]];
+            [self changeRoot];
+        }
+    }];
 }
 
 - (void)changeRoot {

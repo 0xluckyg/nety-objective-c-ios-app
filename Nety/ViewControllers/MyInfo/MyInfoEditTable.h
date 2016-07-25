@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "UIPrinciples.h"
 #import "NetworkData.h"
+#import "NoContent.h"
+#import "MyInfoEditTable.h"
+#import "MyInfoEditExperience.h"
 
-@interface MyInfoEditTable : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+@interface MyInfoEditTable : UIViewController <UITableViewDelegate, UITableViewDataSource, experienceDataDelegate> {
     bool editButtonClicked;
 }
 
@@ -18,7 +21,15 @@
 
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
 
-@property (strong, nonatomic) NetworkData *experienceData;
+@property (strong, nonatomic) NSMutableArray *experienceArray;
+
+@property (strong, nonatomic) NoContent *noContentController;
+
+
+@property (nonatomic) bool add;
+
+@property (nonatomic) NSUInteger arrayIndex;
+
 
 - (IBAction)backButton:(id)sender;
 

@@ -7,9 +7,6 @@
 //
 
 #import "MyInfo.h"
-#import "UIPrinciples.h"
-#import "Constants.h"
-#import "SingletonUserData.h"
 
 @interface MyInfo ()
 
@@ -21,72 +18,76 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self initializeSettings];
     [self initializeDesign];
+    
+    NSLog(@"%@: got user name on change",[UserInformation getName]);
+    NSLog(@"%lu: got user age on change",[UserInformation getAge]);
+    NSLog(@"%@: got user status on change",[UserInformation getStatus]);
+    NSLog(@"%@: got user summary on change",[UserInformation getSummary]);
+    NSLog(@"%@: got user identity on change",[UserInformation getIdentity]);
+    NSLog(@"%@: got user identity on change",[UserInformation getExperiences]);
+    NSLog(@"%@: got user identity on change",[UserInformation getProfileImage]);
+}
 
+- (void)viewWillAppear:(BOOL)animated {
+    [self initializeSettings];
 }
 
 - (void)initializeSettings {
     
-    self.firdatabase = [[FIRDatabase database] reference];
+//    self.firdatabase = [[FIRDatabase database] reference];
     
-    SingletonUserData *singletonUserData = [SingletonUserData sharedInstance];
-    NSLog(@"%@", singletonUserData.userID);
+    self.nameLabel.text = [UserInformation getName];
     
-    [[[self.firdatabase child:kUsers] child:singletonUserData.userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-        // Get user value
+    self.identityLabel.text = [UserInformation getIdentity];
+    
+    if ([[UserInformation getIdentity] isEqualToString:@""]) {
+        self.identityLabel.text = @"You haven't described who you are!";
+    } else {
+        self.identityLabel.text = [UserInformation getIdentity];
+    }
+    
+    if ([[UserInformation getStatus] isEqualToString:@""]) {
+        self.userStatusInfo.text = @"You haven't set a status yet!";
+    } else {
+        self.userStatusInfo.text = [UserInformation getStatus];
+    }
+    
+    if ([[UserInformation getSummary] isEqualToString:@""]) {
+        self.userSummaryInfo.text = @"You haven't set a summary yet!";
+    } else {
+        self.userSummaryInfo.text = [UserInformation getSummary];
+    }
+    
+    self.experienceArray = [UserInformation getExperiences];
+    
+    NSLog(@"%lu", [self.experienceArray count]);
+    
+    if ([self.experienceArray count] > 0) {
         
-        NSLog(@"%@", snapshot);
+        NSString *experienceString = @"";
         
-        self.userData = snapshot.value;
-        
-        self.nameLabel.text = [NSString stringWithFormat:@"%@ %@ %@", [self.userData objectForKey:kFirstName], [self.userData objectForKey:kLastName], [self.userData objectForKey:kAge]];
-        
-        self.identityLabel.text = [self.userData objectForKey:kIdentity];
-        
-        if ([[self.userData objectForKey:kStatus] isEqualToString:@""]) {
-            self.userStatusInfo.text = @"You haven't set a status yet!";
-        } else {
-            self.userStatusInfo.text = [self.userData objectForKey:kStatus];
+        for (int i = 0; i < [self.experienceArray count]; i ++) {
+            
+            NSString *experienceStringAdd = [NSString stringWithFormat:@"%@\r%@ ~ %@\r\r%@\r\r\r",
+                                             [[self.experienceArray objectAtIndex:i] objectForKey:kExperienceName],
+                                             [[self.experienceArray objectAtIndex:i] objectForKey:kExperienceStartDate],
+                                             [[self.experienceArray objectAtIndex:i] objectForKey:kExperienceEndDate],
+                                             [[self.experienceArray objectAtIndex:i] objectForKey:kExperienceDescription]
+                                             ];
+            
+            NSLog(@"%@", experienceStringAdd);
+            
+            experienceString = [experienceString stringByAppendingString:experienceStringAdd];
         }
         
-        self.userSummaryInfo.text = [self.userData objectForKey:kSummary];
+        self.userExperienceInfo.text = experienceString;
         
-        if ([self.userData objectForKey:kExperiences]) {
-            
-            NSLog(@"%lu", [[self.userData objectForKey:kExperiences] count]);
-            
-            self.experienceArray = [[NSMutableArray alloc] initWithArray:[[self.userData objectForKey:kExperiences] allValues]];
-            
-            NSLog(@"%lu", [self.experienceArray count]);
-            
-            NSString *experienceString = @"";
-            
-            for (int i = 0; i < [self.experienceArray count]; i ++) {
-                
-                NSString *experienceStringAdd = [NSString stringWithFormat:@"%@\r%@ ~ %@\r\r%@\r\r\r",
-                                                 [[self.experienceArray objectAtIndex:i] objectForKey:kExperienceName],
-                                                 [[self.experienceArray objectAtIndex:i] objectForKey:kExperienceStartDate],
-                                                 [[self.experienceArray objectAtIndex:i] objectForKey:kExperienceEndDate],
-                                                 [[self.experienceArray objectAtIndex:i] objectForKey:kExperienceDescription]
-                                                 ];
-                
-                NSLog(@"%@", experienceStringAdd);
-                
-                experienceString = [experienceString stringByAppendingString:experienceStringAdd];
-            }
-            
-            self.userExperienceInfo.text = experienceString;
-            
-        } else {
-            self.userExperienceInfo.text = @"You didn't add any experience or interest yet";
-        }
-        
-        // ...
-    } withCancelBlock:^(NSError * _Nonnull error) {
-        NSLog(@"%@", error.localizedDescription);
-        
-    }];
+    } else {
+        self.userExperienceInfo.text = @"You didn't add any experience or interest yet";
+    }
+    
+    self.userProfileImage.image = [UserInformation getProfileImage];
     
 }
 
@@ -98,7 +99,7 @@
     [self.view setBackgroundColor:self.UIPrinciple.netyBlue];
     
     //Profile image setup
-    self.userProfileImage.image = [UIImage imageNamed:@"girl2.jpg"];
+    self.userProfileImage.image = [UserInformation getProfileImage];
     
     //Color for the small view
     self.userBasicInfoView.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.4f];
@@ -116,14 +117,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"myInfoEditTableSegue"]) {
+        MyInfoEditTable *editTableVC = [segue destinationViewController];
+        
+        editTableVC.experienceArray = self.experienceArray;
+        
+    }
 }
-*/
 
 @end

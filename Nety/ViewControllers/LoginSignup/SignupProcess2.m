@@ -92,10 +92,9 @@
     
     //Initialize cell
     MyInfoEditTableCell *experienceCell = [tableView dequeueReusableCellWithIdentifier:@"MyInfoEditTableCell"];
-    if ([self.experienceArray count] == 0) {
+    
+    if ([self.experienceArray count] != 0) {
 
-        
-    } else {
         //Set cell data
         NSDictionary *rowData = [self.experienceArray objectAtIndex:indexPath.row];
         //Change format of date

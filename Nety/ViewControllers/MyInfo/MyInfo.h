@@ -7,12 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SingletonUserData.h"
 #import "UIPrinciples.h"
+#import "SignupProcess3.h"
+#import "Constants.h"
+#import "UserInformation.h"
+#import "MyInfoEditTable.h"
 
 @import Firebase;
 
 @interface MyInfo : UIViewController
+
 
 @property (weak, nonatomic) IBOutlet UIImageView *userProfileImage;
 
@@ -33,6 +37,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *userInfoViewTopConstraint;
 
 @property (strong, nonatomic) NSMutableDictionary *userData;
+
+@property (strong, nonatomic) UserInformation *userInformation;
 
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
 

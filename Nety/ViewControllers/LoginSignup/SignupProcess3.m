@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "Constants.h"
 #import "SingletonUserData.h"
+#import "UserInformation.h"
 
 @interface SignupProcess3 ()
 
@@ -123,8 +124,8 @@
     
     //Get userID and save to database
     NSString *userID = [[[self.userInfo objectAtIndex:0] stringByReplacingOccurrencesOfString:@"@" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
-    SingletonUserData *singletonUserData = [SingletonUserData sharedInstance];
-    singletonUserData.userID = userID;
+//    SingletonUserData *singletonUserData = [SingletonUserData sharedInstance];
+//    singletonUserData.userID = userID;
     
     
     //Uploading profile image
@@ -152,15 +153,13 @@
                 NSLog(@"%@", metadata);
                 
                 [self registerUserInfo:userID metaDataUid:[[metadata downloadURL] absoluteString]];
+                [self changeRoot];
                 
             }
             
         }];
         
     }
-    
-    [self changeRoot];
-    
 }
 
 -(void)registerUserInfo: (NSString *)userID metaDataUid:(NSString *)metaDataUid {
@@ -181,6 +180,17 @@
                            kSummary: [self.userInfo objectAtIndex:6],
                            kExperiences: experiences,
                            kProfilePhoto: metaDataUid};
+    
+    
+    //Set user information inside global variables
+    [UserInformation setUserID:userID];
+    [UserInformation setName:[NSString stringWithFormat:@"%@ %@", [post objectForKey:kFirstName], [post objectForKey:kLastName]]];
+    [UserInformation setAge:[[post objectForKey:kAge] integerValue]];
+    [UserInformation setStatus:[post objectForKey:kStatus]];
+    [UserInformation setSummary:[post objectForKey:kSummary]];
+    [UserInformation setIdentity:[post objectForKey:kIdentity]];
+    [UserInformation setExperiences:experienceArray];
+    [UserInformation setProfileImage:self.profileImage.image];
     
     [[[self.firdatabase child:@"users"] child:userID] setValue:post];
     

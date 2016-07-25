@@ -65,6 +65,7 @@
 
 
 @property (nonatomic) bool add;
+
 @property (nonatomic) NSUInteger arrayIndex;
 
 - (IBAction)presentButton:(id)sender;

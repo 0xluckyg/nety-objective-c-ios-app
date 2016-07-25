@@ -8,6 +8,7 @@
 
 #import "MyInfoEditTable.h"
 #import "MyInfoEditTableCell.h"
+#import "MyInfoEditExperience.h"
 
 @interface MyInfoEditTable ()
 
@@ -24,13 +25,30 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [self.tableView reloadData];
+    
+    [self.UIPrinciple removeNoContent:self.noContentController];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    //If no experiences visible, show noContent header
+    if ([self.experienceArray count] == 0) {
+        
+        self.experienceArray = [[NSMutableArray alloc] init];
+        
+        self.noContentController = [[NoContent alloc] init];
+        
+        [self.UIPrinciple addNoContent:self setText:@"You haven't added an experience or interest yet" noContentController:self.noContentController];
+    }
+    
+     MyInfoEditExperience *experienceDataVC = [[MyInfoEditExperience alloc] init];
+    [experienceDataVC setDelegate:self];
+    
+    [self.tableView reloadData];
 }
 
 - (void)initializeSettings {
     
     editButtonClicked = YES;
-    
-    self.experienceData = [[NetworkData alloc] init];
     
     [self.tableView setEditing:NO animated:NO];
 }
@@ -50,7 +68,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.experienceData.userExperienceArray count];
+    return [self.experienceArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -59,15 +77,19 @@
     MyInfoEditTableCell *experienceCell = [tableView dequeueReusableCellWithIdentifier:@"MyInfoEditTableCell"];
     
     
-    if ([self.experienceData.userExperienceArray count] == 0) {
+    if ([self.experienceArray count] != 0) {
+
         //Set cell data
-        experienceCell.experienceName.text = @"You didn't add any experience yet";
-    } else {
-        //Set cell data
-        NSDictionary *rowData = [self.experienceData.userExperienceArray objectAtIndex:indexPath.row];
-        experienceCell.experienceName.text = [rowData objectForKey: keyExperienceName];
-        experienceCell.experienceDate.text = [rowData objectForKey: keyExperienceTime];
-        experienceCell.experienceDescription.text = [rowData objectForKey: keyExperienceDescription];
+        NSDictionary *rowData = [self.experienceArray objectAtIndex:indexPath.row];
+        //Change format of date
+        NSString *experienceDate = @"";
+        if (![[rowData objectForKey:@"startDate"] isEqualToString:@""]) {
+            experienceDate = [NSString stringWithFormat:@"%@ to %@", [rowData objectForKey:@"startDate"], [rowData objectForKey:@"endDate"]];
+        }
+        
+        experienceCell.experienceName.text = [rowData objectForKey: @"name"];
+        experienceCell.experienceDate.text = experienceDate;
+        experienceCell.experienceDescription.text = [rowData objectForKey: @"description"];
     }
     
     //Set cell style
@@ -91,6 +113,9 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //Move to editing cell
+    self.add = false;
+    self.arrayIndex = indexPath.row;
+    
     [self performSegueWithIdentifier:@"experienceDetailSegue" sender:self];
 }
 
@@ -112,23 +137,58 @@
 }
 
 - (IBAction)addButton:(id)sender {
+    //Indicate that user is going to add an experience instead of editing
+    self.add = true;
+    
+    [self performSegueWithIdentifier:@"experienceDetailSegue" sender:self];
 }
-
-//-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    return UITableViewCellEditingStyleNone;
-//}
 
 -(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
 
+
+
 -(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
-    [self.experienceData.userExperienceArray exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
+    [self.experienceArray exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
     
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.experienceArray removeObjectAtIndex:indexPath.row];
+    [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+    
+    if ([self.experienceArray count] == 0) {
+        
+        //If deleted and array is 0
+        self.noContentController = [[NoContent alloc] init];
+        
+        [self.UIPrinciple addNoContent:self setText:@"You haven't added an experience or interest yet" noContentController:self.noContentController];
+    }
+    
+}
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"experienceDetailSegue"]) {
+        
+        MyInfoEditTable *experienceDataVC = [segue destinationViewController];
+        
+        //Indicate that experience is adding, not changing
+        experienceDataVC.add = self.add;
+        
+        experienceDataVC.experienceArray = self.experienceArray;
+        
+        experienceDataVC.arrayIndex = self.arrayIndex;
+        
+    }
+}
 
+-(void)sendExperienceData:(NSMutableArray *)experienceData {
+    
+    self.experienceArray = experienceData;
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

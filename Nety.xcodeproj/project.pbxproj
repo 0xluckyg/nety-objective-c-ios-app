@@ -28,6 +28,7 @@
 		67B240151D41425700F011BB /* SingletonUserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 67B240141D41425700F011BB /* SingletonUserData.m */; };
 		67CD9C2E1D3C75E800823701 /* NoContent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67CD9C2D1D3C75E800823701 /* NoContent.xib */; };
 		67CD9C311D3C795600823701 /* NoContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CD9C301D3C795600823701 /* NoContent.m */; };
+		67D273741D45310A00282730 /* UserInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D273731D45310A00282730 /* UserInformation.m */; };
 		67D4AD5F1D26333D00F42B7F /* LoginSignup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67D4AD5E1D26333D00F42B7F /* LoginSignup.storyboard */; };
 		67D4AD621D26536000F42B7F /* MainPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D4AD611D26536000F42B7F /* MainPage.m */; };
 		67D4AD651D265A7E00F42B7F /* Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D4AD641D265A7E00F42B7F /* Login.m */; };
@@ -100,6 +101,8 @@
 		67CD9C2D1D3C75E800823701 /* NoContent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoContent.xib; sourceTree = "<group>"; };
 		67CD9C2F1D3C795600823701 /* NoContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoContent.h; sourceTree = "<group>"; };
 		67CD9C301D3C795600823701 /* NoContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoContent.m; sourceTree = "<group>"; };
+		67D273721D45310A00282730 /* UserInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInformation.h; sourceTree = "<group>"; };
+		67D273731D45310A00282730 /* UserInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInformation.m; sourceTree = "<group>"; };
 		67D4AD5E1D26333D00F42B7F /* LoginSignup.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginSignup.storyboard; sourceTree = "<group>"; };
 		67D4AD601D26536000F42B7F /* MainPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPage.h; sourceTree = "<group>"; };
 		67D4AD611D26536000F42B7F /* MainPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPage.m; sourceTree = "<group>"; };
@@ -403,10 +406,12 @@
 				67DD1AB21D17D40D00FBEA0F /* UIPrinciples.m */,
 				67B2400D1D40594600F011BB /* Constants.h */,
 				67B2400E1D40594600F011BB /* Constants.m */,
-				67DD1AB71D17E39B00FBEA0F /* NetworkData.h */,
-				67DD1AB81D17E39B00FBEA0F /* NetworkData.m */,
 				67B240131D41425700F011BB /* SingletonUserData.h */,
 				67B240141D41425700F011BB /* SingletonUserData.m */,
+				67D273721D45310A00282730 /* UserInformation.h */,
+				67D273731D45310A00282730 /* UserInformation.m */,
+				67DD1AB71D17E39B00FBEA0F /* NetworkData.h */,
+				67DD1AB81D17E39B00FBEA0F /* NetworkData.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -592,6 +597,7 @@
 				67DD1A981D17BF1700FBEA0F /* Network.m in Sources */,
 				67391DF51D27FBD800A50C03 /* SignupProcessExperienceDetail.m in Sources */,
 				67391DF21D27FBC400A50C03 /* SignupProcess2.m in Sources */,
+				67D273741D45310A00282730 /* UserInformation.m in Sources */,
 				67DD1A9D1D17BF6900FBEA0F /* MyNetwork.m in Sources */,
 				67DD1A7C1D17BEB500FBEA0F /* main.m in Sources */,
 				67B240151D41425700F011BB /* SingletonUserData.m in Sources */,
