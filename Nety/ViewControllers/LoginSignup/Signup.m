@@ -7,9 +7,6 @@
 //
 
 #import "Signup.h"
-#import "SignupProcess1.h"
-#import "Constants.h"
-#import "SingletonUserData.h"
 
 @interface Signup ()
 
@@ -53,6 +50,12 @@
     
     self.signupWithLinkedinButtonOutlet.backgroundColor = self.UIPrinciple.linkedInBlue;
     [self.signupWithLinkedinButtonOutlet.layer setCornerRadius:self.signupWithLinkedinButtonOutlet.frame.size.height/2];
+    
+    self.email.textColor = self.UIPrinciple.netyBlue;
+    self.password.textColor = self.UIPrinciple.netyBlue;
+    self.age.textColor = self.UIPrinciple.netyBlue;
+    self.name.textColor = self.UIPrinciple.netyBlue;
+    
 }
 
 
@@ -130,8 +133,7 @@
                  //User ID is supposed to be the email without . and @
                  NSString *userID = [[[self.userInfo objectAtIndex:0] stringByReplacingOccurrencesOfString:@"@" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
                  
-                 SingletonUserData *singletonUserData = [SingletonUserData sharedInstance];
-                 singletonUserData.userID = userID;
+                 [UserInformation setUserID:userID];
                  
                  //Save name and age to the database
                  [[[self.firdatabase child:kUsers] child:userID] setValue:@{kFirstName: [self.userInfo objectAtIndex:2],

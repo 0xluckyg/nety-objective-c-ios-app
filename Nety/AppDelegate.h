@@ -20,7 +20,5 @@
 
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
 
-@property (weak, nonatomic) Login *login;
-
 @end
 

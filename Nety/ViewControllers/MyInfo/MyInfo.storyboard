@@ -21,6 +21,7 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZMi-V3-Yti">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="364"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ZMi-V3-Yti" secondAttribute="height" multiplier="207:182" id="x2Q-N8-Y8w"/>
                                 </constraints>
@@ -117,7 +118,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="X25-mw-JAx" kind="show" id="Su5-pn-c9F"/>
+                                                    <segue destination="X25-mw-JAx" kind="show" identifier="myInfoEditSummarySegue" id="Su5-pn-c9F"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D9f-68-y0e">
@@ -143,7 +144,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="X25-mw-JAx" kind="show" id="keI-uC-p8d"/>
+                                                    <segue destination="X25-mw-JAx" kind="show" identifier="myInfoEditStatusSegue" id="keI-uC-p8d"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -173,13 +174,24 @@
                                             <constraint firstItem="2Va-He-S0X" firstAttribute="top" secondItem="ixx-8P-liu" secondAttribute="top" constant="22" id="vnh-pu-gaz"/>
                                         </constraints>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JGk-WY-LRG">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="246"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="Agu-z0-FHh" appends="YES" id="OSN-hs-CVD"/>
+                                        </connections>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="ixx-8P-liu" firstAttribute="top" secondItem="94P-OH-Uet" secondAttribute="top" constant="325" id="20Y-PQ-qen"/>
+                                    <constraint firstItem="JGk-WY-LRG" firstAttribute="leading" secondItem="94P-OH-Uet" secondAttribute="leading" id="Rls-Is-cgN"/>
+                                    <constraint firstItem="XCA-ee-oZP" firstAttribute="top" secondItem="JGk-WY-LRG" secondAttribute="bottom" id="UQs-vw-ZSd"/>
                                     <constraint firstItem="XCA-ee-oZP" firstAttribute="leading" secondItem="94P-OH-Uet" secondAttribute="leading" id="UYV-LK-74O"/>
                                     <constraint firstItem="ixx-8P-liu" firstAttribute="leading" secondItem="94P-OH-Uet" secondAttribute="leading" id="Z9a-2F-mfT"/>
                                     <constraint firstAttribute="trailing" secondItem="ixx-8P-liu" secondAttribute="trailing" id="erc-ZG-4KV"/>
                                     <constraint firstAttribute="bottom" secondItem="ixx-8P-liu" secondAttribute="bottom" id="oZy-Mt-arm"/>
+                                    <constraint firstItem="JGk-WY-LRG" firstAttribute="top" secondItem="94P-OH-Uet" secondAttribute="top" id="q0R-HB-igX"/>
+                                    <constraint firstAttribute="trailing" secondItem="JGk-WY-LRG" secondAttribute="trailing" id="sNo-Zz-hMN"/>
                                     <constraint firstItem="ixx-8P-liu" firstAttribute="top" secondItem="XCA-ee-oZP" secondAttribute="bottom" id="tMC-k8-QV6"/>
                                     <constraint firstAttribute="trailing" secondItem="XCA-ee-oZP" secondAttribute="trailing" id="xCS-KR-YM0"/>
                                 </constraints>
@@ -213,6 +225,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o2Q-EY-9oa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Agu-z0-FHh">
+                    <connections>
+                        <action selector="imageTapped:" destination="e6U-G5-a2Q" id="AiZ-Vs-jsf"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1168" y="427"/>
         </scene>
@@ -299,6 +316,7 @@
                         <outlet property="editType2Label" destination="i0A-9I-gtj" id="8Ay-9s-pUs"/>
                         <outlet property="editType2TextField" destination="SyJ-2p-F7k" id="bQ6-9U-jfK"/>
                         <outlet property="saveButtonOutlet" destination="fBt-fS-vQf" id="odH-rl-4tQ"/>
+                        <outlet property="topLabel" destination="A1I-Hm-Idj" id="eM7-k0-89Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XSX-ba-SAZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -354,7 +372,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hcc-5j-nNr">
-                                                    <rect key="frame" x="35" y="13" width="42" height="21"/>
+                                                    <rect key="frame" x="35" y="13" width="344" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -372,6 +390,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="gBQ-MW-d2s" secondAttribute="bottom" constant="13.5" id="AWf-oM-N6J"/>
                                                 <constraint firstItem="99I-QH-MRQ" firstAttribute="top" secondItem="Hcc-5j-nNr" secondAttribute="bottom" id="RvW-y5-4Py"/>
                                                 <constraint firstItem="gBQ-MW-d2s" firstAttribute="leading" secondItem="st3-Yl-5C5" secondAttribute="leading" constant="35" id="fMg-cx-yw0"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Hcc-5j-nNr" secondAttribute="trailing" constant="27" id="gaq-yN-cjS"/>
                                                 <constraint firstItem="Hcc-5j-nNr" firstAttribute="top" secondItem="st3-Yl-5C5" secondAttribute="topMargin" constant="5" id="y81-ar-dP7"/>
                                                 <constraint firstItem="99I-QH-MRQ" firstAttribute="leading" secondItem="st3-Yl-5C5" secondAttribute="leadingMargin" constant="27" id="yXs-dT-aKg"/>
                                             </constraints>

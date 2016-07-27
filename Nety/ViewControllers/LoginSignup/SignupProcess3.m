@@ -7,10 +7,6 @@
 //
 
 #import "SignupProcess3.h"
-#import "AppDelegate.h"
-#import "Constants.h"
-#import "SingletonUserData.h"
-#import "UserInformation.h"
 
 @interface SignupProcess3 ()
 
@@ -127,9 +123,29 @@
     
     //Get userID and save to database
     NSString *userID = [[[self.userInfo objectAtIndex:0] stringByReplacingOccurrencesOfString:@"@" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
-    //    SingletonUserData *singletonUserData = [SingletonUserData sharedInstance];
-    //    singletonUserData.userID = userID;
     
+    [self uploadImage:userID];
+    
+
+}
+
+- (IBAction)backButton:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+#pragma mark - View Disappear
+//---------------------------------------------------------
+
+
+
+
+
+#pragma mark - Custom methods
+//---------------------------------------------------------
+
+
+-(void)uploadImage: (NSString *)userID {
     
     //Uploading profile image
     NSString *uniqueImageID = [[NSUUID UUID] UUIDString];
@@ -138,9 +154,14 @@
     FIRStorageReference *profileImageRef = [[[storage reference] child:@"profileImages"] child:uniqueImageID];
     
     //If user doesn't set profile image, set it to default image without uploading it.
-    if (self.profileImage.image == [UIImage imageNamed:@"NetyBlueLogo"]) {
+    NSData *logoImage = UIImagePNGRepresentation([UIImage imageNamed:@"NetyBlueLogo"]);
+    NSData *pickedImage = UIImagePNGRepresentation(self.profileImage.image);
+    
+    if ([logoImage isEqualToData:pickedImage]) {
         
         [self registerUserInfo:userID metaDataUid:@"NetyBlueLogo"];
+        [UserInformation setProfileImage:[UIImage imageNamed:@"NetyBlueLogo"]];
+        [self changeRoot];
         
     } else {
         
@@ -163,39 +184,6 @@
         }];
         
     }
-}
-
-- (IBAction)backButton:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-
-#pragma mark - View Disappear
-//---------------------------------------------------------
-
-
-
-
-
-#pragma mark - Custom methods
-//---------------------------------------------------------
-
-
--(void)changeRoot {
-    
-    //Set root controller to tabbar with cross dissolve animation
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    [UIView
-     transitionWithView:self.view.window
-     duration:0.5
-     options:UIViewAnimationOptionTransitionCrossDissolve
-     animations:^(void) {
-         BOOL oldState = [UIView areAnimationsEnabled];
-         [UIView setAnimationsEnabled:NO];
-         [appDelegate.window setRootViewController:appDelegate.tabBarRootController];
-         [UIView setAnimationsEnabled:oldState];
-     }
-     completion:nil];
     
 }
 
@@ -230,6 +218,24 @@
     [UserInformation setProfileImage:self.profileImage.image];
     
     [[[self.firdatabase child:@"users"] child:userID] setValue:post];
+    
+}
+
+-(void)changeRoot {
+    
+    //Set root controller to tabbar with cross dissolve animation
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    [UIView
+     transitionWithView:self.view.window
+     duration:0.5
+     options:UIViewAnimationOptionTransitionCrossDissolve
+     animations:^(void) {
+         BOOL oldState = [UIView areAnimationsEnabled];
+         [UIView setAnimationsEnabled:NO];
+         [appDelegate.window setRootViewController:appDelegate.tabBarRootController];
+         [UIView setAnimationsEnabled:oldState];
+     }
+     completion:nil];
     
 }
 

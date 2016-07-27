@@ -53,8 +53,9 @@
     
     //textfield
     self.summaryTextField.text = summaryPlaceholder;
-    self.summaryTextField.textColor = self.UIPrinciple.defaultGray;
+    self.summaryTextField.textColor = self.UIPrinciple.netyBlue;
     self.summaryTextField.layer.cornerRadius = 8;
+    self.jobTextField.textColor = self.UIPrinciple.netyBlue;
     
     //save button
     [self.nextButtonOutlet setTintColor:[UIColor whiteColor]];

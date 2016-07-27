@@ -8,17 +8,22 @@
 
 #import <UIKit/UIKit.h>
 #import "UIPrinciples.h"
+#import "UserInformation.h"
+#import "Constants.h"
+
+@import Firebase;
 
 @interface MyInfoEditType2 : UIViewController <UITextViewDelegate> {
+    
     NSString *editType2PlacementText;
+    bool changed;
 }
 
 
 //VARIABLES----------------------------------------
 
-
-
-
+//status = 0 summary = 1
+@property (nonatomic) NSInteger statusOrSummary;
 
 //UTIL CLASSES----------------------------------------
 
@@ -34,6 +39,8 @@
 
 //IBOUTLETS----------------------------------------
 
+
+@property (weak, nonatomic) IBOutlet UILabel *topLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *editType2Label;
 

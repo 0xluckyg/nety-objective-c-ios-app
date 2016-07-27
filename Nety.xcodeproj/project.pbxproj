@@ -25,7 +25,6 @@
 		679B9EED1D236E1C00C426F2 /* MyInfoEditTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 679B9EEC1D236E1C00C426F2 /* MyInfoEditTable.m */; };
 		679B9EF01D2396A700C426F2 /* MyInfoEditTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 679B9EEF1D2396A700C426F2 /* MyInfoEditTableCell.m */; };
 		67B2400F1D40594600F011BB /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 67B2400E1D40594600F011BB /* Constants.m */; };
-		67B240151D41425700F011BB /* SingletonUserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 67B240141D41425700F011BB /* SingletonUserData.m */; };
 		67CD9C2E1D3C75E800823701 /* NoContent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67CD9C2D1D3C75E800823701 /* NoContent.xib */; };
 		67CD9C311D3C795600823701 /* NoContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CD9C301D3C795600823701 /* NoContent.m */; };
 		67D273741D45310A00282730 /* UserInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D273731D45310A00282730 /* UserInformation.m */; };
@@ -96,8 +95,6 @@
 		679B9EEF1D2396A700C426F2 /* MyInfoEditTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoEditTableCell.m; sourceTree = "<group>"; };
 		67B2400D1D40594600F011BB /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		67B2400E1D40594600F011BB /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
-		67B240131D41425700F011BB /* SingletonUserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingletonUserData.h; sourceTree = "<group>"; };
-		67B240141D41425700F011BB /* SingletonUserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingletonUserData.m; sourceTree = "<group>"; };
 		67CD9C2D1D3C75E800823701 /* NoContent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoContent.xib; sourceTree = "<group>"; };
 		67CD9C2F1D3C795600823701 /* NoContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoContent.h; sourceTree = "<group>"; };
 		67CD9C301D3C795600823701 /* NoContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoContent.m; sourceTree = "<group>"; };
@@ -406,8 +403,6 @@
 				67DD1AB21D17D40D00FBEA0F /* UIPrinciples.m */,
 				67B2400D1D40594600F011BB /* Constants.h */,
 				67B2400E1D40594600F011BB /* Constants.m */,
-				67B240131D41425700F011BB /* SingletonUserData.h */,
-				67B240141D41425700F011BB /* SingletonUserData.m */,
 				67D273721D45310A00282730 /* UserInformation.h */,
 				67D273731D45310A00282730 /* UserInformation.m */,
 				67DD1AB71D17E39B00FBEA0F /* NetworkData.h */,
@@ -600,7 +595,6 @@
 				67D273741D45310A00282730 /* UserInformation.m in Sources */,
 				67DD1A9D1D17BF6900FBEA0F /* MyNetwork.m in Sources */,
 				67DD1A7C1D17BEB500FBEA0F /* main.m in Sources */,
-				67B240151D41425700F011BB /* SingletonUserData.m in Sources */,
 				679B9EEA1D236E0A00C426F2 /* MyInfoEditType2.m in Sources */,
 				67D4AD621D26536000F42B7F /* MainPage.m in Sources */,
 				67DD1AB91D17E39B00FBEA0F /* NetworkData.m in Sources */,

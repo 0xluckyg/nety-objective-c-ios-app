@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "UIPrinciples.h"
 #import "UserInformation.h"
+#import "Constants.h"
 
 @import Firebase;
 
 @interface MyInfoEditType1 : UIViewController <UITextFieldDelegate> {
     NSString *editType1NamePlacementText;
     NSString *editType1JobPlacementText;
+    bool changed;
 }
 
 

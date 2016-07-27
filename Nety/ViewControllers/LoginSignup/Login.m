@@ -7,10 +7,6 @@
 //
 
 #import "Login.h"
-#import "AppDelegate.h"
-#import "SingletonUserData.h"
-#import <UIKit/UIKit.h>
-#import "Constants.h"
 
 @interface Login ()
 
@@ -53,6 +49,8 @@
     self.loginWithLinkedinOutlet.backgroundColor = self.UIPrinciple.linkedInBlue;
     [self.loginWithLinkedinOutlet.layer setCornerRadius:self.loginWithLinkedinOutlet.frame.size.height/2];
     
+    self.email.textColor = self.UIPrinciple.netyBlue;
+    self.password.textColor = self.UIPrinciple.netyBlue;
     
 }
 

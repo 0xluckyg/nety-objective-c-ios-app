@@ -12,6 +12,7 @@
 #import "Constants.h"
 #import "UserInformation.h"
 #import "MyInfoEditTable.h"
+#import "MyInfoEditType2.h"
 
 @import Firebase;
 
@@ -61,11 +62,10 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *userInfoViewTopConstraint;
 
-
 //IBACTIONS----------------------------------------
 
 
-
+- (IBAction)imageTapped:(id)sender;
 
 
 //-------------------------------------------------

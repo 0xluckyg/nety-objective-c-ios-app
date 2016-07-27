@@ -77,6 +77,12 @@
     self.experienceDescriptionTextField.layer.cornerRadius = 8;
     self.experienceDescriptionTextField.textColor = self.UIPrinciple.netyBlue;
     
+    //Set textcolors to blue
+    self.dateToTextField.textColor = self.UIPrinciple.netyBlue;
+    self.dateFromTextField.textColor = self.UIPrinciple.netyBlue;
+    self.experienceNameTextField.textColor = self.UIPrinciple.netyBlue;
+    self.experienceDescriptionTextField.textColor = self.UIPrinciple.netyBlue;
+    
     if (self.add == true) {
         
         //name

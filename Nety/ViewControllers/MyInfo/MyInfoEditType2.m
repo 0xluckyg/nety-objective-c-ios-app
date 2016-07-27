@@ -26,14 +26,36 @@
     [self initializeDesign];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [self initializeSettings];
+    [self initializeDesign];
+}
+
 
 #pragma mark - Initialization
 //---------------------------------------------------------
 
 
 - (void)initializeSettings {
+    changed = false;
+    
     //initialize textfield description placeholder
-    editType2PlacementText = @"Write a summary about yourself!";
+    if (self.statusOrSummary == 0) {
+        if (![[UserInformation getStatus] isEqualToString:@""]) {
+            editType2PlacementText = [UserInformation getStatus];
+        } else {
+            editType2PlacementText = @"Write a status for everyone to see!";
+        }
+    } else {
+        if (![[UserInformation getSummary] isEqualToString:@""]) {
+            editType2PlacementText = [UserInformation getSummary];
+        } else {
+            editType2PlacementText = @"Write a summary about yourself!";
+        }
+    }
+    
+    
+    
 }
 
 - (void)initializeDesign {
@@ -43,13 +65,19 @@
     self.view.backgroundColor = self.UIPrinciple.netyBlue;
     
     //Label
-    self.editType2Label.text = @"Summary";
+    if (self.statusOrSummary == 0) {
+        self.editType2Label.text = @"Status";
+        self.topLabel.text = @"Set Status";
+    } else {
+        self.editType2Label.text = @"Summary";
+        self.topLabel.text = @"Set Summary";
+    }
     self.editType2Label.textColor = [UIColor whiteColor];
     
     //textfield
     self.editType2TextField.text = editType2PlacementText;
-    self.editType2TextField.textColor = self.UIPrinciple.netyBlue;
     self.editType2TextField.layer.cornerRadius = 8;
+    self.editType2TextField.textColor = self.UIPrinciple.netyBlue;
     
     //save button
     [self.saveButtonOutlet setTintColor:[UIColor whiteColor]];
@@ -70,12 +98,16 @@
 
 //Move screen up a bit when Keyboard appears for Description only
 -(void)textViewDidBeginEditing:(UITextView *)textView {
+    changed = true;
+    
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:.3];
     [UIView setAnimationBeginsFromCurrentState:TRUE];
     self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y -50., self.view.frame.size.width, self.view.frame.size.height);
     
     [UIView commitAnimations];
+    
+    self.editType2TextField.text = @"";
     
 }
 
@@ -114,7 +146,33 @@
 //---------------------------------------------------------
 
 
-
+-(void)viewWillDisappear:(BOOL)animated {
+    
+    if (changed == true) {
+        
+        FIRDatabaseReference *firdatabase = [[FIRDatabase database] reference];
+        
+        if (self.statusOrSummary == 0) {
+        
+            [[[[firdatabase child:kUsers]
+                            child:[UserInformation getUserID]]
+                            child:kStatus]
+                            setValue:self.editType2TextField.text];
+            
+            [UserInformation setStatus:self.editType2TextField.text];
+            
+        } else {
+            [[[[firdatabase child:kUsers]
+                            child:[UserInformation getUserID]]
+                            child:kSummary]
+                            setValue:self.editType2TextField.text];
+            
+            [UserInformation setStatus:self.editType2TextField.text];
+        
+        }
+    }
+    
+}
 
 
 #pragma mark - Custom methods

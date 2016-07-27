@@ -25,13 +25,6 @@
     
     [self initializeDesign];
     
-    NSLog(@"%@: got user name on change",[UserInformation getName]);
-    NSLog(@"%lu: got user age on change",[UserInformation getAge]);
-    NSLog(@"%@: got user status on change",[UserInformation getStatus]);
-    NSLog(@"%@: got user summary on change",[UserInformation getSummary]);
-    NSLog(@"%@: got user identity on change",[UserInformation getIdentity]);
-    NSLog(@"%@: got user identity on change",[UserInformation getExperiences]);
-    NSLog(@"%@: got user identity on change",[UserInformation getProfileImage]);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -47,7 +40,7 @@
 
 - (void)initializeSettings {
     
-    //    self.firdatabase = [[FIRDatabase database] reference];
+    self.firdatabase = [[FIRDatabase database] reference];
     
     self.nameLabel.text = [UserInformation getName];
     
@@ -73,8 +66,6 @@
     
     self.experienceArray = [UserInformation getExperiences];
     
-    NSLog(@"%lu", [self.experienceArray count]);
-    
     if ([self.experienceArray count] > 0) {
         
         NSString *experienceString = @"";
@@ -87,8 +78,6 @@
                                              [[self.experienceArray objectAtIndex:i] objectForKey:kExperienceEndDate],
                                              [[self.experienceArray objectAtIndex:i] objectForKey:kExperienceDescription]
                                              ];
-            
-            NSLog(@"%@", experienceStringAdd);
             
             experienceString = [experienceString stringByAppendingString:experienceStringAdd];
         }
@@ -132,6 +121,30 @@
 //---------------------------------------------------------
 
 
+//When photo choosing screen shows, customize nav controller
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    //Customizing view controller here
+    [viewController.navigationController.navigationBar setBackgroundColor:self.UIPrinciple.netyBlue];
+    [viewController.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    [viewController.navigationController.navigationBar setTranslucent:NO];
+    [self.UIPrinciple addTopbarColor:viewController];
+    
+    //Style navbar
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
+                                [UIColor whiteColor], NSForegroundColorAttributeName, nil];
+    
+    [viewController.navigationController.navigationBar setTitleTextAttributes:attributes];
+    
+}
+
+// This method is called when an image has been chosen from the library or taken from the camera.
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    //You can retrieve the actual UIImage
+    
+    [self changeImage:picker getInfo:info];
+    
+}
 
 
 
@@ -139,6 +152,16 @@
 //---------------------------------------------------------
 
 
+//For image tapped
+- (IBAction)imageTapped:(id)sender {
+    UIImagePickerController *pickerLibrary = [[UIImagePickerController alloc] init];
+    pickerLibrary.delegate = (id)self;
+    pickerLibrary.allowsEditing = YES;
+    pickerLibrary.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    [self presentViewController:pickerLibrary animated:YES completion:nil];
+    
+    NSLog(@"tapped");
+}
 
 
 
@@ -152,6 +175,16 @@
         
         editTableVC.experienceArray = self.experienceArray;
         
+    } else if ([segue.identifier isEqualToString:@"myInfoEditStatusSegue"]) {
+        MyInfoEditType2 *editTableVC = [segue destinationViewController];
+        
+        editTableVC.statusOrSummary = 0;
+    
+    } else if ([segue.identifier isEqualToString:@"myInfoEditSummarySegue"]) {
+        MyInfoEditType2 *editTableVC = [segue destinationViewController];
+        
+        editTableVC.statusOrSummary = 1;
+        
     }
 }
 
@@ -160,9 +193,60 @@
 //---------------------------------------------------------
 
 
-//Receive data through protocol
--(void)experienceDataToMyInfo:(NSMutableArray *)experienceData {
-    self.experienceArray = experienceData;
+-(void)changeImage: (UIImagePickerController *)picker getInfo:(NSDictionary *)info {
+
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    
+    UIImage *editedimage = [info objectForKey:UIImagePickerControllerEditedImage];
+    
+    if (![UIImagePNGRepresentation(image) isEqualToData:UIImagePNGRepresentation(editedimage)]) {
+        image = editedimage;
+    }
+    
+    
+    //Get userID and save to database
+    NSString *userID = [UserInformation getUserID];
+    
+    //Uploading profile image
+    NSString *uniqueImageID = [[NSUUID UUID] UUIDString];
+    
+    FIRStorage *storage = [FIRStorage storage];
+    FIRStorageReference *profileImageRef = [[[storage reference] child:@"profileImages"] child:uniqueImageID];
+    
+    //If user doesn't set profile image, set it to default image without uploading it.
+    NSData *pickedImage = UIImagePNGRepresentation(image);
+    NSData *originalImage = UIImagePNGRepresentation([UserInformation getProfileImage]);
+    
+    if (![originalImage isEqualToData:pickedImage]) {
+        
+        NSData *uploadData = pickedImage;
+        
+        [profileImageRef putData:uploadData metadata:nil completion:^(FIRStorageMetadata * _Nullable metadata, NSError * _Nullable error) {
+            
+            if (error) {
+                NSLog(@"%@", error.localizedDescription);
+                [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Can not upload image" message:@"Please try again at another time" viewController:self];
+                
+            } else {
+                
+                NSLog(@"image url saved");
+                
+                [[[[self.firdatabase child:kUsers] child:userID] child:kProfilePhoto] setValue: [[metadata downloadURL] absoluteString]];
+                
+                [UserInformation setProfileImage:image];
+                self.userProfileImage.image = [UserInformation getProfileImage];
+                
+                [picker dismissViewControllerAnimated:YES completion:nil];
+            }
+            
+        }];
+        
+    } else {
+        
+        [picker dismissViewControllerAnimated:YES completion:nil];
+        
+    }
+    
 }
 
 
