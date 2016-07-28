@@ -13,6 +13,31 @@
 
 @interface Chat : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SWTableViewCellDelegate>
 
+
+//VARIABLES----------------------------------------
+
+
+
+
+
+//UTIL CLASSES----------------------------------------
+
+
+@property (strong, nonatomic) UIPrinciples *UIPrinciple;
+
+//Temporary
+@property (strong, nonatomic) NetworkData *userData;
+
+
+//LIB CLASSES----------------------------------------
+
+
+
+
+
+//IBOUTLETS----------------------------------------
+
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (weak, nonatomic) IBOutlet UIView *topBar;
@@ -25,11 +50,14 @@
 
 @property (weak, nonatomic) IBOutlet UIView *oldNewView;
 
-@property (strong, nonatomic) UIPrinciples *UIPrinciple;
 
-//Temporary
-@property (strong, nonatomic) NetworkData *userData;
+//IBACTIONS----------------------------------------
+
 
 - (IBAction)oldNewSegmentedAction:(id)sender;
+
+
+//-------------------------------------------------
+
 
 @end

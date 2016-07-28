@@ -41,7 +41,7 @@
     self.UIPrinciple = [[UIPrinciples alloc] init];
     self.view.backgroundColor = self.UIPrinciple.netyBlue;
     
-    self.profileImage.image = [UIImage imageNamed:@"NetyBlueLogo"];
+    self.profileImage.image = [UIImage imageNamed:kDefaultUserLogoName];
     self.profileImage.layer.cornerRadius = self.profileImage.frame.size.height /2;
     self.profileImage.layer.masksToBounds = YES;
     self.profileImage.layer.borderWidth = 0;
@@ -154,13 +154,13 @@
     FIRStorageReference *profileImageRef = [[[storage reference] child:@"profileImages"] child:uniqueImageID];
     
     //If user doesn't set profile image, set it to default image without uploading it.
-    NSData *logoImage = UIImagePNGRepresentation([UIImage imageNamed:@"NetyBlueLogo"]);
+    NSData *logoImage = UIImagePNGRepresentation([UIImage imageNamed:kDefaultUserLogoName]);
     NSData *pickedImage = UIImagePNGRepresentation(self.profileImage.image);
     
     if ([logoImage isEqualToData:pickedImage]) {
         
-        [self registerUserInfo:userID metaDataUid:@"NetyBlueLogo"];
-        [UserInformation setProfileImage:[UIImage imageNamed:@"NetyBlueLogo"]];
+        [self registerUserInfo:userID metaDataUid:kDefaultUserLogoName];
+        [UserInformation setProfileImage:[UIImage imageNamed:kDefaultUserLogoName]];
         [self changeRoot];
         
     } else {
@@ -174,7 +174,6 @@
                 [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Can not upload image" message:@"Please try again at another time" viewController:self];
                 
             } else {
-                NSLog(@"%@", metadata);
                 
                 [self registerUserInfo:userID metaDataUid:[[metadata downloadURL] absoluteString]];
                 [self changeRoot];

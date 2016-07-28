@@ -22,6 +22,9 @@ extern NSString *const kExperienceEndDate;
 extern NSString *const kExperienceDescription;
 extern NSString *const kProfilePhoto;
 
+extern NSString *const kDefaultUserLogoName;
+
+
 @interface Constants : NSObject
 
 @end

@@ -15,12 +15,22 @@
 
 @implementation Profile
 
+
+#pragma mark - View Load
+//---------------------------------------------------------
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     [self initializeDesign];
 }
+
+
+#pragma mark - Initialization
+//---------------------------------------------------------
+
 
 - (void)initializeDesign {
     
@@ -51,14 +61,21 @@
     self.experienceInfo.text = @"lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum lorem ipsum lorem ipsum lorem ipsu ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum";
     
     self.infoViewTopConstraint.constant = self.view.frame.size.height / 2.3;
-
+    
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
+#pragma mark - Protocols and Delegates
+//---------------------------------------------------------
+
+
+
+
+
+#pragma mark - Buttons
+//---------------------------------------------------------
+
 
 - (IBAction)backButton:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -68,6 +85,30 @@
     
     [self performSegueWithIdentifier:@"MessagesSegue" sender:self];
     
+}
+
+
+#pragma mark - View Disappear
+//---------------------------------------------------------
+
+
+
+
+
+#pragma mark - Custom methods
+//---------------------------------------------------------
+
+
+
+
+
+
+//---------------------------------------------------------
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 

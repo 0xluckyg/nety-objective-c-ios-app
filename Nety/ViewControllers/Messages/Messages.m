@@ -14,18 +14,28 @@
 
 @implementation Messages
 
+
+#pragma mark - View Load
+//---------------------------------------------------------
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     [self initializeSettings];
     [self initializeDesign];
     [self addDemoMessages];
 }
 
+
+#pragma mark - Initialization
+//---------------------------------------------------------
+
+
 - (void)initializeSettings {
     self.senderId = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
     self.senderDisplayName = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-
+    
     self.messages = [[NSMutableArray alloc] init];
 }
 
@@ -36,13 +46,13 @@
     //Set up message style
     JSQMessagesBubbleImageFactory *incomingImage = [[JSQMessagesBubbleImageFactory alloc] initWithBubbleImage:[UIImage jsq_bubbleCompactTaillessImage] capInsets:UIEdgeInsetsZero];
     JSQMessagesBubbleImageFactory *outgoingImage = [[JSQMessagesBubbleImageFactory alloc] initWithBubbleImage:[UIImage jsq_bubbleCompactTaillessImage] capInsets:UIEdgeInsetsZero];
-
+    
     
     self.outgoingBubbleImageView = [outgoingImage outgoingMessagesBubbleImageWithColor:self.UIPrinciple.netyBlue];
     self.incomingBubbleImageView = [incomingImage incomingMessagesBubbleImageWithColor:self.UIPrinciple.netyGray];
-
+    
     //Set up avatar image
-    self.incomingBubbleAvatarImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"NetyBlueLogo"] diameter:35.0f];
+    self.incomingBubbleAvatarImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:kDefaultUserLogoName] diameter:35.0f];
     
     
     //Set user avatar size to zero
@@ -60,7 +70,7 @@
     self.inputToolbar.contentView.leftBarButtonItem.tintColor = self.UIPrinciple.netyGray;
     self.inputToolbar.contentView.textView.font = [self.UIPrinciple netyFontWithSize:15];
     [self.inputToolbar.contentView.rightBarButtonItem setTitle:@"Send" forState:normal];
-
+    
     
     
     //Style the navigation bar
@@ -83,40 +93,13 @@
     
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleLightContent;
-}
 
--(void)backButtonPressed {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
+#pragma mark - Protocols and Delegates
+//---------------------------------------------------------
 
-- (void)addDemoMessages {
-    NSString *sender;
-    
-    for (int i = 1; i <= 10; i ++) {
-        if (i % 2 == 0) {
-            sender = @"server";
-        } else {
-            sender = self.senderId;
-        }
-        
-        NSString *messageContent = [NSString stringWithFormat:@"Messages rn. %i", i];
-        NSDate *todaysDate = [NSDate date];
-        
-        JSQMessage *message = [[JSQMessage alloc] initWithSenderId:sender senderDisplayName:sender date:todaysDate text:messageContent];
-        
-        [self.messages addObject:message];
-        
-    }
-    
-    //Reload messages
-    [self.collectionView reloadData];
-}
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-
+    
     return self.messages.count;
 }
 
@@ -130,7 +113,7 @@
 }
 
 -(id<JSQMessageBubbleImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView messageBubbleImageDataForItemAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     JSQMessage *data = self.messages[indexPath.row];
     
     if (data.senderId == self.senderId) {
@@ -143,20 +126,12 @@
 
 -(id<JSQMessageAvatarImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageDataForItemAtIndexPath:(NSIndexPath *)indexPath {
     JSQMessage *data = self.messages[indexPath.row];
-
+    
     if (data.senderId == self.senderId) {
         return nil;
     } else {
         return self.incomingBubbleAvatarImage;
     }
-}
-
--(void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text senderId:(NSString *)senderId senderDisplayName:(NSString *)senderDisplayName date:(NSDate *)date {
-    JSQMessage *message = [[JSQMessage alloc] initWithSenderId:senderId senderDisplayName:senderDisplayName date:date text:text];
-    
-    [self.messages addObject:message];
-    [self finishSendingMessage];
-    
 }
 
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -194,13 +169,12 @@
      *  Show a timestamp for every 3rd message
      */
     if (indexPath.item % 6 == 0) {
-//        JSQMessage *message = [self.messages objectAtIndex:indexPath.item];
+        //        JSQMessage *message = [self.messages objectAtIndex:indexPath.item];
         return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:[NSDate date]];
     }
-
+    
     return nil;
 }
-
 
 //Height for top labels
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
@@ -224,6 +198,10 @@
 }
 
 
+#pragma mark - Buttons
+//---------------------------------------------------------
+
+
 - (void)didPressAccessoryButton:(UIButton *)sender
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Image Source"
@@ -236,9 +214,9 @@
                                                    }];
     
     UIAlertAction *library = [UIAlertAction actionWithTitle:@"Library" style:UIAlertActionStyleDefault
-                                                      handler:^(UIAlertAction * action) {
-                                                          
-                                                      }];
+                                                    handler:^(UIAlertAction * action) {
+                                                        
+                                                    }];
     
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * action) {
@@ -250,6 +228,55 @@
     [alert addAction:cancel];
     [self presentViewController:alert animated:YES completion:nil];
 }
+
+-(void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text senderId:(NSString *)senderId senderDisplayName:(NSString *)senderDisplayName date:(NSDate *)date {
+    JSQMessage *message = [[JSQMessage alloc] initWithSenderId:senderId senderDisplayName:senderDisplayName date:date text:text];
+    
+    [self.messages addObject:message];
+    [self finishSendingMessage];
+    
+}
+
+
+#pragma mark - View Disappear
+//---------------------------------------------------------
+
+
+-(void)backButtonPressed {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+#pragma mark - Custom methods
+//---------------------------------------------------------
+
+
+- (void)addDemoMessages {
+    NSString *sender;
+    
+    for (int i = 1; i <= 10; i ++) {
+        if (i % 2 == 0) {
+            sender = @"server";
+        } else {
+            sender = self.senderId;
+        }
+        
+        NSString *messageContent = [NSString stringWithFormat:@"Messages rn. %i", i];
+        NSDate *todaysDate = [NSDate date];
+        
+        JSQMessage *message = [[JSQMessage alloc] initWithSenderId:sender senderDisplayName:sender date:todaysDate text:messageContent];
+        
+        [self.messages addObject:message];
+        
+    }
+    
+    //Reload messages
+    [self.collectionView reloadData];
+}
+
+
+//---------------------------------------------------------
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

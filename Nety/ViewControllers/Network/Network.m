@@ -7,8 +7,6 @@
 //
 
 #import "Network.h"
-#import "NetworkCell.h"
-#import "NetworkData.h"
 
 @interface Network ()
 
@@ -16,12 +14,22 @@
 
 @implementation Network
 
+
+#pragma mark - View Load
+//---------------------------------------------------------
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [self initializeUsers];
     [self initializeSettings];
     [self initializeDesign];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [self.tableView reloadData];
 }
 
 //Clicked cell will reset
@@ -30,15 +38,26 @@
 }
 
 
+#pragma mark - Initialization
+//---------------------------------------------------------
+
+
 - (void)initializeSettings {
+    
     self.userData = [[NetworkData alloc] init];
+    
+    self.imageCache = [[NSCache alloc] init];
     
     //Set up notifications
     [[self.tabBarController.tabBar.items objectAtIndex:2] setBadgeValue:@"4"];
-
+    
+    //Get location?
+    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    NSString *str = [appDelegate returnLatLongString];
+    
+    NSLog(@"%@", str);
+    
 }
-
-
 
 - (void)initializeDesign {
     
@@ -70,10 +89,30 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)initializeUsers {
+    
+    self.usersArray = [[NSMutableArray alloc] init];
+    
+    self.firdatabase = [[FIRDatabase database] reference];
+    
+    [[self.firdatabase child:kUsers] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        NSDictionary *usersDictionary = snapshot.value;
+        
+        [self.usersArray addObjectsFromArray:[usersDictionary allValues]];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+        
+    } withCancelBlock:nil];
+    
 }
+
+
+#pragma mark - Protocols and Delegates
+//---------------------------------------------------------
+
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -81,7 +120,8 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [self.userData.userDataArray count];
+    NSLog(@"array count: %lu", [self.usersArray count]);
+    return [self.usersArray count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -90,35 +130,54 @@
     NetworkCell *networkCell = [tableView dequeueReusableCellWithIdentifier:@"NetworkCell" forIndexPath:indexPath];
     int row = (int)[indexPath row];
     
-    //Setting cell data
-    NSDictionary *userDataDictionary = self.userData.userDataArray[row];
-    networkCell.networkUserImage.image = [UIImage imageNamed:[userDataDictionary objectForKey:keyImage]];
+    if ([self.usersArray count] > 0 ) {
+        
+        //Setting cell data
+        NSDictionary *userDataDictionary = self.usersArray[row];
+        networkCell.networkUserImage.image = [UIImage imageNamed:kDefaultUserLogoName];
+        
+        //If image is not NetyBlueLogo, start downloading and caching the image
+        NSString *photoUrl = [userDataDictionary objectForKey:kProfilePhoto];
+        if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
+            NSURL *profileImageUrl = [NSURL URLWithString:[userDataDictionary objectForKey:kProfilePhoto]];
+            [self loadAndCacheImage:networkCell photoUrl:profileImageUrl cache:self.imageCache];
+        } else {
+            networkCell.networkUserImage.image = [UIImage imageNamed:kDefaultUserLogoName];
+        }
+
+        
+        NSString *fullName = [NSString stringWithFormat:@"%@ %@", [userDataDictionary objectForKey:kFirstName], [userDataDictionary objectForKey:kLastName]];
+        
+        //Set name
+        networkCell.networkUserName.text = fullName;
+        //Set job
+        networkCell.networkUserJob.text = [userDataDictionary objectForKey:kIdentity];
+        //Set description
+        NSString *statusString = [userDataDictionary objectForKey:kStatus];
+        if ([statusString isEqualToString:@""]) {
+            networkCell.networkUserDescription.text = [userDataDictionary objectForKey:kSummary];
+        } else {
+            networkCell.networkUserDescription.text = statusString;
+        }
+        
+        //DESIGN
+        //Setting font color of cells to black
+        networkCell.networkUserJob.textColor = [UIColor blackColor];
+        networkCell.networkUserName.textColor = [UIColor blackColor];
+        networkCell.networkUserDescription.textColor = [UIColor blackColor];
+        
+        //Set selection color to blue
+        UIView *bgColorView = [[UIView alloc] init];
+        bgColorView.backgroundColor = self.UIPrinciple.netyBlue;
+        [networkCell setSelectedBackgroundView:bgColorView];
+        //Set highlighted color to white
+        networkCell.networkUserJob.highlightedTextColor = [UIColor whiteColor];
+        networkCell.networkUserName.highlightedTextColor = [UIColor whiteColor];
+        networkCell.networkUserDescription.highlightedTextColor = [UIColor whiteColor];
+        
+    }
     
-    //Set name
-    networkCell.networkUserName.text = [userDataDictionary objectForKey:keyName];
-    //Set job
-    networkCell.networkUserJob.text = [userDataDictionary objectForKey:keyJob];
-    //Set description
-    NSString *descriptionText = [userDataDictionary objectForKey:keyDescription];
-    networkCell.networkUserDescription.text = descriptionText;
-    
-    //DESIGN
-    //Setting font color of cells to black
-    networkCell.networkUserJob.textColor = [UIColor blackColor];
-    networkCell.networkUserName.textColor = [UIColor blackColor];
-    networkCell.networkUserDescription.textColor = [UIColor blackColor];
-    
-    //Set selection color to blue
-    UIView *bgColorView = [[UIView alloc] init];
-    bgColorView.backgroundColor = self.UIPrinciple.netyBlue;
-    [networkCell setSelectedBackgroundView:bgColorView];
-    //Set highlighted color to white
-    networkCell.networkUserJob.highlightedTextColor = [UIColor whiteColor];
-    networkCell.networkUserName.highlightedTextColor = [UIColor whiteColor];
-    networkCell.networkUserDescription.highlightedTextColor = [UIColor whiteColor];
-    
-    
-    return networkCell;    
+    return networkCell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -126,12 +185,77 @@
     [self performSegueWithIdentifier:@"ShowProfileSegue" sender:indexPath];
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-}
-
 //Hide keyboard when search button pressed
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [searchBar endEditing:YES];
 }
+
+
+#pragma mark - Buttons
+//---------------------------------------------------------
+
+
+
+
+
+#pragma mark - View Disappear
+//---------------------------------------------------------
+
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+}
+
+
+#pragma mark - Custom methods
+//---------------------------------------------------------
+
+
+//Function for downloading and caching the image
+-(void)loadAndCacheImage:(NetworkCell *)networkCell photoUrl:(NSURL *)photoUrl cache:(NSCache *)imageCache {
+    
+    //Set default to nil
+    networkCell.networkUserImage.image = nil;
+    
+    NSURL *profileImageUrl = photoUrl;
+    
+    UIImage *cachedImage = [imageCache objectForKey:profileImageUrl];
+    
+    if (cachedImage) {
+        
+        networkCell.networkUserImage.image = cachedImage;
+        
+    } else {
+        
+        [[[NSURLSession sharedSession] dataTaskWithURL:profileImageUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            if (error != nil) {
+                NSLog(@"%@", error);
+                return;
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                UIImage *downloadedImage = [UIImage imageWithData:data];
+                
+                [imageCache setObject:downloadedImage forKey:profileImageUrl];
+                
+                networkCell.networkUserImage.image = downloadedImage;
+                
+            });
+            
+        }] resume];
+        
+    }
+
+}
+
+
+//---------------------------------------------------------
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 
 @end

@@ -17,6 +17,11 @@
 
 @implementation MyNetwork
 
+
+#pragma mark - View Load
+//---------------------------------------------------------
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -25,10 +30,10 @@
     [self initializeDesign];
 }
 
-//Swiped cell will reset
-- (void)viewWillDisappear:(BOOL)animated {
-    [self.tableView reloadData];
-}
+
+#pragma mark - Initialization
+//---------------------------------------------------------
+
 
 - (void)initializeSettings {
     self.userData = [[NetworkData alloc] init];
@@ -63,10 +68,10 @@
     [self.searchBarView setBackgroundColor:self.UIPrinciple.netyBlue];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
+#pragma mark - Protocols and Delegates
+//---------------------------------------------------------
+
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -122,7 +127,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     [self performSegueWithIdentifier:@"ShowProfileSegue" sender:indexPath];
     
 }
@@ -138,14 +143,14 @@
         }
         case 1: {
             NSLog(@"1 pressed");
-
+            
             // Delete button is pressed
-//          NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
-//          [self.userData.userDataArray[cellIndexPath.row] removeObjectAtIndex:cellIndexPath.row] ;
-//          [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationRight];
+            //          NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+            //          [self.userData.userDataArray[cellIndexPath.row] removeObjectAtIndex:cellIndexPath.row] ;
+            //          [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationRight];
             
             break;
-
+            
         }
         default: {
             break;
@@ -153,10 +158,43 @@
     }
 }
 
-
 //Hide keyboard when search button pressed
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [searchBar endEditing:YES];
+}
+
+
+#pragma mark - Buttons
+//---------------------------------------------------------
+
+
+
+
+
+#pragma mark - View Disappear
+//---------------------------------------------------------
+
+
+//Swiped cell will reset
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.tableView reloadData];
+}
+
+
+#pragma mark - Custom methods
+//---------------------------------------------------------
+
+
+
+
+
+
+//---------------------------------------------------------
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 

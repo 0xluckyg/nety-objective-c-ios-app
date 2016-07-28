@@ -16,8 +16,15 @@
 @implementation AppDelegate
 
 
+#pragma mark - View Load
+//---------------------------------------------------------
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [self initializeLocationManager];
+
     
     //Check if user is signed in, and move on
     [self initializeSettings];
@@ -28,28 +35,41 @@
     return YES;
 }
 
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+}
+
+
+#pragma mark - Initialization
+//---------------------------------------------------------
+
+
 -(void)initializeLoginView {
     
-//    [[FIRAuth auth] addAuthStateDidChangeListener:^(FIRAuth *_Nonnull auth,
-//                                                    FIRUser *_Nullable user) {
-//        if (user != nil) {
-//            // User is signed in.
-//            [self.window setRootViewController:self.tabBarRootController];
-//            
-//        } else {
-//            
-//            UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"LoginSignup" bundle:nil];
-//            UIViewController *myNetworkViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"MainPageNav"];
-//            
-//            [self.window setRootViewController:myNetworkViewController];
-//        }
-//    }];
+    //    [[FIRAuth auth] addAuthStateDidChangeListener:^(FIRAuth *_Nonnull auth,
+    //                                                    FIRUser *_Nullable user) {
+    //        if (user != nil) {
+    //            // User is signed in.
+    //            [self.window setRootViewController:self.tabBarRootController];
+    //
+    //        } else {
+    //
+    //            UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"LoginSignup" bundle:nil];
+    //            UIViewController *myNetworkViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"MainPageNav"];
+    //
+    //            [self.window setRootViewController:myNetworkViewController];
+    //        }
+    //    }];
     
     UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"LoginSignup" bundle:nil];
     UIViewController *myNetworkViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"MainPageNav"];
     
     [self.window setRootViewController:myNetworkViewController];
-
+    
 }
 
 -(void)initializeDesign {
@@ -115,21 +135,45 @@
     [[UITabBar appearance] setShadowImage:[[UIImage alloc] init]];
     [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
     
-//    [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : self.UIPrinciple.netyGray}
-//                                             forState:UIControlStateNormal];
-//    [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor] }
-//                                             forState:UIControlStateSelected];
+    //    [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : self.UIPrinciple.netyGray}
+    //                                             forState:UIControlStateNormal];
+    //    [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor] }
+    //                                             forState:UIControlStateSelected];
     
     //Connect tabBar and view controllers together
     NSArray* controllers = [NSArray arrayWithObjects:networkViewController,
-                                                    myNetworkViewController,
-                                                    chatViewController,
-                                                    myInfoViewController,
-                                                    settingsViewController, nil];
-        
+                            myNetworkViewController,
+                            chatViewController,
+                            myInfoViewController,
+                            settingsViewController, nil];
+    
     self.tabBarRootController.viewControllers = controllers;
     
 }
+
+
+#pragma mark - Protocols and Delegates
+//---------------------------------------------------------
+
+
+- (void)locationManager: (CLLocationManager *)manager
+    didUpdateToLocation: (CLLocation *)newLocation
+           fromLocation: (CLLocation *)oldLocation {
+    
+    NSLog(@"location called");
+    
+    float latitude = newLocation.coordinate.latitude;
+    self.stringLatitude = [NSString stringWithFormat:@"%f",latitude];
+    float longitude = newLocation.coordinate.longitude;
+    self.stringLongitude = [NSString stringWithFormat:@"%f", longitude];
+    //[self returnLatLongString:strLatitude:strLongitude];
+    
+}
+
+
+#pragma mark - View Disappear
+//---------------------------------------------------------
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -141,16 +185,40 @@
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
+#pragma mark - Custom methods
+//---------------------------------------------------------
+
+
+- (void)initializeLocationManager {
+    
+    self.locationManager = [[CLLocationManager alloc] init];
+    
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    //whenever user moves
+    self.locationManager.distanceFilter = kCLDistanceFilterNone;    
+    
+    [self.locationManager startUpdatingLocation];
+    
+    NSLog(@"location initialized");
+    
+}
+
+-(NSString*)returnLatLongString {
+    
+    NSString *str = [NSString stringWithFormat: @"lat=%@&long=%@", self.stringLatitude, self.stringLongitude];
+    
+    return str;
+}
+
+
+//---------------------------------------------------------
+
 
 @end

@@ -95,9 +95,7 @@
                                      
                                      [[[self.firdatabase child:kUsers] child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
                                          // Get user value
-                                         
-                                         NSLog(@"%@", snapshot.value);
-                                         
+                                                                                  
                                          NSDictionary *firebaseUserInfo = snapshot.value;
                                          
                                          //Set user information inside global variables

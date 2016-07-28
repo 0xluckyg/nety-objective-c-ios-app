@@ -19,6 +19,11 @@
 
 @implementation Chat
 
+
+#pragma mark - View Load
+//---------------------------------------------------------
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -27,10 +32,10 @@
     [self initializeDesign];
 }
 
-//Swiped cell will reset
-- (void)viewWillDisappear:(BOOL)animated {
-    [self.tableView reloadData];
-}
+
+#pragma mark - Initialization
+//---------------------------------------------------------
+
 
 - (void)initializeSettings {
     self.userData = [[NetworkData alloc] init];
@@ -53,10 +58,10 @@
     [self.oldNewView setBackgroundColor:self.UIPrinciple.netyBlue];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
+#pragma mark - Protocols and Delegates
+//---------------------------------------------------------
+
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -81,7 +86,7 @@
     chatCell.chatUserName.text = [userDataDictionary objectForKey:keyName];
     //Set job
     chatCell.chatTime.text = [userDataDictionary objectForKey:keyJob];
-
+    
     //Set description
     NSString *descriptionText = [userDataDictionary objectForKey:keyDescription];
     chatCell.chatDescription.text = descriptionText;
@@ -94,44 +99,38 @@
     chatCell.chatUserName.highlightedTextColor = [UIColor whiteColor];
     chatCell.chatTime.highlightedTextColor = [UIColor whiteColor];
     chatCell.chatDescription.highlightedTextColor = [UIColor whiteColor];
-
+    
     //SWTableViewCell configuration
     NSMutableArray *chatRightUtilityButtons = [[NSMutableArray alloc] init];
     
     if (self.oldNewSegmentedControl.selectedSegmentIndex == 1) {
-
+        
         [chatRightUtilityButtons sw_addUtilityButtonWithColor:
          self.UIPrinciple.netyBlue
-                                                             title:@"Block"];
+                                                        title:@"Block"];
         [chatRightUtilityButtons sw_addUtilityButtonWithColor:
          self.UIPrinciple.netyRed
-                                                             title:@"Delete"];
-    
+                                                        title:@"Delete"];
+        
     } else {
-
+        
         [chatRightUtilityButtons sw_addUtilityButtonWithColor:
          self.UIPrinciple.netyGray
                                                         title:@"Block"];
         
         [chatRightUtilityButtons sw_addUtilityButtonWithColor:
          self.UIPrinciple.netyBlue
-                                                             title:@"Add"];
+                                                        title:@"Add"];
         [chatRightUtilityButtons sw_addUtilityButtonWithColor:
          self.UIPrinciple.netyRed
-                                                             title:@"Delete"];
-
+                                                        title:@"Delete"];
+        
     }
     
     chatCell.rightUtilityButtons = chatRightUtilityButtons;
     chatCell.delegate = self;
     
     return chatCell;
-}
-
-- (IBAction)oldNewSegmentedAction:(id)sender {
-    
-    [self.tableView reloadData];
-    
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -144,25 +143,25 @@
 //Actions when right swipe buttons are tapped
 -(void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
     if (self.oldNewSegmentedControl.selectedSegmentIndex == 1) {
-    switch (index) {
-        case 0: {
-            NSLog(@"0 on NEW pressed");
-            break;
+        switch (index) {
+            case 0: {
+                NSLog(@"0 on NEW pressed");
+                break;
+            }
+            case 1: {
+                NSLog(@"1 one NEW pressed");
+                
+                // Delete button is pressed
+                //          NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+                //          [self.userData.userDataArray[cellIndexPath.row] removeObjectAtIndex:cellIndexPath.row] ;
+                //          [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationRight];
+                
+                break;
+            }
+            default: {
+                break;
+            }
         }
-        case 1: {
-            NSLog(@"1 one NEW pressed");
-            
-            // Delete button is pressed
-            //          NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
-            //          [self.userData.userDataArray[cellIndexPath.row] removeObjectAtIndex:cellIndexPath.row] ;
-            //          [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationRight];
-            
-            break;
-        }
-        default: {
-            break;
-        }
-    }
         
     } else {
         switch (index) {
@@ -183,7 +182,7 @@
             case 2: {
                 NSLog(@"2 on OLD pressed");
             }
-            
+                
             default: {
                 break;
             }
@@ -196,8 +195,45 @@
     [searchBar endEditing:YES];
 }
 
+
+#pragma mark - Buttons
+//---------------------------------------------------------
+
+
+- (IBAction)oldNewSegmentedAction:(id)sender {
+    
+    [self.tableView reloadData];
+    
+}
+
+
+#pragma mark - View Disappear
+//---------------------------------------------------------
+
+
+//Swiped cell will reset
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.tableView reloadData];
+}
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
+}
+
+
+#pragma mark - Custom methods
+//---------------------------------------------------------
+
+
+
+
+
+//---------------------------------------------------------
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 

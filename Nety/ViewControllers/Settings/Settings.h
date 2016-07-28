@@ -13,7 +13,27 @@
 
 @interface Settings : UITableViewController
 
+
+//VARIABLES----------------------------------------
+
+
+
+
+
+//UTIL CLASSES----------------------------------------
+
+
 @property (strong,nonatomic) UIPrinciples *UIPrinciple;
+
+
+//LIB CLASSES----------------------------------------
+
+
+
+
+
+//IBOUTLETS----------------------------------------
+
 
 @property (weak, nonatomic) IBOutlet UIView *locationRangeSlider;
 
@@ -26,10 +46,15 @@
 @property (weak, nonatomic) IBOutlet UIImageView *linkedInImage;
 
 
+//IBACTIONS----------------------------------------
+
+
 - (IBAction)locationRangeSliderAction:(id)sender;
 
 - (IBAction)notificationSwitchAction:(id)sender;
 
+
+//-------------------------------------------------
 
 
 @end

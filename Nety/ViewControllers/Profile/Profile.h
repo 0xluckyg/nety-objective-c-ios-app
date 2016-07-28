@@ -12,6 +12,27 @@
 @interface Profile : UIViewController
 
 
+//VARIABLES----------------------------------------
+
+
+
+
+
+//UTIL CLASSES----------------------------------------
+
+
+@property (strong, nonatomic) UIPrinciples *UIPrinciple;
+
+
+//LIB CLASSES----------------------------------------
+
+
+
+
+
+//IBOUTLETS----------------------------------------
+
+
 @property (weak, nonatomic) IBOutlet UIImageView *profileImage;
 
 @property (weak, nonatomic) IBOutlet UIView *infoView;
@@ -30,12 +51,16 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *infoViewTopConstraint;
 
-@property (strong, nonatomic) UIPrinciples *UIPrinciple;
+
+//IBACTIONS----------------------------------------
+
 
 - (IBAction)backButton:(id)sender;
 
 - (IBAction)chatNowButton:(id)sender;
 
+
+//-------------------------------------------------
 
 
 @end

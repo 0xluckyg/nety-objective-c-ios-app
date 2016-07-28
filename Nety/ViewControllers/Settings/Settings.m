@@ -15,6 +15,11 @@
 
 @implementation Settings
 
+
+#pragma mark - View Load
+//---------------------------------------------------------
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initializeDesign];
@@ -26,8 +31,13 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
--(void)initializeDesign {
 
+#pragma mark - Initialization
+//---------------------------------------------------------
+
+
+-(void)initializeDesign {
+    
     self.UIPrinciple = [[UIPrinciples alloc] init];
     
     //Style the navigation bar
@@ -53,6 +63,11 @@
     [self.notificationSwitch setOnTintColor:self.UIPrinciple.netyBlue];
     
 }
+
+
+#pragma mark - Protocols and Delegates
+//---------------------------------------------------------
+
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -84,8 +99,32 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
--(void)changeRoot {
 
+
+#pragma mark - Buttons
+//---------------------------------------------------------
+
+
+- (IBAction)locationRangeSliderAction:(id)sender {
+}
+
+- (IBAction)notificationSwitchAction:(id)sender {
+}
+
+
+#pragma mark - View Disappear
+//---------------------------------------------------------
+
+
+
+
+
+#pragma mark - Custom methods
+//---------------------------------------------------------
+
+
+-(void)changeRoot {
+    
     //Set root controller to tabbar with cross dissolve animation
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     
@@ -104,17 +143,17 @@
          [UIView setAnimationsEnabled:oldState];
      }
      completion:nil];
-
+    
 }
+
+
+//---------------------------------------------------------
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)locationRangeSliderAction:(id)sender {
-}
 
-- (IBAction)notificationSwitchAction:(id)sender {
-}
 @end
