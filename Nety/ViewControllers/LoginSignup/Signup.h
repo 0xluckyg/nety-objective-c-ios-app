@@ -11,6 +11,7 @@
 #import "SignupProcess1.h"
 #import "Constants.h"
 #import "UserInformation.h"
+#import "AppDelegate.h"
 
 @import Firebase;
 

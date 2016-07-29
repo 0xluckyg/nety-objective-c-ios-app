@@ -148,10 +148,18 @@
 -(void)uploadImage: (NSString *)userID {
     
     //Uploading profile image
-    NSString *uniqueImageID = [[NSUUID UUID] UUIDString];
+    NSString *uniqueImageIDBig = [[NSUUID UUID] UUIDString];
+    NSString *uniqueImageIDSmall = [[NSUUID UUID] UUIDString];
     
     FIRStorage *storage = [FIRStorage storage];
-    FIRStorageReference *profileImageRef = [[[storage reference] child:@"profileImages"] child:uniqueImageID];
+    FIRStorageReference *profileImageBigRef = [[[[storage reference]
+                                             child:@"ProfileImages"]
+                                            child:@"Big" ]
+                                            child:uniqueImageIDBig];
+    FIRStorageReference *profileImageSmallRef = [[[[storage reference]
+                                              child:@"ProfileImages"]
+                                             child:@"Small" ]
+                                            child:uniqueImageIDSmall];
     
     //If user doesn't set profile image, set it to default image without uploading it.
     NSData *logoImage = UIImagePNGRepresentation([UIImage imageNamed:kDefaultUserLogoName]);
@@ -159,15 +167,20 @@
     
     if ([logoImage isEqualToData:pickedImage]) {
         
-        [self registerUserInfo:userID metaDataUid:kDefaultUserLogoName];
+        [self registerUserInfo:userID metaDataBigUid:kDefaultUserLogoName metaDataSmallUid:kDefaultUserLogoName];
         [UserInformation setProfileImage:[UIImage imageNamed:kDefaultUserLogoName]];
         [self changeRoot];
         
     } else {
         
-        NSData *uploadData = UIImagePNGRepresentation(self.profileImage.image);
+        UIImage *bigProfileImage = self.profileImage.image;
+        UIImage *smallProfileImage = [self.UIPrinciple scaleDownImage:bigProfileImage];
         
-        [profileImageRef putData:uploadData metadata:nil completion:^(FIRStorageMetadata * _Nullable metadata, NSError * _Nullable error) {
+        NSData *uploadDataBig = UIImagePNGRepresentation(bigProfileImage);
+        NSData *uploadDataSmall = UIImagePNGRepresentation(smallProfileImage);
+        
+        //Uploading big profile picture first
+        [profileImageBigRef putData:uploadDataBig metadata:nil completion:^(FIRStorageMetadata * _Nullable metadataBig, NSError * _Nullable error) {
             
             if (error) {
                 NSLog(@"%@", error.localizedDescription);
@@ -175,8 +188,20 @@
                 
             } else {
                 
-                [self registerUserInfo:userID metaDataUid:[[metadata downloadURL] absoluteString]];
-                [self changeRoot];
+                //Uploading small profile picture next
+                [profileImageSmallRef putData:uploadDataSmall metadata:nil completion:^(FIRStorageMetadata * _Nullable metadataSmall, NSError * _Nullable error) {
+                    if (error) {
+                        NSLog(@"%@", error.localizedDescription);
+                        
+                    } else {
+                        
+                        [self registerUserInfo:userID
+                                metaDataBigUid:[[metadataBig downloadURL] absoluteString]
+                              metaDataSmallUid:[[metadataSmall downloadURL] absoluteString]];
+                        
+                        [self changeRoot];
+                    }
+                }];
                 
             }
             
@@ -186,7 +211,7 @@
     
 }
 
--(void)registerUserInfo: (NSString *)userID metaDataUid:(NSString *)metaDataUid {
+-(void)registerUserInfo: (NSString *)userID metaDataBigUid:(NSString *)metaDataBigUid metaDataSmallUid:(NSString *)metaDataSmallUid {
     
     NSMutableDictionary *experiences = [[NSMutableDictionary alloc] init];
     NSMutableArray *experienceArray = [self.userInfo objectAtIndex:7];
@@ -203,7 +228,8 @@
                            kIdentity: [self.userInfo objectAtIndex:5],
                            kSummary: [self.userInfo objectAtIndex:6],
                            kExperiences: experiences,
-                           kProfilePhoto: metaDataUid};
+                           kProfilePhoto: metaDataBigUid,
+                           kSmallProfilePhoto: metaDataSmallUid};
     
     
     //Set user information inside global variables
@@ -216,14 +242,16 @@
     [UserInformation setExperiences:experienceArray];
     [UserInformation setProfileImage:self.profileImage.image];
     
-    [[[self.firdatabase child:@"users"] child:userID] setValue:post];
+    [[[self.firdatabase child:kUsers] child:userID] setValue:post];
     
 }
 
 -(void)changeRoot {
     
     //Set root controller to tabbar with cross dissolve animation
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [appDelegate setUserIsSigningIn:false];
+    
     [UIView
      transitionWithView:self.view.window
      duration:0.5

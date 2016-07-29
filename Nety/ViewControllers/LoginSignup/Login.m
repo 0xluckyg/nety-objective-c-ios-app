@@ -114,7 +114,7 @@
 - (IBAction)loginWithLinkedinButton:(id)sender {
     
     //Just set root controller to tabbar
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [appDelegate.window setRootViewController:appDelegate.tabBarRootController];
     
 }
@@ -154,22 +154,30 @@
     [UserInformation setExperiences:experienceArray];
     
     // Create a reference to the file you want to download
-    FIRStorageReference *userProfileImageRef = [[FIRStorage storage] referenceForURL:profileImageUrl];
-    
-    // Fetch the download URL
-    [userProfileImageRef dataWithMaxSize:1 * 1024 * 1024 completion:^(NSData *data, NSError *error){
-        if (error != nil) {
-            [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Problem signing in" message:error.localizedDescription viewController:self];
-        } else {
-            [UserInformation setProfileImage:[UIImage imageWithData:data]];
-            [self changeRoot];
-        }
-    }];
+    if ([profileImageUrl isEqualToString:kDefaultUserLogoName]) {
+        
+        [UserInformation setProfileImage:[UIImage imageNamed:kDefaultUserLogoName]];
+        [self changeRoot];
+        
+    } else {
+        FIRStorageReference *userProfileImageRef = [[FIRStorage storage] referenceForURL:profileImageUrl];
+        
+        // Fetch the download URL
+        [userProfileImageRef dataWithMaxSize:1 * 1024 * 1024 completion:^(NSData *data, NSError *error){
+            if (error != nil) {
+                [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Problem signing in" message:error.localizedDescription viewController:self];
+            } else {
+                [UserInformation setProfileImage:[UIImage imageWithData:data]];
+                [self changeRoot];
+            }
+        }];
+        
+    }
 }
 
 - (void)changeRoot {
     //Set root controller to tabbar with cross dissolve animation
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     
     [UIView
      transitionWithView:self.view.window

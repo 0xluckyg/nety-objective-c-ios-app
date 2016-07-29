@@ -21,6 +21,7 @@ NSString *const kExperienceStartDate = @"startDate";
 NSString *const kExperienceEndDate = @"endDate";
 NSString *const kExperienceDescription = @"description";
 NSString *const kProfilePhoto = @"profileImageUrl";
+NSString *const kSmallProfilePhoto = @"smallProfileImageUrl";
 
 NSString *const kDefaultUserLogoName = @"NetyBlueLogo";
 

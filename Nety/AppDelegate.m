@@ -23,8 +23,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    userIsSigningIn = false;
+    
     [self initializeLocationManager];
-
     
     //Check if user is signed in, and move on
     [self initializeSettings];
@@ -50,25 +51,33 @@
 
 -(void)initializeLoginView {
     
-    //    [[FIRAuth auth] addAuthStateDidChangeListener:^(FIRAuth *_Nonnull auth,
-    //                                                    FIRUser *_Nullable user) {
-    //        if (user != nil) {
-    //            // User is signed in.
-    //            [self.window setRootViewController:self.tabBarRootController];
-    //
-    //        } else {
-    //
-    //            UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"LoginSignup" bundle:nil];
-    //            UIViewController *myNetworkViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"MainPageNav"];
-    //
-    //            [self.window setRootViewController:myNetworkViewController];
-    //        }
-    //    }];
+        [[FIRAuth auth] addAuthStateDidChangeListener:^(FIRAuth *_Nonnull auth,
+                                                        FIRUser *_Nullable user) {
+            if (user != nil) {
+                
+                if (userIsSigningIn == false) {
+                
+                    // User is signed in.
+                    NSLog(@"App Delegate detected user signedin");
+                    [self fetchUserInformation:user];
+                    
+                    //Set root view controller to main app
+                    [self.window setRootViewController:self.tabBarRootController];
+                    
+                }
+                
+            } else {
+                
+                    NSLog(@"App Delegate detected user not signed in");
+                    UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"LoginSignup" bundle:nil];
+                    UIViewController *myNetworkViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"MainPageNav"];
+                    
+                    //Set root view controller to login page
+                    [self.window setRootViewController:myNetworkViewController];
+            }
+        }];
     
-    UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"LoginSignup" bundle:nil];
-    UIViewController *myNetworkViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"MainPageNav"];
     
-    [self.window setRootViewController:myNetworkViewController];
     
 }
 
@@ -217,6 +226,68 @@
     return str;
 }
 
+- (void)fetchUserInformation: (FIRUser *)user {
+    
+    FIRDatabaseReference *firdatabase = [[FIRDatabase database] reference];
+    
+    NSString *userEmail = user.email;
+    NSString *userID = [[userEmail stringByReplacingOccurrencesOfString:@"@" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
+    
+    [[[firdatabase child:kUsers] child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        // Get user value
+        
+        NSDictionary *firebaseUserInfo = snapshot.value;
+        
+        //Set user information inside global variables
+        [self saveUserInformationLocally:firebaseUserInfo userID:userID profileImageUrl:[firebaseUserInfo objectForKey:kProfilePhoto]];
+        
+    } withCancelBlock:^(NSError * _Nonnull error) {
+        NSLog(@"%@", error.localizedDescription);
+    }];
+    
+}
+
+- (void)saveUserInformationLocally: (NSDictionary *)firbaseUserInfo userID:(NSString *)userID profileImageUrl:(NSString *)profileImageUrl{
+    
+    //Set user information inside global variables
+    [UserInformation setUserID:userID];
+    [UserInformation setName:[NSString stringWithFormat:@"%@ %@", [firbaseUserInfo objectForKey:kFirstName], [firbaseUserInfo objectForKey:kLastName]]];
+    [UserInformation setAge:[[firbaseUserInfo objectForKey:kAge] integerValue]];
+    [UserInformation setStatus:[firbaseUserInfo objectForKey:kStatus]];
+    [UserInformation setSummary:[firbaseUserInfo objectForKey:kSummary]];
+    [UserInformation setIdentity:[firbaseUserInfo objectForKey:kIdentity]];
+    
+    NSMutableArray *experienceArray = [NSMutableArray arrayWithArray:[[firbaseUserInfo objectForKey:kExperiences] allValues]];
+    
+    [UserInformation setExperiences:experienceArray];
+    
+    if ([profileImageUrl isEqualToString:kDefaultUserLogoName]) {
+        
+        [UserInformation setProfileImage:[UIImage imageNamed:kDefaultUserLogoName]];
+        
+    } else {
+        
+        // Create a reference to the file you want to download
+        FIRStorageReference *userProfileImageRef = [[FIRStorage storage] referenceForURL:profileImageUrl];
+        
+        // Fetch the download URL
+        [userProfileImageRef dataWithMaxSize:1 * 1180 * 1180 completion:^(NSData *data, NSError *error){
+            if (error != nil) {
+                
+                //Error downloading Message
+                NSLog(@"%@", error.localizedDescription);
+                
+            } else {
+                [UserInformation setProfileImage:[UIImage imageWithData:data]];
+            }
+        }];
+        
+    }
+}
+
+-(void)setUserIsSigningIn: (bool)boolean {
+    userIsSigningIn = boolean;
+}
 
 //---------------------------------------------------------
 

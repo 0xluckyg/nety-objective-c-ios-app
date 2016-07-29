@@ -23,12 +23,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self initializeUsers];
     [self initializeSettings];
     [self initializeDesign];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    [self initializeUsers];
+    [self initializeSettings];
     [self.tableView reloadData];
 }
 
@@ -92,6 +93,7 @@
 - (void)initializeUsers {
     
     self.usersArray = [[NSMutableArray alloc] init];
+    self.userIDArray = [[NSMutableArray alloc] init];
     
     self.firdatabase = [[FIRDatabase database] reference];
     
@@ -99,6 +101,8 @@
         
         NSDictionary *usersDictionary = snapshot.value;
         
+        [self.userIDArray addObjectsFromArray:[usersDictionary allKeys]];
+                
         [self.usersArray addObjectsFromArray:[usersDictionary allValues]];
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -138,6 +142,7 @@
         
         //If image is not NetyBlueLogo, start downloading and caching the image
         NSString *photoUrl = [userDataDictionary objectForKey:kProfilePhoto];
+
         if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
             NSURL *profileImageUrl = [NSURL URLWithString:[userDataDictionary objectForKey:kProfilePhoto]];
             [self loadAndCacheImage:networkCell photoUrl:profileImageUrl cache:self.imageCache];
@@ -182,6 +187,20 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    NSURL *selectedUserBigPhotoUrl = [NSURL URLWithString:[[self.usersArray objectAtIndex:indexPath.row] objectForKey:kProfilePhoto]];
+    
+    //Get image
+    [[[NSURLSession sharedSession] dataTaskWithURL:selectedUserBigPhotoUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"%@", error);
+            return;
+        }
+            
+        selectedUserBigImage = [UIImage imageWithData:data];
+        NSLog(@"got image");
+        
+    }] resume];
+    
     [self performSegueWithIdentifier:@"ShowProfileSegue" sender:indexPath];
 }
 
@@ -203,6 +222,19 @@
 
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([[segue identifier] isEqualToString:@"ShowProfileSegue"]) {
+    
+        NSUInteger selectedRow = self.tableView.indexPathForSelectedRow.row;
+        
+        Profile *profilePage = [segue destinationViewController];
+        
+        profilePage.selectedUserProfileImage = selectedUserBigImage;
+        
+        profilePage.selectedUserInfoDictionary = [self.usersArray objectAtIndex:selectedRow];
+        profilePage.selectedUserID = [self.userIDArray objectAtIndex:selectedRow];
+        
+    }
 }
 
 

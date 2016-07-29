@@ -115,6 +115,9 @@
                                                                 self.age.text ]];
         
         
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        [appDelegate setUserIsSigningIn:true];
+        
         //Sign up the user
         [[FIRAuth auth]
          createUserWithEmail: [self.userInfo objectAtIndex:0]
@@ -133,13 +136,30 @@
                  //User ID is supposed to be the email without . and @
                  NSString *userID = [[[self.userInfo objectAtIndex:0] stringByReplacingOccurrencesOfString:@"@" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
                  
+                 NSMutableArray *experienceArray = [[NSMutableArray alloc] init];
+                 
+                 NSDictionary *post = @{kFirstName: [self.userInfo objectAtIndex:2],
+                                        kLastName: [self.userInfo objectAtIndex:3],
+                                        kAge: [self.userInfo objectAtIndex:4],
+                                        kStatus: @"",
+                                        kIdentity: @"",
+                                        kSummary: @"",
+                                        kExperiences: experienceArray,
+                                        kProfilePhoto: kDefaultUserLogoName,
+                                        kSmallProfilePhoto: kDefaultUserLogoName};
+                 
+                 
+                 //Set user information inside global variables
                  [UserInformation setUserID:userID];
+                 [UserInformation setName:[NSString stringWithFormat:@"%@ %@", [post objectForKey:kFirstName], [post objectForKey:kLastName]]];
+                 [UserInformation setAge:[[post objectForKey:kAge] integerValue]];
+                 [UserInformation setStatus:[post objectForKey:kStatus]];
+                 [UserInformation setSummary:[post objectForKey:kSummary]];
+                 [UserInformation setIdentity:[post objectForKey:kIdentity]];
+                 [UserInformation setExperiences:experienceArray];
+                 [UserInformation setProfileImage:[UIImage imageNamed:kDefaultUserLogoName]];
                  
-                 //Save name and age to the database
-                 [[[self.firdatabase child:kUsers] child:userID] setValue:@{kFirstName: [self.userInfo objectAtIndex:2],
-                                                                            kLastName: [self.userInfo objectAtIndex:3],
-                                                                            kAge: [self.userInfo objectAtIndex:4]}];
-                 
+                 [[[self.firdatabase child:kUsers] child:userID] setValue:post];
                  
                  [self performSegueWithIdentifier:@"signupProcess1Segue" sender:self];
              }
@@ -184,7 +204,6 @@
 
 #pragma mark - Custom methods
 //---------------------------------------------------------
-
 
 
 

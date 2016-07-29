@@ -12,18 +12,23 @@
 #import "Constants.h"
 #import "AppDelegate.h"
 #import "NetworkCell.h"
+#import "Profile.h"
 #import "NetworkData.h"
 
 
 @import Firebase;
 
-@interface Network : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface Network : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate> {
+    UIImage *selectedUserBigImage;
+}
 
 
 //VARIABLES----------------------------------------
 
 
 @property (strong, nonatomic) NSMutableArray *usersArray;
+
+@property (strong, nonatomic) NSMutableArray *userIDArray;
 
 @property (strong, nonatomic) NSCache *imageCache;
 

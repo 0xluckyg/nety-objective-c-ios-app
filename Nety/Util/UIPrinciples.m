@@ -106,4 +106,18 @@
     
 }
 
+
+//Uploading image to server (make 10 times smaller)
+-(UIImage*)scaleDownImage:(UIImage*)img {
+    
+    CGSize newSize = CGSizeMake(img.size.width / 13, img.size.height / 13);
+
+    UIGraphicsBeginImageContextWithOptions(newSize, YES, 0.0);
+    [img drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return scaledImage;
+}
+
 @end

@@ -243,7 +243,18 @@
 
 
 -(void)backButtonPressed {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    CATransition *transition = [CATransition animation];
+    transition.duration = 0.35;
+    transition.timingFunction =
+    [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = kCATransitionMoveIn;
+    transition.subtype = kCATransitionFromRight;
+    
+    // NSLog(@"%s: self.view.window=%@", _func_, self.view.window);
+    UIView *containerView = self.view.window;
+    [containerView.layer addAnimation:transition forKey:nil];
+    
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 

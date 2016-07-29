@@ -13,7 +13,11 @@
 
 @import Firebase;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate> {
+    
+    bool userIsSigningIn;
+
+}
 
 @property (strong, nonatomic) UIWindow *window;
 
@@ -29,6 +33,8 @@
 @property (strong, nonatomic) NSString * stringLongitude;
 
 -(NSString*)returnLatLongString;
+
+-(void)setUserIsSigningIn: (bool)boolean;
 
 @end
 

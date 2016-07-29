@@ -34,4 +34,8 @@
 
 -(void)removeNoContent: (NoContent *)noContentController;
 
+
+-(UIImage*)scaleDownImage:(UIImage*)img;
+
+
 @end

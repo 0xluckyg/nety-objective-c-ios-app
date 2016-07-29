@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UIPrinciples.h"
+#import "Constants.h"
 
 @interface Profile : UIViewController
 
@@ -15,7 +16,11 @@
 //VARIABLES----------------------------------------
 
 
+@property (strong, nonatomic) NSDictionary *selectedUserInfoDictionary;
 
+@property (strong, nonatomic) NSString *selectedUserID;
+
+@property (strong, nonatomic) UIImage *selectedUserProfileImage;
 
 
 //UTIL CLASSES----------------------------------------
@@ -39,6 +44,10 @@
 
 @property (weak, nonatomic) IBOutlet UIView *basicInfoView;
 
+@property (weak, nonatomic) IBOutlet UILabel *nameInfo;
+
+@property (weak, nonatomic) IBOutlet UILabel *identityInfo;
+
 @property (weak, nonatomic) IBOutlet UILabel *statusInfo;
 
 @property (weak, nonatomic) IBOutlet UILabel *summaryInfo;
@@ -46,8 +55,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *experienceInfo;
 
 @property (weak, nonatomic) IBOutlet UIButton *chatNowButtonOutlet;
-
-@property (weak, nonatomic) IBOutlet UIButton *bottomChatNowButtonOutlet;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *infoViewTopConstraint;
 
