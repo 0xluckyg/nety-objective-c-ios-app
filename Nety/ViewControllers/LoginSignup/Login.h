@@ -11,6 +11,7 @@
 #import "UserInformation.h"
 #import "AppDelegate.h"
 #import "Constants.h"
+#import "MBProgressHUD.h"
 
 @import Firebase;
 

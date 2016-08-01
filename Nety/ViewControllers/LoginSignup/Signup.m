@@ -118,6 +118,8 @@
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         [appDelegate setUserIsSigningIn:true];
         
+        
+        
         //Sign up the user
         [[FIRAuth auth]
          createUserWithEmail: [self.userInfo objectAtIndex:0]

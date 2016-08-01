@@ -107,6 +107,7 @@
 }
 
 
+
 //Uploading image to server (make 10 times smaller)
 -(UIImage*)scaleDownImage:(UIImage*)img {
     

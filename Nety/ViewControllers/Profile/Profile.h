@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "UIPrinciples.h"
 #import "Constants.h"
+#import "Messages.h"
 
 @interface Profile : UIViewController
 
@@ -21,6 +22,8 @@
 @property (strong, nonatomic) NSString *selectedUserID;
 
 @property (strong, nonatomic) UIImage *selectedUserProfileImage;
+
+@property (strong, nonatomic) NSCache *imageCache;
 
 
 //UTIL CLASSES----------------------------------------
@@ -65,6 +68,8 @@
 - (IBAction)backButton:(id)sender;
 
 - (IBAction)chatNowButton:(id)sender;
+
+- (IBAction)swipeDown:(id)sender;
 
 
 //-------------------------------------------------

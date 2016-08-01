@@ -14,13 +14,12 @@
 #import "NetworkCell.h"
 #import "Profile.h"
 #import "NetworkData.h"
+#import "MBProgressHUD.h"
 
 
 @import Firebase;
 
-@interface Network : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate> {
-    UIImage *selectedUserBigImage;
-}
+@interface Network : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
 
 //VARIABLES----------------------------------------

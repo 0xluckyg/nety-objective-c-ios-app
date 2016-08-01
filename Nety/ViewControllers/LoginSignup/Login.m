@@ -83,11 +83,19 @@
         
     } else {
         
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode = MBProgressHUDModeIndeterminate;
+        hud.labelText = @"Logging in";
+        hud.color = [self.UIPrinciple.netyBlue colorWithAlphaComponent:0.3f];
+        [hud show:YES];
+        
         [[FIRAuth auth] signInWithEmail:self.email.text
                                password:self.password.text
                              completion:^(FIRUser *user, NSError *error) {
                                  
                                  if (error) {
+                                     [hud hide:YES];
+
                                      [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Problem signing in" message:error.localizedDescription viewController:self];
                                  } else {
                                      
@@ -100,6 +108,8 @@
                                          
                                          //Set user information inside global variables
                                          [self saveUserInformationLocally:firebaseUserInfo userID:userID profileImageUrl:[firebaseUserInfo objectForKey:kProfilePhoto]];
+                                         
+                                         [hud hide:YES];
                                          
                                      } withCancelBlock:^(NSError * _Nonnull error) {
                                          NSLog(@"%@", error.localizedDescription);

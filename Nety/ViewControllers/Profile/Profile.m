@@ -29,12 +29,28 @@
     NSLog(@"%@", self.selectedUserInfoDictionary);
     NSLog(@"%@", self.selectedUserID);
     
+    
+    //If image is not NetyBlueLogo, start downloading and caching the image
+    NSString *photoUrl = [self.selectedUserInfoDictionary objectForKey:kProfilePhoto];
+    
+    if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
+        NSURL *profileImageUrl = [NSURL URLWithString:[self.selectedUserInfoDictionary objectForKey:kProfilePhoto]];
+        [self loadAndCacheImage: profileImageUrl cache:self.imageCache];
+    } else {
+        self.profileImage.image = [UIImage imageNamed:kDefaultUserLogoName];
+    }
+    
 }
 
 
 #pragma mark - Initialization
 //---------------------------------------------------------
 
+- (void)initializeSettings {
+    
+    self.imageCache = [[NSCache alloc] init];
+    
+}
 
 - (void)initializeDesign {
     
@@ -42,8 +58,7 @@
     
     self.view.backgroundColor = self.UIPrinciple.netyBlue;
     
-    //Profile image setup
-    self.profileImage.image = self.selectedUserProfileImage;
+    self.profileImage.image = [UIImage imageNamed:kDefaultUserLogoName];
     
     //Color for the small view
     self.basicInfoView.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.4f];
@@ -124,10 +139,18 @@
 
 - (IBAction)chatNowButton:(id)sender {
     
-
+//    UIStoryboard *messagesStoryboard = [UIStoryboard storyboardWithName:@"Messages" bundle:nil];
+//    UIViewController *messagesVC = [messagesStoryboard instantiateViewControllerWithIdentifier:@"Messages"];
+    
+//    [self presentViewController:messagesVC animated:YES completion:nil];
     
     [self performSegueWithIdentifier:@"MessagesSegue" sender:self];
     
+}
+
+- (IBAction)swipeDown:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+
 }
 
 
@@ -142,8 +165,39 @@
 //---------------------------------------------------------
 
 
-
-
+//Function for downloading and caching the image
+-(void)loadAndCacheImage: (NSURL *)photoUrl cache:(NSCache *)imageCache {
+    
+    NSURL *profileImageUrl = photoUrl;
+    
+    UIImage *cachedImage = [imageCache objectForKey:profileImageUrl];
+    
+    if (cachedImage) {
+        
+        self.profileImage.image = cachedImage;
+        
+    } else {
+        
+        [[[NSURLSession sharedSession] dataTaskWithURL:profileImageUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            if (error != nil) {
+                NSLog(@"%@", error);
+                return;
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                UIImage *downloadedImage = [UIImage imageWithData:data];
+                
+                [self.imageCache setObject:downloadedImage forKey:profileImageUrl];
+                
+                self.profileImage.image = downloadedImage;
+                
+            });
+            
+        }] resume];
+        
+    }
+}
 
 
 //---------------------------------------------------------

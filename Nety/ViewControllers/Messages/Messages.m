@@ -168,7 +168,7 @@
      *
      *  Show a timestamp for every 3rd message
      */
-    if (indexPath.item % 6 == 0) {
+    if (indexPath.item % 15 == 0) {
         //        JSQMessage *message = [self.messages objectAtIndex:indexPath.item];
         return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:[NSDate date]];
     }
@@ -190,7 +190,7 @@
      *
      *  Show a timestamp for every 3rd message
      */
-    if (indexPath.item % 6 == 0) {
+    if (indexPath.item % 15 == 0) {
         return kJSQMessagesCollectionViewCellLabelHeightDefault;
     }
     
@@ -243,18 +243,8 @@
 
 
 -(void)backButtonPressed {
-    CATransition *transition = [CATransition animation];
-    transition.duration = 0.35;
-    transition.timingFunction =
-    [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    transition.type = kCATransitionMoveIn;
-    transition.subtype = kCATransitionFromRight;
     
-    // NSLog(@"%s: self.view.window=%@", _func_, self.view.window);
-    UIView *containerView = self.view.window;
-    [containerView.layer addAnimation:transition forKey:nil];
-    
-    [self dismissViewControllerAnimated:NO completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

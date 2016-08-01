@@ -179,10 +179,17 @@
         NSData *uploadDataBig = UIImagePNGRepresentation(bigProfileImage);
         NSData *uploadDataSmall = UIImagePNGRepresentation(smallProfileImage);
         
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode = MBProgressHUDModeIndeterminate;
+        hud.labelText = @"Uploading";
+        hud.color = [self.UIPrinciple.netyBlue colorWithAlphaComponent:0.3f];
+        [hud show:YES];
+        
         //Uploading big profile picture first
         [profileImageBigRef putData:uploadDataBig metadata:nil completion:^(FIRStorageMetadata * _Nullable metadataBig, NSError * _Nullable error) {
             
             if (error) {
+                [hud hide:YES];
                 NSLog(@"%@", error.localizedDescription);
                 [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Can not upload image" message:@"Please try again at another time" viewController:self];
                 
@@ -199,6 +206,7 @@
                                 metaDataBigUid:[[metadataBig downloadURL] absoluteString]
                               metaDataSmallUid:[[metadataSmall downloadURL] absoluteString]];
                         
+                        [hud hide:YES];
                         [self changeRoot];
                     }
                 }];

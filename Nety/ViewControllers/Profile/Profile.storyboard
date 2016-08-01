@@ -135,6 +135,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="ytb-bu-QIl" firstAttribute="top" secondItem="oTP-Ri-c9z" secondAttribute="top" constant="40" id="4jU-77-rOn"/>
                                     <constraint firstItem="Vv7-TQ-Bjl" firstAttribute="leading" secondItem="oTP-Ri-c9z" secondAttribute="leading" id="8XJ-Gc-sil"/>
@@ -146,6 +147,9 @@
                                     <constraint firstItem="ytb-bu-QIl" firstAttribute="leading" secondItem="oTP-Ri-c9z" secondAttribute="leading" constant="20" id="uEB-0n-oVC"/>
                                     <constraint firstItem="MLP-s6-2Ce" firstAttribute="leading" secondItem="oTP-Ri-c9z" secondAttribute="leading" id="wzH-L7-cjE"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="dfa-6L-r1c" appends="YES" id="XSs-Uc-f3s"/>
+                                </connections>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -178,8 +182,13 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Lp-HJ-hlU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="down" id="dfa-6L-r1c">
+                    <connections>
+                        <action selector="swipeDown:" destination="7tS-Nk-aUc" id="UMM-sv-BWL"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2049" y="270"/>
+            <point key="canvasLocation" x="2861" y="269.5"/>
         </scene>
         <!--Messages-->
         <scene sceneID="Kxv-6F-Jij">
@@ -187,7 +196,26 @@
                 <viewControllerPlaceholder storyboardName="Messages" id="KvN-Nt-IcX" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TfP-UQ-JSF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2410.5" y="-103"/>
+            <point key="canvasLocation" x="3219.5" y="-240"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Ker-vf-nTI">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="m8c-Rw-yQy" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KCv-fr-odL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="7tS-Nk-aUc" kind="relationship" relationship="rootViewController" id="kUr-7k-7no"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uNS-El-6nd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2275" y="269"/>
         </scene>
     </scenes>
     <resources>

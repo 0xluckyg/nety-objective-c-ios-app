@@ -29,7 +29,6 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [self initializeUsers];
-    [self initializeSettings];
     [self.tableView reloadData];
 }
 
@@ -187,21 +186,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSURL *selectedUserBigPhotoUrl = [NSURL URLWithString:[[self.usersArray objectAtIndex:indexPath.row] objectForKey:kProfilePhoto]];
-    
-    //Get image
-    [[[NSURLSession sharedSession] dataTaskWithURL:selectedUserBigPhotoUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if (error != nil) {
-            NSLog(@"%@", error);
-            return;
-        }
-            
-        selectedUserBigImage = [UIImage imageWithData:data];
-        NSLog(@"got image");
-        
-    }] resume];
-    
     [self performSegueWithIdentifier:@"ShowProfileSegue" sender:indexPath];
+    
 }
 
 //Hide keyboard when search button pressed
@@ -228,9 +214,7 @@
         NSUInteger selectedRow = self.tableView.indexPathForSelectedRow.row;
         
         Profile *profilePage = [segue destinationViewController];
-        
-        profilePage.selectedUserProfileImage = selectedUserBigImage;
-        
+                
         profilePage.selectedUserInfoDictionary = [self.usersArray objectAtIndex:selectedRow];
         profilePage.selectedUserID = [self.userIDArray objectAtIndex:selectedRow];
         
