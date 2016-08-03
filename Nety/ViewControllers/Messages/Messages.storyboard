@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="mTM-9r-fN0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vKo-LV-MMT">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -8,13 +8,13 @@
         <!--Messages-->
         <scene sceneID="5Gk-wC-KNQ">
             <objects>
-                <viewController title="Messages" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vKo-LV-MMT" customClass="Messages" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Messages" title="Messages" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vKo-LV-MMT" customClass="Messages" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="K6M-9S-882"/>
                         <viewControllerLayoutGuide type="bottom" id="u2x-wi-wjD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="gbP-mc-fyZ">
-                        <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </view>
                     <navigationItem key="navigationItem" id="Wzl-0I-Twa"/>
@@ -22,31 +22,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8H2-DW-idc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1877" y="-123"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Txq-kc-fun">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RQg-rP-cTN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController storyboardIdentifier="Messages" automaticallyAdjustsScrollViewInsets="NO" id="mTM-9r-fN0" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Bxk-FC-cIu">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Dms-mz-je2">
-                        <rect key="frame" x="0.0" y="692" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </toolbar>
-                    <connections>
-                        <segue destination="vKo-LV-MMT" kind="relationship" relationship="rootViewController" id="X7c-AH-diC"/>
-                    </connections>
-                </navigationController>
-            </objects>
-            <point key="canvasLocation" x="1385" y="-123"/>
+            <point key="canvasLocation" x="1533" y="-130"/>
         </scene>
     </scenes>
 </document>

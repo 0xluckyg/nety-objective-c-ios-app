@@ -23,24 +23,23 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    NSLog(@"2");
+    
     [self initializeSettings];
     [self initializeDesign];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    
+    self.navigationItem.title = @"Near me";
+    
     [self initializeUsers];
-    [self.tableView reloadData];
-}
-
-//Clicked cell will reset
-- (void)viewWillDisappear:(BOOL)animated {
     [self.tableView reloadData];
 }
 
 
 #pragma mark - Initialization
 //---------------------------------------------------------
-
 
 - (void)initializeSettings {
     
@@ -79,10 +78,8 @@
     [self.navigationController.navigationBar setTitleTextAttributes:attributes];
     
     [self.navigationController.navigationBar setItems:@[navItem]];
-    [self.navigationController.navigationBar setBarTintColor:self.UIPrinciple.netyBlue];
-    [self.navigationController.navigationBar setBackgroundColor:self.UIPrinciple.netyBlue];
-    
-    
+//    [self.navigationController.navigationBar setBarTintColor:self.UIPrinciple.netyBlue];
+//    [self.navigationController.navigationBar setBackgroundColor:self.UIPrinciple.netyBlue];
     //Set searchbar
     [self.searchBar setBackgroundImage:[[UIImage alloc]init]];
     [self.searchBarView setBackgroundColor:self.UIPrinciple.netyBlue];
@@ -186,8 +183,18 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    [self performSegueWithIdentifier:@"ShowProfileSegue" sender:indexPath];
+    UIStoryboard *profileStoryboard = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+    Profile *profilePage = [profileStoryboard instantiateViewControllerWithIdentifier:@"Profile"];
     
+    NSUInteger selectedRow = self.tableView.indexPathForSelectedRow.row;
+    
+    NSLog(@"%lu", [self.usersArray count]);
+    
+    profilePage.selectedUserInfoDictionary = [self.usersArray objectAtIndex:selectedRow];
+    profilePage.selectedUserID = [self.userIDArray objectAtIndex:selectedRow];
+    
+    [self.navigationController pushViewController:profilePage animated:YES];
+        
 }
 
 //Hide keyboard when search button pressed
@@ -207,18 +214,8 @@
 //---------------------------------------------------------
 
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    if ([[segue identifier] isEqualToString:@"ShowProfileSegue"]) {
-    
-        NSUInteger selectedRow = self.tableView.indexPathForSelectedRow.row;
-        
-        Profile *profilePage = [segue destinationViewController];
-                
-        profilePage.selectedUserInfoDictionary = [self.usersArray objectAtIndex:selectedRow];
-        profilePage.selectedUserID = [self.userIDArray objectAtIndex:selectedRow];
-        
-    }
+-(void)viewWillDisappear:(BOOL)animated {
+   [self.tableView reloadData];
 }
 
 
@@ -252,8 +249,12 @@
                 
                 UIImage *downloadedImage = [UIImage imageWithData:data];
                 
-                [imageCache setObject:downloadedImage forKey:profileImageUrl];
+                if (downloadedImage != nil) {
                 
+                    [imageCache setObject:downloadedImage forKey:profileImageUrl];
+                
+                }
+                    
                 networkCell.networkUserImage.image = downloadedImage;
                 
             });

@@ -24,7 +24,16 @@
     
     [self initializeSettings];
     [self initializeDesign];
-    [self addDemoMessages];
+//    [self addDemoMessages];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+}
+
+-(bool)hidesBottomBarWhenPushed {
+    return YES;
 }
 
 
@@ -33,15 +42,45 @@
 
 
 - (void)initializeSettings {
-    self.senderId = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-    self.senderDisplayName = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    
+    self.firdatabase = [[FIRDatabase database] reference];
+    
+    self.senderId = [UserInformation getUserID];
+    self.senderDisplayName = [UserInformation getUserID];
+    
+    
+    //Check if the same room exists first
+    [[[self.firdatabase child:@"userDetails"] child:self.senderId] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        NSMutableDictionary *chatRoomInformation = [self makeChatRoom];
+        
+        NSLog(@"%@", self.chatroomID);
+        
+        if (![snapshot hasChild:self.chatroomID]) {
+            //Room
+            [[[self.firdatabase child:@"chats"] child:self.chatroomID] setValue:chatRoomInformation];
+            //Add
+            [[[[self.firdatabase child:@"usersDetails"] child:self.senderId] child:@"chats"] setValue:self.chatroomID];
+        } else {
+            [self observeMessagesFromDatabase];
+        }
+        
+    } withCancelBlock:nil];
     
     self.messages = [[NSMutableArray alloc] init];
+    
 }
 
 - (void)initializeDesign {
     
     self.UIPrinciple = [[UIPrinciples alloc] init];
+    
+    //Style navbar
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
+                                [UIColor whiteColor], NSForegroundColorAttributeName, nil];
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:attributes];
     
     //Set up message style
     JSQMessagesBubbleImageFactory *incomingImage = [[JSQMessagesBubbleImageFactory alloc] initWithBubbleImage:[UIImage jsq_bubbleCompactTaillessImage] capInsets:UIEdgeInsetsZero];
@@ -52,8 +91,12 @@
     self.incomingBubbleImageView = [incomingImage incomingMessagesBubbleImageWithColor:self.UIPrinciple.netyGray];
     
     //Set up avatar image
-    self.incomingBubbleAvatarImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:kDefaultUserLogoName] diameter:35.0f];
-    
+    if ([self.selectedUserProfileImageString isEqualToString:kDefaultUserLogoName]) {
+        self.incomingBubbleAvatarImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:kDefaultUserLogoName] diameter:35.0f];
+    } else {
+        NSLog(@"download called");
+        [self downloadSelectedUserImage];
+    }
     
     //Set user avatar size to zero
     [[self.collectionView collectionViewLayout] setOutgoingAvatarViewSize:CGSizeZero];
@@ -73,23 +116,11 @@
     
     
     
-    //Style the navigation bar
-    UINavigationItem *navItem= [[UINavigationItem alloc] init];
-    navItem.title = @"chat";
-    
+    //Style the navigation bar    
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"Back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:normal target:self action:@selector(backButtonPressed)];
     
-    navItem.leftBarButtonItem = leftButton;
-    
-    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
-                                [UIColor whiteColor], NSForegroundColorAttributeName, nil];
-    
-    [[UINavigationBar appearance] setTitleTextAttributes:attributes];
-    
-    [self.navigationController.navigationBar setItems:@[navItem]];
-    [self.navigationController.navigationBar setBarTintColor:self.UIPrinciple.netyBlue];
-    [self.navigationController.navigationBar setBackgroundColor:self.UIPrinciple.netyBlue];
+    self.navigationItem.leftBarButtonItem = leftButton;
+    self.navigationItem.title = @"Name";
     
 }
 
@@ -205,7 +236,7 @@
 - (void)didPressAccessoryButton:(UIButton *)sender
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Image Source"
-                                                                   message:@"This is an alert."
+                                                                   message:@"How would you like to send file?"
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
     
     UIAlertAction *camera = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleDefault
@@ -230,7 +261,17 @@
 }
 
 -(void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text senderId:(NSString *)senderId senderDisplayName:(NSString *)senderDisplayName date:(NSDate *)date {
+    
     JSQMessage *message = [[JSQMessage alloc] initWithSenderId:senderId senderDisplayName:senderDisplayName date:date text:text];
+        
+    NSNumber *secondsSince1970 = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]];
+    
+    NSDictionary *messageData = @{ @"senderId": senderId,
+                                   @"senderDisplayName": senderDisplayName,
+                                   @"date": secondsSince1970,
+                                   @"text": text};
+    
+    [[[[self.firdatabase child:@"chats"] child:self.chatroomID] childByAutoId] setValue:messageData];
     
     [self.messages addObject:message];
     [self finishSendingMessage];
@@ -244,7 +285,13 @@
 
 -(void)backButtonPressed {
     
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
+
+-(void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
 }
 
 
@@ -252,28 +299,114 @@
 //---------------------------------------------------------
 
 
-- (void)addDemoMessages {
-    NSString *sender;
+- (void)observeMessagesFromDatabase {
     
-    for (int i = 1; i <= 10; i ++) {
-        if (i % 2 == 0) {
-            sender = @"server";
-        } else {
-            sender = self.senderId;
-        }
+    [[[self.firdatabase child:@"chats"] child:self.chatroomID] observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
-        NSString *messageContent = [NSString stringWithFormat:@"Messages rn. %i", i];
-        NSDate *todaysDate = [NSDate date];
+        NSMutableDictionary *messagesDictionary = snapshot.value;
+        NSString *senderIdFromDatabase = [messagesDictionary objectForKey:@"senderId"];
+        NSString *senderDisplaynameFromDatabase = [messagesDictionary objectForKey:@"senderDisplayName"];
+        double timeSince1970Double = [[messagesDictionary objectForKey:@"date"] doubleValue];
+        NSDate * messageDate = [self convertDoubleToDate:timeSince1970Double];
+        NSString *textFromDatabase = [messagesDictionary objectForKey:@"text"];
+        JSQMessage *jsqMessage = [[JSQMessage alloc] initWithSenderId:senderIdFromDatabase senderDisplayName:senderDisplaynameFromDatabase date:messageDate text:textFromDatabase];
+
+        [self.messages addObject:jsqMessage];
         
-        JSQMessage *message = [[JSQMessage alloc] initWithSenderId:sender senderDisplayName:sender date:todaysDate text:messageContent];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.collectionView reloadData];
+        });
         
-        [self.messages addObject:message];
+    } withCancelBlock:nil];
+
+}
+
+- (NSDate *)convertDoubleToDate: (double)timeIntervalDouble {
+    NSNumber *timeIntervalInNumber = [NSNumber numberWithDouble:timeIntervalDouble];
+    NSTimeInterval timeInterval = [timeIntervalInNumber doubleValue];
+    
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+    
+    return date;
+}
+
+- (NSMutableDictionary *)makeChatRoom {
+    
+    //Making a room
+    NSComparisonResult result = [self.senderId compare:self.selectedUserID];
+    NSMutableDictionary *chatRoomInformation;
+    NSNumber *secondsSince1970 = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]];
+    
+    if (result == NSOrderedAscending) {
+        
+        self.chatroomID = [NSString stringWithFormat:@"%@%@", self.senderId, self.selectedUserID];
+        
+        chatRoomInformation = [[NSMutableDictionary alloc] initWithDictionary: @{@"created": secondsSince1970,
+                                                                                 @"members": @{
+                                                                                         @"member1": self.senderId,
+                                                                                         @"member2": self.selectedUserID}}];
+        
+        
+    } else {
+        
+        self.chatroomID = [NSString stringWithFormat:@"%@%@", self.selectedUserID, self.senderId];
+        chatRoomInformation = [[NSMutableDictionary alloc] initWithDictionary: @{@"created": secondsSince1970,
+                                                                                 @"members": @{
+                                                                                         @"member1": self.selectedUserID,
+                                                                                         @"member2": self.senderId}}];
         
     }
     
-    //Reload messages
-    [self.collectionView reloadData];
+    return chatRoomInformation;
 }
+
+- (void)downloadSelectedUserImage {
+    
+    NSURL *profileImageUrl = [NSURL URLWithString: self.selectedUserProfileImageString];
+    
+    [[[NSURLSession sharedSession] dataTaskWithURL:profileImageUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"%@", error);
+            return;
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            UIImage *downloadedImage = [UIImage imageWithData:data];
+            
+            NSLog(@"%@", downloadedImage);
+            
+            self.incomingBubbleAvatarImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:downloadedImage diameter:35.0f];
+            
+        });
+        
+        [self.collectionView reloadData];
+        
+    }] resume];
+}
+
+//- (void)addDemoMessages {
+//    NSString *sender;
+//    
+//    for (int i = 1; i <= 10; i ++) {
+//        if (i % 2 == 0) {
+//            sender = @"server";
+//        } else {
+//            sender = self.senderId;
+//        }
+//        
+//        NSString *messageContent = [NSString stringWithFormat:@"Messages rn. %i", i];
+//        NSDate *todaysDate = [NSDate date];
+//        
+//        JSQMessage *message = [[JSQMessage alloc] initWithSenderId:sender senderDisplayName:sender date:todaysDate text:messageContent];
+//        
+//        [self.messages addObject:message];
+//        
+//    }
+//    
+//    //Reload messages
+//    [self.collectionView reloadData];
+//}
 
 
 //---------------------------------------------------------

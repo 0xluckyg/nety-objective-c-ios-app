@@ -23,23 +23,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    NSLog(@"view load");
     
+    [self initializeSettings];
     [self initializeDesign];
     
-    NSLog(@"%@", self.selectedUserInfoDictionary);
-    NSLog(@"%@", self.selectedUserID);
+//    NSLog(@"%@", self.selectedUserInfoDictionary);
+//    NSLog(@"%@", self.selectedUserID);
     
-    
-    //If image is not NetyBlueLogo, start downloading and caching the image
-    NSString *photoUrl = [self.selectedUserInfoDictionary objectForKey:kProfilePhoto];
-    
-    if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
-        NSURL *profileImageUrl = [NSURL URLWithString:[self.selectedUserInfoDictionary objectForKey:kProfilePhoto]];
-        [self loadAndCacheImage: profileImageUrl cache:self.imageCache];
-    } else {
-        self.profileImage.image = [UIImage imageNamed:kDefaultUserLogoName];
-    }
-    
+}
+
+-(BOOL)hidesBottomBarWhenPushed {
+    return YES;
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
 }
 
 
@@ -53,8 +53,19 @@
 }
 
 - (void)initializeDesign {
-    
     self.UIPrinciple = [[UIPrinciples alloc] init];
+    
+    //If image is not NetyBlueLogo, start downloading and caching the image
+    NSString *photoUrl = [self.selectedUserInfoDictionary objectForKey:kProfilePhoto];
+    
+    if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
+        NSURL *profileImageUrl = [NSURL URLWithString:[self.selectedUserInfoDictionary objectForKey:kProfilePhoto]];
+        [self loadAndCacheImage: profileImageUrl cache:self.imageCache];
+    } else {
+        self.profileImage.image = [UIImage imageNamed:kDefaultUserLogoName];
+    }
+    
+    self.profileImage.layer.masksToBounds = YES;
     
     self.view.backgroundColor = self.UIPrinciple.netyBlue;
     
@@ -134,18 +145,20 @@
 
 
 - (IBAction)backButton:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)chatNowButton:(id)sender {
     
-//    UIStoryboard *messagesStoryboard = [UIStoryboard storyboardWithName:@"Messages" bundle:nil];
-//    UIViewController *messagesVC = [messagesStoryboard instantiateViewControllerWithIdentifier:@"Messages"];
     
-//    [self presentViewController:messagesVC animated:YES completion:nil];
+    UIStoryboard *messagesStoryboard = [UIStoryboard storyboardWithName:@"Messages" bundle:nil];
+    Messages *messagesVC = [messagesStoryboard instantiateViewControllerWithIdentifier:@"Messages"];
     
-    [self performSegueWithIdentifier:@"MessagesSegue" sender:self];
+    messagesVC.selectedUserID = self.selectedUserID;
+    messagesVC.selectedUserProfileImageString = [self.selectedUserInfoDictionary objectForKey:kSmallProfilePhoto];
     
+    [self.navigationController pushViewController:messagesVC animated:YES];
+
 }
 
 - (IBAction)swipeDown:(id)sender {
@@ -157,9 +170,10 @@
 #pragma mark - View Disappear
 //---------------------------------------------------------
 
-
-
-
+-(void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+}
 
 #pragma mark - Custom methods
 //---------------------------------------------------------
@@ -171,6 +185,9 @@
     NSURL *profileImageUrl = photoUrl;
     
     UIImage *cachedImage = [imageCache objectForKey:profileImageUrl];
+    
+    NSLog(@"%@", imageCache);
+    NSLog(@"%@", cachedImage);
     
     if (cachedImage) {
         

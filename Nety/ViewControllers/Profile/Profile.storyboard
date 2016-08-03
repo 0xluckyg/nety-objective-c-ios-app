@@ -9,7 +9,7 @@
         <!--Profile-->
         <scene sceneID="gJz-Hi-453">
             <objects>
-                <viewController storyboardIdentifier="Profile" title="Profile" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7tS-Nk-aUc" customClass="Profile" sceneMemberID="viewController">
+                <viewController restorationIdentifier="Profile" storyboardIdentifier="Profile" title="Profile" id="7tS-Nk-aUc" customClass="Profile" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wAl-dj-vNv"/>
                         <viewControllerLayoutGuide type="bottom" id="cpI-2G-POU"/>
@@ -148,11 +148,13 @@
                                     <constraint firstItem="MLP-s6-2Ce" firstAttribute="leading" secondItem="oTP-Ri-c9z" secondAttribute="leading" id="wzH-L7-cjE"/>
                                 </constraints>
                                 <connections>
+                                    <outletCollection property="gestureRecognizers" destination="dfa-6L-r1c" appends="YES" id="sh8-Mv-9ye"/>
                                     <outletCollection property="gestureRecognizers" destination="dfa-6L-r1c" appends="YES" id="XSs-Uc-f3s"/>
                                 </connections>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="f5s-GQ-Edf" firstAttribute="leading" secondItem="mgg-RU-9ip" secondAttribute="leading" id="4zb-ee-Zi3"/>
                             <constraint firstAttribute="trailing" secondItem="oTP-Ri-c9z" secondAttribute="trailing" id="CNu-2t-6C2"/>
@@ -163,6 +165,9 @@
                             <constraint firstItem="Vv7-TQ-Bjl" firstAttribute="width" secondItem="mgg-RU-9ip" secondAttribute="width" id="bEt-KT-d3z"/>
                             <constraint firstAttribute="trailing" secondItem="f5s-GQ-Edf" secondAttribute="trailing" id="eFh-dO-2MZ"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="dfa-6L-r1c" appends="YES" id="cK8-vI-LYu"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="UDk-Zu-cOS"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -182,7 +187,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Lp-HJ-hlU" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="down" id="dfa-6L-r1c">
+                <swipeGestureRecognizer direction="right" id="dfa-6L-r1c">
                     <connections>
                         <action selector="swipeDown:" destination="7tS-Nk-aUc" id="UMM-sv-BWL"/>
                     </connections>
@@ -197,25 +202,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TfP-UQ-JSF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3219.5" y="-240"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Ker-vf-nTI">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="m8c-Rw-yQy" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KCv-fr-odL">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="7tS-Nk-aUc" kind="relationship" relationship="rootViewController" id="kUr-7k-7no"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uNS-El-6nd" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2275" y="269"/>
         </scene>
     </scenes>
     <resources>

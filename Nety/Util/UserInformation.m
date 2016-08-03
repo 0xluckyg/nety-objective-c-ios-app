@@ -27,6 +27,7 @@ static UIImage *profileImage;
 static NSMutableArray *experiences;
 
 
+static NSCache *imagesCache;
 
 +(NSString *) getUserID {
     return userID;
@@ -60,6 +61,11 @@ static NSMutableArray *experiences;
     return experiences;
 };
 
++(NSCache *)getImagesCache {
+    return imagesCache;
+}
+
+
 +(void) setUserID: (NSString *)setUserID {
     userID = setUserID;
 };
@@ -91,5 +97,9 @@ static NSMutableArray *experiences;
 +(void) setExperiences: (NSMutableArray *)setExperiences {
     experiences = setExperiences;
 };
+
++(void) setImagesCache: (UIImage *)image {
+    
+}
 
 @end

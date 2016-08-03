@@ -38,6 +38,9 @@
 
 
 - (void)initializeSettings {
+    
+    
+    
     self.userData = [[NetworkData alloc] init];
 }
 
@@ -134,7 +137,12 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:@"MessagesSegue" sender:self];
+    
+    UIStoryboard *messagesStoryboard = [UIStoryboard storyboardWithName:@"Messages" bundle:nil];
+    UIViewController *messagesVC = [messagesStoryboard instantiateViewControllerWithIdentifier:@"Messages"];
+    
+    [self.navigationController pushViewController:messagesVC animated:YES];
+    
 }
 
 //Close cell when other is cell is opened

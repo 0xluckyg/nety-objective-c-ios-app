@@ -10,14 +10,25 @@
 #import <JSQMessagesViewController/JSQMessages.h> 
 #import "UIPrinciples.h"
 #import "Constants.h"
+#import "UserInformation.h"
 
-@interface Messages : JSQMessagesViewController
+@import Firebase;
+
+@interface Messages : JSQMessagesViewController 
 
 
 //VARIABLES----------------------------------------
 
 
 @property (strong, nonatomic) NSMutableArray *messages;
+
+@property (strong, nonatomic) NSString *selectedUserID;
+
+@property (strong, nonatomic) NSString *selectedUserProfileImageString;
+
+@property (strong, nonatomic) UIImage *selectedUserProfileImage;
+
+@property (weak, nonatomic) NSString *chatroomID;
 
 
 //UTIL CLASSES----------------------------------------
@@ -28,6 +39,8 @@
 
 //LIB CLASSES----------------------------------------
 
+
+@property (strong, nonatomic) FIRDatabaseReference *firdatabase;
 
 @property (strong, nonatomic) JSQMessagesBubbleImage *outgoingBubbleImageView;
 

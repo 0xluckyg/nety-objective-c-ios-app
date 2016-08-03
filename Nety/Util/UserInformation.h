@@ -21,6 +21,8 @@
 +(UIImage *) getProfileImage;
 +(NSMutableArray *) getExperiences;
 
++(NSCache *)getImagesCache;
+
 +(void) setUserID: (NSString *)userID;
 +(void) setName: (NSString *)name;
 +(void) setAge: (NSInteger)age;
@@ -29,5 +31,7 @@
 +(void) setSummary: (NSString *)summary;
 +(void) setProfileImage: (UIImage *)profileImage;
 +(void) setExperiences: (NSMutableArray *)experiences;
+
++(void) setImagesCache: (UIImage *)image;
 
 @end

@@ -82,8 +82,7 @@
 }
 
 -(void)initializeDesign {
-    [self.window setBackgroundColor:self.UIPrinciple.netyBlue];
-    [UINavigationBar appearance].clipsToBounds = YES;
+    [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
     [[UINavigationBar appearance] setBarTintColor:self.UIPrinciple.netyBlue];
 }
 
