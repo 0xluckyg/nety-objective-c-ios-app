@@ -156,6 +156,7 @@
     
     messagesVC.selectedUserID = self.selectedUserID;
     messagesVC.selectedUserProfileImageString = [self.selectedUserInfoDictionary objectForKey:kSmallProfilePhoto];
+    messagesVC.selectedUserName = [NSString stringWithFormat:@"%@ %@", [self.selectedUserInfoDictionary objectForKey:kFirstName], [self.selectedUserInfoDictionary objectForKey:kLastName]];
     
     [self.navigationController pushViewController:messagesVC animated:YES];
 

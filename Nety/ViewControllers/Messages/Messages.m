@@ -24,7 +24,6 @@
     
     [self initializeSettings];
     [self initializeDesign];
-//    [self addDemoMessages];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -46,26 +45,9 @@
     self.firdatabase = [[FIRDatabase database] reference];
     
     self.senderId = [UserInformation getUserID];
-    self.senderDisplayName = [UserInformation getUserID];
+    self.senderDisplayName = [UserInformation getName];
     
-    
-    //Check if the same room exists first
-    [[[self.firdatabase child:@"userDetails"] child:self.senderId] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-        
-        NSMutableDictionary *chatRoomInformation = [self makeChatRoom];
-        
-        NSLog(@"%@", self.chatroomID);
-        
-        if (![snapshot hasChild:self.chatroomID]) {
-            //Room
-            [[[self.firdatabase child:@"chats"] child:self.chatroomID] setValue:chatRoomInformation];
-            //Add
-            [[[[self.firdatabase child:@"usersDetails"] child:self.senderId] child:@"chats"] setValue:self.chatroomID];
-        } else {
-            [self observeMessagesFromDatabase];
-        }
-        
-    } withCancelBlock:nil];
+    [self createRoomAndObserveMessages];
     
     self.messages = [[NSMutableArray alloc] init];
     
@@ -79,6 +61,7 @@
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
                                 [UIColor whiteColor], NSForegroundColorAttributeName, nil];
+    self.navigationItem.title = self.selectedUserName;
     
     [self.navigationController.navigationBar setTitleTextAttributes:attributes];
     
@@ -94,7 +77,7 @@
     if ([self.selectedUserProfileImageString isEqualToString:kDefaultUserLogoName]) {
         self.incomingBubbleAvatarImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:kDefaultUserLogoName] diameter:35.0f];
     } else {
-        NSLog(@"download called");
+        NSLog(@"download image called");
         [self downloadSelectedUserImage];
     }
     
@@ -120,7 +103,6 @@
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"Back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:normal target:self action:@selector(backButtonPressed)];
     
     self.navigationItem.leftBarButtonItem = leftButton;
-    self.navigationItem.title = @"Name";
     
 }
 
@@ -147,7 +129,7 @@
     
     JSQMessage *data = self.messages[indexPath.row];
     
-    if (data.senderId == self.senderId) {
+    if ([data.senderId isEqualToString: self.senderId]) {
         return self.outgoingBubbleImageView;
     } else {
         return self.incomingBubbleImageView;
@@ -158,7 +140,7 @@
 -(id<JSQMessageAvatarImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageDataForItemAtIndexPath:(NSIndexPath *)indexPath {
     JSQMessage *data = self.messages[indexPath.row];
     
-    if (data.senderId == self.senderId) {
+    if ([data.senderId isEqualToString: self.senderId]) {
         return nil;
     } else {
         return self.incomingBubbleAvatarImage;
@@ -193,15 +175,20 @@
 //Date for top labels
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    /**
-     *  This logic should be consistent with what you return from `heightForCellTopLabelAtIndexPath:`
-     *  The other label text delegate methods should follow a similar pattern.
-     *
-     *  Show a timestamp for every 3rd message
-     */
-    if (indexPath.item % 15 == 0) {
-        //        JSQMessage *message = [self.messages objectAtIndex:indexPath.item];
-        return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:[NSDate date]];
+    
+    //Height for top labels has to match date for top labels
+    JSQMessage *message = [self.messages objectAtIndex:indexPath.item];
+    
+    if (indexPath.item == 0) {
+        return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
+    }
+    
+    if (indexPath.item - 1 > 0) {
+        JSQMessage *previousMessage = [self.messages objectAtIndex:indexPath.item - 1];
+        
+        if ([message.date timeIntervalSinceDate:previousMessage.date] / 60 > 1) {
+            return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
+        }
     }
     
     return nil;
@@ -211,18 +198,19 @@
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
                    layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
-    /**
-     *  Each label in a cell has a `height` delegate method that corresponds to its text dataSource method
-     */
     
-    /**
-     *  This logic should be consistent with what you return from `attributedTextForCellTopLabelAtIndexPath:`
-     *  The other label height delegate methods should follow similarly
-     *
-     *  Show a timestamp for every 3rd message
-     */
-    if (indexPath.item % 15 == 0) {
+    //Height for top labels has to match date for top labels
+    if (indexPath.item == 0) {
         return kJSQMessagesCollectionViewCellLabelHeightDefault;
+    }
+    
+    if (indexPath.item - 1 > 0) {
+        JSQMessage *previousMessage = [self.messages objectAtIndex:indexPath.item - 1];
+        JSQMessage *message = [self.messages objectAtIndex:indexPath.item];
+        
+        if ([message.date timeIntervalSinceDate:previousMessage.date] / 60 > 1) {
+            return kJSQMessagesCollectionViewCellLabelHeightDefault;
+        }
     }
     
     return 0.0f;
@@ -262,20 +250,25 @@
 
 -(void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text senderId:(NSString *)senderId senderDisplayName:(NSString *)senderDisplayName date:(NSDate *)date {
     
-    JSQMessage *message = [[JSQMessage alloc] initWithSenderId:senderId senderDisplayName:senderDisplayName date:date text:text];
-        
-    NSNumber *secondsSince1970 = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]];
+    NSNumber *secondsSince1970 = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970]];
     
     NSDictionary *messageData = @{ @"senderId": senderId,
                                    @"senderDisplayName": senderDisplayName,
                                    @"date": secondsSince1970,
                                    @"text": text};
     
-    [[[[self.firdatabase child:@"chats"] child:self.chatroomID] childByAutoId] setValue:messageData];
+    [[[[[self.firdatabase child:@"chats"] child:self.chatroomID] child:@"messages" ] childByAutoId] setValue:messageData];
     
-    [self.messages addObject:message];
+    if (otherUserStatus == 0) {
+        
+        readcount += 1;
+        NSNumber *readcountToDatabase = @(readcount);
+        
+        [[[[[self.firdatabase child:@"userDetails"] child:self.selectedUserID] child:@"chats"] child:self.chatroomID] updateChildValues:@{@"unread":readcountToDatabase}];
+        
+    }
+    
     [self finishSendingMessage];
-    
 }
 
 
@@ -292,16 +285,125 @@
 -(void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    
+    //If no messages, delete chat rooms
+    if ([self.messages count] == 0) {
+        
+        //Remove room
+        [[[self.firdatabase child:@"chats"] child:self.chatroomID] removeValue];
+        //Remove value
+        [[[[[self.firdatabase child:@"userDetails"]
+                child:self.senderId]
+                child:@"chats"]
+                child:self.chatroomID]
+                removeValue];
+        
+        [[[[[self.firdatabase child:@"userDetails"]
+                child:self.selectedUserID]
+                child:@"chats"]
+                child:self.chatroomID]
+                removeValue];
+        
+    }
+    
+    
+    [[[[[self.firdatabase child:@"userDetails"] child:self.senderId] child:@"chats"] child:self.chatroomID] updateChildValues:@{@"online": @0}];
+    
 }
 
 
 #pragma mark - Custom methods
 //---------------------------------------------------------
 
+- (void)createRoomAndObserveMessages {
+    
+    NSMutableDictionary *chatRoomInformation = [self makeChatRoomID];
+    
+    //Check if the same room exists first
+    [[[[self.firdatabase child:@"userDetails"] child:self.senderId] child:@"chats"] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        if (![snapshot hasChild:self.chatroomID]) {
+            
+            NSLog(@"created room");
+            
+            //Room
+            [[[self.firdatabase child:@"chats"] child:self.chatroomID] setValue:chatRoomInformation];
+            //Add to both the user and selected user
+            [[[[[[self.firdatabase child:@"userDetails"]
+                                    child:self.senderId]
+                                    child:@"chats"]
+                                    child:self.chatroomID]
+                                    child:@"unread"]
+                                    setValue:@0];
+            [[[[[[self.firdatabase child:@"userDetails"]
+                                    child:self.senderId]
+                                    child:@"chats"]
+                                    child:self.chatroomID]
+                                    child:@"type"]
+                                    setValue:@0];
+            
+            [[[[[[self.firdatabase child:@"userDetails"]
+                                    child:self.selectedUserID]
+                                    child:@"chats"]
+                                    child:self.chatroomID]
+                                    child:@"unread"]
+                                    setValue:@0];
+            [[[[[[self.firdatabase child:@"userDetails"]
+                                    child:self.selectedUserID]
+                                    child:@"chats"]
+                                    child:self.chatroomID]
+                                    child:@"type"]
+                                    setValue:@0];
+            
+            
+            
+            [self observeMessagesFromDatabase];
+        } else {
+            
+            [self observeMessagesFromDatabase];
+            
+            NSLog(@"%li", (long)readcount);
+            
+            //Set user's own readcount to 0 when entering chat room
+            [[[[[self.firdatabase child:@"userDetails"] child:self.senderId] child:@"chats"] child:self.chatroomID] updateChildValues:@{@"unread": @0}];
+            //Set user's online status to 0 when entering chat room
+            [[[[[self.firdatabase child:@"userDetails"] child:self.senderId] child:@"chats"] child:self.chatroomID] updateChildValues:@{@"online": @1}];
+            
+            [self listenForReadCountAndOnlineStatus];
+            
+        }
+        
+    } withCancelBlock:nil];
+
+}
+
+- (void)listenForReadCountAndOnlineStatus {
+    
+    //Listen for other person's read count
+    [[[[[self.firdatabase child:@"userDetails"] child:self.selectedUserID] child:@"chats"] child:self.chatroomID] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        if ([snapshot hasChild:@"unread"]) {
+            NSDictionary *readCountDictionary = snapshot.value;
+            readcount = [[readCountDictionary objectForKey:@"unread"] integerValue];
+            NSLog(@"snapshot value %@", snapshot.value);
+            NSLog(@"our readcount %li", readcount);
+        } else {
+            readcount = 0;
+        }
+        
+        if ([snapshot hasChild:@"online"]) {
+            NSDictionary *onlineUserStatusDictionary = snapshot.value;
+            otherUserStatus = [[onlineUserStatusDictionary objectForKey:@"online"] integerValue];
+            
+        }
+        
+    } withCancelBlock:nil];
+
+}
 
 - (void)observeMessagesFromDatabase {
     
-    [[[self.firdatabase child:@"chats"] child:self.chatroomID] observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    [[[[self.firdatabase child:@"chats"] child:self.chatroomID] child:@"messages"] observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
         NSMutableDictionary *messagesDictionary = snapshot.value;
         NSString *senderIdFromDatabase = [messagesDictionary objectForKey:@"senderId"];
@@ -310,7 +412,7 @@
         NSDate * messageDate = [self convertDoubleToDate:timeSince1970Double];
         NSString *textFromDatabase = [messagesDictionary objectForKey:@"text"];
         JSQMessage *jsqMessage = [[JSQMessage alloc] initWithSenderId:senderIdFromDatabase senderDisplayName:senderDisplaynameFromDatabase date:messageDate text:textFromDatabase];
-
+        
         [self.messages addObject:jsqMessage];
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -322,7 +424,7 @@
 }
 
 - (NSDate *)convertDoubleToDate: (double)timeIntervalDouble {
-    NSNumber *timeIntervalInNumber = [NSNumber numberWithDouble:timeIntervalDouble];
+    NSNumber *timeIntervalInNumber = [NSNumber numberWithInt:timeIntervalDouble];
     NSTimeInterval timeInterval = [timeIntervalInNumber doubleValue];
     
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
@@ -330,12 +432,12 @@
     return date;
 }
 
-- (NSMutableDictionary *)makeChatRoom {
+- (NSMutableDictionary *)makeChatRoomID {
     
     //Making a room
     NSComparisonResult result = [self.senderId compare:self.selectedUserID];
     NSMutableDictionary *chatRoomInformation;
-    NSNumber *secondsSince1970 = [NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]];
+    NSNumber *secondsSince1970 = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970]];
     
     if (result == NSOrderedAscending) {
         
@@ -378,35 +480,12 @@
             
             self.incomingBubbleAvatarImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:downloadedImage diameter:35.0f];
             
+            [self.collectionView reloadData];
+            
         });
-        
-        [self.collectionView reloadData];
         
     }] resume];
 }
-
-//- (void)addDemoMessages {
-//    NSString *sender;
-//    
-//    for (int i = 1; i <= 10; i ++) {
-//        if (i % 2 == 0) {
-//            sender = @"server";
-//        } else {
-//            sender = self.senderId;
-//        }
-//        
-//        NSString *messageContent = [NSString stringWithFormat:@"Messages rn. %i", i];
-//        NSDate *todaysDate = [NSDate date];
-//        
-//        JSQMessage *message = [[JSQMessage alloc] initWithSenderId:sender senderDisplayName:sender date:todaysDate text:messageContent];
-//        
-//        [self.messages addObject:message];
-//        
-//    }
-//    
-//    //Reload messages
-//    [self.collectionView reloadData];
-//}
 
 
 //---------------------------------------------------------

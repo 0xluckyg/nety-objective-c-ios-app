@@ -14,7 +14,10 @@
 
 @import Firebase;
 
-@interface Messages : JSQMessagesViewController 
+@interface Messages : JSQMessagesViewController {
+    NSInteger readcount;
+    NSInteger otherUserStatus;
+}
 
 
 //VARIABLES----------------------------------------
@@ -26,9 +29,11 @@
 
 @property (strong, nonatomic) NSString *selectedUserProfileImageString;
 
+@property (strong, nonatomic) NSString *selectedUserName;
+
 @property (strong, nonatomic) UIImage *selectedUserProfileImage;
 
-@property (weak, nonatomic) NSString *chatroomID;
+@property (strong, nonatomic) NSString *chatroomID;
 
 
 //UTIL CLASSES----------------------------------------

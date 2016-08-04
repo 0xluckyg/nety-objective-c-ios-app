@@ -92,6 +92,9 @@
     //Configure Firebase
     [FIRApp configure];
     
+    //Enable presistence
+    [FIRDatabase database].persistenceEnabled = YES;
+    
     //Notification setup
     UIUserNotificationType allNotificationTypes =
     (UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge);
