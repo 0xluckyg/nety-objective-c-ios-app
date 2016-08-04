@@ -77,7 +77,6 @@
     if ([self.selectedUserProfileImageString isEqualToString:kDefaultUserLogoName]) {
         self.incomingBubbleAvatarImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:kDefaultUserLogoName] diameter:35.0f];
     } else {
-        NSLog(@"download image called");
         [self downloadSelectedUserImage];
     }
     
@@ -252,19 +251,19 @@
     
     NSNumber *secondsSince1970 = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970]];
     
-    NSDictionary *messageData = @{ @"senderId": senderId,
-                                   @"senderDisplayName": senderDisplayName,
-                                   @"date": secondsSince1970,
-                                   @"text": text};
+    NSDictionary *messageData = @{ kSenderId: senderId,
+                                   kSenderDisplayName: senderDisplayName,
+                                   kDate: secondsSince1970,
+                                   kText: text};
     
-    [[[[[self.firdatabase child:@"chats"] child:self.chatroomID] child:@"messages" ] childByAutoId] setValue:messageData];
+    [[[[[self.firdatabase child:kChatRooms] child:self.chatroomID] child:kMessages ] childByAutoId] setValue:messageData];
     
     if (otherUserStatus == 0) {
         
         readcount += 1;
         NSNumber *readcountToDatabase = @(readcount);
         
-        [[[[[self.firdatabase child:@"userDetails"] child:self.selectedUserID] child:@"chats"] child:self.chatroomID] updateChildValues:@{@"unread":readcountToDatabase}];
+        [[[[[self.firdatabase child:kUserDetails] child:self.selectedUserID] child:kChats] child:self.chatroomID] updateChildValues:@{kUnread:readcountToDatabase}];
         
     }
     
@@ -286,28 +285,27 @@
     [super viewWillDisappear:animated];
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
     
+    [[[[[self.firdatabase child:kUserDetails] child:self.senderId] child:kChats] child:self.chatroomID] updateChildValues:@{kOnline: @0}];
+    
     //If no messages, delete chat rooms
     if ([self.messages count] == 0) {
         
         //Remove room
-        [[[self.firdatabase child:@"chats"] child:self.chatroomID] removeValue];
+        [[[self.firdatabase child:kChatRooms] child:self.chatroomID] removeValue];
         //Remove value
-        [[[[[self.firdatabase child:@"userDetails"]
+        [[[[[self.firdatabase child:kUserDetails]
                 child:self.senderId]
-                child:@"chats"]
+                child:kChats]
                 child:self.chatroomID]
                 removeValue];
         
-        [[[[[self.firdatabase child:@"userDetails"]
+        [[[[[self.firdatabase child:kUserDetails]
                 child:self.selectedUserID]
-                child:@"chats"]
+                child:kChats]
                 child:self.chatroomID]
                 removeValue];
         
     }
-    
-    
-    [[[[[self.firdatabase child:@"userDetails"] child:self.senderId] child:@"chats"] child:self.chatroomID] updateChildValues:@{@"online": @0}];
     
 }
 
@@ -320,44 +318,37 @@
     NSMutableDictionary *chatRoomInformation = [self makeChatRoomID];
     
     //Check if the same room exists first
-    [[[[self.firdatabase child:@"userDetails"] child:self.senderId] child:@"chats"] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    [[[[self.firdatabase child:kUserDetails] child:self.senderId] child:kChats] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
-        if (![snapshot hasChild:self.chatroomID]) {
+        NSLog(@"this is snapshot value %@", snapshot.value);
+        
+        if (![snapshot hasChild:self.chatroomID] || snapshot.value == NULL) {
             
             NSLog(@"created room");
             
             //Room
-            [[[self.firdatabase child:@"chats"] child:self.chatroomID] setValue:chatRoomInformation];
+            [[[self.firdatabase child:kChatRooms] child:self.chatroomID] setValue:chatRoomInformation];
             //Add to both the user and selected user
-            [[[[[[self.firdatabase child:@"userDetails"]
+            [[[[[[self.firdatabase child:kUserDetails]
                                     child:self.senderId]
-                                    child:@"chats"]
+                                    child:kChats]
                                     child:self.chatroomID]
-                                    child:@"unread"]
-                                    setValue:@0];
-            [[[[[[self.firdatabase child:@"userDetails"]
-                                    child:self.senderId]
-                                    child:@"chats"]
-                                    child:self.chatroomID]
-                                    child:@"type"]
+                                    child:kUnread]
                                     setValue:@0];
             
-            [[[[[[self.firdatabase child:@"userDetails"]
+            [[[[[[self.firdatabase child:kUserDetails]
                                     child:self.selectedUserID]
-                                    child:@"chats"]
+                                    child:kChats]
                                     child:self.chatroomID]
-                                    child:@"unread"]
-                                    setValue:@0];
-            [[[[[[self.firdatabase child:@"userDetails"]
-                                    child:self.selectedUserID]
-                                    child:@"chats"]
-                                    child:self.chatroomID]
-                                    child:@"type"]
+                                    child:kUnread]
                                     setValue:@0];
             
-            
+            //Set user's online status to 0 when entering chat room
+            [[[[[self.firdatabase child:kUserDetails] child:self.senderId] child:kChats] child:self.chatroomID] updateChildValues:@{kOnline: @1}];
             
             [self observeMessagesFromDatabase];
+            [self listenForReadCountAndOnlineStatus];
+            
         } else {
             
             [self observeMessagesFromDatabase];
@@ -365,9 +356,9 @@
             NSLog(@"%li", (long)readcount);
             
             //Set user's own readcount to 0 when entering chat room
-            [[[[[self.firdatabase child:@"userDetails"] child:self.senderId] child:@"chats"] child:self.chatroomID] updateChildValues:@{@"unread": @0}];
+            [[[[[self.firdatabase child:kUserDetails] child:self.senderId] child:kChats] child:self.chatroomID] updateChildValues:@{kUnread: @0}];
             //Set user's online status to 0 when entering chat room
-            [[[[[self.firdatabase child:@"userDetails"] child:self.senderId] child:@"chats"] child:self.chatroomID] updateChildValues:@{@"online": @1}];
+            [[[[[self.firdatabase child:kUserDetails] child:self.senderId] child:kChats] child:self.chatroomID] updateChildValues:@{kOnline: @1}];
             
             [self listenForReadCountAndOnlineStatus];
             
@@ -380,20 +371,18 @@
 - (void)listenForReadCountAndOnlineStatus {
     
     //Listen for other person's read count
-    [[[[[self.firdatabase child:@"userDetails"] child:self.selectedUserID] child:@"chats"] child:self.chatroomID] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    [[[[[self.firdatabase child:kUserDetails] child:self.selectedUserID] child:kChats] child:self.chatroomID] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
-        if ([snapshot hasChild:@"unread"]) {
+        if ([snapshot hasChild:kUnread]) {
             NSDictionary *readCountDictionary = snapshot.value;
-            readcount = [[readCountDictionary objectForKey:@"unread"] integerValue];
-            NSLog(@"snapshot value %@", snapshot.value);
-            NSLog(@"our readcount %li", readcount);
+            readcount = [[readCountDictionary objectForKey:kUnread] integerValue];
         } else {
             readcount = 0;
         }
         
-        if ([snapshot hasChild:@"online"]) {
+        if ([snapshot hasChild:kOnline]) {
             NSDictionary *onlineUserStatusDictionary = snapshot.value;
-            otherUserStatus = [[onlineUserStatusDictionary objectForKey:@"online"] integerValue];
+            otherUserStatus = [[onlineUserStatusDictionary objectForKey:kOnline] integerValue];
             
         }
         
@@ -403,14 +392,14 @@
 
 - (void)observeMessagesFromDatabase {
     
-    [[[[self.firdatabase child:@"chats"] child:self.chatroomID] child:@"messages"] observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    [[[[self.firdatabase child:kChatRooms] child:self.chatroomID] child:kMessages] observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
         NSMutableDictionary *messagesDictionary = snapshot.value;
-        NSString *senderIdFromDatabase = [messagesDictionary objectForKey:@"senderId"];
-        NSString *senderDisplaynameFromDatabase = [messagesDictionary objectForKey:@"senderDisplayName"];
-        double timeSince1970Double = [[messagesDictionary objectForKey:@"date"] doubleValue];
+        NSString *senderIdFromDatabase = [messagesDictionary objectForKey:kSenderId];
+        NSString *senderDisplaynameFromDatabase = [messagesDictionary objectForKey:kSenderDisplayName];
+        double timeSince1970Double = [[messagesDictionary objectForKey:kDate] doubleValue];
         NSDate * messageDate = [self convertDoubleToDate:timeSince1970Double];
-        NSString *textFromDatabase = [messagesDictionary objectForKey:@"text"];
+        NSString *textFromDatabase = [messagesDictionary objectForKey:kText];
         JSQMessage *jsqMessage = [[JSQMessage alloc] initWithSenderId:senderIdFromDatabase senderDisplayName:senderDisplaynameFromDatabase date:messageDate text:textFromDatabase];
         
         [self.messages addObject:jsqMessage];
@@ -443,8 +432,8 @@
         
         self.chatroomID = [NSString stringWithFormat:@"%@%@", self.senderId, self.selectedUserID];
         
-        chatRoomInformation = [[NSMutableDictionary alloc] initWithDictionary: @{@"created": secondsSince1970,
-                                                                                 @"members": @{
+        chatRoomInformation = [[NSMutableDictionary alloc] initWithDictionary: @{kCreated: secondsSince1970,
+                                                                                 kMembers: @{
                                                                                          @"member1": self.senderId,
                                                                                          @"member2": self.selectedUserID}}];
         
@@ -452,8 +441,8 @@
     } else {
         
         self.chatroomID = [NSString stringWithFormat:@"%@%@", self.selectedUserID, self.senderId];
-        chatRoomInformation = [[NSMutableDictionary alloc] initWithDictionary: @{@"created": secondsSince1970,
-                                                                                 @"members": @{
+        chatRoomInformation = [[NSMutableDictionary alloc] initWithDictionary: @{kCreated: secondsSince1970,
+                                                                                 kMembers: @{
                                                                                          @"member1": self.selectedUserID,
                                                                                          @"member2": self.senderId}}];
         
