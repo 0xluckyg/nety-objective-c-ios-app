@@ -42,9 +42,7 @@
 //---------------------------------------------------------
 
 - (void)initializeSettings {
-    
-    self.userData = [[NetworkData alloc] init];
-    
+        
     self.imageCache = [[NSCache alloc] init];
     
     //Set up notifications
@@ -188,13 +186,15 @@
     
     NSUInteger selectedRow = self.tableView.indexPathForSelectedRow.row;
     
-    NSLog(@"%lu", [self.usersArray count]);
+    NSLog(@"1: %lu", [self.usersArray count]);
     
-    profilePage.selectedUserInfoDictionary = [self.usersArray objectAtIndex:selectedRow];
-    profilePage.selectedUserID = [self.userIDArray objectAtIndex:selectedRow];
+    profilePage.selectedUserInfoDictionary = [[NSDictionary alloc] initWithDictionary: [self.usersArray objectAtIndex:selectedRow]];
+    
+    NSLog(@"2: %lu", [self.userIDArray count]);
+    profilePage.selectedUserID = [[NSString alloc] initWithString:[self.userIDArray objectAtIndex:selectedRow]];
     
     [self.navigationController pushViewController:profilePage animated:YES];
-        
+    
 }
 
 //Hide keyboard when search button pressed

@@ -10,14 +10,30 @@
 #import "NetworkData.h"
 #import "SWTableViewCell.h"
 #import "UIPrinciples.h"
+#import "UserInformation.h"
 
-@interface Chat : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SWTableViewCellDelegate>
+@import Firebase;
+
+@interface Chat : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SWTableViewCellDelegate> {
+    
+    NSDictionary *userDataDictionary;
+    bool deleteOnUserSide;
+
+}
 
 
 //VARIABLES----------------------------------------
 
 
+@property (strong, nonatomic) NSMutableArray *recentChatArray;
 
+@property (strong, nonatomic) NSMutableArray *oldChatArray;
+
+@property (strong, nonatomic) NSMutableArray *recentChatRoomKeyArray;
+
+@property (strong, nonatomic) NSMutableArray *oldChatRoomKeyArray;
+
+@property (strong, nonatomic) NSCache *imageCache;
 
 
 //UTIL CLASSES----------------------------------------
@@ -25,14 +41,11 @@
 
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
 
-//Temporary
-@property (strong, nonatomic) NetworkData *userData;
-
 
 //LIB CLASSES----------------------------------------
 
 
-
+@property (strong, nonatomic) FIRDatabaseReference *firdatabase;
 
 
 //IBOUTLETS----------------------------------------

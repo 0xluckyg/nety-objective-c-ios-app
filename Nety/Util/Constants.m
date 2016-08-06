@@ -8,6 +8,8 @@
 
 #import "Constants.h"
 
+NSString *const kFullName = @"fullName";
+
 NSString *const kUsers = @"users";
     NSString *const kFirstName = @"firstName";
     NSString *const kLastName = @"lastName";
@@ -27,6 +29,7 @@ NSString *const kUserDetails = @"userDetails";
     NSString *const kChats = @"chats";
         NSString *const kOnline = @"online";
         NSString *const kUnread = @"unread";
+        NSString *const kType = @"type";
 
 NSString *const kChatRooms = @"chats";
     NSString *const kCreated = @"created";

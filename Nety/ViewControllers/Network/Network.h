@@ -37,9 +37,6 @@
 
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
 
-@property (strong, nonatomic) NetworkData *userData;
-
-
 //LIB CLASSES----------------------------------------
 
 

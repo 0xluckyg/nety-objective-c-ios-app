@@ -256,16 +256,26 @@
                                    kDate: secondsSince1970,
                                    kText: text};
     
-    [[[[[self.firdatabase child:kChatRooms] child:self.chatroomID] child:kMessages ] childByAutoId] setValue:messageData];
+    FIRDatabaseReference *messageRef = [[[self.firdatabase child:kChatRooms] child:self.chatroomID] child:kMessages ];
+    [[messageRef childByAutoId] setValue:messageData];
+    
+    
+    //Editing each user's chat room data
+    FIRDatabaseReference *selectedUserChatRoomRef = [[[[self.firdatabase child:kUserDetails] child:self.selectedUserID] child:kChats] child:self.chatroomID];
+    FIRDatabaseReference *userChatRoomRef = [[[[self.firdatabase child:kUserDetails] child:self.senderId] child:kChats] child:self.chatroomID];
     
     if (otherUserStatus == 0) {
-        
         readcount += 1;
         NSNumber *readcountToDatabase = @(readcount);
         
-        [[[[[self.firdatabase child:kUserDetails] child:self.selectedUserID] child:kChats] child:self.chatroomID] updateChildValues:@{kUnread:readcountToDatabase}];
-        
+        [selectedUserChatRoomRef updateChildValues:@{kUnread:readcountToDatabase}];
     }
+    
+    [selectedUserChatRoomRef updateChildValues:@{@"recentMessage":text}];
+    [selectedUserChatRoomRef updateChildValues:@{@"updateTime":secondsSince1970}];
+    
+    [userChatRoomRef updateChildValues:@{@"recentMessage":text}];
+    [userChatRoomRef updateChildValues:@{@"updateTime":secondsSince1970}];
     
     [self finishSendingMessage];
 }
@@ -285,7 +295,8 @@
     [super viewWillDisappear:animated];
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
     
-    [[[[[self.firdatabase child:kUserDetails] child:self.senderId] child:kChats] child:self.chatroomID] updateChildValues:@{kOnline: @0}];
+    FIRDatabaseReference *onlineRef = [[[[self.firdatabase child:kUserDetails] child:self.senderId] child:kChats] child:self.chatroomID];
+    [onlineRef updateChildValues:@{kOnline: @0}];
     
     //If no messages, delete chat rooms
     if ([self.messages count] == 0) {
@@ -317,31 +328,29 @@
     
     NSMutableDictionary *chatRoomInformation = [self makeChatRoomID];
     
+    FIRDatabaseReference *chatRoomRef = [[[self.firdatabase child:kUserDetails] child:self.senderId] child:kChats];
     //Check if the same room exists first
-    [[[[self.firdatabase child:kUserDetails] child:self.senderId] child:kChats] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    [chatRoomRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
-        NSLog(@"this is snapshot value %@", snapshot.value);
-        
+        //If room doesn't exist
         if (![snapshot hasChild:self.chatroomID] || snapshot.value == NULL) {
             
             NSLog(@"created room");
             
-            //Room
+            //Room setup
             [[[self.firdatabase child:kChatRooms] child:self.chatroomID] setValue:chatRoomInformation];
-            //Add to both the user and selected user
-            [[[[[[self.firdatabase child:kUserDetails]
-                                    child:self.senderId]
-                                    child:kChats]
-                                    child:self.chatroomID]
-                                    child:kUnread]
-                                    setValue:@0];
             
-            [[[[[[self.firdatabase child:kUserDetails]
-                                    child:self.selectedUserID]
-                                    child:kChats]
-                                    child:self.chatroomID]
-                                    child:kUnread]
-                                    setValue:@0];
+            //Add information to both the user and selected user
+            FIRDatabaseReference *userChatRoomRef = [[[[[self firdatabase] child:kUserDetails] child:self.senderId] child:kChats] child:self.chatroomID];
+            [[userChatRoomRef child:kUnread] setValue:@0];
+            [[[userChatRoomRef child:kMembers] child:@"member1"] setValue:self.selectedUserID];
+            [[userChatRoomRef child:@"type"] setValue:@0];
+            
+            FIRDatabaseReference *selectedUserChatRoomRef = [[[[[self firdatabase] child:kUserDetails] child:self.selectedUserID] child:kChats] child:self.chatroomID];
+            [[selectedUserChatRoomRef child:kUnread] setValue:@0];
+            [[[selectedUserChatRoomRef child:kMembers] child:@"member1"] setValue:self.senderId];
+            [[selectedUserChatRoomRef child:kType] setValue:@0];
+            
             
             //Set user's online status to 0 when entering chat room
             [[[[[self.firdatabase child:kUserDetails] child:self.senderId] child:kChats] child:self.chatroomID] updateChildValues:@{kOnline: @1}];

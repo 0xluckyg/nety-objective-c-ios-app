@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const kFullName;
+
 extern NSString *const kUsers;
     extern NSString *const kFirstName;
     extern NSString *const kLastName;
@@ -27,6 +29,7 @@ extern NSString *const kUserDetails;
     extern NSString *const kChats;
         extern NSString *const kOnline;
         extern NSString *const kUnread;
+        extern NSString *const kType;
 
 extern NSString *const kChatRooms;
     extern NSString *const kCreated;
