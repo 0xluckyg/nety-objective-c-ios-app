@@ -16,6 +16,18 @@
                     <view key="view" contentMode="scaleToFill" id="gbP-mc-fyZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FzS-Dx-wTZ">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="FzS-Dx-wTZ" secondAttribute="trailing" id="OQi-rV-B2D"/>
+                            <constraint firstItem="u2x-wi-wjD" firstAttribute="top" secondItem="FzS-Dx-wTZ" secondAttribute="bottom" id="Xqt-9v-xdX"/>
+                            <constraint firstItem="FzS-Dx-wTZ" firstAttribute="top" secondItem="gbP-mc-fyZ" secondAttribute="top" id="iaM-8G-zAp"/>
+                            <constraint firstItem="FzS-Dx-wTZ" firstAttribute="leading" secondItem="gbP-mc-fyZ" secondAttribute="leading" id="lNT-RV-skw"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Wzl-0I-Twa"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>

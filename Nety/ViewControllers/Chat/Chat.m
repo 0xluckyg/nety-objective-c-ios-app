@@ -27,21 +27,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    [self initializeUsers];
     [self initializeSettings];
     [self initializeDesign];
+    [self initializeUsers];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+}
 
 #pragma mark - Initialization
 //---------------------------------------------------------
 
 
 - (void)initializeSettings {
+    self.oldChatArray = [[NSMutableArray alloc] init];
+    self.recentChatArray = [[NSMutableArray alloc] init];
+    self.recentChatRoomKeyArray = [[NSMutableArray alloc] init];
+    self.oldChatRoomKeyArray = [[NSMutableArray alloc] init];
     
     self.imageCache = [[NSCache alloc] init];
-    
 }
 
 - (void)initializeDesign {
@@ -64,10 +68,9 @@
 
 - (void)initializeUsers {
     
-    self.oldChatArray = [[NSMutableArray alloc] init];
-    self.recentChatArray = [[NSMutableArray alloc] init];
-    self.recentChatRoomKeyArray = [[NSMutableArray alloc] init];
-    self.oldChatRoomKeyArray = [[NSMutableArray alloc] init];
+    self.firdatabase = [[FIRDatabase database] reference];
+    
+    self.chatRoomsRef = [[[[self.firdatabase child:kUserDetails] child:[UserInformation getUserID]] child:kChats] queryOrderedByChild:@"updateTime"];
     
     [self listenForChildAdded];
     [self listenForChildRemoved];
@@ -228,17 +231,24 @@
             }
             case 2: {
             
+                
+                NSLog(@"index: %lu", index);
+                
+                int row = (int)self.tableView.indexPathForSelectedRow;
+                
                 //delete button is pressed
-                NSString *selectedUserID = [[[self.recentChatArray objectAtIndex:index] objectForKey:kMembers] objectForKey:@"member1"];
+                NSString *selectedUserID = [[[self.recentChatArray objectAtIndex:row] objectForKey:kMembers] objectForKey:@"member1"];
+                NSString *roomID = [self.recentChatRoomKeyArray objectAtIndex:row];
+                
                 FIRDatabaseReference *selectedUserChatRoomsRef = [[[self.firdatabase child:kUserDetails] child:selectedUserID] child:kChats];
-                [[selectedUserChatRoomsRef child:[self.recentChatRoomKeyArray objectAtIndex:index]] removeValue];
+                [[selectedUserChatRoomsRef child:[self.recentChatRoomKeyArray objectAtIndex:row]] removeValue];
                 
                 FIRDatabaseReference *userChatRoomsRef = [[[self.firdatabase child:kUserDetails] child:[UserInformation getUserID]] child:kChats] ;
-                [[userChatRoomsRef child:[self.recentChatRoomKeyArray objectAtIndex:index]] removeValue];
+                [[userChatRoomsRef child:[self.recentChatRoomKeyArray objectAtIndex:row]] removeValue];
                 
-                [self.recentChatArray removeObjectAtIndex:index];
-                [self.recentChatRoomKeyArray removeObjectAtIndex:index];                
-                [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+                FIRDatabaseReference *roomRef = [self.firdatabase child:kChats];
+                [[roomRef child:roomID] removeValue];
+                
                 
             }
             default: {
@@ -292,6 +302,8 @@
 
 //Swiped cell will reset
 - (void)viewWillDisappear:(BOOL)animated {
+//    [self.chatRoomsRef removeAllObservers];
+    
     [self.tableView reloadData];
 }
 
@@ -343,17 +355,16 @@
 }
 
 -(void)listenForChildAdded {
-
-    self.firdatabase = [[FIRDatabase database] reference];
     
-    FIRDatabaseQuery *chatRoomsRef = [[[[self.firdatabase child:kUserDetails] child:[UserInformation getUserID]] child:kChats] queryOrderedByChild:@"updateTime"];
-    
-    [chatRoomsRef observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    [self.chatRoomsRef observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
         NSMutableDictionary *chatRoomInfoDict = snapshot.value;
         NSDictionary *members = [snapshot.value objectForKey:kMembers];
         NSString *chatRoomKey = snapshot.key;
         
+        NSLog(@"Got snapchat: %@", snapshot.value);
+        NSLog(@"Got you: %@", [members objectForKey:@"member1"]);
+            
         FIRDatabaseReference *userInfoRef = [[self.firdatabase child:kUsers] child:[members objectForKey:@"member1"]];
         [userInfoRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
             
@@ -384,11 +395,7 @@
 
 -(void)listenForChildRemoved {
     
-    self.firdatabase = [[FIRDatabase database] reference];
-    
-    FIRDatabaseQuery *chatRoomsRef = [[[[self.firdatabase child:kUserDetails] child:[UserInformation getUserID]] child:kChats] queryOrderedByChild:@"updateTime"];
-    
-    [chatRoomsRef observeEventType:FIRDataEventTypeChildRemoved withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    [self.chatRoomsRef observeEventType:FIRDataEventTypeChildRemoved withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
         NSMutableDictionary *chatRoomInfoDict = snapshot.value;
         NSString *chatRoomKey = snapshot.key;
@@ -397,14 +404,14 @@
             NSUInteger index = [self.recentChatRoomKeyArray indexOfObject:chatRoomKey];
             [self.recentChatArray removeObjectAtIndex:index];
             [self.recentChatRoomKeyArray removeObjectAtIndex:index];
-//            [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:1]]
-//                                  withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]]
+                                  withRowAnimation:UITableViewRowAnimationAutomatic];
         } else {
             NSUInteger index = [self.oldChatRoomKeyArray indexOfObject:chatRoomKey];
             [self.oldChatArray removeObjectAtIndex:index];
             [self.oldChatRoomKeyArray removeObjectAtIndex:index];
-//            [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:1]]
-//                                  withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]]
+                                  withRowAnimation:UITableViewRowAnimationAutomatic];
             
         }
         
@@ -414,19 +421,19 @@
 
 -(void)listenForChildChanged {
     
-    self.firdatabase = [[FIRDatabase database] reference];
-    
-    FIRDatabaseQuery *chatRoomsRef = [[[[self.firdatabase child:kUserDetails] child:[UserInformation getUserID]] child:kChats] queryOrderedByChild:@"updateTime"];
-    
-    [chatRoomsRef observeEventType:FIRDataEventTypeChildChanged withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    //THIS PART CRASHES!!!
+    [self.chatRoomsRef observeEventType:FIRDataEventTypeChildChanged withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
         NSMutableDictionary *chatRoomInfoDict = snapshot.value;
         NSDictionary *members = [snapshot.value objectForKey:kMembers];
         NSString *chatRoomKey = snapshot.key;
         
+        NSLog(@"Got snapchat 2: %@", snapshot.value);
+        NSLog(@"Got you 2: %@", [members objectForKey:@"member1"]);
+        
         FIRDatabaseReference *userInfoRef = [[self.firdatabase child:kUsers] child:[members objectForKey:@"member1"]];
         [userInfoRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-            
+        
             NSString *profilePhotoUrl = [snapshot.value objectForKey:kSmallProfilePhoto];
             NSString *name = [NSString stringWithFormat:@"%@ %@", [snapshot.value objectForKey:kFirstName], [snapshot.value objectForKey:kLastName]];
             
@@ -449,18 +456,14 @@
             });
             
         } withCancelBlock:nil];
-        
+            
     } withCancelBlock:nil];
     
 }
 
 -(void)listenForChildMoved {
     
-    self.firdatabase = [[FIRDatabase database] reference];
-    
-    FIRDatabaseQuery *chatRoomsRef = [[[[self.firdatabase child:kUserDetails] child:[UserInformation getUserID]] child:kChats] queryOrderedByChild:@"updateTime"];
-    
-    [chatRoomsRef observeEventType:FIRDataEventTypeChildMoved withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    [self.chatRoomsRef observeEventType:FIRDataEventTypeChildMoved withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
         NSLog(@"moved: %@", snapshot.value);
         

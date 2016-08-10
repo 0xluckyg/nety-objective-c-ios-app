@@ -17,7 +17,6 @@
 @interface Chat : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SWTableViewCellDelegate> {
     
     NSDictionary *userDataDictionary;
-    bool deleteOnUserSide;
 
 }
 
@@ -46,6 +45,8 @@
 
 
 @property (strong, nonatomic) FIRDatabaseReference *firdatabase;
+
+@property (strong, nonatomic) FIRDatabaseQuery *chatRoomsRef;
 
 
 //IBOUTLETS----------------------------------------

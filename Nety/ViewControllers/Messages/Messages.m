@@ -79,7 +79,6 @@
     } else {
         [self downloadSelectedUserImage];
     }
-    
     //Set user avatar size to zero
     [[self.collectionView collectionViewLayout] setOutgoingAvatarViewSize:CGSizeZero];
     [[self.collectionView collectionViewLayout] setIncomingAvatarViewSize:CGSizeMake(35.0f, 35.0f)];
@@ -332,33 +331,11 @@
     //Check if the same room exists first
     [chatRoomRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
+        NSLog([snapshot hasChild:self.chatroomID] ? @"Yes" : @"No");
+        NSLog(@"snapshot value: %@", snapshot.value);
+        
         //If room doesn't exist
-        if (![snapshot hasChild:self.chatroomID] || snapshot.value == NULL) {
-            
-            NSLog(@"created room");
-            
-            //Room setup
-            [[[self.firdatabase child:kChatRooms] child:self.chatroomID] setValue:chatRoomInformation];
-            
-            //Add information to both the user and selected user
-            FIRDatabaseReference *userChatRoomRef = [[[[[self firdatabase] child:kUserDetails] child:self.senderId] child:kChats] child:self.chatroomID];
-            [[userChatRoomRef child:kUnread] setValue:@0];
-            [[[userChatRoomRef child:kMembers] child:@"member1"] setValue:self.selectedUserID];
-            [[userChatRoomRef child:@"type"] setValue:@0];
-            
-            FIRDatabaseReference *selectedUserChatRoomRef = [[[[[self firdatabase] child:kUserDetails] child:self.selectedUserID] child:kChats] child:self.chatroomID];
-            [[selectedUserChatRoomRef child:kUnread] setValue:@0];
-            [[[selectedUserChatRoomRef child:kMembers] child:@"member1"] setValue:self.senderId];
-            [[selectedUserChatRoomRef child:kType] setValue:@0];
-            
-            
-            //Set user's online status to 0 when entering chat room
-            [[[[[self.firdatabase child:kUserDetails] child:self.senderId] child:kChats] child:self.chatroomID] updateChildValues:@{kOnline: @1}];
-            
-            [self observeMessagesFromDatabase];
-            [self listenForReadCountAndOnlineStatus];
-            
-        } else {
+        if ([snapshot hasChild:self.chatroomID] && snapshot.value != NULL) {
             
             [self observeMessagesFromDatabase];
             
@@ -369,6 +346,40 @@
             //Set user's online status to 0 when entering chat room
             [[[[[self.firdatabase child:kUserDetails] child:self.senderId] child:kChats] child:self.chatroomID] updateChildValues:@{kOnline: @1}];
             
+            [self listenForReadCountAndOnlineStatus];
+            
+        } else {
+            
+            NSLog(@"created room");
+            
+            NSLog(@"chatrooms: %@", kChatRooms);
+            NSLog(@"chatroom id: %@", self.chatroomID);
+            NSLog(@"chatroom info: %@", chatRoomInformation);
+            NSLog(@"sender id: %@", self.senderId);
+            NSLog(@"selected id: %@", self.selectedUserID);
+            
+            NSNumber *secondsSince1970 = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970]];
+            
+            //Room setup
+            [[[self.firdatabase child:kChatRooms] child:self.chatroomID] setValue:chatRoomInformation];
+            
+            //Add information to both the user and selected user
+            FIRDatabaseReference *userChatRoomRef = [[[[[self firdatabase] child:kUserDetails] child:self.senderId] child:kChats] child:self.chatroomID];
+            [[[userChatRoomRef child:kMembers] child:@"member1"] setValue:self.selectedUserID];
+            [[userChatRoomRef child:@"type"] setValue:@0];
+            [[userChatRoomRef child:kUnread] setValue:@0];
+            [userChatRoomRef updateChildValues:@{@"updateTime":secondsSince1970}];
+            
+            FIRDatabaseReference *selectedUserChatRoomRef = [[[[[self firdatabase] child:kUserDetails] child:self.selectedUserID] child:kChats] child:self.chatroomID];
+            [[[selectedUserChatRoomRef child:kMembers] child:@"member1"] setValue:self.senderId];
+            [[selectedUserChatRoomRef child:kType] setValue:@0];
+            [[selectedUserChatRoomRef child:kUnread] setValue:@0];
+            [selectedUserChatRoomRef updateChildValues:@{@"updateTime":secondsSince1970}];
+            
+            //Set user's online status to 0 when entering chat room
+            [[[[[self.firdatabase child:kUserDetails] child:self.senderId] child:kChats] child:self.chatroomID] updateChildValues:@{kOnline: @1}];
+            
+            [self observeMessagesFromDatabase];
             [self listenForReadCountAndOnlineStatus];
             
         }
@@ -400,6 +411,8 @@
 }
 
 - (void)observeMessagesFromDatabase {
+    
+    
     
     [[[[self.firdatabase child:kChatRooms] child:self.chatroomID] child:kMessages] observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
