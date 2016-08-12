@@ -225,26 +225,32 @@
             case 1: {
                 NSLog(@"1 one NEW pressed");
                 
+                //ADD
+                int row = (int)self.tableView.indexPathForSelectedRow;
                 
+                NSString *userID = [UserInformation getUserID];
+                NSString *roomID = [self.recentChatRoomKeyArray objectAtIndex:row];
+                
+                FIRDatabaseReference *userChatRoomRef = [[[self.firdatabase child:kUserDetails] child:userID] child:kChats];
+                [[userChatRoomRef child:roomID] updateChildValues:@{@"type": @1}];
                 
                 break;
             }
             case 2: {
-            
                 
                 NSLog(@"index: %lu", index);
                 
+                //DELETE
                 int row = (int)self.tableView.indexPathForSelectedRow;
                 
-                //delete button is pressed
                 NSString *selectedUserID = [[[self.recentChatArray objectAtIndex:row] objectForKey:kMembers] objectForKey:@"member1"];
                 NSString *roomID = [self.recentChatRoomKeyArray objectAtIndex:row];
                 
                 FIRDatabaseReference *selectedUserChatRoomsRef = [[[self.firdatabase child:kUserDetails] child:selectedUserID] child:kChats];
-                [[selectedUserChatRoomsRef child:[self.recentChatRoomKeyArray objectAtIndex:row]] removeValue];
+                [[selectedUserChatRoomsRef child:roomID] removeValue];
                 
                 FIRDatabaseReference *userChatRoomsRef = [[[self.firdatabase child:kUserDetails] child:[UserInformation getUserID]] child:kChats] ;
-                [[userChatRoomsRef child:[self.recentChatRoomKeyArray objectAtIndex:row]] removeValue];
+                [[userChatRoomsRef child:roomID] removeValue];
                 
                 FIRDatabaseReference *roomRef = [self.firdatabase child:kChats];
                 [[roomRef child:roomID] removeValue];
@@ -402,16 +408,22 @@
         
         if ([[chatRoomInfoDict objectForKey:@"type"] integerValue] == 0) {
             NSUInteger index = [self.recentChatRoomKeyArray indexOfObject:chatRoomKey];
-            [self.recentChatArray removeObjectAtIndex:index];
-            [self.recentChatRoomKeyArray removeObjectAtIndex:index];
-            [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]]
-                                  withRowAnimation:UITableViewRowAnimationAutomatic];
+            
+            if (index != NSNotFound) {
+                [self.recentChatArray removeObjectAtIndex:index];
+                [self.recentChatRoomKeyArray removeObjectAtIndex:index];
+                [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]]
+                                      withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
         } else {
             NSUInteger index = [self.oldChatRoomKeyArray indexOfObject:chatRoomKey];
-            [self.oldChatArray removeObjectAtIndex:index];
-            [self.oldChatRoomKeyArray removeObjectAtIndex:index];
-            [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]]
-                                  withRowAnimation:UITableViewRowAnimationAutomatic];
+            
+            if (index != NSNotFound) {
+                [self.oldChatArray removeObjectAtIndex:index];
+                [self.oldChatRoomKeyArray removeObjectAtIndex:index];
+                [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]]
+                                      withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
             
         }
         
@@ -441,14 +453,21 @@
             [chatRoomInfoDict setValue:profilePhotoUrl forKey:kSmallProfilePhoto];
             
             if ([[chatRoomInfoDict objectForKey:@"type"] integerValue] == 0) {
+                
                 NSUInteger index = [self.recentChatRoomKeyArray indexOfObject:chatRoomKey];
+                
+                if (index != NSNotFound) {
+                    [self.recentChatArray replaceObjectAtIndex:index withObject:chatRoomInfoDict];
+                    [self.recentChatRoomKeyArray replaceObjectAtIndex:index withObject:chatRoomKey];
+                }
 
-                [self.recentChatArray replaceObjectAtIndex:index withObject:chatRoomInfoDict];
-                [self.recentChatRoomKeyArray replaceObjectAtIndex:index withObject:chatRoomKey];
             } else {
                 NSUInteger index = [self.oldChatRoomKeyArray indexOfObject:chatRoomKey];
-                [self.oldChatArray replaceObjectAtIndex:index withObject:chatRoomInfoDict];
-                [self.oldChatRoomKeyArray replaceObjectAtIndex:index withObject:chatRoomKey];
+                
+                if (index != NSNotFound) {
+                    [self.oldChatArray replaceObjectAtIndex:index withObject:chatRoomInfoDict];
+                    [self.oldChatRoomKeyArray replaceObjectAtIndex:index withObject:chatRoomKey];
+                }
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -480,26 +499,28 @@
             [chatRoomInfoDict setValue:name forKey:kFullName];
             [chatRoomInfoDict setValue:profilePhotoUrl forKey:kSmallProfilePhoto];
             
-            //            NSLog(@"chat room dict: %@", chatRoomInfoDict);
-            
             if ([[chatRoomInfoDict objectForKey:@"type"] integerValue] == 0) {
                 NSUInteger index = [self.recentChatRoomKeyArray indexOfObject:chatRoomKey];
                 
-                NSDictionary *objectAtIndex = [self.recentChatArray objectAtIndex:index];
-                [self.recentChatArray removeObjectAtIndex:index];
-                [self.recentChatArray insertObject:objectAtIndex atIndex:0];
-                NSString *roomKeyAtIndex = [self.recentChatRoomKeyArray objectAtIndex:index];
-                [self.recentChatRoomKeyArray removeObjectAtIndex:index];
-                [self.recentChatRoomKeyArray insertObject:roomKeyAtIndex atIndex:0];
+                if (index != NSNotFound) {
+                    NSDictionary *objectAtIndex = [self.recentChatArray objectAtIndex:index];
+                    [self.recentChatArray removeObjectAtIndex:index];
+                    [self.recentChatArray insertObject:objectAtIndex atIndex:0];
+                    NSString *roomKeyAtIndex = [self.recentChatRoomKeyArray objectAtIndex:index];
+                    [self.recentChatRoomKeyArray removeObjectAtIndex:index];
+                    [self.recentChatRoomKeyArray insertObject:roomKeyAtIndex atIndex:0];
+                }
             } else {
                 NSUInteger index = [self.oldChatRoomKeyArray indexOfObject:chatRoomKey];
                 
-                NSDictionary *objectAtIndex = [self.oldChatArray objectAtIndex:index];
-                [self.oldChatArray removeObjectAtIndex:index];
-                [self.oldChatArray insertObject:objectAtIndex atIndex:0];
-                NSString *roomKeyAtIndex = [self.oldChatRoomKeyArray objectAtIndex:index];
-                [self.oldChatRoomKeyArray removeObjectAtIndex:index];
-                [self.oldChatRoomKeyArray insertObject:roomKeyAtIndex atIndex:0];
+                if (index != NSNotFound) {
+                    NSDictionary *objectAtIndex = [self.oldChatArray objectAtIndex:index];
+                    [self.oldChatArray removeObjectAtIndex:index];
+                    [self.oldChatArray insertObject:objectAtIndex atIndex:0];
+                    NSString *roomKeyAtIndex = [self.oldChatRoomKeyArray objectAtIndex:index];
+                    [self.oldChatRoomKeyArray removeObjectAtIndex:index];
+                    [self.oldChatRoomKeyArray insertObject:roomKeyAtIndex atIndex:0];
+                }
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
