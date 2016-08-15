@@ -486,6 +486,7 @@
             if (self.oldNewSegmentedControl.selectedSegmentIndex == 0) {
                 
                 if ([[chatRoomInfoDict objectForKey:kType] integerValue] == 0) {
+                    
                     [self.recentChatArray addObject:chatRoomInfoDict];
                     [self.recentChatRoomKeyArray addObject:chatRoomKey];
                     dispatch_async(dispatch_get_main_queue(), ^{

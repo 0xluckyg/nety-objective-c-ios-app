@@ -7,9 +7,7 @@
 //
 
 #import "MyNetwork.h"
-#import "UIPrinciples.h"
-#import "MyNetworkCell.h"
-#import "NetworkData.h"
+
 
 @interface MyNetwork ()
 
@@ -38,7 +36,9 @@
 
 - (void)initializeSettings {
     self.userArray = [[NSMutableArray alloc] init];
-    self.userData = [[NetworkData alloc] init];
+    self.userKeyArray = [[NSMutableArray alloc] init];
+    self.imageCache = [[NSCache alloc] init];
+
 }
 
 - (void)initializeDesign {
@@ -72,8 +72,14 @@
 
 - (void) initializeUsers {
     
+    self.firdatabase = [[FIRDatabase database] reference];
     
+    self.userDetailRef = [[[[self.firdatabase child:kUserDetails] child:[UserInformation getUserID]] child:kAddedUsers] queryOrderedByChild:kFirstName];
     
+    [self listenForChildAdded];
+    [self listenForChildRemoved];
+    [self listenForChildChanged];
+
 }
 
 #pragma mark - Protocols and Delegates
@@ -86,7 +92,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [self.userData.userDataArray count];
+    return [self.userArray count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -95,17 +101,44 @@
     MyNetworkCell *myNetworkCell = [tableView dequeueReusableCellWithIdentifier:@"MyNetworkCell" forIndexPath:indexPath];
     int row = (int)[indexPath row];
     
-    //Setting cell data
-    NSDictionary *userDataDictionary = self.userData.userDataArray[row];
-    myNetworkCell.myNetworkUserImage.image = [UIImage imageNamed:[userDataDictionary objectForKey:keyImage]];
+    userDataDictionary = [self.userArray objectAtIndex:row];
     
-    //Set name
-    myNetworkCell.myNetworkUserName.text = [userDataDictionary objectForKey:keyName];
+    //Setting cell data
+    myNetworkCell.myNetworkUserImage.image = [UIImage imageNamed: kDefaultUserLogoName];
+    
+    //Setting images
+    NSString *photoUrl = [userDataDictionary objectForKey:kSmallProfilePhoto];
+    if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
+        NSURL *profileImageUrl = [NSURL URLWithString:photoUrl];
+        [self loadAndCacheImage:myNetworkCell photoUrl:profileImageUrl cache:self.imageCache];
+    } else {
+        myNetworkCell.myNetworkUserImage.image = [UIImage imageNamed:kDefaultUserLogoName];
+    }
+    
+    //Setting name
+    NSString *fullName = [NSString stringWithFormat:@"%@ %@", [userDataDictionary objectForKey:kFirstName], [userDataDictionary objectForKey:kLastName]];
+    myNetworkCell.myNetworkUserName.text = fullName;
+    
     //Set job
-    myNetworkCell.myNetworkUserJob.text = [userDataDictionary objectForKey:keyJob];
+    myNetworkCell.myNetworkUserJob.text = [userDataDictionary objectForKey:kIdentity];
+    
     //Set description
-    NSString *descriptionText = [userDataDictionary objectForKey:keyDescription];
-    myNetworkCell.myNetworkUserDescription.text = descriptionText;
+    NSString *statusString = [userDataDictionary objectForKey:kStatus];
+    NSString *summaryString = [userDataDictionary objectForKey:kSummary];
+    
+    if (![statusString isEqualToString:@""]) {
+        
+        myNetworkCell.myNetworkUserDescription.text = statusString;
+        
+    } else if (![summaryString isEqualToString:@""]){
+    
+        myNetworkCell.myNetworkUserDescription.text = summaryString;
+        
+    } else {
+        
+        myNetworkCell.myNetworkUserDescription.text = @"";
+        
+    }
     
     //Set selection color to blue
     UIView *bgColorView = [[UIView alloc] init];
@@ -145,16 +178,13 @@
 -(void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
     switch (index) {
         case 0: {
-            NSLog(@"0 pressed");
+            
+            
             break;
         }
         case 1: {
             NSLog(@"1 pressed");
             
-            // Delete button is pressed
-            //          NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
-            //          [self.userData.userDataArray[cellIndexPath.row] removeObjectAtIndex:cellIndexPath.row] ;
-            //          [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationRight];
             
             break;
             
@@ -192,8 +222,101 @@
 //---------------------------------------------------------
 
 
+//Function for downloading and caching the image
+-(void)loadAndCacheImage:(MyNetworkCell *)myNetworkCell photoUrl:(NSURL *)photoUrl cache:(NSCache *)imageCache {
+    
+    //Set default to nil
+    myNetworkCell.myNetworkUserImage.image = nil;
+    NSURL *profileImageUrl = photoUrl;
+    UIImage *cachedImage = [imageCache objectForKey:profileImageUrl];
+    
+    if (cachedImage) {
+        
+        myNetworkCell.myNetworkUserImage.image = cachedImage;
+        
+    } else {
+        
+        [[[NSURLSession sharedSession] dataTaskWithURL:profileImageUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            if (error != nil) {
+                NSLog(@"%@", error);
+                return;
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                UIImage *downloadedImage = [UIImage imageWithData:data];
+                
+                if (downloadedImage != nil) {
+                    [imageCache setObject:downloadedImage forKey:profileImageUrl];
+                }
+                
+                myNetworkCell.myNetworkUserImage.image = downloadedImage;
+                
+            });
+            
+        }] resume];
+        
+    }
+    
+}
 
+- (void) listenForChildAdded {
 
+    [self.userDetailRef observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        NSString *otherUserID = snapshot.key;
+        
+        FIRDatabaseReference *otherUserDetail = [[self.firdatabase child:kUsers] child:otherUserID];
+        
+        [otherUserDetail observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+                    
+            [self.userKeyArray addObject:snapshot.key];
+            
+            [self.userArray addObject:snapshot.value];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
+            });
+            
+        } withCancelBlock:nil];
+        
+    } withCancelBlock:nil];
+    
+}
+
+- (void) listenForChildRemoved {
+    
+    [self.userDetailRef observeEventType:FIRDataEventTypeChildRemoved withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        NSString *otherUserID = snapshot.key;
+        NSUInteger index = [self.userKeyArray indexOfObject:otherUserID];
+        
+        if (index != NSNotFound) {
+            [self.userArray removeObjectAtIndex:index];
+            [self.userKeyArray removeObjectAtIndex:index];
+            [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]]
+                                  withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+        
+    } withCancelBlock:nil];
+    
+}
+
+- (void) listenForChildChanged {
+    
+    [self.userDetailRef observeEventType:FIRDataEventTypeChildChanged withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        NSString *otherUserID = snapshot.key;
+        NSUInteger index = [self.userKeyArray indexOfObject:otherUserID];
+        NSMutableDictionary *userInformation = [self.userArray objectAtIndex:index];
+        
+        if (index != NSNotFound) {
+            [self.userArray replaceObjectAtIndex:index withObject:userInformation];
+        }
+        
+    } withCancelBlock:nil];
+    
+}
 
 
 //---------------------------------------------------------

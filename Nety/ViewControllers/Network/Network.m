@@ -149,14 +149,26 @@
         
         //Set name
         networkCell.networkUserName.text = fullName;
+        
         //Set job
         networkCell.networkUserJob.text = [userDataDictionary objectForKey:kIdentity];
+        
         //Set description
         NSString *statusString = [userDataDictionary objectForKey:kStatus];
-        if ([statusString isEqualToString:@""]) {
-            networkCell.networkUserDescription.text = [userDataDictionary objectForKey:kSummary];
-        } else {
+        NSString *summaryString = [userDataDictionary objectForKey:kSummary];
+
+        if (![statusString isEqualToString:@""]) {
+            
             networkCell.networkUserDescription.text = statusString;
+            
+        } else if (![summaryString isEqualToString:@""]){
+            
+            networkCell.networkUserDescription.text = summaryString;
+            
+        } else {
+        
+            networkCell.networkUserDescription.text = @"";
+            
         }
         
         //DESIGN

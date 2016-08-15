@@ -10,10 +10,18 @@
 #import "NetworkData.h"
 #import "SWTableViewCell.h"
 #import "UIPrinciples.h"
+#import "Constants.h"
+#import "UserInformation.h"
+#import "UIPrinciples.h"
+#import "MyNetworkCell.h"
 
 @import Firebase;
 
-@interface MyNetwork : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, SWTableViewCellDelegate>
+@interface MyNetwork : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, SWTableViewCellDelegate> {
+
+    NSDictionary *userDataDictionary;
+    
+}
 
 
 //VARIABLES----------------------------------------
@@ -21,11 +29,13 @@
 
 @property (strong, nonatomic) NSMutableArray *userArray;
 
+@property (strong, nonatomic) NSMutableArray *userKeyArray;
+
+@property (strong, nonatomic) NSCache *imageCache;
+
 
 //UTIL CLASSES----------------------------------------
 
-
-@property (strong, nonatomic) NetworkData *userData;
 
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
 
@@ -33,7 +43,9 @@
 //LIB CLASSES----------------------------------------
 
 
-@property (strong, nonatomic) FIRDatabaseReference *firbase;
+@property (strong, nonatomic) FIRDatabaseReference *firdatabase;
+
+@property (strong, nonatomic) FIRDatabaseQuery *userDetailRef;
 
 
 //IBOUTLETS----------------------------------------
