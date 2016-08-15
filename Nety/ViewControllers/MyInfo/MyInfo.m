@@ -184,7 +184,6 @@
         MyInfoEditType2 *editTableVC = [segue destinationViewController];
         
         editTableVC.statusOrSummary = 1;
-        
     }
 }
 

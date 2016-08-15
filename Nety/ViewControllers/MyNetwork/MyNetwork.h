@@ -19,7 +19,7 @@
 //VARIABLES----------------------------------------
 
 
-
+@property (strong, nonatomic) NSMutableArray *userArray;
 
 
 //UTIL CLASSES----------------------------------------

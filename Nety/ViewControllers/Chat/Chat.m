@@ -70,7 +70,7 @@
     
     self.firdatabase = [[FIRDatabase database] reference];
     
-    self.chatRoomsRef = [[[[self.firdatabase child:kUserDetails] child:[UserInformation getUserID]] child:kChats] queryOrderedByChild:@"updateTime"];
+    self.chatRoomsRef = [[[[self.firdatabase child:kUserChats] child:[UserInformation getUserID]] child:kChats] queryOrderedByChild:kUpdateTime];
     
     [self listenForChildAdded];
     [self listenForChildRemoved];
@@ -129,19 +129,19 @@
     chatCell.chatUserName.text = [userDataDictionary objectForKey:kFullName];
     
     //Set notification
-    if ([[userDataDictionary objectForKey:@"unread"] integerValue] == 0) {
+    if ([[userDataDictionary objectForKey:kUnread] integerValue] == 0) {
         chatCell.chatNotificationView.backgroundColor = [UIColor clearColor];
         chatCell.chatNotificationLabel.text = @"";
     } else {
-        chatCell.chatNotificationLabel.text = [NSString stringWithFormat:@"%@", [userDataDictionary objectForKey:@"unread"]];
+        chatCell.chatNotificationLabel.text = [NSString stringWithFormat:@"%@", [userDataDictionary objectForKey:kUnread]];
     }
     
     //Set description
-    NSString *descriptionText = [userDataDictionary objectForKey:@"recentMessage"];
+    NSString *descriptionText = [userDataDictionary objectForKey:kRecentMessage];
     chatCell.chatDescription.text = descriptionText;
     
     //Set date
-    double timeSince1970Double = [[userDataDictionary objectForKey:@"updateTime"] doubleValue];
+    double timeSince1970Double = [[userDataDictionary objectForKey:kUpdateTime] doubleValue];
     NSDate *messageDate = [self convertDoubleToDate:timeSince1970Double];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
@@ -169,7 +169,7 @@
                                                         title:@"Block"];
         [chatRightUtilityButtons sw_addUtilityButtonWithColor:
          self.UIPrinciple.netyRed
-                                                        title:@"Delete"];
+                                                        title:@"Leave"];
         
     } else {
         
@@ -182,7 +182,7 @@
                                                         title:@"Add"];
         [chatRightUtilityButtons sw_addUtilityButtonWithColor:
          self.UIPrinciple.netyRed
-                                                        title:@"Delete"];
+                                                        title:@"Leave"];
         
     }
     
@@ -204,6 +204,13 @@
         messagesVC.selectedUserProfileImageString = [[self.recentChatArray objectAtIndex:indexPath.row] objectForKey:kSmallProfilePhoto];
         messagesVC.selectedUserName = [[self.recentChatArray objectAtIndex:indexPath.row] objectForKey:kFullName];
         
+    } else {
+    
+        messagesVC.chatroomID = [self.oldChatRoomKeyArray objectAtIndex:indexPath.row];
+        messagesVC.selectedUserID = [[[self.oldChatArray objectAtIndex:indexPath.row] objectForKey:kMembers] objectForKey:@"member1"];
+        messagesVC.selectedUserProfileImageString = [[self.oldChatArray objectAtIndex:indexPath.row] objectForKey:kSmallProfilePhoto];
+        messagesVC.selectedUserName = [[self.oldChatArray objectAtIndex:indexPath.row] objectForKey:kFullName];
+        
     }
     
     [self.navigationController pushViewController:messagesVC animated:YES];
@@ -217,44 +224,96 @@
 //Actions when right swipe buttons are tapped
 -(void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
     if (self.oldNewSegmentedControl.selectedSegmentIndex == 0) {
+        //NEW
         switch (index) {
             case 0: {
-                NSLog(@"0 on NEW pressed");
+                
+                UIAlertAction *cont = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    
+                    //BLOCK
+                    NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+                    NSString *userID = [UserInformation getUserID];
+                    NSString *roomID = [self.recentChatRoomKeyArray objectAtIndex:cellIndexPath.row];
+                    NSString *selectedUserID = [[[self.recentChatArray objectAtIndex:cellIndexPath.row] objectForKey:kMembers] objectForKey:@"member1"];
+                    
+                    //Remove
+                    FIRDatabaseReference *selectedUserChatRoomsRef = [[[self.firdatabase child:kUserChats] child:selectedUserID] child:kChats];
+                    [[selectedUserChatRoomsRef child:roomID] removeValue];
+                    
+                    FIRDatabaseReference *userChatRoomsRef = [[[self.firdatabase child:kUserChats] child:[UserInformation getUserID]] child:kChats] ;
+                    [[userChatRoomsRef child:roomID] removeValue];
+                    
+                    FIRDatabaseReference *roomRef = [self.firdatabase child:kChats];
+                    [[roomRef child:roomID] removeValue];
+                    
+                    //Adding to UserDetails
+                    FIRDatabaseReference *userDetailsRef = [[[self.firdatabase child:kUserDetails] child:userID] child:kBlockedUsers];
+                    [userDetailsRef setValue:@{selectedUserID:@0}];
+                    
+                }];
+                
+                UIAlertAction *okay = [UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    
+                }];
+                
+                [self.UIPrinciple twoButtonAlert:cont rightButton:okay controller:@"Block?" message:@"You will not see this person on this app, and all the chats will be deleted. Are you sure to block?" viewController:self];
+                
                 break;
             }
             case 1: {
-                NSLog(@"1 one NEW pressed");
                 
                 //ADD
-                int row = (int)self.tableView.indexPathForSelectedRow;
+                
+                NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
                 
                 NSString *userID = [UserInformation getUserID];
-                NSString *roomID = [self.recentChatRoomKeyArray objectAtIndex:row];
+                NSString *roomID = [self.recentChatRoomKeyArray objectAtIndex:cellIndexPath.row];
                 
-                FIRDatabaseReference *userChatRoomRef = [[[self.firdatabase child:kUserDetails] child:userID] child:kChats];
-                [[userChatRoomRef child:roomID] updateChildValues:@{@"type": @1}];
+                FIRDatabaseReference *userChatRoomRef = [[[self.firdatabase child:kUserChats] child:userID] child:kChats];
+                
+                NSMutableDictionary *chatRoomItem = [self.recentChatArray objectAtIndex:cellIndexPath.row];
+                [chatRoomItem setValue:@1 forKey:kType];
+                
+                [[userChatRoomRef child:roomID] removeValue];
+                
+                [[userChatRoomRef child:roomID] setValue:chatRoomItem];
+                
+                NSLog(@"%@", chatRoomItem);
+                
+                //Adding to UserDetails
+                NSString *selectedUserID = [[[self.recentChatArray objectAtIndex:cellIndexPath.row] objectForKey:kMembers] objectForKey:@"member1"];
+                
+                FIRDatabaseReference *userDetailsRef = [[[self.firdatabase child:kUserDetails] child:userID] child:kAddedUsers];
+                [userDetailsRef setValue:@{selectedUserID:@0}];
                 
                 break;
             }
             case 2: {
                 
-                NSLog(@"index: %lu", index);
+                UIAlertAction *cont = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    
+                    //DELETE
+                    NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+                    
+                    NSString *selectedUserID = [[[self.recentChatArray objectAtIndex:cellIndexPath.row] objectForKey:kMembers] objectForKey:@"member1"];
+                    NSString *roomID = [self.recentChatRoomKeyArray objectAtIndex:cellIndexPath.row];
+                    
+                    FIRDatabaseReference *selectedUserChatRoomsRef = [[[self.firdatabase child:kUserChats] child:selectedUserID] child:kChats];
+                    [[selectedUserChatRoomsRef child:roomID] removeValue];
+                    
+                    FIRDatabaseReference *userChatRoomsRef = [[[self.firdatabase child:kUserChats] child:[UserInformation getUserID]] child:kChats] ;
+                    [[userChatRoomsRef child:roomID] removeValue];
+                    
+                    FIRDatabaseReference *roomRef = [self.firdatabase child:kChats];
+                    [[roomRef child:roomID] removeValue];
+                    
+                }];
                 
-                //DELETE
-                int row = (int)self.tableView.indexPathForSelectedRow;
+                UIAlertAction *okay = [UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    
+                }];
                 
-                NSString *selectedUserID = [[[self.recentChatArray objectAtIndex:row] objectForKey:kMembers] objectForKey:@"member1"];
-                NSString *roomID = [self.recentChatRoomKeyArray objectAtIndex:row];
-                
-                FIRDatabaseReference *selectedUserChatRoomsRef = [[[self.firdatabase child:kUserDetails] child:selectedUserID] child:kChats];
-                [[selectedUserChatRoomsRef child:roomID] removeValue];
-                
-                FIRDatabaseReference *userChatRoomsRef = [[[self.firdatabase child:kUserDetails] child:[UserInformation getUserID]] child:kChats] ;
-                [[userChatRoomsRef child:roomID] removeValue];
-                
-                FIRDatabaseReference *roomRef = [self.firdatabase child:kChats];
-                [[roomRef child:roomID] removeValue];
-                
+                [self.UIPrinciple twoButtonAlert:cont rightButton:okay controller:@"Leave?" message:@"Are you sure? All the chats will be deleted." viewController:self];
                 
             }
             default: {
@@ -263,18 +322,66 @@
         }
         
     } else {
+        //OLD
         switch (index) {
             case 0: {
-                NSLog(@"0 on OLD pressed");
+
+                UIAlertAction *cont = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    
+                    //BLOCK
+                    NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+                    NSString *userID = [UserInformation getUserID];
+                    NSString *roomID = [self.oldChatRoomKeyArray objectAtIndex:cellIndexPath.row];
+                    NSString *selectedUserID = [[[self.oldChatArray objectAtIndex:cellIndexPath.row] objectForKey:kMembers] objectForKey:@"member1"];
+                    
+                    //Remove
+                    FIRDatabaseReference *selectedUserChatRoomsRef = [[[self.firdatabase child:kUserChats] child:selectedUserID] child:kChats];
+                    [[selectedUserChatRoomsRef child:roomID] removeValue];
+                    
+                    FIRDatabaseReference *userChatRoomsRef = [[[self.firdatabase child:kUserChats] child:[UserInformation getUserID]] child:kChats] ;
+                    [[userChatRoomsRef child:roomID] removeValue];
+                    
+                    FIRDatabaseReference *roomRef = [self.firdatabase child:kChats];
+                    [[roomRef child:roomID] removeValue];
+                    
+                    //Adding to UserDetails
+                    FIRDatabaseReference *userDetailsRef = [[[self.firdatabase child:kUserDetails] child:userID] child:kBlockedUsers];
+                    [userDetailsRef setValue:@{selectedUserID:@0}];
+                    
+                }];
+                
+                UIAlertAction *okay = [UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    
+                }];
+                
+                [self.UIPrinciple twoButtonAlert:cont rightButton:okay controller:@"Block?" message:@"You will not see this person on this app, and all the chats will be deleted. Are you sure to block?" viewController:self];
+                
                 break;
             }
             case 1: {
-                NSLog(@"1 on OLD pressed");
                 
-                // Delete button is pressed
-                //          NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
-                //          [self.userData.userDataArray[cellIndexPath.row] removeObjectAtIndex:cellIndexPath.row] ;
-                //          [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationRight];
+                UIAlertAction *cont = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    //DELETE
+                    NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+                    
+                    NSString *selectedUserID = [[[self.oldChatArray objectAtIndex:cellIndexPath.row] objectForKey:kMembers] objectForKey:@"member1"];
+                    NSString *roomID = [self.oldChatRoomKeyArray objectAtIndex:cellIndexPath.row];
+                    
+                    FIRDatabaseReference *selectedUserChatRoomsRef = [[[self.firdatabase child:kUserChats] child:selectedUserID] child:kChats];
+                    [[selectedUserChatRoomsRef child:roomID] removeValue];
+                    
+                    FIRDatabaseReference *userChatRoomsRef = [[[self.firdatabase child:kUserChats] child:[UserInformation getUserID]] child:kChats] ;
+                    [[userChatRoomsRef child:roomID] removeValue];
+                    
+                    FIRDatabaseReference *roomRef = [self.firdatabase child:kChats];
+                    [[roomRef child:roomID] removeValue];
+                }];
+                
+                UIAlertAction *okay = [UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    
+                }];
+                
+                [self.UIPrinciple twoButtonAlert:cont rightButton:okay controller:@"Leave?" message:@"Are you sure? All the chats will be deleted." viewController:self];
                 
                 break;
             }
@@ -323,9 +430,7 @@
     
     //Set default to nil
     chatCell.chatUserImage.image = nil;
-    
     NSURL *profileImageUrl = photoUrl;
-    
     UIImage *cachedImage = [imageCache objectForKey:profileImageUrl];
     
     if (cachedImage) {
@@ -345,9 +450,7 @@
                 UIImage *downloadedImage = [UIImage imageWithData:data];
                 
                 if (downloadedImage != nil) {
-                    
                     [imageCache setObject:downloadedImage forKey:profileImageUrl];
-                    
                 }
                 
                 chatCell.chatUserImage.image = downloadedImage;
@@ -368,9 +471,9 @@
         NSDictionary *members = [snapshot.value objectForKey:kMembers];
         NSString *chatRoomKey = snapshot.key;
         
-        NSLog(@"Got snapchat: %@", snapshot.value);
-        NSLog(@"Got you: %@", [members objectForKey:@"member1"]);
-            
+//        NSLog(@"Got snapchat: %@", snapshot.value);
+//        NSLog(@"Got you: %@", [members objectForKey:@"member1"]);
+        
         FIRDatabaseReference *userInfoRef = [[self.firdatabase child:kUsers] child:[members objectForKey:@"member1"]];
         [userInfoRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
             
@@ -380,18 +483,33 @@
             [chatRoomInfoDict setValue:name forKey:kFullName];
             [chatRoomInfoDict setValue:profilePhotoUrl forKey:kSmallProfilePhoto];
             
-            if ([[chatRoomInfoDict objectForKey:@"type"] integerValue] == 0) {
-                [self.recentChatArray addObject:chatRoomInfoDict];
-                [self.recentChatRoomKeyArray addObject:chatRoomKey];
-                NSLog(@"chatroom key added: %@", chatRoomKey);
+            if (self.oldNewSegmentedControl.selectedSegmentIndex == 0) {
+                
+                if ([[chatRoomInfoDict objectForKey:kType] integerValue] == 0) {
+                    [self.recentChatArray addObject:chatRoomInfoDict];
+                    [self.recentChatRoomKeyArray addObject:chatRoomKey];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.tableView reloadData];
+                    });
+                } else {
+                    [self.oldChatArray addObject:chatRoomInfoDict];
+                    [self.oldChatRoomKeyArray addObject:chatRoomKey];
+                }
+                
             } else {
-                [self.oldChatArray addObject:chatRoomInfoDict];
-                [self.oldChatRoomKeyArray addObject:chatRoomKey];
-            }
             
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
-            });
+                if ([[chatRoomInfoDict objectForKey:kType] integerValue] == 0) {
+                    [self.recentChatArray addObject:chatRoomInfoDict];
+                    [self.recentChatRoomKeyArray addObject:chatRoomKey];
+                } else {
+                    [self.oldChatArray addObject:chatRoomInfoDict];
+                    [self.oldChatRoomKeyArray addObject:chatRoomKey];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.tableView reloadData];
+                    });
+                }
+                
+            }
             
         } withCancelBlock:nil];
         
@@ -406,7 +524,7 @@
         NSMutableDictionary *chatRoomInfoDict = snapshot.value;
         NSString *chatRoomKey = snapshot.key;
         
-        if ([[chatRoomInfoDict objectForKey:@"type"] integerValue] == 0) {
+        if ([[chatRoomInfoDict objectForKey:kType] integerValue] == 0) {
             NSUInteger index = [self.recentChatRoomKeyArray indexOfObject:chatRoomKey];
             
             if (index != NSNotFound) {
@@ -440,8 +558,8 @@
         NSDictionary *members = [snapshot.value objectForKey:kMembers];
         NSString *chatRoomKey = snapshot.key;
         
-        NSLog(@"Got snapchat 2: %@", snapshot.value);
-        NSLog(@"Got you 2: %@", [members objectForKey:@"member1"]);
+//        NSLog(@"Got snapchat 2: %@", snapshot.value);
+//        NSLog(@"Got you 2: %@", [members objectForKey:@"member1"]);
         
         FIRDatabaseReference *userInfoRef = [[self.firdatabase child:kUsers] child:[members objectForKey:@"member1"]];
         [userInfoRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
@@ -452,7 +570,7 @@
             [chatRoomInfoDict setValue:name forKey:kFullName];
             [chatRoomInfoDict setValue:profilePhotoUrl forKey:kSmallProfilePhoto];
             
-            if ([[chatRoomInfoDict objectForKey:@"type"] integerValue] == 0) {
+            if ([[chatRoomInfoDict objectForKey:kType] integerValue] == 0) {
                 
                 NSUInteger index = [self.recentChatRoomKeyArray indexOfObject:chatRoomKey];
                 
@@ -484,7 +602,7 @@
     
     [self.chatRoomsRef observeEventType:FIRDataEventTypeChildMoved withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
-        NSLog(@"moved: %@", snapshot.value);
+//        NSLog(@"moved: %@", snapshot.value);
         
         NSMutableDictionary *chatRoomInfoDict = snapshot.value;
         NSDictionary *members = [snapshot.value objectForKey:kMembers];
@@ -499,7 +617,7 @@
             [chatRoomInfoDict setValue:name forKey:kFullName];
             [chatRoomInfoDict setValue:profilePhotoUrl forKey:kSmallProfilePhoto];
             
-            if ([[chatRoomInfoDict objectForKey:@"type"] integerValue] == 0) {
+            if ([[chatRoomInfoDict objectForKey:kType] integerValue] == 0) {
                 NSUInteger index = [self.recentChatRoomKeyArray indexOfObject:chatRoomKey];
                 
                 if (index != NSNotFound) {

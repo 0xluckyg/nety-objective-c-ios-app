@@ -28,6 +28,7 @@
     
     [self initializeSettings];
     [self initializeDesign];
+    [self initializeUsers];
 }
 
 
@@ -36,6 +37,7 @@
 
 
 - (void)initializeSettings {
+    self.userArray = [[NSMutableArray alloc] init];
     self.userData = [[NetworkData alloc] init];
 }
 
@@ -68,6 +70,11 @@
     [self.searchBarView setBackgroundColor:self.UIPrinciple.netyBlue];
 }
 
+- (void) initializeUsers {
+    
+    
+    
+}
 
 #pragma mark - Protocols and Delegates
 //---------------------------------------------------------

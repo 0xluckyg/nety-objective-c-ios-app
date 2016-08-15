@@ -17,6 +17,7 @@
 @interface Chat : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SWTableViewCellDelegate> {
     
     NSDictionary *userDataDictionary;
+    bool userAddedAsFriend;
 
 }
 
