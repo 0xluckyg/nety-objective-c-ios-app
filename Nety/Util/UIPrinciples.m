@@ -80,6 +80,20 @@
     [viewController.navigationController.view addSubview:noContentController.view];
 }
 
+-(void)addSlider: (UIViewController *)viewController customSlider:(CustomSlider *)customSlider {
+    
+    float tabbarHeight = viewController.tabBarController.tabBar.frame.size.height;
+    float sliderHeight = customSlider.slider.frame.size.height;
+    
+    customSlider.view.frame = CGRectMake(0, viewController.view.frame.size.height-tabbarHeight - sliderHeight - 10, viewController.view.frame.size.width, customSlider.slider.frame.size.height);
+
+    customSlider.slider.tintColor = self.netyBlue;
+    
+    customSlider.view.backgroundColor = [UIColor clearColor];
+    
+    [viewController.navigationController.view addSubview:customSlider.view];
+}
+
 -(void)addTopbarColor: (UIViewController *)viewController {
     UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, 0,[UIScreen mainScreen].bounds.size.width, 20)];
     view.backgroundColor=self.netyBlue;

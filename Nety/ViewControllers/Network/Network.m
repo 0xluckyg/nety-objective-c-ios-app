@@ -76,11 +76,13 @@
     [self.navigationController.navigationBar setTitleTextAttributes:attributes];
     
     [self.navigationController.navigationBar setItems:@[navItem]];
-//    [self.navigationController.navigationBar setBarTintColor:self.UIPrinciple.netyBlue];
-//    [self.navigationController.navigationBar setBackgroundColor:self.UIPrinciple.netyBlue];
-    //Set searchbar
+
     [self.searchBar setBackgroundImage:[[UIImage alloc]init]];
     [self.searchBarView setBackgroundColor:self.UIPrinciple.netyBlue];
+
+    self.customSlider = [[CustomSlider alloc] init];
+    
+    [self.UIPrinciple addSlider:self customSlider:self.customSlider];
     
 }
 

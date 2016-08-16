@@ -15,7 +15,7 @@
 #import "Profile.h"
 #import "NetworkData.h"
 #import "MBProgressHUD.h"
-
+#import "CustomSlider.h"
 
 @import Firebase;
 
@@ -34,8 +34,10 @@
 
 //UTIL CLASSES----------------------------------------
 
-
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
+
+@property (strong, nonatomic) CustomSlider *customSlider;
+
 
 //LIB CLASSES----------------------------------------
 

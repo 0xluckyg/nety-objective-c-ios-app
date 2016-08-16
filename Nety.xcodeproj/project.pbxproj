@@ -24,6 +24,8 @@
 		679B9EEA1D236E0A00C426F2 /* MyInfoEditType2.m in Sources */ = {isa = PBXBuildFile; fileRef = 679B9EE91D236E0A00C426F2 /* MyInfoEditType2.m */; };
 		679B9EED1D236E1C00C426F2 /* MyInfoEditTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 679B9EEC1D236E1C00C426F2 /* MyInfoEditTable.m */; };
 		679B9EF01D2396A700C426F2 /* MyInfoEditTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 679B9EEF1D2396A700C426F2 /* MyInfoEditTableCell.m */; };
+		67ABD69B1D62F6EE004A1B5B /* CustomSlider.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67ABD69A1D62F6EE004A1B5B /* CustomSlider.xib */; };
+		67ABD6A11D62F759004A1B5B /* CustomSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 67ABD6A01D62F759004A1B5B /* CustomSlider.m */; };
 		67B2400F1D40594600F011BB /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 67B2400E1D40594600F011BB /* Constants.m */; };
 		67CD9C2E1D3C75E800823701 /* NoContent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67CD9C2D1D3C75E800823701 /* NoContent.xib */; };
 		67CD9C311D3C795600823701 /* NoContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CD9C301D3C795600823701 /* NoContent.m */; };
@@ -93,6 +95,9 @@
 		679B9EEC1D236E1C00C426F2 /* MyInfoEditTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoEditTable.m; sourceTree = "<group>"; };
 		679B9EEE1D2396A700C426F2 /* MyInfoEditTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoEditTableCell.h; sourceTree = "<group>"; };
 		679B9EEF1D2396A700C426F2 /* MyInfoEditTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoEditTableCell.m; sourceTree = "<group>"; };
+		67ABD69A1D62F6EE004A1B5B /* CustomSlider.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomSlider.xib; sourceTree = "<group>"; };
+		67ABD69F1D62F759004A1B5B /* CustomSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSlider.h; sourceTree = "<group>"; };
+		67ABD6A01D62F759004A1B5B /* CustomSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSlider.m; sourceTree = "<group>"; };
 		67B2400D1D40594600F011BB /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		67B2400E1D40594600F011BB /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		67CD9C2D1D3C75E800823701 /* NoContent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoContent.xib; sourceTree = "<group>"; };
@@ -159,6 +164,9 @@
 				67CD9C2D1D3C75E800823701 /* NoContent.xib */,
 				67CD9C2F1D3C795600823701 /* NoContent.h */,
 				67CD9C301D3C795600823701 /* NoContent.m */,
+				67ABD69A1D62F6EE004A1B5B /* CustomSlider.xib */,
+				67ABD69F1D62F759004A1B5B /* CustomSlider.h */,
+				67ABD6A01D62F759004A1B5B /* CustomSlider.m */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -511,6 +519,7 @@
 				67DD1AC11D17E42D00FBEA0F /* girl1.jpg in Resources */,
 				67DD1A8A1D17BEB500FBEA0F /* LaunchScreen.storyboard in Resources */,
 				67602F521D2EC76900DA2F3A /* Messages.storyboard in Resources */,
+				67ABD69B1D62F6EE004A1B5B /* CustomSlider.xib in Resources */,
 				67DD1A871D17BEB500FBEA0F /* Assets.xcassets in Resources */,
 				67DD1AA41D17BFCC00FBEA0F /* Chat.storyboard in Resources */,
 				67D4AD5F1D26333D00F42B7F /* LoginSignup.storyboard in Resources */,
@@ -600,6 +609,7 @@
 				67D273741D45310A00282730 /* UserInformation.m in Sources */,
 				67DD1A9D1D17BF6900FBEA0F /* MyNetwork.m in Sources */,
 				67DD1A7C1D17BEB500FBEA0F /* main.m in Sources */,
+				67ABD6A11D62F759004A1B5B /* CustomSlider.m in Sources */,
 				679B9EEA1D236E0A00C426F2 /* MyInfoEditType2.m in Sources */,
 				67D4AD621D26536000F42B7F /* MainPage.m in Sources */,
 				67DD1AB91D17E39B00FBEA0F /* NetworkData.m in Sources */,

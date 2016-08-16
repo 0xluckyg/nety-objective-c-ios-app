@@ -126,8 +126,7 @@
 -(void)changeRoot {
     
     //Set root controller to tabbar with cross dissolve animation
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     //Set login storyboard
     UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"LoginSignup" bundle:nil];
     UIViewController *myNetworkViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"MainPageNav"];
