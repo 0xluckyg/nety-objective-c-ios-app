@@ -41,6 +41,14 @@
 
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    
+    //Set navbar title
+    self.navigationItem.title = @"My Network";
+
+    
+}
+
 - (void)initializeDesign {
     
     //No separator
@@ -168,7 +176,16 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    [self performSegueWithIdentifier:@"ShowProfileSegue" sender:indexPath];
+    UIStoryboard *profileStoryboard = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+    Profile *profilePage = [profileStoryboard instantiateViewControllerWithIdentifier:@"Profile"];
+    
+    NSUInteger selectedRow = self.tableView.indexPathForSelectedRow.row;
+    
+    profilePage.selectedUserID = [self.userKeyArray objectAtIndex:selectedRow];
+    
+    profilePage.selectedUserInfoDictionary = [self.userArray objectAtIndex:selectedRow];
+    
+    [self.navigationController pushViewController:profilePage animated:YES];
     
 }
 
@@ -179,11 +196,77 @@
     switch (index) {
         case 0: {
             
+            UIAlertAction *cont = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                
+                //BLOCK
+                NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+                NSString *userID = [UserInformation getUserID];
+                NSString *otherUserID = [self.userKeyArray objectAtIndex:cellIndexPath.row];
+                NSString *roomID = [self makeChatRoomID:userID otherUser:otherUserID];
+                
+                //Remove
+                FIRDatabaseReference *otherUserChatRoomsRef = [[[self.firdatabase child:kUserChats] child:otherUserID] child:kChats];
+                [[otherUserChatRoomsRef child:roomID] removeValue];
+                
+                FIRDatabaseReference *userChatRoomsRef = [[[self.firdatabase child:kUserChats] child:userID] child:kChats] ;
+                [[userChatRoomsRef child:roomID] removeValue];
+                
+                FIRDatabaseReference *roomRef = [self.firdatabase child:kChats];
+                [[roomRef child:roomID] removeValue];
+                
+                //Adding blockedUser to UserDetails
+                FIRDatabaseReference *userDetailsRef = [[[self.firdatabase child:kUserDetails] child:userID] child:kBlockedUsers];
+                [userDetailsRef setValue:@{otherUserID:@0}];
+                
+                //Deleting addedUser from UserDetails
+                FIRDatabaseReference *userAddedUsersRef = [[[self.firdatabase child:kUserDetails] child:userID] child:kAddedUsers];
+                FIRDatabaseReference *otherUserAddedUsersRef = [[[self.firdatabase child:kUserDetails] child:otherUserID] child:kAddedUsers];
+                [[userAddedUsersRef child:otherUserID] removeValue];
+                [[otherUserAddedUsersRef child:userID] removeValue];
+                
+            }];
+            
+            UIAlertAction *okay = [UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                
+            }];
+            
+            [self.UIPrinciple twoButtonAlert:cont rightButton:okay controller:@"Block?" message:@"You will not see this person on this app, and all the chats will be deleted. Are you sure to block?" viewController:self];
             
             break;
         }
         case 1: {
-            NSLog(@"1 pressed");
+            
+            UIAlertAction *cont = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                
+                //DELETE
+                NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+                NSString *userID = [UserInformation getUserID];
+                NSString *otherUserID = [self.userKeyArray objectAtIndex:cellIndexPath.row];
+                NSString *roomID = [self makeChatRoomID:userID otherUser:otherUserID];
+                
+                //Remove
+                FIRDatabaseReference *otherUserChatRoomRef = [[[self.firdatabase child:kUserChats] child:otherUserID] child:kChats];
+                [[otherUserChatRoomRef child:roomID] removeValue];
+                
+                FIRDatabaseReference *userChatRoomsRef = [[[self.firdatabase child:kUserChats] child:userID] child:kChats] ;
+                [[userChatRoomsRef child:roomID] removeValue];
+                
+                FIRDatabaseReference *roomRef = [self.firdatabase child:kChats];
+                [[roomRef child:roomID] removeValue];
+                
+                //Deleting addedUser from UserDetails
+                FIRDatabaseReference *userAddedUsersRef = [[[self.firdatabase child:kUserDetails] child:userID] child:kAddedUsers];
+                FIRDatabaseReference *otherUserAddedUsersRef = [[[self.firdatabase child:kUserDetails] child:otherUserID] child:kAddedUsers];
+                [[userAddedUsersRef child:otherUserID] removeValue];
+                [[otherUserAddedUsersRef child:userID] removeValue];
+                
+            }];
+            
+            UIAlertAction *okay = [UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                
+            }];
+            
+            [self.UIPrinciple twoButtonAlert:cont rightButton:okay controller:@"Leave?" message:@"Are you sure? All the chats will be deleted." viewController:self];
             
             
             break;
@@ -258,6 +341,25 @@
         
     }
     
+}
+
+- (NSString *)makeChatRoomID: (NSString *)userID otherUser:(NSString *)otherUserID {
+    
+    //Making a room
+    NSComparisonResult result = [userID compare:otherUserID];
+    NSString *chatroomID;
+    
+    if (result == NSOrderedAscending) {
+        
+        chatroomID = [NSString stringWithFormat:@"%@%@", userID, otherUserID];
+        
+    } else {
+        
+        chatroomID = [NSString stringWithFormat:@"%@%@", otherUserID, userID];
+
+    }
+    
+    return chatroomID;
 }
 
 - (void) listenForChildAdded {

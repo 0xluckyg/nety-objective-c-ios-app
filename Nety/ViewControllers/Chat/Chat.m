@@ -315,6 +315,8 @@
                 
                 [self.UIPrinciple twoButtonAlert:cont rightButton:okay controller:@"Leave?" message:@"Are you sure? All the chats will be deleted." viewController:self];
                 
+                break;
+                
             }
             default: {
                 break;

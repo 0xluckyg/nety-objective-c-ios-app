@@ -14,6 +14,7 @@
 #import "UserInformation.h"
 #import "UIPrinciples.h"
 #import "MyNetworkCell.h"
+#import "Profile.h"
 
 @import Firebase;
 

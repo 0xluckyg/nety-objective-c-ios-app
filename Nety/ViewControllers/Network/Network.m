@@ -198,11 +198,8 @@
     
     NSUInteger selectedRow = self.tableView.indexPathForSelectedRow.row;
     
-    NSLog(@"1: %lu", [self.usersArray count]);
-    
     profilePage.selectedUserInfoDictionary = [[NSDictionary alloc] initWithDictionary: [self.usersArray objectAtIndex:selectedRow]];
     
-    NSLog(@"2: %lu", [self.userIDArray count]);
     profilePage.selectedUserID = [[NSString alloc] initWithString:[self.userIDArray objectAtIndex:selectedRow]];
     
     [self.navigationController pushViewController:profilePage animated:YES];

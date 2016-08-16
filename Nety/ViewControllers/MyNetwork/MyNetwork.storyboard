@@ -137,20 +137,11 @@
                         <outlet property="searchBar" destination="xTf-kD-6Ae" id="wGp-Co-qNi"/>
                         <outlet property="searchBarView" destination="jHz-1u-AaC" id="Xa3-Zv-PtB"/>
                         <outlet property="tableView" destination="Vex-kh-xZF" id="uYd-Ll-m2l"/>
-                        <segue destination="Q5s-wq-akf" kind="presentation" identifier="ShowProfileSegue" id="Exv-x5-pWE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c28-1e-QBr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1082" y="243"/>
-        </scene>
-        <!--Profile-->
-        <scene sceneID="Iba-BS-tLi">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="Profile" storyboardName="Profile" referencedIdentifier="Profile" id="Q5s-wq-akf" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MdT-J3-vDZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1476" y="-197"/>
         </scene>
         <!--MyNetwork-->
         <scene sceneID="pGi-7h-MDU">
