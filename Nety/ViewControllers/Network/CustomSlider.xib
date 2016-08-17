@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomSlider">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Network">
             <connections>
-                <outlet property="slider" destination="SX4-TL-9pA" id="TJD-jx-LFX"/>
-                <outlet property="view" destination="iN0-l3-epB" id="wG3-nG-D4N"/>
+                <outlet property="slider" destination="4v9-SG-A47" id="fg0-M9-ZpA"/>
+                <outlet property="sliderView" destination="iN0-l3-epB" id="F1a-1c-3lt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -16,20 +16,23 @@
             <rect key="frame" x="0.0" y="0.0" width="370" height="30"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="SX4-TL-9pA">
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="4v9-SG-A47">
                     <rect key="frame" x="-2" y="0.0" width="374" height="31"/>
+                    <connections>
+                        <action selector="sliderAction:" destination="-1" eventType="valueChanged" id="i9Z-L1-D3f"/>
+                    </connections>
                 </slider>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="SX4-TL-9pA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="IiG-Xa-2xI"/>
-                <constraint firstAttribute="bottom" secondItem="SX4-TL-9pA" secondAttribute="bottom" id="NmR-TS-umK"/>
-                <constraint firstAttribute="trailing" secondItem="SX4-TL-9pA" secondAttribute="trailing" id="Sef-1l-LVq"/>
-                <constraint firstItem="SX4-TL-9pA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="UCV-zH-bui"/>
+                <constraint firstItem="4v9-SG-A47" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="GMH-nl-bck"/>
+                <constraint firstItem="4v9-SG-A47" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="LNF-hq-ZYO"/>
+                <constraint firstAttribute="trailing" secondItem="4v9-SG-A47" secondAttribute="trailing" id="UqP-V4-k4i"/>
+                <constraint firstAttribute="bottom" secondItem="4v9-SG-A47" secondAttribute="bottom" id="gct-O0-s6x"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="352" y="-118"/>
+            <point key="canvasLocation" x="366" y="163"/>
         </view>
     </objects>
 </document>

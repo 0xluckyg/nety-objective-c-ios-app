@@ -29,6 +29,14 @@
     [self initializeUsers];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [self.tableView reloadData];
+    
+    self.navigationItem.title = @"My Network";
+    
+}
+
 
 #pragma mark - Initialization
 //---------------------------------------------------------
@@ -39,14 +47,6 @@
     self.userKeyArray = [[NSMutableArray alloc] init];
     self.imageCache = [[NSCache alloc] init];
 
-}
-
--(void)viewWillAppear:(BOOL)animated {
-    
-    //Set navbar title
-    self.navigationItem.title = @"My Network";
-
-    
 }
 
 - (void)initializeDesign {
@@ -100,6 +100,18 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
+//    NoContent *noContent = [[NoContent alloc] init];
+
+//    if ([self.userArray count] == 0) {
+//        
+//        NSLog(@"called");
+//        NSString *contentText = [NSString stringWithFormat:@"There is no one %@ near you", self.title];
+//        [self.UIPrinciple addNoContent:self setText:contentText noContentController:noContent];
+//        
+//    } else {
+//        [self.UIPrinciple removeNoContent:noContent];
+//    }
+    
     return [self.userArray count];
 }
 
@@ -109,68 +121,70 @@
     MyNetworkCell *myNetworkCell = [tableView dequeueReusableCellWithIdentifier:@"MyNetworkCell" forIndexPath:indexPath];
     int row = (int)[indexPath row];
     
-    userDataDictionary = [self.userArray objectAtIndex:row];
+    NSLog(@"cont %lu", [self.userArray count]);
     
-    //Setting cell data
-    myNetworkCell.myNetworkUserImage.image = [UIImage imageNamed: kDefaultUserLogoName];
-    
-    //Setting images
-    NSString *photoUrl = [userDataDictionary objectForKey:kSmallProfilePhoto];
-    if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
-        NSURL *profileImageUrl = [NSURL URLWithString:photoUrl];
-        [self loadAndCacheImage:myNetworkCell photoUrl:profileImageUrl cache:self.imageCache];
-    } else {
-        myNetworkCell.myNetworkUserImage.image = [UIImage imageNamed:kDefaultUserLogoName];
-    }
-    
-    //Setting name
-    NSString *fullName = [NSString stringWithFormat:@"%@ %@", [userDataDictionary objectForKey:kFirstName], [userDataDictionary objectForKey:kLastName]];
-    myNetworkCell.myNetworkUserName.text = fullName;
-    
-    //Set job
-    myNetworkCell.myNetworkUserJob.text = [userDataDictionary objectForKey:kIdentity];
-    
-    //Set description
-    NSString *statusString = [userDataDictionary objectForKey:kStatus];
-    NSString *summaryString = [userDataDictionary objectForKey:kSummary];
-    
-    if (![statusString isEqualToString:@""]) {
+        userDataDictionary = [self.userArray objectAtIndex:row];
         
-        myNetworkCell.myNetworkUserDescription.text = statusString;
+        //Setting cell data
+        myNetworkCell.myNetworkUserImage.image = [UIImage imageNamed: kDefaultUserLogoName];
         
-    } else if (![summaryString isEqualToString:@""]){
-    
-        myNetworkCell.myNetworkUserDescription.text = summaryString;
+        //Setting images
+        NSString *photoUrl = [userDataDictionary objectForKey:kSmallProfilePhoto];
+        if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
+            NSURL *profileImageUrl = [NSURL URLWithString:photoUrl];
+            [self loadAndCacheImage:myNetworkCell photoUrl:profileImageUrl cache:self.imageCache];
+        } else {
+            myNetworkCell.myNetworkUserImage.image = [UIImage imageNamed:kDefaultUserLogoName];
+        }
         
-    } else {
+        //Setting name
+        NSString *fullName = [NSString stringWithFormat:@"%@ %@", [userDataDictionary objectForKey:kFirstName], [userDataDictionary objectForKey:kLastName]];
+        myNetworkCell.myNetworkUserName.text = fullName;
         
-        myNetworkCell.myNetworkUserDescription.text = @"";
+        //Set job
+        myNetworkCell.myNetworkUserJob.text = [userDataDictionary objectForKey:kIdentity];
         
-    }
-    
-    //Set selection color to blue
-    UIView *bgColorView = [[UIView alloc] init];
-    bgColorView.backgroundColor = self.UIPrinciple.netyBlue;
-    [myNetworkCell setSelectedBackgroundView:bgColorView];
-    //Set highlighted color to white
-    myNetworkCell.myNetworkUserJob.highlightedTextColor = [UIColor whiteColor];
-    myNetworkCell.myNetworkUserName.highlightedTextColor = [UIColor whiteColor];
-    myNetworkCell.myNetworkUserDescription.highlightedTextColor = [UIColor whiteColor];
-    
-    
-    //SWTableViewCell configuration
-    NSMutableArray *myNetworkRightUtilityButtons = [[NSMutableArray alloc] init];
-    
-    [myNetworkRightUtilityButtons sw_addUtilityButtonWithColor:
-     self.UIPrinciple.netyBlue
-                                                         title:@"Block"];
-    [myNetworkRightUtilityButtons sw_addUtilityButtonWithColor:
-     self.UIPrinciple.netyRed
-                                                         title:@"Delete"];
-    
-    myNetworkCell.rightUtilityButtons = myNetworkRightUtilityButtons;
-    myNetworkCell.delegate = self;
-    
+        //Set description
+        NSString *statusString = [userDataDictionary objectForKey:kStatus];
+        NSString *summaryString = [userDataDictionary objectForKey:kSummary];
+        
+        if (![statusString isEqualToString:@""]) {
+            
+            myNetworkCell.myNetworkUserDescription.text = statusString;
+            
+        } else if (![summaryString isEqualToString:@""]){
+        
+            myNetworkCell.myNetworkUserDescription.text = summaryString;
+            
+        } else {
+            
+            myNetworkCell.myNetworkUserDescription.text = @"";
+            
+        }
+        
+        //Set selection color to blue
+        UIView *bgColorView = [[UIView alloc] init];
+        bgColorView.backgroundColor = self.UIPrinciple.netyBlue;
+        [myNetworkCell setSelectedBackgroundView:bgColorView];
+        //Set highlighted color to white
+        myNetworkCell.myNetworkUserJob.highlightedTextColor = [UIColor whiteColor];
+        myNetworkCell.myNetworkUserName.highlightedTextColor = [UIColor whiteColor];
+        myNetworkCell.myNetworkUserDescription.highlightedTextColor = [UIColor whiteColor];
+        
+        
+        //SWTableViewCell configuration
+        NSMutableArray *myNetworkRightUtilityButtons = [[NSMutableArray alloc] init];
+        
+        [myNetworkRightUtilityButtons sw_addUtilityButtonWithColor:
+         self.UIPrinciple.netyBlue
+                                                             title:@"Block"];
+        [myNetworkRightUtilityButtons sw_addUtilityButtonWithColor:
+         self.UIPrinciple.netyRed
+                                                             title:@"Delete"];
+        
+        myNetworkCell.rightUtilityButtons = myNetworkRightUtilityButtons;
+        myNetworkCell.delegate = self;
+        
     return myNetworkCell;
 }
 
@@ -400,6 +414,10 @@
                                   withRowAnimation:UITableViewRowAnimationAutomatic];
         }
         
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+        
     } withCancelBlock:nil];
     
 }
@@ -415,6 +433,10 @@
         if (index != NSNotFound) {
             [self.userArray replaceObjectAtIndex:index withObject:userInformation];
         }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
         
     } withCancelBlock:nil];
     

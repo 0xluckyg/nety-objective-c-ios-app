@@ -15,7 +15,6 @@
 #import "Profile.h"
 #import "NetworkData.h"
 #import "MBProgressHUD.h"
-#import "CustomSlider.h"
 
 @import Firebase;
 
@@ -31,13 +30,11 @@
 
 @property (strong, nonatomic) NSCache *imageCache;
 
+@property (nonatomic) float sliderValue;
 
 //UTIL CLASSES----------------------------------------
 
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
-
-@property (strong, nonatomic) CustomSlider *customSlider;
-
 
 //LIB CLASSES----------------------------------------
 
@@ -54,11 +51,15 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+@property (strong, nonatomic) IBOutlet UIView *sliderView;
+
+@property (weak, nonatomic) IBOutlet UISlider *slider;
+
 
 //IBACTIONS----------------------------------------
 
 
-
+- (IBAction)sliderAction:(id)sender;
 
 
 //-------------------------------------------------

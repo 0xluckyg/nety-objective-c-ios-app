@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "NoContent.h"
-#import "CustomSlider.h"
 
 @interface UIPrinciples : NSObject
 
@@ -34,8 +33,6 @@
 -(void)addNoContent: (UIViewController *)viewController setText:(NSString*)text noContentController:(NoContent *)noContentController;
 
 -(void)removeNoContent: (NoContent *)noContentController;
-
--(void)addSlider: (UIViewController *)viewController customSlider:(CustomSlider *)customSlider;
 
 -(UIImage*)scaleDownImage:(UIImage*)img;
 
