@@ -31,10 +31,7 @@
 //    NSLog(@"%@", self.selectedUserInfoDictionary);
 //    NSLog(@"%@", self.selectedUserID);
     
-}
 
--(BOOL)hidesBottomBarWhenPushed {
-    return YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -146,6 +143,13 @@
 
 - (IBAction)backButton:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+    
+    __weak typeof(self) weakSelf = self;
+    weakSelf.tabBarController.tabBar.hidden = NO;
+    [self.UIPrinciple setTabBarVisible:![self.UIPrinciple tabBarIsVisible:self] animated:YES sender:self completion:^(BOOL finished) {
+        NSLog(@"animation done");
+
+    }];
 }
 
 - (IBAction)chatNowButton:(id)sender {
@@ -174,6 +178,7 @@
 -(void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    
 }
 
 #pragma mark - Custom methods

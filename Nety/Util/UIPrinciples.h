@@ -36,5 +36,8 @@
 
 -(UIImage*)scaleDownImage:(UIImage*)img;
 
+- (void)setTabBarVisible:(BOOL)visible animated:(BOOL)animated sender:(UIViewController *)viewController completion:(void (^)(BOOL))completion;
+
+- (BOOL)tabBarIsVisible: (UIViewController *)viewController;
 
 @end

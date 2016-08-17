@@ -31,6 +31,7 @@
 -(void)viewWillAppear:(BOOL)animated {
     
     self.navigationItem.title = @"Near Me";
+    
     [self initializeUsers];
     [self.tableView reloadData];
 }
@@ -55,7 +56,8 @@
     self.sliderView = [[[NSBundle mainBundle] loadNibNamed:@"CustomSlider" owner:self options:nil] objectAtIndex:0];
     
     [self addSlider:self.sliderView slider:self.slider];
-    
+    [self.view bringSubviewToFront:self.sliderView];
+    [self.view setAutoresizesSubviews:YES];
 }
 
 - (void)initializeDesign {
@@ -195,6 +197,14 @@
     
     profilePage.selectedUserID = [[NSString alloc] initWithString:[self.userIDArray objectAtIndex:selectedRow]];
     
+    __weak typeof(self) weakSelf = self;
+    [self.UIPrinciple setTabBarVisible:![self.UIPrinciple tabBarIsVisible:self] animated:YES sender:self completion:^(BOOL finished) {
+        NSLog(@"animation done");
+        weakSelf.tabBarController.tabBar.hidden = YES;
+    }];
+
+    
+    
     [self.navigationController pushViewController:profilePage animated:YES];
     
 }
@@ -217,8 +227,6 @@
 
 
 -(void)viewWillDisappear:(BOOL)animated {
-    
-    [self.sliderView removeFromSuperview];
     
    [self.tableView reloadData];
 }
@@ -275,13 +283,13 @@
     float tabbarHeight = self.tabBarController.tabBar.frame.size.height;
     float sliderHeight = slider.frame.size.height;
     
-    customSlider.frame = CGRectMake(0, self.view.frame.size.height-tabbarHeight - sliderHeight - 10, self.view.frame.size.width, slider.frame.size.height);
+    customSlider.frame = CGRectMake(0, self.view.frame.size.height-tabbarHeight - sliderHeight - 60, self.view.frame.size.width, slider.frame.size.height);
     
     slider.tintColor = self.UIPrinciple.netyBlue;
     
     customSlider.backgroundColor = [UIColor clearColor];
     
-    [self.navigationController.view addSubview:customSlider];
+    [self.view addSubview:customSlider];
 }
 
 -(void) listenForChildAdded {

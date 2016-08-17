@@ -107,6 +107,29 @@
 }
 
 
+//tabbartransition
+- (void)setTabBarVisible:(BOOL)visible animated:(BOOL)animated sender:(UIViewController *)viewController completion:(void (^)(BOOL))completion {
+    
+    // bail if the current state matches the desired state
+    if ([self tabBarIsVisible:viewController] == visible) return (completion)? completion(YES) : nil;
+    
+    // get a frame calculation ready
+    CGRect frame = viewController.tabBarController.tabBar.frame;
+    CGFloat height = frame.size.height;
+    CGFloat offsetY = (visible)? -height : height;
+    
+    // zero duration means no animation
+    CGFloat duration = (animated)? 0.3 : 0.0;
+    
+    [UIView animateWithDuration:duration animations:^{
+        viewController.tabBarController.tabBar.frame = CGRectOffset(frame, 0, offsetY);
+    } completion:completion];
+}
+
+// know the current state
+- (BOOL)tabBarIsVisible: (UIViewController *)viewController {
+    return viewController.tabBarController.tabBar.frame.origin.y < CGRectGetMaxY(viewController.view.frame);
+}
 
 //Uploading image to server (make 10 times smaller)
 -(UIImage*)scaleDownImage:(UIImage*)img {
