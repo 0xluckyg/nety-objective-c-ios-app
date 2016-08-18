@@ -199,6 +199,12 @@
     
     profilePage.selectedUserInfoDictionary = [self.userArray objectAtIndex:selectedRow];
     
+    __weak typeof(self) weakSelf = self;
+    [self.UIPrinciple setTabBarVisible:![self.UIPrinciple tabBarIsVisible:self] animated:YES sender:self completion:^(BOOL finished) {
+        NSLog(@"animation done");
+        weakSelf.tabBarController.tabBar.hidden = YES;
+    }];
+    
     [self.navigationController pushViewController:profilePage animated:YES];
     
 }

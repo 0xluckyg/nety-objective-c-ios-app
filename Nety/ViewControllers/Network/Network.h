@@ -18,7 +18,9 @@
 
 @import Firebase;
 
-@interface Network : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface Network : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate> {
+    bool goingToProfileView;
+}
 
 
 //VARIABLES----------------------------------------
@@ -31,6 +33,8 @@
 @property (strong, nonatomic) NSCache *imageCache;
 
 @property (nonatomic) float sliderValue;
+
+@property (nonatomic) float sliderDistanceValue;
 
 //UTIL CLASSES----------------------------------------
 

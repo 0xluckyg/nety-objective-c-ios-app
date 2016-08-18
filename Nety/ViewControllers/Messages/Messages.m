@@ -286,13 +286,19 @@
 
 -(void)backButtonPressed {
     
+    NSMutableArray *navigationArray = [[NSMutableArray alloc] initWithArray: self.navigationController.viewControllers];
+    
+    if ([navigationArray count] > 2) {
+        [navigationArray removeObjectAtIndex: 1];
+        self.navigationController.viewControllers = navigationArray;
+    }
+    
     [self.navigationController popViewControllerAnimated:YES];
     
 }
 
 -(void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [[self navigationController] setNavigationBarHidden:YES animated:YES];
     
     FIRDatabaseReference *onlineRef = [[[[self.firdatabase child:kUserChats] child:self.senderId] child:kChats] child:self.chatroomID];
     [onlineRef updateChildValues:@{kOnline: @0}];
@@ -487,10 +493,14 @@
             
             UIImage *downloadedImage = [UIImage imageWithData:data];
             
-            NSLog(@"%@", downloadedImage);
+            NSLog(@"is null? %@", downloadedImage);
             
-            self.incomingBubbleAvatarImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:downloadedImage diameter:35.0f];
-            
+            if (downloadedImage != nil) {
+                self.incomingBubbleAvatarImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:downloadedImage diameter:35.0f];
+            } else {
+                self.incomingBubbleAvatarImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:kDefaultUserLogoName] diameter:35.0f];
+            }
+                
             [self.collectionView reloadData];
             
         });

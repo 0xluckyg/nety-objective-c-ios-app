@@ -23,17 +23,28 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self initializeDesign];
     [self initializeSettings];
-
+    [self initializeDesign];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     
-    self.navigationItem.title = @"Near Me";
+    goingToProfileView = false;
     
     [self initializeUsers];
     [self.tableView reloadData];
+    
+    self.sliderView = [[[NSBundle mainBundle] loadNibNamed:@"CustomSlider" owner:self options:nil] objectAtIndex:0];
+    
+    self.slider.value = self.sliderValue;
+    
+    [self addSlider:self.sliderView slider:self.slider];
+    
+    self.navigationItem.title = [NSString stringWithFormat:@"%@ Near Me", [self calculateDistanceToDescription]];
+    self.tabBarController.tabBar.hidden = NO;
+    
+    
 }
 
 
@@ -41,23 +52,18 @@
 //---------------------------------------------------------
 
 - (void)initializeSettings {
-        
+    
     self.imageCache = [[NSCache alloc] init];
     
     //Set up notifications
     [[self.tabBarController.tabBar.items objectAtIndex:2] setBadgeValue:@"4"];
     
     //Get location?
-//    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-//    NSString *str = [appDelegate returnLatLongString];
-//    
-//    NSLog(@"%@", str);
+    //    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    //    NSString *str = [appDelegate returnLatLongString];
+    //
+    //    NSLog(@"%@", str);
     
-    self.sliderView = [[[NSBundle mainBundle] loadNibNamed:@"CustomSlider" owner:self options:nil] objectAtIndex:0];
-    
-    [self addSlider:self.sliderView slider:self.slider];
-    [self.view bringSubviewToFront:self.sliderView];
-    [self.view setAutoresizesSubviews:YES];
 }
 
 - (void)initializeDesign {
@@ -70,7 +76,18 @@
     
     //Style the navigation bar
     UINavigationItem *navItem= [[UINavigationItem alloc] init];
-    navItem.title = @"Near me";
+    
+    self.slider.continuous = YES;
+    
+    self.sliderValue = (0.3);
+    
+    self.slider.value = self.sliderValue;
+    NSLog(@"slidervalue set? %f", self.sliderValue);
+    
+    [self calculateSliderDistanceValue];
+    
+    navItem.title = @"";
+    self.title = [NSString stringWithFormat:@"%@ Near Me", [self calculateDistanceToDescription]];
     
     //Style navbar
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -80,9 +97,11 @@
     [self.navigationController.navigationBar setTitleTextAttributes:attributes];
     
     [self.navigationController.navigationBar setItems:@[navItem]];
-
+    
     [self.searchBar setBackgroundImage:[[UIImage alloc]init]];
     [self.searchBarView setBackgroundColor:self.UIPrinciple.netyBlue];
+    
+    self.navigationItem.title = [NSString stringWithFormat:@"%@ Near Me", [self calculateDistanceToDescription]];
     
 }
 
@@ -125,14 +144,14 @@
         
         //If image is not NetyBlueLogo, start downloading and caching the image
         NSString *photoUrl = [userDataDictionary objectForKey:kProfilePhoto];
-
+        
         if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
             NSURL *profileImageUrl = [NSURL URLWithString:[userDataDictionary objectForKey:kProfilePhoto]];
             [self loadAndCacheImage:networkCell photoUrl:profileImageUrl cache:self.imageCache];
         } else {
             networkCell.networkUserImage.image = [UIImage imageNamed:kDefaultUserLogoName];
         }
-
+        
         
         NSString *fullName = [NSString stringWithFormat:@"%@ %@", [userDataDictionary objectForKey:kFirstName], [userDataDictionary objectForKey:kLastName]];
         
@@ -145,7 +164,7 @@
         //Set description
         NSString *statusString = [userDataDictionary objectForKey:kStatus];
         NSString *summaryString = [userDataDictionary objectForKey:kSummary];
-
+        
         if (![statusString isEqualToString:@""]) {
             
             networkCell.networkUserDescription.text = statusString;
@@ -155,7 +174,7 @@
             networkCell.networkUserDescription.text = summaryString;
             
         } else {
-        
+            
             networkCell.networkUserDescription.text = @"";
             
         }
@@ -197,13 +216,14 @@
     
     profilePage.selectedUserID = [[NSString alloc] initWithString:[self.userIDArray objectAtIndex:selectedRow]];
     
+    goingToProfileView = true;
+    
     __weak typeof(self) weakSelf = self;
     [self.UIPrinciple setTabBarVisible:![self.UIPrinciple tabBarIsVisible:self] animated:YES sender:self completion:^(BOOL finished) {
         NSLog(@"animation done");
+        [weakSelf.sliderView removeFromSuperview];
         weakSelf.tabBarController.tabBar.hidden = YES;
     }];
-
-    
     
     [self.navigationController pushViewController:profilePage animated:YES];
     
@@ -219,7 +239,17 @@
 //---------------------------------------------------------
 
 
-
+- (IBAction)sliderAction:(id)sender {
+    
+    NSLog(@"%f", self.slider.value);
+    
+    self.sliderValue = self.slider.value;
+    
+    [self calculateSliderDistanceValue];
+    
+    self.title = [NSString stringWithFormat:@"%@ Near", [self calculateDistanceToDescription]];
+    
+}
 
 
 #pragma mark - View Disappear
@@ -228,7 +258,11 @@
 
 -(void)viewWillDisappear:(BOOL)animated {
     
-   [self.tableView reloadData];
+    if (goingToProfileView != true) {
+        [self.sliderView removeFromSuperview];
+    }
+    
+    [self.tableView reloadData];
 }
 
 
@@ -263,11 +297,11 @@
                 UIImage *downloadedImage = [UIImage imageWithData:data];
                 
                 if (downloadedImage != nil) {
-                
-                    [imageCache setObject:downloadedImage forKey:profileImageUrl];
-                
-                }
                     
+                    [imageCache setObject:downloadedImage forKey:profileImageUrl];
+                    
+                }
+                
                 networkCell.networkUserImage.image = downloadedImage;
                 
             });
@@ -275,7 +309,7 @@
         }] resume];
         
     }
-
+    
 }
 
 -(void)addSlider:(UIView *)customSlider slider:(UISlider *)slider{
@@ -283,7 +317,7 @@
     float tabbarHeight = self.tabBarController.tabBar.frame.size.height;
     float sliderHeight = slider.frame.size.height;
     
-    customSlider.frame = CGRectMake(0, self.view.frame.size.height-tabbarHeight - sliderHeight - 60, self.view.frame.size.width, slider.frame.size.height);
+    customSlider.frame = CGRectMake(0, self.view.frame.size.height-tabbarHeight - sliderHeight - 10, self.view.frame.size.width, slider.frame.size.height);
     
     slider.tintColor = self.UIPrinciple.netyBlue;
     
@@ -293,48 +327,18 @@
 }
 
 -(void) listenForChildAdded {
-
+    
     [[self.firdatabase child:kUsers] observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
         NSDictionary *usersDictionary = snapshot.value;
         NSString *otherUserID = snapshot.key;
         NSString *userID = [UserInformation getUserID];
         
-//        NSMutableArray *blockedUsersArray = [[NSMutableArray alloc] init];
-//        FIRDatabaseReference *blockedUsersRef = [[[self.firdatabase child:kUserDetails] child:userID] child:kBlockedUsers];
-//        [blockedUsersRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-//            
-//            if (snapshot.value != NULL) {
-//            
-//                [blockedUsersArray addObjectsFromArray:[snapshot.value allKeys]];
-//                
-//                NSMutableArray *otherUserBlockedUsersArray = [[NSMutableArray alloc] init];
-//                FIRDatabaseReference *otherUserBlockedUsersRef = [[[self.firdatabase child:kUserDetails] child:otherUserID] child:kBlockedUsers];
-//                [otherUserBlockedUsersRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-//                    
-//                    if (snapshot.value != NULL) {
-//                    
-//                    [otherUserBlockedUsersArray addObjectsFromArray:[snapshot.value allKeys]];
-//                    
-//                    if (![blockedUsersArray containsObject:otherUserID] && ![otherUserBlockedUsersArray containsObject:userID]) {
-//
-//                        
-//                    }
-//                        
-//                    }
-//                    
-//                }];
-//                
-//            }
-//            
-//            
-//        }];
-        
         if (![otherUserID isEqualToString: userID]) {
-        
+            
             [self.userIDArray addObject:otherUserID];
             [self.usersArray addObject:usersDictionary];
-        
+            
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -342,9 +346,46 @@
         });
         
     } withCancelBlock:nil];
-
+    
 }
 
+-(void) calculateSliderDistanceValue {
+    
+    NSLog(@"slider value %f", self.slider.value);
+    
+    if (self.sliderValue >= 0 && self.sliderValue <= 0.1) {
+        self.sliderDistanceValue = 30;
+    } else if (self.sliderValue > 0.10 && self.sliderValue <= 0.20) {
+        self.sliderDistanceValue = 50;
+    } else if (self.sliderValue > 0.20 && self.sliderValue <= 0.30) {
+        self.sliderDistanceValue = 100;
+    } else if (self.sliderValue > 0.30 && self.sliderValue <= 0.40) {
+        self.sliderDistanceValue = 200;
+    } else if (self.sliderValue > 0.40 && self.sliderValue <= 0.50) {
+        self.sliderDistanceValue = 300;
+    }  else if (self.sliderValue > 0.50 && self.sliderValue <= 0.60) {
+        self.sliderDistanceValue = 500;
+    }  else if (self.sliderValue > 0.60 && self.sliderValue <= 0.70) {
+        self.sliderDistanceValue = 5280 * 5;
+    }  else if (self.sliderValue > 0.70 && self.sliderValue <= 0.80) {
+        self.sliderDistanceValue = 5280 * 10;
+    } else if (self.sliderValue > 0.80) {
+        self.sliderDistanceValue = 5280 * 20;
+    }
+    
+    
+    NSLog(@"calculated %f", self.sliderDistanceValue);
+}
+
+- (NSString *) calculateDistanceToDescription {
+    
+    if (self.sliderDistanceValue >= 5280) {
+        return [NSString stringWithFormat:@"%i Miles", (int) self.sliderDistanceValue / 5280];
+    } else {
+        return [NSString stringWithFormat:@"%ift", (int) self.sliderDistanceValue];
+    }
+    
+}
 
 //---------------------------------------------------------
 
@@ -352,29 +393,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-
-- (IBAction)sliderAction:(id)sender {
-    
-    NSLog(@"%f", self.slider.value);
-    
-    if (self.slider.value > 0 && self.slider.value <= 0.1) {
-        self.title = @"50ft Near";
-    } else if (self.slider.value > 0.10 && self.slider.value <= 0.20) {
-        self.title = @"100ft Near";
-    } else if (self.slider.value > 0.20 && self.slider.value <= 0.30) {
-        self.title = @"200ft Near";
-    } else if (self.slider.value > 0.30 && self.slider.value <= 0.40) {
-        self.title = @"500ft Near";
-    } else if (self.slider.value > 0.40 && self.slider.value <= 0.50) {
-        self.title = @"1 Mile Near";
-    }  else if (self.slider.value > 0.50 && self.slider.value <= 0.70) {
-        self.title = @"5 Miles Near";
-    }  else if (self.slider.value > 0.70 && self.slider.value <= 1.00) {
-        self.title = @"10 Miles Near";
-    }
-    
 }
 
 @end

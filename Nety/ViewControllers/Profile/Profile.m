@@ -211,10 +211,10 @@
                 
                 UIImage *downloadedImage = [UIImage imageWithData:data];
                 
-                [self.imageCache setObject:downloadedImage forKey:profileImageUrl];
-                
-                self.profileImage.image = downloadedImage;
-                
+                if (downloadedImage != nil) {
+                    [self.imageCache setObject:downloadedImage forKey:profileImageUrl];
+                    self.profileImage.image = downloadedImage;
+                }
             });
             
         }] resume];
