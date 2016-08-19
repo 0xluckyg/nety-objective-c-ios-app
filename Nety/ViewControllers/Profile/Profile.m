@@ -68,7 +68,7 @@
     
     self.view.backgroundColor = self.UIPrinciple.netyBlue;
     
-    self.profileImage.image = [UIImage imageNamed:kDefaultUserLogoName];
+    //self.profileImage.image = [UIImage imageNamed:kDefaultUserLogoName];
     
     //Color for the small view
     self.basicInfoView.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.4f];
