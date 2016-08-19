@@ -124,7 +124,7 @@
     if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
         NSURL *profileImageUrl = [NSURL URLWithString:photoUrl];
         //[self loadAndCacheImage:chatCell photoUrl:profileImageUrl cache:self.imageCache];
-        [chatCell.chatUserImage sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName] options:SDWebImageHighPriority];
+        [chatCell.chatUserImage sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
     }
 //    else {
 //        chatCell.chatUserImage.image = [UIImage imageNamed:kDefaultUserLogoName];

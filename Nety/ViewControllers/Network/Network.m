@@ -148,7 +148,7 @@
         if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
             NSURL *profileImageUrl = [NSURL URLWithString:[userDataDictionary objectForKey:kProfilePhoto]];
             //[self loadAndCacheImage:networkCell photoUrl:profileImageUrl cache:self.imageCache];
-            [networkCell.networkUserImage sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName] options:SDWebImageHighPriority];
+            [networkCell.networkUserImage sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
             
         }
         

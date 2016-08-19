@@ -484,7 +484,7 @@
     NSURL *profileImageUrl = [NSURL URLWithString: self.selectedUserProfileImageString];
     
     UIImageView* imView = [[UIImageView alloc] init];
-    [imView sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName] options:SDWebImageHighPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [imView sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if (!error)
         {
             self.incomingBubbleAvatarImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:image diameter:35.0f];

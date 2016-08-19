@@ -232,6 +232,7 @@
                 NSLog(@"image url saved");
                 
                 [[[[self.firdatabase child:kUsers] child:userID] child:kProfilePhoto] setValue: [[metadata downloadURL] absoluteString]];
+                [[[[self.firdatabase child:kUsers] child:userID] child:kSmallProfilePhoto] setValue: [[metadata downloadURL] absoluteString]];
                 
                 [UserInformation setProfileImage:image];
                 self.userProfileImage.image = [UserInformation getProfileImage];

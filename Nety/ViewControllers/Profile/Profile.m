@@ -8,6 +8,7 @@
 
 #import "Profile.h"
 #import "UIPrinciples.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface Profile ()
 
@@ -57,7 +58,8 @@
     
     if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
         NSURL *profileImageUrl = [NSURL URLWithString:[self.selectedUserInfoDictionary objectForKey:kProfilePhoto]];
-        [self loadAndCacheImage: profileImageUrl cache:self.imageCache];
+        //[self loadAndCacheImage: profileImageUrl cache:self.imageCache];
+        [_profileImage sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
     } else {
         self.profileImage.image = [UIImage imageNamed:kDefaultUserLogoName];
     }
@@ -186,41 +188,41 @@
 
 
 //Function for downloading and caching the image
--(void)loadAndCacheImage: (NSURL *)photoUrl cache:(NSCache *)imageCache {
-    
-    NSURL *profileImageUrl = photoUrl;
-    
-    UIImage *cachedImage = [imageCache objectForKey:profileImageUrl];
-    
-    NSLog(@"%@", imageCache);
-    NSLog(@"%@", cachedImage);
-    
-    if (cachedImage) {
-        
-        self.profileImage.image = cachedImage;
-        
-    } else {
-        
-        [[[NSURLSession sharedSession] dataTaskWithURL:profileImageUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            if (error != nil) {
-                NSLog(@"%@", error);
-                return;
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                UIImage *downloadedImage = [UIImage imageWithData:data];
-                
-                if (downloadedImage != nil) {
-                    [self.imageCache setObject:downloadedImage forKey:profileImageUrl];
-                    self.profileImage.image = downloadedImage;
-                }
-            });
-            
-        }] resume];
-        
-    }
-}
+//-(void)loadAndCacheImage: (NSURL *)photoUrl cache:(NSCache *)imageCache {
+//    
+//    NSURL *profileImageUrl = photoUrl;
+//    
+//    UIImage *cachedImage = [imageCache objectForKey:profileImageUrl];
+//    
+//    NSLog(@"%@", imageCache);
+//    NSLog(@"%@", cachedImage);
+//    
+//    if (cachedImage) {
+//        
+//        self.profileImage.image = cachedImage;
+//        
+//    } else {
+//        
+//        [[[NSURLSession sharedSession] dataTaskWithURL:profileImageUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+//            if (error != nil) {
+//                NSLog(@"%@", error);
+//                return;
+//            }
+//            
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                
+//                UIImage *downloadedImage = [UIImage imageWithData:data];
+//                
+//                if (downloadedImage != nil) {
+//                    [self.imageCache setObject:downloadedImage forKey:profileImageUrl];
+//                    self.profileImage.image = downloadedImage;
+//                }
+//            });
+//            
+//        }] resume];
+//        
+//    }
+//}
 
 
 //---------------------------------------------------------
