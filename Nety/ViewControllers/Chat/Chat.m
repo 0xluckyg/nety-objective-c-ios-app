@@ -13,6 +13,8 @@
 #import "UIPrinciples.h"
 #import "Messages.h"
 
+#import <SDWebImage/UIImageView+WebCache.h>
+
 @interface Chat ()
 
 @end
@@ -121,10 +123,12 @@
     //If image is not NetyBlueLogo, start downloading and caching the image
     if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
         NSURL *profileImageUrl = [NSURL URLWithString:photoUrl];
-        [self loadAndCacheImage:chatCell photoUrl:profileImageUrl cache:self.imageCache];
-    } else {
-        chatCell.chatUserImage.image = [UIImage imageNamed:kDefaultUserLogoName];
+        //[self loadAndCacheImage:chatCell photoUrl:profileImageUrl cache:self.imageCache];
+        [chatCell.chatUserImage sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName] options:SDWebImageHighPriority];
     }
+//    else {
+//        chatCell.chatUserImage.image = [UIImage imageNamed:kDefaultUserLogoName];
+//    }
     
     //Set name
     chatCell.chatUserName.text = [userDataDictionary objectForKey:kFullName];
@@ -429,42 +433,42 @@
 
 
 //Function for downloading and caching the image
--(void)loadAndCacheImage:(ChatCell *)chatCell photoUrl:(NSURL *)photoUrl cache:(NSCache *)imageCache {
-    
-    //Set default to nil
-    chatCell.chatUserImage.image = nil;
-    NSURL *profileImageUrl = photoUrl;
-    UIImage *cachedImage = [imageCache objectForKey:profileImageUrl];
-    
-    if (cachedImage) {
-        
-        chatCell.chatUserImage.image = cachedImage;
-        
-    } else {
-        
-        [[[NSURLSession sharedSession] dataTaskWithURL:profileImageUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            if (error != nil) {
-                NSLog(@"%@", error);
-                return;
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                UIImage *downloadedImage = [UIImage imageWithData:data];
-                
-                if (downloadedImage != nil) {
-                    [imageCache setObject:downloadedImage forKey:profileImageUrl];
-                }
-                
-                chatCell.chatUserImage.image = downloadedImage;
-                
-            });
-            
-        }] resume];
-        
-    }
-    
-}
+//-(void)loadAndCacheImage:(ChatCell *)chatCell photoUrl:(NSURL *)photoUrl cache:(NSCache *)imageCache {
+//    
+//    //Set default to nil
+//    chatCell.chatUserImage.image = nil;
+//    NSURL *profileImageUrl = photoUrl;
+//    UIImage *cachedImage = [imageCache objectForKey:profileImageUrl];
+//    
+//    if (cachedImage) {
+//        
+//        chatCell.chatUserImage.image = cachedImage;
+//        
+//    } else {
+//        
+//        [[[NSURLSession sharedSession] dataTaskWithURL:profileImageUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+//            if (error != nil) {
+//                NSLog(@"%@", error);
+//                return;
+//            }
+//            
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                
+//                UIImage *downloadedImage = [UIImage imageWithData:data];
+//                
+//                if (downloadedImage != nil) {
+//                    [imageCache setObject:downloadedImage forKey:profileImageUrl];
+//                }
+//                
+//                chatCell.chatUserImage.image = downloadedImage;
+//                
+//            });
+//            
+//        }] resume];
+//        
+//    }
+//    
+//}
 
 -(void)listenForChildAdded {
     

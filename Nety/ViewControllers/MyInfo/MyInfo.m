@@ -7,6 +7,7 @@
 //
 
 #import "MyInfo.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface MyInfo ()
 

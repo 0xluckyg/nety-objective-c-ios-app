@@ -33,8 +33,6 @@
  */
 @interface JSQMessagesCollectionView : UICollectionView <JSQMessagesCollectionViewCellDelegate>
 
-
-
 /**
  *  The object that provides the data for the collection view.
  *  The data source must adopt the `JSQMessagesCollectionViewDataSource` protocol.

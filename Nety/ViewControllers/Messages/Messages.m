@@ -31,7 +31,7 @@
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
 }
 
--(bool)hidesBottomBarWhenPushed {
+-(BOOL)hidesBottomBarWhenPushed {
     return YES;
 }
 

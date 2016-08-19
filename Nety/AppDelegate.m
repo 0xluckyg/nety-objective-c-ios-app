@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "UIPrinciples.h"
 
+#import <SDWebImage/UIImageView+WebCache.h>
+
 @interface AppDelegate ()
 
 @end
@@ -274,19 +276,23 @@
     } else {
         
         // Create a reference to the file you want to download
-        FIRStorageReference *userProfileImageRef = [[FIRStorage storage] referenceForURL:profileImageUrl];
-        
-        // Fetch the download URL
-        [userProfileImageRef dataWithMaxSize:1 * 1180 * 1180 completion:^(NSData *data, NSError *error){
-            if (error != nil) {
-                
-                //Error downloading Message
-                NSLog(@"%@", error.localizedDescription);
-                
-            } else {
-                [UserInformation setProfileImage:[UIImage imageWithData:data]];
-            }
+        UIImageView* imView = [[UIImageView alloc] init];
+        [imView sd_setImageWithURL:[NSURL URLWithString:profileImageUrl] placeholderImage:[UIImage imageNamed:kDefaultUserLogoName] options:SDWebImageHighPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [UserInformation setProfileImage:image];
         }];
+//        FIRStorageReference *userProfileImageRef = [[FIRStorage storage] referenceForURL:profileImageUrl];
+//        
+//        // Fetch the download URL
+//        [userProfileImageRef dataWithMaxSize:1 * 1180 * 1180 completion:^(NSData *data, NSError *error){
+//            if (error != nil) {
+//                
+//                //Error downloading Message
+//                NSLog(@"%@", error.localizedDescription);
+//                
+//            } else {
+//                [UserInformation setProfileImage:[UIImage imageWithData:data]];
+//            }
+//        }];
         
     }
 }

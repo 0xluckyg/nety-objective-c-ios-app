@@ -7,7 +7,7 @@
 //
 
 #import "MyNetwork.h"
-
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface MyNetwork ()
 
@@ -121,7 +121,7 @@
     MyNetworkCell *myNetworkCell = [tableView dequeueReusableCellWithIdentifier:@"MyNetworkCell" forIndexPath:indexPath];
     int row = (int)[indexPath row];
     
-    NSLog(@"cont %lu", [self.userArray count]);
+    NSLog(@"cont %lu", (unsigned long)[self.userArray count]);
     
         userDataDictionary = [self.userArray objectAtIndex:row];
         
@@ -132,11 +132,13 @@
         NSString *photoUrl = [userDataDictionary objectForKey:kSmallProfilePhoto];
         if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
             NSURL *profileImageUrl = [NSURL URLWithString:photoUrl];
-            [self loadAndCacheImage:myNetworkCell photoUrl:profileImageUrl cache:self.imageCache];
-        } else {
-            myNetworkCell.myNetworkUserImage.image = [UIImage imageNamed:kDefaultUserLogoName];
+            //[self loadAndCacheImage:myNetworkCell photoUrl:profileImageUrl cache:self.imageCache];
+            [myNetworkCell.myNetworkUserImage sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName] options:SDWebImageHighPriority];
         }
-        
+//        else {
+//            myNetworkCell.myNetworkUserImage.image = [UIImage imageNamed:kDefaultUserLogoName];
+//        }
+    
         //Setting name
         NSString *fullName = [NSString stringWithFormat:@"%@ %@", [userDataDictionary objectForKey:kFirstName], [userDataDictionary objectForKey:kLastName]];
         myNetworkCell.myNetworkUserName.text = fullName;
@@ -326,42 +328,42 @@
 
 
 //Function for downloading and caching the image
--(void)loadAndCacheImage:(MyNetworkCell *)myNetworkCell photoUrl:(NSURL *)photoUrl cache:(NSCache *)imageCache {
-    
-    //Set default to nil
-    myNetworkCell.myNetworkUserImage.image = nil;
-    NSURL *profileImageUrl = photoUrl;
-    UIImage *cachedImage = [imageCache objectForKey:profileImageUrl];
-    
-    if (cachedImage) {
-        
-        myNetworkCell.myNetworkUserImage.image = cachedImage;
-        
-    } else {
-        
-        [[[NSURLSession sharedSession] dataTaskWithURL:profileImageUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            if (error != nil) {
-                NSLog(@"%@", error);
-                return;
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                UIImage *downloadedImage = [UIImage imageWithData:data];
-                
-                if (downloadedImage != nil) {
-                    [imageCache setObject:downloadedImage forKey:profileImageUrl];
-                }
-                
-                myNetworkCell.myNetworkUserImage.image = downloadedImage;
-                
-            });
-            
-        }] resume];
-        
-    }
-    
-}
+//-(void)loadAndCacheImage:(MyNetworkCell *)myNetworkCell photoUrl:(NSURL *)photoUrl cache:(NSCache *)imageCache {
+//    
+//    //Set default to nil
+//    myNetworkCell.myNetworkUserImage.image = nil;
+//    NSURL *profileImageUrl = photoUrl;
+//    UIImage *cachedImage = [imageCache objectForKey:profileImageUrl];
+//    
+//    if (cachedImage) {
+//        
+//        myNetworkCell.myNetworkUserImage.image = cachedImage;
+//        
+//    } else {
+//        
+//        [[[NSURLSession sharedSession] dataTaskWithURL:profileImageUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+//            if (error != nil) {
+//                NSLog(@"%@", error);
+//                return;
+//            }
+//            
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                
+//                UIImage *downloadedImage = [UIImage imageWithData:data];
+//                
+//                if (downloadedImage != nil) {
+//                    [imageCache setObject:downloadedImage forKey:profileImageUrl];
+//                }
+//                
+//                myNetworkCell.myNetworkUserImage.image = downloadedImage;
+//                
+//            });
+//            
+//        }] resume];
+//        
+//    }
+//    
+//}
 
 - (NSString *)makeChatRoomID: (NSString *)userID otherUser:(NSString *)otherUserID {
     

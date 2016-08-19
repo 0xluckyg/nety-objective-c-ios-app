@@ -23,6 +23,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+#if DEBUG
+    [_password setText:@"ptest3"];
+    [_email setText:@"test3@gmail.com"];
+#endif
+    
     [self initializeSettings];
     [self initializeDesign];
 }
@@ -85,16 +90,16 @@
         
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeIndeterminate;
-        hud.labelText = @"Logging in";
-        hud.color = [self.UIPrinciple.netyBlue colorWithAlphaComponent:0.3f];
-        [hud show:YES];
+        [hud.label setText:@"Logging in"];;
+        [hud.bezelView setColor:[self.UIPrinciple.netyBlue colorWithAlphaComponent:0.3f]];
+        [hud showAnimated:YES];
         
         [[FIRAuth auth] signInWithEmail:self.email.text
                                password:self.password.text
                              completion:^(FIRUser *user, NSError *error) {
                                  
                                  if (error) {
-                                     [hud hide:YES];
+                                     [hud hideAnimated:YES];
 
                                      [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Problem signing in" message:error.localizedDescription viewController:self];
                                  } else {
@@ -109,7 +114,7 @@
                                          //Set user information inside global variables
                                          [self saveUserInformationLocally:firebaseUserInfo userID:userID profileImageUrl:[firebaseUserInfo objectForKey:kProfilePhoto]];
                                          
-                                         [hud hide:YES];
+                                         [hud hideAnimated:YES];
                                          
                                      } withCancelBlock:^(NSError * _Nonnull error) {
                                          NSLog(@"%@", error.localizedDescription);
