@@ -147,9 +147,9 @@
         
         if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
             NSURL *profileImageUrl = [NSURL URLWithString:[userDataDictionary objectForKey:kProfilePhoto]];
-            [self loadAndCacheImage:networkCell photoUrl:profileImageUrl cache:self.imageCache];
-        } else {
-            networkCell.networkUserImage.image = [UIImage imageNamed:kDefaultUserLogoName];
+            //[self loadAndCacheImage:networkCell photoUrl:profileImageUrl cache:self.imageCache];
+            [networkCell.networkUserImage sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName] options:SDWebImageHighPriority];
+            
         }
         
         
@@ -271,46 +271,46 @@
 
 
 //Function for downloading and caching the image
--(void)loadAndCacheImage:(NetworkCell *)networkCell photoUrl:(NSURL *)photoUrl cache:(NSCache *)imageCache {
-    
-    //Set default to nil
-    networkCell.networkUserImage.image = nil;
-    
-    NSURL *profileImageUrl = photoUrl;
-    
-    UIImage *cachedImage = [imageCache objectForKey:profileImageUrl];
-    
-    if (cachedImage) {
-        
-        networkCell.networkUserImage.image = cachedImage;
-        
-    } else {
-        
-        [[[NSURLSession sharedSession] dataTaskWithURL:profileImageUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            if (error != nil) {
-                NSLog(@"%@", error);
-                return;
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                UIImage *downloadedImage = [UIImage imageWithData:data];
-                
-                if (downloadedImage != nil) {
-                    
-                    [imageCache setObject:downloadedImage forKey:profileImageUrl];
-                    
-                }
-                
-                networkCell.networkUserImage.image = downloadedImage;
-                
-            });
-            
-        }] resume];
-        
-    }
-    
-}
+//-(void)loadAndCacheImage:(NetworkCell *)networkCell photoUrl:(NSURL *)photoUrl cache:(NSCache *)imageCache {
+//    
+//    //Set default to nil
+//    networkCell.networkUserImage.image = nil;
+//    
+//    NSURL *profileImageUrl = photoUrl;
+//    
+//    UIImage *cachedImage = [imageCache objectForKey:profileImageUrl];
+//    
+//    if (cachedImage) {
+//        
+//        networkCell.networkUserImage.image = cachedImage;
+//        
+//    } else {
+//        
+//        [[[NSURLSession sharedSession] dataTaskWithURL:profileImageUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+//            if (error != nil) {
+//                NSLog(@"%@", error);
+//                return;
+//            }
+//            
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                
+//                UIImage *downloadedImage = [UIImage imageWithData:data];
+//                
+//                if (downloadedImage != nil) {
+//                    
+//                    [imageCache setObject:downloadedImage forKey:profileImageUrl];
+//                    
+//                }
+//                
+//                networkCell.networkUserImage.image = downloadedImage;
+//                
+//            });
+//            
+//        }] resume];
+//        
+//    }
+//    
+//}
 
 -(void)addSlider:(UIView *)customSlider slider:(UISlider *)slider{
     

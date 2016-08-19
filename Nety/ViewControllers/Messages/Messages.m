@@ -483,29 +483,40 @@
     
     NSURL *profileImageUrl = [NSURL URLWithString: self.selectedUserProfileImageString];
     
-    [[[NSURLSession sharedSession] dataTaskWithURL:profileImageUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if (error != nil) {
-            NSLog(@"%@", error);
-            return;
+    UIImageView* imView = [[UIImageView alloc] init];
+    [imView sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName] options:SDWebImageHighPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (!error)
+        {
+            self.incomingBubbleAvatarImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:image diameter:35.0f];
         }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            UIImage *downloadedImage = [UIImage imageWithData:data];
-            
-            NSLog(@"is null? %@", downloadedImage);
-            
-            if (downloadedImage != nil) {
-                self.incomingBubbleAvatarImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:downloadedImage diameter:35.0f];
-            } else {
-                self.incomingBubbleAvatarImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:kDefaultUserLogoName] diameter:35.0f];
-            }
-                
-            [self.collectionView reloadData];
-            
-        });
-        
-    }] resume];
+        else
+        {
+            self.incomingBubbleAvatarImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:kDefaultUserLogoName] diameter:35.0f];
+        }
+    }];
+//    [[[NSURLSession sharedSession] dataTaskWithURL:profileImageUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+//        if (error != nil) {
+//            NSLog(@"%@", error);
+//            return;
+//        }
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            
+//            UIImage *downloadedImage = [UIImage imageWithData:data];
+//            
+//            NSLog(@"is null? %@", downloadedImage);
+//            
+//            if (downloadedImage != nil) {
+//                self.incomingBubbleAvatarImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:downloadedImage diameter:35.0f];
+//            } else {
+//                self.incomingBubbleAvatarImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:kDefaultUserLogoName] diameter:35.0f];
+//            }
+//                
+//            [self.collectionView reloadData];
+//            
+//        });
+//        
+//    }] resume];
 }
 
 

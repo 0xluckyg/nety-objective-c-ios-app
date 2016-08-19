@@ -12,6 +12,8 @@
 #import "Constants.h"
 #import "UserInformation.h"
 
+#import <SDWebImage/UIImageView+WebCache.h>
+//
 @import Firebase;
 
 @interface Messages : JSQMessagesViewController {
