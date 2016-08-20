@@ -138,7 +138,9 @@
         chatCell.chatNotificationView.backgroundColor = [UIColor clearColor];
         chatCell.chatNotificationLabel.text = @"";
     } else {
+        chatCell.chatNotificationView.backgroundColor = self.UIPrinciple.netyBlue;
         chatCell.chatNotificationLabel.text = [NSString stringWithFormat:@"%@", [userDataDictionary objectForKey:kUnread]];
+        NSLog(@"Unread: %@", [userDataDictionary objectForKey:kUnread]);
     }
     
     //Set description
@@ -146,10 +148,12 @@
     chatCell.chatDescription.text = descriptionText;
     
     //Set date
-    double timeSince1970Double = [[userDataDictionary objectForKey:kUpdateTime] doubleValue];
+    double timeSince1970Double = [[userDataDictionary objectForKey:kUpdateTime] doubleValue] * -1;
     NSDate *messageDate = [self convertDoubleToDate:timeSince1970Double];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    dateFormatter.dateStyle = NSDateFormatterShortStyle;
+    dateFormatter.timeStyle = NSDateFormatterShortStyle;
+    dateFormatter.doesRelativeDateFormatting = YES;
     NSString *dateFormat = [dateFormatter stringFromDate:messageDate];
     chatCell.chatTime.text = dateFormat;
     
@@ -478,8 +482,8 @@
         NSDictionary *members = [snapshot.value objectForKey:kMembers];
         NSString *chatRoomKey = snapshot.key;
         
-//        NSLog(@"Got snapchat: %@", snapshot.value);
-//        NSLog(@"Got you: %@", [members objectForKey:@"member1"]);
+        NSLog(@"Got snapchat: %@", snapshot.value);
+        NSLog(@"Got you: %@", [members objectForKey:@"member1"]);
         
         FIRDatabaseReference *userInfoRef = [[self.firdatabase child:kUsers] child:[members objectForKey:@"member1"]];
         [userInfoRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
@@ -499,6 +503,8 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self.tableView reloadData];
                     });
+                    
+                    NSLog(@"dict value: %@", chatRoomInfoDict);
                 } else {
                     [self.oldChatArray addObject:chatRoomInfoDict];
                     [self.oldChatRoomKeyArray addObject:chatRoomKey];

@@ -24,7 +24,7 @@ NSString *const kUsers = @"users";
         NSString *const kExperienceDescription = @"description";
     NSString *const kProfilePhoto = @"profileImageUrl";
     NSString *const kSmallProfilePhoto = @"smallProfileImageUrl";
-    NSString *const kVisibilityStatus = @"visibilityStatus";
+    NSString *const kSecurity = @"security";
 
 NSString *const kUserChats = @"userChatRooms";
     NSString *const kChats = @"chats";

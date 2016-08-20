@@ -248,7 +248,8 @@
 
 -(void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text senderId:(NSString *)senderId senderDisplayName:(NSString *)senderDisplayName date:(NSDate *)date {
     
-    NSNumber *secondsSince1970 = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970]];
+    NSNumber *secondsSince1970 = [NSNumber numberWithInt: -1 * [[NSDate date] timeIntervalSince1970]];
+    
     
     NSDictionary *messageData = @{ kSenderId: senderId,
                                    kSenderDisplayName: senderDisplayName,
@@ -356,15 +357,7 @@
             
         } else {
             
-            NSLog(@"created room");
-            
-            NSLog(@"chatrooms: %@", kChatRooms);
-            NSLog(@"chatroom id: %@", self.chatroomID);
-            NSLog(@"chatroom info: %@", chatRoomInformation);
-            NSLog(@"sender id: %@", self.senderId);
-            NSLog(@"selected id: %@", self.selectedUserID);
-            
-            NSNumber *secondsSince1970 = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970]];
+            NSNumber *secondsSince1970 = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970] * -1];
             
             //Room setup
             [[[self.firdatabase child:kChatRooms] child:self.chatroomID] setValue:chatRoomInformation];
@@ -372,12 +365,14 @@
             //Add information to both the user and selected user
             FIRDatabaseReference *userChatRoomRef = [[[[[self firdatabase] child:kUserChats] child:self.senderId] child:kChats] child:self.chatroomID];
             [[[userChatRoomRef child:kMembers] child:@"member1"] setValue:self.selectedUserID];
+            [[userChatRoomRef child:kRecentMessage] setValue:@"Typing..."];
             [[userChatRoomRef child:kType] setValue:@0];
             [[userChatRoomRef child:kUnread] setValue:@0];
             [userChatRoomRef updateChildValues:@{kUpdateTime:secondsSince1970}];
             
             FIRDatabaseReference *selectedUserChatRoomRef = [[[[[self firdatabase] child:kUserChats] child:self.selectedUserID] child:kChats] child:self.chatroomID];
             [[[selectedUserChatRoomRef child:kMembers] child:@"member1"] setValue:self.senderId];
+            [[selectedUserChatRoomRef child:kRecentMessage] setValue:@"Typing..."];
             [[selectedUserChatRoomRef child:kType] setValue:@0];
             [[selectedUserChatRoomRef child:kUnread] setValue:@0];
             [selectedUserChatRoomRef updateChildValues:@{kUpdateTime:secondsSince1970}];
@@ -425,7 +420,7 @@
         NSMutableDictionary *messagesDictionary = snapshot.value;
         NSString *senderIdFromDatabase = [messagesDictionary objectForKey:kSenderId];
         NSString *senderDisplaynameFromDatabase = [messagesDictionary objectForKey:kSenderDisplayName];
-        double timeSince1970Double = [[messagesDictionary objectForKey:kDate] doubleValue];
+        double timeSince1970Double = [[messagesDictionary objectForKey:kDate] doubleValue] * -1;
         NSDate * messageDate = [self convertDoubleToDate:timeSince1970Double];
         NSString *textFromDatabase = [messagesDictionary objectForKey:kText];
         JSQMessage *jsqMessage = [[JSQMessage alloc] initWithSenderId:senderIdFromDatabase senderDisplayName:senderDisplaynameFromDatabase date:messageDate text:textFromDatabase];
@@ -454,7 +449,7 @@
     //Making a room
     NSComparisonResult result = [self.senderId compare:self.selectedUserID];
     NSMutableDictionary *chatRoomInformation;
-    NSNumber *secondsSince1970 = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970]];
+    NSNumber *secondsSince1970 = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970] * -1];
     
     if (result == NSOrderedAscending) {
         

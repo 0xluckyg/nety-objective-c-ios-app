@@ -129,30 +129,30 @@
     
     //Set title and image of each tabBar item
     [networkViewController.tabBarItem setImage:[UIImage imageNamed:@"NetworkEmpty"]];
-    [networkViewController.tabBarItem setSelectedImage:[[UIImage imageNamed:@"Network"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [networkViewController.tabBarItem setSelectedImage:[[UIImage imageNamed:@"Network"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
     [networkViewController.tabBarItem setTitle:@"Net"];
     
     [myNetworkViewController.tabBarItem setImage:[UIImage imageNamed:@"MyNetworkEmpty"]];
-    [myNetworkViewController.tabBarItem setSelectedImage:[[UIImage imageNamed:@"MyNetwork"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [myNetworkViewController.tabBarItem setSelectedImage:[[UIImage imageNamed:@"MyNetwork"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
     [myNetworkViewController.tabBarItem setTitle:@"My Net"];
     
     [chatViewController.tabBarItem setImage:[UIImage imageNamed:@"ChatEmpty"]];
-    [chatViewController.tabBarItem setSelectedImage:[[UIImage imageNamed:@"Chat"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [chatViewController.tabBarItem setSelectedImage:[[UIImage imageNamed:@"Chat"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
     [chatViewController.tabBarItem setTitle:@"Chat"];
     
     [myInfoViewController.tabBarItem setImage:[UIImage imageNamed:@"ProfileEmpty"]];
-    [myInfoViewController.tabBarItem setSelectedImage:[[UIImage imageNamed:@"Profile"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [myInfoViewController.tabBarItem setSelectedImage:[[UIImage imageNamed:@"Profile"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
     [myInfoViewController.tabBarItem setTitle:@"Me"];
     
     [settingsViewController.tabBarItem setImage:[UIImage imageNamed:@"SettingsEmpty"]];
-    [settingsViewController.tabBarItem setSelectedImage:[[UIImage imageNamed:@"Settings"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [settingsViewController.tabBarItem setSelectedImage:[[UIImage imageNamed:@"Settings"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
     [settingsViewController.tabBarItem setTitle:@"Settings"];
     
     //Set tabBar style
-    [[UITabBar appearance] setBackgroundColor:self.UIPrinciple.netyBlue];
-    [[UITabBar appearance] setBackgroundImage:[[UIImage alloc] init]];
-    [[UITabBar appearance] setShadowImage:[[UIImage alloc] init]];
-    [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
+//    [[UITabBar appearance] setBackgroundColor:self.UIPrinciple.netyBlue];
+//    [[UITabBar appearance] setBackgroundImage:[[UIImage alloc] init]];
+//    [[UITabBar appearance] setShadowImage:[[UIImage alloc] init]];
+    [[UITabBar appearance] setTintColor:self.UIPrinciple.netyBlue];
     
 //    [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor]}
 //                                                 forState:UIControlStateNormal];

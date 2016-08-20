@@ -24,7 +24,7 @@ extern NSString *const kUsers;
         extern NSString *const kExperienceDescription;
     extern NSString *const kProfilePhoto;
     extern NSString *const kSmallProfilePhoto;
-    extern NSString *const kVisibilityStatus;
+    extern NSString *const kSecurity;
 
 extern NSString *const kUserChats;
     extern NSString *const kChats;

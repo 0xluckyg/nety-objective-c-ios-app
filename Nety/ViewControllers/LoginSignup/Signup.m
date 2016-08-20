@@ -148,8 +148,8 @@
                                         kSummary: @"",
                                         kExperiences: experienceArray,
                                         kProfilePhoto: kDefaultUserLogoName,
-                                        kSmallProfilePhoto: kDefaultUserLogoName};
-                 
+                                        kSmallProfilePhoto: kDefaultUserLogoName,
+                                        kSecurity: @0};
                  
                  //Set user information inside global variables
                  [UserInformation setUserID:userID];

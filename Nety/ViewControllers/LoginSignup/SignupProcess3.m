@@ -181,15 +181,15 @@
         
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeIndeterminate;
-        hud.labelText = @"Uploading";
-        hud.color = [self.UIPrinciple.netyBlue colorWithAlphaComponent:0.3f];
-        [hud show:YES];
+        hud.label.text = @"Uploading";
+        hud.bezelView.color = [self.UIPrinciple.netyBlue colorWithAlphaComponent:0.3f];
+        [hud showAnimated:YES];
         
         //Uploading big profile picture first
         [profileImageBigRef putData:uploadDataBig metadata:nil completion:^(FIRStorageMetadata * _Nullable metadataBig, NSError * _Nullable error) {
             
             if (error) {
-                [hud hide:YES];
+                [hud hideAnimated:YES];
                 NSLog(@"%@", error.localizedDescription);
                 [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Can not upload image" message:@"Please try again at another time" viewController:self];
                 
@@ -206,7 +206,7 @@
                                 metaDataBigUid:[[metadataBig downloadURL] absoluteString]
                               metaDataSmallUid:[[metadataSmall downloadURL] absoluteString]];
                         
-                        [hud hide:YES];
+                        [hud hideAnimated:YES];
                         [self changeRoot];
                     }
                 }];

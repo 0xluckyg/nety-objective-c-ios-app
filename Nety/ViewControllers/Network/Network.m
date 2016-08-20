@@ -351,8 +351,6 @@
 
 -(void) calculateSliderDistanceValue {
     
-    NSLog(@"slider value %f", self.slider.value);
-    
     if (self.sliderValue >= 0 && self.sliderValue <= 0.1) {
         self.sliderDistanceValue = 30;
     } else if (self.sliderValue > 0.10 && self.sliderValue <= 0.20) {
@@ -373,8 +371,6 @@
         self.sliderDistanceValue = 5280 * 20;
     }
     
-    
-    NSLog(@"calculated %f", self.sliderDistanceValue);
 }
 
 - (NSString *) calculateDistanceToDescription {

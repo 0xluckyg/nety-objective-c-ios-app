@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "UIPrinciples.h"
+#import "Constants.h"
+#import "UserInformation.h"
 
 @import Firebase;
 
@@ -17,7 +19,11 @@
 //VARIABLES----------------------------------------
 
 
+@property (nonatomic) NSInteger userSecurityValue;
 
+@property (nonatomic) float sliderValue;
+
+@property (nonatomic) float sliderDistanceValue;
 
 
 //UTIL CLASSES----------------------------------------
@@ -29,17 +35,24 @@
 //LIB CLASSES----------------------------------------
 
 
-
+@property (strong, nonatomic) FIRDatabaseReference *firdatabase;
 
 
 //IBOUTLETS----------------------------------------
 
 
-@property (weak, nonatomic) IBOutlet UIView *locationRangeSlider;
+
+@property (weak, nonatomic) IBOutlet UISlider *locationRangeSlider;
 
 @property (weak, nonatomic) IBOutlet UILabel *locationRangeLabel;
 
 @property (weak, nonatomic) IBOutlet UISwitch *notificationSwitch;
+
+@property (weak, nonatomic) IBOutlet UISwitch *discoverabilitySwitch;
+
+@property (weak, nonatomic) IBOutlet UISwitch *chatRequestSwitch;
+
+@property (weak, nonatomic) IBOutlet UISwitch *chatSwitch;
 
 @property (weak, nonatomic) IBOutlet UIImageView *facebookImage;
 
@@ -52,6 +65,12 @@
 - (IBAction)locationRangeSliderAction:(id)sender;
 
 - (IBAction)notificationSwitchAction:(id)sender;
+
+- (IBAction)discoverabilitySwitchAction:(id)sender;
+
+- (IBAction)chatRequestSwitchAction:(id)sender;
+
+- (IBAction)chatSwitchAction:(id)sender;
 
 
 //-------------------------------------------------
