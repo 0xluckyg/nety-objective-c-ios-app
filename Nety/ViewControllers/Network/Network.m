@@ -9,11 +9,15 @@
 #import "Network.h"
 
 @interface Network ()
+{
+    N_API* myAPI;
+}
 
 @end
 
 @implementation Network
 
+@synthesize fetchedResultsController = _fetchedResultsController;
 
 #pragma mark - View Load
 //---------------------------------------------------------
@@ -33,7 +37,7 @@
     goingToProfileView = false;
     
     [self initializeUsers];
-    [self.tableView reloadData];
+    //[self.tableView reloadData];
     
     self.sliderView = [[[NSBundle mainBundle] loadNibNamed:@"CustomSlider" owner:self options:nil] objectAtIndex:0];
     
@@ -53,8 +57,7 @@
 
 - (void)initializeSettings {
     
-    self.imageCache = [[NSCache alloc] init];
-    
+    myAPI = [N_API sharedController];
     //Set up notifications
     [[self.tabBarController.tabBar.items objectAtIndex:2] setBadgeValue:@"4"];
     
@@ -69,7 +72,7 @@
 - (void)initializeDesign {
     
     //No separator
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.table.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     // UIPrinciples class from Util folder
     self.UIPrinciple = [[UIPrinciples alloc] init];
@@ -107,13 +110,52 @@
 
 - (void)initializeUsers {
     
-    self.usersArray = [[NSMutableArray alloc] init];
+//    self.usersArray = [[NSMutableArray alloc] init];
     self.userIDArray = [[NSMutableArray alloc] init];
     
-    self.firdatabase = [[FIRDatabase database] reference];
+//    self.firdatabase = [[FIRDatabase database] reference];
     
-    [self listenForChildAdded];
+//    [self listenForChildAdded];
     
+}
+
+- (NSFetchedResultsController *)fetchedResultsController
+{
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    // Edit the entity name as appropriate.
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Users" inManagedObjectContext:myAPI.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    //NSPredicate* predicate = [NSPredicate predicateWithFormat:@""];
+    //[fetchRequest setPredicate:predicate];
+    
+    // Set the batch size to a suitable number.
+    //[fetchRequest setFetchBatchSize:20];
+    
+    // Edit the sort key as appropriate.
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"userID" ascending:YES];
+    
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    
+    // Edit the section name key path and cache name if appropriate.
+    // nil for section name key path means "no sections".
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:myAPI.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    aFetchedResultsController.delegate = self;
+    self.fetchedResultsController = aFetchedResultsController;
+    
+    NSError *error = nil;
+    if (![self.fetchedResultsController performFetch:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    
+    return _fetchedResultsController;
 }
 
 
@@ -121,100 +163,158 @@
 //---------------------------------------------------------
 
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    return [self.usersArray count];
-}
+//-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+//    return 1;
+//}
+//
+//-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+//    
+//    return [self.usersArray count];
+//}
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     //Configure cell
     NetworkCell *networkCell = [tableView dequeueReusableCellWithIdentifier:@"NetworkCell" forIndexPath:indexPath];
-    int row = (int)[indexPath row];
+     Users *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     
-    if ([self.usersArray count] > 0 ) {
+    [self configureCell:networkCell withObject:object];
+//    if ([self.usersArray count] > 0 ) {
+    
+//        //Setting cell data
+//        NSDictionary *userDataDictionary = self.usersArray[row];
+//        networkCell.networkUserImage.image = [UIImage imageNamed:kDefaultUserLogoName];
+//        
+//        //If image is not NetyBlueLogo, start downloading and caching the image
+//        NSString *photoUrl = [userDataDictionary objectForKey:kProfilePhoto];
+//        
+//        if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
+//            NSURL *profileImageUrl = [NSURL URLWithString:[userDataDictionary objectForKey:kProfilePhoto]];
+//            //[self loadAndCacheImage:networkCell photoUrl:profileImageUrl cache:self.imageCache];
+//            [networkCell.networkUserImage sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
+//            
+//        }
+//        
+//        
+//        NSString *fullName = [NSString stringWithFormat:@"%@ %@", [userDataDictionary objectForKey:kFirstName], [userDataDictionary objectForKey:kLastName]];
+//        
+//        //Set name
+//        networkCell.networkUserName.text = fullName;
+//        
+//        //Set job
+//        networkCell.networkUserJob.text = [userDataDictionary objectForKey:kIdentity];
+//        
+//        //Set description
+//        NSString *statusString = [userDataDictionary objectForKey:kStatus];
+//        NSString *summaryString = [userDataDictionary objectForKey:kSummary];
+//        
+//        if (![statusString isEqualToString:@""]) {
+//            
+//            networkCell.networkUserDescription.text = statusString;
+//            
+//        } else if (![summaryString isEqualToString:@""]){
+//            
+//            networkCell.networkUserDescription.text = summaryString;
+//            
+//        } else {
+//            
+//            networkCell.networkUserDescription.text = @"";
+//            
+//        }
+//        
+//        //DESIGN
+//        //Setting font color of cells to black
+//        networkCell.networkUserJob.textColor = [UIColor blackColor];
+//        networkCell.networkUserName.textColor = [UIColor blackColor];
+//        networkCell.networkUserDescription.textColor = [UIColor blackColor];
+//        
+//        //Set selection color to blue
+//        UIView *bgColorView = [[UIView alloc] init];
+//        bgColorView.backgroundColor = self.UIPrinciple.netyBlue;
+//        [networkCell setSelectedBackgroundView:bgColorView];
+//        //Set highlighted color to white
+//        networkCell.networkUserJob.highlightedTextColor = [UIColor whiteColor];
+//        networkCell.networkUserName.highlightedTextColor = [UIColor whiteColor];
+//        networkCell.networkUserDescription.highlightedTextColor = [UIColor whiteColor];
         
-        //Setting cell data
-        NSDictionary *userDataDictionary = self.usersArray[row];
-        networkCell.networkUserImage.image = [UIImage imageNamed:kDefaultUserLogoName];
-        
-        //If image is not NetyBlueLogo, start downloading and caching the image
-        NSString *photoUrl = [userDataDictionary objectForKey:kProfilePhoto];
-        
-        if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
-            NSURL *profileImageUrl = [NSURL URLWithString:[userDataDictionary objectForKey:kProfilePhoto]];
-            //[self loadAndCacheImage:networkCell photoUrl:profileImageUrl cache:self.imageCache];
-            [networkCell.networkUserImage sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
-            
-        }
-        
-        
-        NSString *fullName = [NSString stringWithFormat:@"%@ %@", [userDataDictionary objectForKey:kFirstName], [userDataDictionary objectForKey:kLastName]];
-        
-        //Set name
-        networkCell.networkUserName.text = fullName;
-        
-        //Set job
-        networkCell.networkUserJob.text = [userDataDictionary objectForKey:kIdentity];
-        
-        //Set description
-        NSString *statusString = [userDataDictionary objectForKey:kStatus];
-        NSString *summaryString = [userDataDictionary objectForKey:kSummary];
-        
-        if (![statusString isEqualToString:@""]) {
-            
-            networkCell.networkUserDescription.text = statusString;
-            
-        } else if (![summaryString isEqualToString:@""]){
-            
-            networkCell.networkUserDescription.text = summaryString;
-            
-        } else {
-            
-            networkCell.networkUserDescription.text = @"";
-            
-        }
-        
-        //DESIGN
-        //Setting font color of cells to black
-        networkCell.networkUserJob.textColor = [UIColor blackColor];
-        networkCell.networkUserName.textColor = [UIColor blackColor];
-        networkCell.networkUserDescription.textColor = [UIColor blackColor];
-        
-        //Set selection color to blue
-        UIView *bgColorView = [[UIView alloc] init];
-        bgColorView.backgroundColor = self.UIPrinciple.netyBlue;
-        [networkCell setSelectedBackgroundView:bgColorView];
-        //Set highlighted color to white
-        networkCell.networkUserJob.highlightedTextColor = [UIColor whiteColor];
-        networkCell.networkUserName.highlightedTextColor = [UIColor whiteColor];
-        networkCell.networkUserDescription.highlightedTextColor = [UIColor whiteColor];
-        
-    } else {
-        
-        NSString *contentText = [NSString stringWithFormat:@"There is no one %@ near you", self.title];
-        NoContent *noContent = [[NoContent alloc] init];
-        [self.UIPrinciple addNoContent:self setText:contentText noContentController:noContent];
+//    } else {
+//        
+//        NSString *contentText = [NSString stringWithFormat:@"There is no one %@ near you", self.title];
+//        NoContent *noContent = [[NoContent alloc] init];
+//        [self.UIPrinciple addNoContent:self setText:contentText noContentController:noContent];
+//        
+//    }
+    
+    return networkCell;
+}
+
+- (void)configureCell:(NetworkCell*)cell withObject:(Users*)object {
+    //Setting cell data
+    cell.networkUserImage.image = [UIImage imageNamed:kDefaultUserLogoName];
+    
+    //If image is not NetyBlueLogo, start downloading and caching the image
+    NSString *photoUrl = object.profileImageUrl;
+    
+    if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
+        NSURL *profileImageUrl = [NSURL URLWithString:object.profileImageUrl];
+        //[self loadAndCacheImage:networkCell photoUrl:profileImageUrl cache:self.imageCache];
+        [cell.networkUserImage sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
         
     }
     
-    return networkCell;
+    
+    NSString *fullName = [NSString stringWithFormat:@"%@ %@", object.firstName, object.lastName];
+    
+    //Set name
+    cell.networkUserName.text = fullName;
+    
+    //Set job
+    cell.networkUserJob.text = object.identity;
+    
+    //Set description
+    NSString *statusString = object.status;
+    NSString *summaryString = object.summary;
+    
+    if (![statusString isEqualToString:@""]) {
+        
+        cell.networkUserDescription.text = statusString;
+        
+    } else if (![summaryString isEqualToString:@""]){
+        
+        cell.networkUserDescription.text = summaryString;
+        
+    } else {
+        
+        cell.networkUserDescription.text = @"";
+        
+    }
+    
+    //DESIGN
+    //Setting font color of cells to black
+    cell.networkUserJob.textColor = [UIColor blackColor];
+    cell.networkUserName.textColor = [UIColor blackColor];
+    cell.networkUserDescription.textColor = [UIColor blackColor];
+    
+    //Set selection color to blue
+    UIView *bgColorView = [[UIView alloc] init];
+    bgColorView.backgroundColor = self.UIPrinciple.netyBlue;
+    [cell setSelectedBackgroundView:bgColorView];
+    //Set highlighted color to white
+    cell.networkUserJob.highlightedTextColor = [UIColor whiteColor];
+    cell.networkUserName.highlightedTextColor = [UIColor whiteColor];
+    cell.networkUserDescription.highlightedTextColor = [UIColor whiteColor];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UIStoryboard *profileStoryboard = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
     Profile *profilePage = [profileStoryboard instantiateViewControllerWithIdentifier:@"Profile"];
-    
-    NSUInteger selectedRow = self.tableView.indexPathForSelectedRow.row;
-    
-    profilePage.selectedUserInfoDictionary = [[NSDictionary alloc] initWithDictionary: [self.usersArray objectAtIndex:selectedRow]];
-    
-    profilePage.selectedUserID = [[NSString alloc] initWithString:[self.userIDArray objectAtIndex:selectedRow]];
+    profilePage.selectedUser = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+//    NSUInteger selectedRow = self.table.indexPathForSelectedRow.row;
+//    
+//    profilePage.selectedUserInfoDictionary = [[NSDictionary alloc] initWithDictionary: [self.usersArray objectAtIndex:selectedRow]];
+//    
+//    profilePage.selectedUserID = [[NSString alloc] initWithString:[self.userIDArray objectAtIndex:selectedRow]];
     
     goingToProfileView = true;
     
@@ -262,55 +362,12 @@
         [self.sliderView removeFromSuperview];
     }
     
-    [self.tableView reloadData];
+    //[self.tableView reloadData];
 }
 
 
 #pragma mark - Custom methods
 //---------------------------------------------------------
-
-
-//Function for downloading and caching the image
-//-(void)loadAndCacheImage:(NetworkCell *)networkCell photoUrl:(NSURL *)photoUrl cache:(NSCache *)imageCache {
-//    
-//    //Set default to nil
-//    networkCell.networkUserImage.image = nil;
-//    
-//    NSURL *profileImageUrl = photoUrl;
-//    
-//    UIImage *cachedImage = [imageCache objectForKey:profileImageUrl];
-//    
-//    if (cachedImage) {
-//        
-//        networkCell.networkUserImage.image = cachedImage;
-//        
-//    } else {
-//        
-//        [[[NSURLSession sharedSession] dataTaskWithURL:profileImageUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-//            if (error != nil) {
-//                NSLog(@"%@", error);
-//                return;
-//            }
-//            
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                
-//                UIImage *downloadedImage = [UIImage imageWithData:data];
-//                
-//                if (downloadedImage != nil) {
-//                    
-//                    [imageCache setObject:downloadedImage forKey:profileImageUrl];
-//                    
-//                }
-//                
-//                networkCell.networkUserImage.image = downloadedImage;
-//                
-//            });
-//            
-//        }] resume];
-//        
-//    }
-//    
-//}
 
 -(void)addSlider:(UIView *)customSlider slider:(UISlider *)slider{
     
@@ -326,28 +383,28 @@
     [self.view addSubview:customSlider];
 }
 
--(void) listenForChildAdded {
-    
-    [[self.firdatabase child:kUsers] observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-        
-        NSDictionary *usersDictionary = snapshot.value;
-        NSString *otherUserID = snapshot.key;
-        NSString *userID = [UserInformation getUserID];
-        
-        if (![otherUserID isEqualToString: userID]) {
-            
-            [self.userIDArray addObject:otherUserID];
-            [self.usersArray addObject:usersDictionary];
-            
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-        });
-        
-    } withCancelBlock:nil];
-    
-}
+//-(void) listenForChildAdded {
+//    
+//    [[self.firdatabase child:kUsers] observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+//        
+//        NSDictionary *usersDictionary = snapshot.value;
+//        NSString *otherUserID = snapshot.key;
+//        NSString *userID = [UserInformation getUserID];
+//        
+//        if (![otherUserID isEqualToString: userID]) {
+//            
+//            [self.userIDArray addObject:otherUserID];
+//            [self.usersArray addObject:usersDictionary];
+//#warning RELOAD DATA
+//        }
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self.tableView reloadData];
+//        });
+//        
+//    } withCancelBlock:nil];
+//    
+//}
 
 -(void) calculateSliderDistanceValue {
     

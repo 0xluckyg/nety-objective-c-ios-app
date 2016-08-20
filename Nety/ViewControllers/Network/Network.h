@@ -16,9 +16,11 @@
 #import "NetworkData.h"
 #import "MBProgressHUD.h"
 
-@import Firebase;
+#import "N_CoreDataTableViewController.h"
+#import "N_API.h"
+//@import Firebase;
 
-@interface Network : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate> {
+@interface Network : N_CoreDataTableViewController <UISearchBarDelegate> {
     bool goingToProfileView;
 }
 
@@ -26,11 +28,9 @@
 //VARIABLES----------------------------------------
 
 
-@property (strong, nonatomic) NSMutableArray *usersArray;
+//@property (strong, nonatomic) NSMutableArray *usersArray;
 
 @property (strong, nonatomic) NSMutableArray *userIDArray;
-
-@property (strong, nonatomic) NSCache *imageCache;
 
 @property (nonatomic) float sliderValue;
 
@@ -43,7 +43,7 @@
 //LIB CLASSES----------------------------------------
 
 
-@property (strong, nonatomic) FIRDatabaseReference *firdatabase;
+//@property (strong, nonatomic) FIRDatabaseReference *firdatabase;
 
 
 //IBOUTLETS----------------------------------------
@@ -53,7 +53,7 @@
 
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+//@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) IBOutlet UIView *sliderView;
 

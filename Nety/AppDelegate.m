@@ -8,10 +8,14 @@
 
 #import "AppDelegate.h"
 #import "UIPrinciples.h"
+#import "N_API.h"
 
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface AppDelegate ()
+{
+    N_API* myApi;
+}
 
 @end
 
@@ -93,11 +97,7 @@
 -(void)initializeSettings {
     self.UIPrinciple = [[UIPrinciples alloc] init];
     
-    //Configure Firebase
-    [FIRApp configure];
-    
-    //Enable presistence
-    [FIRDatabase database].persistenceEnabled = YES;
+    myApi = [N_API sharedController];
     
     //Notification setup
     UIUserNotificationType allNotificationTypes =
@@ -205,6 +205,8 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    // Saves changes in the application's managed object context before the application terminates.
+    [myApi saveContext];
 }
 
 

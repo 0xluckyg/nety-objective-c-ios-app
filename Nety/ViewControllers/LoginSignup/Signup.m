@@ -31,7 +31,6 @@
 #pragma mark - Initialization
 //---------------------------------------------------------
 
-
 - (void)initializeSettings {
     
     self.firdatabase = [[FIRDatabase database] reference];

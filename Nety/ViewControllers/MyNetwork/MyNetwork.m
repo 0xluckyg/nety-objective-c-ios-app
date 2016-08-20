@@ -195,11 +195,12 @@
     UIStoryboard *profileStoryboard = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
     Profile *profilePage = [profileStoryboard instantiateViewControllerWithIdentifier:@"Profile"];
     
-    NSUInteger selectedRow = self.tableView.indexPathForSelectedRow.row;
-    
-    profilePage.selectedUserID = [self.userKeyArray objectAtIndex:selectedRow];
-    
-    profilePage.selectedUserInfoDictionary = [self.userArray objectAtIndex:selectedRow];
+#warning    profilePage.selectedUser =
+//    NSUInteger selectedRow = self.tableView.indexPathForSelectedRow.row;
+//    
+//    profilePage.selectedUserID = [self.userKeyArray objectAtIndex:selectedRow];
+//    
+//    profilePage.selectedUserInfoDictionary = [self.userArray objectAtIndex:selectedRow];
     
     __weak typeof(self) weakSelf = self;
     [self.UIPrinciple setTabBarVisible:![self.UIPrinciple tabBarIsVisible:self] animated:YES sender:self completion:^(BOOL finished) {

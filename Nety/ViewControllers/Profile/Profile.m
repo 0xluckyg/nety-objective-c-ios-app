@@ -46,7 +46,7 @@
 
 - (void)initializeSettings {
     
-    self.imageCache = [[NSCache alloc] init];
+//    self.imageCache = [[NSCache alloc] init];
     
 }
 
@@ -54,10 +54,10 @@
     self.UIPrinciple = [[UIPrinciples alloc] init];
     
     //If image is not NetyBlueLogo, start downloading and caching the image
-    NSString *photoUrl = [self.selectedUserInfoDictionary objectForKey:kProfilePhoto];
+    NSString *photoUrl = _selectedUser.profileImageUrl;
     
     if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
-        NSURL *profileImageUrl = [NSURL URLWithString:[self.selectedUserInfoDictionary objectForKey:kProfilePhoto]];
+        NSURL *profileImageUrl = [NSURL URLWithString:photoUrl];
         //[self loadAndCacheImage: profileImageUrl cache:self.imageCache];
         [_profileImage sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
     } else {
@@ -83,13 +83,14 @@
     
     //Info content
     
-    NSString *status = [self.selectedUserInfoDictionary objectForKey:kStatus];
-    NSString *summary = [self.selectedUserInfoDictionary objectForKey:kSummary];
-    NSArray *experiences = [[self.selectedUserInfoDictionary objectForKey:kExperiences] allValues];
-    NSString *name = [NSString stringWithFormat:@"%@ %@", [self.selectedUserInfoDictionary objectForKey:kFirstName], [self.selectedUserInfoDictionary objectForKey:kLastName]];
+    NSString *status = _selectedUser.status;
+    NSString *summary = _selectedUser.summary;
+#warning    NSArray *experiences = [[self.selectedUserInfoDictionary objectForKey:kExperiences] allValues];
+    NSArray *experiences;
+    NSString *name = [NSString stringWithFormat:@"%@ %@", _selectedUser.firstName, _selectedUser.lastName];
     
     self.nameInfo.text = name;
-    self.identityInfo.text = [self.selectedUserInfoDictionary objectForKey:kIdentity];
+    self.identityInfo.text = _selectedUser.identity;
     
     if ([status isEqualToString:@""]) {
         self.statusInfo.text = @"No status";
@@ -160,9 +161,9 @@
     UIStoryboard *messagesStoryboard = [UIStoryboard storyboardWithName:@"Messages" bundle:nil];
     Messages *messagesVC = [messagesStoryboard instantiateViewControllerWithIdentifier:@"Messages"];
     
-    messagesVC.selectedUserID = self.selectedUserID;
-    messagesVC.selectedUserProfileImageString = [self.selectedUserInfoDictionary objectForKey:kSmallProfilePhoto];
-    messagesVC.selectedUserName = [NSString stringWithFormat:@"%@ %@", [self.selectedUserInfoDictionary objectForKey:kFirstName], [self.selectedUserInfoDictionary objectForKey:kLastName]];
+    messagesVC.selectedUserID = _selectedUser.userID;
+    messagesVC.selectedUserProfileImageString = _selectedUser.profileImageUrl;
+    messagesVC.selectedUserName = [NSString stringWithFormat:@"%@ %@", _selectedUser.firstName, _selectedUser.lastName];
     
     [self.navigationController pushViewController:messagesVC animated:YES];
 

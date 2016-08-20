@@ -10,20 +10,22 @@
 #import "UIPrinciples.h"
 #import "Constants.h"
 #import "Messages.h"
+#import "Users.h"
 
 @interface Profile : UIViewController
 
 
 //VARIABLES----------------------------------------
 
+@property (strong,nonatomic) Users* selectedUser;
 
-@property (strong, nonatomic) NSDictionary *selectedUserInfoDictionary;
+//@property (strong, nonatomic) NSDictionary *selectedUserInfoDictionary;
+//
+//@property (strong, nonatomic) NSString *selectedUserID;
+//
+//@property (strong, nonatomic) UIImage *selectedUserProfileImage;
 
-@property (strong, nonatomic) NSString *selectedUserID;
-
-@property (strong, nonatomic) UIImage *selectedUserProfileImage;
-
-@property (strong, nonatomic) NSCache *imageCache;
+//@property (strong, nonatomic) NSCache *imageCache;
 
 
 //UTIL CLASSES----------------------------------------

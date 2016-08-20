@@ -7,6 +7,7 @@
 //
 
 #import "Login.h"
+#import "N_API.h"
 
 @interface Login ()
 
@@ -94,35 +95,50 @@
         [hud.bezelView setColor:[self.UIPrinciple.netyBlue colorWithAlphaComponent:0.3f]];
         [hud showAnimated:YES];
         
-        [[FIRAuth auth] signInWithEmail:self.email.text
-                               password:self.password.text
-                             completion:^(FIRUser *user, NSError *error) {
-                                 
-                                 if (error) {
-                                     [hud hideAnimated:YES];
+        [[N_API sharedController] loginToAcc:self.email.text pass:self.password.text DoneBlock:^(NSDictionary *dict, NSError *error) {
+            if (error)
+            {
+                [hud hideAnimated:YES];
+                
+                [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Problem signing in" message:error.localizedDescription viewController:self];
+            }
+            else
+            {
+                [self saveUserInformationLocally:dict userID:[N_API sharedController].myUser.userID profileImageUrl:[dict objectForKey:kProfilePhoto]];
+                
+                [hud hideAnimated:YES];
 
-                                     [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Problem signing in" message:error.localizedDescription viewController:self];
-                                 } else {
-                                     
-                                     NSString *userID = [[self.email.text stringByReplacingOccurrencesOfString:@"@" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
-                                     
-                                     [[[self.firdatabase child:kUsers] child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-                                         // Get user value
-                                                                                  
-                                         NSDictionary *firebaseUserInfo = snapshot.value;
-                                         
-                                         //Set user information inside global variables
-                                         [self saveUserInformationLocally:firebaseUserInfo userID:userID profileImageUrl:[firebaseUserInfo objectForKey:kProfilePhoto]];
-                                         
-                                         [hud hideAnimated:YES];
-                                         
-                                     } withCancelBlock:^(NSError * _Nonnull error) {
-                                         NSLog(@"%@", error.localizedDescription);
-                                     }];
-                                     
-                                 }
-                                 
-                             }];
+            }
+        }];
+//        [[FIRAuth auth] signInWithEmail:self.email.text
+//                               password:self.password.text
+//                             completion:^(FIRUser *user, NSError *error) {
+//                                 
+//                                 if (error) {
+//                                     [hud hideAnimated:YES];
+//
+//                                     [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Problem signing in" message:error.localizedDescription viewController:self];
+//                                 } else {
+//                                     
+//                                     NSString *userID = [[self.email.text stringByReplacingOccurrencesOfString:@"@" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
+//                                     
+//                                     [[[self.firdatabase child:kUsers] child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+//                                         // Get user value
+//                                                                                  
+//                                         NSDictionary *firebaseUserInfo = snapshot.value;
+//                                         
+//                                         //Set user information inside global variables
+//                                         [self saveUserInformationLocally:firebaseUserInfo userID:userID profileImageUrl:[firebaseUserInfo objectForKey:kProfilePhoto]];
+//                                         
+//                                         [hud hideAnimated:YES];
+//                                         
+//                                     } withCancelBlock:^(NSError * _Nonnull error) {
+//                                         NSLog(@"%@", error.localizedDescription);
+//                                     }];
+//                                     
+//                                 }
+//                                 
+//                             }];
     }
 }
 

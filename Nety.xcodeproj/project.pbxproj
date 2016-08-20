@@ -56,6 +56,11 @@
 		67DD1AC31D17E42D00FBEA0F /* man.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1ABE1D17E42D00FBEA0F /* man.jpg */; };
 		67DD1AC41D17E42D00FBEA0F /* water.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1ABF1D17E42D00FBEA0F /* water.jpg */; };
 		97677F0633DE3705741AEB8E /* libPods-Nety.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F5D56FDB372FC5465929EE /* libPods-Nety.a */; };
+		E1E0B9211D689D8600295133 /* Nety.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B91F1D689D8600295133 /* Nety.xcdatamodeld */; };
+		E1E0B9241D689DC800295133 /* N_API.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B9231D689DC800295133 /* N_API.m */; };
+		E1E0B9281D689FA700295133 /* N_CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B9271D689FA700295133 /* N_CoreDataTableViewController.m */; };
+		E1E0B9401D68BCF700295133 /* Users+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B93D1D68BCF700295133 /* Users+CoreDataProperties.m */; };
+		E1E0B9411D68BCF700295133 /* Users.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B93F1D68BCF700295133 /* Users.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -141,6 +146,15 @@
 		67DD1ABD1D17E42D00FBEA0F /* girl2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = girl2.jpg; sourceTree = "<group>"; };
 		67DD1ABE1D17E42D00FBEA0F /* man.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = man.jpg; sourceTree = "<group>"; };
 		67DD1ABF1D17E42D00FBEA0F /* water.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = water.jpg; sourceTree = "<group>"; };
+		E1E0B9201D689D8600295133 /* Nety.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Nety.xcdatamodel; sourceTree = "<group>"; };
+		E1E0B9221D689DC800295133 /* N_API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = N_API.h; path = CoreData/N_API.h; sourceTree = "<group>"; };
+		E1E0B9231D689DC800295133 /* N_API.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = N_API.m; path = CoreData/N_API.m; sourceTree = "<group>"; };
+		E1E0B9261D689FA700295133 /* N_CoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = N_CoreDataTableViewController.h; path = CoreData/N_CoreDataTableViewController.h; sourceTree = "<group>"; };
+		E1E0B9271D689FA700295133 /* N_CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = N_CoreDataTableViewController.m; path = CoreData/N_CoreDataTableViewController.m; sourceTree = "<group>"; };
+		E1E0B93C1D68BCF700295133 /* Users+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Users+CoreDataProperties.h"; sourceTree = "<group>"; };
+		E1E0B93D1D68BCF700295133 /* Users+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Users+CoreDataProperties.m"; sourceTree = "<group>"; };
+		E1E0B93E1D68BCF700295133 /* Users.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Users.h; sourceTree = "<group>"; };
+		E1E0B93F1D68BCF700295133 /* Users.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Users.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -312,6 +326,7 @@
 		67DD1A7A1D17BEB500FBEA0F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E1E0B91E1D689D6200295133 /* CoreData */,
 				67DD1ABA1D17E42D00FBEA0F /* TemporaryImages */,
 				67DD1A7D1D17BEB500FBEA0F /* AppDelegate.h */,
 				67DD1A7E1D17BEB500FBEA0F /* AppDelegate.m */,
@@ -443,6 +458,38 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E1E0B91E1D689D6200295133 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				E1E0B91F1D689D8600295133 /* Nety.xcdatamodeld */,
+				E1E0B92F1D68A64400295133 /* NetyUsersModel */,
+				E1E0B9221D689DC800295133 /* N_API.h */,
+				E1E0B9231D689DC800295133 /* N_API.m */,
+				E1E0B9251D689F6600295133 /* CoreDataTableView */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		E1E0B9251D689F6600295133 /* CoreDataTableView */ = {
+			isa = PBXGroup;
+			children = (
+				E1E0B9261D689FA700295133 /* N_CoreDataTableViewController.h */,
+				E1E0B9271D689FA700295133 /* N_CoreDataTableViewController.m */,
+			);
+			name = CoreDataTableView;
+			sourceTree = "<group>";
+		};
+		E1E0B92F1D68A64400295133 /* NetyUsersModel */ = {
+			isa = PBXGroup;
+			children = (
+				E1E0B93C1D68BCF700295133 /* Users+CoreDataProperties.h */,
+				E1E0B93D1D68BCF700295133 /* Users+CoreDataProperties.m */,
+				E1E0B93E1D68BCF700295133 /* Users.h */,
+				E1E0B93F1D68BCF700295133 /* Users.m */,
+			);
+			name = NetyUsersModel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -477,7 +524,7 @@
 				TargetAttributes = {
 					67DD1A761D17BEB500FBEA0F = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = U9677H3UDV;
+						DevelopmentTeam = 34SL6966R8;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -585,6 +632,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1E0B9401D68BCF700295133 /* Users+CoreDataProperties.m in Sources */,
 				67DD1AB31D17D40D00FBEA0F /* UIPrinciples.m in Sources */,
 				67606C6E1D24888700AD127E /* MyInfoEditExperience.m in Sources */,
 				678138AB1D33B2DD00BFBF48 /* Settings.m in Sources */,
@@ -594,17 +642,20 @@
 				67391DEA1D27ED0200A50C03 /* Signup.m in Sources */,
 				67D4AD651D265A7E00F42B7F /* Login.m in Sources */,
 				67391DEF1D27FBB900A50C03 /* SignupProcess1.m in Sources */,
+				E1E0B9241D689DC800295133 /* N_API.m in Sources */,
 				679B9EF01D2396A700C426F2 /* MyInfoEditTableCell.m in Sources */,
 				67CD9C311D3C795600823701 /* NoContent.m in Sources */,
 				67B2400F1D40594600F011BB /* Constants.m in Sources */,
 				67DD1A7F1D17BEB500FBEA0F /* AppDelegate.m in Sources */,
 				67DD1A981D17BF1700FBEA0F /* Network.m in Sources */,
 				67391DF51D27FBD800A50C03 /* SignupProcessExperienceDetail.m in Sources */,
+				E1E0B9281D689FA700295133 /* N_CoreDataTableViewController.m in Sources */,
 				67391DF21D27FBC400A50C03 /* SignupProcess2.m in Sources */,
 				67D273741D45310A00282730 /* UserInformation.m in Sources */,
 				67DD1A9D1D17BF6900FBEA0F /* MyNetwork.m in Sources */,
 				67DD1A7C1D17BEB500FBEA0F /* main.m in Sources */,
 				679B9EEA1D236E0A00C426F2 /* MyInfoEditType2.m in Sources */,
+				E1E0B9211D689D8600295133 /* Nety.xcdatamodeld in Sources */,
 				67D4AD621D26536000F42B7F /* MainPage.m in Sources */,
 				67DD1AB91D17E39B00FBEA0F /* NetworkData.m in Sources */,
 				673338F71D20937C00A8009F /* MyNetworkCell.m in Sources */,
@@ -612,6 +663,7 @@
 				67DD1AAD1D17C3E600FBEA0F /* Profile.m in Sources */,
 				679B9EED1D236E1C00C426F2 /* MyInfoEditTable.m in Sources */,
 				67DD1AA71D17BFFF00FBEA0F /* MyInfo.m in Sources */,
+				E1E0B9411D68BCF700295133 /* Users.m in Sources */,
 				67DD1AB61D17E04F00FBEA0F /* NetworkCell.m in Sources */,
 				679B9EE71D236DF900C426F2 /* MyInfoEditType1.m in Sources */,
 				674918EA1D2D8ACE0015EFE9 /* SignupProcess3.m in Sources */,
@@ -768,6 +820,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E1E0B91F1D689D8600295133 /* Nety.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E1E0B9201D689D8600295133 /* Nety.xcdatamodel */,
+			);
+			currentVersion = E1E0B9201D689D8600295133 /* Nety.xcdatamodel */;
+			name = Nety.xcdatamodeld;
+			path = CoreData/Nety.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 67DD1A6F1D17BEB500FBEA0F /* Project object */;
 }
