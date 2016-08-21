@@ -239,10 +239,9 @@
     else
     {
         user = [NSEntityDescription insertNewObjectForEntityForName:@"Users" inManagedObjectContext:self.managedObjectContext];
-        [user setValue:userID forKey:@"userID"];
 
     }
-    
+    [user setValue:userID forKey:@"userID"];
     for (NSString* keys in [userInfo allKeys]) {
         @try {
             [user setValue:[userInfo objectForKey:keys] forKey:keys];
@@ -254,6 +253,7 @@
     }
     
     if (flagMy) {
+        user.itIsMe = [NSNumber numberWithBool:YES];
         [self setMyUser:user];
     }
     NSLog(@"UserADD");

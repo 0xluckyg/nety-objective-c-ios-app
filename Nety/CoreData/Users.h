@@ -2,12 +2,14 @@
 //  Users.h
 //  Nety
 //
-//  Created by Alex Agarkov on 21.08.16.
+//  Created by Alex Agarkov on 22.08.16.
 //  Copyright © 2016 Scott Cho. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+
+@class Experiences;
 
 NS_ASSUME_NONNULL_BEGIN
 

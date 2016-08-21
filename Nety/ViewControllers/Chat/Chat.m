@@ -70,7 +70,6 @@
 - (void)initializeUsers {
     
     self.firdatabase = [[FIRDatabase database] reference];
-    
     self.chatRoomsRef = [[[[self.firdatabase child:kUserChats] child:MY_USER.userID] child:kChats] queryOrderedByChild:kUpdateTime];
     
     [self listenForChildAdded];

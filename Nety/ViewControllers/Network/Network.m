@@ -141,8 +141,8 @@ NSString *const networkNoContentString = @"You don't have friends yet. Swipe lef
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Users" inManagedObjectContext:MY_API.managedObjectContext];
     [fetchRequest setEntity:entity];
     
-    //NSPredicate* predicate = [NSPredicate predicateWithFormat:@""];
-    //[fetchRequest setPredicate:predicate];
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"itIsMe != YES"];
+    [fetchRequest setPredicate:predicate];
     
     // Set the batch size to a suitable number.
     [fetchRequest setFetchBatchSize:10];

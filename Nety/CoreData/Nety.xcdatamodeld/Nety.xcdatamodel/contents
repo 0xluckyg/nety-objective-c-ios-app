@@ -7,11 +7,12 @@
         <attribute name="startDate" optional="YES" attributeType="Binary" syncable="YES"/>
     </entity>
     <entity name="Users" representedClassName="Users" syncable="YES">
-        <attribute name="age" optional="YES" attributeType="Integer 64" minValueString="0" defaultValueString="0" syncable="YES"/>
+        <attribute name="age" optional="YES" attributeType="String" minValueString="0" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="identity" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isBlocked" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="isFriend" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="itIsMe" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="profileImageUrl" optional="YES" attributeType="String" defaultValueString="NetyBlueLogo" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
@@ -20,7 +21,7 @@
         <relationship name="experiences" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Experiences" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Users" positionX="-5661" positionY="-472" width="128" height="208"/>
+        <element name="Users" positionX="-5661" positionY="-472" width="128" height="223"/>
         <element name="Experiences" positionX="-5447" positionY="-477" width="128" height="103"/>
     </elements>
 </model>

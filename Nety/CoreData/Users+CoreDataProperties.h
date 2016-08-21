@@ -2,7 +2,7 @@
 //  Users+CoreDataProperties.h
 //  Nety
 //
-//  Created by Alex Agarkov on 21.08.16.
+//  Created by Alex Agarkov on 22.08.16.
 //  Copyright © 2016 Scott Cho. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Users (CoreDataProperties)
 
 @property (nullable, nonatomic, retain) NSString *firstName;
-@property (nullable, nonatomic, retain) NSNumber *age;
+@property (nullable, nonatomic, retain) NSString *age;
 @property (nullable, nonatomic, retain) NSString *lastName;
 @property (nullable, nonatomic, retain) NSString *profileImageUrl;
 @property (nullable, nonatomic, retain) NSString *summary;
@@ -25,16 +25,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *status;
 @property (nullable, nonatomic, retain) NSNumber *isFriend;
 @property (nullable, nonatomic, retain) NSNumber *isBlocked;
-@property (nullable, nonatomic, retain) NSSet<NSManagedObject *> *experiences;
+@property (nullable, nonatomic, retain) NSNumber *itIsMe;
+@property (nullable, nonatomic, retain) NSSet<Experiences *> *experiences;
 
 @end
 
 @interface Users (CoreDataGeneratedAccessors)
 
-- (void)addExperiencesObject:(NSManagedObject *)value;
-- (void)removeExperiencesObject:(NSManagedObject *)value;
-- (void)addExperiences:(NSSet<NSManagedObject *> *)values;
-- (void)removeExperiences:(NSSet<NSManagedObject *> *)values;
+- (void)addExperiencesObject:(Experiences *)value;
+- (void)removeExperiencesObject:(Experiences *)value;
+- (void)addExperiences:(NSSet<Experiences *> *)values;
+- (void)removeExperiences:(NSSet<Experiences *> *)values;
 
 @end
 

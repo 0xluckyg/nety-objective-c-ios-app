@@ -19,7 +19,7 @@ typedef void (^N_APIBlockArray)(NSArray* array, NSError* error);
 
 @interface N_API : NSObject
 
-@property (weak, nonatomic) Users* myUser;
+@property (strong, nonatomic) Users* myUser;
 #pragma mark - Core Data stack
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;

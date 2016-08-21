@@ -58,10 +58,10 @@
 		E1E0B9211D689D8600295133 /* Nety.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B91F1D689D8600295133 /* Nety.xcdatamodeld */; };
 		E1E0B9241D689DC800295133 /* N_API.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B9231D689DC800295133 /* N_API.m */; };
 		E1E0B9281D689FA700295133 /* N_CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B9271D689FA700295133 /* N_CoreDataTableViewController.m */; };
-		E1E0B9571D6A1A8800295133 /* Users+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B9501D6A1A8800295133 /* Users+CoreDataProperties.m */; };
-		E1E0B9581D6A1A8800295133 /* Users.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B9521D6A1A8800295133 /* Users.m */; };
 		E1E0B9591D6A1A8800295133 /* Experiences+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B9541D6A1A8800295133 /* Experiences+CoreDataProperties.m */; };
 		E1E0B95A1D6A1A8800295133 /* Experiences.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B9561D6A1A8800295133 /* Experiences.m */; };
+		E1E0B95F1D6A5FBE00295133 /* Users+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B95C1D6A5FBE00295133 /* Users+CoreDataProperties.m */; };
+		E1E0B9601D6A5FBE00295133 /* Users.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B95E1D6A5FBE00295133 /* Users.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -151,14 +151,14 @@
 		E1E0B9261D689FA700295133 /* N_CoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = N_CoreDataTableViewController.h; path = CoreData/N_CoreDataTableViewController.h; sourceTree = "<group>"; };
 		E1E0B9271D689FA700295133 /* N_CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = N_CoreDataTableViewController.m; path = CoreData/N_CoreDataTableViewController.m; sourceTree = "<group>"; };
 		E1E0B94E1D6A14C900295133 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		E1E0B94F1D6A1A8800295133 /* Users+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Users+CoreDataProperties.h"; path = "CoreData/Users+CoreDataProperties.h"; sourceTree = "<group>"; };
-		E1E0B9501D6A1A8800295133 /* Users+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Users+CoreDataProperties.m"; path = "CoreData/Users+CoreDataProperties.m"; sourceTree = "<group>"; };
-		E1E0B9511D6A1A8800295133 /* Users.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Users.h; path = CoreData/Users.h; sourceTree = "<group>"; };
-		E1E0B9521D6A1A8800295133 /* Users.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Users.m; path = CoreData/Users.m; sourceTree = "<group>"; };
 		E1E0B9531D6A1A8800295133 /* Experiences+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Experiences+CoreDataProperties.h"; path = "CoreData/Experiences+CoreDataProperties.h"; sourceTree = "<group>"; };
 		E1E0B9541D6A1A8800295133 /* Experiences+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Experiences+CoreDataProperties.m"; path = "CoreData/Experiences+CoreDataProperties.m"; sourceTree = "<group>"; };
 		E1E0B9551D6A1A8800295133 /* Experiences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Experiences.h; path = CoreData/Experiences.h; sourceTree = "<group>"; };
 		E1E0B9561D6A1A8800295133 /* Experiences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Experiences.m; path = CoreData/Experiences.m; sourceTree = "<group>"; };
+		E1E0B95B1D6A5FBE00295133 /* Users+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Users+CoreDataProperties.h"; path = "CoreData/Users+CoreDataProperties.h"; sourceTree = "<group>"; };
+		E1E0B95C1D6A5FBE00295133 /* Users+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Users+CoreDataProperties.m"; path = "CoreData/Users+CoreDataProperties.m"; sourceTree = "<group>"; };
+		E1E0B95D1D6A5FBE00295133 /* Users.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Users.h; path = CoreData/Users.h; sourceTree = "<group>"; };
+		E1E0B95E1D6A5FBE00295133 /* Users.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Users.m; path = CoreData/Users.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -485,14 +485,14 @@
 		E1E0B92F1D68A64400295133 /* NetyUsersModel */ = {
 			isa = PBXGroup;
 			children = (
-				E1E0B94F1D6A1A8800295133 /* Users+CoreDataProperties.h */,
-				E1E0B9501D6A1A8800295133 /* Users+CoreDataProperties.m */,
-				E1E0B9511D6A1A8800295133 /* Users.h */,
-				E1E0B9521D6A1A8800295133 /* Users.m */,
 				E1E0B9531D6A1A8800295133 /* Experiences+CoreDataProperties.h */,
 				E1E0B9541D6A1A8800295133 /* Experiences+CoreDataProperties.m */,
 				E1E0B9551D6A1A8800295133 /* Experiences.h */,
 				E1E0B9561D6A1A8800295133 /* Experiences.m */,
+				E1E0B95B1D6A5FBE00295133 /* Users+CoreDataProperties.h */,
+				E1E0B95C1D6A5FBE00295133 /* Users+CoreDataProperties.m */,
+				E1E0B95D1D6A5FBE00295133 /* Users.h */,
+				E1E0B95E1D6A5FBE00295133 /* Users.m */,
 			);
 			name = NetyUsersModel;
 			sourceTree = "<group>";
@@ -639,6 +639,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1E0B9601D6A5FBE00295133 /* Users.m in Sources */,
 				67DD1AB31D17D40D00FBEA0F /* UIPrinciples.m in Sources */,
 				67606C6E1D24888700AD127E /* MyInfoEditExperience.m in Sources */,
 				678138AB1D33B2DD00BFBF48 /* Settings.m in Sources */,
@@ -652,11 +653,9 @@
 				E1E0B9241D689DC800295133 /* N_API.m in Sources */,
 				679B9EF01D2396A700C426F2 /* MyInfoEditTableCell.m in Sources */,
 				67CD9C311D3C795600823701 /* NoContent.m in Sources */,
-				E1E0B9581D6A1A8800295133 /* Users.m in Sources */,
 				67B2400F1D40594600F011BB /* Constants.m in Sources */,
 				67DD1A7F1D17BEB500FBEA0F /* AppDelegate.m in Sources */,
 				67DD1A981D17BF1700FBEA0F /* Network.m in Sources */,
-				E1E0B9571D6A1A8800295133 /* Users+CoreDataProperties.m in Sources */,
 				67391DF51D27FBD800A50C03 /* SignupProcessExperienceDetail.m in Sources */,
 				E1E0B9281D689FA700295133 /* N_CoreDataTableViewController.m in Sources */,
 				67391DF21D27FBC400A50C03 /* SignupProcess2.m in Sources */,
@@ -670,6 +669,7 @@
 				67391DFB1D280A9600A50C03 /* SignupProcessExperienceDetailCell.m in Sources */,
 				67DD1AAD1D17C3E600FBEA0F /* Profile.m in Sources */,
 				679B9EED1D236E1C00C426F2 /* MyInfoEditTable.m in Sources */,
+				E1E0B95F1D6A5FBE00295133 /* Users+CoreDataProperties.m in Sources */,
 				67DD1AA71D17BFFF00FBEA0F /* MyInfo.m in Sources */,
 				E1E0B9591D6A1A8800295133 /* Experiences+CoreDataProperties.m in Sources */,
 				67DD1AB61D17E04F00FBEA0F /* NetworkCell.m in Sources */,

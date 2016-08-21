@@ -2,7 +2,7 @@
 //  Users+CoreDataProperties.m
 //  Nety
 //
-//  Created by Alex Agarkov on 21.08.16.
+//  Created by Alex Agarkov on 22.08.16.
 //  Copyright © 2016 Scott Cho. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -23,6 +23,7 @@
 @dynamic status;
 @dynamic isFriend;
 @dynamic isBlocked;
+@dynamic itIsMe;
 @dynamic experiences;
 
 @end
