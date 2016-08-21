@@ -10,7 +10,6 @@
 #import "UIPrinciples.h"
 #import "SignupProcess3.h"
 #import "Constants.h"
-#import "UserInformation.h"
 #import "MyInfoEditTable.h"
 #import "MyInfoEditType2.h"
 
@@ -28,9 +27,6 @@
 
 
 //UTIL CLASSES----------------------------------------
-
-
-@property (strong, nonatomic) UserInformation *userInformation;
 
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
 

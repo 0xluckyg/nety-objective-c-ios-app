@@ -136,7 +136,7 @@
                     <connections>
                         <outlet property="searchBar" destination="xTf-kD-6Ae" id="wGp-Co-qNi"/>
                         <outlet property="searchBarView" destination="jHz-1u-AaC" id="Xa3-Zv-PtB"/>
-                        <outlet property="tableView" destination="Vex-kh-xZF" id="uYd-Ll-m2l"/>
+                        <outlet property="table" destination="Vex-kh-xZF" id="Pbh-LE-L66"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c28-1e-QBr" userLabel="First Responder" sceneMemberID="firstResponder"/>

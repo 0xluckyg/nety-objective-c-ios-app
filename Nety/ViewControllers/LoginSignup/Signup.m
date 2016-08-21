@@ -147,18 +147,10 @@
                                         kSummary: @"",
                                         kExperiences: experienceArray,
                                         kProfilePhoto: kDefaultUserLogoName,
-                                        kSmallProfilePhoto: kDefaultUserLogoName,
                                         kSecurity: @0};
                  
                  //Set user information inside global variables
-                 [UserInformation setUserID:userID];
-                 [UserInformation setName:[NSString stringWithFormat:@"%@ %@", [post objectForKey:kFirstName], [post objectForKey:kLastName]]];
-                 [UserInformation setAge:[[post objectForKey:kAge] integerValue]];
-                 [UserInformation setStatus:[post objectForKey:kStatus]];
-                 [UserInformation setSummary:[post objectForKey:kSummary]];
-                 [UserInformation setIdentity:[post objectForKey:kIdentity]];
-                 [UserInformation setExperiences:experienceArray];
-                 [UserInformation setProfileImage:[UIImage imageNamed:kDefaultUserLogoName]];
+                 [MY_API addNewUser:post UserID:userID FlagMy:YES];
                  
                  [[[self.firdatabase child:kUsers] child:userID] setValue:post];
                  

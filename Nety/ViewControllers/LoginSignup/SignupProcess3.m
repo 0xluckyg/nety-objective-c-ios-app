@@ -168,7 +168,6 @@
     if ([logoImage isEqualToData:pickedImage]) {
         
         [self registerUserInfo:userID metaDataBigUid:kDefaultUserLogoName metaDataSmallUid:kDefaultUserLogoName];
-        [UserInformation setProfileImage:[UIImage imageNamed:kDefaultUserLogoName]];
         [self changeRoot];
         
     } else {
@@ -236,20 +235,11 @@
                            kIdentity: [self.userInfo objectAtIndex:5],
                            kSummary: [self.userInfo objectAtIndex:6],
                            kExperiences: experiences,
-                           kProfilePhoto: metaDataBigUid,
-                           kSmallProfilePhoto: metaDataSmallUid};
+                           kProfilePhoto: metaDataBigUid};
     
     
     //Set user information inside global variables
-    [UserInformation setUserID:userID];
-    [UserInformation setName:[NSString stringWithFormat:@"%@ %@", [post objectForKey:kFirstName], [post objectForKey:kLastName]]];
-    [UserInformation setAge:[[post objectForKey:kAge] integerValue]];
-    [UserInformation setStatus:[post objectForKey:kStatus]];
-    [UserInformation setSummary:[post objectForKey:kSummary]];
-    [UserInformation setIdentity:[post objectForKey:kIdentity]];
-    [UserInformation setExperiences:experienceArray];
-    [UserInformation setProfileImage:self.profileImage.image];
-    
+    [MY_API addNewUser:post UserID:userID FlagMy:YES];
     [[[self.firdatabase child:kUsers] child:userID] setValue:post];
     
 }

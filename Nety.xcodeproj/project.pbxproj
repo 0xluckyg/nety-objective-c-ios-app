@@ -28,7 +28,6 @@
 		67B2400F1D40594600F011BB /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 67B2400E1D40594600F011BB /* Constants.m */; };
 		67CD9C2E1D3C75E800823701 /* NoContent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67CD9C2D1D3C75E800823701 /* NoContent.xib */; };
 		67CD9C311D3C795600823701 /* NoContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CD9C301D3C795600823701 /* NoContent.m */; };
-		67D273741D45310A00282730 /* UserInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D273731D45310A00282730 /* UserInformation.m */; };
 		67D4AD5F1D26333D00F42B7F /* LoginSignup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67D4AD5E1D26333D00F42B7F /* LoginSignup.storyboard */; };
 		67D4AD621D26536000F42B7F /* MainPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D4AD611D26536000F42B7F /* MainPage.m */; };
 		67D4AD651D265A7E00F42B7F /* Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D4AD641D265A7E00F42B7F /* Login.m */; };
@@ -59,8 +58,10 @@
 		E1E0B9211D689D8600295133 /* Nety.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B91F1D689D8600295133 /* Nety.xcdatamodeld */; };
 		E1E0B9241D689DC800295133 /* N_API.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B9231D689DC800295133 /* N_API.m */; };
 		E1E0B9281D689FA700295133 /* N_CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B9271D689FA700295133 /* N_CoreDataTableViewController.m */; };
-		E1E0B9401D68BCF700295133 /* Users+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B93D1D68BCF700295133 /* Users+CoreDataProperties.m */; };
-		E1E0B9411D68BCF700295133 /* Users.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B93F1D68BCF700295133 /* Users.m */; };
+		E1E0B9571D6A1A8800295133 /* Users+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B9501D6A1A8800295133 /* Users+CoreDataProperties.m */; };
+		E1E0B9581D6A1A8800295133 /* Users.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B9521D6A1A8800295133 /* Users.m */; };
+		E1E0B9591D6A1A8800295133 /* Experiences+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B9541D6A1A8800295133 /* Experiences+CoreDataProperties.m */; };
+		E1E0B95A1D6A1A8800295133 /* Experiences.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B9561D6A1A8800295133 /* Experiences.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,8 +106,6 @@
 		67CD9C2D1D3C75E800823701 /* NoContent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoContent.xib; sourceTree = "<group>"; };
 		67CD9C2F1D3C795600823701 /* NoContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoContent.h; sourceTree = "<group>"; };
 		67CD9C301D3C795600823701 /* NoContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoContent.m; sourceTree = "<group>"; };
-		67D273721D45310A00282730 /* UserInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInformation.h; sourceTree = "<group>"; };
-		67D273731D45310A00282730 /* UserInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInformation.m; sourceTree = "<group>"; };
 		67D4AD5E1D26333D00F42B7F /* LoginSignup.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginSignup.storyboard; sourceTree = "<group>"; };
 		67D4AD601D26536000F42B7F /* MainPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPage.h; sourceTree = "<group>"; };
 		67D4AD611D26536000F42B7F /* MainPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPage.m; sourceTree = "<group>"; };
@@ -151,10 +150,15 @@
 		E1E0B9231D689DC800295133 /* N_API.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = N_API.m; path = CoreData/N_API.m; sourceTree = "<group>"; };
 		E1E0B9261D689FA700295133 /* N_CoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = N_CoreDataTableViewController.h; path = CoreData/N_CoreDataTableViewController.h; sourceTree = "<group>"; };
 		E1E0B9271D689FA700295133 /* N_CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = N_CoreDataTableViewController.m; path = CoreData/N_CoreDataTableViewController.m; sourceTree = "<group>"; };
-		E1E0B93C1D68BCF700295133 /* Users+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Users+CoreDataProperties.h"; sourceTree = "<group>"; };
-		E1E0B93D1D68BCF700295133 /* Users+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Users+CoreDataProperties.m"; sourceTree = "<group>"; };
-		E1E0B93E1D68BCF700295133 /* Users.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Users.h; sourceTree = "<group>"; };
-		E1E0B93F1D68BCF700295133 /* Users.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Users.m; sourceTree = "<group>"; };
+		E1E0B94E1D6A14C900295133 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		E1E0B94F1D6A1A8800295133 /* Users+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Users+CoreDataProperties.h"; path = "CoreData/Users+CoreDataProperties.h"; sourceTree = "<group>"; };
+		E1E0B9501D6A1A8800295133 /* Users+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Users+CoreDataProperties.m"; path = "CoreData/Users+CoreDataProperties.m"; sourceTree = "<group>"; };
+		E1E0B9511D6A1A8800295133 /* Users.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Users.h; path = CoreData/Users.h; sourceTree = "<group>"; };
+		E1E0B9521D6A1A8800295133 /* Users.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Users.m; path = CoreData/Users.m; sourceTree = "<group>"; };
+		E1E0B9531D6A1A8800295133 /* Experiences+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Experiences+CoreDataProperties.h"; path = "CoreData/Experiences+CoreDataProperties.h"; sourceTree = "<group>"; };
+		E1E0B9541D6A1A8800295133 /* Experiences+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Experiences+CoreDataProperties.m"; path = "CoreData/Experiences+CoreDataProperties.m"; sourceTree = "<group>"; };
+		E1E0B9551D6A1A8800295133 /* Experiences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Experiences.h; path = CoreData/Experiences.h; sourceTree = "<group>"; };
+		E1E0B9561D6A1A8800295133 /* Experiences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Experiences.m; path = CoreData/Experiences.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -330,6 +334,7 @@
 				67DD1ABA1D17E42D00FBEA0F /* TemporaryImages */,
 				67DD1A7D1D17BEB500FBEA0F /* AppDelegate.h */,
 				67DD1A7E1D17BEB500FBEA0F /* AppDelegate.m */,
+				E1E0B94E1D6A14C900295133 /* PrefixHeader.pch */,
 				67DD1A861D17BEB500FBEA0F /* Assets.xcassets */,
 				67DD1A881D17BEB500FBEA0F /* LaunchScreen.storyboard */,
 				67D9922F1D36B8AD0056D9B9 /* GoogleService-Info.plist */,
@@ -421,8 +426,6 @@
 				67DD1AB21D17D40D00FBEA0F /* UIPrinciples.m */,
 				67B2400D1D40594600F011BB /* Constants.h */,
 				67B2400E1D40594600F011BB /* Constants.m */,
-				67D273721D45310A00282730 /* UserInformation.h */,
-				67D273731D45310A00282730 /* UserInformation.m */,
 				67DD1AB71D17E39B00FBEA0F /* NetworkData.h */,
 				67DD1AB81D17E39B00FBEA0F /* NetworkData.m */,
 			);
@@ -482,10 +485,14 @@
 		E1E0B92F1D68A64400295133 /* NetyUsersModel */ = {
 			isa = PBXGroup;
 			children = (
-				E1E0B93C1D68BCF700295133 /* Users+CoreDataProperties.h */,
-				E1E0B93D1D68BCF700295133 /* Users+CoreDataProperties.m */,
-				E1E0B93E1D68BCF700295133 /* Users.h */,
-				E1E0B93F1D68BCF700295133 /* Users.m */,
+				E1E0B94F1D6A1A8800295133 /* Users+CoreDataProperties.h */,
+				E1E0B9501D6A1A8800295133 /* Users+CoreDataProperties.m */,
+				E1E0B9511D6A1A8800295133 /* Users.h */,
+				E1E0B9521D6A1A8800295133 /* Users.m */,
+				E1E0B9531D6A1A8800295133 /* Experiences+CoreDataProperties.h */,
+				E1E0B9541D6A1A8800295133 /* Experiences+CoreDataProperties.m */,
+				E1E0B9551D6A1A8800295133 /* Experiences.h */,
+				E1E0B9561D6A1A8800295133 /* Experiences.m */,
 			);
 			name = NetyUsersModel;
 			sourceTree = "<group>";
@@ -524,7 +531,7 @@
 				TargetAttributes = {
 					67DD1A761D17BEB500FBEA0F = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = U9677H3UDV;
+						DevelopmentTeam = 34SL6966R8;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -632,10 +639,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1E0B9401D68BCF700295133 /* Users+CoreDataProperties.m in Sources */,
 				67DD1AB31D17D40D00FBEA0F /* UIPrinciples.m in Sources */,
 				67606C6E1D24888700AD127E /* MyInfoEditExperience.m in Sources */,
 				678138AB1D33B2DD00BFBF48 /* Settings.m in Sources */,
+				E1E0B95A1D6A1A8800295133 /* Experiences.m in Sources */,
 				67DD1AA21D17BFC300FBEA0F /* Chat.m in Sources */,
 				67602F501D2EC75F00DA2F3A /* Messages.m in Sources */,
 				6733390E1D20B5ED00A8009F /* ChatCell.m in Sources */,
@@ -645,13 +652,14 @@
 				E1E0B9241D689DC800295133 /* N_API.m in Sources */,
 				679B9EF01D2396A700C426F2 /* MyInfoEditTableCell.m in Sources */,
 				67CD9C311D3C795600823701 /* NoContent.m in Sources */,
+				E1E0B9581D6A1A8800295133 /* Users.m in Sources */,
 				67B2400F1D40594600F011BB /* Constants.m in Sources */,
 				67DD1A7F1D17BEB500FBEA0F /* AppDelegate.m in Sources */,
 				67DD1A981D17BF1700FBEA0F /* Network.m in Sources */,
+				E1E0B9571D6A1A8800295133 /* Users+CoreDataProperties.m in Sources */,
 				67391DF51D27FBD800A50C03 /* SignupProcessExperienceDetail.m in Sources */,
 				E1E0B9281D689FA700295133 /* N_CoreDataTableViewController.m in Sources */,
 				67391DF21D27FBC400A50C03 /* SignupProcess2.m in Sources */,
-				67D273741D45310A00282730 /* UserInformation.m in Sources */,
 				67DD1A9D1D17BF6900FBEA0F /* MyNetwork.m in Sources */,
 				67DD1A7C1D17BEB500FBEA0F /* main.m in Sources */,
 				679B9EEA1D236E0A00C426F2 /* MyInfoEditType2.m in Sources */,
@@ -663,7 +671,7 @@
 				67DD1AAD1D17C3E600FBEA0F /* Profile.m in Sources */,
 				679B9EED1D236E1C00C426F2 /* MyInfoEditTable.m in Sources */,
 				67DD1AA71D17BFFF00FBEA0F /* MyInfo.m in Sources */,
-				E1E0B9411D68BCF700295133 /* Users.m in Sources */,
+				E1E0B9591D6A1A8800295133 /* Experiences+CoreDataProperties.m in Sources */,
 				67DD1AB61D17E04F00FBEA0F /* NetworkCell.m in Sources */,
 				679B9EE71D236DF900C426F2 /* MyInfoEditType1.m in Sources */,
 				674918EA1D2D8ACE0015EFE9 /* SignupProcess3.m in Sources */,
@@ -773,6 +781,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "${SRCROOT}/Nety/PrefixHeader.pch";
 				INFOPLIST_FILE = Nety/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -789,6 +799,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "${SRCROOT}/Nety/PrefixHeader.pch";
 				INFOPLIST_FILE = Nety/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

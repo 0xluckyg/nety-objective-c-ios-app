@@ -199,7 +199,6 @@
     
     
     //Save locally
-    [UserInformation setExperiences:self.experienceArray];
     
     //Save to database
     NSMutableDictionary *experiences = [[NSMutableDictionary alloc] init];
@@ -209,7 +208,7 @@
         [experiences setObject:[self.experienceArray objectAtIndex:i] forKey:experienceKey];
     }
     
-    [[[[self.firdatabase child:kUsers] child:[UserInformation getUserID]] child:kExperiences] setValue:experiences];
+    [[[[self.firdatabase child:kUsers] child:MY_USER.userID] child:kExperiences] setValue:experiences];
     
 }
 

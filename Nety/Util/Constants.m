@@ -21,9 +21,8 @@ NSString *const kUsers = @"users";
         NSString *const kExperienceName = @"name";
         NSString *const kExperienceStartDate = @"startDate";
         NSString *const kExperienceEndDate = @"endDate";
-        NSString *const kExperienceDescription = @"description";
+        NSString *const kExperienceDescription = @"descript";//description -- Property name clashes with a method implemented by NSManagedObject or NSObject
     NSString *const kProfilePhoto = @"profileImageUrl";
-    NSString *const kSmallProfilePhoto = @"smallProfileImageUrl";
     NSString *const kSecurity = @"security";
 
 NSString *const kUserChats = @"userChatRooms";

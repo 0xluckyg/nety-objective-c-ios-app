@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "UIPrinciples.h"
 #import "Constants.h"
-#import "UserInformation.h"
 
 @import Firebase;
 

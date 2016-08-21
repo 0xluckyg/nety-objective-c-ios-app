@@ -18,8 +18,6 @@
 #import "NoContent.h"
 
 #import "N_CoreDataTableViewController.h"
-#import "N_API.h"
-//@import Firebase;
 
 @interface Network : N_CoreDataTableViewController <UISearchBarDelegate> {
     bool goingToProfileView;

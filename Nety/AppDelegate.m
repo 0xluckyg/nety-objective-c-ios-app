@@ -8,14 +8,10 @@
 
 #import "AppDelegate.h"
 #import "UIPrinciples.h"
-#import "N_API.h"
 
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface AppDelegate ()
-{
-    N_API* myApi;
-}
 
 @end
 
@@ -28,6 +24,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    MY_API;
     
     userIsSigningIn = false;
     
@@ -97,7 +94,6 @@
 -(void)initializeSettings {
     self.UIPrinciple = [[UIPrinciples alloc] init];
     
-    myApi = [N_API sharedController];
     
     //Notification setup
     UIUserNotificationType allNotificationTypes =
@@ -206,7 +202,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
-    [myApi saveContext];
+    [MY_API saveContext];
 }
 
 
@@ -246,57 +242,16 @@
     [[[firdatabase child:kUsers] child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         // Get user value
         
-        NSDictionary *firebaseUserInfo = snapshot.value;
+        NSDictionary *usersDictionary = snapshot.value;
+        NSString *otherUserID = snapshot.key;
         
-        //Set user information inside global variables
-        [self saveUserInformationLocally:firebaseUserInfo userID:userID profileImageUrl:[firebaseUserInfo objectForKey:kProfilePhoto]];
+        [MY_API addNewUser:usersDictionary UserID:otherUserID FlagMy:YES];
+        
         
     } withCancelBlock:^(NSError * _Nonnull error) {
         NSLog(@"%@", error.localizedDescription);
     }];
     
-}
-
-- (void)saveUserInformationLocally: (NSDictionary *)firbaseUserInfo userID:(NSString *)userID profileImageUrl:(NSString *)profileImageUrl{
-    
-    //Set user information inside global variables
-    [UserInformation setUserID:userID];
-    [UserInformation setName:[NSString stringWithFormat:@"%@ %@", [firbaseUserInfo objectForKey:kFirstName], [firbaseUserInfo objectForKey:kLastName]]];
-    [UserInformation setAge:[[firbaseUserInfo objectForKey:kAge] integerValue]];
-    [UserInformation setStatus:[firbaseUserInfo objectForKey:kStatus]];
-    [UserInformation setSummary:[firbaseUserInfo objectForKey:kSummary]];
-    [UserInformation setIdentity:[firbaseUserInfo objectForKey:kIdentity]];
-    
-    NSMutableArray *experienceArray = [NSMutableArray arrayWithArray:[[firbaseUserInfo objectForKey:kExperiences] allValues]];
-    
-    [UserInformation setExperiences:experienceArray];
-    
-    if ([profileImageUrl isEqualToString:kDefaultUserLogoName]) {
-        
-        [UserInformation setProfileImage:[UIImage imageNamed:kDefaultUserLogoName]];
-        
-    } else {
-        
-        // Create a reference to the file you want to download
-        UIImageView* imView = [[UIImageView alloc] init];
-        [imView sd_setImageWithURL:[NSURL URLWithString:profileImageUrl] placeholderImage:[UIImage imageNamed:kDefaultUserLogoName] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            [UserInformation setProfileImage:image];
-        }];
-//        FIRStorageReference *userProfileImageRef = [[FIRStorage storage] referenceForURL:profileImageUrl];
-//        
-//        // Fetch the download URL
-//        [userProfileImageRef dataWithMaxSize:1 * 1180 * 1180 completion:^(NSData *data, NSError *error){
-//            if (error != nil) {
-//                
-//                //Error downloading Message
-//                NSLog(@"%@", error.localizedDescription);
-//                
-//            } else {
-//                [UserInformation setProfileImage:[UIImage imageWithData:data]];
-//            }
-//        }];
-        
-    }
 }
 
 -(void)setUserIsSigningIn: (bool)boolean {

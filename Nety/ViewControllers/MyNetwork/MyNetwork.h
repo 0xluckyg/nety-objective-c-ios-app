@@ -11,18 +11,14 @@
 #import "SWTableViewCell.h"
 #import "UIPrinciples.h"
 #import "Constants.h"
-#import "UserInformation.h"
 #import "UIPrinciples.h"
 #import "MyNetworkCell.h"
 #import "Profile.h"
+#import "N_CoreDataTableViewController.h"
 
 @import Firebase;
 
-@interface MyNetwork : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, SWTableViewCellDelegate> {
-
-    NSDictionary *userDataDictionary;
-    
-}
+@interface MyNetwork : N_CoreDataTableViewController <UISearchBarDelegate, SWTableViewCellDelegate> 
 
 
 //VARIABLES----------------------------------------
@@ -31,8 +27,6 @@
 @property (strong, nonatomic) NSMutableArray *userArray;
 
 @property (strong, nonatomic) NSMutableArray *userKeyArray;
-
-@property (strong, nonatomic) NSCache *imageCache;
 
 
 //UTIL CLASSES----------------------------------------
@@ -46,19 +40,12 @@
 //LIB CLASSES----------------------------------------
 
 
-@property (strong, nonatomic) FIRDatabaseReference *firdatabase;
-
-@property (strong, nonatomic) FIRDatabaseQuery *userDetailRef;
-
-
 //IBOUTLETS----------------------------------------
 
 
 @property (weak, nonatomic) IBOutlet UIView *searchBarView;
 
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 
 //IBACTIONS----------------------------------------

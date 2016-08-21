@@ -11,9 +11,6 @@
 NSString *const networkNoContentString = @"You don't have friends yet. Swipe left on your chats to add people!";
 
 @interface Network ()
-{
-    N_API* myAPI;
-}
 
 @end
 
@@ -72,7 +69,6 @@ NSString *const networkNoContentString = @"You don't have friends yet. Swipe lef
 - (void)initializeSettings {
     self.noContentController = [[NoContent alloc] init];
 
-    myAPI = [N_API sharedController];
     //Set up notifications
     [[self.tabBarController.tabBar.items objectAtIndex:2] setBadgeValue:@"4"];
     
@@ -142,23 +138,22 @@ NSString *const networkNoContentString = @"You don't have friends yet. Swipe lef
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     // Edit the entity name as appropriate.
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Users" inManagedObjectContext:myAPI.managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Users" inManagedObjectContext:MY_API.managedObjectContext];
     [fetchRequest setEntity:entity];
     
     //NSPredicate* predicate = [NSPredicate predicateWithFormat:@""];
     //[fetchRequest setPredicate:predicate];
     
     // Set the batch size to a suitable number.
-    //[fetchRequest setFetchBatchSize:20];
+    [fetchRequest setFetchBatchSize:10];
     
     // Edit the sort key as appropriate.
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"userID" ascending:YES];
     
     [fetchRequest setSortDescriptors:@[sortDescriptor]];
-    
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:myAPI.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:MY_API.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
     
@@ -176,16 +171,6 @@ NSString *const networkNoContentString = @"You don't have friends yet. Swipe lef
 
 #pragma mark - Protocols and Delegates
 //---------------------------------------------------------
-
-
-//-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    return 1;
-//}
-//
-//-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    
-//    return [self.usersArray count];
-//}
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -263,11 +248,6 @@ NSString *const networkNoContentString = @"You don't have friends yet. Swipe lef
     UIStoryboard *profileStoryboard = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
     Profile *profilePage = [profileStoryboard instantiateViewControllerWithIdentifier:@"Profile"];
     profilePage.selectedUser = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-//    NSUInteger selectedRow = self.table.indexPathForSelectedRow.row;
-//    
-//    profilePage.selectedUserInfoDictionary = [[NSDictionary alloc] initWithDictionary: [self.usersArray objectAtIndex:selectedRow]];
-//    
-//    profilePage.selectedUserID = [[NSString alloc] initWithString:[self.userIDArray objectAtIndex:selectedRow]];
     
     goingToProfileView = true;
     
@@ -314,8 +294,6 @@ NSString *const networkNoContentString = @"You don't have friends yet. Swipe lef
     if (goingToProfileView != true) {
         [self.sliderView removeFromSuperview];
     }
-    
-    //[self.tableView reloadData];
 }
 
 
@@ -335,29 +313,6 @@ NSString *const networkNoContentString = @"You don't have friends yet. Swipe lef
     
     [self.view addSubview:customSlider];
 }
-
-//-(void) listenForChildAdded {
-//    
-//    [[self.firdatabase child:kUsers] observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-//        
-//        NSDictionary *usersDictionary = snapshot.value;
-//        NSString *otherUserID = snapshot.key;
-//        NSString *userID = [UserInformation getUserID];
-//        
-//        if (![otherUserID isEqualToString: userID]) {
-//            
-//            [self.userIDArray addObject:otherUserID];
-//            [self.usersArray addObject:usersDictionary];
-//#warning RELOAD DATA
-//        }
-//        
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [self.tableView reloadData];
-//        });
-//        
-//    } withCancelBlock:nil];
-//    
-//}
 
 -(void) calculateSliderDistanceValue {
     

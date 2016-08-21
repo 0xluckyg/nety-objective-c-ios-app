@@ -158,7 +158,7 @@
 //3: Not discoverable
 
 - (IBAction)discoverabilitySwitchAction:(id)sender {
-    NSString *userID = [UserInformation getUserID];
+    NSString *userID = MY_USER.userID;
     
     if (self.discoverabilitySwitch.isOn == true) {
         [[[[self.firdatabase child:kUsers] child:userID] child:kSecurity] setValue:@2];
@@ -170,7 +170,7 @@
 }
 
 - (IBAction)chatRequestSwitchAction:(id)sender {
-    NSString *userID = [UserInformation getUserID];
+    NSString *userID = MY_USER.userID;
 
     if (self.chatRequestSwitch.isOn == true) {
         [self.discoverabilitySwitch setOn:YES animated:YES];
@@ -182,7 +182,7 @@
 }
 
 - (IBAction)chatSwitchAction:(id)sender {
-    NSString *userID = [UserInformation getUserID];
+    NSString *userID = MY_USER.userID;
     
     if (self.chatSwitch.isOn == true) {
         [self.chatRequestSwitch setOn:YES animated:YES];
@@ -229,7 +229,7 @@
 
 - (void)listenForSecurityStatus {
 
-    [[[[self.firdatabase child:kUsers] child:[UserInformation getUserID]] child:kSecurity] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    [[[[self.firdatabase child:kUsers] child:MY_USER.userID] child:kSecurity] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
         if (snapshot != nil) {
             self.userSecurityValue = (NSInteger)snapshot.value;

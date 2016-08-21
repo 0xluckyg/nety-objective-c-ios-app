@@ -17,6 +17,7 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
 
 @implementation MyNetwork
 
+@synthesize fetchedResultsController = _fetchedResultsController;
 
 #pragma mark - View Load
 //---------------------------------------------------------
@@ -32,8 +33,6 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    
-    [self.tableView reloadData];
     
     self.navigationItem.title = @"My Network";
     
@@ -60,16 +59,13 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
 
 - (void)initializeSettings {
     self.noContentController = [[NoContent alloc] init];
-    self.userArray = [[NSMutableArray alloc] init];
-    self.userKeyArray = [[NSMutableArray alloc] init];
-    self.imageCache = [[NSCache alloc] init];
 
 }
 
 - (void)initializeDesign {
     
     //No separator
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.table.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     // UIPrinciples class from Util folder
     self.UIPrinciple = [[UIPrinciples alloc] init];
@@ -97,27 +93,17 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
 
 - (void) initializeUsers {
     
-    self.firdatabase = [[FIRDatabase database] reference];
-    
-    self.userDetailRef = [[[[self.firdatabase child:kUserDetails] child:[UserInformation getUserID]] child:kAddedUsers] queryOrderedByChild:kFirstName];
-    
-    [self listenForChildAdded];
-    [self listenForChildRemoved];
-    [self listenForChildChanged];
 
 }
 
 #pragma mark - Protocols and Delegates
 //---------------------------------------------------------
 
-
-//-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    return 1;
-//}
-
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if ([self.userArray count] == 0) {
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
+
+    if ([sectionInfo numberOfObjects] == 0) {
         
         UIImage *contentImage = [[UIImage imageNamed:@"Friend"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
@@ -129,95 +115,86 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
         
     }
     
-    return [self.userArray count];
+    return [sectionInfo numberOfObjects];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     //Configure cell
     MyNetworkCell *myNetworkCell = [tableView dequeueReusableCellWithIdentifier:@"MyNetworkCell" forIndexPath:indexPath];
-    int row = (int)[indexPath row];
     
-    NSLog(@"cont %lu", (unsigned long)[self.userArray count]);
+    Users *user = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     
-        userDataDictionary = [self.userArray objectAtIndex:row];
-        
-        //Setting cell data
-        myNetworkCell.myNetworkUserImage.image = [UIImage imageNamed: kDefaultUserLogoName];
-        
-        //Setting images
-        NSString *photoUrl = [userDataDictionary objectForKey:kSmallProfilePhoto];
-        if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
-            NSURL *profileImageUrl = [NSURL URLWithString:photoUrl];
-            //[self loadAndCacheImage:myNetworkCell photoUrl:profileImageUrl cache:self.imageCache];
-            [myNetworkCell.myNetworkUserImage sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
-        }
-//        else {
-//            myNetworkCell.myNetworkUserImage.image = [UIImage imageNamed:kDefaultUserLogoName];
-//        }
-    
-        //Setting name
-        NSString *fullName = [NSString stringWithFormat:@"%@ %@", [userDataDictionary objectForKey:kFirstName], [userDataDictionary objectForKey:kLastName]];
-        myNetworkCell.myNetworkUserName.text = fullName;
-        
-        //Set job
-        myNetworkCell.myNetworkUserJob.text = [userDataDictionary objectForKey:kIdentity];
-        
-        //Set description
-        NSString *statusString = [userDataDictionary objectForKey:kStatus];
-        NSString *summaryString = [userDataDictionary objectForKey:kSummary];
-        
-        if (![statusString isEqualToString:@""]) {
-            
-            myNetworkCell.myNetworkUserDescription.text = statusString;
-            
-        } else if (![summaryString isEqualToString:@""]){
-        
-            myNetworkCell.myNetworkUserDescription.text = summaryString;
-            
-        } else {
-            
-            myNetworkCell.myNetworkUserDescription.text = @"";
-            
-        }
-        
-        //Set selection color to blue
-        UIView *bgColorView = [[UIView alloc] init];
-        bgColorView.backgroundColor = self.UIPrinciple.netyBlue;
-        [myNetworkCell setSelectedBackgroundView:bgColorView];
-        //Set highlighted color to white
-        myNetworkCell.myNetworkUserJob.highlightedTextColor = [UIColor whiteColor];
-        myNetworkCell.myNetworkUserName.highlightedTextColor = [UIColor whiteColor];
-        myNetworkCell.myNetworkUserDescription.highlightedTextColor = [UIColor whiteColor];
-        
-        
-        //SWTableViewCell configuration
-        NSMutableArray *myNetworkRightUtilityButtons = [[NSMutableArray alloc] init];
-        
-        [myNetworkRightUtilityButtons sw_addUtilityButtonWithColor:
-         self.UIPrinciple.netyBlue
-                                                             title:@"Block"];
-        [myNetworkRightUtilityButtons sw_addUtilityButtonWithColor:
-         self.UIPrinciple.netyRed
-                                                             title:@"Delete"];
-        
-        myNetworkCell.rightUtilityButtons = myNetworkRightUtilityButtons;
-        myNetworkCell.delegate = self;
+    [self configureCell:myNetworkCell withObject:user];
         
     return myNetworkCell;
 }
 
+- (void)configureCell:(MyNetworkCell*)cell withObject:(Users*)object
+{
+    NSString *photoUrl = object.profileImageUrl;
+    if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
+        NSURL *profileImageUrl = [NSURL URLWithString:photoUrl];
+        //[self loadAndCacheImage:myNetworkCell photoUrl:profileImageUrl cache:self.imageCache];
+        [cell.myNetworkUserImage sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
+    }
+    
+    //Setting name
+    NSString *fullName = [NSString stringWithFormat:@"%@ %@", object.firstName, object.lastName];
+    cell.myNetworkUserName.text = fullName;
+    
+    //Set job
+    cell.myNetworkUserJob.text = object.identity;
+    
+    //Set description
+    NSString *statusString = object.status;
+    NSString *summaryString = object.summary;
+    
+    if (![statusString isEqualToString:@""]) {
+        
+        cell.myNetworkUserDescription.text = statusString;
+        
+    } else if (![summaryString isEqualToString:@""]){
+        
+        cell.myNetworkUserDescription.text = summaryString;
+        
+    } else {
+        
+        cell.myNetworkUserDescription.text = @"";
+        
+    }
+    
+    //Set selection color to blue
+    UIView *bgColorView = [[UIView alloc] init];
+    bgColorView.backgroundColor = self.UIPrinciple.netyBlue;
+    [cell setSelectedBackgroundView:bgColorView];
+    //Set highlighted color to white
+    cell.myNetworkUserJob.highlightedTextColor = [UIColor whiteColor];
+    cell.myNetworkUserName.highlightedTextColor = [UIColor whiteColor];
+    cell.myNetworkUserDescription.highlightedTextColor = [UIColor whiteColor];
+    
+    
+    //SWTableViewCell configuration
+    NSMutableArray *myNetworkRightUtilityButtons = [[NSMutableArray alloc] init];
+    
+    [myNetworkRightUtilityButtons sw_addUtilityButtonWithColor:
+     self.UIPrinciple.netyBlue
+                                                         title:@"Block"];
+    [myNetworkRightUtilityButtons sw_addUtilityButtonWithColor:
+     self.UIPrinciple.netyRed
+                                                         title:@"Delete"];
+    
+    cell.rightUtilityButtons = myNetworkRightUtilityButtons;
+    cell.delegate = self;
+}
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UIStoryboard *profileStoryboard = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
     Profile *profilePage = [profileStoryboard instantiateViewControllerWithIdentifier:@"Profile"];
     
-#warning//    profilePage.selectedUser =
-//    NSUInteger selectedRow = self.tableView.indexPathForSelectedRow.row;
-//    
-//    profilePage.selectedUserID = [self.userKeyArray objectAtIndex:selectedRow];
-//    
-//    profilePage.selectedUserInfoDictionary = [self.userArray objectAtIndex:selectedRow];
+    Users *user = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+    
+    profilePage.selectedUser = user;
     
     __weak typeof(self) weakSelf = self;
     [self.UIPrinciple setTabBarVisible:![self.UIPrinciple tabBarIsVisible:self] animated:YES sender:self completion:^(BOOL finished) {
@@ -229,38 +206,80 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
     
 }
 
+- (NSFetchedResultsController *)fetchedResultsController
+{
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    // Edit the entity name as appropriate.
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Users" inManagedObjectContext:MY_API.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"isFriend == YES AND isBlocked == NO"];
+    [fetchRequest setPredicate:predicate];
+    
+    // Set the batch size to a suitable number.
+    [fetchRequest setFetchBatchSize:10];
+    
+    // Edit the sort key as appropriate.
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"userID" ascending:YES];
+    
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    // Edit the section name key path and cache name if appropriate.
+    // nil for section name key path means "no sections".
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:MY_API.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    aFetchedResultsController.delegate = self;
+    self.fetchedResultsController = aFetchedResultsController;
+    
+    NSError *error = nil;
+    if (![self.fetchedResultsController performFetch:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    
+    return _fetchedResultsController;
+}
+
 //Close cell when other is cell is opened
 -(BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell { return YES; }
 
--(void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
+-(void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index
+{
+    FIRDatabaseReference* firdatabase = [[FIRDatabase database] reference];
+    Users *user = [[self fetchedResultsController] objectAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    
+    NSString *userID = MY_API.myUser.userID;
+    NSString *otherUserID = user.userID;
+    NSString *roomID = [self makeChatRoomID:userID otherUser:otherUserID];
+    
     switch (index) {
         case 0: {
             
             UIAlertAction *cont = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                 
                 //BLOCK
-                NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
-                NSString *userID = [UserInformation getUserID];
-                NSString *otherUserID = [self.userKeyArray objectAtIndex:cellIndexPath.row];
-                NSString *roomID = [self makeChatRoomID:userID otherUser:otherUserID];
                 
                 //Remove
-                FIRDatabaseReference *otherUserChatRoomsRef = [[[self.firdatabase child:kUserChats] child:otherUserID] child:kChats];
+                FIRDatabaseReference *otherUserChatRoomsRef = [[[firdatabase child:kUserChats] child:otherUserID] child:kChats];
                 [[otherUserChatRoomsRef child:roomID] removeValue];
                 
-                FIRDatabaseReference *userChatRoomsRef = [[[self.firdatabase child:kUserChats] child:userID] child:kChats] ;
+                FIRDatabaseReference *userChatRoomsRef = [[[firdatabase child:kUserChats] child:userID] child:kChats] ;
                 [[userChatRoomsRef child:roomID] removeValue];
                 
-                FIRDatabaseReference *roomRef = [self.firdatabase child:kChats];
+                FIRDatabaseReference *roomRef = [firdatabase child:kChats];
                 [[roomRef child:roomID] removeValue];
                 
                 //Adding blockedUser to UserDetails
-                FIRDatabaseReference *userDetailsRef = [[[self.firdatabase child:kUserDetails] child:userID] child:kBlockedUsers];
+                FIRDatabaseReference *userDetailsRef = [[[firdatabase child:kUserDetails] child:userID] child:kBlockedUsers];
                 [userDetailsRef setValue:@{otherUserID:@0}];
                 
                 //Deleting addedUser from UserDetails
-                FIRDatabaseReference *userAddedUsersRef = [[[self.firdatabase child:kUserDetails] child:userID] child:kAddedUsers];
-                FIRDatabaseReference *otherUserAddedUsersRef = [[[self.firdatabase child:kUserDetails] child:otherUserID] child:kAddedUsers];
+                FIRDatabaseReference *userAddedUsersRef = [[[firdatabase child:kUserDetails] child:userID] child:kAddedUsers];
+                FIRDatabaseReference *otherUserAddedUsersRef = [[[firdatabase child:kUserDetails] child:otherUserID] child:kAddedUsers];
                 [[userAddedUsersRef child:otherUserID] removeValue];
                 [[otherUserAddedUsersRef child:userID] removeValue];
                 
@@ -279,24 +298,20 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
             UIAlertAction *cont = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                 
                 //DELETE
-                NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
-                NSString *userID = [UserInformation getUserID];
-                NSString *otherUserID = [self.userKeyArray objectAtIndex:cellIndexPath.row];
-                NSString *roomID = [self makeChatRoomID:userID otherUser:otherUserID];
                 
                 //Remove
-                FIRDatabaseReference *otherUserChatRoomRef = [[[self.firdatabase child:kUserChats] child:otherUserID] child:kChats];
+                FIRDatabaseReference *otherUserChatRoomRef = [[[firdatabase child:kUserChats] child:otherUserID] child:kChats];
                 [[otherUserChatRoomRef child:roomID] removeValue];
                 
-                FIRDatabaseReference *userChatRoomsRef = [[[self.firdatabase child:kUserChats] child:userID] child:kChats] ;
+                FIRDatabaseReference *userChatRoomsRef = [[[firdatabase child:kUserChats] child:userID] child:kChats] ;
                 [[userChatRoomsRef child:roomID] removeValue];
                 
-                FIRDatabaseReference *roomRef = [self.firdatabase child:kChats];
+                FIRDatabaseReference *roomRef = [firdatabase child:kChats];
                 [[roomRef child:roomID] removeValue];
                 
                 //Deleting addedUser from UserDetails
-                FIRDatabaseReference *userAddedUsersRef = [[[self.firdatabase child:kUserDetails] child:userID] child:kAddedUsers];
-                FIRDatabaseReference *otherUserAddedUsersRef = [[[self.firdatabase child:kUserDetails] child:otherUserID] child:kAddedUsers];
+                FIRDatabaseReference *userAddedUsersRef = [[[firdatabase child:kUserDetails] child:userID] child:kAddedUsers];
+                FIRDatabaseReference *otherUserAddedUsersRef = [[[firdatabase child:kUserDetails] child:otherUserID] child:kAddedUsers];
                 [[userAddedUsersRef child:otherUserID] removeValue];
                 [[otherUserAddedUsersRef child:userID] removeValue];
                 
@@ -335,53 +350,9 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
 //---------------------------------------------------------
 
 
-//Swiped cell will reset
-- (void)viewWillDisappear:(BOOL)animated {
-    [self.tableView reloadData];
-}
-
 
 #pragma mark - Custom methods
 //---------------------------------------------------------
-
-
-//Function for downloading and caching the image
-//-(void)loadAndCacheImage:(MyNetworkCell *)myNetworkCell photoUrl:(NSURL *)photoUrl cache:(NSCache *)imageCache {
-//    
-//    //Set default to nil
-//    myNetworkCell.myNetworkUserImage.image = nil;
-//    NSURL *profileImageUrl = photoUrl;
-//    UIImage *cachedImage = [imageCache objectForKey:profileImageUrl];
-//    
-//    if (cachedImage) {
-//        
-//        myNetworkCell.myNetworkUserImage.image = cachedImage;
-//        
-//    } else {
-//        
-//        [[[NSURLSession sharedSession] dataTaskWithURL:profileImageUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-//            if (error != nil) {
-//                NSLog(@"%@", error);
-//                return;
-//            }
-//            
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                
-//                UIImage *downloadedImage = [UIImage imageWithData:data];
-//                
-//                if (downloadedImage != nil) {
-//                    [imageCache setObject:downloadedImage forKey:profileImageUrl];
-//                }
-//                
-//                myNetworkCell.myNetworkUserImage.image = downloadedImage;
-//                
-//            });
-//            
-//        }] resume];
-//        
-//    }
-//    
-//}
 
 - (NSString *)makeChatRoomID: (NSString *)userID otherUser:(NSString *)otherUserID {
     
@@ -401,75 +372,6 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
     
     return chatroomID;
 }
-
-- (void) listenForChildAdded {
-
-    [self.userDetailRef observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-        
-        NSString *otherUserID = snapshot.key;
-        
-        FIRDatabaseReference *otherUserDetail = [[self.firdatabase child:kUsers] child:otherUserID];
-        
-        [otherUserDetail observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-                    
-            [self.userKeyArray addObject:snapshot.key];
-            
-            [self.userArray addObject:snapshot.value];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
-            });
-            
-        } withCancelBlock:nil];
-        
-    } withCancelBlock:nil];
-    
-}
-
-- (void) listenForChildRemoved {
-    
-    [self.userDetailRef observeEventType:FIRDataEventTypeChildRemoved withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-        
-        NSString *otherUserID = snapshot.key;
-        
-        NSUInteger index = [self.userKeyArray indexOfObject:otherUserID];
-        
-        if (index != NSNotFound) {
-            [self.userArray removeObjectAtIndex:index];
-            [self.userKeyArray removeObjectAtIndex:index];
-            [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]]
-                                  withRowAnimation:UITableViewRowAnimationAutomatic];
-            
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-        });
-        
-    } withCancelBlock:nil];
-    
-}
-
-- (void) listenForChildChanged {
-    
-    [self.userDetailRef observeEventType:FIRDataEventTypeChildChanged withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-        
-        NSString *otherUserID = snapshot.key;
-        NSUInteger index = [self.userKeyArray indexOfObject:otherUserID];
-        NSMutableDictionary *userInformation = [self.userArray objectAtIndex:index];
-        
-        if (index != NSNotFound) {
-            [self.userArray replaceObjectAtIndex:index withObject:userInformation];
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-        });
-        
-    } withCancelBlock:nil];
-    
-}
-
 
 //---------------------------------------------------------
 

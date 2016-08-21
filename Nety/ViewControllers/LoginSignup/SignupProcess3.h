@@ -8,10 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "UIPrinciples.h"
-#import "UserInformation.h"
 #import "AppDelegate.h"
 #import "Constants.h"
-#import "UserInformation.h"
 
 @import Firebase;
 

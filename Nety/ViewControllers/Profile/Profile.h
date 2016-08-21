@@ -19,15 +19,6 @@
 
 @property (strong,nonatomic) Users* selectedUser;
 
-//@property (strong, nonatomic) NSDictionary *selectedUserInfoDictionary;
-//
-//@property (strong, nonatomic) NSString *selectedUserID;
-//
-//@property (strong, nonatomic) UIImage *selectedUserProfileImage;
-
-//@property (strong, nonatomic) NSCache *imageCache;
-
-
 //UTIL CLASSES----------------------------------------
 
 

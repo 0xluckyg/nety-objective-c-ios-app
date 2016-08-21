@@ -38,4 +38,5 @@ typedef void (^N_APIBlockArray)(NSArray* array, NSError* error);
 
 - (void) loginToAcc:(NSString*) email pass:(NSString*) password  DoneBlock:(N_APIBlockDict)doneBlock;
 
+- (void) addNewUser:(NSDictionary*)userInfo UserID:(NSString*)userID FlagMy:(BOOL)flagMy;
 @end

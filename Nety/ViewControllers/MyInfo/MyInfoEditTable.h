@@ -12,7 +12,6 @@
 #import "NoContent.h"
 #import "MyInfoEditTable.h"
 #import "MyInfoEditExperience.h"
-#import "UserInformation.h"
 #import "MyInfoEditTableCell.h"
 #import "MyInfoEditExperience.h"
 #import "Constants.h"

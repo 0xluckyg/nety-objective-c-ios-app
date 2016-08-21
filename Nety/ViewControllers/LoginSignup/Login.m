@@ -7,7 +7,6 @@
 //
 
 #import "Login.h"
-#import "N_API.h"
 
 @interface Login ()
 
@@ -95,7 +94,7 @@
         [hud.bezelView setColor:[self.UIPrinciple.netyBlue colorWithAlphaComponent:0.3f]];
         [hud showAnimated:YES];
         
-        [[N_API sharedController] loginToAcc:self.email.text pass:self.password.text DoneBlock:^(NSDictionary *dict, NSError *error) {
+        [MY_API loginToAcc:self.email.text pass:self.password.text DoneBlock:^(NSDictionary *dict, NSError *error) {
             if (error)
             {
                 [hud hideAnimated:YES];
@@ -104,41 +103,12 @@
             }
             else
             {
-                [self saveUserInformationLocally:dict userID:[N_API sharedController].myUser.userID profileImageUrl:[dict objectForKey:kProfilePhoto]];
+                [self changeRoot];
                 
                 [hud hideAnimated:YES];
 
             }
         }];
-//        [[FIRAuth auth] signInWithEmail:self.email.text
-//                               password:self.password.text
-//                             completion:^(FIRUser *user, NSError *error) {
-//                                 
-//                                 if (error) {
-//                                     [hud hideAnimated:YES];
-//
-//                                     [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Problem signing in" message:error.localizedDescription viewController:self];
-//                                 } else {
-//                                     
-//                                     NSString *userID = [[self.email.text stringByReplacingOccurrencesOfString:@"@" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
-//                                     
-//                                     [[[self.firdatabase child:kUsers] child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-//                                         // Get user value
-//                                                                                  
-//                                         NSDictionary *firebaseUserInfo = snapshot.value;
-//                                         
-//                                         //Set user information inside global variables
-//                                         [self saveUserInformationLocally:firebaseUserInfo userID:userID profileImageUrl:[firebaseUserInfo objectForKey:kProfilePhoto]];
-//                                         
-//                                         [hud hideAnimated:YES];
-//                                         
-//                                     } withCancelBlock:^(NSError * _Nonnull error) {
-//                                         NSLog(@"%@", error.localizedDescription);
-//                                     }];
-//                                     
-//                                 }
-//                                 
-//                             }];
     }
 }
 
@@ -169,42 +139,6 @@
 #pragma mark - Custom methods
 //---------------------------------------------------------
 
-
-- (void)saveUserInformationLocally: (NSDictionary *)firbaseUserInfo userID:(NSString *)userID profileImageUrl:(NSString *)profileImageUrl{
-    
-    //Set user information inside global variables
-    [UserInformation setUserID:userID];
-    [UserInformation setName:[NSString stringWithFormat:@"%@ %@", [firbaseUserInfo objectForKey:kFirstName], [firbaseUserInfo objectForKey:kLastName]]];
-    [UserInformation setAge:[[firbaseUserInfo objectForKey:kAge] integerValue]];
-    [UserInformation setStatus:[firbaseUserInfo objectForKey:kStatus]];
-    [UserInformation setSummary:[firbaseUserInfo objectForKey:kSummary]];
-    [UserInformation setIdentity:[firbaseUserInfo objectForKey:kIdentity]];
-    
-    NSMutableArray *experienceArray = [NSMutableArray arrayWithArray:[[firbaseUserInfo objectForKey:kExperiences] allValues]];
-    
-    [UserInformation setExperiences:experienceArray];
-    
-    // Create a reference to the file you want to download
-    if ([profileImageUrl isEqualToString:kDefaultUserLogoName]) {
-        
-        [UserInformation setProfileImage:[UIImage imageNamed:kDefaultUserLogoName]];
-        [self changeRoot];
-        
-    } else {
-        FIRStorageReference *userProfileImageRef = [[FIRStorage storage] referenceForURL:profileImageUrl];
-        
-        // Fetch the download URL
-        [userProfileImageRef dataWithMaxSize:1 * 1024 * 1024 completion:^(NSData *data, NSError *error){
-            if (error != nil) {
-                [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Problem signing in" message:error.localizedDescription viewController:self];
-            } else {
-                [UserInformation setProfileImage:[UIImage imageWithData:data]];
-                [self changeRoot];
-            }
-        }];
-        
-    }
-}
 
 - (void)changeRoot {
     //Set root controller to tabbar with cross dissolve animation

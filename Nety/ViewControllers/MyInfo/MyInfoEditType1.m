@@ -35,8 +35,8 @@
     
     changed = false;
     
-    editType1NamePlacementText = [UserInformation getName];
-    editType1JobPlacementText = [UserInformation getIdentity];
+    editType1NamePlacementText = USER_NAME;
+    editType1JobPlacementText = MY_USER.userID;
     
     //Set tags for date sections to identify which one's which
     self.editType1NameTextField.tag = 1;
@@ -161,24 +161,21 @@
         
     } else {
         
-        if (![name isEqualToString:[UserInformation getName]]) {
+        if (![name isEqualToString:USER_NAME]) {
             
             NSArray *nameArray = [self.editType1NameTextField.text componentsSeparatedByString:@" "];
             NSString *firstName = [nameArray objectAtIndex:0];
             NSString *lastName = [nameArray objectAtIndex:1];
             
-            [UserInformation setName:self.editType1NameTextField.text];
-            [UserInformation setIdentity:self.editType1JobTextField.text];
-            
             self.firdatabase = [[FIRDatabase database] reference];
             
             //Save name and age to the database
             [[[[self.firdatabase child:kUsers]
-               child:[UserInformation getUserID]]
+               child:MY_USER.userID]
               child:kFirstName]
              setValue:firstName];
             [[[[self.firdatabase child:kUsers]
-               child:[UserInformation getUserID]]
+               child:MY_USER.userID]
               child:kLastName]
              setValue:lastName];
             
@@ -195,7 +192,7 @@
     } else {
         
         [[[[self.firdatabase child:kUsers]
-           child:[UserInformation getUserID]]
+           child:MY_USER.userID]
           child:kIdentity]
          setValue:identity];
         

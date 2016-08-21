@@ -28,10 +28,6 @@
     
     [self initializeSettings];
     [self initializeDesign];
-    
-//    NSLog(@"%@", self.selectedUserInfoDictionary);
-//    NSLog(@"%@", self.selectedUserID);
-    
 
 }
 
@@ -85,8 +81,7 @@
     
     NSString *status = _selectedUser.status;
     NSString *summary = _selectedUser.summary;
-#warning    NSArray *experiences = [[self.selectedUserInfoDictionary objectForKey:kExperiences] allValues];
-    NSArray *experiences;
+    NSArray *experiences = [MY_USER.experiences allObjects];
     NSString *name = [NSString stringWithFormat:@"%@ %@", _selectedUser.firstName, _selectedUser.lastName];
     
     self.nameInfo.text = name;
@@ -186,45 +181,6 @@
 
 #pragma mark - Custom methods
 //---------------------------------------------------------
-
-
-//Function for downloading and caching the image
-//-(void)loadAndCacheImage: (NSURL *)photoUrl cache:(NSCache *)imageCache {
-//    
-//    NSURL *profileImageUrl = photoUrl;
-//    
-//    UIImage *cachedImage = [imageCache objectForKey:profileImageUrl];
-//    
-//    NSLog(@"%@", imageCache);
-//    NSLog(@"%@", cachedImage);
-//    
-//    if (cachedImage) {
-//        
-//        self.profileImage.image = cachedImage;
-//        
-//    } else {
-//        
-//        [[[NSURLSession sharedSession] dataTaskWithURL:profileImageUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-//            if (error != nil) {
-//                NSLog(@"%@", error);
-//                return;
-//            }
-//            
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                
-//                UIImage *downloadedImage = [UIImage imageWithData:data];
-//                
-//                if (downloadedImage != nil) {
-//                    [self.imageCache setObject:downloadedImage forKey:profileImageUrl];
-//                    self.profileImage.image = downloadedImage;
-//                }
-//            });
-//            
-//        }] resume];
-//        
-//    }
-//}
-
 
 //---------------------------------------------------------
 

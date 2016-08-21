@@ -31,6 +31,8 @@
     [FIRDatabase database].persistenceEnabled = YES;
     self.firdatabase = [[FIRDatabase database] reference];
     [self listenForChildAdded];
+    [self listenForChildChanged];
+    [self listenForChildRemoved];
 }
 
 #pragma mark - Core Data stack
@@ -113,7 +115,7 @@
     }
 }
 
-#pragma mark - Firebase
+#pragma mark - Firebase - Network
 
 -(void) listenForChildAdded {
     
@@ -129,15 +131,104 @@
     
 }
 
+-(void) listenForChildRemoved {
+    
+    [[self.firdatabase child:kUsers] observeEventType:FIRDataEventTypeChildRemoved withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        NSString *otherUserID = snapshot.key;
+        
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Users" inManagedObjectContext:self.managedObjectContext];
+        [fetchRequest setEntity:entity];
+        
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"userID" ascending:YES];
+        
+        [fetchRequest setSortDescriptors:@[sortDescriptor]];
+        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"userID == %@",otherUserID]];
+        NSError *error = nil;
+        NSMutableArray* findUserArray = [NSMutableArray arrayWithArray:[self.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
+        if (findUserArray.count>0) {
+            Users* user = [findUserArray lastObject];
+            [self.managedObjectContext deleteObject:user];
+            [self saveContext];
+        }
+        
+    } withCancelBlock:nil];
+    
+}
+
+-(void) listenForChildChanged {
+    
+    [[self.firdatabase child:kUsers] observeEventType:FIRDataEventTypeChildChanged withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        NSDictionary *usersDictionary = snapshot.value;
+        NSString *otherUserID = snapshot.key;
+        NSString *userID = _myUser.userID;
+        
+        [self addNewUser:usersDictionary UserID:otherUserID FlagMy:[otherUserID isEqualToString: userID]];
+        
+    } withCancelBlock:nil];
+    
+}
+
+#pragma mark - Firebase - MyNetwork
+
+- (void) listenForNetworkChildAdded {
+    
+    [[[[self.firdatabase child:kUserDetails] child:_myUser.userID] child:kAddedUsers] observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        NSString *otherUserID = snapshot.key;
+        
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Users" inManagedObjectContext:self.managedObjectContext];
+        [fetchRequest setEntity:entity];
+        
+        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"userID == %@",otherUserID]];
+        NSError *error = nil;
+        NSMutableArray* findUserArray = [NSMutableArray arrayWithArray:[self.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
+        
+        if (findUserArray.count>0) {
+            Users* user = [findUserArray lastObject];
+            [user setIsFriend:[NSNumber numberWithBool:YES]];
+            [self saveContext];
+        }
+        
+    } withCancelBlock:nil];
+    
+}
+
+- (void) listenForNetworkChildRemoved {
+    
+    [[[[self.firdatabase child:kUserDetails] child:_myUser.userID] child:kAddedUsers] observeEventType:FIRDataEventTypeChildRemoved withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        NSString *otherUserID = snapshot.key;
+        
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Users" inManagedObjectContext:self.managedObjectContext];
+        [fetchRequest setEntity:entity];
+        
+        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"userID == %@",otherUserID]];
+        NSError *error = nil;
+        NSMutableArray* findUserArray = [NSMutableArray arrayWithArray:[self.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
+        
+        if (findUserArray.count>0) {
+            Users* user = [findUserArray lastObject];
+            [user setIsFriend:[NSNumber numberWithBool:NO]];
+            [self saveContext];
+        }
+        
+    } withCancelBlock:nil];
+    
+}
+
+//--------------------------------------------
+
 - (void) addNewUser:(NSDictionary*)userInfo UserID:(NSString*)userID FlagMy:(BOOL)flagMy
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Users" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
     
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"userID" ascending:YES];
-    
-    [fetchRequest setSortDescriptors:@[sortDescriptor]];
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"userID == %@",userID]];
     NSError *error = nil;
     NSMutableArray* findUserArray = [NSMutableArray arrayWithArray:[self.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
@@ -163,11 +254,19 @@
     }
     
     if (flagMy) {
-        self.myUser = user;
+        [self setMyUser:user];
     }
     NSLog(@"UserADD");
     [self saveContext];
 }
+
+- (void) setMyUser:(Users *)myUser
+{
+    _myUser = myUser;
+    [self listenForNetworkChildAdded];
+    [self listenForNetworkChildRemoved];
+}
+
 #pragma mark - Login
 
 - (void) loginToAcc:(NSString*) email pass:(NSString*) password  DoneBlock:(N_APIBlockDict)doneBlock

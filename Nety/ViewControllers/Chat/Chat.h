@@ -10,7 +10,6 @@
 #import "NetworkData.h"
 #import "SWTableViewCell.h"
 #import "UIPrinciples.h"
-#import "UserInformation.h"
 
 @import Firebase;
 

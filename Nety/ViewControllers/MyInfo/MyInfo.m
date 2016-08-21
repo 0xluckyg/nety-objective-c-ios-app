@@ -43,29 +43,27 @@
     
     self.firdatabase = [[FIRDatabase database] reference];
     
-    self.nameLabel.text = [UserInformation getName];
+    self.nameLabel.text = MY_USER.firstName;
     
-    self.identityLabel.text = [UserInformation getIdentity];
-    
-    if ([[UserInformation getIdentity] isEqualToString:@""]) {
+    if ([MY_USER.identity isEqualToString:@""]) {
         self.identityLabel.text = @"You haven't described who you are!";
     } else {
-        self.identityLabel.text = [UserInformation getIdentity];
+        self.identityLabel.text = MY_USER.identity;
     }
     
-    if ([[UserInformation getStatus] isEqualToString:@""]) {
+    if ([MY_USER.status isEqualToString:@""]) {
         self.userStatusInfo.text = @"You haven't set a status yet!";
     } else {
-        self.userStatusInfo.text = [UserInformation getStatus];
+        self.userStatusInfo.text = MY_USER.status;
     }
     
-    if ([[UserInformation getSummary] isEqualToString:@""]) {
+    if ([MY_USER.summary isEqualToString:@""]) {
         self.userSummaryInfo.text = @"You haven't set a summary yet!";
     } else {
-        self.userSummaryInfo.text = [UserInformation getSummary];
+        self.userSummaryInfo.text = MY_USER.summary;
     }
     
-    self.experienceArray = [UserInformation getExperiences];
+    self.experienceArray = [NSMutableArray arrayWithArray:[MY_USER.experiences allObjects]];
     
     if ([self.experienceArray count] > 0) {
         
@@ -92,7 +90,7 @@
         self.userExperienceInfo.text = @"You didn't add any experience or interest yet";
     }
     
-    self.userProfileImage.image = [UserInformation getProfileImage];
+    [self.userProfileImage sd_setImageWithURL:[NSURL URLWithString:MY_USER.profileImageUrl] placeholderImage:[UIImage imageNamed:kDefaultUserLogoName] completed:nil];
     
 }
 
@@ -102,9 +100,6 @@
     
     //Set background color
     [self.view setBackgroundColor:self.UIPrinciple.netyBlue];
-    
-    //Profile image setup
-    self.userProfileImage.image = [UserInformation getProfileImage];
     
     //Color for the small view
     self.userBasicInfoView.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.4f];
@@ -147,7 +142,10 @@
     
 }
 
-
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
 
 #pragma mark - Buttons
 //---------------------------------------------------------
@@ -205,7 +203,7 @@
     
     
     //Get userID and save to database
-    NSString *userID = [UserInformation getUserID];
+    NSString *userID = MY_USER.userID;
     
     //Uploading profile image
     NSString *uniqueImageID = [[NSUUID UUID] UUIDString];
@@ -215,7 +213,7 @@
     
     //If user doesn't set profile image, set it to default image without uploading it.
     NSData *pickedImage = UIImagePNGRepresentation(image);
-    NSData *originalImage = UIImagePNGRepresentation([UserInformation getProfileImage]);
+    NSData *originalImage = UIImagePNGRepresentation(self.userProfileImage.image);
     
     if (![originalImage isEqualToData:pickedImage]) {
         
@@ -232,10 +230,6 @@
                 NSLog(@"image url saved");
                 
                 [[[[self.firdatabase child:kUsers] child:userID] child:kProfilePhoto] setValue: [[metadata downloadURL] absoluteString]];
-                [[[[self.firdatabase child:kUsers] child:userID] child:kSmallProfilePhoto] setValue: [[metadata downloadURL] absoluteString]];
-                
-                [UserInformation setProfileImage:image];
-                self.userProfileImage.image = [UserInformation getProfileImage];
                 
                 [picker dismissViewControllerAnimated:YES completion:nil];
             }

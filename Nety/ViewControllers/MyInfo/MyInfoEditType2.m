@@ -41,14 +41,14 @@
     
     //initialize textfield description placeholder
     if (self.statusOrSummary == 0) {
-        if (![[UserInformation getStatus] isEqualToString:@""]) {
-            editType2PlacementText = [UserInformation getStatus];
+        if (![MY_USER.status isEqualToString:@""]) {
+            editType2PlacementText = MY_USER.status;
         } else {
             editType2PlacementText = @"Write a status for everyone to see!";
         }
     } else {
-        if (![[UserInformation getSummary] isEqualToString:@""]) {
-            editType2PlacementText = [UserInformation getSummary];
+        if (![MY_USER.summary isEqualToString:@""]) {
+            editType2PlacementText = MY_USER.summary;
         } else {
             editType2PlacementText = @"Write a summary about yourself!";
         }
@@ -155,19 +155,15 @@
         if (self.statusOrSummary == 0) {
         
             [[[[firdatabase child:kUsers]
-                            child:[UserInformation getUserID]]
+                            child:MY_USER.userID]
                             child:kStatus]
                             setValue:self.editType2TextField.text];
             
-            [UserInformation setStatus:self.editType2TextField.text];
-            
         } else {
             [[[[firdatabase child:kUsers]
-                            child:[UserInformation getUserID]]
+                            child:MY_USER.userID]
                             child:kSummary]
                             setValue:self.editType2TextField.text];
-            
-            [UserInformation setStatus:self.editType2TextField.text];
         
         }
     }

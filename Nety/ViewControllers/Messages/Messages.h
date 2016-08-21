@@ -10,7 +10,6 @@
 #import <JSQMessagesViewController/JSQMessages.h> 
 #import "UIPrinciples.h"
 #import "Constants.h"
-#import "UserInformation.h"
 
 #import <SDWebImage/UIImageView+WebCache.h>
 //

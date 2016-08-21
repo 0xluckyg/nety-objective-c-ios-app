@@ -47,8 +47,6 @@
     self.recentChatArray = [[NSMutableArray alloc] init];
     self.recentChatRoomKeyArray = [[NSMutableArray alloc] init];
     self.oldChatRoomKeyArray = [[NSMutableArray alloc] init];
-    
-    self.imageCache = [[NSCache alloc] init];
 }
 
 - (void)initializeDesign {
@@ -73,7 +71,7 @@
     
     self.firdatabase = [[FIRDatabase database] reference];
     
-    self.chatRoomsRef = [[[[self.firdatabase child:kUserChats] child:[UserInformation getUserID]] child:kChats] queryOrderedByChild:kUpdateTime];
+    self.chatRoomsRef = [[[[self.firdatabase child:kUserChats] child:MY_USER.userID] child:kChats] queryOrderedByChild:kUpdateTime];
     
     [self listenForChildAdded];
     [self listenForChildRemoved];
@@ -118,7 +116,7 @@
     
     //Set images
     chatCell.chatUserImage.image = [UIImage imageNamed: kDefaultUserLogoName];
-    NSString *photoUrl = [userDataDictionary objectForKey:kSmallProfilePhoto];
+    NSString *photoUrl = [userDataDictionary objectForKey:kProfilePhoto];
     
     //If image is not NetyBlueLogo, start downloading and caching the image
     if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
@@ -126,9 +124,6 @@
         //[self loadAndCacheImage:chatCell photoUrl:profileImageUrl cache:self.imageCache];
         [chatCell.chatUserImage sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
     }
-//    else {
-//        chatCell.chatUserImage.image = [UIImage imageNamed:kDefaultUserLogoName];
-//    }
     
     //Set name
     chatCell.chatUserName.text = [userDataDictionary objectForKey:kFullName];
@@ -210,14 +205,14 @@
     
         messagesVC.chatroomID = [self.recentChatRoomKeyArray objectAtIndex:indexPath.row];
         messagesVC.selectedUserID = [[[self.recentChatArray objectAtIndex:indexPath.row] objectForKey:kMembers] objectForKey:@"member1"];
-        messagesVC.selectedUserProfileImageString = [[self.recentChatArray objectAtIndex:indexPath.row] objectForKey:kSmallProfilePhoto];
+        messagesVC.selectedUserProfileImageString = [[self.recentChatArray objectAtIndex:indexPath.row] objectForKey:kProfilePhoto];
         messagesVC.selectedUserName = [[self.recentChatArray objectAtIndex:indexPath.row] objectForKey:kFullName];
         
     } else {
     
         messagesVC.chatroomID = [self.oldChatRoomKeyArray objectAtIndex:indexPath.row];
         messagesVC.selectedUserID = [[[self.oldChatArray objectAtIndex:indexPath.row] objectForKey:kMembers] objectForKey:@"member1"];
-        messagesVC.selectedUserProfileImageString = [[self.oldChatArray objectAtIndex:indexPath.row] objectForKey:kSmallProfilePhoto];
+        messagesVC.selectedUserProfileImageString = [[self.oldChatArray objectAtIndex:indexPath.row] objectForKey:kProfilePhoto];
         messagesVC.selectedUserName = [[self.oldChatArray objectAtIndex:indexPath.row] objectForKey:kFullName];
         
     }
@@ -241,7 +236,7 @@
                     
                     //BLOCK
                     NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
-                    NSString *userID = [UserInformation getUserID];
+                    NSString *userID = MY_USER.userID;
                     NSString *roomID = [self.recentChatRoomKeyArray objectAtIndex:cellIndexPath.row];
                     NSString *selectedUserID = [[[self.recentChatArray objectAtIndex:cellIndexPath.row] objectForKey:kMembers] objectForKey:@"member1"];
                     
@@ -249,7 +244,7 @@
                     FIRDatabaseReference *selectedUserChatRoomsRef = [[[self.firdatabase child:kUserChats] child:selectedUserID] child:kChats];
                     [[selectedUserChatRoomsRef child:roomID] removeValue];
                     
-                    FIRDatabaseReference *userChatRoomsRef = [[[self.firdatabase child:kUserChats] child:[UserInformation getUserID]] child:kChats] ;
+                    FIRDatabaseReference *userChatRoomsRef = [[[self.firdatabase child:kUserChats] child:MY_USER.userID] child:kChats] ;
                     [[userChatRoomsRef child:roomID] removeValue];
                     
                     FIRDatabaseReference *roomRef = [self.firdatabase child:kChats];
@@ -275,7 +270,7 @@
                 
                 NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
                 
-                NSString *userID = [UserInformation getUserID];
+                NSString *userID = MY_USER.userID;
                 NSString *roomID = [self.recentChatRoomKeyArray objectAtIndex:cellIndexPath.row];
                 
                 FIRDatabaseReference *userChatRoomRef = [[[self.firdatabase child:kUserChats] child:userID] child:kChats];
@@ -310,7 +305,7 @@
                     FIRDatabaseReference *selectedUserChatRoomsRef = [[[self.firdatabase child:kUserChats] child:selectedUserID] child:kChats];
                     [[selectedUserChatRoomsRef child:roomID] removeValue];
                     
-                    FIRDatabaseReference *userChatRoomsRef = [[[self.firdatabase child:kUserChats] child:[UserInformation getUserID]] child:kChats] ;
+                    FIRDatabaseReference *userChatRoomsRef = [[[self.firdatabase child:kUserChats] child:MY_USER.userID] child:kChats] ;
                     [[userChatRoomsRef child:roomID] removeValue];
                     
                     FIRDatabaseReference *roomRef = [self.firdatabase child:kChats];
@@ -341,7 +336,7 @@
                     
                     //BLOCK
                     NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
-                    NSString *userID = [UserInformation getUserID];
+                    NSString *userID = MY_USER.userID;
                     NSString *roomID = [self.oldChatRoomKeyArray objectAtIndex:cellIndexPath.row];
                     NSString *selectedUserID = [[[self.oldChatArray objectAtIndex:cellIndexPath.row] objectForKey:kMembers] objectForKey:@"member1"];
                     
@@ -349,7 +344,7 @@
                     FIRDatabaseReference *selectedUserChatRoomsRef = [[[self.firdatabase child:kUserChats] child:selectedUserID] child:kChats];
                     [[selectedUserChatRoomsRef child:roomID] removeValue];
                     
-                    FIRDatabaseReference *userChatRoomsRef = [[[self.firdatabase child:kUserChats] child:[UserInformation getUserID]] child:kChats] ;
+                    FIRDatabaseReference *userChatRoomsRef = [[[self.firdatabase child:kUserChats] child:MY_USER.userID] child:kChats] ;
                     [[userChatRoomsRef child:roomID] removeValue];
                     
                     FIRDatabaseReference *roomRef = [self.firdatabase child:kChats];
@@ -381,7 +376,7 @@
                     FIRDatabaseReference *selectedUserChatRoomsRef = [[[self.firdatabase child:kUserChats] child:selectedUserID] child:kChats];
                     [[selectedUserChatRoomsRef child:roomID] removeValue];
                     
-                    FIRDatabaseReference *userChatRoomsRef = [[[self.firdatabase child:kUserChats] child:[UserInformation getUserID]] child:kChats] ;
+                    FIRDatabaseReference *userChatRoomsRef = [[[self.firdatabase child:kUserChats] child:MY_USER.userID] child:kChats] ;
                     [[userChatRoomsRef child:roomID] removeValue];
                     
                     FIRDatabaseReference *roomRef = [self.firdatabase child:kChats];
@@ -435,45 +430,6 @@
 #pragma mark - Custom methods
 //---------------------------------------------------------
 
-
-//Function for downloading and caching the image
-//-(void)loadAndCacheImage:(ChatCell *)chatCell photoUrl:(NSURL *)photoUrl cache:(NSCache *)imageCache {
-//    
-//    //Set default to nil
-//    chatCell.chatUserImage.image = nil;
-//    NSURL *profileImageUrl = photoUrl;
-//    UIImage *cachedImage = [imageCache objectForKey:profileImageUrl];
-//    
-//    if (cachedImage) {
-//        
-//        chatCell.chatUserImage.image = cachedImage;
-//        
-//    } else {
-//        
-//        [[[NSURLSession sharedSession] dataTaskWithURL:profileImageUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-//            if (error != nil) {
-//                NSLog(@"%@", error);
-//                return;
-//            }
-//            
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                
-//                UIImage *downloadedImage = [UIImage imageWithData:data];
-//                
-//                if (downloadedImage != nil) {
-//                    [imageCache setObject:downloadedImage forKey:profileImageUrl];
-//                }
-//                
-//                chatCell.chatUserImage.image = downloadedImage;
-//                
-//            });
-//            
-//        }] resume];
-//        
-//    }
-//    
-//}
-
 -(void)listenForChildAdded {
     
     [self.chatRoomsRef observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
@@ -488,11 +444,11 @@
         FIRDatabaseReference *userInfoRef = [[self.firdatabase child:kUsers] child:[members objectForKey:@"member1"]];
         [userInfoRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
             
-            NSString *profilePhotoUrl = [snapshot.value objectForKey:kSmallProfilePhoto];
+            NSString *profilePhotoUrl = [snapshot.value objectForKey:kProfilePhoto];
             NSString *name = [NSString stringWithFormat:@"%@ %@", [snapshot.value objectForKey:kFirstName], [snapshot.value objectForKey:kLastName]];
             
             [chatRoomInfoDict setValue:name forKey:kFullName];
-            [chatRoomInfoDict setValue:profilePhotoUrl forKey:kSmallProfilePhoto];
+            [chatRoomInfoDict setValue:profilePhotoUrl forKey:kProfilePhoto];
             
             if (self.oldNewSegmentedControl.selectedSegmentIndex == 0) {
                 
@@ -582,11 +538,11 @@
         FIRDatabaseReference *userInfoRef = [[self.firdatabase child:kUsers] child:[members objectForKey:@"member1"]];
         [userInfoRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
-            NSString *profilePhotoUrl = [snapshot.value objectForKey:kSmallProfilePhoto];
+            NSString *profilePhotoUrl = [snapshot.value objectForKey:kProfilePhoto];
             NSString *name = [NSString stringWithFormat:@"%@ %@", [snapshot.value objectForKey:kFirstName], [snapshot.value objectForKey:kLastName]];
             
             [chatRoomInfoDict setValue:name forKey:kFullName];
-            [chatRoomInfoDict setValue:profilePhotoUrl forKey:kSmallProfilePhoto];
+            [chatRoomInfoDict setValue:profilePhotoUrl forKey:kProfilePhoto];
             
             if ([[chatRoomInfoDict objectForKey:kType] integerValue] == 0) {
                 
@@ -629,11 +585,11 @@
         FIRDatabaseReference *userInfoRef = [[self.firdatabase child:kUsers] child:[members objectForKey:@"member1"]];
         [userInfoRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
             
-            NSString *profilePhotoUrl = [snapshot.value objectForKey:kSmallProfilePhoto];
+            NSString *profilePhotoUrl = [snapshot.value objectForKey:kProfilePhoto];
             NSString *name = [NSString stringWithFormat:@"%@ %@", [snapshot.value objectForKey:kFirstName], [snapshot.value objectForKey:kLastName]];
             
             [chatRoomInfoDict setValue:name forKey:kFullName];
-            [chatRoomInfoDict setValue:profilePhotoUrl forKey:kSmallProfilePhoto];
+            [chatRoomInfoDict setValue:profilePhotoUrl forKey:kProfilePhoto];
             
             if ([[chatRoomInfoDict objectForKey:kType] integerValue] == 0) {
                 NSUInteger index = [self.recentChatRoomKeyArray indexOfObject:chatRoomKey];
