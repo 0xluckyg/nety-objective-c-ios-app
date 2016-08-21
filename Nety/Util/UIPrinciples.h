@@ -30,7 +30,7 @@
 -(void)addTopbarColor: (UIViewController *)viewController;
 -(UIFont*)netyFontWithSize: (int)size;
 
--(void)addNoContent: (UIViewController *)viewController setText:(NSString*)text noContentController:(NoContent *)noContentController;
+-(void)addNoContent: (UIViewController *)viewController setText:(NSString*)text setImage:(UIImage *)contentImage setColor:(UIColor *)color noContentController:(NoContent *)noContentController;
 
 -(void)removeNoContent: (NoContent *)noContentController;
 

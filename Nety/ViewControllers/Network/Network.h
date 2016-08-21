@@ -15,6 +15,7 @@
 #import "Profile.h"
 #import "NetworkData.h"
 #import "MBProgressHUD.h"
+#import "NoContent.h"
 
 #import "N_CoreDataTableViewController.h"
 #import "N_API.h"
@@ -39,6 +40,9 @@
 //UTIL CLASSES----------------------------------------
 
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
+
+@property (strong, nonatomic) NoContent *noContentController;
+
 
 //LIB CLASSES----------------------------------------
 

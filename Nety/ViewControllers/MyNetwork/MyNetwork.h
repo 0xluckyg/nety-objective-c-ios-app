@@ -40,6 +40,8 @@
 
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
 
+@property (strong, nonatomic) NoContent *noContentController;
+
 
 //LIB CLASSES----------------------------------------
 

@@ -67,17 +67,26 @@
     
 }
 
--(void)addNoContent: (UIViewController *)viewController setText:(NSString*)text noContentController:(NoContent *)noContentController {
+-(void)addNoContent: (UIViewController *)viewController setText:(NSString*)text setImage:(UIImage *)contentImage setColor:(UIColor *)color noContentController:(NoContent *)noContentController {
     
-    noContentController.view.frame = CGRectMake(0, viewController.view.frame.size.height/2 - 50, viewController.view.frame.size.width, 150);
+    float width = viewController.view.frame.size.width;
+    float height = noContentController.view.frame.size.height;
+    float xValue = 0;
+    float yValue = viewController.view.frame.size.height/2 - height/2;
     
-    [noContentController.view setBackgroundColor:self.netyTransparent];
+    noContentController.view.frame = CGRectMake(xValue, yValue, width, height);
+    
+    [noContentController.view setBackgroundColor:[UIColor clearColor]];
     
     [noContentController.label setTextColor:[UIColor whiteColor]];
     
     noContentController.label.text = text;
+    noContentController.label.textColor = color;
     
-    [viewController.navigationController.view addSubview:noContentController.view];
+    noContentController.image.image = contentImage;
+    [noContentController.image setTintColor:color];
+    
+    [viewController.view addSubview:noContentController.view];
 }
 
 -(void)addTopbarColor: (UIViewController *)viewController {

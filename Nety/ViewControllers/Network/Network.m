@@ -8,6 +8,8 @@
 
 #import "Network.h"
 
+NSString *const networkNoContentString = @"You don't have friends yet. Swipe left on your chats to add people!";
+
 @interface Network ()
 {
     N_API* myAPI;
@@ -49,6 +51,18 @@
     self.tabBarController.tabBar.hidden = NO;
     
     
+    //If no experiences visible, show noContent header
+    if ([[self fetchedResultsController].fetchedObjects count] == 0) {
+        
+        UIImage *contentImage = [[UIImage imageNamed:@"Friend"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        
+        if (![self.noContentController isDescendantOfView:self.view]) {
+            [self.UIPrinciple addNoContent:self setText:networkNoContentString setImage:contentImage setColor:self.UIPrinciple.netyGray noContentController:self.noContentController];
+        }
+    } else {
+        [self.UIPrinciple removeNoContent:self.noContentController];
+    }
+    
 }
 
 
@@ -56,7 +70,8 @@
 //---------------------------------------------------------
 
 - (void)initializeSettings {
-    
+    self.noContentController = [[NoContent alloc] init];
+
     myAPI = [N_API sharedController];
     //Set up notifications
     [[self.tabBarController.tabBar.items objectAtIndex:2] setBadgeValue:@"4"];
@@ -176,74 +191,21 @@
     
     //Configure cell
     NetworkCell *networkCell = [tableView dequeueReusableCellWithIdentifier:@"NetworkCell" forIndexPath:indexPath];
-     Users *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+     Users *user = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     
-    [self configureCell:networkCell withObject:object];
-//    if ([self.usersArray count] > 0 ) {
-    
-//        //Setting cell data
-//        NSDictionary *userDataDictionary = self.usersArray[row];
-//        networkCell.networkUserImage.image = [UIImage imageNamed:kDefaultUserLogoName];
-//        
-//        //If image is not NetyBlueLogo, start downloading and caching the image
-//        NSString *photoUrl = [userDataDictionary objectForKey:kProfilePhoto];
-//        
-//        if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
-//            NSURL *profileImageUrl = [NSURL URLWithString:[userDataDictionary objectForKey:kProfilePhoto]];
-//            //[self loadAndCacheImage:networkCell photoUrl:profileImageUrl cache:self.imageCache];
-//            [networkCell.networkUserImage sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
-//            
-//        }
-//        
-//        
-//        NSString *fullName = [NSString stringWithFormat:@"%@ %@", [userDataDictionary objectForKey:kFirstName], [userDataDictionary objectForKey:kLastName]];
-//        
-//        //Set name
-//        networkCell.networkUserName.text = fullName;
-//        
-//        //Set job
-//        networkCell.networkUserJob.text = [userDataDictionary objectForKey:kIdentity];
-//        
-//        //Set description
-//        NSString *statusString = [userDataDictionary objectForKey:kStatus];
-//        NSString *summaryString = [userDataDictionary objectForKey:kSummary];
-//        
-//        if (![statusString isEqualToString:@""]) {
-//            
-//            networkCell.networkUserDescription.text = statusString;
-//            
-//        } else if (![summaryString isEqualToString:@""]){
-//            
-//            networkCell.networkUserDescription.text = summaryString;
-//            
-//        } else {
-//            
-//            networkCell.networkUserDescription.text = @"";
-//            
-//        }
-//        
-//        //DESIGN
-//        //Setting font color of cells to black
-//        networkCell.networkUserJob.textColor = [UIColor blackColor];
-//        networkCell.networkUserName.textColor = [UIColor blackColor];
-//        networkCell.networkUserDescription.textColor = [UIColor blackColor];
-//        
-//        //Set selection color to blue
-//        UIView *bgColorView = [[UIView alloc] init];
-//        bgColorView.backgroundColor = self.UIPrinciple.netyBlue;
-//        [networkCell setSelectedBackgroundView:bgColorView];
-//        //Set highlighted color to white
-//        networkCell.networkUserJob.highlightedTextColor = [UIColor whiteColor];
-//        networkCell.networkUserName.highlightedTextColor = [UIColor whiteColor];
-//        networkCell.networkUserDescription.highlightedTextColor = [UIColor whiteColor];
+    [self configureCell:networkCell withObject:user];
         
-//    } else {
-//        
-//        NSString *contentText = [NSString stringWithFormat:@"There is no one %@ near you", self.title];
-//        NoContent *noContent = [[NoContent alloc] init];
-//        [self.UIPrinciple addNoContent:self setText:contentText noContentController:noContent];
-//        
-//    }
+    //If no experiences visible, show noContent header
+    if ([[self fetchedResultsController].fetchedObjects count] == 0) {
+        
+        UIImage *contentImage = [[UIImage imageNamed:@"Friend"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        
+        if (![self.noContentController isDescendantOfView:self.view]) {
+            [self.UIPrinciple addNoContent:self setText:networkNoContentString setImage:contentImage setColor:self.UIPrinciple.netyGray noContentController:self.noContentController];
+        }
+    } else {
+        [self.UIPrinciple removeNoContent:self.noContentController];
+    }
     
     return networkCell;
 }
@@ -294,15 +256,6 @@
     cell.networkUserJob.textColor = [UIColor blackColor];
     cell.networkUserName.textColor = [UIColor blackColor];
     cell.networkUserDescription.textColor = [UIColor blackColor];
-    
-    //Set selection color to blue
-    UIView *bgColorView = [[UIView alloc] init];
-    bgColorView.backgroundColor = self.UIPrinciple.netyBlue;
-    [cell setSelectedBackgroundView:bgColorView];
-    //Set highlighted color to white
-    cell.networkUserJob.highlightedTextColor = [UIColor whiteColor];
-    cell.networkUserName.highlightedTextColor = [UIColor whiteColor];
-    cell.networkUserDescription.highlightedTextColor = [UIColor whiteColor];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

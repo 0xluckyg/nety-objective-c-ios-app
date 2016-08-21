@@ -9,6 +9,8 @@
 #import "MyNetwork.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
+NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe left on your chats to add people!";
+
 @interface MyNetwork ()
 
 @end
@@ -35,6 +37,20 @@
     
     self.navigationItem.title = @"My Network";
     
+    
+    //If no experiences visible, show noContent header
+    if ([self.userArray count] == 0) {
+        self.userArray = [[NSMutableArray alloc] init];
+        
+        UIImage *contentImage = [[UIImage imageNamed:@"Friend"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        
+        if (![self.noContentController isDescendantOfView:self.view]) {
+            [self.UIPrinciple addNoContent:self setText:myNetworkNoContentString setImage:contentImage setColor:self.UIPrinciple.netyGray noContentController:self.noContentController];
+        }
+    } else {
+        [self.UIPrinciple removeNoContent:self.noContentController];
+    }
+    
 }
 
 
@@ -43,6 +59,7 @@
 
 
 - (void)initializeSettings {
+    self.noContentController = [[NoContent alloc] init];
     self.userArray = [[NSMutableArray alloc] init];
     self.userKeyArray = [[NSMutableArray alloc] init];
     self.imageCache = [[NSCache alloc] init];
@@ -100,17 +117,17 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-//    NoContent *noContent = [[NoContent alloc] init];
-//
-//    if ([self.userArray count] == 0) {
-//        
-//        NSLog(@"called");
-//        NSString *contentText = [NSString stringWithFormat:@"There is no one %@ near you", self.title];
-//        [self.UIPrinciple addNoContent:self setText:contentText noContentController:noContent];
-//        
-//    } else {
-//        [self.UIPrinciple removeNoContent:noContent];
-//    }
+    if ([self.userArray count] == 0) {
+        
+        UIImage *contentImage = [[UIImage imageNamed:@"Friend"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        
+        if (![self.noContentController isDescendantOfView:self.view]) {
+            [self.UIPrinciple addNoContent:self setText:myNetworkNoContentString setImage:contentImage setColor:self.UIPrinciple.netyGray noContentController:self.noContentController];
+        }
+    } else {
+        [self.UIPrinciple removeNoContent:self.noContentController];
+        
+    }
     
     return [self.userArray count];
 }
@@ -195,7 +212,7 @@
     UIStoryboard *profileStoryboard = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
     Profile *profilePage = [profileStoryboard instantiateViewControllerWithIdentifier:@"Profile"];
     
-#warning    profilePage.selectedUser =
+#warning//    profilePage.selectedUser =
 //    NSUInteger selectedRow = self.tableView.indexPathForSelectedRow.row;
 //    
 //    profilePage.selectedUserID = [self.userKeyArray objectAtIndex:selectedRow];
@@ -414,6 +431,7 @@
     [self.userDetailRef observeEventType:FIRDataEventTypeChildRemoved withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
         NSString *otherUserID = snapshot.key;
+        
         NSUInteger index = [self.userKeyArray indexOfObject:otherUserID];
         
         if (index != NSNotFound) {
@@ -421,6 +439,7 @@
             [self.userKeyArray removeObjectAtIndex:index];
             [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]]
                                   withRowAnimation:UITableViewRowAnimationAutomatic];
+            
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{

@@ -544,8 +544,10 @@
             if (index != NSNotFound) {
                 [self.recentChatArray removeObjectAtIndex:index];
                 [self.recentChatRoomKeyArray removeObjectAtIndex:index];
-                [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]]
-                                      withRowAnimation:UITableViewRowAnimationAutomatic];
+                if (self.oldNewSegmentedControl.selectedSegmentIndex == 0) {
+                    [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]]
+                                          withRowAnimation:UITableViewRowAnimationAutomatic];
+                }
             }
         } else {
             NSUInteger index = [self.oldChatRoomKeyArray indexOfObject:chatRoomKey];
@@ -553,8 +555,10 @@
             if (index != NSNotFound) {
                 [self.oldChatArray removeObjectAtIndex:index];
                 [self.oldChatRoomKeyArray removeObjectAtIndex:index];
-                [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]]
+                if (self.oldNewSegmentedControl.selectedSegmentIndex == 1) {
+                    [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]]
                                       withRowAnimation:UITableViewRowAnimationAutomatic];
+                }
             }
             
         }

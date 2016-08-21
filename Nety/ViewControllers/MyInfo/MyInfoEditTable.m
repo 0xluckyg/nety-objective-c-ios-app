@@ -28,6 +28,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    
     //If no experiences visible, show noContent header
     if ([self.experienceArray count] == 0) {
         
@@ -35,7 +36,11 @@
         
         self.noContentController = [[NoContent alloc] init];
         
-        [self.UIPrinciple addNoContent:self setText:@"You haven't added an experience or interest yet" noContentController:self.noContentController];
+        UIImage *contentImage = [[UIImage imageNamed:@"LightBulb"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        
+        [self.UIPrinciple addNoContent:self setText:@"You haven't added an experience or interest yet" setImage:contentImage setColor:self.UIPrinciple.netyGray noContentController:self.noContentController];
+    } else {
+        [self.UIPrinciple removeNoContent:self.noContentController];
     }
     
     MyInfoEditExperience *experienceDataVC = [[MyInfoEditExperience alloc] init];
@@ -147,7 +152,9 @@
         //If deleted and array is 0
         self.noContentController = [[NoContent alloc] init];
         
-        [self.UIPrinciple addNoContent:self setText:@"You haven't added an experience or interest yet" noContentController:self.noContentController];
+        UIImage *contentImage = [UIImage imageNamed:@"LightBulb"];
+        
+        [self.UIPrinciple addNoContent:self setText:@"You haven't added an experience or interest yet" setImage:contentImage setColor:self.UIPrinciple.netyGray noContentController:self.noContentController];
     }
     
 }
@@ -204,8 +211,6 @@
     
     [[[[self.firdatabase child:kUsers] child:[UserInformation getUserID]] child:kExperiences] setValue:experiences];
     
-
-    [self.UIPrinciple removeNoContent:self.noContentController];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

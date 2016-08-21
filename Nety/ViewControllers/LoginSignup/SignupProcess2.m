@@ -39,7 +39,11 @@
         
         self.noContentController = [[NoContent alloc] init];
         
-        [self.UIPrinciple addNoContent:self setText:@"You haven't added an experience or interest yet" noContentController:self.noContentController];
+        UIImage *contentImage = [[UIImage imageNamed:@"LightBulb"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        
+        [self.UIPrinciple addNoContent:self setText:@"You haven't added an experience or interest yet" setImage:contentImage setColor:self.UIPrinciple.netyGray noContentController:self.noContentController];
+    } else {
+        [self.UIPrinciple removeNoContent:self.noContentController];
     }
     
     SignupProcessExperienceDetail *experienceDataVC = [[SignupProcessExperienceDetail alloc] init];
@@ -162,7 +166,9 @@
         //If deleted and array is 0
         self.noContentController = [[NoContent alloc] init];
         
-        [self.UIPrinciple addNoContent:self setText:@"You haven't added an experience or interest yet" noContentController:self.noContentController];
+        UIImage *contentImage = [UIImage imageNamed:@"LightBulb"];
+        
+        [self.UIPrinciple addNoContent:self setText:@"You haven't added an experience or interest yet" setImage:contentImage setColor:self.UIPrinciple.netyGray noContentController:self.noContentController];
     }
     
 }
@@ -210,8 +216,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [self.tableView reloadData];
-    
-    [self.UIPrinciple removeNoContent:self.noContentController];
     
 }
 
