@@ -58,6 +58,14 @@
 		67DD1AC31D17E42D00FBEA0F /* man.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1ABE1D17E42D00FBEA0F /* man.jpg */; };
 		67DD1AC41D17E42D00FBEA0F /* water.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1ABF1D17E42D00FBEA0F /* water.jpg */; };
 		97677F0633DE3705741AEB8E /* libPods-Nety.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F5D56FDB372FC5465929EE /* libPods-Nety.a */; };
+		E163EF5A1D6AF9DF004374E3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E163EF591D6AF9DF004374E3 /* main.m */; };
+		E163EF5D1D6AF9DF004374E3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E163EF5C1D6AF9DF004374E3 /* AppDelegate.m */; };
+		E163EF601D6AF9DF004374E3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E163EF5F1D6AF9DF004374E3 /* ViewController.m */; };
+		E163EF631D6AF9DF004374E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E163EF611D6AF9DF004374E3 /* Main.storyboard */; };
+		E163EF651D6AF9DF004374E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E163EF641D6AF9DF004374E3 /* Assets.xcassets */; };
+		E163EF681D6AF9DF004374E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E163EF661D6AF9DF004374E3 /* LaunchScreen.storyboard */; };
+		E163EFB01D6B48B8004374E3 /* ChatRooms+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E163EFAD1D6B48B8004374E3 /* ChatRooms+CoreDataProperties.m */; };
+		E163EFB11D6B48B8004374E3 /* ChatRooms.m in Sources */ = {isa = PBXBuildFile; fileRef = E163EFAF1D6B48B8004374E3 /* ChatRooms.m */; };
 		E1E0B9211D689D8600295133 /* Nety.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B91F1D689D8600295133 /* Nety.xcdatamodeld */; };
 		E1E0B9241D689DC800295133 /* N_API.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B9231D689DC800295133 /* N_API.m */; };
 		E1E0B9281D689FA700295133 /* N_CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B9271D689FA700295133 /* N_CoreDataTableViewController.m */; };
@@ -154,6 +162,20 @@
 		67DD1ABD1D17E42D00FBEA0F /* girl2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = girl2.jpg; sourceTree = "<group>"; };
 		67DD1ABE1D17E42D00FBEA0F /* man.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = man.jpg; sourceTree = "<group>"; };
 		67DD1ABF1D17E42D00FBEA0F /* water.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = water.jpg; sourceTree = "<group>"; };
+		E163EF561D6AF9DF004374E3 /* SedAll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SedAll.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E163EF591D6AF9DF004374E3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E163EF5B1D6AF9DF004374E3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		E163EF5C1D6AF9DF004374E3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		E163EF5E1D6AF9DF004374E3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		E163EF5F1D6AF9DF004374E3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		E163EF621D6AF9DF004374E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E163EF641D6AF9DF004374E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E163EF671D6AF9DF004374E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E163EF691D6AF9DF004374E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E163EFAC1D6B48B8004374E3 /* ChatRooms+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ChatRooms+CoreDataProperties.h"; path = "CoreData/ChatRooms+CoreDataProperties.h"; sourceTree = "<group>"; };
+		E163EFAD1D6B48B8004374E3 /* ChatRooms+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ChatRooms+CoreDataProperties.m"; path = "CoreData/ChatRooms+CoreDataProperties.m"; sourceTree = "<group>"; };
+		E163EFAE1D6B48B8004374E3 /* ChatRooms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatRooms.h; path = CoreData/ChatRooms.h; sourceTree = "<group>"; };
+		E163EFAF1D6B48B8004374E3 /* ChatRooms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatRooms.m; path = CoreData/ChatRooms.m; sourceTree = "<group>"; };
 		E1E0B9201D689D8600295133 /* Nety.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Nety.xcdatamodel; sourceTree = "<group>"; };
 		E1E0B9221D689DC800295133 /* N_API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = N_API.h; path = CoreData/N_API.h; sourceTree = "<group>"; };
 		E1E0B9231D689DC800295133 /* N_API.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = N_API.m; path = CoreData/N_API.m; sourceTree = "<group>"; };
@@ -176,6 +198,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				97677F0633DE3705741AEB8E /* libPods-Nety.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E163EF531D6AF9DF004374E3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +340,7 @@
 			isa = PBXGroup;
 			children = (
 				67DD1A791D17BEB500FBEA0F /* Nety */,
+				E163EF571D6AF9DF004374E3 /* SedAll */,
 				67DD1A781D17BEB500FBEA0F /* Products */,
 				8FCFFEDB2731DDDE96F8924A /* Pods */,
 				B852F7677337544B123B08BC /* Frameworks */,
@@ -321,6 +351,7 @@
 			isa = PBXGroup;
 			children = (
 				67DD1A771D17BEB500FBEA0F /* Nety.app */,
+				E163EF561D6AF9DF004374E3 /* SedAll.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -476,6 +507,30 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E163EF571D6AF9DF004374E3 /* SedAll */ = {
+			isa = PBXGroup;
+			children = (
+				E163EF5B1D6AF9DF004374E3 /* AppDelegate.h */,
+				E163EF5C1D6AF9DF004374E3 /* AppDelegate.m */,
+				E163EF5E1D6AF9DF004374E3 /* ViewController.h */,
+				E163EF5F1D6AF9DF004374E3 /* ViewController.m */,
+				E163EF611D6AF9DF004374E3 /* Main.storyboard */,
+				E163EF641D6AF9DF004374E3 /* Assets.xcassets */,
+				E163EF661D6AF9DF004374E3 /* LaunchScreen.storyboard */,
+				E163EF691D6AF9DF004374E3 /* Info.plist */,
+				E163EF581D6AF9DF004374E3 /* Supporting Files */,
+			);
+			path = SedAll;
+			sourceTree = "<group>";
+		};
+		E163EF581D6AF9DF004374E3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E163EF591D6AF9DF004374E3 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		E1E0B91E1D689D6200295133 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -508,6 +563,10 @@
 				E1E0B95C1D6A5FBE00295133 /* Users+CoreDataProperties.m */,
 				E1E0B95D1D6A5FBE00295133 /* Users.h */,
 				E1E0B95E1D6A5FBE00295133 /* Users.m */,
+				E163EFAC1D6B48B8004374E3 /* ChatRooms+CoreDataProperties.h */,
+				E163EFAD1D6B48B8004374E3 /* ChatRooms+CoreDataProperties.m */,
+				E163EFAE1D6B48B8004374E3 /* ChatRooms.h */,
+				E163EFAF1D6B48B8004374E3 /* ChatRooms.m */,
 			);
 			name = NetyUsersModel;
 			sourceTree = "<group>";
@@ -535,6 +594,23 @@
 			productReference = 67DD1A771D17BEB500FBEA0F /* Nety.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E163EF551D6AF9DF004374E3 /* SedAll */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E163EF6C1D6AF9DF004374E3 /* Build configuration list for PBXNativeTarget "SedAll" */;
+			buildPhases = (
+				E163EF521D6AF9DF004374E3 /* Sources */,
+				E163EF531D6AF9DF004374E3 /* Frameworks */,
+				E163EF541D6AF9DF004374E3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SedAll;
+			productName = SedAll;
+			productReference = E163EF561D6AF9DF004374E3 /* SedAll.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -553,6 +629,9 @@
 							};
 						};
 					};
+					E163EF551D6AF9DF004374E3 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 				};
 			};
 			buildConfigurationList = 67DD1A721D17BEB500FBEA0F /* Build configuration list for PBXProject "Nety" */;
@@ -569,6 +648,7 @@
 			projectRoot = "";
 			targets = (
 				67DD1A761D17BEB500FBEA0F /* Nety */,
+				E163EF551D6AF9DF004374E3 /* SedAll */,
 			);
 		};
 /* End PBXProject section */
@@ -596,6 +676,16 @@
 				67DD1A9F1D17BF7200FBEA0F /* MyNetwork.storyboard in Resources */,
 				67CD9C2E1D3C75E800823701 /* NoContent.xib in Resources */,
 				67DD1AC41D17E42D00FBEA0F /* water.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E163EF541D6AF9DF004374E3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E163EF681D6AF9DF004374E3 /* LaunchScreen.storyboard in Resources */,
+				E163EF651D6AF9DF004374E3 /* Assets.xcassets in Resources */,
+				E163EF631D6AF9DF004374E3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -659,6 +749,7 @@
 				67606C6E1D24888700AD127E /* MyInfoEditExperience.m in Sources */,
 				678138AB1D33B2DD00BFBF48 /* Settings.m in Sources */,
 				E1E0B95A1D6A1A8800295133 /* Experiences.m in Sources */,
+				E163EFB11D6B48B8004374E3 /* ChatRooms.m in Sources */,
 				67DD1AA21D17BFC300FBEA0F /* Chat.m in Sources */,
 				67602F501D2EC75F00DA2F3A /* Messages.m in Sources */,
 				6733390E1D20B5ED00A8009F /* ChatCell.m in Sources */,
@@ -674,6 +765,7 @@
 				67391DF51D27FBD800A50C03 /* SignupProcessExperienceDetail.m in Sources */,
 				673E58761D6AAFA300D28F5B /* CAPSPageMenu.m in Sources */,
 				673E58701D6AAE6400D28F5B /* NewChats.m in Sources */,
+				E163EFB01D6B48B8004374E3 /* ChatRooms+CoreDataProperties.m in Sources */,
 				E1E0B9281D689FA700295133 /* N_CoreDataTableViewController.m in Sources */,
 				67391DF21D27FBC400A50C03 /* SignupProcess2.m in Sources */,
 				67DD1A9D1D17BF6900FBEA0F /* MyNetwork.m in Sources */,
@@ -696,6 +788,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E163EF521D6AF9DF004374E3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E163EF601D6AF9DF004374E3 /* ViewController.m in Sources */,
+				E163EF5D1D6AF9DF004374E3 /* AppDelegate.m in Sources */,
+				E163EF5A1D6AF9DF004374E3 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -703,6 +805,22 @@
 			isa = PBXVariantGroup;
 			children = (
 				67DD1A891D17BEB500FBEA0F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		E163EF611D6AF9DF004374E3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E163EF621D6AF9DF004374E3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E163EF661D6AF9DF004374E3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E163EF671D6AF9DF004374E3 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -828,6 +946,28 @@
 			};
 			name = Release;
 		};
+		E163EF6A1D6AF9DF004374E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SedAll/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.YobibyteLLC.SedAll;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E163EF6B1D6AF9DF004374E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SedAll/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.YobibyteLLC.SedAll;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -848,6 +988,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		E163EF6C1D6AF9DF004374E3 /* Build configuration list for PBXNativeTarget "SedAll" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E163EF6A1D6AF9DF004374E3 /* Debug */,
+				E163EF6B1D6AF9DF004374E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 

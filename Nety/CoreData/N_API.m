@@ -8,6 +8,7 @@
 
 #import "N_API.h"
 #import "Constants.h"
+#import "ChatRooms.h"
 
 @implementation N_API
 
@@ -221,6 +222,29 @@
     
 }
 
+- (void) listenForNetworkBlockChildAdd {
+    
+    [[[[self.firdatabase child:kUserDetails] child:_myUser.userID] child:kAddedUsers] observeEventType:FIRDataEventTypeChildRemoved withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        NSString *otherUserID = snapshot.key;
+        
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Users" inManagedObjectContext:self.managedObjectContext];
+        [fetchRequest setEntity:entity];
+        
+        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"userID == %@",otherUserID]];
+        NSError *error = nil;
+        NSMutableArray* findUserArray = [NSMutableArray arrayWithArray:[self.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
+        
+        if (findUserArray.count>0) {
+            Users* user = [findUserArray lastObject];
+            [user setIsBlocked:[NSNumber numberWithBool:YES]];
+            [self saveContext];
+        }
+        
+    } withCancelBlock:nil];
+    
+}
 //--------------------------------------------
 
 - (void) addNewUser:(NSDictionary*)userInfo UserID:(NSString*)userID FlagMy:(BOOL)flagMy
@@ -260,11 +284,32 @@
     [self saveContext];
 }
 
+- (Users*) getUserrsWithID:(NSString*)userID
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Users" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"userID == %@",userID]];
+    NSError *error = nil;
+    NSMutableArray* findUserArray = [NSMutableArray arrayWithArray:[self.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
+    Users* user;
+    if (findUserArray.count>0) {
+        user = [findUserArray lastObject];
+    }
+    return user;
+}
+
 - (void) setMyUser:(Users *)myUser
 {
     _myUser = myUser;
     [self listenForNetworkChildAdded];
     [self listenForNetworkChildRemoved];
+    [self listenForNetworkBlockChildAdd];
+    [self listenForChatsChildAdded];
+    [self listenForChatsChildRemoved];
+    [self listenForChatsChildChanged];
+    // [self listenForChatsChildMoved];
 }
 
 #pragma mark - Login
@@ -297,4 +342,146 @@
                              
                          }];
 }
+
+//self.chatRoomsRef = [[[[self.firdatabase child:kUserChats] child:MY_USER.userID] child:kChats] queryOrderedByChild:kUpdateTime];
+
+#pragma mark - Chats
+
+-(void)listenForChatsChildAdded {
+    
+    [[[[self.firdatabase child:kUserChats] child:MY_USER.userID] child:kChats] observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        NSMutableDictionary *chatRoomInfoDict = snapshot.value;
+        NSDictionary *members = [snapshot.value objectForKey:kMembers];
+        NSString *chatRoomKey = snapshot.key;
+        
+        NSLog(@"Got snapchat: %@", snapshot.value);
+        NSLog(@"Got you: %@", [members objectForKey:@"member1"]);
+        
+        Users* tempUser = [self getUserrsWithID:[members objectForKey:@"member1"]];
+            
+            NSString *profilePhotoUrl = tempUser.profileImageUrl;
+            NSString *name = [NSString stringWithFormat:@"%@ %@", tempUser.firstName, tempUser.lastName];
+            
+            [chatRoomInfoDict setValue:name forKey:kFullName];
+            [chatRoomInfoDict setValue:profilePhotoUrl forKey:kProfilePhoto];
+        
+        [self addNewChatRoom:chatRoomInfoDict WithID:chatRoomKey Members:tempUser];
+        
+    } withCancelBlock:nil];
+    
+}
+
+- (void) addNewChatRoom:(NSDictionary*)userInfo WithID:(NSString*)roomID  Members:(Users*)user
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ChatRooms" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"charRoomID == %@",roomID]];
+    NSError *error = nil;
+    NSMutableArray* findUserArray = [NSMutableArray arrayWithArray:[self.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
+    ChatRooms* rooms;
+    if (findUserArray.count>0) {
+        rooms = [findUserArray lastObject];
+    }
+    else
+    {
+        rooms = [NSEntityDescription insertNewObjectForEntityForName:@"ChatRooms" inManagedObjectContext:self.managedObjectContext];
+        
+    }
+    [rooms setMembers:user];
+    [rooms setValue:roomID forKey:@"charRoomID"];
+    for (NSString* keys in [userInfo allKeys]) {
+        @try {
+            [rooms setValue:[userInfo objectForKey:keys] forKey:keys];
+        } @catch (NSException *exception) {
+            NSLog(@"ERROR:%@ /n key:%@",exception,keys);
+        } @finally {
+            ///
+        }
+    }
+    NSLog(@"ChatRooms ADD OK");
+    [self saveContext];
+}
+
+-(void)listenForChatsChildRemoved {
+    
+    [[[[self.firdatabase child:kUserChats] child:MY_USER.userID] child:kChats] observeEventType:FIRDataEventTypeChildRemoved withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        NSString *chatRoomKey = snapshot.key;
+        
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"ChatRooms" inManagedObjectContext:self.managedObjectContext];
+        [fetchRequest setEntity:entity];
+        
+        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"charRoomID == %@",chatRoomKey]];
+        NSError *error = nil;
+        NSMutableArray* findUserArray = [NSMutableArray arrayWithArray:[self.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
+        ChatRooms* rooms;
+        if (findUserArray.count>0) {
+            rooms = [findUserArray lastObject];
+            [self.managedObjectContext deleteObject:rooms];
+        }
+        
+    } withCancelBlock:nil];
+    
+}
+
+-(void)listenForChatsChildChanged {
+    
+    //THIS PART CRASHES!!!
+    [[[[self.firdatabase child:kUserChats] child:MY_USER.userID] child:kChats] observeEventType:FIRDataEventTypeChildChanged withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        
+        NSMutableDictionary *chatRoomInfoDict = snapshot.value;
+        NSDictionary *members = [snapshot.value objectForKey:kMembers];
+        NSString *chatRoomKey = snapshot.key;
+        Users* tempUser = [self getUserrsWithID:[members objectForKey:@"member1"]];
+        [self addNewChatRoom:chatRoomInfoDict WithID:chatRoomKey Members:tempUser];
+        
+    } withCancelBlock:nil];
+    
+}
+//
+//-(void)listenForChatsChildMoved {
+//    
+//    [[[[self.firdatabase child:kUserChats] child:MY_USER.userID] child:kChats] observeEventType:FIRDataEventTypeChildMoved withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+//        
+//        //        NSLog(@"moved: %@", snapshot.value);
+//        
+//        NSMutableDictionary *chatRoomInfoDict = snapshot.value;
+//        NSDictionary *members = [snapshot.value objectForKey:kMembers];
+//        NSString *chatRoomKey = snapshot.key;
+//        
+//        FIRDatabaseReference *userInfoRef = [[self.firdatabase child:kUsers] child:[members objectForKey:@"member1"]];
+//        [userInfoRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+//            
+//            NSString *profilePhotoUrl = [snapshot.value objectForKey:kProfilePhoto];
+//            NSString *name = [NSString stringWithFormat:@"%@ %@", [snapshot.value objectForKey:kFirstName], [snapshot.value objectForKey:kLastName]];
+//            
+//            [chatRoomInfoDict setValue:name forKey:kFullName];
+//            [chatRoomInfoDict setValue:profilePhotoUrl forKey:kProfilePhoto];
+//            
+////            if ([[chatRoomInfoDict objectForKey:kType] integerValue] == 0) {
+////                NSUInteger index = [self.recentChatRoomKeyArray indexOfObject:chatRoomKey];
+////                
+////                if (index != NSNotFound) {
+////                    NSDictionary *objectAtIndex = [self.recentChatArray objectAtIndex:index];
+////                    [self.recentChatArray removeObjectAtIndex:index];
+////                    [self.recentChatArray insertObject:objectAtIndex atIndex:0];
+////                    NSString *roomKeyAtIndex = [self.recentChatRoomKeyArray objectAtIndex:index];
+////                    [self.recentChatRoomKeyArray removeObjectAtIndex:index];
+////                    [self.recentChatRoomKeyArray insertObject:roomKeyAtIndex atIndex:0];
+////                }
+////            }
+////            
+////            dispatch_async(dispatch_get_main_queue(), ^{
+////                [self.tableView reloadData];
+////            });
+//            
+//        } withCancelBlock:nil];
+//        
+//    } withCancelBlock:nil];
+//    
+//}
 @end

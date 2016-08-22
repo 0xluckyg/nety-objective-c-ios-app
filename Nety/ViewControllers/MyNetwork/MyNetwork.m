@@ -252,7 +252,7 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
 -(void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index
 {
     FIRDatabaseReference* firdatabase = [[FIRDatabase database] reference];
-    Users *user = [[self fetchedResultsController] objectAtIndexPath:[NSIndexPath indexPathForRow:index-1 inSection:0]];
+    Users *user = [[self fetchedResultsController] objectAtIndexPath:[self.table indexPathForCell:cell]];
     
     NSString *userID = MY_API.myUser.userID;
     NSString *otherUserID = user.userID;

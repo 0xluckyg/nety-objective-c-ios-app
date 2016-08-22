@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15G31" minimumToolsVersion="Xcode 7.0">
+    <entity name="ChatRooms" representedClassName="ChatRooms" syncable="YES">
+        <attribute name="charRoomID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fullName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="online" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="profileImageUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="recentMessage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="unread" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="updateTime" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="members" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Users" syncable="YES"/>
+    </entity>
     <entity name="Experiences" representedClassName="Experiences" syncable="YES">
         <attribute name="descript" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="endDate" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -21,7 +32,8 @@
         <relationship name="experiences" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Experiences" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Users" positionX="-5661" positionY="-472" width="128" height="223"/>
-        <element name="Experiences" positionX="-5447" positionY="-477" width="128" height="103"/>
+        <element name="Experiences" positionX="-5438" positionY="-396" width="128" height="103"/>
+        <element name="Users" positionX="-5661" positionY="-511" width="128" height="223"/>
+        <element name="ChatRooms" positionX="-5438" positionY="-621" width="128" height="178"/>
     </elements>
 </model>

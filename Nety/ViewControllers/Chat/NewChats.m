@@ -10,12 +10,15 @@
 
 #import <SDWebImage/UIImageView+WebCache.h>
 
+#import "ChatRooms.h"
+
 @interface NewChats ()
 
 @end
 
 @implementation NewChats
 
+@synthesize fetchedResultsController = _fetchedResultsController;
 
 #pragma mark - View Load
 //---------------------------------------------------------
@@ -24,6 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     [self initializeSettings];
     [self initializeDesign];
     [self initializeUsers];
@@ -38,14 +42,13 @@
 
 
 - (void)initializeSettings {
-    self.recentChatArray = [[NSMutableArray alloc] init];
-    self.recentChatRoomKeyArray = [[NSMutableArray alloc] init];
+
 }
 
 - (void)initializeDesign {
     
     //No separator
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.table.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     // UIPrinciples class from Util folder
     self.UIPrinciple = [[UIPrinciples alloc] init];
@@ -53,81 +56,108 @@
 
 
 - (void)initializeUsers {
-    
-    self.firdatabase = [[FIRDatabase database] reference];
-    self.chatRoomsRef = [[[[self.firdatabase child:kUserChats] child:MY_USER.userID] child:kChats] queryOrderedByChild:kUpdateTime];
-    
-    [self listenForChildAdded];
-    [self listenForChildRemoved];
-    [self listenForChildChanged];
-    [self listenForChildMoved];
+
 }
+
+- (NSFetchedResultsController *)fetchedResultsController
+{
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    // Edit the entity name as appropriate.
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ChatRooms" inManagedObjectContext:MY_API.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"type == NO"];
+    [fetchRequest setPredicate:predicate];
+    
+    // Set the batch size to a suitable number.
+    [fetchRequest setFetchBatchSize:10];
+    
+    // Edit the sort key as appropriate.
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"charRoomID" ascending:YES];
+    
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    // Edit the section name key path and cache name if appropriate.
+    // nil for section name key path means "no sections".
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:MY_API.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    aFetchedResultsController.delegate = self;
+    self.fetchedResultsController = aFetchedResultsController;
+    
+    NSError *error = nil;
+    if (![self.fetchedResultsController performFetch:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    
+    return _fetchedResultsController;
+}
+
 
 #pragma mark - Protocols and Delegates
 //---------------------------------------------------------
 
-
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    return [self.recentChatArray count];
-
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     
     //Configure cell
     ChatCell *chatCell = [tableView dequeueReusableCellWithIdentifier:@"ChatCell" forIndexPath:indexPath];
-    int row = (int)[indexPath row];
     
     //Setting cell data as recent chats
-    userDataDictionary = [self.recentChatArray objectAtIndex:row];
+    ChatRooms* chat = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+   
+    [self configureCell:chatCell withObject:chat];
     
+    return chatCell;
+}
+
+- (void)configureCell:(ChatCell*)cell withObject:(ChatRooms*)object
+{
     //Set images
-    chatCell.chatUserImage.image = [UIImage imageNamed: kDefaultUserLogoName];
-    NSString *photoUrl = [userDataDictionary objectForKey:kProfilePhoto];
+    cell.chatUserImage.image = [UIImage imageNamed: kDefaultUserLogoName];
+    NSString *photoUrl = object.profileImageUrl;
     
     //If image is not NetyBlueLogo, start downloading and caching the image
     if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
         NSURL *profileImageUrl = [NSURL URLWithString:photoUrl];
         //[self loadAndCacheImage:chatCell photoUrl:profileImageUrl cache:self.imageCache];
-        [chatCell.chatUserImage sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
+        [cell.chatUserImage sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
     }
     
     //Set name
-    chatCell.chatUserName.text = [userDataDictionary objectForKey:kFullName];
+    cell.chatUserName.text = object.fullName;
     
     //Set notification
-    if ([[userDataDictionary objectForKey:kUnread] integerValue] == 0) {
-        chatCell.chatNotificationView.backgroundColor = [UIColor clearColor];
-        chatCell.chatNotificationLabel.text = @"";
+    if ([object.unread integerValue] == 0) {
+        cell.chatNotificationView.backgroundColor = [UIColor clearColor];
+        cell.chatNotificationLabel.text = @"";
     } else {
-        chatCell.chatNotificationView.backgroundColor = self.UIPrinciple.netyBlue;
-        chatCell.chatNotificationLabel.text = [NSString stringWithFormat:@"%@", [userDataDictionary objectForKey:kUnread]];
-        NSLog(@"Unread: %@", [userDataDictionary objectForKey:kUnread]);
+        cell.chatNotificationView.backgroundColor = self.UIPrinciple.netyBlue;
+        cell.chatNotificationLabel.text = [NSString stringWithFormat:@"%d", [object.unread integerValue]];
     }
     
     //Set description
-    NSString *descriptionText = [userDataDictionary objectForKey:kRecentMessage];
-    chatCell.chatDescription.text = descriptionText;
+    NSString *descriptionText = object.recentMessage;
+    cell.chatDescription.text = descriptionText;
     
     //Set date
-    double timeSince1970Double = [[userDataDictionary objectForKey:kUpdateTime] doubleValue] * -1;
+    double timeSince1970Double = [object.updateTime doubleValue] * -1;
     NSDate *messageDate = [self convertDoubleToDate:timeSince1970Double];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateStyle = NSDateFormatterShortStyle;
     dateFormatter.timeStyle = NSDateFormatterShortStyle;
     dateFormatter.doesRelativeDateFormatting = YES;
     NSString *dateFormat = [dateFormatter stringFromDate:messageDate];
-    chatCell.chatTime.text = dateFormat;
+    cell.chatTime.text = dateFormat;
     
     //SWTableViewCell configuration
     NSMutableArray *chatRightUtilityButtons = [[NSMutableArray alloc] init];
-
-        
+    
+    
     [chatRightUtilityButtons sw_addUtilityButtonWithColor:
      self.UIPrinciple.netyGray
                                                     title:@"Block"];
@@ -138,24 +168,23 @@
     [chatRightUtilityButtons sw_addUtilityButtonWithColor:
      self.UIPrinciple.netyRed
                                                     title:@"Leave"];
-        
     
-    chatCell.rightUtilityButtons = chatRightUtilityButtons;
-    chatCell.delegate = self;
     
-    return chatCell;
+    cell.rightUtilityButtons = chatRightUtilityButtons;
+    cell.delegate = self;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UIStoryboard *messagesStoryboard = [UIStoryboard storyboardWithName:@"Messages" bundle:nil];
     Messages *messagesVC = [messagesStoryboard instantiateViewControllerWithIdentifier:@"Messages"];
-        
-    messagesVC.chatroomID = [self.recentChatRoomKeyArray objectAtIndex:indexPath.row];
-    messagesVC.selectedUserID = [[[self.recentChatArray objectAtIndex:indexPath.row] objectForKey:kMembers] objectForKey:@"member1"];
-    messagesVC.selectedUserProfileImageString = [[self.recentChatArray objectAtIndex:indexPath.row] objectForKey:kProfilePhoto];
-    messagesVC.selectedUserName = [[self.recentChatArray objectAtIndex:indexPath.row] objectForKey:kFullName];
     
+    ChatRooms* chat = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+//    messagesVC.chatroomID = [self.recentChatRoomKeyArray objectAtIndex:indexPath.row];
+//    messagesVC.selectedUserID = [[[self.recentChatArray objectAtIndex:indexPath.row] objectForKey:kMembers] objectForKey:@"member1"];
+//    messagesVC.selectedUserProfileImageString = [[self.recentChatArray objectAtIndex:indexPath.row] objectForKey:kProfilePhoto];
+//    messagesVC.selectedUserName = [[self.recentChatArray objectAtIndex:indexPath.row] objectForKey:kFullName];
+//    
     [self.delegateFromNewChats pushViewControllerThroughProtocolFromNewChats:messagesVC];
     
     
@@ -167,6 +196,12 @@
 //Actions when right swipe buttons are tapped
 -(void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
     
+    ChatRooms* chat = [[self fetchedResultsController] objectAtIndexPath:[self.table indexPathForCell:cell]];
+    FIRDatabaseReference *firdatabase = [[FIRDatabase database] reference] ;
+    
+    NSString *userID = MY_USER.userID;
+    NSString *roomID = chat.charRoomID;
+    NSString *selectedUserID = chat.members.userID;
     //NEW
     switch (index) {
         case 0: {
@@ -174,23 +209,19 @@
             UIAlertAction *cont = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                 
                 //BLOCK
-                NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
-                NSString *userID = MY_USER.userID;
-                NSString *roomID = [self.recentChatRoomKeyArray objectAtIndex:cellIndexPath.row];
-                NSString *selectedUserID = [[[self.recentChatArray objectAtIndex:cellIndexPath.row] objectForKey:kMembers] objectForKey:@"member1"];
                 
                 //Remove
-                FIRDatabaseReference *selectedUserChatRoomsRef = [[[self.firdatabase child:kUserChats] child:selectedUserID] child:kChats];
+                FIRDatabaseReference *selectedUserChatRoomsRef = [[[firdatabase child:kUserChats] child:selectedUserID] child:kChats];
                 [[selectedUserChatRoomsRef child:roomID] removeValue];
                 
-                FIRDatabaseReference *userChatRoomsRef = [[[self.firdatabase child:kUserChats] child:MY_USER.userID] child:kChats] ;
+                FIRDatabaseReference *userChatRoomsRef = [[[firdatabase child:kUserChats] child:MY_USER.userID] child:kChats] ;
                 [[userChatRoomsRef child:roomID] removeValue];
                 
-                FIRDatabaseReference *roomRef = [self.firdatabase child:kChats];
+                FIRDatabaseReference *roomRef = [firdatabase child:kChats];
                 [[roomRef child:roomID] removeValue];
                 
                 //Adding to UserDetails
-                FIRDatabaseReference *userDetailsRef = [[[self.firdatabase child:kUserDetails] child:userID] child:kBlockedUsers];
+                FIRDatabaseReference *userDetailsRef = [[[firdatabase child:kUserDetails] child:userID] child:kBlockedUsers];
                 [userDetailsRef setValue:@{selectedUserID:@0}];
                 
             }];
@@ -207,26 +238,19 @@
             
             //ADD
             
-            NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+            FIRDatabaseReference *userChatRoomRef = [[[firdatabase child:kUserChats] child:userID] child:kChats];
             
-            NSString *userID = MY_USER.userID;
-            NSString *roomID = [self.recentChatRoomKeyArray objectAtIndex:cellIndexPath.row];
+//            NSMutableDictionary *chatRoomItem = [recentChatArray objectAtIndex:cellIndexPath.row];
+//            [chatRoomItem setValue:@1 forKey:kType];
+//            
+            [[[userChatRoomRef child:roomID] child:kType]setValue:@1];
             
-            FIRDatabaseReference *userChatRoomRef = [[[self.firdatabase child:kUserChats] child:userID] child:kChats];
             
-            NSMutableDictionary *chatRoomItem = [self.recentChatArray objectAtIndex:cellIndexPath.row];
-            [chatRoomItem setValue:@1 forKey:kType];
-            
-            [[userChatRoomRef child:roomID] removeValue];
-            
-            [[userChatRoomRef child:roomID] setValue:chatRoomItem];
-            
-            NSLog(@"%@", chatRoomItem);
+//            NSLog(@"%@", chatRoomItem);
             
             //Adding to UserDetails
-            NSString *selectedUserID = [[[self.recentChatArray objectAtIndex:cellIndexPath.row] objectForKey:kMembers] objectForKey:@"member1"];
             
-            FIRDatabaseReference *userDetailsRef = [[[self.firdatabase child:kUserDetails] child:userID] child:kAddedUsers];
+            FIRDatabaseReference *userDetailsRef = [[[firdatabase child:kUserDetails] child:userID] child:kAddedUsers];
             [userDetailsRef setValue:@{selectedUserID:@0}];
             
             break;
@@ -236,18 +260,14 @@
             UIAlertAction *cont = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                 
                 //DELETE
-                NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
-                
-                NSString *selectedUserID = [[[self.recentChatArray objectAtIndex:cellIndexPath.row] objectForKey:kMembers] objectForKey:@"member1"];
-                NSString *roomID = [self.recentChatRoomKeyArray objectAtIndex:cellIndexPath.row];
-                
-                FIRDatabaseReference *selectedUserChatRoomsRef = [[[self.firdatabase child:kUserChats] child:selectedUserID] child:kChats];
+
+                FIRDatabaseReference *selectedUserChatRoomsRef = [[[firdatabase child:kUserChats] child:selectedUserID] child:kChats];
                 [[selectedUserChatRoomsRef child:roomID] removeValue];
                 
-                FIRDatabaseReference *userChatRoomsRef = [[[self.firdatabase child:kUserChats] child:MY_USER.userID] child:kChats] ;
+                FIRDatabaseReference *userChatRoomsRef = [[[firdatabase child:kUserChats] child:MY_USER.userID] child:kChats] ;
                 [[userChatRoomsRef child:roomID] removeValue];
                 
-                FIRDatabaseReference *roomRef = [self.firdatabase child:kChats];
+                FIRDatabaseReference *roomRef = [firdatabase child:kChats];
                 [[roomRef child:roomID] removeValue];
                 
             }];
@@ -279,7 +299,6 @@
 
 - (IBAction)oldNewSegmentedAction:(id)sender {
     
-    [self.tableView reloadData];
     
 }
 
@@ -292,156 +311,11 @@
 - (void)viewWillDisappear:(BOOL)animated {
     //    [self.chatRoomsRef removeAllObservers];
     
-    [self.tableView reloadData];
 }
 
 
 #pragma mark - Custom methods
 //---------------------------------------------------------
-
--(void)listenForChildAdded {
-    
-    [self.chatRoomsRef observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-        
-        NSMutableDictionary *chatRoomInfoDict = snapshot.value;
-        NSDictionary *members = [snapshot.value objectForKey:kMembers];
-        NSString *chatRoomKey = snapshot.key;
-        
-        NSLog(@"Got snapchat: %@", snapshot.value);
-        NSLog(@"Got you: %@", [members objectForKey:@"member1"]);
-        
-        FIRDatabaseReference *userInfoRef = [[self.firdatabase child:kUsers] child:[members objectForKey:@"member1"]];
-        [userInfoRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-            
-            NSString *profilePhotoUrl = [snapshot.value objectForKey:kProfilePhoto];
-            NSString *name = [NSString stringWithFormat:@"%@ %@", [snapshot.value objectForKey:kFirstName], [snapshot.value objectForKey:kLastName]];
-            
-            [chatRoomInfoDict setValue:name forKey:kFullName];
-            [chatRoomInfoDict setValue:profilePhotoUrl forKey:kProfilePhoto];
-        
-            if ([[chatRoomInfoDict objectForKey:kType] integerValue] == 0) {
-                
-                [self.recentChatArray addObject:chatRoomInfoDict];
-                [self.recentChatRoomKeyArray addObject:chatRoomKey];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.tableView reloadData];
-                });
-                
-                NSLog(@"dict value: %@", chatRoomInfoDict);
-            }
-            
-        } withCancelBlock:nil];
-        
-    } withCancelBlock:nil];
-    
-}
-
--(void)listenForChildRemoved {
-    
-    [self.chatRoomsRef observeEventType:FIRDataEventTypeChildRemoved withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-        
-        NSMutableDictionary *chatRoomInfoDict = snapshot.value;
-        NSString *chatRoomKey = snapshot.key;
-        
-        if ([[chatRoomInfoDict objectForKey:kType] integerValue] == 0) {
-            NSUInteger index = [self.recentChatRoomKeyArray indexOfObject:chatRoomKey];
-            
-            if (index != NSNotFound) {
-                [self.recentChatArray removeObjectAtIndex:index];
-                [self.recentChatRoomKeyArray removeObjectAtIndex:index];
-                [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]]
-                                          withRowAnimation:UITableViewRowAnimationAutomatic];
-                
-            }
-        }
-        
-    } withCancelBlock:nil];
-    
-}
-
--(void)listenForChildChanged {
-    
-    //THIS PART CRASHES!!!
-    [self.chatRoomsRef observeEventType:FIRDataEventTypeChildChanged withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-        
-        NSMutableDictionary *chatRoomInfoDict = snapshot.value;
-        NSDictionary *members = [snapshot.value objectForKey:kMembers];
-        NSString *chatRoomKey = snapshot.key;
-        
-        //        NSLog(@"Got snapchat 2: %@", snapshot.value);
-        //        NSLog(@"Got you 2: %@", [members objectForKey:@"member1"]);
-        
-        FIRDatabaseReference *userInfoRef = [[self.firdatabase child:kUsers] child:[members objectForKey:@"member1"]];
-        [userInfoRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-            
-            NSString *profilePhotoUrl = [snapshot.value objectForKey:kProfilePhoto];
-            NSString *name = [NSString stringWithFormat:@"%@ %@", [snapshot.value objectForKey:kFirstName], [snapshot.value objectForKey:kLastName]];
-            
-            [chatRoomInfoDict setValue:name forKey:kFullName];
-            [chatRoomInfoDict setValue:profilePhotoUrl forKey:kProfilePhoto];
-            
-            if ([[chatRoomInfoDict objectForKey:kType] integerValue] == 0) {
-                
-                NSUInteger index = [self.recentChatRoomKeyArray indexOfObject:chatRoomKey];
-                
-                if (index != NSNotFound) {
-                    [self.recentChatArray replaceObjectAtIndex:index withObject:chatRoomInfoDict];
-                    [self.recentChatRoomKeyArray replaceObjectAtIndex:index withObject:chatRoomKey];
-                }
-                
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
-            });
-            
-        } withCancelBlock:nil];
-        
-    } withCancelBlock:nil];
-    
-}
-
--(void)listenForChildMoved {
-    
-    [self.chatRoomsRef observeEventType:FIRDataEventTypeChildMoved withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-        
-        //        NSLog(@"moved: %@", snapshot.value);
-        
-        NSMutableDictionary *chatRoomInfoDict = snapshot.value;
-        NSDictionary *members = [snapshot.value objectForKey:kMembers];
-        NSString *chatRoomKey = snapshot.key;
-        
-        FIRDatabaseReference *userInfoRef = [[self.firdatabase child:kUsers] child:[members objectForKey:@"member1"]];
-        [userInfoRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-            
-            NSString *profilePhotoUrl = [snapshot.value objectForKey:kProfilePhoto];
-            NSString *name = [NSString stringWithFormat:@"%@ %@", [snapshot.value objectForKey:kFirstName], [snapshot.value objectForKey:kLastName]];
-            
-            [chatRoomInfoDict setValue:name forKey:kFullName];
-            [chatRoomInfoDict setValue:profilePhotoUrl forKey:kProfilePhoto];
-            
-            if ([[chatRoomInfoDict objectForKey:kType] integerValue] == 0) {
-                NSUInteger index = [self.recentChatRoomKeyArray indexOfObject:chatRoomKey];
-                
-                if (index != NSNotFound) {
-                    NSDictionary *objectAtIndex = [self.recentChatArray objectAtIndex:index];
-                    [self.recentChatArray removeObjectAtIndex:index];
-                    [self.recentChatArray insertObject:objectAtIndex atIndex:0];
-                    NSString *roomKeyAtIndex = [self.recentChatRoomKeyArray objectAtIndex:index];
-                    [self.recentChatRoomKeyArray removeObjectAtIndex:index];
-                    [self.recentChatRoomKeyArray insertObject:roomKeyAtIndex atIndex:0];
-                }
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
-            });
-            
-        } withCancelBlock:nil];
-        
-    } withCancelBlock:nil];
-    
-}
 
 - (NSDate *)convertDoubleToDate: (double)timeIntervalDouble {
     NSNumber *timeIntervalInNumber = [NSNumber numberWithInt:timeIntervalDouble];

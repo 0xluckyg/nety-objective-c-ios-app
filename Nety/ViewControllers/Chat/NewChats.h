@@ -12,6 +12,7 @@
 #import "UIPrinciples.h"
 #import "Messages.h"
 #import "ChatCell.h"
+#import "N_CoreDataTableViewController.h"
 
 @protocol pushViewControllerProtocolFromNewChats <NSObject>
 
@@ -21,20 +22,11 @@
 
 @import Firebase;
 
-@interface NewChats : UIViewController <UITableViewDataSource, UITableViewDelegate, SWTableViewCellDelegate> {
-    
-    NSDictionary *userDataDictionary;
-    bool userAddedAsFriend;
+@interface NewChats : N_CoreDataTableViewController <SWTableViewCellDelegate>
 
-}
 
 
 //VARIABLES----------------------------------------
-
-
-@property (strong, nonatomic) NSMutableArray *recentChatArray;
-
-@property (strong, nonatomic) NSMutableArray *recentChatRoomKeyArray;
 
 @property (weak, nonatomic) id<pushViewControllerProtocolFromNewChats>delegateFromNewChats;
 
@@ -48,15 +40,8 @@
 //LIB CLASSES----------------------------------------
 
 
-@property (strong, nonatomic) FIRDatabaseReference *firdatabase;
-
-@property (strong, nonatomic) FIRDatabaseQuery *chatRoomsRef;
-
-
 //IBOUTLETS----------------------------------------
 
-
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 //IBACTIONS----------------------------------------
 
