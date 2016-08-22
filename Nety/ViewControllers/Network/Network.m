@@ -100,8 +100,7 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
     
     [self calculateSliderDistanceValue];
     
-    navItem.title = @"";
-    self.title = [NSString stringWithFormat:@"%@ Near Me", [self calculateDistanceToDescription]];
+    navItem.title = @"Near Me";
     
     //Style navbar
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -112,8 +111,7 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
     
     [self.navigationController.navigationBar setItems:@[navItem]];
     
-    [self.searchBar setBackgroundImage:[[UIImage alloc]init]];
-    [self.searchBarView setBackgroundColor:self.UIPrinciple.netyBlue];
+    [self.searchBar setBarTintColor:[UIColor whiteColor]];
     
     self.navigationItem.title = [NSString stringWithFormat:@"%@ Near Me", [self calculateDistanceToDescription]];
     

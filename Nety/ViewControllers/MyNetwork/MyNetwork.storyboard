@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="gIA-Wb-DTE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="gIA-Wb-DTE">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -19,32 +19,21 @@
                         <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jHz-1u-AaC">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                <subviews>
-                                    <searchBar contentMode="redraw" searchBarStyle="prominent" text="" placeholder="Search your chats!" translatesAutoresizingMaskIntoConstraints="NO" id="xTf-kD-6Ae">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                        <color key="tintColor" red="0.43521448759999998" green="0.56477015090000005" blue="0.90839741490000003" alpha="1" colorSpace="calibratedRGB"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="jIs-UK-NWL" id="k5F-La-VuF"/>
-                                        </connections>
-                                    </searchBar>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="xTf-kD-6Ae" secondAttribute="trailing" id="W5B-XJ-AY4"/>
-                                    <constraint firstItem="xTf-kD-6Ae" firstAttribute="top" secondItem="jHz-1u-AaC" secondAttribute="top" id="WnZ-RA-za3"/>
-                                    <constraint firstAttribute="bottom" secondItem="xTf-kD-6Ae" secondAttribute="bottom" id="myU-or-EV4"/>
-                                    <constraint firstItem="xTf-kD-6Ae" firstAttribute="leading" secondItem="jHz-1u-AaC" secondAttribute="leading" id="ukO-v4-2w9"/>
-                                </constraints>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vex-kh-xZF">
-                                <rect key="frame" x="0.0" y="44" width="414" height="628"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="prominent" text="" placeholder="Search your chats!" id="xTf-kD-6Ae">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="tintColor" red="0.43521448759999998" green="0.56477015090000005" blue="0.90839741490000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="jIs-UK-NWL" id="k5F-La-VuF"/>
+                                    </connections>
+                                </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyNetworkCell" rowHeight="75" id="zIg-HZ-xIR" customClass="MyNetworkCell">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="75"/>
+                                        <rect key="frame" x="0.0" y="72" width="414" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zIg-HZ-xIR" id="p9W-g7-qIt">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="74.5"/>
@@ -107,24 +96,15 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Vex-kh-xZF" firstAttribute="leading" secondItem="cjc-bb-ExB" secondAttribute="leading" id="4WI-qN-lUT"/>
-                            <constraint firstItem="Vex-kh-xZF" firstAttribute="top" secondItem="jHz-1u-AaC" secondAttribute="bottom" id="AJg-h2-MXl"/>
-                            <constraint firstItem="jHz-1u-AaC" firstAttribute="top" secondItem="Neo-U7-ega" secondAttribute="bottom" id="CMM-nL-HHV"/>
-                            <constraint firstItem="jHz-1u-AaC" firstAttribute="leading" secondItem="cjc-bb-ExB" secondAttribute="leading" id="EYn-qG-co2"/>
-                            <constraint firstItem="Vex-kh-xZF" firstAttribute="top" secondItem="jHz-1u-AaC" secondAttribute="bottom" id="KMR-Wb-smz"/>
                             <constraint firstAttribute="trailing" secondItem="Vex-kh-xZF" secondAttribute="trailing" id="Mjd-c7-7Le"/>
                             <constraint firstItem="ZwW-Jb-H6M" firstAttribute="top" secondItem="Vex-kh-xZF" secondAttribute="bottom" id="NIt-mK-y1P"/>
-                            <constraint firstAttribute="trailing" secondItem="jHz-1u-AaC" secondAttribute="trailing" id="Pdg-lQ-LGj"/>
-                            <constraint firstItem="jHz-1u-AaC" firstAttribute="leading" secondItem="cjc-bb-ExB" secondAttribute="leading" id="eZe-Gx-J80"/>
-                            <constraint firstAttribute="trailing" secondItem="jHz-1u-AaC" secondAttribute="trailing" id="kyd-Dc-UTG"/>
                             <constraint firstItem="Vex-kh-xZF" firstAttribute="leading" secondItem="cjc-bb-ExB" secondAttribute="leading" id="mI2-VJ-dI8"/>
                             <constraint firstAttribute="trailing" secondItem="Vex-kh-xZF" secondAttribute="trailing" id="wE4-22-d43"/>
+                            <constraint firstItem="Vex-kh-xZF" firstAttribute="top" secondItem="Neo-U7-ega" secondAttribute="bottom" id="wcd-Nk-GQv"/>
                             <constraint firstItem="ZwW-Jb-H6M" firstAttribute="top" secondItem="Vex-kh-xZF" secondAttribute="bottom" id="x2q-Yy-qGm"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="eZe-Gx-J80"/>
-                                <exclude reference="kyd-Dc-UTG"/>
-                                <exclude reference="KMR-Wb-smz"/>
                                 <exclude reference="Mjd-c7-7Le"/>
                                 <exclude reference="mI2-VJ-dI8"/>
                                 <exclude reference="NIt-mK-y1P"/>
@@ -135,7 +115,6 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="searchBar" destination="xTf-kD-6Ae" id="wGp-Co-qNi"/>
-                        <outlet property="searchBarView" destination="jHz-1u-AaC" id="Xa3-Zv-PtB"/>
                         <outlet property="table" destination="Vex-kh-xZF" id="Pbh-LE-L66"/>
                     </connections>
                 </viewController>

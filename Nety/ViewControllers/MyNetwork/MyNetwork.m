@@ -82,13 +82,11 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
     [self.navigationController.navigationBar setTitleTextAttributes:attributes];
     
     [self.navigationController.navigationBar setItems:@[navItem]];
-    [self.navigationController.navigationBar setBarTintColor:self.UIPrinciple.netyBlue];
-    [self.navigationController.navigationBar setBackgroundColor:self.UIPrinciple.netyBlue];
+
     
     
     //Set searchbar
-    [self.searchBar setBackgroundImage:[[UIImage alloc]init]];
-    [self.searchBarView setBackgroundColor:self.UIPrinciple.netyBlue];
+    [self.searchBar setBarTintColor:[UIColor whiteColor]];
 }
 
 - (void) initializeUsers {

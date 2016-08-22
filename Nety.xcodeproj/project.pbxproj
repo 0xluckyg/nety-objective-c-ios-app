@@ -14,6 +14,9 @@
 		67391DF21D27FBC400A50C03 /* SignupProcess2.m in Sources */ = {isa = PBXBuildFile; fileRef = 67391DF11D27FBC400A50C03 /* SignupProcess2.m */; };
 		67391DF51D27FBD800A50C03 /* SignupProcessExperienceDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 67391DF41D27FBD800A50C03 /* SignupProcessExperienceDetail.m */; };
 		67391DFB1D280A9600A50C03 /* SignupProcessExperienceDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 67391DFA1D280A9600A50C03 /* SignupProcessExperienceDetailCell.m */; };
+		673E58701D6AAE6400D28F5B /* NewChats.m in Sources */ = {isa = PBXBuildFile; fileRef = 673E586F1D6AAE6400D28F5B /* NewChats.m */; };
+		673E58731D6AAE7900D28F5B /* MyChats.m in Sources */ = {isa = PBXBuildFile; fileRef = 673E58721D6AAE7900D28F5B /* MyChats.m */; };
+		673E58761D6AAFA300D28F5B /* CAPSPageMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 673E58751D6AAFA300D28F5B /* CAPSPageMenu.m */; };
 		674918EA1D2D8ACE0015EFE9 /* SignupProcess3.m in Sources */ = {isa = PBXBuildFile; fileRef = 674918E91D2D8ACE0015EFE9 /* SignupProcess3.m */; };
 		6755E0711D63EA81006FA4A9 /* CustomSlider.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6755E0701D63EA81006FA4A9 /* CustomSlider.xib */; };
 		67602F501D2EC75F00DA2F3A /* Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = 67602F4F1D2EC75F00DA2F3A /* Messages.m */; };
@@ -82,6 +85,12 @@
 		67391DF41D27FBD800A50C03 /* SignupProcessExperienceDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupProcessExperienceDetail.m; sourceTree = "<group>"; };
 		67391DF91D280A9600A50C03 /* SignupProcessExperienceDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupProcessExperienceDetailCell.h; sourceTree = "<group>"; };
 		67391DFA1D280A9600A50C03 /* SignupProcessExperienceDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupProcessExperienceDetailCell.m; sourceTree = "<group>"; };
+		673E586E1D6AAE6400D28F5B /* NewChats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewChats.h; sourceTree = "<group>"; };
+		673E586F1D6AAE6400D28F5B /* NewChats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewChats.m; sourceTree = "<group>"; };
+		673E58711D6AAE7900D28F5B /* MyChats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyChats.h; sourceTree = "<group>"; };
+		673E58721D6AAE7900D28F5B /* MyChats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyChats.m; sourceTree = "<group>"; };
+		673E58741D6AAFA300D28F5B /* CAPSPageMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAPSPageMenu.h; sourceTree = "<group>"; };
+		673E58751D6AAFA300D28F5B /* CAPSPageMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAPSPageMenu.m; sourceTree = "<group>"; };
 		674918E81D2D8ACE0015EFE9 /* SignupProcess3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupProcess3.h; sourceTree = "<group>"; };
 		674918E91D2D8ACE0015EFE9 /* SignupProcess3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupProcess3.m; sourceTree = "<group>"; };
 		6755E0701D63EA81006FA4A9 /* CustomSlider.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomSlider.xib; sourceTree = "<group>"; };
@@ -364,6 +373,10 @@
 			children = (
 				67DD1AA01D17BFC300FBEA0F /* Chat.h */,
 				67DD1AA11D17BFC300FBEA0F /* Chat.m */,
+				673E586E1D6AAE6400D28F5B /* NewChats.h */,
+				673E586F1D6AAE6400D28F5B /* NewChats.m */,
+				673E58711D6AAE7900D28F5B /* MyChats.h */,
+				673E58721D6AAE7900D28F5B /* MyChats.m */,
 				67DD1AA31D17BFCC00FBEA0F /* Chat.storyboard */,
 				6733390C1D20B5ED00A8009F /* ChatCell.h */,
 				6733390D1D20B5ED00A8009F /* ChatCell.m */,
@@ -422,6 +435,8 @@
 		67DD1AB01D17D3DF00FBEA0F /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				673E58741D6AAFA300D28F5B /* CAPSPageMenu.h */,
+				673E58751D6AAFA300D28F5B /* CAPSPageMenu.m */,
 				67DD1AB11D17D40D00FBEA0F /* UIPrinciples.h */,
 				67DD1AB21D17D40D00FBEA0F /* UIPrinciples.m */,
 				67B2400D1D40594600F011BB /* Constants.h */,
@@ -657,6 +672,8 @@
 				67DD1A7F1D17BEB500FBEA0F /* AppDelegate.m in Sources */,
 				67DD1A981D17BF1700FBEA0F /* Network.m in Sources */,
 				67391DF51D27FBD800A50C03 /* SignupProcessExperienceDetail.m in Sources */,
+				673E58761D6AAFA300D28F5B /* CAPSPageMenu.m in Sources */,
+				673E58701D6AAE6400D28F5B /* NewChats.m in Sources */,
 				E1E0B9281D689FA700295133 /* N_CoreDataTableViewController.m in Sources */,
 				67391DF21D27FBC400A50C03 /* SignupProcess2.m in Sources */,
 				67DD1A9D1D17BF6900FBEA0F /* MyNetwork.m in Sources */,
@@ -665,6 +682,7 @@
 				E1E0B9211D689D8600295133 /* Nety.xcdatamodeld in Sources */,
 				67D4AD621D26536000F42B7F /* MainPage.m in Sources */,
 				67DD1AB91D17E39B00FBEA0F /* NetworkData.m in Sources */,
+				673E58731D6AAE7900D28F5B /* MyChats.m in Sources */,
 				673338F71D20937C00A8009F /* MyNetworkCell.m in Sources */,
 				67391DFB1D280A9600A50C03 /* SignupProcessExperienceDetailCell.m in Sources */,
 				67DD1AAD1D17C3E600FBEA0F /* Profile.m in Sources */,

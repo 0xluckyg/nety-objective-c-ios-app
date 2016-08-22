@@ -20,7 +20,8 @@
         _netyRed = [UIColor colorWithRed:220.0f/255.0f green:68.0f/255.0f blue:55.0f/255.0f alpha:1.0f];
         _netyGray = [UIColor colorWithRed:220.0f/255.0f green:220.0f/255.0f blue:220.0f/255.0f alpha:1.0f];
         _netyTransparent = [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:0.3f];
-        _defaultGray = [UIColor colorWithRed:187.0f/255.0f green:187.0f/255.0f blue:194.0f/255.0f alpha:1.0f];
+        _defaultGray = [UIColor colorWithRed:167.0f/255.0f green:167.0f/255.0f blue:167.0f/255.0f alpha:1.0f];
+        _lightGray = [UIColor colorWithRed:236.0/255.0f green:236.0/255.0f blue:236.0/255.0f alpha:1.0f];
         _linkedInBlue = [UIColor colorWithRed:0.0/255.0f green:123.0/255.0f blue:181.0/255.0f alpha:1.0f];
         _facebookBlue = [UIColor colorWithRed:59.0/255.0f green:89.0/255.0f blue:152.0/255.0f alpha:1.0f];
         

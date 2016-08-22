@@ -50,9 +50,6 @@
 
 //IBOUTLETS----------------------------------------
 
-
-@property (weak, nonatomic) IBOutlet UIView *searchBarView;
-
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 //@property (weak, nonatomic) IBOutlet UITableView *tableView;
