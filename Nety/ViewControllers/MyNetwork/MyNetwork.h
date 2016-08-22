@@ -24,9 +24,7 @@
 //VARIABLES----------------------------------------
 
 
-@property (strong, nonatomic) NSMutableArray *userArray;
 
-@property (strong, nonatomic) NSMutableArray *userKeyArray;
 
 
 //UTIL CLASSES----------------------------------------

@@ -38,8 +38,7 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
     
     
     //If no experiences visible, show noContent header
-    if ([self.userArray count] == 0) {
-        self.userArray = [[NSMutableArray alloc] init];
+    if ([[self fetchedResultsController].fetchedObjects count] == 0) {
         
         UIImage *contentImage = [[UIImage imageNamed:@"Friend"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
@@ -49,6 +48,7 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
     } else {
         [self.UIPrinciple removeNoContent:self.noContentController];
     }
+    
     
 }
 
@@ -126,7 +126,19 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
     Users *user = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     
     [self configureCell:myNetworkCell withObject:user];
+    
+    //If no experiences visible, show noContent header
+    if ([[self fetchedResultsController].fetchedObjects count] == 0) {
         
+        UIImage *contentImage = [[UIImage imageNamed:@"Friend"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        
+        if (![self.noContentController isDescendantOfView:self.view]) {
+            [self.UIPrinciple addNoContent:self setText:myNetworkNoContentString setImage:contentImage setColor:self.UIPrinciple.netyGray noContentController:self.noContentController];
+        }
+    } else {
+        [self.UIPrinciple removeNoContent:self.noContentController];
+    }
+    
     return myNetworkCell;
 }
 
@@ -164,16 +176,6 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
         
     }
     
-    //Set selection color to blue
-    UIView *bgColorView = [[UIView alloc] init];
-    bgColorView.backgroundColor = self.UIPrinciple.netyBlue;
-    [cell setSelectedBackgroundView:bgColorView];
-    //Set highlighted color to white
-    cell.myNetworkUserJob.highlightedTextColor = [UIColor whiteColor];
-    cell.myNetworkUserName.highlightedTextColor = [UIColor whiteColor];
-    cell.myNetworkUserDescription.highlightedTextColor = [UIColor whiteColor];
-    
-    
     //SWTableViewCell configuration
     NSMutableArray *myNetworkRightUtilityButtons = [[NSMutableArray alloc] init];
     
@@ -201,6 +203,8 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
         NSLog(@"animation done");
         weakSelf.tabBarController.tabBar.hidden = YES;
     }];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     [self.navigationController pushViewController:profilePage animated:YES];
     

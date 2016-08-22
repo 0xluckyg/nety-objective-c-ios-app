@@ -8,7 +8,7 @@
 
 #import "Network.h"
 
-NSString *const networkNoContentString = @"You don't have friends yet. Swipe left on your chats to add people!";
+NSString *const networkNoContentString = @"Can't find people near you. Maybe try sliding the bar!";
 
 @interface Network ()
 
@@ -172,11 +172,15 @@ NSString *const networkNoContentString = @"You don't have friends yet. Swipe lef
 #pragma mark - Protocols and Delegates
 //---------------------------------------------------------
 
+
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     //Configure cell
     NetworkCell *networkCell = [tableView dequeueReusableCellWithIdentifier:@"NetworkCell" forIndexPath:indexPath];
      Users *user = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+    
+//    networkCell.selectionStyle = select
     
     [self configureCell:networkCell withObject:user];
         
@@ -258,9 +262,13 @@ NSString *const networkNoContentString = @"You don't have friends yet. Swipe lef
         weakSelf.tabBarController.tabBar.hidden = YES;
     }];
     
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     [self.navigationController pushViewController:profilePage animated:YES];
     
 }
+
+
 
 //Hide keyboard when search button pressed
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
