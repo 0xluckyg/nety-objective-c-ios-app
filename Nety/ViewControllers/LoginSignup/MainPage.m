@@ -8,7 +8,9 @@
 
 #import "MainPage.h"
 
-@interface MainPage ()
+@interface MainPage ()<FBSDKLoginButtonDelegate>
+
+@property (weak, nonatomic) IBOutlet FBSDKLoginButton *loginButton;
 
 @end
 
@@ -22,12 +24,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    _loginButton.readPermissions =
+    @[@"public_profile", @"email", @"user_friends"];
+    [_loginButton setDelegate:self];
     [self initializeDesign];
     
 }
 
+- (void)  loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
+                error:(NSError *)error
+{
+    if (error) {
+        NSLog(@"Process error");
+    } else if (result.isCancelled) {
+        NSLog(@"Cancelled");
+    } else {
+        NSLog(@"Logged in");
+        NSLog(@"Token: %@",result.token.tokenString);
+    }
+}
 
+- (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton
+{
+    NSLog(@"LogOut");
+}
 #pragma mark - Initialization
 //---------------------------------------------------------
 

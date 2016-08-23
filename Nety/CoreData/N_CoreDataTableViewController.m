@@ -81,7 +81,7 @@
 
 - (NSFetchedResultsController *)fetchedResultsController
 {
-    return _fetchedResultsController;
+    return nil;
 }
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller

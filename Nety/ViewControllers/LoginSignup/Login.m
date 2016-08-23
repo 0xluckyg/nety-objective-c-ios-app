@@ -7,6 +7,7 @@
 //
 
 #import "Login.h"
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 @interface Login ()
 

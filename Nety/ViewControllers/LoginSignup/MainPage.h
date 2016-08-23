@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "UIPrinciples.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 @interface MainPage : UIViewController {
     NSInteger loginOrSignup;

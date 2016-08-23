@@ -8,8 +8,9 @@
 
 #import "AppDelegate.h"
 #import "UIPrinciples.h"
-
+#import <linkedin-sdk/LISDK.h>
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @interface AppDelegate ()
 
@@ -30,6 +31,7 @@
     
     [self initializeLocationManager];
     
+    [self loginLinkedIn];
     //Check if user is signed in, and move on
     [self initializeSettings];
     [self initializeLoginView];
@@ -168,6 +170,7 @@
 #pragma mark - Protocols and Delegates
 //---------------------------------------------------------
 
+#pragma mark - CLLocationManagerDelegate
 
 - (void)locationManager: (CLLocationManager *)manager
     didUpdateToLocation: (CLLocation *)newLocation
@@ -217,7 +220,7 @@
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     //whenever user moves
-    self.locationManager.distanceFilter = kCLDistanceFilterNone;    
+    self.locationManager.distanceFilter = 10;//10m
     
     [self.locationManager startUpdatingLocation];
     
@@ -225,6 +228,29 @@
     
 }
 
+- (void) loginLinkedIn
+{
+    [LISDKSessionManager createSessionWithAuth:[NSArray arrayWithObjects:LISDK_BASIC_PROFILE_PERMISSION, LISDK_EMAILADDRESS_PERMISSION, nil]
+                                         state:@"some state"
+                        showGoToAppStoreDialog:YES
+                                  successBlock:^(NSString *returnState) {
+                                      
+                                      NSLog(@"%s","success called!");
+                                      LISDKSession *session = [[LISDKSessionManager sharedInstance] session];
+                                      NSLog(@"value=%@ isvalid=%@",[session value],[session isValid] ? @"YES" : @"NO");
+                                      NSMutableString *text = [[NSMutableString alloc] initWithString:[session.accessToken description]];
+                                      [text appendString:[NSString stringWithFormat:@",state=\"%@\"",returnState]];
+                                      NSLog(@"Response label text %@",text);
+
+                                      
+                                  }
+                                    errorBlock:^(NSError *error) {
+                                        NSLog(@"%s %@","error called! ", [error description]);
+
+                                    }
+     ];
+    NSLog(@"%s","sync pressed3");
+}
 -(NSString*)returnLatLongString {
     
     NSString *str = [NSString stringWithFormat: @"lat=%@&long=%@", self.stringLatitude, self.stringLongitude];
@@ -260,5 +286,19 @@
 
 //---------------------------------------------------------
 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    
+    NSLog(@"%s url=%@","app delegate application openURL called ", [url absoluteString]);
+    if ([LISDKCallbackHandler shouldHandleUrl:url]) {
+        return [LISDKCallbackHandler application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+    } else 
+    {
+        return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                              openURL:url
+                                                    sourceApplication:sourceApplication
+                                                           annotation:annotation];
+    }
+    return YES;
+}
 
 @end

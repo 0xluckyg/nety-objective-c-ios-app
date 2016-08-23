@@ -51,6 +51,13 @@
                                             <segue destination="z0J-bM-jSS" kind="show" id="FYC-io-CBK"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FQ2-P7-kHJ" customClass="FBSDKLoginButton">
+                                        <rect key="frame" x="73" y="397" width="136" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="Afg-W0-9Tm"/>
+                                            <constraint firstAttribute="width" constant="136" id="Dfx-kR-OIQ"/>
+                                        </constraints>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.43521448759999998" green="0.56477015090000005" blue="0.90839741490000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -58,8 +65,10 @@
                                     <constraint firstItem="2lL-8E-NXk" firstAttribute="top" secondItem="XJ5-h9-g37" secondAttribute="bottom" constant="26" id="Js5-n0-ujq"/>
                                     <constraint firstItem="XJ5-h9-g37" firstAttribute="top" secondItem="Ohl-8S-SdE" secondAttribute="bottom" constant="20" id="SgR-83-pLD"/>
                                     <constraint firstAttribute="trailing" secondItem="XJ5-h9-g37" secondAttribute="trailing" constant="60" id="Xrh-ID-p27"/>
+                                    <constraint firstAttribute="bottom" secondItem="FQ2-P7-kHJ" secondAttribute="bottom" id="Xx5-52-HBN"/>
                                     <constraint firstAttribute="trailing" secondItem="2lL-8E-NXk" secondAttribute="trailing" constant="60" id="cEs-TE-o50"/>
                                     <constraint firstItem="Ohl-8S-SdE" firstAttribute="centerX" secondItem="dzw-h8-dqd" secondAttribute="centerX" id="hwk-FN-iT8"/>
+                                    <constraint firstItem="FQ2-P7-kHJ" firstAttribute="centerX" secondItem="dzw-h8-dqd" secondAttribute="centerX" id="jZs-eU-P3N"/>
                                     <constraint firstItem="Ohl-8S-SdE" firstAttribute="top" secondItem="dzw-h8-dqd" secondAttribute="top" constant="43" id="k7L-yK-I2x"/>
                                     <constraint firstAttribute="height" constant="429" id="kPo-zA-DvE"/>
                                     <constraint firstAttribute="width" constant="282" id="nyc-ae-i1i"/>
@@ -77,6 +86,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="holdingView" destination="dzw-h8-dqd" id="GYl-3D-lzd"/>
+                        <outlet property="loginButton" destination="FQ2-P7-kHJ" id="xo5-Oq-MDS"/>
                         <outlet property="loginButtonOutlet" destination="XJ5-h9-g37" id="tbf-ot-Sx7"/>
                         <outlet property="logoImage" destination="Ohl-8S-SdE" id="5vh-r1-Dlh"/>
                         <outlet property="signupButtonOutlet" destination="2lL-8E-NXk" id="tm8-vQ-bkr"/>

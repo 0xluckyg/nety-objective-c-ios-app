@@ -58,14 +58,13 @@
 		67DD1AC31D17E42D00FBEA0F /* man.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1ABE1D17E42D00FBEA0F /* man.jpg */; };
 		67DD1AC41D17E42D00FBEA0F /* water.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1ABF1D17E42D00FBEA0F /* water.jpg */; };
 		97677F0633DE3705741AEB8E /* libPods-Nety.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F5D56FDB372FC5465929EE /* libPods-Nety.a */; };
-		E163EF5A1D6AF9DF004374E3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E163EF591D6AF9DF004374E3 /* main.m */; };
-		E163EF5D1D6AF9DF004374E3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E163EF5C1D6AF9DF004374E3 /* AppDelegate.m */; };
-		E163EF601D6AF9DF004374E3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E163EF5F1D6AF9DF004374E3 /* ViewController.m */; };
-		E163EF631D6AF9DF004374E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E163EF611D6AF9DF004374E3 /* Main.storyboard */; };
-		E163EF651D6AF9DF004374E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E163EF641D6AF9DF004374E3 /* Assets.xcassets */; };
-		E163EF681D6AF9DF004374E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E163EF661D6AF9DF004374E3 /* LaunchScreen.storyboard */; };
 		E163EFB01D6B48B8004374E3 /* ChatRooms+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E163EFAD1D6B48B8004374E3 /* ChatRooms+CoreDataProperties.m */; };
 		E163EFB11D6B48B8004374E3 /* ChatRooms.m in Sources */ = {isa = PBXBuildFile; fileRef = E163EFAF1D6B48B8004374E3 /* ChatRooms.m */; };
+		E163EFB31D6C671E004374E3 /* linkedin-sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E163EFB21D6C671D004374E3 /* linkedin-sdk.framework */; };
+		E163EFC41D6C9325004374E3 /* FacebookSDKStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E163EFBA1D6C9325004374E3 /* FacebookSDKStrings.bundle */; };
+		E163EFC71D6C9325004374E3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E163EFBD1D6C9325004374E3 /* FBSDKCoreKit.framework */; };
+		E163EFC81D6C9325004374E3 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E163EFBE1D6C9325004374E3 /* FBSDKLoginKit.framework */; };
+		E163EFCC1D6C9C88004374E3 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E163EFCB1D6C9C88004374E3 /* Bolts.framework */; };
 		E1E0B9211D689D8600295133 /* Nety.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B91F1D689D8600295133 /* Nety.xcdatamodeld */; };
 		E1E0B9241D689DC800295133 /* N_API.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B9231D689DC800295133 /* N_API.m */; };
 		E1E0B9281D689FA700295133 /* N_CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B9271D689FA700295133 /* N_CoreDataTableViewController.m */; };
@@ -162,7 +161,6 @@
 		67DD1ABD1D17E42D00FBEA0F /* girl2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = girl2.jpg; sourceTree = "<group>"; };
 		67DD1ABE1D17E42D00FBEA0F /* man.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = man.jpg; sourceTree = "<group>"; };
 		67DD1ABF1D17E42D00FBEA0F /* water.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = water.jpg; sourceTree = "<group>"; };
-		E163EF561D6AF9DF004374E3 /* SedAll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SedAll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E163EF591D6AF9DF004374E3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E163EF5B1D6AF9DF004374E3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E163EF5C1D6AF9DF004374E3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -176,6 +174,11 @@
 		E163EFAD1D6B48B8004374E3 /* ChatRooms+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ChatRooms+CoreDataProperties.m"; path = "CoreData/ChatRooms+CoreDataProperties.m"; sourceTree = "<group>"; };
 		E163EFAE1D6B48B8004374E3 /* ChatRooms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatRooms.h; path = CoreData/ChatRooms.h; sourceTree = "<group>"; };
 		E163EFAF1D6B48B8004374E3 /* ChatRooms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatRooms.m; path = CoreData/ChatRooms.m; sourceTree = "<group>"; };
+		E163EFB21D6C671D004374E3 /* linkedin-sdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "linkedin-sdk.framework"; sourceTree = "<group>"; };
+		E163EFBA1D6C9325004374E3 /* FacebookSDKStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKStrings.bundle; sourceTree = "<group>"; };
+		E163EFBD1D6C9325004374E3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		E163EFBE1D6C9325004374E3 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		E163EFCB1D6C9C88004374E3 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = FacebookSDKStrings.bundle/Bolts.framework; sourceTree = "<group>"; };
 		E1E0B9201D689D8600295133 /* Nety.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Nety.xcdatamodel; sourceTree = "<group>"; };
 		E1E0B9221D689DC800295133 /* N_API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = N_API.h; path = CoreData/N_API.h; sourceTree = "<group>"; };
 		E1E0B9231D689DC800295133 /* N_API.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = N_API.m; path = CoreData/N_API.m; sourceTree = "<group>"; };
@@ -197,14 +200,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E163EFCC1D6C9C88004374E3 /* Bolts.framework in Frameworks */,
 				97677F0633DE3705741AEB8E /* libPods-Nety.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E163EF531D6AF9DF004374E3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				E163EFB31D6C671E004374E3 /* linkedin-sdk.framework in Frameworks */,
+				E163EFC71D6C9325004374E3 /* FBSDKCoreKit.framework in Frameworks */,
+				E163EFC81D6C9325004374E3 /* FBSDKLoginKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,9 +214,11 @@
 		673338F81D2098D200A8009F /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				E163EFB21D6C671D004374E3 /* linkedin-sdk.framework */,
 				67CD9C2D1D3C75E800823701 /* NoContent.xib */,
 				67CD9C2F1D3C795600823701 /* NoContent.h */,
 				67CD9C301D3C795600823701 /* NoContent.m */,
+				E163EFB61D6C9303004374E3 /* FB */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -351,7 +353,6 @@
 			isa = PBXGroup;
 			children = (
 				67DD1A771D17BEB500FBEA0F /* Nety.app */,
-				E163EF561D6AF9DF004374E3 /* SedAll.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -531,6 +532,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E163EFB61D6C9303004374E3 /* FB */ = {
+			isa = PBXGroup;
+			children = (
+				E163EFCB1D6C9C88004374E3 /* Bolts.framework */,
+				E163EFBA1D6C9325004374E3 /* FacebookSDKStrings.bundle */,
+				E163EFBD1D6C9325004374E3 /* FBSDKCoreKit.framework */,
+				E163EFBE1D6C9325004374E3 /* FBSDKLoginKit.framework */,
+			);
+			name = FB;
+			sourceTree = "<group>";
+		};
 		E1E0B91E1D689D6200295133 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -594,23 +606,6 @@
 			productReference = 67DD1A771D17BEB500FBEA0F /* Nety.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E163EF551D6AF9DF004374E3 /* SedAll */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E163EF6C1D6AF9DF004374E3 /* Build configuration list for PBXNativeTarget "SedAll" */;
-			buildPhases = (
-				E163EF521D6AF9DF004374E3 /* Sources */,
-				E163EF531D6AF9DF004374E3 /* Frameworks */,
-				E163EF541D6AF9DF004374E3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SedAll;
-			productName = SedAll;
-			productReference = E163EF561D6AF9DF004374E3 /* SedAll.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -629,9 +624,6 @@
 							};
 						};
 					};
-					E163EF551D6AF9DF004374E3 = {
-						CreatedOnToolsVersion = 7.3.1;
-					};
 				};
 			};
 			buildConfigurationList = 67DD1A721D17BEB500FBEA0F /* Build configuration list for PBXProject "Nety" */;
@@ -648,7 +640,6 @@
 			projectRoot = "";
 			targets = (
 				67DD1A761D17BEB500FBEA0F /* Nety */,
-				E163EF551D6AF9DF004374E3 /* SedAll */,
 			);
 		};
 /* End PBXProject section */
@@ -668,6 +659,7 @@
 				67DD1AA41D17BFCC00FBEA0F /* Chat.storyboard in Resources */,
 				67D4AD5F1D26333D00F42B7F /* LoginSignup.storyboard in Resources */,
 				67DD1AA91D17C00600FBEA0F /* MyInfo.storyboard in Resources */,
+				E163EFC41D6C9325004374E3 /* FacebookSDKStrings.bundle in Resources */,
 				67D992301D36B8AD0056D9B9 /* GoogleService-Info.plist in Resources */,
 				678138A81D33A94E00BFBF48 /* Settings.storyboard in Resources */,
 				67DD1AAF1D17C3EF00FBEA0F /* Profile.storyboard in Resources */,
@@ -676,16 +668,6 @@
 				67DD1A9F1D17BF7200FBEA0F /* MyNetwork.storyboard in Resources */,
 				67CD9C2E1D3C75E800823701 /* NoContent.xib in Resources */,
 				67DD1AC41D17E42D00FBEA0F /* water.jpg in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E163EF541D6AF9DF004374E3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E163EF681D6AF9DF004374E3 /* LaunchScreen.storyboard in Resources */,
-				E163EF651D6AF9DF004374E3 /* Assets.xcassets in Resources */,
-				E163EF631D6AF9DF004374E3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -785,16 +767,6 @@
 				67DD1AB61D17E04F00FBEA0F /* NetworkCell.m in Sources */,
 				679B9EE71D236DF900C426F2 /* MyInfoEditType1.m in Sources */,
 				674918EA1D2D8ACE0015EFE9 /* SignupProcess3.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E163EF521D6AF9DF004374E3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E163EF601D6AF9DF004374E3 /* ViewController.m in Sources */,
-				E163EF5D1D6AF9DF004374E3 /* AppDelegate.m in Sources */,
-				E163EF5A1D6AF9DF004374E3 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -917,6 +889,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Nety/Lib",
+					"$(PROJECT_DIR)/Nety/Lib/FacebookSDKStrings.bundle",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "${SRCROOT}/Nety/PrefixHeader.pch";
 				INFOPLIST_FILE = Nety/Info.plist;
@@ -935,6 +912,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Nety/Lib",
+					"$(PROJECT_DIR)/Nety/Lib/FacebookSDKStrings.bundle",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "${SRCROOT}/Nety/PrefixHeader.pch";
 				INFOPLIST_FILE = Nety/Info.plist;
@@ -943,28 +925,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.change.Nety;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-			};
-			name = Release;
-		};
-		E163EF6A1D6AF9DF004374E3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = SedAll/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.YobibyteLLC.SedAll;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		E163EF6B1D6AF9DF004374E3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = SedAll/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.YobibyteLLC.SedAll;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -988,14 +948,6 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
-		};
-		E163EF6C1D6AF9DF004374E3 /* Build configuration list for PBXNativeTarget "SedAll" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E163EF6A1D6AF9DF004374E3 /* Debug */,
-				E163EF6B1D6AF9DF004374E3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 
