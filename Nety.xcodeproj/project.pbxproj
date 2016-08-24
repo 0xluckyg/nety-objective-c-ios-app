@@ -35,7 +35,6 @@
 		67D4AD5F1D26333D00F42B7F /* LoginSignup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67D4AD5E1D26333D00F42B7F /* LoginSignup.storyboard */; };
 		67D4AD621D26536000F42B7F /* MainPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D4AD611D26536000F42B7F /* MainPage.m */; };
 		67D4AD651D265A7E00F42B7F /* Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D4AD641D265A7E00F42B7F /* Login.m */; };
-		67D992301D36B8AD0056D9B9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 67D9922F1D36B8AD0056D9B9 /* GoogleService-Info.plist */; };
 		67DD1A7C1D17BEB500FBEA0F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DD1A7B1D17BEB500FBEA0F /* main.m */; };
 		67DD1A7F1D17BEB500FBEA0F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DD1A7E1D17BEB500FBEA0F /* AppDelegate.m */; };
 		67DD1A871D17BEB500FBEA0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1A861D17BEB500FBEA0F /* Assets.xcassets */; };
@@ -66,6 +65,7 @@
 		E163EFC71D6C9325004374E3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E163EFBD1D6C9325004374E3 /* FBSDKCoreKit.framework */; };
 		E163EFC81D6C9325004374E3 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E163EFBE1D6C9325004374E3 /* FBSDKLoginKit.framework */; };
 		E163EFCC1D6C9C88004374E3 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E163EFCB1D6C9C88004374E3 /* Bolts.framework */; };
+		E18CB8B51D6D9C0400742CCE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E18CB8B41D6D9C0400742CCE /* GoogleService-Info.plist */; };
 		E1E0B9211D689D8600295133 /* Nety.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B91F1D689D8600295133 /* Nety.xcdatamodeld */; };
 		E1E0B9241D689DC800295133 /* N_API.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B9231D689DC800295133 /* N_API.m */; };
 		E1E0B9281D689FA700295133 /* N_CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B9271D689FA700295133 /* N_CoreDataTableViewController.m */; };
@@ -130,7 +130,6 @@
 		67D4AD611D26536000F42B7F /* MainPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPage.m; sourceTree = "<group>"; };
 		67D4AD631D265A7E00F42B7F /* Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Login.h; sourceTree = "<group>"; };
 		67D4AD641D265A7E00F42B7F /* Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Login.m; sourceTree = "<group>"; };
-		67D9922F1D36B8AD0056D9B9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		67DD1A771D17BEB500FBEA0F /* Nety.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nety.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67DD1A7B1D17BEB500FBEA0F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		67DD1A7D1D17BEB500FBEA0F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -182,6 +181,7 @@
 		E163EFBD1D6C9325004374E3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		E163EFBE1D6C9325004374E3 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		E163EFCB1D6C9C88004374E3 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = FacebookSDKStrings.bundle/Bolts.framework; sourceTree = "<group>"; };
+		E18CB8B41D6D9C0400742CCE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E1E0B9201D689D8600295133 /* Nety.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Nety.xcdatamodel; sourceTree = "<group>"; };
 		E1E0B9221D689DC800295133 /* N_API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = N_API.h; path = CoreData/N_API.h; sourceTree = "<group>"; };
 		E1E0B9231D689DC800295133 /* N_API.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = N_API.m; path = CoreData/N_API.m; sourceTree = "<group>"; };
@@ -390,7 +390,7 @@
 				E1E0B94E1D6A14C900295133 /* PrefixHeader.pch */,
 				67DD1A861D17BEB500FBEA0F /* Assets.xcassets */,
 				67DD1A881D17BEB500FBEA0F /* LaunchScreen.storyboard */,
-				67D9922F1D36B8AD0056D9B9 /* GoogleService-Info.plist */,
+				E18CB8B41D6D9C0400742CCE /* GoogleService-Info.plist */,
 				67DD1A8B1D17BEB500FBEA0F /* Info.plist */,
 				67DD1A7B1D17BEB500FBEA0F /* main.m */,
 			);
@@ -630,9 +630,12 @@
 				TargetAttributes = {
 					67DD1A761D17BEB500FBEA0F = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 34SL6966R8;
+						DevelopmentTeam = U9677H3UDV;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -673,7 +676,7 @@
 				67D4AD5F1D26333D00F42B7F /* LoginSignup.storyboard in Resources */,
 				67DD1AA91D17C00600FBEA0F /* MyInfo.storyboard in Resources */,
 				E163EFC41D6C9325004374E3 /* FacebookSDKStrings.bundle in Resources */,
-				67D992301D36B8AD0056D9B9 /* GoogleService-Info.plist in Resources */,
+				E18CB8B51D6D9C0400742CCE /* GoogleService-Info.plist in Resources */,
 				678138A81D33A94E00BFBF48 /* Settings.storyboard in Resources */,
 				67DD1AAF1D17C3EF00FBEA0F /* Profile.storyboard in Resources */,
 				67DD1AC01D17E42D00FBEA0F /* duck.jpg in Resources */,
@@ -913,7 +916,7 @@
 				INFOPLIST_FILE = Nety/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.change.Nety;
+				PRODUCT_BUNDLE_IDENTIFIER = com.change.NetyApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -936,7 +939,7 @@
 				INFOPLIST_FILE = Nety/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.change.Nety;
+				PRODUCT_BUNDLE_IDENTIFIER = com.change.NetyApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

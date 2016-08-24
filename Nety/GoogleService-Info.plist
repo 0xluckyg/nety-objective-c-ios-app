@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>94121610297-4ic7but19behs8p6crbvnuorol9kgpta.apps.googleusercontent.com</string>
+	<string>94121610297-ce2tg4kc8apa0id00u68n0sdjl9hj4dt.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.94121610297-4ic7but19behs8p6crbvnuorol9kgpta</string>
+	<string>com.googleusercontent.apps.94121610297-ce2tg4kc8apa0id00u68n0sdjl9hj4dt</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCYlyqVGK3hBHsFnsGM39YcGaW0RZne84E</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.change.Nety</string>
+	<string>com.change.NetyApp</string>
 	<key>PROJECT_ID</key>
 	<string>nety-63a47</string>
 	<key>STORAGE_BUCKET</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:94121610297:ios:2a136fc6fbe5420b</string>
+	<string>1:94121610297:ios:4e08cbf450112451</string>
 	<key>DATABASE_URL</key>
 	<string>https://nety-63a47.firebaseio.com</string>
 </dict>
