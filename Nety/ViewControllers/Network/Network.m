@@ -111,7 +111,7 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
     
     [self.navigationController.navigationBar setItems:@[navItem]];
     
-    [self.searchBar setBarTintColor:[UIColor whiteColor]];
+    //[self.searchBar setBarTintColor:[UIColor whiteColor]];
     
     self.navigationItem.title = [NSString stringWithFormat:@"%@ Near Me", [self calculateDistanceToDescription]];
     
@@ -139,7 +139,16 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Users" inManagedObjectContext:MY_API.managedObjectContext];
     [fetchRequest setEntity:entity];
     
-    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"itIsMe != YES"];
+    
+    NSPredicate* predicate;
+    if (_searchBar.text.length)
+    {
+        predicate = [NSPredicate predicateWithFormat:@"firstName CONTAINS[c]%@ OR lastName CONTAINS[c] %@ AND itIsMe != YES",_searchBar.text,_searchBar.text];
+    }
+    else
+    {
+        predicate = [NSPredicate predicateWithFormat:@"itIsMe != YES"];
+    }
     [fetchRequest setPredicate:predicate];
     
     // Set the batch size to a suitable number.
@@ -271,8 +280,19 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
 //Hide keyboard when search button pressed
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [searchBar endEditing:YES];
+    _fetchedResultsController = nil;
+    _fetchedResultsController.delegate = nil;
+    [self.table reloadData];
 }
 
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar endEditing:YES];
+    [_searchBar setText:@""];
+    _fetchedResultsController = nil;
+    _fetchedResultsController.delegate = nil;
+    [self.table reloadData];
+}
 
 #pragma mark - Buttons
 //---------------------------------------------------------

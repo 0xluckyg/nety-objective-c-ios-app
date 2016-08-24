@@ -220,6 +220,10 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
     [fetchRequest setEntity:entity];
     
     NSPredicate* predicate = [NSPredicate predicateWithFormat:@"isFriend == YES AND isBlocked == NO"];
+    if (_searchBar.text.length)
+    {
+        predicate = [NSPredicate predicateWithFormat:@"(firstName CONTAINS[c]%@ OR lastName CONTAINS[c] %@) AND itIsMe != YES AND isFriend == YES AND isBlocked == NO",_searchBar.text,_searchBar.text];
+    }
     [fetchRequest setPredicate:predicate];
     
     // Set the batch size to a suitable number.
@@ -335,9 +339,20 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
     }
 }
 
-//Hide keyboard when search button pressed
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [searchBar endEditing:YES];
+    _fetchedResultsController = nil;
+    _fetchedResultsController.delegate = nil;
+    [self.table reloadData];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar endEditing:YES];
+    [_searchBar setText:@""];
+    _fetchedResultsController = nil;
+    _fetchedResultsController.delegate = nil;
+    [self.table reloadData];
 }
 
 
