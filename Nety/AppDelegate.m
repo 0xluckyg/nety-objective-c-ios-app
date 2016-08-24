@@ -91,13 +91,6 @@
     [[UINavigationBar appearance] setBarTintColor:self.UIPrinciple.netyBlue];
     [[UINavigationBar appearance] setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
 
-    //Style navbar
-    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                [self.UIPrinciple netyFontWithSize:15], NSFontAttributeName,
-                                self.UIPrinciple.netyBlue, NSForegroundColorAttributeName, nil];
-    
-    [[UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil] setTitleTextAttributes:attributes
-                                                                                        forState:UIControlStateNormal];
 }
 
 -(void)initializeSettings {
@@ -237,25 +230,25 @@
 
 - (void) loginLinkedIn
 {
-    [LISDKSessionManager createSessionWithAuth:[NSArray arrayWithObjects:LISDK_BASIC_PROFILE_PERMISSION, LISDK_EMAILADDRESS_PERMISSION, nil]
-                                         state:@"some state"
-                        showGoToAppStoreDialog:YES
-                                  successBlock:^(NSString *returnState) {
-                                      
-                                      NSLog(@"%s","success called!");
-                                      LISDKSession *session = [[LISDKSessionManager sharedInstance] session];
-                                      NSLog(@"value=%@ isvalid=%@",[session value],[session isValid] ? @"YES" : @"NO");
-                                      NSMutableString *text = [[NSMutableString alloc] initWithString:[session.accessToken description]];
-                                      [text appendString:[NSString stringWithFormat:@",state=\"%@\"",returnState]];
-                                      NSLog(@"Response label text %@",text);
-
-                                      
-                                  }
-                                    errorBlock:^(NSError *error) {
-                                        NSLog(@"%s %@","error called! ", [error description]);
-
-                                    }
-     ];
+//    [LISDKSessionManager createSessionWithAuth:[NSArray arrayWithObjects:LISDK_BASIC_PROFILE_PERMISSION, LISDK_EMAILADDRESS_PERMISSION, nil]
+//                                         state:@"some state"
+//                        showGoToAppStoreDialog:YES
+//                                  successBlock:^(NSString *returnState) {
+//                                      
+//                                      NSLog(@"%s","success called!");
+//                                      LISDKSession *session = [[LISDKSessionManager sharedInstance] session];
+//                                      NSLog(@"value=%@ isvalid=%@",[session value],[session isValid] ? @"YES" : @"NO");
+//                                      NSMutableString *text = [[NSMutableString alloc] initWithString:[session.accessToken description]];
+//                                      [text appendString:[NSString stringWithFormat:@",state=\"%@\"",returnState]];
+//                                      NSLog(@"Response label text %@",text);
+//
+//                                      
+//                                  }
+//                                    errorBlock:^(NSError *error) {
+//                                        NSLog(@"%s %@","error called! ", [error description]);
+//
+//                                    }
+//     ];
     NSLog(@"%s","sync pressed3");
 }
 -(NSString*)returnLatLongString {
@@ -275,10 +268,17 @@
     [[[firdatabase child:kUsers] child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         // Get user value
         
-        NSDictionary *usersDictionary = snapshot.value;
-        NSString *otherUserID = snapshot.key;
-        
-        [MY_API addNewUser:usersDictionary UserID:otherUserID FlagMy:YES];
+        if ([snapshot exists]) {
+            NSDictionary *usersDictionary = snapshot.value;
+            NSString *otherUserID = snapshot.key;
+            
+            [MY_API addNewUser:usersDictionary UserID:otherUserID FlagMy:YES];
+        }
+        else
+        {
+            NSLog(@"User not found");
+            #warning Reg NEW USER HERE
+        }
         
         
     } withCancelBlock:^(NSError * _Nonnull error) {

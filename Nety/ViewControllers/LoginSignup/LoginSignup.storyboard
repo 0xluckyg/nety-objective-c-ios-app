@@ -37,7 +37,7 @@
                                         </state>
                                         <connections>
                                             <action selector="signupButton:" destination="j8U-Cs-uLi" eventType="touchUpInside" id="fJ1-iG-RAY"/>
-                                            <segue destination="tVr-X4-ba6" kind="show" id="a19-bO-e5E"/>
+                                            <segue destination="tVr-X4-ba6" kind="show" identifier="singUp" id="a19-bO-e5E"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XJ5-h9-g37">
@@ -51,13 +51,6 @@
                                             <segue destination="z0J-bM-jSS" kind="show" id="FYC-io-CBK"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FQ2-P7-kHJ" customClass="FBSDKLoginButton">
-                                        <rect key="frame" x="73" y="397" width="136" height="32"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="32" id="Afg-W0-9Tm"/>
-                                            <constraint firstAttribute="width" constant="136" id="Dfx-kR-OIQ"/>
-                                        </constraints>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.43521448759999998" green="0.56477015090000005" blue="0.90839741490000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -65,10 +58,8 @@
                                     <constraint firstItem="2lL-8E-NXk" firstAttribute="top" secondItem="XJ5-h9-g37" secondAttribute="bottom" constant="26" id="Js5-n0-ujq"/>
                                     <constraint firstItem="XJ5-h9-g37" firstAttribute="top" secondItem="Ohl-8S-SdE" secondAttribute="bottom" constant="20" id="SgR-83-pLD"/>
                                     <constraint firstAttribute="trailing" secondItem="XJ5-h9-g37" secondAttribute="trailing" constant="60" id="Xrh-ID-p27"/>
-                                    <constraint firstAttribute="bottom" secondItem="FQ2-P7-kHJ" secondAttribute="bottom" id="Xx5-52-HBN"/>
                                     <constraint firstAttribute="trailing" secondItem="2lL-8E-NXk" secondAttribute="trailing" constant="60" id="cEs-TE-o50"/>
                                     <constraint firstItem="Ohl-8S-SdE" firstAttribute="centerX" secondItem="dzw-h8-dqd" secondAttribute="centerX" id="hwk-FN-iT8"/>
-                                    <constraint firstItem="FQ2-P7-kHJ" firstAttribute="centerX" secondItem="dzw-h8-dqd" secondAttribute="centerX" id="jZs-eU-P3N"/>
                                     <constraint firstItem="Ohl-8S-SdE" firstAttribute="top" secondItem="dzw-h8-dqd" secondAttribute="top" constant="43" id="k7L-yK-I2x"/>
                                     <constraint firstAttribute="height" constant="429" id="kPo-zA-DvE"/>
                                     <constraint firstAttribute="width" constant="282" id="nyc-ae-i1i"/>
@@ -86,7 +77,6 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="holdingView" destination="dzw-h8-dqd" id="GYl-3D-lzd"/>
-                        <outlet property="loginButton" destination="FQ2-P7-kHJ" id="xo5-Oq-MDS"/>
                         <outlet property="loginButtonOutlet" destination="XJ5-h9-g37" id="tbf-ot-Sx7"/>
                         <outlet property="logoImage" destination="Ohl-8S-SdE" id="5vh-r1-Dlh"/>
                         <outlet property="signupButtonOutlet" destination="2lL-8E-NXk" id="tm8-vQ-bkr"/>
@@ -96,7 +86,7 @@
             </objects>
             <point key="canvasLocation" x="987" y="343"/>
         </scene>
-        <!--Login-->
+        <!--Delegate-->
         <scene sceneID="cik-9x-16P">
             <objects>
                 <viewController storyboardIdentifier="Login" useStoryboardIdentifierAsRestorationIdentifier="YES" id="z0J-bM-jSS" customClass="Login" sceneMemberID="viewController">
@@ -147,17 +137,29 @@
                                             <action selector="loginWithLinkedinButton:" destination="z0J-bM-jSS" eventType="touchUpInside" id="OsQ-1G-15y"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z50-sX-lBN" customClass="FBSDKLoginButton">
+                                        <rect key="frame" x="61" y="296" width="119" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="FYj-IO-s4i"/>
+                                            <constraint firstAttribute="width" constant="119" id="kGh-Av-6qu"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="delegate" destination="z0J-bM-jSS" id="0mr-Kz-sO3"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.43521448759999998" green="0.56477015090000005" blue="0.90839741490000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="Rb2-WJ-mSA" firstAttribute="centerX" secondItem="yaJ-kx-Dyw" secondAttribute="centerX" id="4BH-f8-qDH"/>
                                     <constraint firstAttribute="height" constant="339" id="74d-nL-YdR"/>
                                     <constraint firstItem="kTq-O3-2WW" firstAttribute="top" secondItem="AN5-wS-k4M" secondAttribute="bottom" constant="26" id="DLp-iv-ebN"/>
+                                    <constraint firstItem="z50-sX-lBN" firstAttribute="centerX" secondItem="yaJ-kx-Dyw" secondAttribute="centerX" id="O5x-ZM-I1V"/>
                                     <constraint firstItem="AN5-wS-k4M" firstAttribute="leading" secondItem="yaJ-kx-Dyw" secondAttribute="leading" constant="35" id="RQh-kv-xG7"/>
                                     <constraint firstItem="AN5-wS-k4M" firstAttribute="top" secondItem="Rb2-WJ-mSA" secondAttribute="bottom" constant="66" id="XLj-YC-Jom"/>
                                     <constraint firstItem="Rb2-WJ-mSA" firstAttribute="top" secondItem="lVg-7z-32W" secondAttribute="bottom" constant="26" id="XU2-5A-5YZ"/>
                                     <constraint firstAttribute="width" constant="240" id="ZgH-Tl-GMX"/>
                                     <constraint firstAttribute="trailing" secondItem="kTq-O3-2WW" secondAttribute="trailing" constant="35" id="dgP-5v-5C6"/>
+                                    <constraint firstAttribute="bottom" secondItem="z50-sX-lBN" secondAttribute="bottom" constant="8" id="f3D-DS-x8Z"/>
                                     <constraint firstAttribute="trailing" secondItem="AN5-wS-k4M" secondAttribute="trailing" constant="35" id="hHQ-va-SY1"/>
                                     <constraint firstItem="lVg-7z-32W" firstAttribute="centerX" secondItem="yaJ-kx-Dyw" secondAttribute="centerX" id="k5l-5X-xDZ"/>
                                     <constraint firstItem="kTq-O3-2WW" firstAttribute="leading" secondItem="yaJ-kx-Dyw" secondAttribute="leading" constant="35" id="osr-hp-zpZ"/>
@@ -190,6 +192,7 @@
                     <connections>
                         <outlet property="email" destination="lVg-7z-32W" id="70D-7i-Lsh"/>
                         <outlet property="holdingView" destination="yaJ-kx-Dyw" id="vIc-el-REq"/>
+                        <outlet property="loginButton" destination="z50-sX-lBN" id="rRx-AQ-yyU"/>
                         <outlet property="loginButtonOutlet" destination="AN5-wS-k4M" id="QMB-gU-o2x"/>
                         <outlet property="loginWithLinkedinOutlet" destination="kTq-O3-2WW" id="NI7-lx-qx8"/>
                         <outlet property="password" destination="Rb2-WJ-mSA" id="SEq-Et-eim"/>
