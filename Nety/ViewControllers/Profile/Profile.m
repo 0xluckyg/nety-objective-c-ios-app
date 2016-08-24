@@ -33,7 +33,6 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[self navigationController] setNavigationBarHidden:YES animated:YES];
 }
 
 
@@ -49,80 +48,44 @@
 - (void)initializeDesign {
     self.UIPrinciple = [[UIPrinciples alloc] init];
     
-    //If image is not NetyBlueLogo, start downloading and caching the image
-    NSString *photoUrl = _selectedUser.profileImageUrl;
-    
-    if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
-        NSURL *profileImageUrl = [NSURL URLWithString:photoUrl];
-        //[self loadAndCacheImage: profileImageUrl cache:self.imageCache];
-        [_profileImage sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
-    } else {
-        self.profileImage.image = [UIImage imageNamed:kDefaultUserLogoName];
-    }
-    
-    self.profileImage.layer.masksToBounds = YES;
-    
-    self.view.backgroundColor = self.UIPrinciple.netyBlue;
-    
-    //self.profileImage.image = [UIImage imageNamed:kDefaultUserLogoName];
-    
-    //Color for the small view
-    self.basicInfoView.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.4f];
-    
-    //Color for the big view
-    self.infoView.backgroundColor = self.UIPrinciple.netyBlue;
-    
-    //Chat now buttons styling
-    [self.chatNowButtonOutlet setTitle:@"CHAT NOW" forState:UIControlStateNormal];
-    self.chatNowButtonOutlet.backgroundColor = [UIColor whiteColor];
-    self.chatNowButtonOutlet.tintColor = self.UIPrinciple.netyBlue;
-    
     //Info content
-    
     NSString *status = _selectedUser.status;
     NSString *summary = _selectedUser.summary;
     NSArray *experiences = [MY_USER.experiences allObjects];
     NSString *name = [NSString stringWithFormat:@"%@ %@", _selectedUser.firstName, _selectedUser.lastName];
     
-    self.nameInfo.text = name;
-    self.identityInfo.text = _selectedUser.identity;
+    //Style navbar
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
+                                [UIColor whiteColor], NSForegroundColorAttributeName, nil];
+    self.navigationItem.title = name;
     
-    if ([status isEqualToString:@""]) {
-        self.statusInfo.text = @"No status";
+    [self.navigationController.navigationBar setTitleTextAttributes:attributes];
+    
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"Back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:normal target:self action:@selector(backButtonPressed)];
+    
+    self.navigationItem.leftBarButtonItem = leftButton;
+    
+    //If image is not NetyBlueLogo, start downloading and caching the image
+    NSString *photoUrl = _selectedUser.profileImageUrl;
+    UIImageView *profileImageView = [[UIImageView alloc] init];
+    
+    if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
+        NSURL *profileImageUrl = [NSURL URLWithString:photoUrl];
+        [profileImageView sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
     } else {
-        self.statusInfo.text = status;
+        profileImageView.image = [UIImage imageNamed:kDefaultUserLogoName];
     }
     
-    if ([summary isEqualToString:@""]) {
-        self.summaryInfo.text = @"No summary";
-    } else {
-        self.summaryInfo.text = summary;
-    }
+    float width = self.view.frame.size.width;
+    float height = self.view.frame.size.height / 2.5;
     
-    if (experiences) {
-        NSString *experienceString = @"";
-        
-        for (int i = 0; i < [experiences count]; i ++) {
-            
-            NSString *experienceStringAdd = [NSString stringWithFormat:@"%@\r%@ ~ %@\r\r%@\r\r\r",
-                                             [[experiences objectAtIndex:i] objectForKey:kExperienceName],
-                                             [[experiences objectAtIndex:i] objectForKey:kExperienceStartDate],
-                                             [[experiences objectAtIndex:i] objectForKey:kExperienceEndDate],
-                                             [[experiences objectAtIndex:i] objectForKey:kExperienceDescription]
-                                             ];
-            
-            experienceString = [experienceString stringByAppendingString:experienceStringAdd];
-        }
-        
-        self.experienceInfo.text = experienceString;
-        
-    } else {
-        
-        self.experienceInfo.text = @"No experiences";
-        
-    }
+    [profileImageView setFrame:CGRectMake(0, 0, width, height)];
+    [profileImageView setContentMode:UIViewContentModeScaleAspectFill];
     
-    self.infoViewTopConstraint.constant = self.view.frame.size.height / 2.3;
+    [self.tableView addParallaxWithView:profileImageView andHeight:height];
+    
+    [self.tableView.parallaxView setDelegate:self];
     
     
 }
@@ -131,24 +94,19 @@
 #pragma mark - Protocols and Delegates
 //---------------------------------------------------------
 
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
+    return 0;
+}
 
-
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    ChatButton *networkCell = [tableView dequeueReusableCellWithIdentifier:@"statusOrSummary" forIndexPath:indexPath];
+    
+    return networkCell;
+}
 
 #pragma mark - Buttons
 //---------------------------------------------------------
-
-
-- (IBAction)backButton:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-    
-    __weak typeof(self) weakSelf = self;
-    weakSelf.tabBarController.tabBar.hidden = NO;
-    [self.UIPrinciple setTabBarVisible:![self.UIPrinciple tabBarIsVisible:self] animated:YES sender:self completion:^(BOOL finished) {
-        NSLog(@"animation done");
-
-    }];
-}
 
 - (IBAction)chatNowButton:(id)sender {
     
@@ -164,23 +122,31 @@
 
 }
 
-- (IBAction)swipeDown:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-
-}
-
 
 #pragma mark - View Disappear
 //---------------------------------------------------------
 
 -(void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [[self navigationController] setNavigationBarHidden:NO animated:YES];
-    
 }
 
 #pragma mark - Custom methods
 //---------------------------------------------------------
+
+
+-(void) backButtonPressed {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
+    __weak typeof(self) weakSelf = self;
+    weakSelf.tabBarController.tabBar.hidden = NO;
+    [self.UIPrinciple setTabBarVisible:![self.UIPrinciple tabBarIsVisible:self] animated:YES sender:self completion:^(BOOL finished) {
+        NSLog(@"animation done");
+        
+    }];
+    
+}
+
 
 //---------------------------------------------------------
 

@@ -83,7 +83,7 @@
     [fetchRequest setFetchBatchSize:10];
     
     // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"charRoomID" ascending:YES];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"updateTime" ascending:YES];
     
     [fetchRequest setSortDescriptors:@[sortDescriptor]];
     // Edit the section name key path and cache name if appropriate.
@@ -171,10 +171,12 @@
     Messages *messagesVC = [messagesStoryboard instantiateViewControllerWithIdentifier:@"Messages"];
     
        ChatRooms* chat = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-//    messagesVC.chatroomID = [self.oldChatRoomKeyArray objectAtIndex:indexPath.row];
-//    messagesVC.selectedUserID = [[[self.oldChatArray objectAtIndex:indexPath.row] objectForKey:kMembers] objectForKey:@"member1"];
-//    messagesVC.selectedUserProfileImageString = [[self.oldChatArray objectAtIndex:indexPath.row] objectForKey:kProfilePhoto];
-//    messagesVC.selectedUserName = [[self.oldChatArray objectAtIndex:indexPath.row] objectForKey:kFullName];
+    messagesVC.chatroomID = chat.charRoomID;
+    messagesVC.selectedUserID = chat.members.userID;
+    messagesVC.selectedUserProfileImageString =chat.profileImageUrl;
+    messagesVC.selectedUserName = chat.fullName;
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     [self.delegateFromMyChats pushViewControllerThroughProtocolFromMyChats:messagesVC];
     

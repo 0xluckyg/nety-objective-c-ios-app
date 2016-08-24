@@ -1,4 +1,5 @@
 PODS:
+  - APParallaxHeader (0.1.6)
   - Firebase (3.4.0):
     - Firebase/Core (= 3.4.0)
   - Firebase/Analytics (3.4.0):
@@ -11,6 +12,9 @@ PODS:
   - Firebase/Database (3.4.0):
     - Firebase/Analytics
     - FirebaseDatabase (= 3.0.2)
+  - Firebase/Messaging (3.4.0):
+    - Firebase/Analytics
+    - FirebaseMessaging (= 1.1.1)
   - Firebase/RemoteConfig (3.4.0):
     - Firebase/Analytics
     - FirebaseRemoteConfig (= 1.2.0)
@@ -30,6 +34,12 @@ PODS:
   - FirebaseDatabase (3.0.2):
     - FirebaseAnalytics (~> 3.2)
   - FirebaseInstanceID (1.0.8)
+  - FirebaseMessaging (1.1.1):
+    - FirebaseAnalytics (~> 3.3)
+    - FirebaseInstanceID (~> 1.0)
+    - GoogleInterchangeUtilities (~> 1.2)
+    - GoogleIPhoneUtilities (~> 1.2)
+    - GoogleSymbolUtilities (~> 1.1)
   - FirebaseRemoteConfig (1.2.0):
     - FirebaseAnalytics (~> 3.3)
     - FirebaseInstanceID (~> 1.0)
@@ -63,9 +73,12 @@ PODS:
   - SWTableViewCell (0.3.7)
 
 DEPENDENCIES:
+  - APParallaxHeader
   - Firebase
   - Firebase/Auth
+  - Firebase/Core
   - Firebase/Database
+  - Firebase/Messaging
   - Firebase/RemoteConfig
   - Firebase/Storage
   - JSQMessagesViewController
@@ -74,11 +87,13 @@ DEPENDENCIES:
   - SWTableViewCell (~> 0.3.7)
 
 SPEC CHECKSUMS:
+  APParallaxHeader: 854bc48a2487ca12c702f8a236fec0d89cdac5c3
   Firebase: 754562547af419cc2f4b15247fee419081924bc2
   FirebaseAnalytics: 228be2991cb28efb96cdafc4d62f64680e615c69
   FirebaseAuth: 26fd291c3b552fc9658420b867520d5ae080421c
   FirebaseDatabase: 59bea2e7dfd81b3b8b2f8e396caf1a52c2ced6f7
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
+  FirebaseMessaging: 6bc7cd2ecb875c1a9c0f8b94956398aa3145bbb8
   FirebaseRemoteConfig: c5378e689c1edb54ff62061b8f6a908263dd80ae
   FirebaseStorage: fa2a87dee81f682f553af6839daa37a750e65f6a
   GoogleInterchangeUtilities: def8415a862effc67d549d5b5b0b9c7a2f97d4de
@@ -93,6 +108,6 @@ SPEC CHECKSUMS:
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
 
-PODFILE CHECKSUM: 19996ad57c352d40dbfc2688f203c3926f83983d
+PODFILE CHECKSUM: 2ceab56f1746ff88c7707ed943f95da80b6b759e
 
 COCOAPODS: 1.0.1

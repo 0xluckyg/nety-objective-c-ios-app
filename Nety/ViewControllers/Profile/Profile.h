@@ -11,8 +11,10 @@
 #import "Constants.h"
 #import "Messages.h"
 #import "Users.h"
+#import "UIScrollView+APParallaxHeader.h"
+#import "ChatButton.h"
 
-@interface Profile : UIViewController
+@interface Profile : UIViewController <UITableViewDelegate, UITableViewDataSource, APParallaxViewDelegate>
 
 
 //VARIABLES----------------------------------------
@@ -29,18 +31,11 @@
 
 
 
-
-
 //IBOUTLETS----------------------------------------
 
-
-@property (weak, nonatomic) IBOutlet UIImageView *profileImage;
-
-@property (weak, nonatomic) IBOutlet UIView *infoView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (weak, nonatomic) IBOutlet UIView *basicInfoView;
-
-@property (weak, nonatomic) IBOutlet UILabel *nameInfo;
 
 @property (weak, nonatomic) IBOutlet UILabel *identityInfo;
 
@@ -58,12 +53,7 @@
 //IBACTIONS----------------------------------------
 
 
-- (IBAction)backButton:(id)sender;
-
 - (IBAction)chatNowButton:(id)sender;
-
-- (IBAction)swipeDown:(id)sender;
-
 
 //-------------------------------------------------
 
