@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>APParallaxHeader.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
+		</dict>
 		<key>JSQMessagesViewController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -49,7 +54,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>0E9E735AA7D43E85B6930A3E17CCD2EB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>48FF346B6109545CF33177205617B509</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5DF21164C6E1DC7DEE4CA35AD0FD7B25</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -74,7 +89,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>B3FFF1AF65E8A7DE85F1639088EB7170</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>D058B89EB3B3DF45457A2DCD3971AFFE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E0BB9477CB9052115C733AD4B322E911</key>
 		<dict>
 			<key>primary</key>
 			<true/>
