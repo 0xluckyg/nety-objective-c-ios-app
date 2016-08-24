@@ -11,7 +11,6 @@
 NSString *const networkNoContentString = @"Can't find people near you. Maybe try sliding the bar!";
 
 @interface Network ()
-
 @end
 
 @implementation Network
@@ -119,14 +118,9 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
 
 - (void)initializeUsers {
     
-//    self.usersArray = [[NSMutableArray alloc] init];
-    self.userIDArray = [[NSMutableArray alloc] init];
-    
-//    self.firdatabase = [[FIRDatabase database] reference];
-    
-//    [self listenForChildAdded];
     
 }
+
 
 - (NSFetchedResultsController *)fetchedResultsController
 {
@@ -143,12 +137,19 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
     NSPredicate* predicate;
     if (_searchBar.text.length)
     {
-        predicate = [NSPredicate predicateWithFormat:@"firstName CONTAINS[c]%@ OR lastName CONTAINS[c] %@ AND itIsMe != YES",_searchBar.text,_searchBar.text];
+        predicate = [NSPredicate predicateWithFormat:@"firstName CONTAINS[c]%@ OR lastName CONTAINS[c] %@ AND itIsMe != YES AND distance < %f",_searchBar.text,_searchBar.text,_sliderDistanceValue];
     }
     else
     {
-        predicate = [NSPredicate predicateWithFormat:@"itIsMe != YES"];
+        predicate = [NSPredicate predicateWithFormat:@"itIsMe != YES  AND distance < %f",_sliderDistanceValue];
     }
+//    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(Users *user, NSDictionary *bindings)
+//    {
+//        NSArray* tempLocationArray = [NSArray arrayWithArray:[user.geocoordinate componentsSeparatedByString:@":"]];
+//        CLLocation* tempLocation = [[CLLocation alloc] initWithLatitude:[tempLocationArray[0] floatValue] longitude:[tempLocationArray[1] floatValue]];
+//        return (([tempLocation distanceFromLocation:MY_API.locationManager.location] <= _sliderDistanceValue) && _searchBar.text.length>0?([user.firstName containsString:_searchBar.text] || [user.lastName containsString:_searchBar.text]):YES && !user.itIsMe);
+//    }];
+
     [fetchRequest setPredicate:predicate];
     
     // Set the batch size to a suitable number.
@@ -163,7 +164,6 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:MY_API.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
-    
     NSError *error = nil;
     if (![self.fetchedResultsController performFetch:&error]) {
         // Replace this implementation with code to handle the error appropriately.
@@ -359,8 +359,13 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
     }  else if (self.sliderValue > 0.70 && self.sliderValue <= 0.80) {
         self.sliderDistanceValue = 5280 * 10;
     } else if (self.sliderValue > 0.80) {
-        self.sliderDistanceValue = 5280 * 20;
+        self.sliderDistanceValue = 5280 * 200000;
+#warning       self.sliderDistanceValue = 5280 * 20;
     }
+    
+    _fetchedResultsController = nil;
+    _fetchedResultsController.delegate = nil;
+    [self.table reloadData];
     
 }
 

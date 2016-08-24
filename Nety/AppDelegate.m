@@ -11,8 +11,13 @@
 #import <linkedin-sdk/LISDK.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "GeoFire.h"
+
+@import FirebaseDatabase;
 
 @interface AppDelegate ()
+
+//@property (strong,nonatomic) GeoFire *geoFire;
 
 @end
 
@@ -29,9 +34,12 @@
     
     userIsSigningIn = false;
     
-    [self initializeLocationManager];
+//    FIRDatabaseReference *geofireRef = [[FIRDatabase database] reference];
+//    
+//    _geoFire = [[GeoFire alloc] initWithFirebaseRef:geofireRef];
     
-    [self loginLinkedIn];
+    
+    //[self loginLinkedIn];
     //Check if user is signed in, and move on
     [self initializeSettings];
     [self initializeLoginView];
@@ -170,21 +178,6 @@
 #pragma mark - Protocols and Delegates
 //---------------------------------------------------------
 
-#pragma mark - CLLocationManagerDelegate
-
-- (void)locationManager: (CLLocationManager *)manager
-    didUpdateToLocation: (CLLocation *)newLocation
-           fromLocation: (CLLocation *)oldLocation {
-    
-    NSLog(@"location called");
-    
-    float latitude = newLocation.coordinate.latitude;
-    self.stringLatitude = [NSString stringWithFormat:@"%f",latitude];
-    float longitude = newLocation.coordinate.longitude;
-    self.stringLongitude = [NSString stringWithFormat:@"%f", longitude];
-    //[self returnLatLongString:strLatitude:strLongitude];
-    
-}
 
 
 #pragma mark - View Disappear
@@ -212,21 +205,6 @@
 #pragma mark - Custom methods
 //---------------------------------------------------------
 
-
-- (void)initializeLocationManager {
-    
-    self.locationManager = [[CLLocationManager alloc] init];
-    
-    self.locationManager.delegate = self;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    //whenever user moves
-    self.locationManager.distanceFilter = 10;//10m
-    
-    [self.locationManager startUpdatingLocation];
-    
-    NSLog(@"location initialized");
-    
-}
 
 - (void) loginLinkedIn
 {

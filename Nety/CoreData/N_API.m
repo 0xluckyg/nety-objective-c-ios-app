@@ -10,6 +10,7 @@
 #import "Constants.h"
 #import "ChatRooms.h"
 
+
 @implementation N_API
 
 +(instancetype)sharedController
@@ -31,9 +32,9 @@
     //Enable presistence
     [FIRDatabase database].persistenceEnabled = YES;
     self.firdatabase = [[FIRDatabase database] reference];
-    [self listenForChildAdded];
-    [self listenForChildChanged];
-    [self listenForChildRemoved];
+    
+    [self initializeLocationManager];
+    
 }
 
 #pragma mark - Core Data stack
@@ -270,17 +271,22 @@
         @try {
             [user setValue:[userInfo objectForKey:keys] forKey:keys];
         } @catch (NSException *exception) {
-            NSLog(@"Create user ERROR: %@",exception);
+            //NSLog(@"Create user ERROR: %@",exception);
         } @finally {
             ///
         }
     }
     
+    NSArray* tempLocationArray = [NSArray arrayWithArray:[user.geocoordinate componentsSeparatedByString:@":"]];
+    CLLocation* tempLocation = [[CLLocation alloc] initWithLatitude:[tempLocationArray[0] floatValue] longitude:[tempLocationArray[1] floatValue]];
+    double distance = [tempLocation distanceFromLocation:MY_API.locationManager.location];
+    //NSLog(@"distance %f",distance);
+    [user setValue:[NSNumber numberWithDouble:distance] forKey:@"distance"];
     if (flagMy) {
         user.itIsMe = [NSNumber numberWithBool:YES];
         [self setMyUser:user];
     }
-    NSLog(@"UserADD");
+    //NSLog(@"UserADD");
     [self saveContext];
 }
 
@@ -302,14 +308,21 @@
 
 - (void) setMyUser:(Users *)myUser
 {
+    if (!_myUser) {
+        _myUser = myUser;
+        [self listenForChildAdded];
+        [self listenForChildChanged];
+        [self listenForChildRemoved];
+        
+        [self listenForNetworkChildAdded];
+        [self listenForNetworkChildRemoved];
+        [self listenForNetworkBlockChildAdd];
+        [self listenForChatsChildAdded];
+        [self listenForChatsChildRemoved];
+        [self listenForChatsChildChanged];
+        // [self listenForChatsChildMoved]
+    }
     _myUser = myUser;
-    [self listenForNetworkChildAdded];
-    [self listenForNetworkChildRemoved];
-    [self listenForNetworkBlockChildAdd];
-    [self listenForChatsChildAdded];
-    [self listenForChatsChildRemoved];
-    [self listenForChatsChildChanged];
-    // [self listenForChatsChildMoved];
 }
 
 #pragma mark - Login
@@ -355,8 +368,8 @@
         NSDictionary *members = [snapshot.value objectForKey:kMembers];
         NSString *chatRoomKey = snapshot.key;
         
-        NSLog(@"Got snapchat: %@", snapshot.value);
-        NSLog(@"Got you: %@", [members objectForKey:@"member1"]);
+        //NSLog(@"Got snapchat: %@", snapshot.value);
+        //NSLog(@"Got you: %@", [members objectForKey:@"member1"]);
         
         Users* tempUser = [self getUserrsWithID:[members objectForKey:@"member1"]];
             
@@ -396,12 +409,12 @@
         @try {
             [rooms setValue:[userInfo objectForKey:keys] forKey:keys];
         } @catch (NSException *exception) {
-            NSLog(@"ERROR:%@ /n key:%@",exception,keys);
+            //NSLog(@"ERROR:%@ /n key:%@",exception,keys);
         } @finally {
             ///
         }
     }
-    NSLog(@"ChatRooms ADD OK");
+    //NSLog(@"ChatRooms ADD OK");
     [self saveContext];
 }
 
@@ -442,46 +455,39 @@
     } withCancelBlock:nil];
     
 }
-//
-//-(void)listenForChatsChildMoved {
-//    
-//    [[[[self.firdatabase child:kUserChats] child:MY_USER.userID] child:kChats] observeEventType:FIRDataEventTypeChildMoved withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-//        
-//        //        NSLog(@"moved: %@", snapshot.value);
-//        
-//        NSMutableDictionary *chatRoomInfoDict = snapshot.value;
-//        NSDictionary *members = [snapshot.value objectForKey:kMembers];
-//        NSString *chatRoomKey = snapshot.key;
-//        
-//        FIRDatabaseReference *userInfoRef = [[self.firdatabase child:kUsers] child:[members objectForKey:@"member1"]];
-//        [userInfoRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-//            
-//            NSString *profilePhotoUrl = [snapshot.value objectForKey:kProfilePhoto];
-//            NSString *name = [NSString stringWithFormat:@"%@ %@", [snapshot.value objectForKey:kFirstName], [snapshot.value objectForKey:kLastName]];
-//            
-//            [chatRoomInfoDict setValue:name forKey:kFullName];
-//            [chatRoomInfoDict setValue:profilePhotoUrl forKey:kProfilePhoto];
-//            
-////            if ([[chatRoomInfoDict objectForKey:kType] integerValue] == 0) {
-////                NSUInteger index = [self.recentChatRoomKeyArray indexOfObject:chatRoomKey];
-////                
-////                if (index != NSNotFound) {
-////                    NSDictionary *objectAtIndex = [self.recentChatArray objectAtIndex:index];
-////                    [self.recentChatArray removeObjectAtIndex:index];
-////                    [self.recentChatArray insertObject:objectAtIndex atIndex:0];
-////                    NSString *roomKeyAtIndex = [self.recentChatRoomKeyArray objectAtIndex:index];
-////                    [self.recentChatRoomKeyArray removeObjectAtIndex:index];
-////                    [self.recentChatRoomKeyArray insertObject:roomKeyAtIndex atIndex:0];
-////                }
-////            }
-////            
-////            dispatch_async(dispatch_get_main_queue(), ^{
-////                [self.tableView reloadData];
-////            });
-//            
-//        } withCancelBlock:nil];
-//        
-//    } withCancelBlock:nil];
-//    
-//}
+
+#pragma mark - CLLocationManagerDelegate
+
+- (void)locationManager: (CLLocationManager *)manager
+    didUpdateToLocation: (CLLocation *)newLocation
+           fromLocation: (CLLocation *)oldLocation {
+    
+    NSLog(@"location called");
+    
+    
+    if (MY_USER) {
+        FIRDatabaseReference *geo = [[FIRDatabase database] reference];
+        
+        //Save name and age to the database
+        [[[[geo child:kUsers] child:MY_USER.userID] child:kGeoCoordinate] setValue:[NSString stringWithFormat:@"%f:%f",newLocation.coordinate.latitude, newLocation.coordinate.longitude]];
+        
+        NSLog(@"location UDATE OK!!!");
+    }
+    
+}
+
+- (void)initializeLocationManager {
+    
+    self.locationManager = [[CLLocationManager alloc] init];
+    [self.locationManager requestWhenInUseAuthorization];
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    //whenever user moves
+    self.locationManager.distanceFilter = 10;//10m
+    
+    [self.locationManager startUpdatingLocation];
+    
+    NSLog(@"location initialized");
+    
+}
 @end

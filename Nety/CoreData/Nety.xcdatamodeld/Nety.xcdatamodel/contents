@@ -19,7 +19,9 @@
     </entity>
     <entity name="Users" representedClassName="Users" syncable="YES">
         <attribute name="age" optional="YES" attributeType="String" minValueString="0" syncable="YES"/>
+        <attribute name="distance" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="geocoordinate" optional="YES" attributeType="String" defaultValueString="0:0" syncable="YES"/>
         <attribute name="identity" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isBlocked" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="isFriend" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
@@ -32,8 +34,8 @@
         <relationship name="experiences" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Experiences" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Experiences" positionX="-5438" positionY="-396" width="128" height="103"/>
-        <element name="Users" positionX="-5661" positionY="-511" width="128" height="223"/>
         <element name="ChatRooms" positionX="-5438" positionY="-621" width="128" height="178"/>
+        <element name="Experiences" positionX="-5438" positionY="-396" width="128" height="103"/>
+        <element name="Users" positionX="-5661" positionY="-540" width="128" height="253"/>
     </elements>
 </model>

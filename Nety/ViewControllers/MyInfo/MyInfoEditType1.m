@@ -170,14 +170,8 @@
             self.firdatabase = [[FIRDatabase database] reference];
             
             //Save name and age to the database
-            [[[[self.firdatabase child:kUsers]
-               child:MY_USER.userID]
-              child:kFirstName]
-             setValue:firstName];
-            [[[[self.firdatabase child:kUsers]
-               child:MY_USER.userID]
-              child:kLastName]
-             setValue:lastName];
+            [[[[self.firdatabase child:kUsers] child:MY_USER.userID] child:kFirstName] setValue:firstName];
+            [[[[self.firdatabase child:kUsers] child:MY_USER.userID] child:kLastName] setValue:lastName];
             
         }
         

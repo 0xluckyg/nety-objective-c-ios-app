@@ -65,14 +65,20 @@
 		E163EFC71D6C9325004374E3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E163EFBD1D6C9325004374E3 /* FBSDKCoreKit.framework */; };
 		E163EFC81D6C9325004374E3 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E163EFBE1D6C9325004374E3 /* FBSDKLoginKit.framework */; };
 		E163EFCC1D6C9C88004374E3 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E163EFCB1D6C9C88004374E3 /* Bolts.framework */; };
+		E188C3FA1D6E41F100CCFD0F /* Users+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E188C3F71D6E41F100CCFD0F /* Users+CoreDataProperties.m */; };
+		E188C3FB1D6E41F100CCFD0F /* Users.m in Sources */ = {isa = PBXBuildFile; fileRef = E188C3F91D6E41F100CCFD0F /* Users.m */; };
+		E188C3FD1D6E461300CCFD0F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E188C3FC1D6E461300CCFD0F /* MapKit.framework */; };
 		E18CB8B51D6D9C0400742CCE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E18CB8B41D6D9C0400742CCE /* GoogleService-Info.plist */; };
+		E18CB8C41D6E118300742CCE /* GeoFire.m in Sources */ = {isa = PBXBuildFile; fileRef = E18CB8BA1D6E118300742CCE /* GeoFire.m */; };
+		E18CB8C51D6E118300742CCE /* GFBase32Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = E18CB8BD1D6E118300742CCE /* GFBase32Utils.m */; };
+		E18CB8C61D6E118300742CCE /* GFGeoHash.m in Sources */ = {isa = PBXBuildFile; fileRef = E18CB8BF1D6E118300742CCE /* GFGeoHash.m */; };
+		E18CB8C71D6E118300742CCE /* GFGeoHashQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = E18CB8C11D6E118300742CCE /* GFGeoHashQuery.m */; };
+		E18CB8C81D6E118300742CCE /* GFQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = E18CB8C21D6E118300742CCE /* GFQuery.m */; };
 		E1E0B9211D689D8600295133 /* Nety.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B91F1D689D8600295133 /* Nety.xcdatamodeld */; };
 		E1E0B9241D689DC800295133 /* N_API.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B9231D689DC800295133 /* N_API.m */; };
 		E1E0B9281D689FA700295133 /* N_CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B9271D689FA700295133 /* N_CoreDataTableViewController.m */; };
 		E1E0B9591D6A1A8800295133 /* Experiences+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B9541D6A1A8800295133 /* Experiences+CoreDataProperties.m */; };
 		E1E0B95A1D6A1A8800295133 /* Experiences.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B9561D6A1A8800295133 /* Experiences.m */; };
-		E1E0B95F1D6A5FBE00295133 /* Users+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B95C1D6A5FBE00295133 /* Users+CoreDataProperties.m */; };
-		E1E0B9601D6A5FBE00295133 /* Users.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E0B95E1D6A5FBE00295133 /* Users.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -181,7 +187,26 @@
 		E163EFBD1D6C9325004374E3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		E163EFBE1D6C9325004374E3 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		E163EFCB1D6C9C88004374E3 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = FacebookSDKStrings.bundle/Bolts.framework; sourceTree = "<group>"; };
+		E188C3F61D6E41F100CCFD0F /* Users+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Users+CoreDataProperties.h"; path = "CoreData/Users+CoreDataProperties.h"; sourceTree = "<group>"; };
+		E188C3F71D6E41F100CCFD0F /* Users+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Users+CoreDataProperties.m"; path = "CoreData/Users+CoreDataProperties.m"; sourceTree = "<group>"; };
+		E188C3F81D6E41F100CCFD0F /* Users.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Users.h; path = CoreData/Users.h; sourceTree = "<group>"; };
+		E188C3F91D6E41F100CCFD0F /* Users.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Users.m; path = CoreData/Users.m; sourceTree = "<group>"; };
+		E188C3FC1D6E461300CCFD0F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		E18CB8B41D6D9C0400742CCE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E18CB8B61D6E118300742CCE /* GeoFire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFire.h; sourceTree = "<group>"; };
+		E18CB8B71D6E118300742CCE /* GFCircleQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCircleQuery.h; sourceTree = "<group>"; };
+		E18CB8B81D6E118300742CCE /* GFQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFQuery.h; sourceTree = "<group>"; };
+		E18CB8B91D6E118300742CCE /* GFRegionQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFRegionQuery.h; sourceTree = "<group>"; };
+		E18CB8BA1D6E118300742CCE /* GeoFire.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoFire.m; sourceTree = "<group>"; };
+		E18CB8BB1D6E118300742CCE /* GeoFire+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GeoFire+Private.h"; sourceTree = "<group>"; };
+		E18CB8BC1D6E118300742CCE /* GFBase32Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFBase32Utils.h; sourceTree = "<group>"; };
+		E18CB8BD1D6E118300742CCE /* GFBase32Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFBase32Utils.m; sourceTree = "<group>"; };
+		E18CB8BE1D6E118300742CCE /* GFGeoHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFGeoHash.h; sourceTree = "<group>"; };
+		E18CB8BF1D6E118300742CCE /* GFGeoHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFGeoHash.m; sourceTree = "<group>"; };
+		E18CB8C01D6E118300742CCE /* GFGeoHashQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFGeoHashQuery.h; sourceTree = "<group>"; };
+		E18CB8C11D6E118300742CCE /* GFGeoHashQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFGeoHashQuery.m; sourceTree = "<group>"; };
+		E18CB8C21D6E118300742CCE /* GFQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFQuery.m; sourceTree = "<group>"; };
+		E18CB8C31D6E118300742CCE /* GFQuery+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GFQuery+Private.h"; sourceTree = "<group>"; };
 		E1E0B9201D689D8600295133 /* Nety.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Nety.xcdatamodel; sourceTree = "<group>"; };
 		E1E0B9221D689DC800295133 /* N_API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = N_API.h; path = CoreData/N_API.h; sourceTree = "<group>"; };
 		E1E0B9231D689DC800295133 /* N_API.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = N_API.m; path = CoreData/N_API.m; sourceTree = "<group>"; };
@@ -192,10 +217,6 @@
 		E1E0B9541D6A1A8800295133 /* Experiences+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Experiences+CoreDataProperties.m"; path = "CoreData/Experiences+CoreDataProperties.m"; sourceTree = "<group>"; };
 		E1E0B9551D6A1A8800295133 /* Experiences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Experiences.h; path = CoreData/Experiences.h; sourceTree = "<group>"; };
 		E1E0B9561D6A1A8800295133 /* Experiences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Experiences.m; path = CoreData/Experiences.m; sourceTree = "<group>"; };
-		E1E0B95B1D6A5FBE00295133 /* Users+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Users+CoreDataProperties.h"; path = "CoreData/Users+CoreDataProperties.h"; sourceTree = "<group>"; };
-		E1E0B95C1D6A5FBE00295133 /* Users+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Users+CoreDataProperties.m"; path = "CoreData/Users+CoreDataProperties.m"; sourceTree = "<group>"; };
-		E1E0B95D1D6A5FBE00295133 /* Users.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Users.h; path = CoreData/Users.h; sourceTree = "<group>"; };
-		E1E0B95E1D6A5FBE00295133 /* Users.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Users.m; path = CoreData/Users.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,6 +228,7 @@
 				97677F0633DE3705741AEB8E /* libPods-Nety.a in Frameworks */,
 				E163EFB31D6C671E004374E3 /* linkedin-sdk.framework in Frameworks */,
 				E163EFC71D6C9325004374E3 /* FBSDKCoreKit.framework in Frameworks */,
+				E188C3FD1D6E461300CCFD0F /* MapKit.framework in Frameworks */,
 				E163EFC81D6C9325004374E3 /* FBSDKLoginKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -388,6 +410,7 @@
 				67DD1A7D1D17BEB500FBEA0F /* AppDelegate.h */,
 				67DD1A7E1D17BEB500FBEA0F /* AppDelegate.m */,
 				E1E0B94E1D6A14C900295133 /* PrefixHeader.pch */,
+				E18CB8C91D6E118B00742CCE /* Geofire */,
 				67DD1A861D17BEB500FBEA0F /* Assets.xcassets */,
 				67DD1A881D17BEB500FBEA0F /* LaunchScreen.storyboard */,
 				E18CB8B41D6D9C0400742CCE /* GoogleService-Info.plist */,
@@ -516,6 +539,7 @@
 		B852F7677337544B123B08BC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E188C3FC1D6E461300CCFD0F /* MapKit.framework */,
 				01F5D56FDB372FC5465929EE /* libPods-Nety.a */,
 			);
 			name = Frameworks;
@@ -556,6 +580,27 @@
 			name = FB;
 			sourceTree = "<group>";
 		};
+		E18CB8C91D6E118B00742CCE /* Geofire */ = {
+			isa = PBXGroup;
+			children = (
+				E18CB8B61D6E118300742CCE /* GeoFire.h */,
+				E18CB8B71D6E118300742CCE /* GFCircleQuery.h */,
+				E18CB8B81D6E118300742CCE /* GFQuery.h */,
+				E18CB8B91D6E118300742CCE /* GFRegionQuery.h */,
+				E18CB8BA1D6E118300742CCE /* GeoFire.m */,
+				E18CB8BB1D6E118300742CCE /* GeoFire+Private.h */,
+				E18CB8BC1D6E118300742CCE /* GFBase32Utils.h */,
+				E18CB8BD1D6E118300742CCE /* GFBase32Utils.m */,
+				E18CB8BE1D6E118300742CCE /* GFGeoHash.h */,
+				E18CB8BF1D6E118300742CCE /* GFGeoHash.m */,
+				E18CB8C01D6E118300742CCE /* GFGeoHashQuery.h */,
+				E18CB8C11D6E118300742CCE /* GFGeoHashQuery.m */,
+				E18CB8C21D6E118300742CCE /* GFQuery.m */,
+				E18CB8C31D6E118300742CCE /* GFQuery+Private.h */,
+			);
+			name = Geofire;
+			sourceTree = "<group>";
+		};
 		E1E0B91E1D689D6200295133 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -580,14 +625,14 @@
 		E1E0B92F1D68A64400295133 /* NetyUsersModel */ = {
 			isa = PBXGroup;
 			children = (
+				E188C3F61D6E41F100CCFD0F /* Users+CoreDataProperties.h */,
+				E188C3F71D6E41F100CCFD0F /* Users+CoreDataProperties.m */,
+				E188C3F81D6E41F100CCFD0F /* Users.h */,
+				E188C3F91D6E41F100CCFD0F /* Users.m */,
 				E1E0B9531D6A1A8800295133 /* Experiences+CoreDataProperties.h */,
 				E1E0B9541D6A1A8800295133 /* Experiences+CoreDataProperties.m */,
 				E1E0B9551D6A1A8800295133 /* Experiences.h */,
 				E1E0B9561D6A1A8800295133 /* Experiences.m */,
-				E1E0B95B1D6A5FBE00295133 /* Users+CoreDataProperties.h */,
-				E1E0B95C1D6A5FBE00295133 /* Users+CoreDataProperties.m */,
-				E1E0B95D1D6A5FBE00295133 /* Users.h */,
-				E1E0B95E1D6A5FBE00295133 /* Users.m */,
 				E163EFAC1D6B48B8004374E3 /* ChatRooms+CoreDataProperties.h */,
 				E163EFAD1D6B48B8004374E3 /* ChatRooms+CoreDataProperties.m */,
 				E163EFAE1D6B48B8004374E3 /* ChatRooms.h */,
@@ -633,6 +678,9 @@
 						DevelopmentTeam = U9677H3UDV;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Maps.iOS = {
 								enabled = 1;
 							};
 							com.apple.Push = {
@@ -742,11 +790,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1E0B9601D6A5FBE00295133 /* Users.m in Sources */,
 				67DD1AB31D17D40D00FBEA0F /* UIPrinciples.m in Sources */,
 				67606C6E1D24888700AD127E /* MyInfoEditExperience.m in Sources */,
 				678138AB1D33B2DD00BFBF48 /* Settings.m in Sources */,
 				E1E0B95A1D6A1A8800295133 /* Experiences.m in Sources */,
+				E18CB8C81D6E118300742CCE /* GFQuery.m in Sources */,
 				E163EFB11D6B48B8004374E3 /* ChatRooms.m in Sources */,
 				67DD1AA21D17BFC300FBEA0F /* Chat.m in Sources */,
 				67602F501D2EC75F00DA2F3A /* Messages.m in Sources */,
@@ -755,6 +803,7 @@
 				67391DEA1D27ED0200A50C03 /* Signup.m in Sources */,
 				67D4AD651D265A7E00F42B7F /* Login.m in Sources */,
 				67391DEF1D27FBB900A50C03 /* SignupProcess1.m in Sources */,
+				E188C3FB1D6E41F100CCFD0F /* Users.m in Sources */,
 				E1E0B9241D689DC800295133 /* N_API.m in Sources */,
 				679B9EF01D2396A700C426F2 /* MyInfoEditTableCell.m in Sources */,
 				67CD9C311D3C795600823701 /* NoContent.m in Sources */,
@@ -767,6 +816,7 @@
 				E163EFB01D6B48B8004374E3 /* ChatRooms+CoreDataProperties.m in Sources */,
 				E1E0B9281D689FA700295133 /* N_CoreDataTableViewController.m in Sources */,
 				67391DF21D27FBC400A50C03 /* SignupProcess2.m in Sources */,
+				E18CB8C71D6E118300742CCE /* GFGeoHashQuery.m in Sources */,
 				67DD1A9D1D17BF6900FBEA0F /* MyNetwork.m in Sources */,
 				67DD1A7C1D17BEB500FBEA0F /* main.m in Sources */,
 				679B9EEA1D236E0A00C426F2 /* MyInfoEditType2.m in Sources */,
@@ -775,10 +825,13 @@
 				67DD1AB91D17E39B00FBEA0F /* NetworkData.m in Sources */,
 				673E58731D6AAE7900D28F5B /* MyChats.m in Sources */,
 				673338F71D20937C00A8009F /* MyNetworkCell.m in Sources */,
+				E18CB8C41D6E118300742CCE /* GeoFire.m in Sources */,
 				67391DFB1D280A9600A50C03 /* SignupProcessExperienceDetailCell.m in Sources */,
 				67DD1AAD1D17C3E600FBEA0F /* Profile.m in Sources */,
+				E18CB8C51D6E118300742CCE /* GFBase32Utils.m in Sources */,
+				E188C3FA1D6E41F100CCFD0F /* Users+CoreDataProperties.m in Sources */,
+				E18CB8C61D6E118300742CCE /* GFGeoHash.m in Sources */,
 				679B9EED1D236E1C00C426F2 /* MyInfoEditTable.m in Sources */,
-				E1E0B95F1D6A5FBE00295133 /* Users+CoreDataProperties.m in Sources */,
 				67DD1AA71D17BFFF00FBEA0F /* MyInfo.m in Sources */,
 				E1E0B9591D6A1A8800295133 /* Experiences+CoreDataProperties.m in Sources */,
 				67DD1AB61D17E04F00FBEA0F /* NetworkCell.m in Sources */,

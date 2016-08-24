@@ -1,60 +1,49 @@
 PODS:
   - APParallaxHeader (0.1.6)
-  - Firebase (3.4.0):
-    - Firebase/Core (= 3.4.0)
-  - Firebase/Analytics (3.4.0):
-    - FirebaseAnalytics (~> 3.3)
-  - Firebase/Auth (3.4.0):
+  - Firebase/Analytics (3.5.1):
+    - FirebaseAnalytics (~> 3.3.1)
+  - Firebase/AppIndexing (3.5.1):
+    - Firebase/Analytics
+    - FirebaseAppIndexing (= 1.1.0)
+  - Firebase/Auth (3.5.1):
     - Firebase/Analytics
     - FirebaseAuth (= 3.0.4)
-  - Firebase/Core (3.4.0):
+  - Firebase/Core (3.5.1):
     - Firebase/Analytics
-  - Firebase/Database (3.4.0):
+  - Firebase/Crash (3.5.1):
+    - Firebase/Analytics
+    - FirebaseCrash (= 1.0.7)
+  - Firebase/Database (3.5.1):
     - Firebase/Analytics
     - FirebaseDatabase (= 3.0.2)
-  - Firebase/Messaging (3.4.0):
+  - Firebase/Storage (3.5.1):
     - Firebase/Analytics
-    - FirebaseMessaging (= 1.1.1)
-  - Firebase/RemoteConfig (3.4.0):
-    - Firebase/Analytics
-    - FirebaseRemoteConfig (= 1.2.0)
-  - Firebase/Storage (3.4.0):
-    - Firebase/Analytics
-    - FirebaseStorage (= 1.0.2)
-  - FirebaseAnalytics (3.3.0):
+    - FirebaseStorage (= 1.0.3)
+  - FirebaseAnalytics (3.3.1):
     - FirebaseInstanceID (~> 1.0)
     - GoogleInterchangeUtilities (~> 1.2)
     - GoogleSymbolUtilities (~> 1.1)
     - GoogleUtilities (~> 1.2)
+  - FirebaseAppIndexing (1.1.0)
   - FirebaseAuth (3.0.4):
     - FirebaseAnalytics (~> 3.2)
     - GoogleNetworkingUtilities (~> 1.2)
     - GoogleParsingUtilities (~> 1.1)
     - GoogleUtilities (~> 1.2)
+  - FirebaseCrash (1.0.7):
+    - FirebaseAnalytics (~> 3.2)
+    - FirebaseInstanceID (~> 1.0)
+    - GoogleInterchangeUtilities (~> 1.2)
+    - GoogleSymbolUtilities (~> 1.1)
+    - GoogleUtilities (~> 1.2)
   - FirebaseDatabase (3.0.2):
     - FirebaseAnalytics (~> 3.2)
   - FirebaseInstanceID (1.0.8)
-  - FirebaseMessaging (1.1.1):
+  - FirebaseStorage (1.0.3):
     - FirebaseAnalytics (~> 3.3)
-    - FirebaseInstanceID (~> 1.0)
-    - GoogleInterchangeUtilities (~> 1.2)
-    - GoogleIPhoneUtilities (~> 1.2)
-    - GoogleSymbolUtilities (~> 1.1)
-  - FirebaseRemoteConfig (1.2.0):
-    - FirebaseAnalytics (~> 3.3)
-    - FirebaseInstanceID (~> 1.0)
-    - GoogleInterchangeUtilities (~> 1.2)
-    - GoogleIPhoneUtilities (~> 1.2)
-    - GoogleSymbolUtilities (~> 1.1)
-    - GoogleUtilities (~> 1.2)
-  - FirebaseStorage (1.0.2):
-    - FirebaseAnalytics (~> 3.2)
     - GoogleNetworkingUtilities (~> 1.2)
   - GoogleInterchangeUtilities (1.2.1):
     - GoogleSymbolUtilities (~> 1.0)
-  - GoogleIPhoneUtilities (1.2.1):
-    - GoogleSymbolUtilities (~> 1.0)
-    - GoogleUtilities (~> 1.0)
   - GoogleNetworkingUtilities (1.2.1):
     - GoogleSymbolUtilities (~> 1.0)
   - GoogleParsingUtilities (1.1.1):
@@ -74,12 +63,11 @@ PODS:
 
 DEPENDENCIES:
   - APParallaxHeader
-  - Firebase
+  - Firebase/AppIndexing
   - Firebase/Auth
   - Firebase/Core
+  - Firebase/Crash
   - Firebase/Database
-  - Firebase/Messaging
-  - Firebase/RemoteConfig
   - Firebase/Storage
   - JSQMessagesViewController
   - MBProgressHUD
@@ -88,16 +76,15 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   APParallaxHeader: 854bc48a2487ca12c702f8a236fec0d89cdac5c3
-  Firebase: 754562547af419cc2f4b15247fee419081924bc2
-  FirebaseAnalytics: 228be2991cb28efb96cdafc4d62f64680e615c69
+  Firebase: 9b3edeffaf60d56e377dc5281e91c4ba935a5ad9
+  FirebaseAnalytics: d968d4d5f6aeb795cd64144337bcd233e530efc6
+  FirebaseAppIndexing: 2afde496e2cdde46a74476f29ef41b51e76bb2d5
   FirebaseAuth: 26fd291c3b552fc9658420b867520d5ae080421c
+  FirebaseCrash: 2efeb3715b76ac843b841529ce413efb67e5fd4d
   FirebaseDatabase: 59bea2e7dfd81b3b8b2f8e396caf1a52c2ced6f7
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
-  FirebaseMessaging: 6bc7cd2ecb875c1a9c0f8b94956398aa3145bbb8
-  FirebaseRemoteConfig: c5378e689c1edb54ff62061b8f6a908263dd80ae
-  FirebaseStorage: fa2a87dee81f682f553af6839daa37a750e65f6a
+  FirebaseStorage: 3992817bf405f5c1a4f8349678d22724cd0ef509
   GoogleInterchangeUtilities: def8415a862effc67d549d5b5b0b9c7a2f97d4de
-  GoogleIPhoneUtilities: 63f25e93a3ddcb66884d182aab3a660d98f1479b
   GoogleNetworkingUtilities: 3e83269048cfb498dc7ec83ab36813360965c74f
   GoogleParsingUtilities: 30b3896f9ee167dc78747f013d3de157ced1cadf
   GoogleSymbolUtilities: 33117db1b5f290c6fbf259585e4885b4c84b98d7
@@ -108,6 +95,6 @@ SPEC CHECKSUMS:
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
 
-PODFILE CHECKSUM: 2ceab56f1746ff88c7707ed943f95da80b6b759e
+PODFILE CHECKSUM: 3ef1e1a6c825e33ec8204096fac6ecc78bcd816e
 
 COCOAPODS: 1.0.1
