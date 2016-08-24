@@ -41,6 +41,7 @@ extern NSString *const kChatRooms;
         extern NSString *const kSenderDisplayName;
         extern NSString *const kSenderId;
         extern NSString *const kText;
+        extern NSString *const kMedia;
 
 extern NSString *const kUserDetails;
     extern NSString *const kBlockedUsers;

@@ -41,6 +41,7 @@ NSString *const kChatRooms = @"chats";
         NSString *const kSenderDisplayName = @"senderDisplayName";
         NSString *const kSenderId = @"senderId";
         NSString *const kText = @"text";
+        NSString *const kMedia = @"media";
 
 NSString *const kUserDetails = @"userDetails";
     NSString *const kBlockedUsers = @"blockedUsers";

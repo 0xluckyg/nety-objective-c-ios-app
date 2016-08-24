@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <JSQMessagesViewController/JSQMessages.h> 
+#import <JSQMessagesViewController/JSQMessages.h>
 #import "UIPrinciples.h"
 #import "Constants.h"
+#import "MBProgressHUD.h"
 
 #import <SDWebImage/UIImageView+WebCache.h>
 //
@@ -36,6 +37,7 @@
 
 @property (strong, nonatomic) NSString *chatroomID;
 
+@property (strong, nonatomic) UIImage *chatImage;
 
 //UTIL CLASSES----------------------------------------
 

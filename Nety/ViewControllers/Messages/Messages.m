@@ -28,6 +28,7 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
 }
 
@@ -47,9 +48,9 @@
     self.senderId = MY_USER.userID;
     self.senderDisplayName = [NSString stringWithFormat:@"%@ %@",MY_USER.firstName, MY_USER.lastName];
     
-    [self createRoomAndObserveMessages];
-    
     self.messages = [[NSMutableArray alloc] init];
+    
+    [self createRoomAndObserveMessages];
     
 }
 
@@ -72,6 +73,7 @@
     
     self.outgoingBubbleImageView = [outgoingImage outgoingMessagesBubbleImageWithColor:self.UIPrinciple.netyBlue];
     self.incomingBubbleImageView = [incomingImage incomingMessagesBubbleImageWithColor:self.UIPrinciple.netyGray];
+    
     
     //Set up avatar image
     if ([self.selectedUserProfileImageString isEqualToString:kDefaultUserLogoName]) {
@@ -97,7 +99,7 @@
     
     
     
-    //Style the navigation bar    
+    //Style the navigation bar
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"Back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:normal target:self action:@selector(backButtonPressed)];
     
     self.navigationItem.leftBarButtonItem = leftButton;
@@ -215,6 +217,45 @@
 }
 
 
+//When photo choosing screen shows, customize nav controller
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    //Customizing view controller here
+    [viewController.navigationController.navigationBar setBackgroundColor:self.UIPrinciple.netyBlue];
+    [viewController.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    [viewController.navigationController.navigationBar setTranslucent:NO];
+    [self.UIPrinciple addTopbarColor:viewController];
+    
+    //Style navbar
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
+                                [UIColor whiteColor], NSForegroundColorAttributeName, nil];
+    
+    [viewController.navigationController.navigationBar setTitleTextAttributes:attributes];
+    
+}
+
+// This method is called when an image has been chosen from the library or taken from the camera.
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    //You can retrieve the actual UIImage
+    
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    
+    UIImage *editedimage = [info objectForKey:UIImagePickerControllerEditedImage];
+    
+    if (![UIImagePNGRepresentation(image) isEqualToData:UIImagePNGRepresentation(editedimage)]) {
+        image = editedimage;
+    }
+    
+    self.chatImage = [[UIImage alloc] init];
+    self.chatImage = image;
+    
+    NSString *senderName = [NSString stringWithFormat:@"%@ %@",MY_USER.firstName, MY_USER.lastName];
+    
+    [self uploadImage:self.senderId senderDisplayName:senderName pickedImage:image];
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - Buttons
 //---------------------------------------------------------
 
@@ -222,17 +263,25 @@
 - (void)didPressAccessoryButton:(UIButton *)sender
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Image Source"
-                                                                   message:@"How would you like to send file?"
+                                                                   message:@"How would you like to send photo?"
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
     
     UIAlertAction *camera = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * action) {
-                                                       
+                                                       UIImagePickerController *pickerLibrary = [[UIImagePickerController alloc] init];
+                                                       pickerLibrary.delegate = (id)self;
+                                                       pickerLibrary.allowsEditing = YES;
+                                                       pickerLibrary.sourceType = UIImagePickerControllerSourceTypeCamera;
+                                                       [self presentViewController:pickerLibrary animated:YES completion:nil];
                                                    }];
     
     UIAlertAction *library = [UIAlertAction actionWithTitle:@"Library" style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction * action) {
-                                                        
+                                                        UIImagePickerController *pickerLibrary = [[UIImagePickerController alloc] init];
+                                                        pickerLibrary.delegate = (id)self;
+                                                        pickerLibrary.allowsEditing = YES;
+                                                        pickerLibrary.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+                                                        [self presentViewController:pickerLibrary animated:YES completion:nil];
                                                     }];
     
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
@@ -259,31 +308,14 @@
     FIRDatabaseReference *messageRef = [[[self.firdatabase child:kChatRooms] child:self.chatroomID] child:kMessages ];
     [[messageRef childByAutoId] setValue:messageData];
     
+    [self editChatRoomInfo:text date:secondsSince1970];
     
-    //Editing each user's chat room data
-    FIRDatabaseReference *selectedUserChatRoomRef = [[[[self.firdatabase child:kUserChats] child:self.selectedUserID] child:kChats] child:self.chatroomID];
-    FIRDatabaseReference *userChatRoomRef = [[[[self.firdatabase child:kUserChats] child:self.senderId] child:kChats] child:self.chatroomID];
-    
-    if (otherUserStatus == 0) {
-        readcount += 1;
-        NSNumber *readcountToDatabase = @(readcount);
-        
-        [selectedUserChatRoomRef updateChildValues:@{kUnread:readcountToDatabase}];
-    }
-    
-    [selectedUserChatRoomRef updateChildValues:@{kRecentMessage:text}];
-    [selectedUserChatRoomRef updateChildValues:@{kUpdateTime:secondsSince1970}];
-    
-    [userChatRoomRef updateChildValues:@{kRecentMessage:text}];
-    [userChatRoomRef updateChildValues:@{kUpdateTime:secondsSince1970}];
-    
-    [self finishSendingMessage];
+    [self finishSendingMessageAnimated:YES];
 }
 
 
 #pragma mark - View Disappear
 //---------------------------------------------------------
-
 
 -(void)backButtonPressed {
     
@@ -311,16 +343,16 @@
         [[[self.firdatabase child:kChatRooms] child:self.chatroomID] removeValue];
         //Remove value
         [[[[[self.firdatabase child:kUserChats]
-                child:self.senderId]
-                child:kChats]
-                child:self.chatroomID]
-                removeValue];
+            child:self.senderId]
+           child:kChats]
+          child:self.chatroomID]
+         removeValue];
         
         [[[[[self.firdatabase child:kUserChats]
-                child:self.selectedUserID]
-                child:kChats]
-                child:self.chatroomID]
-                removeValue];
+            child:self.selectedUserID]
+           child:kChats]
+          child:self.chatroomID]
+         removeValue];
         
     }
     
@@ -329,6 +361,27 @@
 
 #pragma mark - Custom methods
 //---------------------------------------------------------
+
+-(void)editChatRoomInfo: (NSString *)text date:(NSNumber *)secondsSince1970{
+    
+    //Editing each user's chat room data
+    FIRDatabaseReference *selectedUserChatRoomRef = [[[[self.firdatabase child:kUserChats] child:self.selectedUserID] child:kChats] child:self.chatroomID];
+    FIRDatabaseReference *userChatRoomRef = [[[[self.firdatabase child:kUserChats] child:self.senderId] child:kChats] child:self.chatroomID];
+    
+    if (otherUserStatus == 0) {
+        readcount += 1;
+        NSNumber *readcountToDatabase = @(readcount);
+        
+        [selectedUserChatRoomRef updateChildValues:@{kUnread:readcountToDatabase}];
+    }
+    
+    [selectedUserChatRoomRef updateChildValues:@{kRecentMessage:text}];
+    [selectedUserChatRoomRef updateChildValues:@{kUpdateTime:secondsSince1970}];
+    
+    [userChatRoomRef updateChildValues:@{kRecentMessage:text}];
+    [userChatRoomRef updateChildValues:@{kUpdateTime:secondsSince1970}];
+    
+}
 
 - (void)createRoomAndObserveMessages {
     
@@ -386,7 +439,7 @@
         }
         
     } withCancelBlock:nil];
-
+    
 }
 
 - (void)listenForReadCountAndOnlineStatus {
@@ -408,31 +461,106 @@
         }
         
     } withCancelBlock:nil];
-
+    
 }
 
 - (void)observeMessagesFromDatabase {
     
-    
-    
     [[[[self.firdatabase child:kChatRooms] child:self.chatroomID] child:kMessages] observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
         NSMutableDictionary *messagesDictionary = snapshot.value;
+        NSLog(@"message: %@", messagesDictionary);
         NSString *senderIdFromDatabase = [messagesDictionary objectForKey:kSenderId];
         NSString *senderDisplaynameFromDatabase = [messagesDictionary objectForKey:kSenderDisplayName];
         double timeSince1970Double = [[messagesDictionary objectForKey:kDate] doubleValue] * -1;
         NSDate * messageDate = [self convertDoubleToDate:timeSince1970Double];
         NSString *textFromDatabase = [messagesDictionary objectForKey:kText];
-        JSQMessage *jsqMessage = [[JSQMessage alloc] initWithSenderId:senderIdFromDatabase senderDisplayName:senderDisplaynameFromDatabase date:messageDate text:textFromDatabase];
-        
-        [self.messages addObject:jsqMessage];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.collectionView reloadData];
-        });
+        if ([messagesDictionary objectForKey:kText]) {
+            JSQMessage *jsqMessage = [[JSQMessage alloc] initWithSenderId:senderIdFromDatabase senderDisplayName:senderDisplaynameFromDatabase date:messageDate text:textFromDatabase];
+            
+            [self.messages addObject:jsqMessage];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.collectionView reloadData];
+            });
+            
+            [self scrollToBottomAnimated:YES];
+            
+        } else {
+            
+            UIImageView *chatImage = [[UIImageView alloc] init];
+            
+            [chatImage sd_setImageWithURL:[messagesDictionary objectForKey:kMedia] placeholderImage:[UIImage imageNamed:kDefaultUserLogoName] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                
+                NSLog(@"fetched image");
+                JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithImage:chatImage.image];
+                
+                JSQMessage *photoMessage = [[JSQMessage alloc] initWithSenderId:senderIdFromDatabase senderDisplayName:senderDisplaynameFromDatabase date:messageDate media:photoItem];
+                
+                [self.messages addObject:photoMessage];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.collectionView reloadData];
+                });
+                
+                [self scrollToBottomAnimated:YES];
+                
+            }];
+            
+            
+        }
         
     } withCancelBlock:nil];
+    
+}
 
+-(void)uploadImage: (NSString *)senderID senderDisplayName:(NSString *)senderName pickedImage:(UIImage *)pickedImage {
+    
+    //Uploading profile image
+    NSString *chatMediaImage = [[NSUUID UUID] UUIDString];
+    
+    FIRStorage *storage = [FIRStorage storage];
+    FIRStorageReference *chatMediaImageRef = [[[storage reference]
+                                               child:@"ChatImages"]
+                                              child:chatMediaImage];
+    
+    NSData *pickedImageData = UIImagePNGRepresentation(pickedImage);
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.label.text = @"Uploading";
+    hud.bezelView.color = [self.UIPrinciple.netyBlue colorWithAlphaComponent:0.3f];
+    [hud showAnimated:YES];
+    
+    //Uploading big profile picture first
+    [chatMediaImageRef putData:pickedImageData metadata:nil completion:^(FIRStorageMetadata * _Nullable metadata, NSError * _Nullable error) {
+        
+        if (error) {
+            [hud hideAnimated:YES];
+            NSLog(@"%@", error.localizedDescription);
+            [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Can not upload image" message:@"Please try again at another time" viewController:self];
+            
+        } else {
+            
+            NSNumber *secondsSince1970 = [NSNumber numberWithInt: -1 * [[NSDate date] timeIntervalSince1970]];
+            
+            NSString *dataUrlString = [[metadata downloadURL] absoluteString];
+            
+            NSDictionary *photoMessageData = @{ kSenderId: senderID,
+                                                kSenderDisplayName: senderName,
+                                                kDate: secondsSince1970,
+                                                kMedia: dataUrlString};
+            
+            FIRDatabaseReference *photoMessageRef = [[[self.firdatabase child:kChatRooms] child:self.chatroomID] child:kMessages ];
+            [[photoMessageRef childByAutoId] setValue:photoMessageData];
+            
+            [self editChatRoomInfo:@"Photo" date:secondsSince1970];
+            
+            [hud hideAnimated:YES];
+        }
+        
+    }];
+    
 }
 
 - (NSDate *)convertDoubleToDate: (double)timeIntervalDouble {
