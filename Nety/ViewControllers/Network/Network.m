@@ -111,7 +111,7 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
     
     [self.navigationController.navigationBar setItems:@[navItem]];
     
-    //[self.searchBar setBarTintColor:[UIColor whiteColor]];
+    [self.searchBar setBarTintColor:[UIColor whiteColor]];
     
     self.navigationItem.title = [NSString stringWithFormat:@"%@ Near Me", [self calculateDistanceToDescription]];
     
@@ -278,6 +278,10 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
 
 
 //Hide keyboard when search button pressed
+-(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:YES animated:YES];
+}
+
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [searchBar endEditing:YES];
     _fetchedResultsController = nil;
@@ -292,6 +296,10 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
     _fetchedResultsController = nil;
     _fetchedResultsController.delegate = nil;
     [self.table reloadData];
+}
+
+-(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:NO animated:YES];
 }
 
 #pragma mark - Buttons

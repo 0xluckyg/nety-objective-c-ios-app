@@ -81,9 +81,7 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
     
     [self.navigationController.navigationBar setTitleTextAttributes:attributes];
     
-    [self.navigationController.navigationBar setItems:@[navItem]];
-
-    
+    [self.navigationController.navigationBar setItems:@[navItem]];    
     
     //Set searchbar
     [self.searchBar setBarTintColor:[UIColor whiteColor]];
@@ -339,6 +337,11 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
     }
 }
 
+//Searchbar
+-(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:YES animated:YES];
+}
+
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [searchBar endEditing:YES];
     _fetchedResultsController = nil;
@@ -353,6 +356,10 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
     _fetchedResultsController = nil;
     _fetchedResultsController.delegate = nil;
     [self.table reloadData];
+}
+
+-(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:NO animated:YES];
 }
 
 

@@ -91,6 +91,13 @@
     [[UINavigationBar appearance] setBarTintColor:self.UIPrinciple.netyBlue];
     [[UINavigationBar appearance] setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
 
+    //Style navbar
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [self.UIPrinciple netyFontWithSize:15], NSFontAttributeName,
+                                self.UIPrinciple.netyBlue, NSForegroundColorAttributeName, nil];
+    
+    [[UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil] setTitleTextAttributes:attributes
+                                                                                        forState:UIControlStateNormal];
 }
 
 -(void)initializeSettings {
