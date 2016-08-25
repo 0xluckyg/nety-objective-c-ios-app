@@ -1,5 +1,6 @@
 PODS:
   - APParallaxHeader (0.1.6)
+  - BEMCheckBox (1.2.1)
   - Firebase/Analytics (3.5.1):
     - FirebaseAnalytics (~> 3.3.1)
   - Firebase/AppIndexing (3.5.1):
@@ -63,6 +64,7 @@ PODS:
 
 DEPENDENCIES:
   - APParallaxHeader
+  - BEMCheckBox
   - Firebase/AppIndexing
   - Firebase/Auth
   - Firebase/Core
@@ -76,6 +78,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   APParallaxHeader: 854bc48a2487ca12c702f8a236fec0d89cdac5c3
+  BEMCheckBox: 264b8b72aa92adbfefa265cc58a0cdb86b207b9f
   Firebase: 9b3edeffaf60d56e377dc5281e91c4ba935a5ad9
   FirebaseAnalytics: d968d4d5f6aeb795cd64144337bcd233e530efc6
   FirebaseAppIndexing: 2afde496e2cdde46a74476f29ef41b51e76bb2d5
@@ -95,6 +98,6 @@ SPEC CHECKSUMS:
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
 
-PODFILE CHECKSUM: 3ef1e1a6c825e33ec8204096fac6ecc78bcd816e
+PODFILE CHECKSUM: 521d1479974a2c6fb945c23f69d6df549f263fd2
 
 COCOAPODS: 1.0.1

@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *profileImageUrl;
 @property (nullable, nonatomic, retain) NSString *status;
 @property (nullable, nonatomic, retain) NSString *summary;
+@property (nullable, nonatomic, retain) NSNumber *security;
 @property (nullable, nonatomic, retain) NSString *userID;
 @property (nullable, nonatomic, retain) NSNumber *distance;
 @property (nullable, nonatomic, retain) NSSet<Experiences *> *experiences;

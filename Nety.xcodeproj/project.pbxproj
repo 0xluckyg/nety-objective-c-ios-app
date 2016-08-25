@@ -14,7 +14,10 @@
 		67391DF21D27FBC400A50C03 /* SignupProcess2.m in Sources */ = {isa = PBXBuildFile; fileRef = 67391DF11D27FBC400A50C03 /* SignupProcess2.m */; };
 		67391DF51D27FBD800A50C03 /* SignupProcessExperienceDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 67391DF41D27FBD800A50C03 /* SignupProcessExperienceDetail.m */; };
 		67391DFB1D280A9600A50C03 /* SignupProcessExperienceDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 67391DFA1D280A9600A50C03 /* SignupProcessExperienceDetailCell.m */; };
-		673E2BB01D6D883D00AB139F /* ChatButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 673E2BAF1D6D883D00AB139F /* ChatButton.m */; };
+		673E2BB31D6E64C000AB139F /* ChatButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 673E2BB21D6E64C000AB139F /* ChatButtonCell.m */; };
+		673E2BB61D6E656800AB139F /* MainInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 673E2BB51D6E656800AB139F /* MainInfoCell.m */; };
+		673E2BB91D6E657100AB139F /* ExperienceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 673E2BB81D6E657100AB139F /* ExperienceCell.m */; };
+		673E2BBC1D6E657C00AB139F /* InterestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 673E2BBB1D6E657C00AB139F /* InterestCell.m */; };
 		673E58701D6AAE6400D28F5B /* NewChats.m in Sources */ = {isa = PBXBuildFile; fileRef = 673E586F1D6AAE6400D28F5B /* NewChats.m */; };
 		673E58731D6AAE7900D28F5B /* MyChats.m in Sources */ = {isa = PBXBuildFile; fileRef = 673E58721D6AAE7900D28F5B /* MyChats.m */; };
 		673E58761D6AAFA300D28F5B /* CAPSPageMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 673E58751D6AAFA300D28F5B /* CAPSPageMenu.m */; };
@@ -99,8 +102,14 @@
 		67391DF41D27FBD800A50C03 /* SignupProcessExperienceDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupProcessExperienceDetail.m; sourceTree = "<group>"; };
 		67391DF91D280A9600A50C03 /* SignupProcessExperienceDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupProcessExperienceDetailCell.h; sourceTree = "<group>"; };
 		67391DFA1D280A9600A50C03 /* SignupProcessExperienceDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupProcessExperienceDetailCell.m; sourceTree = "<group>"; };
-		673E2BAE1D6D883D00AB139F /* ChatButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatButton.h; sourceTree = "<group>"; };
-		673E2BAF1D6D883D00AB139F /* ChatButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatButton.m; sourceTree = "<group>"; };
+		673E2BB11D6E64C000AB139F /* ChatButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatButtonCell.h; sourceTree = "<group>"; };
+		673E2BB21D6E64C000AB139F /* ChatButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatButtonCell.m; sourceTree = "<group>"; };
+		673E2BB41D6E656800AB139F /* MainInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainInfoCell.h; sourceTree = "<group>"; };
+		673E2BB51D6E656800AB139F /* MainInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainInfoCell.m; sourceTree = "<group>"; };
+		673E2BB71D6E657100AB139F /* ExperienceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExperienceCell.h; sourceTree = "<group>"; };
+		673E2BB81D6E657100AB139F /* ExperienceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExperienceCell.m; sourceTree = "<group>"; };
+		673E2BBA1D6E657C00AB139F /* InterestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterestCell.h; sourceTree = "<group>"; };
+		673E2BBB1D6E657C00AB139F /* InterestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterestCell.m; sourceTree = "<group>"; };
 		673E586E1D6AAE6400D28F5B /* NewChats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewChats.h; sourceTree = "<group>"; };
 		673E586F1D6AAE6400D28F5B /* NewChats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewChats.m; sourceTree = "<group>"; };
 		673E58711D6AAE7900D28F5B /* MyChats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyChats.h; sourceTree = "<group>"; };
@@ -294,8 +303,14 @@
 		673E2BAD1D6D881000AB139F /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				673E2BAE1D6D883D00AB139F /* ChatButton.h */,
-				673E2BAF1D6D883D00AB139F /* ChatButton.m */,
+				673E2BB11D6E64C000AB139F /* ChatButtonCell.h */,
+				673E2BB21D6E64C000AB139F /* ChatButtonCell.m */,
+				673E2BB41D6E656800AB139F /* MainInfoCell.h */,
+				673E2BB51D6E656800AB139F /* MainInfoCell.m */,
+				673E2BB71D6E657100AB139F /* ExperienceCell.h */,
+				673E2BB81D6E657100AB139F /* ExperienceCell.m */,
+				673E2BBA1D6E657C00AB139F /* InterestCell.h */,
+				673E2BBB1D6E657C00AB139F /* InterestCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -792,14 +807,16 @@
 			files = (
 				67DD1AB31D17D40D00FBEA0F /* UIPrinciples.m in Sources */,
 				67606C6E1D24888700AD127E /* MyInfoEditExperience.m in Sources */,
+				673E2BB91D6E657100AB139F /* ExperienceCell.m in Sources */,
 				678138AB1D33B2DD00BFBF48 /* Settings.m in Sources */,
 				E1E0B95A1D6A1A8800295133 /* Experiences.m in Sources */,
 				E18CB8C81D6E118300742CCE /* GFQuery.m in Sources */,
+				673E2BB31D6E64C000AB139F /* ChatButtonCell.m in Sources */,
 				E163EFB11D6B48B8004374E3 /* ChatRooms.m in Sources */,
 				67DD1AA21D17BFC300FBEA0F /* Chat.m in Sources */,
 				67602F501D2EC75F00DA2F3A /* Messages.m in Sources */,
 				6733390E1D20B5ED00A8009F /* ChatCell.m in Sources */,
-				673E2BB01D6D883D00AB139F /* ChatButton.m in Sources */,
+				673E2BB61D6E656800AB139F /* MainInfoCell.m in Sources */,
 				67391DEA1D27ED0200A50C03 /* Signup.m in Sources */,
 				67D4AD651D265A7E00F42B7F /* Login.m in Sources */,
 				67391DEF1D27FBB900A50C03 /* SignupProcess1.m in Sources */,
@@ -827,6 +844,7 @@
 				673338F71D20937C00A8009F /* MyNetworkCell.m in Sources */,
 				E18CB8C41D6E118300742CCE /* GeoFire.m in Sources */,
 				67391DFB1D280A9600A50C03 /* SignupProcessExperienceDetailCell.m in Sources */,
+				673E2BBC1D6E657C00AB139F /* InterestCell.m in Sources */,
 				67DD1AAD1D17C3E600FBEA0F /* Profile.m in Sources */,
 				E18CB8C51D6E118300742CCE /* GFBase32Utils.m in Sources */,
 				E188C3FA1D6E41F100CCFD0F /* Users+CoreDataProperties.m in Sources */,

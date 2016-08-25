@@ -43,16 +43,20 @@
     
 //    self.imageCache = [[NSCache alloc] init];
     
+    if ([self.selectedUser.security isEqualToNumber:@(3)]) {
+        numberOfComponents = 8 + (int)[[self.selectedUser.experiences allObjects] count];
+    } else {
+        numberOfComponents = 7 + (int)[[self.selectedUser.experiences allObjects] count];
+    }
+    
 }
 
 - (void)initializeDesign {
     self.UIPrinciple = [[UIPrinciples alloc] init];
     
-    //Info content
-    NSString *status = _selectedUser.status;
-    NSString *summary = _selectedUser.summary;
-    NSArray *experiences = [MY_USER.experiences allObjects];
     NSString *name = [NSString stringWithFormat:@"%@ %@", _selectedUser.firstName, _selectedUser.lastName];
+    
+    NSLog(@"%@", self.selectedUser);
     
     //Style navbar
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -84,9 +88,13 @@
     [profileImageView setContentMode:UIViewContentModeScaleAspectFill];
     
     [self.tableView addParallaxWithView:profileImageView andHeight:height];
-    
     [self.tableView.parallaxView setDelegate:self];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [self.tableView setAllowsSelection:NO];
     
+    //Configure tableview height
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 140;
     
 }
 
@@ -95,21 +103,139 @@
 //---------------------------------------------------------
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return numberOfComponents;
+}
 
-    return 0;
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.row == 1 || indexPath.row == 5 || indexPath.row == 6) {
+        return 10;
+    } else {
+        return UITableViewAutomaticDimension;
+    }
+    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ChatButton *networkCell = [tableView dequeueReusableCellWithIdentifier:@"statusOrSummary" forIndexPath:indexPath];
     
-    return networkCell;
+    int normalNumberOfCells = 8 + (int)[[self.selectedUser.experiences allObjects] count];
+    int indexCount = numberOfComponents - normalNumberOfCells;
+    
+    NSString *status = self.selectedUser.status;
+    NSString *summary = self.selectedUser.summary;
+    NSString *identity = self.selectedUser.identity;
+    NSArray *experiences = [self.selectedUser.experiences allObjects];
+    
+    if (indexPath.row == indexCount) {
+        ChatButtonCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChatButtonCell" forIndexPath:indexPath];
+        
+        [cell.buttonOutlet setTitle:@"Chat Now!" forState:UIControlStateNormal];
+        
+        return cell;
+    } else if (indexPath.row == indexCount + 1) {
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SpaceCell" forIndexPath:indexPath];
+        
+        return cell;
+        
+    } else if (indexPath.row >= indexCount + 2 && indexPath.row <= indexCount + 4) {
+        
+        MainInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MainInfoCell" forIndexPath:indexPath];
+        
+        cell.mainInfoImage.image = [[UIImage imageNamed:@"LightBulb"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        
+        cell.mainInfoLabel.textColor = self.UIPrinciple.netyBlue;
+        
+        [cell.mainInfoImage setTintColor:self.UIPrinciple.netyBlue];
+        
+        switch (indexPath.row) {
+            case 2:
+                if ([identity isEqualToString:@""]) {
+                    cell.mainInfoLabel.text = @"No description";
+                } else {
+                    cell.mainInfoLabel.text = identity;
+                }
+                
+                break;
+            case 3: {
+                if ([status isEqualToString:@""]) {
+                    cell.mainInfoLabel.text = @"No status";
+                } else {
+                    cell.mainInfoLabel.text = status;
+                }
+                
+                break;
+            }
+            case 4: {
+                if ([summary isEqualToString:@""]) {
+                    cell.mainInfoLabel.text = @"No summary";
+                } else {
+                    cell.mainInfoLabel.text = summary;
+                }
+                
+                break;
+            }
+        }
+        
+        return cell;
+        
+    } else if (indexPath.row >= indexCount + 5 && indexPath.row <= indexCount + 6) {
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SpaceCell" forIndexPath:indexPath];
+        
+        if (indexPath.row == 5) {
+            
+            float cellHeight = cell.contentView.frame.size.height;
+            float cellWidth = cell.contentView.frame.size.width;
+            
+            UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(0, cellHeight - 1, cellWidth, 1)];/// change size as you need.
+            separatorLineView.backgroundColor = self.UIPrinciple.netyBlue;
+            [cell.contentView addSubview:separatorLineView];
+            
+        }
+        
+        return cell;
+        
+    } else if (indexPath.row == indexCount + 7) {
+        
+        MainInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MainInfoCell" forIndexPath:indexPath];
+        
+        cell.mainInfoImage.image = [[UIImage imageNamed:@"LightBulb"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        
+        [cell.mainInfoImage setTintColor:self.UIPrinciple.netyBlue];
+        
+        cell.mainInfoLabel.textColor = self.UIPrinciple.netyBlue;
+        
+        if ([experiences count] == 0) {
+            cell.mainInfoLabel.text = @"No experiences";
+        } else {
+            cell.mainInfoLabel.text = @"Experiences";
+        }
+        
+        return cell;
+        
+    } else {
+        
+        ExperienceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ExperienceCell" forIndexPath:indexPath];
+        
+        cell.experienceName.textColor = self.UIPrinciple.netyBlue;
+        cell.experienceDate.textColor = self.UIPrinciple.netyBlue;
+        cell.experienceDescription.textColor = self.UIPrinciple.netyBlue;
+        
+        cell.experienceName.text = @"Exp";
+        cell.experienceDate.text = @"Date";
+        cell.experienceDescription.text = @"Des";
+        
+        return cell;
+        
+    }
 }
 
 #pragma mark - Buttons
 //---------------------------------------------------------
 
 - (IBAction)chatNowButton:(id)sender {
-    
     
     UIStoryboard *messagesStoryboard = [UIStoryboard storyboardWithName:@"Messages" bundle:nil];
     Messages *messagesVC = [messagesStoryboard instantiateViewControllerWithIdentifier:@"Messages"];
@@ -137,14 +263,6 @@
 -(void) backButtonPressed {
     
     [self.navigationController popViewControllerAnimated:YES];
-    
-    __weak typeof(self) weakSelf = self;
-    weakSelf.tabBarController.tabBar.hidden = NO;
-    [self.UIPrinciple setTabBarVisible:![self.UIPrinciple tabBarIsVisible:self] animated:YES sender:self completion:^(BOOL finished) {
-        NSLog(@"animation done");
-        
-    }];
-    
 }
 
 

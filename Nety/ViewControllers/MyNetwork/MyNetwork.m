@@ -355,6 +355,13 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
     [self.table reloadData];
 }
 
+-(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:YES animated:YES];
+}
+
+-(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:NO animated:YES];
+}
 
 #pragma mark - Buttons
 //---------------------------------------------------------

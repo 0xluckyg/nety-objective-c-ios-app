@@ -24,6 +24,7 @@
 @dynamic profileImageUrl;
 @dynamic status;
 @dynamic summary;
+@dynamic security;
 @dynamic userID;
 @dynamic distance;
 @dynamic experiences;

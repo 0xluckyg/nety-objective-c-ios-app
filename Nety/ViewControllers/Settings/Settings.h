@@ -10,6 +10,8 @@
 #import "UIPrinciples.h"
 #import "Constants.h"
 
+#import "N_CoreDataTableViewController.h"
+
 @import Firebase;
 
 @interface Settings : UITableViewController

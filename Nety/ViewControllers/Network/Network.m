@@ -44,8 +44,6 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
     [self addSlider:self.sliderView slider:self.slider];
     
     self.navigationItem.title = [NSString stringWithFormat:@"%@ Near Me", [self calculateDistanceToDescription]];
-    self.tabBarController.tabBar.hidden = NO;
-    
     
     //If no experiences visible, show noContent header
     if ([[self fetchedResultsController].fetchedObjects count] == 0) {
@@ -110,7 +108,7 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
     
     [self.navigationController.navigationBar setItems:@[navItem]];
     
-    //[self.searchBar setBarTintColor:[UIColor whiteColor]];
+    [self.searchBar setBarTintColor:[UIColor whiteColor]];
     
     self.navigationItem.title = [NSString stringWithFormat:@"%@ Near Me", [self calculateDistanceToDescription]];
     
@@ -262,13 +260,6 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
     
     goingToProfileView = true;
     
-    __weak typeof(self) weakSelf = self;
-    [self.UIPrinciple setTabBarVisible:![self.UIPrinciple tabBarIsVisible:self] animated:YES sender:self completion:^(BOOL finished) {
-        NSLog(@"animation done");
-        [weakSelf.sliderView removeFromSuperview];
-        weakSelf.tabBarController.tabBar.hidden = YES;
-    }];
-    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     [self.navigationController pushViewController:profilePage animated:YES];
@@ -292,6 +283,14 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
     _fetchedResultsController = nil;
     _fetchedResultsController.delegate = nil;
     [self.table reloadData];
+}
+
+-(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:YES animated:YES];
+}
+
+-(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:NO animated:YES];
 }
 
 #pragma mark - Buttons

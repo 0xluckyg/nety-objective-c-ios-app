@@ -1,5 +1,5 @@
 //
-//  ChatButton.h
+//  InterestCell.h
 //  Nety
 //
 //  Created by Scott Cho on 8/24/16.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ChatButton : UITableViewCell
+@interface InterestCell : UITableViewCell
+
+@property (weak, nonatomic) IBOutlet UILabel *interestDescription;
 
 @end

@@ -1,14 +1,14 @@
 //
-//  ChatButton.m
+//  InterestCell.m
 //  Nety
 //
 //  Created by Scott Cho on 8/24/16.
 //  Copyright © 2016 Scott Cho. All rights reserved.
 //
 
-#import "ChatButton.h"
+#import "InterestCell.h"
 
-@implementation ChatButton
+@implementation InterestCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

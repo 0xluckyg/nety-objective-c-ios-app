@@ -8,6 +8,7 @@ target 'Nety' do
     pod 'SWTableViewCell', '~> 0.3.7'
     pod 'MBProgressHUD'
     pod 'APParallaxHeader'
+    pod 'BEMCheckBox'
     pod 'SDWebImage'
     pod 'Firebase/Core'
     pod 'Firebase/Auth'

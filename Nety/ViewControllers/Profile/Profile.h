@@ -12,9 +12,14 @@
 #import "Messages.h"
 #import "Users.h"
 #import "UIScrollView+APParallaxHeader.h"
-#import "ChatButton.h"
+#import "ChatButtonCell.h"
+#import "ExperienceCell.h"
+#import "MainInfoCell.h"
+#import "InterestCell.h"
 
-@interface Profile : UIViewController <UITableViewDelegate, UITableViewDataSource, APParallaxViewDelegate>
+@interface Profile : UIViewController <UITableViewDelegate, UITableViewDataSource, APParallaxViewDelegate> {
+    int numberOfComponents;
+}
 
 
 //VARIABLES----------------------------------------
@@ -34,21 +39,6 @@
 //IBOUTLETS----------------------------------------
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
-@property (weak, nonatomic) IBOutlet UIView *basicInfoView;
-
-@property (weak, nonatomic) IBOutlet UILabel *identityInfo;
-
-@property (weak, nonatomic) IBOutlet UILabel *statusInfo;
-
-@property (weak, nonatomic) IBOutlet UILabel *summaryInfo;
-
-@property (weak, nonatomic) IBOutlet UILabel *experienceInfo;
-
-@property (weak, nonatomic) IBOutlet UIButton *chatNowButtonOutlet;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *infoViewTopConstraint;
-
 
 //IBACTIONS----------------------------------------
 

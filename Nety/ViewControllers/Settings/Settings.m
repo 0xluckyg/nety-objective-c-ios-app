@@ -204,7 +204,6 @@
 #pragma mark - Custom methods
 //---------------------------------------------------------
 
-
 -(void)changeRoot {
     
     //Set root controller to tabbar with cross dissolve animation
