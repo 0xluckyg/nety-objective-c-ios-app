@@ -491,5 +491,36 @@
     
 }
 
+- (void) logOut
+{
+    NSArray* allObjects = [self allObjects];
+    
+    [self.firdatabase removeAllObservers];
+    self.myUser = nil;
+    
+    for (id object in allObjects) {
+        [self.managedObjectContext deleteObject:object];
+    }
+    [self.managedObjectContext save:nil];
+}
+
+- (NSArray*) allObjects {
+    
+    NSFetchRequest* request = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription* description =
+    [NSEntityDescription entityForName:@"ALL"
+                inManagedObjectContext:self.managedObjectContext];
+    
+    [request setEntity:description];
+    
+    NSError* requestError = nil;
+    NSArray* resultArray = [self.managedObjectContext executeFetchRequest:request error:&requestError];
+    if (requestError) {
+        NSLog(@"%@", [requestError localizedDescription]);
+    }
+    
+    return resultArray;
+}
 
 @end

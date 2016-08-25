@@ -111,6 +111,7 @@
         [[FIRAuth auth] signOut:&error];
         if (!error) {
             [self changeRoot];
+            [MY_API logOut];
         }
         
     }];

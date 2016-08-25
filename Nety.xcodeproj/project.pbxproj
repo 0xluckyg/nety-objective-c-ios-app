@@ -74,6 +74,8 @@
 		E188C3FA1D6E41F100CCFD0F /* Users+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E188C3F71D6E41F100CCFD0F /* Users+CoreDataProperties.m */; };
 		E188C3FB1D6E41F100CCFD0F /* Users.m in Sources */ = {isa = PBXBuildFile; fileRef = E188C3F91D6E41F100CCFD0F /* Users.m */; };
 		E188C3FD1D6E461300CCFD0F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E188C3FC1D6E461300CCFD0F /* MapKit.framework */; };
+		E188C40E1D6F89F400CCFD0F /* ALL.m in Sources */ = {isa = PBXBuildFile; fileRef = E188C40B1D6F89F400CCFD0F /* ALL.m */; };
+		E188C40F1D6F89F400CCFD0F /* ALL+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E188C40D1D6F89F400CCFD0F /* ALL+CoreDataProperties.m */; };
 		E18CB8B51D6D9C0400742CCE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E18CB8B41D6D9C0400742CCE /* GoogleService-Info.plist */; };
 		E18CB8C41D6E118300742CCE /* GeoFire.m in Sources */ = {isa = PBXBuildFile; fileRef = E18CB8BA1D6E118300742CCE /* GeoFire.m */; };
 		E18CB8C51D6E118300742CCE /* GFBase32Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = E18CB8BD1D6E118300742CCE /* GFBase32Utils.m */; };
@@ -210,6 +212,10 @@
 		E188C3F81D6E41F100CCFD0F /* Users.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Users.h; path = CoreData/Users.h; sourceTree = "<group>"; };
 		E188C3F91D6E41F100CCFD0F /* Users.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Users.m; path = CoreData/Users.m; sourceTree = "<group>"; };
 		E188C3FC1D6E461300CCFD0F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		E188C40A1D6F89F400CCFD0F /* ALL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ALL.h; path = CoreData/ALL.h; sourceTree = "<group>"; };
+		E188C40B1D6F89F400CCFD0F /* ALL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ALL.m; path = CoreData/ALL.m; sourceTree = "<group>"; };
+		E188C40C1D6F89F400CCFD0F /* ALL+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ALL+CoreDataProperties.h"; path = "CoreData/ALL+CoreDataProperties.h"; sourceTree = "<group>"; };
+		E188C40D1D6F89F400CCFD0F /* ALL+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ALL+CoreDataProperties.m"; path = "CoreData/ALL+CoreDataProperties.m"; sourceTree = "<group>"; };
 		E18CB8B41D6D9C0400742CCE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E18CB8B61D6E118300742CCE /* GeoFire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFire.h; sourceTree = "<group>"; };
 		E18CB8B71D6E118300742CCE /* GFCircleQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCircleQuery.h; sourceTree = "<group>"; };
@@ -675,6 +681,10 @@
 				E163EFAD1D6B48B8004374E3 /* ChatRooms+CoreDataProperties.m */,
 				E163EFAE1D6B48B8004374E3 /* ChatRooms.h */,
 				E163EFAF1D6B48B8004374E3 /* ChatRooms.m */,
+				E188C40A1D6F89F400CCFD0F /* ALL.h */,
+				E188C40B1D6F89F400CCFD0F /* ALL.m */,
+				E188C40C1D6F89F400CCFD0F /* ALL+CoreDataProperties.h */,
+				E188C40D1D6F89F400CCFD0F /* ALL+CoreDataProperties.m */,
 			);
 			name = NetyUsersModel;
 			sourceTree = "<group>";
@@ -860,6 +870,7 @@
 				67DD1A9D1D17BF6900FBEA0F /* MyNetwork.m in Sources */,
 				67DD1A7C1D17BEB500FBEA0F /* main.m in Sources */,
 				679B9EEA1D236E0A00C426F2 /* MyInfoEditType2.m in Sources */,
+				E188C40F1D6F89F400CCFD0F /* ALL+CoreDataProperties.m in Sources */,
 				E1E0B9211D689D8600295133 /* Nety.xcdatamodeld in Sources */,
 				67D4AD621D26536000F42B7F /* MainPage.m in Sources */,
 				67DD1AB91D17E39B00FBEA0F /* NetworkData.m in Sources */,
@@ -867,6 +878,7 @@
 				673338F71D20937C00A8009F /* MyNetworkCell.m in Sources */,
 				E18CB8C41D6E118300742CCE /* GeoFire.m in Sources */,
 				67391DFB1D280A9600A50C03 /* SignupProcessExperienceDetailCell.m in Sources */,
+				E188C40E1D6F89F400CCFD0F /* ALL.m in Sources */,
 				673E2BBC1D6E657C00AB139F /* InterestCell.m in Sources */,
 				673E2BC61D6EC9AB00AB139F /* MyInfoInterestCell.m in Sources */,
 				67DD1AAD1D17C3E600FBEA0F /* Profile.m in Sources */,

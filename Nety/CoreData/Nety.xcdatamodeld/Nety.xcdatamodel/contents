@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15G31" minimumToolsVersion="Xcode 7.0">
-    <entity name="ChatRooms" representedClassName="ChatRooms" syncable="YES">
+    <entity name="ALL" representedClassName="ALL" syncable="YES"/>
+    <entity name="ChatRooms" representedClassName="ChatRooms" parentEntity="ALL" syncable="YES">
         <attribute name="charRoomID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fullName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="online" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
@@ -11,13 +12,13 @@
         <attribute name="updateTime" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <relationship name="members" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Users" syncable="YES"/>
     </entity>
-    <entity name="Experiences" representedClassName="Experiences" syncable="YES">
+    <entity name="Experiences" representedClassName="Experiences" parentEntity="ALL" syncable="YES">
         <attribute name="descript" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="endDate" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="startDate" optional="YES" attributeType="Binary" syncable="YES"/>
     </entity>
-    <entity name="Users" representedClassName="Users" syncable="YES">
+    <entity name="Users" representedClassName="Users" parentEntity="ALL" syncable="YES">
         <attribute name="age" optional="YES" attributeType="String" minValueString="0" syncable="YES"/>
         <attribute name="distance" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
@@ -37,5 +38,6 @@
         <element name="ChatRooms" positionX="-5438" positionY="-621" width="128" height="178"/>
         <element name="Experiences" positionX="-5438" positionY="-396" width="128" height="103"/>
         <element name="Users" positionX="-5661" positionY="-540" width="128" height="253"/>
+        <element name="ALL" positionX="-5589" positionY="-756" width="128" height="43"/>
     </elements>
 </model>
