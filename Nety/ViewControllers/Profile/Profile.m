@@ -7,8 +7,6 @@
 //
 
 #import "Profile.h"
-#import "UIPrinciples.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface Profile ()
 
@@ -108,8 +106,10 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    int normalNumberOfCells = 8 + (int)[[self.selectedUser.experiences allObjects] count];
+    int indexCount = numberOfComponents - normalNumberOfCells;
     
-    if (indexPath.row == 1 || indexPath.row == 5 || indexPath.row == 6) {
+    if (indexPath.row == indexCount + 1 || indexPath.row == indexCount + 5 || indexPath.row == indexCount + 6) {
         return 10;
     } else {
         return UITableViewAutomaticDimension;

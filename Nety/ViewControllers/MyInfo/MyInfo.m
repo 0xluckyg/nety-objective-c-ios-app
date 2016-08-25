@@ -7,7 +7,6 @@
 //
 
 #import "MyInfo.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface MyInfo ()
 
@@ -26,9 +25,13 @@
     
     [self initializeDesign];
     
+    NSLog(@"%@", MY_USER);
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    
+    numberOfComponents = 7 + (int)[[MY_USER.experiences allObjects] count];
     
     [self initializeSettings];
     
@@ -43,55 +46,6 @@
     
     self.firdatabase = [[FIRDatabase database] reference];
     
-    self.nameLabel.text = MY_USER.firstName;
-    
-    if ([MY_USER.identity isEqualToString:@""]) {
-        self.identityLabel.text = @"You haven't described who you are!";
-    } else {
-        self.identityLabel.text = MY_USER.identity;
-    }
-    
-    if ([MY_USER.status isEqualToString:@""]) {
-        self.userStatusInfo.text = @"You haven't set a status yet!";
-    } else {
-        self.userStatusInfo.text = MY_USER.status;
-    }
-    
-    if ([MY_USER.summary isEqualToString:@""]) {
-        self.userSummaryInfo.text = @"You haven't set a summary yet!";
-    } else {
-        self.userSummaryInfo.text = MY_USER.summary;
-    }
-    
-    self.experienceArray = [NSMutableArray arrayWithArray:[MY_USER.experiences allObjects]];
-    
-    if ([self.experienceArray count] > 0) {
-        
-        NSString *experienceString = @"";
-        
-        for (int i = 0; i < [self.experienceArray count]; i ++) {
-            
-            NSString *experienceStringAdd = [NSString stringWithFormat:@"%@\r%@ ~ %@\r\r%@\r\r\r",
-                                             [[self.experienceArray objectAtIndex:i] objectForKey:kExperienceName],
-                                             [[self.experienceArray objectAtIndex:i] objectForKey:kExperienceStartDate],
-                                             [[self.experienceArray objectAtIndex:i] objectForKey:kExperienceEndDate],
-                                             [[self.experienceArray objectAtIndex:i] objectForKey:kExperienceDescription]
-                                             ];
-            
-            experienceString = [experienceString stringByAppendingString:experienceStringAdd];
-        }
-        
-        self.userExperienceInfo.text = experienceString;
-        
-    } else {
-        
-        self.experienceArray = [[NSMutableArray alloc] init];
-        
-        self.userExperienceInfo.text = @"You didn't add any experience or interest yet";
-    }
-    
-    [self.userProfileImage sd_setImageWithURL:[NSURL URLWithString:MY_USER.profileImageUrl] placeholderImage:[UIImage imageNamed:kDefaultUserLogoName] completed:nil];
-    
 }
 
 - (void)initializeDesign {
@@ -102,19 +56,169 @@
     [self.view setBackgroundColor:self.UIPrinciple.netyBlue];
     
     //Color for the small view
-    self.userBasicInfoView.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.4f];
+    NSString *name = [NSString stringWithFormat:@"%@ %@", MY_USER.firstName, MY_USER.lastName];
     
-    //Color for the big view
-    self.userInfoView.backgroundColor = self.UIPrinciple.netyBlue;
+    //Style navbar
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
+                                [UIColor whiteColor], NSForegroundColorAttributeName, nil];
+    self.navigationItem.title = name;
     
-    self.userInfoViewTopConstraint.constant = self.view.frame.size.height / 2.3;
+    [self.navigationController.navigationBar setTitleTextAttributes:attributes];
     
+    //If image is not NetyBlueLogo, start downloading and caching the image
+    NSString *photoUrl = MY_USER.profileImageUrl;
+    self.profileImageView = [[UIImageView alloc] init];
+    
+    if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
+        NSURL *profileImageUrl = [NSURL URLWithString:photoUrl];
+        [self.profileImageView sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
+    } else {
+        self.profileImageView.image = [UIImage imageNamed:kDefaultUserLogoName];
+    }
+    
+    float width = self.view.frame.size.width;
+    float height = self.view.frame.size.height / 2.5;
+    
+    [self.profileImageView setFrame:CGRectMake(0, 0, width, height)];
+    [self.profileImageView setContentMode:UIViewContentModeScaleAspectFill];
+    
+    [self.tableView addParallaxWithView:self.profileImageView andHeight:height];
+    [self.tableView.parallaxView setDelegate:self];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [self.tableView setAllowsSelection:NO];
+    
+    //Configure tableview height
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 140;
     
 }
 
 
 #pragma mark - Protocols and Delegates
 //---------------------------------------------------------
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return numberOfComponents;
+}
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.row == 0 || indexPath.row == 5 || indexPath.row == 6) {
+        return 10;
+    } else {
+        return UITableViewAutomaticDimension;
+    }
+    
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSString *status = MY_USER.status;
+    NSString *summary = MY_USER.summary;
+    NSString *identity = MY_USER.identity;
+    NSArray *experiences = [MY_USER.experiences allObjects];
+    
+    if (indexPath.row == 0) {
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyInfoSpaceCell" forIndexPath:indexPath];
+        
+        return cell;
+        
+    } else if (indexPath.row >= 1 && indexPath.row <= 3) {
+        
+        MyInfoMainCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyInfoMainCell" forIndexPath:indexPath];
+        
+        cell.mainInfoImage.image = [[UIImage imageNamed:@"LightBulb"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        
+        cell.mainInfoLabel.textColor = self.UIPrinciple.netyBlue;
+        
+        [cell.mainInfoImage setTintColor:self.UIPrinciple.netyBlue];
+        
+        switch (indexPath.row) {
+            case 1:
+                if ([identity isEqualToString:@""]) {
+                    cell.mainInfoLabel.text = @"No description";
+                } else {
+                    cell.mainInfoLabel.text = identity;
+                }
+                
+                break;
+            case 2: {
+                if ([status isEqualToString:@""]) {
+                    cell.mainInfoLabel.text = @"No status";
+                } else {
+                    cell.mainInfoLabel.text = status;
+                }
+                
+                break;
+            }
+            case 3: {
+                if ([summary isEqualToString:@""]) {
+                    cell.mainInfoLabel.text = @"No summary";
+                } else {
+                    cell.mainInfoLabel.text = summary;
+                }
+                
+                break;
+            }
+        }
+        
+        return cell;
+        
+    } else if (indexPath.row >= 4 && indexPath.row <= 5) {
+        
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyInfoSpaceCell" forIndexPath:indexPath];
+        
+        if (indexPath.row == 4) {
+            
+            float cellHeight = cell.contentView.frame.size.height;
+            float cellWidth = cell.contentView.frame.size.width;
+            
+            UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(0, cellHeight - 1, cellWidth, 1)];/// change size as you need.
+            separatorLineView.backgroundColor = self.UIPrinciple.netyBlue;
+            [cell.contentView addSubview:separatorLineView];
+            
+        }
+        
+        return cell;
+        
+    } else if (indexPath.row == 6) {
+        
+        MyInfoMainCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyInfoMainCell" forIndexPath:indexPath];
+        
+        cell.mainInfoImage.image = [[UIImage imageNamed:@"LightBulb"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        
+        [cell.mainInfoImage setTintColor:self.UIPrinciple.netyBlue];
+        
+        cell.mainInfoLabel.textColor = self.UIPrinciple.netyBlue;
+        
+        if ([experiences count] == 0) {
+            cell.mainInfoLabel.text = @"No experiences";
+        } else {
+            cell.mainInfoLabel.text = @"Experiences";
+        }
+        
+        return cell;
+        
+    } else {
+        
+        MyInfoExperienceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyInfoExperienceCell" forIndexPath:indexPath];
+        
+        cell.experienceName.textColor = self.UIPrinciple.netyBlue;
+        cell.experienceDate.textColor = self.UIPrinciple.netyBlue;
+        cell.experienceDescription.textColor = self.UIPrinciple.netyBlue;
+        
+        cell.experienceName.text = @"Exp";
+        cell.experienceDate.text = @"Date";
+        cell.experienceDescription.text = @"Des";
+        
+        return cell;
+        
+    }
+}
 
 
 //When photo choosing screen shows, customize nav controller
@@ -161,7 +265,6 @@
     
     NSLog(@"tapped");
 }
-
 
 
 #pragma mark - View Disappear
@@ -213,7 +316,7 @@
     
     //If user doesn't set profile image, set it to default image without uploading it.
     NSData *pickedImage = UIImagePNGRepresentation(image);
-    NSData *originalImage = UIImagePNGRepresentation(self.userProfileImage.image);
+    NSData *originalImage = UIImagePNGRepresentation(self.profileImageView.image);
     
     if (![originalImage isEqualToData:pickedImage]) {
         

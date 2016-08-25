@@ -12,11 +12,17 @@
 #import "Constants.h"
 #import "MyInfoEditTable.h"
 #import "MyInfoEditType2.h"
+#import "UIScrollView+APParallaxHeader.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "MyInfoMainCell.h"
+#import "MyInfoExperienceCell.h"
+#import "MyInfoInterestCell.h"
 
 @import Firebase;
 
-@interface MyInfo : UIViewController
-
+@interface MyInfo : UIViewController <UITableViewDelegate, UITableViewDataSource, APParallaxViewDelegate> {
+    int numberOfComponents;
+}
 
 //VARIABLES----------------------------------------
 
@@ -25,6 +31,7 @@
 
 @property (strong, nonatomic) NSMutableArray *experienceArray;
 
+@property (strong, nonatomic) UIImageView *profileImageView;
 
 //UTIL CLASSES----------------------------------------
 
@@ -39,29 +46,10 @@
 
 //IBOUTLETS----------------------------------------
 
-
-@property (weak, nonatomic) IBOutlet UIImageView *userProfileImage;
-
-@property (weak, nonatomic) IBOutlet UIView *userBasicInfoView;
-
-@property (weak, nonatomic) IBOutlet UIView *userInfoView;
-
-@property (weak, nonatomic) IBOutlet UILabel *userStatusInfo;
-
-@property (weak, nonatomic) IBOutlet UILabel *userSummaryInfo;
-
-@property (weak, nonatomic) IBOutlet UILabel *userExperienceInfo;
-
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-
-@property (weak, nonatomic) IBOutlet UILabel *identityLabel;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *userInfoViewTopConstraint;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 //IBACTIONS----------------------------------------
 
-
-- (IBAction)imageTapped:(id)sender;
 
 
 //-------------------------------------------------

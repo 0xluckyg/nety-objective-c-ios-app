@@ -235,7 +235,8 @@
                            kIdentity: [self.userInfo objectAtIndex:5],
                            kSummary: [self.userInfo objectAtIndex:6],
                            kExperiences: experiences,
-                           kProfilePhoto: metaDataBigUid};
+                           kProfilePhoto: metaDataBigUid,
+                           kSecurity: @(0)};
     
     
     //Set user information inside global variables

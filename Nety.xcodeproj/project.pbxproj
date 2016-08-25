@@ -18,6 +18,9 @@
 		673E2BB61D6E656800AB139F /* MainInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 673E2BB51D6E656800AB139F /* MainInfoCell.m */; };
 		673E2BB91D6E657100AB139F /* ExperienceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 673E2BB81D6E657100AB139F /* ExperienceCell.m */; };
 		673E2BBC1D6E657C00AB139F /* InterestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 673E2BBB1D6E657C00AB139F /* InterestCell.m */; };
+		673E2BC01D6EC98700AB139F /* MyInfoMainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 673E2BBF1D6EC98700AB139F /* MyInfoMainCell.m */; };
+		673E2BC31D6EC99900AB139F /* MyInfoExperienceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 673E2BC21D6EC99900AB139F /* MyInfoExperienceCell.m */; };
+		673E2BC61D6EC9AB00AB139F /* MyInfoInterestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 673E2BC51D6EC9AB00AB139F /* MyInfoInterestCell.m */; };
 		673E58701D6AAE6400D28F5B /* NewChats.m in Sources */ = {isa = PBXBuildFile; fileRef = 673E586F1D6AAE6400D28F5B /* NewChats.m */; };
 		673E58731D6AAE7900D28F5B /* MyChats.m in Sources */ = {isa = PBXBuildFile; fileRef = 673E58721D6AAE7900D28F5B /* MyChats.m */; };
 		673E58761D6AAFA300D28F5B /* CAPSPageMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 673E58751D6AAFA300D28F5B /* CAPSPageMenu.m */; };
@@ -110,6 +113,12 @@
 		673E2BB81D6E657100AB139F /* ExperienceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExperienceCell.m; sourceTree = "<group>"; };
 		673E2BBA1D6E657C00AB139F /* InterestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterestCell.h; sourceTree = "<group>"; };
 		673E2BBB1D6E657C00AB139F /* InterestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterestCell.m; sourceTree = "<group>"; };
+		673E2BBE1D6EC98700AB139F /* MyInfoMainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoMainCell.h; sourceTree = "<group>"; };
+		673E2BBF1D6EC98700AB139F /* MyInfoMainCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoMainCell.m; sourceTree = "<group>"; };
+		673E2BC11D6EC99900AB139F /* MyInfoExperienceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoExperienceCell.h; sourceTree = "<group>"; };
+		673E2BC21D6EC99900AB139F /* MyInfoExperienceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoExperienceCell.m; sourceTree = "<group>"; };
+		673E2BC41D6EC9AB00AB139F /* MyInfoInterestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoInterestCell.h; sourceTree = "<group>"; };
+		673E2BC51D6EC9AB00AB139F /* MyInfoInterestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoInterestCell.m; sourceTree = "<group>"; };
 		673E586E1D6AAE6400D28F5B /* NewChats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewChats.h; sourceTree = "<group>"; };
 		673E586F1D6AAE6400D28F5B /* NewChats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewChats.m; sourceTree = "<group>"; };
 		673E58711D6AAE7900D28F5B /* MyChats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyChats.h; sourceTree = "<group>"; };
@@ -315,6 +324,19 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		673E2BBD1D6EC96800AB139F /* MyInfoCells */ = {
+			isa = PBXGroup;
+			children = (
+				673E2BBE1D6EC98700AB139F /* MyInfoMainCell.h */,
+				673E2BBF1D6EC98700AB139F /* MyInfoMainCell.m */,
+				673E2BC11D6EC99900AB139F /* MyInfoExperienceCell.h */,
+				673E2BC21D6EC99900AB139F /* MyInfoExperienceCell.m */,
+				673E2BC41D6EC9AB00AB139F /* MyInfoInterestCell.h */,
+				673E2BC51D6EC9AB00AB139F /* MyInfoInterestCell.m */,
+			);
+			name = MyInfoCells;
+			sourceTree = "<group>";
+		};
 		674918E41D2D8A6D0015EFE9 /* Process3 */ = {
 			isa = PBXGroup;
 			children = (
@@ -469,6 +491,7 @@
 		67DD1A931D17BEF200FBEA0F /* MyInfo */ = {
 			isa = PBXGroup;
 			children = (
+				673E2BBD1D6EC96800AB139F /* MyInfoCells */,
 				67DD1AA51D17BFFF00FBEA0F /* MyInfo.h */,
 				67DD1AA61D17BFFF00FBEA0F /* MyInfo.m */,
 				67DD1AA81D17C00600FBEA0F /* MyInfo.storyboard */,
@@ -845,13 +868,16 @@
 				E18CB8C41D6E118300742CCE /* GeoFire.m in Sources */,
 				67391DFB1D280A9600A50C03 /* SignupProcessExperienceDetailCell.m in Sources */,
 				673E2BBC1D6E657C00AB139F /* InterestCell.m in Sources */,
+				673E2BC61D6EC9AB00AB139F /* MyInfoInterestCell.m in Sources */,
 				67DD1AAD1D17C3E600FBEA0F /* Profile.m in Sources */,
 				E18CB8C51D6E118300742CCE /* GFBase32Utils.m in Sources */,
 				E188C3FA1D6E41F100CCFD0F /* Users+CoreDataProperties.m in Sources */,
+				673E2BC31D6EC99900AB139F /* MyInfoExperienceCell.m in Sources */,
 				E18CB8C61D6E118300742CCE /* GFGeoHash.m in Sources */,
 				679B9EED1D236E1C00C426F2 /* MyInfoEditTable.m in Sources */,
 				67DD1AA71D17BFFF00FBEA0F /* MyInfo.m in Sources */,
 				E1E0B9591D6A1A8800295133 /* Experiences+CoreDataProperties.m in Sources */,
+				673E2BC01D6EC98700AB139F /* MyInfoMainCell.m in Sources */,
 				67DD1AB61D17E04F00FBEA0F /* NetworkCell.m in Sources */,
 				679B9EE71D236DF900C426F2 /* MyInfoEditType1.m in Sources */,
 				674918EA1D2D8ACE0015EFE9 /* SignupProcess3.m in Sources */,

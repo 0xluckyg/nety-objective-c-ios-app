@@ -16,6 +16,8 @@
 #import "ExperienceCell.h"
 #import "MainInfoCell.h"
 #import "InterestCell.h"
+#import "UIPrinciples.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface Profile : UIViewController <UITableViewDelegate, UITableViewDataSource, APParallaxViewDelegate> {
     int numberOfComponents;

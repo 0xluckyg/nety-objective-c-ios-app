@@ -147,7 +147,7 @@
                                         kSummary: @"",
                                         kExperiences: experienceArray,
                                         kProfilePhoto: kDefaultUserLogoName,
-                                        kSecurity: @0};
+                                        kSecurity: @(0)};
                  
                  //Set user information inside global variables
                  [MY_API addNewUser:post UserID:userID FlagMy:YES];

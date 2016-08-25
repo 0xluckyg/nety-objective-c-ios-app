@@ -42,7 +42,7 @@
     //[self loginLinkedIn];
     //Check if user is signed in, and move on
     [self initializeSettings];
-    [self initializeLoginView];
+    [self initializeLoginView];    
     [self initializeDesign];
     [self initializeTabBar];
     
@@ -249,6 +249,8 @@
     
     [[[firdatabase child:kUsers] child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         // Get user value
+        
+        NSLog(@"this is user's dictionary %@", snapshot.value);
         
         if ([snapshot exists]) {
             NSDictionary *usersDictionary = snapshot.value;
