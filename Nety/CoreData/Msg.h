@@ -1,5 +1,5 @@
 //
-//  Users.h
+//  Msg.h
 //  Nety
 //
 //  Created by Alex Agarkov on 26.08.16.
@@ -9,11 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "ALL.h"
 
-@class Experiences;
-
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Users : ALL
+@interface Msg : ALL
 
 // Insert code here to declare functionality of your managed object subclass
 
@@ -21,4 +19,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#import "Users+CoreDataProperties.h"
+#import "Msg+CoreDataProperties.h"

@@ -286,7 +286,7 @@
         user.itIsMe = [NSNumber numberWithBool:YES];
         [self setMyUser:user];
     }
-    //NSLog(@"UserADD");
+    NSLog(@"UserADD");
     [self saveContext];
 }
 

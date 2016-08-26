@@ -11,7 +11,6 @@
 #import <linkedin-sdk/LISDK.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import "GeoFire.h"
 
 @import FirebaseDatabase;
 

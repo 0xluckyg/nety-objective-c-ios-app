@@ -18,6 +18,14 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="startDate" optional="YES" attributeType="Binary" syncable="YES"/>
     </entity>
+    <entity name="Msg" representedClassName="Msg" parentEntity="ALL" syncable="YES">
+        <attribute name="chatroomID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="media" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="senderDisplayName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="senderId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Users" representedClassName="Users" parentEntity="ALL" syncable="YES">
         <attribute name="age" optional="YES" attributeType="String" minValueString="0" syncable="YES"/>
         <attribute name="distance" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -29,15 +37,17 @@
         <attribute name="itIsMe" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="profileImageUrl" optional="YES" attributeType="String" defaultValueString="NetyBlueLogo" syncable="YES"/>
+        <attribute name="security" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userID" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="experiences" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Experiences" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ChatRooms" positionX="-5438" positionY="-621" width="128" height="178"/>
-        <element name="Experiences" positionX="-5438" positionY="-396" width="128" height="103"/>
-        <element name="Users" positionX="-5661" positionY="-540" width="128" height="253"/>
-        <element name="ALL" positionX="-5589" positionY="-756" width="128" height="43"/>
+        <element name="ALL" positionX="-5688" positionY="-801" width="128" height="45"/>
+        <element name="ChatRooms" positionX="-5456" positionY="-574" width="128" height="178"/>
+        <element name="Experiences" positionX="-5879" positionY="-396" width="128" height="103"/>
+        <element name="Users" positionX="-5661" positionY="-540" width="128" height="268"/>
+        <element name="Msg" positionX="-5931" positionY="-603" width="128" height="133"/>
     </elements>
 </model>

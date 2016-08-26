@@ -41,7 +41,7 @@
     
 //    self.imageCache = [[NSCache alloc] init];
     
-    if ([self.selectedUser.security isEqualToNumber:@(3)]) {
+    if ([self.selectedUser.security isEqualToString:@"3"]) {
         numberOfComponents = 8 + (int)[[self.selectedUser.experiences allObjects] count];
     } else {
         numberOfComponents = 7 + (int)[[self.selectedUser.experiences allObjects] count];

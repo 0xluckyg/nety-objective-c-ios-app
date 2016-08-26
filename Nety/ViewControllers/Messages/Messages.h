@@ -14,18 +14,21 @@
 
 #import <SDWebImage/UIImageView+WebCache.h>
 //
+
+
 @import Firebase;
 
-@interface Messages : JSQMessagesViewController {
+@interface Messages : JSQMessagesViewController <NSFetchedResultsControllerDelegate>{
     NSInteger readcount;
     NSInteger otherUserStatus;
 }
 
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 //VARIABLES----------------------------------------
 
 
-@property (strong, nonatomic) NSMutableArray *messages;
+//@property (strong, nonatomic) NSMutableArray *messages;
 
 @property (strong, nonatomic) NSString *selectedUserID;
 

@@ -7,6 +7,7 @@
 //
 
 #import "Messages.h"
+#import "Msg.h"
 
 @interface Messages ()
 
@@ -48,8 +49,6 @@
     self.senderId = MY_USER.userID;
     self.senderDisplayName = [NSString stringWithFormat:@"%@ %@",MY_USER.firstName, MY_USER.lastName];
     
-    self.messages = [[NSMutableArray alloc] init];
-    
     [self createRoomAndObserveMessages];
     
 }
@@ -62,6 +61,7 @@
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
                                 [UIColor whiteColor], NSForegroundColorAttributeName, nil];
+    
     self.navigationItem.title = self.selectedUserName;
     
     [self.navigationController.navigationBar setTitleTextAttributes:attributes];
@@ -113,21 +113,23 @@
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-    return self.messages.count;
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
+    return [sectionInfo numberOfObjects];
 }
 
 -(id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath {
-    JSQMessage *data = self.messages[indexPath.row];
-    return data;
+    //JSQMessage *data = self.messages[indexPath.row];
+    return [self getMessageObject:indexPath];
 }
 
--(void)collectionView:(JSQMessagesCollectionView *)collectionView didDeleteMessageAtIndexPath:(NSIndexPath *)indexPath {
-    [self.messages removeObjectAtIndex:indexPath.row];
+-(void)collectionView:(JSQMessagesCollectionView *)collectionView didDeleteMessageAtIndexPath:(NSIndexPath *)indexPath
+{
+#warning    [self.messages removeObjectAtIndex:indexPath.row];
 }
 
 -(id<JSQMessageBubbleImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView messageBubbleImageDataForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    JSQMessage *data = self.messages[indexPath.row];
+    JSQMessage *data = [self getMessageObject:indexPath];
     
     if ([data.senderId isEqualToString: self.senderId]) {
         return self.outgoingBubbleImageView;
@@ -138,7 +140,7 @@
 }
 
 -(id<JSQMessageAvatarImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageDataForItemAtIndexPath:(NSIndexPath *)indexPath {
-    JSQMessage *data = self.messages[indexPath.row];
+    JSQMessage *data = [self getMessageObject:indexPath];
     
     if ([data.senderId isEqualToString: self.senderId]) {
         return nil;
@@ -154,21 +156,9 @@
      */
     JSQMessagesCollectionViewCell *cell = (JSQMessagesCollectionViewCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     
-    JSQMessage *msg = [self.messages objectAtIndex:indexPath.item];
+    JSQMessage *msg = [self getMessageObject:indexPath];
     
-    if (!msg.isMediaMessage) {
-        
-        if ([msg.senderId isEqualToString:self.senderId]) {
-            cell.textView.textColor = [UIColor whiteColor];
-        }
-        else {
-            cell.textView.textColor = [UIColor blackColor];
-        }
-        
-        cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
-                                              NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
-    }
-    
+    [self configureCell:cell withObject:msg];
     return cell;
 }
 
@@ -177,14 +167,14 @@
 {
     
     //Height for top labels has to match date for top labels
-    JSQMessage *message = [self.messages objectAtIndex:indexPath.item];
+    JSQMessage *message = [self getMessageObject:indexPath];
     
     if (indexPath.item == 0) {
         return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
     }
     
     if (indexPath.item - 1 > 0) {
-        JSQMessage *previousMessage = [self.messages objectAtIndex:indexPath.item - 1];
+        JSQMessage *previousMessage = [self getMessageObject:[NSIndexPath indexPathForItem:indexPath.item-1 inSection:indexPath.section]];
         
         if ([message.date timeIntervalSinceDate:previousMessage.date] / 60 > 1) {
             return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
@@ -205,8 +195,8 @@
     }
     
     if (indexPath.item - 1 > 0) {
-        JSQMessage *previousMessage = [self.messages objectAtIndex:indexPath.item - 1];
-        JSQMessage *message = [self.messages objectAtIndex:indexPath.item];
+        JSQMessage *previousMessage = [self getMessageObject:[NSIndexPath indexPathForItem:indexPath.item-1 inSection:indexPath.section]];
+        JSQMessage *message = [self getMessageObject:indexPath];
         
         if ([message.date timeIntervalSinceDate:previousMessage.date] / 60 > 1) {
             return kJSQMessagesCollectionViewCellLabelHeightDefault;
@@ -337,22 +327,14 @@
     [onlineRef updateChildValues:@{kOnline: @0}];
     
     //If no messages, delete chat rooms
-    if ([self.messages count] == 0) {
+    if ([[self.fetchedResultsController sections] count] == 0) {
         
         //Remove room
         [[[self.firdatabase child:kChatRooms] child:self.chatroomID] removeValue];
         //Remove value
-        [[[[[self.firdatabase child:kUserChats]
-            child:self.senderId]
-           child:kChats]
-          child:self.chatroomID]
-         removeValue];
+        [[[[[self.firdatabase child:kUserChats] child:self.senderId] child:kChats] child:self.chatroomID] removeValue];
         
-        [[[[[self.firdatabase child:kUserChats]
-            child:self.selectedUserID]
-           child:kChats]
-          child:self.chatroomID]
-         removeValue];
+        [[[[[self.firdatabase child:kUserChats] child:self.selectedUserID] child:kChats] child:self.chatroomID] removeValue];
         
     }
     
@@ -469,49 +451,73 @@
     [[[[self.firdatabase child:kChatRooms] child:self.chatroomID] child:kMessages] observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
         NSMutableDictionary *messagesDictionary = snapshot.value;
-        NSLog(@"message: %@", messagesDictionary);
-        NSString *senderIdFromDatabase = [messagesDictionary objectForKey:kSenderId];
-        NSString *senderDisplaynameFromDatabase = [messagesDictionary objectForKey:kSenderDisplayName];
-        double timeSince1970Double = [[messagesDictionary objectForKey:kDate] doubleValue] * -1;
-        NSDate * messageDate = [self convertDoubleToDate:timeSince1970Double];
-        NSString *textFromDatabase = [messagesDictionary objectForKey:kText];
-        if ([messagesDictionary objectForKey:kText]) {
-            JSQMessage *jsqMessage = [[JSQMessage alloc] initWithSenderId:senderIdFromDatabase senderDisplayName:senderDisplaynameFromDatabase date:messageDate text:textFromDatabase];
-            
-            [self.messages addObject:jsqMessage];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.collectionView reloadData];
-            });
-            
-            [self scrollToBottomAnimated:YES];
-            
-        } else {
-            
-            UIImageView *chatImage = [[UIImageView alloc] init];
-            
-            [chatImage sd_setImageWithURL:[messagesDictionary objectForKey:kMedia] placeholderImage:[UIImage imageNamed:kDefaultUserLogoName] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                
-                NSLog(@"fetched image");
-                JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithImage:chatImage.image];
-                
-                JSQMessage *photoMessage = [[JSQMessage alloc] initWithSenderId:senderIdFromDatabase senderDisplayName:senderDisplaynameFromDatabase date:messageDate media:photoItem];
-                
-                [self.messages addObject:photoMessage];
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.collectionView reloadData];
-                });
-                
-                [self scrollToBottomAnimated:YES];
-                
-            }];
-            
+
+        
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Users" inManagedObjectContext:MY_API.managedObjectContext];
+        [fetchRequest setEntity:entity];
+        
+        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"chatroomID == %@",self.chatroomID]];
+        NSError *error = nil;
+        NSMutableArray* findUserArray = [NSMutableArray arrayWithArray:[MY_API.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
+        Users* user;
+        if (findUserArray.count>0) {
+            user = [findUserArray lastObject];
+        }
+        else
+        {
+            user = [NSEntityDescription insertNewObjectForEntityForName:@"Users" inManagedObjectContext:MY_API.managedObjectContext];
+            [user setValue:self.chatroomID forKey:@"chatroomID"];
             
         }
+        for (NSString* keys in [messagesDictionary allKeys]) {
+            @try {
+                [user setValue:[messagesDictionary objectForKey:keys] forKey:keys];
+            } @catch (NSException *exception) {
+                //NSLog(@"Create user ERROR: %@",exception);
+            } @finally {
+                ///
+            }
+        }
+        
+        //NSLog(@"UserADD");
+        [MY_API saveContext];
+        
+        
+
         
     } withCancelBlock:nil];
     
+}
+
+- (JSQMessage*) getMessageObject:(NSIndexPath*)indexPath
+{
+    Msg* tempMessage = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+    
+    NSString *senderIdFromDatabase = tempMessage.senderId;
+    NSString *senderDisplaynameFromDatabase = tempMessage.senderDisplayName;
+    double timeSince1970Double = [tempMessage.date doubleValue] * -1;
+    NSDate * messageDate = [self convertDoubleToDate:timeSince1970Double];
+    NSString *textFromDatabase = tempMessage.text;
+    JSQMessage *jsqMsg;
+    if (tempMessage.text) {
+        jsqMsg = [[JSQMessage alloc] initWithSenderId:senderIdFromDatabase senderDisplayName:senderDisplaynameFromDatabase date:messageDate text:textFromDatabase];
+        
+        
+//        [self scrollToBottomAnimated:YES];
+        
+    } else {
+        
+        UIImageView *chatImage = [[UIImageView alloc] init];
+        
+        [chatImage sd_setImageWithURL:[NSURL URLWithString:tempMessage.media] placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
+        JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithImage:chatImage.image];
+        
+        jsqMsg = [[JSQMessage alloc] initWithSenderId:senderIdFromDatabase senderDisplayName:senderDisplaynameFromDatabase date:messageDate media:photoItem];
+        
+        
+    }
+    return jsqMsg;
 }
 
 -(void)uploadImage: (NSString *)senderID senderDisplayName:(NSString *)senderName pickedImage:(UIImage *)pickedImage {
@@ -628,4 +634,105 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (NSFetchedResultsController *)fetchedResultsController
+{
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    // Edit the entity name as appropriate.
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Msg" inManagedObjectContext:MY_API.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    //NSPredicate* predicate = [NSPredicate predicateWithFormat:@""];
+    //[fetchRequest setPredicate:predicate];
+    
+    // Set the batch size to a suitable number.
+    //[fetchRequest setFetchBatchSize:20];
+    
+    // Edit the sort key as appropriate.
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES];
+    
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    
+    // Edit the section name key path and cache name if appropriate.
+    // nil for section name key path means "no sections".
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:MY_API.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    aFetchedResultsController.delegate = self;
+    self.fetchedResultsController = aFetchedResultsController;
+    
+    NSError *error = nil;
+    if (![self.fetchedResultsController performFetch:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    
+    return _fetchedResultsController;
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
+           atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
+{
+    [self.collectionView performBatchUpdates:^{
+        switch(type) {
+            case NSFetchedResultsChangeInsert:
+                [self.collectionView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]];
+                break;
+                
+            case NSFetchedResultsChangeDelete:
+                [self.collectionView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]];
+                break;
+                
+            default:
+                return;
+        }
+    } completion:nil];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath
+{
+    
+    [self.collectionView performBatchUpdates:^{
+        switch(type) {
+            case NSFetchedResultsChangeInsert:
+                [self.collectionView insertItemsAtIndexPaths:@[newIndexPath]];
+                break;
+                
+            case NSFetchedResultsChangeDelete:
+                [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
+                break;
+                
+            case NSFetchedResultsChangeUpdate:
+                [self configureCell:(JSQMessagesCollectionViewCell*)[self.collectionView cellForItemAtIndexPath:indexPath] withObject:anObject];
+                break;
+                
+            case NSFetchedResultsChangeMove:
+                [self.collectionView moveItemAtIndexPath:indexPath toIndexPath:newIndexPath];
+                break;
+        }
+    } completion:nil];
+}
+
+- (void)configureCell:(JSQMessagesCollectionViewCell*)cell withObject:(JSQMessage *)object
+{
+    
+    if (!object.isMediaMessage) {
+        
+        if ([object.senderId isEqualToString:self.senderId]) {
+            cell.textView.textColor = [UIColor whiteColor];
+        }
+        else {
+            cell.textView.textColor = [UIColor blackColor];
+        }
+        
+        cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
+                                              NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
+    }
+
+}
 @end

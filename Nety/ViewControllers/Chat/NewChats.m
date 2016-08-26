@@ -137,7 +137,7 @@
         cell.chatNotificationLabel.text = @"";
     } else {
         cell.chatNotificationView.backgroundColor = self.UIPrinciple.netyBlue;
-        cell.chatNotificationLabel.text = [NSString stringWithFormat:@"%lu", [object.unread integerValue]];
+        cell.chatNotificationLabel.text = [NSString stringWithFormat:@"%d", [object.unread integerValue]];
     }
     
     //Set description
