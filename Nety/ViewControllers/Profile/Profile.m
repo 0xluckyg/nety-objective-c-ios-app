@@ -7,6 +7,7 @@
 //
 
 #import "Profile.h"
+#import "Experiences.h"
 
 @interface Profile ()
 
@@ -217,6 +218,9 @@
     } else {
         
         ExperienceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ExperienceCell" forIndexPath:indexPath];
+        Experiences* expir = [[self.selectedUser.experiences allObjects] objectAtIndex:indexPath.row-7];
+        
+        NSLog(@"Ex: %@",expir);
         
         cell.experienceName.textColor = self.UIPrinciple.netyBlue;
         cell.experienceDate.textColor = self.UIPrinciple.netyBlue;

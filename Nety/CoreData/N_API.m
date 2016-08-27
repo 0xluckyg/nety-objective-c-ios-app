@@ -274,9 +274,18 @@
                     NSDictionary* expDict = [NSDictionary dictionaryWithDictionary:[[userInfo objectForKey:keys] objectForKey:expKey]];
                     Experiences* expir = [NSEntityDescription insertNewObjectForEntityForName:@"Experiences" inManagedObjectContext:self.managedObjectContext];
                     for (NSString* keyExp in [expDict allKeys]) {
-                        [expir setValue:[expDict objectForKey:keyExp] forKey:keyExp];
+                        if ([keyExp isEqualToString:@"description"])
+                        {
+                            [expir setValue:[expDict objectForKey:keyExp] forKey:@"descript"];
+                        }
+                        else
+                        {
+                            [expir setValue:[expDict objectForKey:keyExp] forKey:keyExp];
+                        }
                     }
-                    [user addExperiencesObject:expir];
+                    if (![user.experiences containsObject:expir]) {
+                        [user addExperiencesObject:expir];
+                    }
                     
                 }
             }

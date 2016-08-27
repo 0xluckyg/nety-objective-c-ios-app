@@ -7,6 +7,7 @@
 //
 
 #import "MyInfo.h"
+#import "Experiences.h"
 
 @interface MyInfo ()
 
@@ -218,13 +219,18 @@
         
         MyInfoExperienceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyInfoExperienceCell" forIndexPath:indexPath];
         
+        Experiences* expir = [[MY_USER.experiences allObjects] objectAtIndex:indexPath.row-7];
+        
+        NSLog(@"Ex: %@",expir);
+        
         cell.experienceName.textColor = self.UIPrinciple.netyBlue;
         cell.experienceDate.textColor = self.UIPrinciple.netyBlue;
         cell.experienceDescription.textColor = self.UIPrinciple.netyBlue;
         
-        cell.experienceName.text = @"Exp";
-        cell.experienceDate.text = @"Date";
-        cell.experienceDescription.text = @"Des";
+        cell.experienceName.text = expir.name;
+        cell.experienceDate.text = expir.endDate;
+        
+        cell.experienceDescription.text = expir.descript;
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         

@@ -14,9 +14,9 @@
     </entity>
     <entity name="Experiences" representedClassName="Experiences" parentEntity="ALL" syncable="YES">
         <attribute name="descript" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="endDate" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="endDate" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="startDate" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="startDate" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Msg" representedClassName="Msg" parentEntity="ALL" syncable="YES">
         <attribute name="chatroomID" optional="YES" attributeType="String" syncable="YES"/>
@@ -47,7 +47,7 @@
         <element name="ALL" positionX="-5688" positionY="-801" width="128" height="45"/>
         <element name="ChatRooms" positionX="-5456" positionY="-574" width="128" height="178"/>
         <element name="Experiences" positionX="-5879" positionY="-396" width="128" height="103"/>
-        <element name="Users" positionX="-5661" positionY="-540" width="128" height="268"/>
         <element name="Msg" positionX="-5931" positionY="-603" width="128" height="133"/>
+        <element name="Users" positionX="-5661" positionY="-540" width="128" height="268"/>
     </elements>
 </model>
