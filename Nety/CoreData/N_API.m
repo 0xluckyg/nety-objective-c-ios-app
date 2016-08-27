@@ -9,7 +9,7 @@
 #import "N_API.h"
 #import "Constants.h"
 #import "ChatRooms.h"
-
+#import "Experiences.h"
 
 @implementation N_API
 
@@ -269,9 +269,23 @@
     [user setValue:userID forKey:@"userID"];
     for (NSString* keys in [userInfo allKeys]) {
         @try {
-            [user setValue:[userInfo objectForKey:keys] forKey:keys];
+            if ([keys isEqualToString:@"experiences"]) {
+                for (NSString* expKey in [[userInfo objectForKey:keys] allKeys]) {
+                    NSDictionary* expDict = [NSDictionary dictionaryWithDictionary:[[userInfo objectForKey:keys] objectForKey:expKey]];
+                    Experiences* expir = [NSEntityDescription insertNewObjectForEntityForName:@"Experiences" inManagedObjectContext:self.managedObjectContext];
+                    for (NSString* keyExp in [expDict allKeys]) {
+                        [expir setValue:[expDict objectForKey:keyExp] forKey:keyExp];
+                    }
+                    [user addExperiencesObject:expir];
+                    
+                }
+            }
+            else
+            {
+                [user setValue:[userInfo objectForKey:keys] forKey:keys];
+            }
         } @catch (NSException *exception) {
-            //NSLog(@"Create user ERROR: %@",exception);
+            NSLog(@"Create user ERROR: %@",exception);
         } @finally {
             ///
         }

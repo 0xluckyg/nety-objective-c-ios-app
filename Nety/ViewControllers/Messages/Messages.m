@@ -451,13 +451,13 @@
 
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Users" inManagedObjectContext:MY_API.managedObjectContext];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Msg" inManagedObjectContext:MY_API.managedObjectContext];
         [fetchRequest setEntity:entity];
         
         [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"chatroomID == %@",self.chatroomID]];
         NSError *error = nil;
         NSMutableArray* findUserArray = [NSMutableArray arrayWithArray:[MY_API.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
-        Users* user;
+        Msg* user;
         if (findUserArray.count>0) {
             user = [findUserArray lastObject];
         }
@@ -707,7 +707,7 @@
                 break;
                 
             case NSFetchedResultsChangeUpdate:
-                [self configureCell:(JSQMessagesCollectionViewCell*)[self.collectionView cellForItemAtIndexPath:indexPath] withObject:anObject];
+                [self configureCell:(JSQMessagesCollectionViewCell*)[self.collectionView cellForItemAtIndexPath:indexPath] withObject:[self getMessageObject:indexPath]];
                 break;
                 
             case NSFetchedResultsChangeMove:
