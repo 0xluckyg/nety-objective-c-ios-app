@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="MXR-kz-CZQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="MXR-kz-CZQ">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dzw-h8-dqd">
-                                <rect key="frame" x="66" y="154" width="282" height="429"/>
+                                <rect key="frame" x="66" y="92" width="282" height="552"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ohl-8S-SdE">
                                         <rect key="frame" x="21" y="43" width="240" height="240"/>
@@ -30,8 +30,12 @@
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2lL-8E-NXk">
-                                        <rect key="frame" x="60" y="359" width="162" height="30"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                        <rect key="frame" x="41" y="367" width="200" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="Svp-OG-Vto"/>
+                                            <constraint firstAttribute="height" constant="40" id="dbM-yi-Kju"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                         <state key="normal" title="Signup">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         </state>
@@ -40,9 +44,27 @@
                                             <segue destination="tVr-X4-ba6" kind="show" identifier="singUp" id="a19-bO-e5E"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dj0-ZW-owM">
+                                        <rect key="frame" x="41" y="425" width="200" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="VVT-cA-R8V"/>
+                                            <constraint firstAttribute="height" constant="40" id="pan-MF-3iq"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                        <state key="normal" title="Login with Facebook">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="signupButton:" destination="j8U-Cs-uLi" eventType="touchUpInside" id="NAv-Zb-r7G"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XJ5-h9-g37">
-                                        <rect key="frame" x="60" y="303" width="162" height="30"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                        <rect key="frame" x="41" y="309" width="200" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="ExX-OM-b26"/>
+                                            <constraint firstAttribute="height" constant="40" id="Iem-0q-m6i"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                         <state key="normal" title="Login">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         </state>
@@ -51,19 +73,36 @@
                                             <segue destination="z0J-bM-jSS" kind="show" id="FYC-io-CBK"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9OY-Wq-wvu">
+                                        <rect key="frame" x="41" y="483" width="200" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="k0R-Uq-bZr"/>
+                                            <constraint firstAttribute="width" constant="200" id="uSD-ny-fYs"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                        <state key="normal" title="Login with Linkedin">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="loginWithLinkedinButton:" destination="j8U-Cs-uLi" eventType="touchUpInside" id="WMG-mr-Puk"/>
+                                            <action selector="signupButton:" destination="j8U-Cs-uLi" eventType="touchUpInside" id="g0F-hT-2ma"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.43521448759999998" green="0.56477015090000005" blue="0.90839741490000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="XJ5-h9-g37" firstAttribute="leading" secondItem="dzw-h8-dqd" secondAttribute="leading" constant="60" id="81x-ma-3YQ"/>
-                                    <constraint firstItem="2lL-8E-NXk" firstAttribute="top" secondItem="XJ5-h9-g37" secondAttribute="bottom" constant="26" id="Js5-n0-ujq"/>
-                                    <constraint firstItem="XJ5-h9-g37" firstAttribute="top" secondItem="Ohl-8S-SdE" secondAttribute="bottom" constant="20" id="SgR-83-pLD"/>
-                                    <constraint firstAttribute="trailing" secondItem="XJ5-h9-g37" secondAttribute="trailing" constant="60" id="Xrh-ID-p27"/>
-                                    <constraint firstAttribute="trailing" secondItem="2lL-8E-NXk" secondAttribute="trailing" constant="60" id="cEs-TE-o50"/>
+                                    <constraint firstItem="XJ5-h9-g37" firstAttribute="centerX" secondItem="dzw-h8-dqd" secondAttribute="centerX" id="05S-Oy-vZl"/>
+                                    <constraint firstItem="2lL-8E-NXk" firstAttribute="top" secondItem="XJ5-h9-g37" secondAttribute="bottom" constant="18" id="0GF-4m-hNu"/>
+                                    <constraint firstAttribute="height" constant="552" id="4Fh-BO-nDT"/>
+                                    <constraint firstItem="9OY-Wq-wvu" firstAttribute="top" secondItem="Dj0-ZW-owM" secondAttribute="bottom" constant="18" id="5EZ-i3-088"/>
+                                    <constraint firstItem="Dj0-ZW-owM" firstAttribute="centerX" secondItem="dzw-h8-dqd" secondAttribute="centerX" id="Ffs-7g-s2I"/>
+                                    <constraint firstItem="9OY-Wq-wvu" firstAttribute="centerX" secondItem="dzw-h8-dqd" secondAttribute="centerX" id="NEL-FG-Wxj"/>
+                                    <constraint firstItem="2lL-8E-NXk" firstAttribute="centerX" secondItem="dzw-h8-dqd" secondAttribute="centerX" id="aCL-ze-grn"/>
+                                    <constraint firstItem="XJ5-h9-g37" firstAttribute="top" secondItem="Ohl-8S-SdE" secondAttribute="bottom" constant="26" id="fny-Cc-npj"/>
                                     <constraint firstItem="Ohl-8S-SdE" firstAttribute="centerX" secondItem="dzw-h8-dqd" secondAttribute="centerX" id="hwk-FN-iT8"/>
                                     <constraint firstItem="Ohl-8S-SdE" firstAttribute="top" secondItem="dzw-h8-dqd" secondAttribute="top" constant="43" id="k7L-yK-I2x"/>
-                                    <constraint firstAttribute="height" constant="429" id="kPo-zA-DvE"/>
                                     <constraint firstAttribute="width" constant="282" id="nyc-ae-i1i"/>
-                                    <constraint firstItem="2lL-8E-NXk" firstAttribute="leading" secondItem="dzw-h8-dqd" secondAttribute="leading" constant="60" id="xxi-gd-SSd"/>
+                                    <constraint firstItem="Dj0-ZW-owM" firstAttribute="top" secondItem="2lL-8E-NXk" secondAttribute="bottom" constant="18" id="sfJ-9X-BFp"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -78,6 +117,8 @@
                     <connections>
                         <outlet property="holdingView" destination="dzw-h8-dqd" id="GYl-3D-lzd"/>
                         <outlet property="loginButtonOutlet" destination="XJ5-h9-g37" id="tbf-ot-Sx7"/>
+                        <outlet property="loginWithFacebookOutlet" destination="Dj0-ZW-owM" id="OeF-ES-Bsh"/>
+                        <outlet property="loginWithLinkedinOutlet" destination="9OY-Wq-wvu" id="Gsl-xL-0dH"/>
                         <outlet property="logoImage" destination="Ohl-8S-SdE" id="5vh-r1-Dlh"/>
                         <outlet property="signupButtonOutlet" destination="2lL-8E-NXk" id="tm8-vQ-bkr"/>
                     </connections>
@@ -117,26 +158,6 @@
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AN5-wS-k4M">
-                                        <rect key="frame" x="35" y="198" width="170" height="30"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
-                                        <state key="normal" title="Login!">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="loginButton:" destination="z0J-bM-jSS" eventType="touchUpInside" id="CTc-7T-XQt"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kTq-O3-2WW">
-                                        <rect key="frame" x="35" y="254" width="170" height="30"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
-                                        <state key="normal" title="Login with Linkedin!">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="loginWithLinkedinButton:" destination="z0J-bM-jSS" eventType="touchUpInside" id="OsQ-1G-15y"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z50-sX-lBN" customClass="FBSDKLoginButton">
                                         <rect key="frame" x="61" y="296" width="119" height="35"/>
                                         <constraints>
@@ -147,22 +168,32 @@
                                             <outlet property="delegate" destination="z0J-bM-jSS" id="0mr-Kz-sO3"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AN5-wS-k4M">
+                                        <rect key="frame" x="20" y="198" width="200" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="19J-Z2-MCx"/>
+                                            <constraint firstAttribute="height" constant="40" id="7It-Ne-T48"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                        <state key="normal" title="Login!">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="loginButton:" destination="z0J-bM-jSS" eventType="touchUpInside" id="CTc-7T-XQt"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.43521448759999998" green="0.56477015090000005" blue="0.90839741490000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="Rb2-WJ-mSA" firstAttribute="centerX" secondItem="yaJ-kx-Dyw" secondAttribute="centerX" id="4BH-f8-qDH"/>
                                     <constraint firstAttribute="height" constant="339" id="74d-nL-YdR"/>
-                                    <constraint firstItem="kTq-O3-2WW" firstAttribute="top" secondItem="AN5-wS-k4M" secondAttribute="bottom" constant="26" id="DLp-iv-ebN"/>
                                     <constraint firstItem="z50-sX-lBN" firstAttribute="centerX" secondItem="yaJ-kx-Dyw" secondAttribute="centerX" id="O5x-ZM-I1V"/>
-                                    <constraint firstItem="AN5-wS-k4M" firstAttribute="leading" secondItem="yaJ-kx-Dyw" secondAttribute="leading" constant="35" id="RQh-kv-xG7"/>
                                     <constraint firstItem="AN5-wS-k4M" firstAttribute="top" secondItem="Rb2-WJ-mSA" secondAttribute="bottom" constant="66" id="XLj-YC-Jom"/>
                                     <constraint firstItem="Rb2-WJ-mSA" firstAttribute="top" secondItem="lVg-7z-32W" secondAttribute="bottom" constant="26" id="XU2-5A-5YZ"/>
                                     <constraint firstAttribute="width" constant="240" id="ZgH-Tl-GMX"/>
-                                    <constraint firstAttribute="trailing" secondItem="kTq-O3-2WW" secondAttribute="trailing" constant="35" id="dgP-5v-5C6"/>
                                     <constraint firstAttribute="bottom" secondItem="z50-sX-lBN" secondAttribute="bottom" constant="8" id="f3D-DS-x8Z"/>
-                                    <constraint firstAttribute="trailing" secondItem="AN5-wS-k4M" secondAttribute="trailing" constant="35" id="hHQ-va-SY1"/>
                                     <constraint firstItem="lVg-7z-32W" firstAttribute="centerX" secondItem="yaJ-kx-Dyw" secondAttribute="centerX" id="k5l-5X-xDZ"/>
-                                    <constraint firstItem="kTq-O3-2WW" firstAttribute="leading" secondItem="yaJ-kx-Dyw" secondAttribute="leading" constant="35" id="osr-hp-zpZ"/>
+                                    <constraint firstItem="AN5-wS-k4M" firstAttribute="centerX" secondItem="yaJ-kx-Dyw" secondAttribute="centerX" id="qsE-b2-9We"/>
                                     <constraint firstItem="lVg-7z-32W" firstAttribute="top" secondItem="yaJ-kx-Dyw" secondAttribute="top" constant="46" id="utg-O1-N56"/>
                                 </constraints>
                             </view>
@@ -194,7 +225,6 @@
                         <outlet property="holdingView" destination="yaJ-kx-Dyw" id="vIc-el-REq"/>
                         <outlet property="loginButton" destination="z50-sX-lBN" id="rRx-AQ-yyU"/>
                         <outlet property="loginButtonOutlet" destination="AN5-wS-k4M" id="QMB-gU-o2x"/>
-                        <outlet property="loginWithLinkedinOutlet" destination="kTq-O3-2WW" id="NI7-lx-qx8"/>
                         <outlet property="password" destination="Rb2-WJ-mSA" id="SEq-Et-eim"/>
                     </connections>
                 </viewController>
@@ -236,16 +266,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Xr-P2-0If">
                                 <rect key="frame" x="87" y="161" width="240" height="413"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rde-EH-6ZI">
-                                        <rect key="frame" x="35" y="355" width="170" height="30"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
-                                        <state key="normal" title="Signup with Linkedin!">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="signupWithLinkedinButton:" destination="tVr-X4-ba6" eventType="touchUpInside" id="FD7-1x-oAt"/>
-                                        </connections>
-                                    </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8fX-8t-k1w">
                                         <rect key="frame" x="25" y="37" width="190" height="30"/>
                                         <constraints>
@@ -279,7 +299,11 @@
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vtw-Tg-Bs7">
-                                        <rect key="frame" x="35" y="299" width="170" height="30"/>
+                                        <rect key="frame" x="20" y="299" width="200" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="2NJ-AD-gSi"/>
+                                            <constraint firstAttribute="height" constant="40" id="DOl-vM-ciL"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                         <state key="normal" title="Signup!">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -298,14 +322,10 @@
                                     <constraint firstItem="sW0-Ef-jem" firstAttribute="top" secondItem="qny-6A-Uti" secondAttribute="bottom" constant="26" id="HHr-eM-Cog"/>
                                     <constraint firstItem="xzG-JF-eRz" firstAttribute="centerX" secondItem="6Xr-P2-0If" secondAttribute="centerX" id="OV0-Li-P5e"/>
                                     <constraint firstItem="sW0-Ef-jem" firstAttribute="centerX" secondItem="6Xr-P2-0If" secondAttribute="centerX" id="SbJ-87-3Y4"/>
-                                    <constraint firstItem="rde-EH-6ZI" firstAttribute="top" secondItem="Vtw-Tg-Bs7" secondAttribute="bottom" constant="26" id="Tq6-Kd-gk0"/>
                                     <constraint firstItem="qny-6A-Uti" firstAttribute="centerX" secondItem="6Xr-P2-0If" secondAttribute="centerX" id="YCn-qM-sVA"/>
-                                    <constraint firstAttribute="trailing" secondItem="rde-EH-6ZI" secondAttribute="trailing" constant="35" id="fSy-us-kHU"/>
                                     <constraint firstItem="xzG-JF-eRz" firstAttribute="top" secondItem="8fX-8t-k1w" secondAttribute="bottom" constant="26" id="hKB-0b-IoY"/>
                                     <constraint firstAttribute="width" constant="240" id="jow-4z-7MH"/>
-                                    <constraint firstAttribute="trailing" secondItem="Vtw-Tg-Bs7" secondAttribute="trailing" constant="35" id="nLB-nJ-qe0"/>
-                                    <constraint firstItem="Vtw-Tg-Bs7" firstAttribute="leading" secondItem="6Xr-P2-0If" secondAttribute="leading" constant="35" id="okK-MC-pTA"/>
-                                    <constraint firstItem="rde-EH-6ZI" firstAttribute="leading" secondItem="6Xr-P2-0If" secondAttribute="leading" constant="35" id="vNA-AM-lRb"/>
+                                    <constraint firstItem="Vtw-Tg-Bs7" firstAttribute="centerX" secondItem="6Xr-P2-0If" secondAttribute="centerX" id="qIH-wQ-hdA"/>
                                     <constraint firstItem="8fX-8t-k1w" firstAttribute="top" secondItem="6Xr-P2-0If" secondAttribute="top" constant="37" id="zmC-d3-9Nj"/>
                                 </constraints>
                             </view>
@@ -339,7 +359,6 @@
                         <outlet property="name" destination="qny-6A-Uti" id="V4a-bj-CLm"/>
                         <outlet property="password" destination="xzG-JF-eRz" id="5zA-sf-40t"/>
                         <outlet property="signupButtonOutlet" destination="Vtw-Tg-Bs7" id="y0s-HB-WLz"/>
-                        <outlet property="signupWithLinkedinButtonOutlet" destination="rde-EH-6ZI" id="IEP-Zt-BqW"/>
                         <segue destination="MIp-ew-6h3" kind="show" identifier="signupProcess1Segue" id="1AG-Bc-qCN"/>
                     </connections>
                 </viewController>

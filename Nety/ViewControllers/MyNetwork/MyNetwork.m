@@ -43,7 +43,7 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
         UIImage *contentImage = [[UIImage imageNamed:@"Friend"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
         if (![self.noContentController isDescendantOfView:self.view]) {
-            [self.UIPrinciple addNoContent:self setText:myNetworkNoContentString setImage:contentImage setColor:self.UIPrinciple.netyGray noContentController:self.noContentController];
+            [self.UIPrinciple addNoContent:self setText:myNetworkNoContentString setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
         }
     } else {
         [self.UIPrinciple removeNoContent:self.noContentController];
@@ -106,7 +106,7 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
         UIImage *contentImage = [[UIImage imageNamed:@"Friend"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
         if (![self.noContentController isDescendantOfView:self.view]) {
-            [self.UIPrinciple addNoContent:self setText:myNetworkNoContentString setImage:contentImage setColor:self.UIPrinciple.netyGray noContentController:self.noContentController];
+            [self.UIPrinciple addNoContent:self setText:myNetworkNoContentString setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
         }
     } else {
         [self.UIPrinciple removeNoContent:self.noContentController];
@@ -131,7 +131,7 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
         UIImage *contentImage = [[UIImage imageNamed:@"Friend"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
         if (![self.noContentController isDescendantOfView:self.view]) {
-            [self.UIPrinciple addNoContent:self setText:myNetworkNoContentString setImage:contentImage setColor:self.UIPrinciple.netyGray noContentController:self.noContentController];
+            [self.UIPrinciple addNoContent:self setText:myNetworkNoContentString setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
         }
     } else {
         [self.UIPrinciple removeNoContent:self.noContentController];

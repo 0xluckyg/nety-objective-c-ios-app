@@ -19,9 +19,7 @@
 
 #import "N_CoreDataTableViewController.h"
 
-@interface Network : N_CoreDataTableViewController <UISearchBarDelegate> {
-    bool goingToProfileView;
-}
+@interface Network : N_CoreDataTableViewController <UISearchBarDelegate>
 
 
 //VARIABLES----------------------------------------

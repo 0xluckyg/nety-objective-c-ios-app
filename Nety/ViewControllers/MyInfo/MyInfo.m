@@ -35,6 +35,8 @@
     
     [self initializeSettings];
     
+    [self.tableView reloadData];
+    
 }
 
 
@@ -51,9 +53,6 @@
 - (void)initializeDesign {
     
     self.UIPrinciple = [[UIPrinciples alloc] init];
-    
-    //Set background color
-    [self.view setBackgroundColor:self.UIPrinciple.netyBlue];
     
     //Color for the small view
     NSString *name = [NSString stringWithFormat:@"%@ %@", MY_USER.firstName, MY_USER.lastName];
@@ -78,7 +77,7 @@
     }
     
     float width = self.view.frame.size.width;
-    float height = self.view.frame.size.height / 2.5;
+    float height = self.view.frame.size.height / 2.2;
     
     [self.profileImageView setFrame:CGRectMake(0, 0, width, height)];
     [self.profileImageView setContentMode:UIViewContentModeScaleAspectFill];
@@ -86,7 +85,7 @@
     [self.tableView addParallaxWithView:self.profileImageView andHeight:height];
     [self.tableView.parallaxView setDelegate:self];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    [self.tableView setAllowsSelection:NO];
+    [self.tableView setAllowsSelection:YES];
     
     //Configure tableview height
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -105,7 +104,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.row == 0 || indexPath.row == 5 || indexPath.row == 6) {
+    if (indexPath.row == 0 || indexPath.row == 4 || indexPath.row == 5) {
         return 10;
     } else {
         return UITableViewAutomaticDimension;
@@ -124,13 +123,13 @@
         
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyInfoSpaceCell" forIndexPath:indexPath];
         
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         return cell;
         
     } else if (indexPath.row >= 1 && indexPath.row <= 3) {
         
         MyInfoMainCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyInfoMainCell" forIndexPath:indexPath];
-        
-        cell.mainInfoImage.image = [[UIImage imageNamed:@"LightBulb"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
         cell.mainInfoLabel.textColor = self.UIPrinciple.netyBlue;
         
@@ -138,14 +137,18 @@
         
         switch (indexPath.row) {
             case 1:
+                cell.mainInfoImage.image = [[UIImage imageNamed:@"Identity"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+                
                 if ([identity isEqualToString:@""]) {
                     cell.mainInfoLabel.text = @"No description";
                 } else {
                     cell.mainInfoLabel.text = identity;
                 }
-                
+            
                 break;
             case 2: {
+                cell.mainInfoImage.image = [[UIImage imageNamed:@"Status"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+                
                 if ([status isEqualToString:@""]) {
                     cell.mainInfoLabel.text = @"No status";
                 } else {
@@ -155,6 +158,8 @@
                 break;
             }
             case 3: {
+                cell.mainInfoImage.image = [[UIImage imageNamed:@"Summary"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+                
                 if ([summary isEqualToString:@""]) {
                     cell.mainInfoLabel.text = @"No summary";
                 } else {
@@ -164,6 +169,8 @@
                 break;
             }
         }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
         
         return cell;
         
@@ -183,13 +190,15 @@
             
         }
         
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         return cell;
         
     } else if (indexPath.row == 6) {
         
         MyInfoMainCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyInfoMainCell" forIndexPath:indexPath];
         
-        cell.mainInfoImage.image = [[UIImage imageNamed:@"LightBulb"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        cell.mainInfoImage.image = [[UIImage imageNamed:@"LightBulbSmall"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
         [cell.mainInfoImage setTintColor:self.UIPrinciple.netyBlue];
         
@@ -200,6 +209,8 @@
         } else {
             cell.mainInfoLabel.text = @"Experiences";
         }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
         
         return cell;
         
@@ -215,9 +226,56 @@
         cell.experienceDate.text = @"Date";
         cell.experienceDescription.text = @"Des";
         
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         return cell;
         
     }
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    switch(indexPath.row) {
+        
+        case 1: {
+            MyInfoEditType1 *editNameAndIdentity = [self.storyboard instantiateViewControllerWithIdentifier:@"MyInfoEditType1"];
+            
+            [self.navigationController pushViewController:editNameAndIdentity animated:YES];
+            
+            break;
+        }
+        case 2: {
+            MyInfoEditType2 *editStatus = [self.storyboard instantiateViewControllerWithIdentifier:@"MyInfoEditType2"];
+            
+            editStatus.statusOrSummary = 0;
+            
+            [self.navigationController pushViewController:editStatus animated:YES];
+            
+            break;
+        }
+        case 3: {
+            MyInfoEditType2 *editSummary = [self.storyboard instantiateViewControllerWithIdentifier:@"MyInfoEditType2"];
+            
+            editSummary.statusOrSummary = 1;
+            
+            [self.navigationController pushViewController:editSummary animated:YES];
+            
+            break;
+        }
+        case 6: {
+            MyInfoEditTable *editTableVC = [self.storyboard instantiateViewControllerWithIdentifier:@"MyInfoEditTable"];
+            
+            editTableVC.experienceArray = self.experienceArray;
+            
+            [self.navigationController pushViewController:editTableVC animated:YES];
+            
+            break;
+        }
+    
+    }
+    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
 }
 
 
@@ -270,24 +328,6 @@
 #pragma mark - View Disappear
 //---------------------------------------------------------
 
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"myInfoEditTableSegue"]) {
-        MyInfoEditTable *editTableVC = [segue destinationViewController];
-        
-        editTableVC.experienceArray = self.experienceArray;
-        
-    } else if ([segue.identifier isEqualToString:@"myInfoEditStatusSegue"]) {
-        MyInfoEditType2 *editTableVC = [segue destinationViewController];
-        
-        editTableVC.statusOrSummary = 0;
-    
-    } else if ([segue.identifier isEqualToString:@"myInfoEditSummarySegue"]) {
-        MyInfoEditType2 *editTableVC = [segue destinationViewController];
-        
-        editTableVC.statusOrSummary = 1;
-    }
-}
 
 
 #pragma mark - Custom methods

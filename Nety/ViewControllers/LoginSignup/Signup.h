@@ -58,8 +58,6 @@
 
 - (IBAction)signupButton:(id)sender;
 
-- (IBAction)signupWithLinkedinButton:(id)sender;
-
 - (IBAction)backButton:(id)sender;
 
 

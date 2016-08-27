@@ -32,6 +32,11 @@
 }
 
 
+-(BOOL)hidesBottomBarWhenPushed {
+    return YES;
+}
+
+
 #pragma mark - Initialization
 //---------------------------------------------------------
 
@@ -63,15 +68,7 @@
     
     //Background of page
     self.view.backgroundColor = self.UIPrinciple.netyBlue;
-    
-    //Label
-    if (self.statusOrSummary == 0) {
-        self.editType2Label.text = @"Status";
-        self.topLabel.text = @"Set Status";
-    } else {
-        self.editType2Label.text = @"Summary";
-        self.topLabel.text = @"Set Summary";
-    }
+
     self.editType2Label.textColor = [UIColor whiteColor];
     
     //textfield
@@ -82,7 +79,24 @@
     //save button
     [self.saveButtonOutlet setTintColor:[UIColor whiteColor]];
     
+    //Style navbar
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
+                                [UIColor whiteColor], NSForegroundColorAttributeName, nil];
     
+    if (self.statusOrSummary == 0) {
+        self.editType2Label.text = @"Status";
+        self.navigationItem.title = @"Set Status";
+    } else {
+        self.editType2Label.text = @"Summary";
+        self.navigationItem.title = @"Set Summary";
+    }
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:attributes];
+    
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"Back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:normal target:self action:@selector(backButtonPressed)];
+    
+    self.navigationItem.leftBarButtonItem = leftButton;
 }
 
 
@@ -131,11 +145,6 @@
 //---------------------------------------------------------
 
 
-//Back button to go back to my info
-- (IBAction)backButton:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 //save and go back to my info
 - (IBAction)saveButton:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
@@ -175,8 +184,9 @@
 //---------------------------------------------------------
 
 
-
-
+-(void) backButtonPressed {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 
 //---------------------------------------------------------

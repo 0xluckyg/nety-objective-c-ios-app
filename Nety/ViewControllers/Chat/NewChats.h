@@ -12,6 +12,7 @@
 #import "UIPrinciples.h"
 #import "Messages.h"
 #import "ChatCell.h"
+#import "NoContent.h"
 #import "N_CoreDataTableViewController.h"
 
 @protocol pushViewControllerProtocolFromNewChats <NSObject>
@@ -35,6 +36,8 @@
 
 
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
+
+@property (strong, nonatomic) NoContent *noContentController;
 
 
 //LIB CLASSES----------------------------------------

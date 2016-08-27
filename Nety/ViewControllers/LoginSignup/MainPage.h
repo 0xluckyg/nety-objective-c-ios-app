@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "UIPrinciples.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <linkedin-sdk/LISDK.h>
 
 @interface MainPage : UIViewController {
     NSInteger loginOrSignup;
@@ -75,6 +78,10 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *signupButtonOutlet;
 
+@property (weak, nonatomic) IBOutlet UIButton *loginWithFacebookOutlet;
+
+@property (weak, nonatomic) IBOutlet UIButton *loginWithLinkedinOutlet;
+
 
 //IBACTIONS----------------------------------------
 
@@ -83,6 +90,7 @@
 
 - (IBAction)signupButton:(id)sender;
 
+- (IBAction)loginWithLinkedinButton:(id)sender;
 
 //-------------------------------------------------
 

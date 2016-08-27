@@ -34,11 +34,11 @@
         
         self.experienceArray = [[NSMutableArray alloc] init];
         
-        self.noContentController = [[NoContent alloc] init];
-        
         UIImage *contentImage = [[UIImage imageNamed:@"LightBulb"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
-        [self.UIPrinciple addNoContent:self setText:@"You haven't added an experience or interest yet" setImage:contentImage setColor:self.UIPrinciple.netyGray noContentController:self.noContentController];
+        if (![self.noContentController isDescendantOfView:self.view]) {
+            [self.UIPrinciple addNoContent:self setText:@"You haven't added an experience or interest yet" setImage:contentImage setColor:[UIColor whiteColor] setSecondColor:[UIColor whiteColor] noContentController:self.noContentController];
+        }
     } else {
         [self.UIPrinciple removeNoContent:self.noContentController];
     }
@@ -49,12 +49,18 @@
     [self.tableView reloadData];
 }
 
+-(BOOL)hidesBottomBarWhenPushed {
+    return YES;
+}
+
 
 #pragma mark - Initialization
 //---------------------------------------------------------
 
 
 - (void)initializeSettings {
+    
+    self.noContentController = [[NoContent alloc] init];
     
     editButtonClicked = YES;
     
@@ -74,6 +80,18 @@
     
     //No separator
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    //Style navbar
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
+                                [UIColor whiteColor], NSForegroundColorAttributeName, nil];
+    self.navigationItem.title = @"Add an experience";
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:attributes];
+    
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"Back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:normal target:self action:@selector(backButtonPressed)];
+    
+    self.navigationItem.leftBarButtonItem = leftButton;
     
 }
 
@@ -154,7 +172,7 @@
         
         UIImage *contentImage = [UIImage imageNamed:@"LightBulb"];
         
-        [self.UIPrinciple addNoContent:self setText:@"You haven't added an experience or interest yet" setImage:contentImage setColor:self.UIPrinciple.netyGray noContentController:self.noContentController];
+[self.UIPrinciple addNoContent:self setText:@"You haven't added an experience or interest yet" setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
     }
     
 }
@@ -163,11 +181,6 @@
 #pragma mark - Buttons
 //---------------------------------------------------------
 
-
-- (IBAction)backButton:(id)sender {
-    
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 - (IBAction)editButton:(id)sender {
     
@@ -196,9 +209,6 @@
 - (void)viewWillDisappear:(BOOL)animated {
     
     [self.tableView reloadData];
-    
-    
-    //Save locally
     
     //Save to database
     NSMutableDictionary *experiences = [[NSMutableDictionary alloc] init];
@@ -232,6 +242,9 @@
 #pragma mark - Custom methods
 //---------------------------------------------------------
 
+-(void) backButtonPressed {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 //To receive data
 -(void)sendExperienceData:(NSMutableArray *)experienceData {

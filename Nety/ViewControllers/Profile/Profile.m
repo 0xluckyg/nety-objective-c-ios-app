@@ -41,7 +41,7 @@
     
 //    self.imageCache = [[NSCache alloc] init];
     
-    if ([self.selectedUser.security isEqualToString:@"3"]) {
+    if (![self.selectedUser.security isEqualToString:@"3"]) {
         numberOfComponents = 8 + (int)[[self.selectedUser.experiences allObjects] count];
     } else {
         numberOfComponents = 7 + (int)[[self.selectedUser.experiences allObjects] count];
@@ -80,7 +80,7 @@
     }
     
     float width = self.view.frame.size.width;
-    float height = self.view.frame.size.height / 2.5;
+    float height = self.view.frame.size.height / 2.2;
     
     [profileImageView setFrame:CGRectMake(0, 0, width, height)];
     [profileImageView setContentMode:UIViewContentModeScaleAspectFill];
@@ -143,41 +143,40 @@
         
         MainInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MainInfoCell" forIndexPath:indexPath];
         
-        cell.mainInfoImage.image = [[UIImage imageNamed:@"LightBulb"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        
         cell.mainInfoLabel.textColor = self.UIPrinciple.netyBlue;
         
         [cell.mainInfoImage setTintColor:self.UIPrinciple.netyBlue];
         
-        switch (indexPath.row) {
-            case 2:
-                if ([identity isEqualToString:@""]) {
-                    cell.mainInfoLabel.text = @"No description";
-                } else {
-                    cell.mainInfoLabel.text = identity;
-                }
-                
-                break;
-            case 3: {
-                if ([status isEqualToString:@""]) {
-                    cell.mainInfoLabel.text = @"No status";
-                } else {
-                    cell.mainInfoLabel.text = status;
-                }
-                
-                break;
+        int one = indexCount + 2;
+        int two = indexCount + 3;
+        int three = indexCount + 4;
+        
+        if (indexPath.row == one) {
+            cell.mainInfoImage.image = [[UIImage imageNamed:@"Identity"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+            
+            if ([identity isEqualToString:@""]) {
+                cell.mainInfoLabel.text = @"No description";
+            } else {
+                cell.mainInfoLabel.text = identity;
             }
-            case 4: {
-                if ([summary isEqualToString:@""]) {
-                    cell.mainInfoLabel.text = @"No summary";
-                } else {
-                    cell.mainInfoLabel.text = summary;
-                }
-                
-                break;
+        } else if (indexPath.row == two) {
+            cell.mainInfoImage.image = [[UIImage imageNamed:@"Status"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+            
+            if ([status isEqualToString:@""]) {
+                cell.mainInfoLabel.text = @"No status";
+            } else {
+                cell.mainInfoLabel.text = status;
+            }
+        } else if (indexPath.row == three){
+            cell.mainInfoImage.image = [[UIImage imageNamed:@"Summary"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+            
+            if ([summary isEqualToString:@""]) {
+                cell.mainInfoLabel.text = @"No summary";
+            } else {
+                cell.mainInfoLabel.text = summary;
             }
         }
-        
+
         return cell;
         
     } else if (indexPath.row >= indexCount + 5 && indexPath.row <= indexCount + 6) {
@@ -201,7 +200,7 @@
         
         MainInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MainInfoCell" forIndexPath:indexPath];
         
-        cell.mainInfoImage.image = [[UIImage imageNamed:@"LightBulb"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        cell.mainInfoImage.image = [[UIImage imageNamed:@"LightBulbSmall"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
         [cell.mainInfoImage setTintColor:self.UIPrinciple.netyBlue];
         

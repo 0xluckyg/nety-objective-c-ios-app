@@ -12,6 +12,9 @@
 #import "UIPrinciples.h"
 #import "Messages.h"
 #import "N_CoreDataTableViewController.h"
+#import "ChatCell.h"
+#import "ChatRooms.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @import Firebase;
 
@@ -33,6 +36,8 @@
 
 
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
+
+@property (strong, nonatomic) NoContent *noContentController;
 
 
 //LIB CLASSES----------------------------------------

@@ -32,38 +32,41 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
 
 -(void)viewWillAppear:(BOOL)animated {
     
-    goingToProfileView = false;
-    
     [self initializeUsers];
     //[self.tableView reloadData];
     
-    self.sliderView = [[[NSBundle mainBundle] loadNibNamed:@"CustomSlider" owner:self options:nil] objectAtIndex:0];
-    
     self.slider.value = self.sliderValue;
     
-    [self addSlider:self.sliderView slider:self.slider];
+    if (![self.sliderView isDescendantOfView:self.view]) {
+        NSLog(@"added");
+        [self addSlider:self.sliderView slider:self.slider];
+    }
     
     self.navigationItem.title = [NSString stringWithFormat:@"%@ Near Me", [self calculateDistanceToDescription]];
     
     //If no experiences visible, show noContent header
     if ([[self fetchedResultsController].fetchedObjects count] == 0) {
         
-        UIImage *contentImage = [[UIImage imageNamed:@"Friend"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        UIImage *contentImage = [[UIImage imageNamed:@"Location"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
         if (![self.noContentController isDescendantOfView:self.view]) {
-            [self.UIPrinciple addNoContent:self setText:networkNoContentString setImage:contentImage setColor:self.UIPrinciple.netyGray noContentController:self.noContentController];
+            [self.UIPrinciple addNoContent:self setText:networkNoContentString setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
         }
     } else {
         [self.UIPrinciple removeNoContent:self.noContentController];
     }
     
+    
+    
 }
-
 
 #pragma mark - Initialization
 //---------------------------------------------------------
 
 - (void)initializeSettings {
+    
+    self.sliderView = [[[NSBundle mainBundle] loadNibNamed:@"CustomSlider" owner:self options:nil] objectAtIndex:0];
+    
     self.noContentController = [[NoContent alloc] init];
 
     //Set up notifications
@@ -195,7 +198,7 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
         UIImage *contentImage = [[UIImage imageNamed:@"Friend"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
         if (![self.noContentController isDescendantOfView:self.view]) {
-            [self.UIPrinciple addNoContent:self setText:networkNoContentString setImage:contentImage setColor:self.UIPrinciple.netyGray noContentController:self.noContentController];
+           [self.UIPrinciple addNoContent:self setText:networkNoContentString setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
         }
     } else {
         [self.UIPrinciple removeNoContent:self.noContentController];
@@ -258,10 +261,10 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
     Profile *profilePage = [profileStoryboard instantiateViewControllerWithIdentifier:@"Profile"];
     profilePage.selectedUser = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     
-    goingToProfileView = true;
-    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    profilePage.hidesBottomBarWhenPushed = YES;
+
     [self.navigationController pushViewController:profilePage animated:YES];
     
 }
@@ -315,10 +318,7 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
 
 
 -(void)viewWillDisappear:(BOOL)animated {
-    
-    if (goingToProfileView != true) {
-        [self.sliderView removeFromSuperview];
-    }
+        
 }
 
 

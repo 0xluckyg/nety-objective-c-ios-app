@@ -162,10 +162,6 @@
     
 }
 
-- (IBAction)signupWithLinkedinButton:(id)sender {
-    
-}
-
 //Go back to main screen
 - (IBAction)backButton:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];

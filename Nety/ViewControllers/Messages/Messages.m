@@ -33,10 +33,6 @@
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
 }
 
--(BOOL)hidesBottomBarWhenPushed {
-    return YES;
-}
-
 
 #pragma mark - Initialization
 //---------------------------------------------------------
@@ -124,7 +120,7 @@
 
 -(void)collectionView:(JSQMessagesCollectionView *)collectionView didDeleteMessageAtIndexPath:(NSIndexPath *)indexPath
 {
-#warning    [self.messages removeObjectAtIndex:indexPath.row];
+    
 }
 
 -(id<JSQMessageBubbleImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView messageBubbleImageDataForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -327,6 +323,7 @@
     [onlineRef updateChildValues:@{kOnline: @0}];
     
     //If no messages, delete chat rooms
+    NSLog(@"%lu message count", [[self.fetchedResultsController sections] count]);
     if ([[self.fetchedResultsController sections] count] == 0) {
         
         //Remove room
@@ -466,12 +463,14 @@
         }
         else
         {
-            user = [NSEntityDescription insertNewObjectForEntityForName:@"Users" inManagedObjectContext:MY_API.managedObjectContext];
+            user = [NSEntityDescription insertNewObjectForEntityForName:@"Msg" inManagedObjectContext:MY_API.managedObjectContext];
             [user setValue:self.chatroomID forKey:@"chatroomID"];
             
         }
         for (NSString* keys in [messagesDictionary allKeys]) {
             @try {
+                NSLog(@"key: %@", keys);
+                NSLog(@"value?: %@",[messagesDictionary objectForKey:keys]);
                 [user setValue:[messagesDictionary objectForKey:keys] forKey:keys];
             } @catch (NSException *exception) {
                 //NSLog(@"Create user ERROR: %@",exception);

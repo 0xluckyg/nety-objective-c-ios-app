@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "LightBulb.png",
+      "filename" : "LightBulbSmall.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "LightBulb@2x.png",
+      "filename" : "LightBulbSmall@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "LightBulb@3x.png",
+      "filename" : "LightBulbSmall@3x.png",
       "scale" : "3x"
     }
   ],

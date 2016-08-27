@@ -26,6 +26,10 @@
     [self initializeDesign];
 }
 
+-(BOOL)hidesBottomBarWhenPushed {
+    return YES;
+}
+
 
 #pragma mark - Initialization
 //---------------------------------------------------------
@@ -70,6 +74,17 @@
     //save button
     [self.saveButtonOutlet setTintColor:[UIColor whiteColor]];
     
+    //Style navbar
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
+                                [UIColor whiteColor], NSForegroundColorAttributeName, nil];
+    self.navigationItem.title = @"Edit your name and identity";
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:attributes];
+    
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"Back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:normal target:self action:@selector(backButtonPressed)];
+    
+    self.navigationItem.leftBarButtonItem = leftButton;
     
 }
 
@@ -117,11 +132,6 @@
 //---------------------------------------------------------
 
 
-//Go back
-- (IBAction)backButton:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 //Save and go back
 - (IBAction)saveButton:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
@@ -146,6 +156,9 @@
 //---------------------------------------------------------
 
 
+-(void) backButtonPressed {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 -(void) updateNameAndIdentity {
 

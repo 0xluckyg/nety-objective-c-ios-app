@@ -68,7 +68,7 @@
     
 }
 
--(void)addNoContent: (UIViewController *)viewController setText:(NSString*)text setImage:(UIImage *)contentImage setColor:(UIColor *)color noContentController:(NoContent *)noContentController {
+-(void)addNoContent: (UIViewController *)viewController setText:(NSString*)text setImage:(UIImage *)contentImage setColor:(UIColor *)color setSecondColor:(UIColor *)secondColor noContentController:(NoContent *)noContentController {
     
     float width = viewController.view.frame.size.width;
     float height = noContentController.view.frame.size.height;
@@ -82,7 +82,7 @@
     [noContentController.label setTextColor:[UIColor whiteColor]];
     
     noContentController.label.text = text;
-    noContentController.label.textColor = color;
+    noContentController.label.textColor = secondColor;
     
     noContentController.image.image = contentImage;
     [noContentController.image setTintColor:color];

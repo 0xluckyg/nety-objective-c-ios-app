@@ -39,8 +39,6 @@
 //IBOUTLETS----------------------------------------
 
 
-@property (weak, nonatomic) IBOutlet UILabel *topLabel;
-
 @property (weak, nonatomic) IBOutlet UILabel *editType2Label;
 
 @property (weak, nonatomic) IBOutlet UITextView *editType2TextField;
@@ -50,8 +48,6 @@
 
 //IBACTIONS----------------------------------------
 
-
-- (IBAction)backButton:(id)sender;
 
 - (IBAction)saveButton:(id)sender;
 

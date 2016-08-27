@@ -107,6 +107,18 @@
     //Save button
     [self.saveButtonOutlet setTintColor:[UIColor whiteColor]];
     
+    //Style navbar
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
+                                [UIColor whiteColor], NSForegroundColorAttributeName, nil];
+    self.navigationItem.title = @"Edit experience";
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:attributes];
+    
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"Back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:normal target:self action:@selector(backButtonPressed)];
+    
+    self.navigationItem.leftBarButtonItem = leftButton;
+    
 }
 
 
@@ -192,27 +204,6 @@
     self.dateToTextField.text = dateToPlacementText;
 }
 
-//Going back to experience table view
-- (IBAction)backButton:(id)sender {
-    
-    if (saved == false && changed == true) {
-        
-        
-        UIAlertAction *cont = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [self.navigationController popViewControllerAnimated:YES];
-        }];
-        
-        UIAlertAction *okay = [UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            
-        }];
-        
-        [self.UIPrinciple twoButtonAlert:cont rightButton:okay controller:@"Not saved" message:@"You haven't saved your interest or experience. Continue anyway?" viewController:self];
-        
-    } else {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-    
-}
 
 //Saving and going back to experience table view
 - (IBAction)saveButton:(id)sender {
@@ -262,6 +253,27 @@
 
 #pragma mark - Custom methods
 //---------------------------------------------------------
+
+
+-(void) backButtonPressed {
+    
+    if (saved == false && changed == true) {
+        
+        
+        UIAlertAction *cont = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+        
+        UIAlertAction *okay = [UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            
+        }];
+        
+        [self.UIPrinciple twoButtonAlert:cont rightButton:okay controller:@"Not saved" message:@"You haven't saved your interest or experience. Continue anyway?" viewController:self];
+        
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 
 
 - (void)sendExperienceData {

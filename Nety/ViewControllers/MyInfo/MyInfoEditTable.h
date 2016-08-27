@@ -57,8 +57,6 @@
 //IBACTIONS----------------------------------------
 
 
-- (IBAction)backButton:(id)sender;
-
 - (IBAction)editButton:(id)sender;
 
 - (IBAction)addButton:(id)sender;

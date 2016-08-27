@@ -12,6 +12,7 @@
 #import "Constants.h"
 #import "MyInfoEditTable.h"
 #import "MyInfoEditType2.h"
+#import "MyInfoEditType1.h"
 #import "UIScrollView+APParallaxHeader.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "MyInfoMainCell.h"

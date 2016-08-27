@@ -46,17 +46,12 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *loginButtonOutlet;
 
-@property (weak, nonatomic) IBOutlet UIButton *loginWithLinkedinOutlet;
-
 
 //IBACTIONS----------------------------------------
 
 - (IBAction)backButton:(id)sender;
 
 - (IBAction)loginButton:(id)sender;
-
-- (IBAction)loginWithLinkedinButton:(id)sender;
-
 
 //-------------------------------------------------
 

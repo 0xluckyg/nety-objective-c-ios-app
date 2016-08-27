@@ -7,10 +7,10 @@
 //
 
 #import "NewChats.h"
-
 #import <SDWebImage/UIImageView+WebCache.h>
-
 #import "ChatRooms.h"
+
+NSString *const newChatNoContentString = @"You don't have friends yet. Swipe left on your chats to add people!";
 
 @interface NewChats ()
 
@@ -34,7 +34,20 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    
+    //If no experiences visible, show noContent header
+    if ([[self fetchedResultsController].fetchedObjects count] == 0) {
+        
+        UIImage *contentImage = [[UIImage imageNamed:@"SpeechBubble"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        
+        if (![self.noContentController isDescendantOfView:self.view]) {
+            [self customAddNoContent:self setText:newChatNoContentString setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
+        }
+    } else {
+        [self.UIPrinciple removeNoContent:self.noContentController];
+    }
+    
+    
 }
 
 #pragma mark - Initialization
@@ -42,7 +55,7 @@
 
 
 - (void)initializeSettings {
-
+    self.noContentController = [[NoContent alloc] init];
 }
 
 - (void)initializeDesign {
@@ -112,6 +125,18 @@
    
     [self configureCell:chatCell withObject:chat];
     
+    //If no experiences visible, show noContent header
+    if ([[self fetchedResultsController].fetchedObjects count] == 0) {
+        
+        UIImage *contentImage = [[UIImage imageNamed:@"SpeechBubble"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        
+        if (![self.noContentController isDescendantOfView:self.view]) {
+            [self customAddNoContent:self setText:newChatNoContentString setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
+        }
+    } else {
+        [self.UIPrinciple removeNoContent:self.noContentController];
+    }
+    
     return chatCell;
 }
 
@@ -137,7 +162,7 @@
         cell.chatNotificationLabel.text = @"";
     } else {
         cell.chatNotificationView.backgroundColor = self.UIPrinciple.netyBlue;
-        cell.chatNotificationLabel.text = [NSString stringWithFormat:@"%d", [object.unread integerValue]];
+        cell.chatNotificationLabel.text = [NSString stringWithFormat:@"%lu", [object.unread integerValue]];
     }
     
     //Set description
@@ -326,6 +351,29 @@
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
     
     return date;
+}
+
+
+-(void)customAddNoContent: (UIViewController *)viewController setText:(NSString*)text setImage:(UIImage *)contentImage setColor:(UIColor *)color setSecondColor:(UIColor *)secondColor noContentController:(NoContent *)noContentController {
+    
+    float width = viewController.view.frame.size.width;
+    float height = noContentController.view.frame.size.height;
+    float xValue = 0;
+    float yValue = (viewController.view.frame.size.height - 145)/2 - height/2;
+    
+    noContentController.view.frame = CGRectMake(xValue, yValue, width, height);
+    
+    [noContentController.view setBackgroundColor:[UIColor clearColor]];
+    
+    [noContentController.label setTextColor:[UIColor whiteColor]];
+    
+    noContentController.label.text = text;
+    noContentController.label.textColor = secondColor;
+    
+    noContentController.image.image = contentImage;
+    [noContentController.image setTintColor:color];
+    
+    [viewController.view addSubview:noContentController.view];
 }
 
 
