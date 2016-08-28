@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Msg (CoreDataProperties)
 
-@property (nullable, nonatomic, retain) NSString *date;
+@property (nullable, nonatomic, retain) NSNumber *date;
 @property (nullable, nonatomic, retain) NSString *senderDisplayName;
 @property (nullable, nonatomic, retain) NSString *senderId;
 @property (nullable, nonatomic, retain) NSString *text;
