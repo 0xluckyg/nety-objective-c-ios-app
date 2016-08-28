@@ -33,7 +33,6 @@ NSString *const myChatNoContentString = @"You don't have friends yet. Swipe left
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    
     //If no experiences visible, show noContent header
     if ([[self fetchedResultsController].fetchedObjects count] == 0) {
         

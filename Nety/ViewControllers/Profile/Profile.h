@@ -18,15 +18,18 @@
 #import "InterestCell.h"
 #import "UIPrinciples.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <CoreData/CoreData.h>
 
-@interface Profile : UIViewController <UITableViewDelegate, UITableViewDataSource, APParallaxViewDelegate> {
+@interface Profile : UIViewController <UITableViewDelegate, UITableViewDataSource, APParallaxViewDelegate, NSFetchedResultsControllerDelegate> {
     int numberOfComponents;
 }
 
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 //VARIABLES----------------------------------------
 
 @property (strong,nonatomic) Users* selectedUser;
+@property (strong,nonatomic) NSString* selectedUserID;
 
 //UTIL CLASSES----------------------------------------
 
