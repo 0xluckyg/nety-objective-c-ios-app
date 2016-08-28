@@ -458,7 +458,7 @@
         
         [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"charRoomID == %@",self.chatroomID]];
         NSError *error = nil;
-<<<<<<< HEAD
+
         NSMutableArray* findUserArray = [NSMutableArray arrayWithArray:[MY_API.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
         ChatRooms* chatRoom;
         if (findUserArray.count>0) {
@@ -495,33 +495,6 @@
                 } @finally {
                     ///
                 }
-=======
-        NSMutableArray* findMessageArray = [NSMutableArray arrayWithArray:[MY_API.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
-        NSLog(@"%@ findUserArray", findMessageArray);
-        Msg* message;
-        if (findMessageArray.count>0) {
-            message = [findMessageArray lastObject];
-        }
-        else
-        {
-            message = [NSEntityDescription insertNewObjectForEntityForName:@"Msg" inManagedObjectContext:MY_API.managedObjectContext];
-        }
-        
-        [message setValue:self.chatroomID forKey:@"chatroomID"];
-        for (NSString* keys in [messagesDictionary allKeys]) {
-            @try {
-                if ([keys isEqualToString:kDate]) {
-                    NSNumber *dateNum = (NSNumber *)[messagesDictionary objectForKey:keys];
-                    [message setValue:dateNum forKey:keys];
-                } else {
-                    [message setValue:[messagesDictionary objectForKey:keys] forKey:keys];
-                }
-                
-            } @catch (NSException *exception) {
-                NSLog(@"Create user ERROR: %@",exception);
-            } @finally {
-                ///
->>>>>>> origin/master
             }
 
             [chatRoom addMesagesObject:msgObj];
