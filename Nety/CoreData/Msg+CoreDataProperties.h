@@ -15,9 +15,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Msg (CoreDataProperties)
 
+<<<<<<< HEAD
 @property (nullable, nonatomic, retain) NSString *chatroomID;
 @property (nullable, nonatomic, retain) NSDate *date;
 @property (nullable, nonatomic, retain) NSString *media;
+=======
+@property (nullable, nonatomic, retain) NSNumber *date;
+>>>>>>> origin/master
 @property (nullable, nonatomic, retain) NSString *senderDisplayName;
 @property (nullable, nonatomic, retain) NSString *senderId;
 @property (nullable, nonatomic, retain) NSString *text;

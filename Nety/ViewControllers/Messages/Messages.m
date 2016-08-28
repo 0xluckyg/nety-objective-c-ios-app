@@ -109,9 +109,12 @@
 //---------------------------------------------------------
 
 
+
+
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
     id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
+    NSLog(@"%lu number of items", [sectionInfo numberOfObjects]);
     return [sectionInfo numberOfObjects];
 }
 
@@ -373,15 +376,10 @@
     //Check if the same room exists first
     [chatRoomRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
-        NSLog([snapshot hasChild:self.chatroomID] ? @"Yes" : @"No");
-        NSLog(@"snapshot value: %@", snapshot.value);
-        
-        //If room doesn't exist
+        //If room exists
         if ([snapshot hasChild:self.chatroomID] && snapshot.value != NULL) {
             
             [self observeMessagesFromDatabase];
-            
-            NSLog(@"%li", (long)readcount);
             
             //Set user's own readcount to 0 when entering chat room
             [[[[[self.firdatabase child:kUserChats] child:self.senderId] child:kChats] child:self.chatroomID] updateChildValues:@{kUnread: @0}];
@@ -389,7 +387,8 @@
             [[[[[self.firdatabase child:kUserChats] child:self.senderId] child:kChats] child:self.chatroomID] updateChildValues:@{kOnline: @1}];
             
             [self listenForReadCountAndOnlineStatus];
-            
+        
+        //If room doesn't exist
         } else {
             
             NSNumber *secondsSince1970 = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970] * -1];
@@ -459,6 +458,7 @@
         
         [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"charRoomID == %@",self.chatroomID]];
         NSError *error = nil;
+<<<<<<< HEAD
         NSMutableArray* findUserArray = [NSMutableArray arrayWithArray:[MY_API.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
         ChatRooms* chatRoom;
         if (findUserArray.count>0) {
@@ -495,6 +495,33 @@
                 } @finally {
                     ///
                 }
+=======
+        NSMutableArray* findMessageArray = [NSMutableArray arrayWithArray:[MY_API.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
+        NSLog(@"%@ findUserArray", findMessageArray);
+        Msg* message;
+        if (findMessageArray.count>0) {
+            message = [findMessageArray lastObject];
+        }
+        else
+        {
+            message = [NSEntityDescription insertNewObjectForEntityForName:@"Msg" inManagedObjectContext:MY_API.managedObjectContext];
+        }
+        
+        [message setValue:self.chatroomID forKey:@"chatroomID"];
+        for (NSString* keys in [messagesDictionary allKeys]) {
+            @try {
+                if ([keys isEqualToString:kDate]) {
+                    NSNumber *dateNum = (NSNumber *)[messagesDictionary objectForKey:keys];
+                    [message setValue:dateNum forKey:keys];
+                } else {
+                    [message setValue:[messagesDictionary objectForKey:keys] forKey:keys];
+                }
+                
+            } @catch (NSException *exception) {
+                NSLog(@"Create user ERROR: %@",exception);
+            } @finally {
+                ///
+>>>>>>> origin/master
             }
 
             [chatRoom addMesagesObject:msgObj];
@@ -513,6 +540,9 @@
 - (JSQMessage*) getMessageObject:(NSIndexPath*)indexPath
 {
     Msg* tempMessage = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+    
+//    NSLog(@"%@ tempMessage", tempMessage);
+//    NSLog(@"%lu tempMessageIndex", indexPath.row);
     
     NSString *senderIdFromDatabase = tempMessage.senderId;
     NSString *senderDisplaynameFromDatabase = tempMessage.senderDisplayName;
@@ -671,7 +701,7 @@
     //[fetchRequest setFetchBatchSize:20];
     
     // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:kDate ascending:YES];
     
     [fetchRequest setSortDescriptors:@[sortDescriptor]];
     

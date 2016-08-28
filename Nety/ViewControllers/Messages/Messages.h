@@ -28,8 +28,6 @@
 //VARIABLES----------------------------------------
 
 
-//@property (strong, nonatomic) NSMutableArray *messages;
-
 @property (strong, nonatomic) NSString *selectedUserID;
 
 @property (strong, nonatomic) NSString *selectedUserProfileImageString;

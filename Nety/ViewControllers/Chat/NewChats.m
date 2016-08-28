@@ -358,7 +358,7 @@ NSString *const newChatNoContentString = @"You don't have friends yet. Swipe lef
     float width = viewController.view.frame.size.width;
     float height = noContentController.view.frame.size.height;
     float xValue = 0;
-    float yValue = (viewController.view.frame.size.height - 145)/2 - height/2;
+    float yValue = (viewController.view.frame.size.height - 144)/2 - height/2;
     
     noContentController.view.frame = CGRectMake(xValue, yValue, width, height);
     

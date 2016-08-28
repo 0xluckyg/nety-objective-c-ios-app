@@ -32,7 +32,6 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
 
 -(void)viewWillAppear:(BOOL)animated {
     
-    [self initializeUsers];
     //[self.tableView reloadData];
     
     self.slider.value = self.sliderValue;
@@ -114,11 +113,6 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
     [self.searchBar setBarTintColor:[UIColor whiteColor]];
     
     self.navigationItem.title = [NSString stringWithFormat:@"%@ Near Me", [self calculateDistanceToDescription]];
-    
-}
-
-- (void)initializeUsers {
-    
     
 }
 
