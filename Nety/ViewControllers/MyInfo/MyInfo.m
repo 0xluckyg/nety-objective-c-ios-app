@@ -49,14 +49,9 @@
     
     self.firdatabase = [[FIRDatabase database] reference];
     
-}
-
-- (void)initializeDesign {
-    
-    self.UIPrinciple = [[UIPrinciples alloc] init];
-    
     //Color for the small view
     NSString *name = [NSString stringWithFormat:@"%@ %@", MY_USER.firstName, MY_USER.lastName];
+    NSLog(@"myinfo name %@", name);
     
     //Style navbar
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -65,6 +60,11 @@
     self.navigationItem.title = name;
     
     [self.navigationController.navigationBar setTitleTextAttributes:attributes];
+}
+
+- (void)initializeDesign {
+    
+    self.UIPrinciple = [[UIPrinciples alloc] init];
     
     //If image is not NetyBlueLogo, start downloading and caching the image
     NSString *photoUrl = MY_USER.profileImageUrl;

@@ -30,7 +30,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     //If no experiences visible, show noContent header
-    if ([self.experienceArray count] == 0) {
+    if ([[MY_USER.experiences allObjects] count] == 0) {
         
         self.experienceArray = [[NSMutableArray alloc] init];
         
@@ -101,28 +101,28 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.experienceArray count];
+    return [[MY_USER.experiences allObjects] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    Experiences* expir = [[MY_USER.experiences allObjects] objectAtIndex:indexPath.row];
     
     //Initialize cell
     MyInfoEditTableCell *experienceCell = [tableView dequeueReusableCellWithIdentifier:@"MyInfoEditTableCell"];
     
     
-    if ([self.experienceArray count] != 0) {
+    if ([[MY_USER.experiences allObjects] count] != 0) {
         
-        //Set cell data
-        NSDictionary *rowData = [self.experienceArray objectAtIndex:indexPath.row];
         //Change format of date
         NSString *experienceDate = @"";
-        if (![[rowData objectForKey:@"startDate"] isEqualToString:@""]) {
-            experienceDate = [NSString stringWithFormat:@"%@ to %@", [rowData objectForKey:@"startDate"], [rowData objectForKey:@"endDate"]];
+        if (![expir.startDate isEqualToString:@""]) {
+            experienceDate = [NSString stringWithFormat:@"%@ to %@", expir.startDate, expir.endDate];
         }
         
-        experienceCell.experienceName.text = [rowData objectForKey: @"name"];
+        experienceCell.experienceName.text = expir.name;
         experienceCell.experienceDate.text = experienceDate;
-        experienceCell.experienceDescription.text = [rowData objectForKey: @"description"];
+        experienceCell.experienceDescription.text = expir.descript;
     }
     
     //Set cell style
@@ -165,14 +165,14 @@
     [self.experienceArray removeObjectAtIndex:indexPath.row];
     [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
     
-    if ([self.experienceArray count] == 0) {
+    if ([[MY_USER.experiences allObjects] count] == 0) {
         
         //If deleted and array is 0
         self.noContentController = [[NoContent alloc] init];
         
         UIImage *contentImage = [UIImage imageNamed:@"LightBulb"];
         
-[self.UIPrinciple addNoContent:self setText:@"You haven't added an experience or interest yet" setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
+        [self.UIPrinciple addNoContent:self setText:@"You haven't added an experience or interest yet" setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
     }
     
 }

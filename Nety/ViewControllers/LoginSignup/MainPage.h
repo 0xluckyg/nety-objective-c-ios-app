@@ -11,6 +11,9 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <linkedin-sdk/LISDK.h>
+#import "Constants.h"
+#import "AppDelegate.h"
+
 
 @interface MainPage : UIViewController {
     NSInteger loginOrSignup;
@@ -25,7 +28,7 @@
 //UTIL CLASSES----------------------------------------
 
 
-
+@property (strong, nonatomic) FIRDatabaseReference *firdatabase;
 
 
 //LIB CLASSES----------------------------------------
@@ -91,6 +94,9 @@
 - (IBAction)signupButton:(id)sender;
 
 - (IBAction)loginWithLinkedinButton:(id)sender;
+
+- (IBAction)loginWithFacebookButton:(id)sender;
+
 
 //-------------------------------------------------
 

@@ -26,7 +26,7 @@
     // Do any additional setup after loading the view.
 
     [self initializeDesign];
-    
+    [self initializeSettings];
 }
 
 #pragma mark - Initialization
@@ -49,14 +49,32 @@
     [self.signupButtonOutlet.layer setBorderColor:[[UIColor whiteColor] CGColor]];
     [self.signupButtonOutlet.layer setCornerRadius:self.signupButtonOutlet.frame.size.height/2];
     
-    [self.loginWithFacebookOutlet.layer setBorderWidth:1.0];
-    [self.loginWithFacebookOutlet.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+//    [self.loginWithFacebookOutlet.layer setBorderWidth:1.0];
+//    [self.loginWithFacebookOutlet.layer setBorderColor:[[UIColor whiteColor] CGColor]];
     [self.loginWithFacebookOutlet.layer setCornerRadius:self.signupButtonOutlet.frame.size.height/2];
     
-    [self.loginWithLinkedinOutlet.layer setBorderWidth:1.0];
-    [self.loginWithLinkedinOutlet.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+//    [self.loginWithLinkedinOutlet.layer setBorderWidth:1.0];
+//    [self.loginWithLinkedinOutlet.layer setBorderColor:[[UIColor whiteColor] CGColor]];
     [self.loginWithLinkedinOutlet.layer setCornerRadius:self.signupButtonOutlet.frame.size.height/2];
     
+    UIImage *facebookImage = [[UIImage imageNamed:@"Facebook"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIImage *linkedinImage = [[UIImage imageNamed:@"LinkedIn"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    
+    [self.loginWithFacebookOutlet setImage:facebookImage forState:UIControlStateNormal];
+    [self.loginWithFacebookOutlet setTintColor:self.UIPrinciple.facebookBlue];
+    self.loginWithFacebookOutlet.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
+    self.loginWithFacebookOutlet.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
+    
+    [self.loginWithLinkedinOutlet setImage:linkedinImage forState:UIControlStateNormal];
+    [self.loginWithLinkedinOutlet setTintColor:self.UIPrinciple.linkedInBlue];
+    self.loginWithLinkedinOutlet.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
+    self.loginWithLinkedinOutlet.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
+    
+    
+}
+
+-(void)initializeSettings {
+    self.firdatabase = [[FIRDatabase database] reference];
 }
 
 
@@ -71,7 +89,7 @@
 //---------------------------------------------------------
 
 
-- (IBAction)loginButton:(id)sender {
+- (IBAction)loginButton:(id)sender {    
 }
 
 - (IBAction)signupButton:(id)sender {
@@ -117,7 +135,6 @@
     
 }
 
-
 #pragma mark - View Disappear
 //---------------------------------------------------------
 
@@ -129,6 +146,109 @@
 //---------------------------------------------------------
 
 
+
+- (IBAction)loginWithFacebookButton:(id)sender {
+    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+    [login
+     logInWithReadPermissions: @[@"public_profile", @"email", @"user_friends"]
+     fromViewController:self
+     handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+         if (error) {
+             NSLog(@"Process error");
+         } else if (result.isCancelled) {
+             NSLog(@"Cancelled");
+         } else {
+             
+             FIRAuthCredential *credential = [FIRFacebookAuthProvider
+                                              credentialWithAccessToken:[FBSDKAccessToken currentAccessToken]
+                                              .tokenString];
+             
+             [[FIRAuth auth] signInWithCredential:credential
+                                       completion:^(FIRUser *user, NSError *error) {
+                                           if (!error) {
+                                               NSLog(@"Login OK");
+                                               NSLog(@"FB User Info: %@",user);
+                                               [self fetchUserInformation:user];
+                                           }
+                                           else
+                                           {
+                                               NSLog(@"FB Login Error: %@",error.localizedDescription);
+                                           }
+                                       }];
+             
+         }
+     }];
+}
+
+#pragma mark -
+
+- (void)fetchUserInformation: (FIRUser *)user {
+    
+    FIRDatabaseReference *firdatabase = [[FIRDatabase database] reference];
+    
+    NSString *userEmail = user.email;
+    NSString *userID = [[userEmail stringByReplacingOccurrencesOfString:@"@" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
+    
+    [[[firdatabase child:kUsers] child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        // Get user value
+        
+        if ([snapshot exists]) {
+            NSDictionary *usersDictionary = snapshot.value;
+            NSString *otherUserID = snapshot.key;
+            
+            [MY_API addNewUser:usersDictionary UserID:otherUserID FlagMy:YES];
+            [self changeRoot];
+        }
+        else
+        {
+            NSLog(@"User not found");
+            [self createNewUser:user UserID:userID];
+        }
+        
+        
+    } withCancelBlock:^(NSError * _Nonnull error) {
+        NSLog(@"%@", error.localizedDescription);
+    }];
+    
+}
+
+- (void) createNewUser:(FIRUser*)userInfo UserID:(NSString*)userID
+{
+    
+    NSArray *nameArray = [userInfo.displayName componentsSeparatedByString:@" "];
+    
+    NSDictionary *post = @{kFirstName: nameArray[0],
+                           kLastName: nameArray[1],
+                           kAge: @(0),
+                           kStatus: @"",
+                           kIdentity: @"",
+                           kSummary: @"",
+                           kExperiences: @{},
+                           kProfilePhoto: userInfo.photoURL.absoluteString};
+    
+    
+    [MY_API addNewUser:post UserID:userID FlagMy:YES];
+    [[[self.firdatabase child:kUsers] child:userID] setValue:post];
+    [self changeRoot];
+    
+}
+
+- (void)changeRoot {
+    //Set root controller to tabbar with cross dissolve animation
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    [UIView
+     transitionWithView:self.view.window
+     duration:0.5
+     options:UIViewAnimationOptionTransitionCrossDissolve
+     animations:^(void) {
+         BOOL oldState = [UIView areAnimationsEnabled];
+         [UIView setAnimationsEnabled:NO];
+         [appDelegate.window setRootViewController:appDelegate.tabBarRootController];
+         [UIView setAnimationsEnabled:oldState];
+     }
+     completion:nil];
+}
 
 
 

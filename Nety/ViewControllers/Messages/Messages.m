@@ -14,7 +14,9 @@
 
 @end
 
-@implementation Messages
+@implementation Messages {
+    NSInteger numberOfMessages;
+}
 
 
 #pragma mark - View Load
@@ -65,8 +67,8 @@
     [self.navigationController.navigationBar setTitleTextAttributes:attributes];
     
     //Set up message style
-    JSQMessagesBubbleImageFactory *incomingImage = [[JSQMessagesBubbleImageFactory alloc] initWithBubbleImage:[UIImage jsq_bubbleCompactTaillessImage] capInsets:UIEdgeInsetsZero];
-    JSQMessagesBubbleImageFactory *outgoingImage = [[JSQMessagesBubbleImageFactory alloc] initWithBubbleImage:[UIImage jsq_bubbleCompactTaillessImage] capInsets:UIEdgeInsetsZero];
+    JSQMessagesBubbleImageFactory *incomingImage = [[JSQMessagesBubbleImageFactory alloc] initWithBubbleImage:[UIImage jsq_bubbleRegularImage] capInsets:UIEdgeInsetsZero];
+    JSQMessagesBubbleImageFactory *outgoingImage = [[JSQMessagesBubbleImageFactory alloc] initWithBubbleImage:[UIImage jsq_bubbleRegularImage] capInsets:UIEdgeInsetsZero];
     
     
     self.outgoingBubbleImageView = [outgoingImage outgoingMessagesBubbleImageWithColor:self.UIPrinciple.netyBlue];
@@ -114,8 +116,8 @@
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
     id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
-    NSLog(@"%lu number of items", [sectionInfo numberOfObjects]);
-    return [sectionInfo numberOfObjects];
+    numberOfMessages = [sectionInfo numberOfObjects];
+    return numberOfMessages;
 }
 
 -(id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -329,8 +331,9 @@
     [onlineRef updateChildValues:@{kOnline: @0}];
     
     //If no messages, delete chat rooms
-    NSLog(@"%u message count", [[self.fetchedResultsController sections] count]);
-    if ([[self.fetchedResultsController sections] count] == 0) {
+    NSLog(@"%lu message count", numberOfMessages);
+    
+    if (numberOfMessages == 0) {
         
         //Remove room
         [[[self.firdatabase child:kChatRooms] child:self.chatroomID] removeValue];

@@ -50,10 +50,22 @@
     self.signupWithLinkedinButtonOutlet.backgroundColor = self.UIPrinciple.linkedInBlue;
     [self.signupWithLinkedinButtonOutlet.layer setCornerRadius:self.signupWithLinkedinButtonOutlet.frame.size.height/2];
     
+    [self.email setBackgroundColor:[UIColor whiteColor]];
+    [self.email.layer setCornerRadius:self.email.frame.size.height/2];
     self.email.textColor = self.UIPrinciple.netyBlue;
+    
+    [self.password setBackgroundColor:[UIColor whiteColor]];
+    [self.password.layer setCornerRadius:self.password.frame.size.height/2];
     self.password.textColor = self.UIPrinciple.netyBlue;
+    
+    [self.age setBackgroundColor:[UIColor whiteColor]];
+    [self.age.layer setCornerRadius:self.age.frame.size.height/2];
     self.age.textColor = self.UIPrinciple.netyBlue;
+    
+    [self.name setBackgroundColor:[UIColor whiteColor]];
+    [self.name.layer setCornerRadius:self.name.frame.size.height/2];
     self.name.textColor = self.UIPrinciple.netyBlue;
+    
     
 }
 

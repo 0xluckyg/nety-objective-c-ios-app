@@ -15,6 +15,7 @@
 #import "MyInfoEditTableCell.h"
 #import "MyInfoEditExperience.h"
 #import "Constants.h"
+#import "Experiences.h"
 
 
 @import Firebase;

@@ -7,13 +7,8 @@
 //
 
 #import "Login.h"
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
-#import <linkedin-sdk/LISDK.h>
 
-@interface Login ()<FBSDKLoginButtonDelegate>
-
-@property (weak, nonatomic) IBOutlet FBSDKLoginButton *loginButton;
+@interface Login ()
 
 @end
 
@@ -27,10 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    _loginButton.readPermissions =
-    @[@"public_profile", @"email", @"user_friends"];
-    [_loginButton setDelegate:self];
+
     
 #if DEBUG
     [_password setText:@"ptest3"];
@@ -60,7 +52,13 @@
     [self.loginButtonOutlet.layer setBorderColor:[[UIColor whiteColor] CGColor]];
     [self.loginButtonOutlet.layer setCornerRadius:self.loginButtonOutlet.frame.size.height/2];
     
+    [self.email setBackgroundColor:[UIColor whiteColor]];
+    [self.email.layer setCornerRadius:self.email.frame.size.height/2];
     self.email.textColor = self.UIPrinciple.netyBlue;
+    
+    
+    [self.password setBackgroundColor:[UIColor whiteColor]];
+    [self.password.layer setCornerRadius:self.password.frame.size.height/2];
     self.password.textColor = self.UIPrinciple.netyBlue;
     
 }
@@ -118,45 +116,6 @@
     }
 }
 
-
-#pragma mark - Facebook
-
-- (void)  loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
-                error:(NSError *)error
-{
-    if (error) {
-        NSLog(@"Process error");
-    } else if (result.isCancelled) {
-        NSLog(@"Cancelled");
-    } else {
-        NSLog(@"Logged in");
-        NSLog(@"Token: %@",result.token.tokenString);
-        
-        FIRAuthCredential *credential = [FIRFacebookAuthProvider
-                                         credentialWithAccessToken:[FBSDKAccessToken currentAccessToken]
-                                         .tokenString];
-        
-        [[FIRAuth auth] signInWithCredential:credential
-                                  completion:^(FIRUser *user, NSError *error) {
-                                      if (!error) {
-                                          NSLog(@"Login OK");
-                                          NSLog(@"FB User Info: %@",user);
-                                          [self fetchUserInformation:user];
-                                      }
-                                      else
-                                      {
-                                          NSLog(@"FB Login Error: %@",error.localizedDescription);
-                                      }
-                                  }];
-    }
-}
-
-
-- (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton
-{
-    NSLog(@"LogOut");
-}
-
 #pragma mark -
 
 - (void)fetchUserInformation: (FIRUser *)user {
@@ -188,6 +147,7 @@
     }];
    
 }
+
 - (void) createNewUser:(FIRUser*)userInfo UserID:(NSString*)userID
 {
 
