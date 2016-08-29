@@ -214,22 +214,46 @@
 
 - (void) createNewUser:(FIRUser*)userInfo UserID:(NSString*)userID
 {
-    
-    NSArray *nameArray = [userInfo.displayName componentsSeparatedByString:@" "];
-    
-    NSDictionary *post = @{kFirstName: nameArray[0],
-                           kLastName: nameArray[1],
-                           kAge: @(0),
-                           kStatus: @"",
-                           kIdentity: @"",
-                           kSummary: @"",
-                           kExperiences: @{},
-                           kProfilePhoto: userInfo.photoURL.absoluteString};
-    
-    
-    [MY_API addNewUser:post UserID:userID FlagMy:YES];
-    [[[self.firdatabase child:kUsers] child:userID] setValue:post];
-    [self changeRoot];
+    [FBSDKProfile loadCurrentProfileWithCompletion:^(FBSDKProfile *profile, NSError *error) {
+        if (!error) {
+            
+            //            FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
+            //                                          initWithGraphPath:@"me"
+            //                                          parameters:[NSDictionary dictionaryWithObject:@"cover,picture.type(large),id,name,first_name,last_name,gender,birthday,email,location,hometown,bio,photos" forKey:@"fields"]
+            //                                          HTTPMethod:@"GET"];
+            //
+            //            [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
+            //                                                  id result,
+            //                                                  NSError *error) {
+            //                if (!error)
+            //                {
+            NSDictionary *post = @{kFirstName:profile.firstName,
+                                   kLastName:profile.lastName,
+                                   kAge: @(0),
+                                   kStatus: @"",
+                                   kIdentity: @"",
+                                   kSummary: @"",
+                                   kExperiences: @{},
+                                   kProfilePhoto: [profile imageURLForPictureMode:FBSDKProfilePictureModeNormal size:CGSizeMake(720, 720)].absoluteString};
+            
+            //Set user information inside global variables
+            [MY_API addNewUser:post UserID:userID FlagMy:YES];
+            [[[self.firdatabase child:kUsers] child:userID] setValue:post];
+            [self changeRoot];
+        }
+        else
+        {
+            NSLog(@"Error %@",error.localizedDescription);
+        }
+        
+        //            }];
+        //
+        //        }
+        //        else
+        //        {
+        //            NSLog(@"Error %@",error.localizedDescription);
+        //        }
+    }];
     
 }
 

@@ -132,11 +132,11 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
     NSPredicate* predicate;
     if (_searchBar.text.length)
     {
-        predicate = [NSPredicate predicateWithFormat:@"firstName CONTAINS[c]%@ OR lastName CONTAINS[c] %@ AND itIsMe != YES AND distance < %f",_searchBar.text,_searchBar.text,_sliderDistanceValue];
+        predicate = [NSPredicate predicateWithFormat:@"firstName CONTAINS[c]%@ OR lastName CONTAINS[c] %@ AND itIsMe != YES AND distance < %f AND isBlocked == NO",_searchBar.text,_searchBar.text,_sliderDistanceValue];
     }
     else
     {
-        predicate = [NSPredicate predicateWithFormat:@"itIsMe != YES  AND distance < %f",_sliderDistanceValue];
+        predicate = [NSPredicate predicateWithFormat:@"itIsMe != YES  AND distance < %f AND isBlocked == NO",_sliderDistanceValue];
     }
 //    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(Users *user, NSDictionary *bindings)
 //    {
