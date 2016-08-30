@@ -124,9 +124,6 @@
             
             [self.UIPrinciple twoButtonAlert:yes rightButton:no controller:@"Log out" message:@"Are you sure to log out?" viewController:self];
             
-        } else {
-            
-            [self.UIPrinciple twoButtonAlert:yes rightButton:no controller:@"Delete account" message:@"Are you sure to delete your account? All the friends you've made will miss you." viewController:self];
         }
     }
     

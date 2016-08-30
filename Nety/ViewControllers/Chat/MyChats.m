@@ -191,7 +191,7 @@ NSString *const myChatNoContentString = @"You don't have friends yet. Swipe left
     Messages *messagesVC = [messagesStoryboard instantiateViewControllerWithIdentifier:@"Messages"];
     
        ChatRooms* chat = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-    messagesVC.chatroomID = chat.charRoomID;
+    messagesVC.chatroomID = chat.chatRoomID;
     messagesVC.selectedUserID = chat.members.userID;
     messagesVC.selectedUserProfileImageString =chat.profileImageUrl;
     messagesVC.selectedUserName = chat.fullName;
@@ -212,7 +212,7 @@ NSString *const myChatNoContentString = @"You don't have friends yet. Swipe left
     FIRDatabaseReference *firdatabase = [[FIRDatabase database] reference] ;
     
     NSString *userID = MY_USER.userID;
-    NSString *roomID = chat.charRoomID;
+    NSString *roomID = chat.chatRoomID;
     NSString *selectedUserID = chat.members.userID;
     //OLD
     switch (index) {

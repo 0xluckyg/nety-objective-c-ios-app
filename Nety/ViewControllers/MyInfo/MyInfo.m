@@ -25,14 +25,26 @@
     // Do any additional setup after loading the view.
     
     [self initializeDesign];
+    [self initializeSettings];
+//    NSMutableSet *mutableSet = [NSMutableSet setWithSet:MY_USER.experiences];
+//    [mutableSet removeAllObjects];
+//    MY_USER.experiences = mutableSet;
+//    NSArray *allExperiences = [MY_USER.experiences allObjects];
+//    for (id object in allExperiences) {
+//        [MY_USER.managedObjectContext deleteObject:object];
+//    }
+
     
-    NSLog(@"%@", MY_USER);
+    
+//    NSLog(@"%@", MY_USER);
     
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     
     numberOfComponents = 7 + (int)[[MY_USER.experiences allObjects] count];
+    
+    NSLog(@"allExp %@",[MY_USER.experiences allObjects]);
     
     [self initializeSettings];
     
@@ -271,7 +283,7 @@
         case 6: {
             MyInfoEditTable *editTableVC = [self.storyboard instantiateViewControllerWithIdentifier:@"MyInfoEditTable"];
             
-            editTableVC.experienceArray = self.experienceArray;
+            editTableVC.fromMyInfo = true;
             
             [self.navigationController pushViewController:editTableVC animated:YES];
             

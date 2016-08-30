@@ -2,7 +2,7 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15D21" minimumToolsVersion="Xcode 7.0">
     <entity name="ALL" representedClassName="ALL" syncable="YES"/>
     <entity name="ChatRooms" representedClassName="ChatRooms" parentEntity="ALL" syncable="YES">
-        <attribute name="charRoomID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="chatRoomID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fullName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="online" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="profileImageUrl" optional="YES" attributeType="String" syncable="YES"/>
@@ -38,7 +38,7 @@
         <attribute name="itIsMe" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="profileImageUrl" optional="YES" attributeType="String" defaultValueString="NetyBlueLogo" syncable="YES"/>
-        <attribute name="security" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="security" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userID" optional="YES" attributeType="String" syncable="YES"/>
@@ -46,9 +46,9 @@
     </entity>
     <elements>
         <element name="ALL" positionX="-5688" positionY="-801" width="128" height="45"/>
-        <element name="ChatRooms" positionX="-5456" positionY="-574" width="128" height="193"/>
+        <element name="ChatRooms" positionX="-5456" positionY="-574" width="128" height="195"/>
         <element name="Experiences" positionX="-5879" positionY="-396" width="128" height="103"/>
         <element name="Msg" positionX="-5139" positionY="-648" width="128" height="133"/>
-        <element name="Users" positionX="-5661" positionY="-540" width="128" height="268"/>
+        <element name="Users" positionX="-5661" positionY="-540" width="128" height="270"/>
     </elements>
 </model>

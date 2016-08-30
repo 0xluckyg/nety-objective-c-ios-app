@@ -34,6 +34,7 @@
 
 @property (nonatomic) NSUInteger arrayIndex;
 
+@property (nonatomic) bool fromMyInfo;
 
 //UTIL CLASSES----------------------------------------
 

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "UIPrinciples.h"
+#import "Experiences.h"
+
 
 @protocol experienceDataDelegate <NSObject>
 

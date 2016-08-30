@@ -26,15 +26,16 @@
     [self initializeDesign];
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    saved = false;
+    changed = false;
+}
 
 #pragma mark - Initialization
 //---------------------------------------------------------
 
 
 - (void)initizlieSetting {
-    
-    saved = false;
-    changed = false;
     
     namePlacementText = @"Where did you work at, or what did you do?";
     dateToPlacementText = @"Present";
@@ -86,15 +87,15 @@
         
     } else {
         
-        NSDictionary *experienceDict = [self.experienceArray objectAtIndex:self.arrayIndex];
+        Experiences *experienceDict = [self.experienceArray objectAtIndex:self.arrayIndex];
         
         //name
-        self.experienceNameTextField.text = [experienceDict objectForKey:@"name"];
+        self.experienceNameTextField.text = experienceDict.name;
         //date
-        self.dateFromTextField.text = [experienceDict objectForKey:@"startDate"];
-        self.dateToTextField.text = [experienceDict objectForKey:@"endDate"];
+        self.dateFromTextField.text = experienceDict.startDate;
+        self.dateToTextField.text = experienceDict.endDate;
         //description
-        self.experienceDescriptionTextField.text = [experienceDict objectForKey:@"description"];
+        self.experienceDescriptionTextField.text = experienceDict.descript;
         
     }
     
@@ -280,6 +281,7 @@
     
     [self.delegate sendExperienceData:self.experienceArray];
     
+    NSLog(@"experienceDelegate %@", self.experienceArray);
 }
 
 

@@ -13,7 +13,7 @@
 
 @implementation ChatRooms (CoreDataProperties)
 
-@dynamic charRoomID;
+@dynamic chatRoomID;
 @dynamic fullName;
 @dynamic online;
 @dynamic profileImageUrl;

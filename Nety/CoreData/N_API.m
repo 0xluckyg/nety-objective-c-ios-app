@@ -284,6 +284,7 @@
                         }
                     }
                     if (![user.experiences containsObject:expir]) {
+                        NSLog(@"expir added %@", expir);
                         [user addExperiencesObject:expir];
                     }
                     
@@ -414,7 +415,7 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"ChatRooms" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
     
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"charRoomID == %@",roomID]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"chatRoomID == %@",roomID]];
     NSError *error = nil;
     NSMutableArray* findUserArray = [NSMutableArray arrayWithArray:[self.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
     ChatRooms* rooms;
@@ -427,7 +428,7 @@
         
     }
     [rooms setMembers:user];
-    [rooms setValue:roomID forKey:@"charRoomID"];
+    [rooms setValue:roomID forKey:@"chatRoomID"];
     for (NSString* keys in [userInfo allKeys]) {
         @try {
             [rooms setValue:[userInfo objectForKey:keys] forKey:keys];
@@ -533,6 +534,36 @@
     
     NSEntityDescription* description =
     [NSEntityDescription entityForName:@"ALL"
+                inManagedObjectContext:self.managedObjectContext];
+    
+    [request setEntity:description];
+    
+    NSError* requestError = nil;
+    NSArray* resultArray = [self.managedObjectContext executeFetchRequest:request error:&requestError];
+    if (requestError) {
+        NSLog(@"%@", [requestError localizedDescription]);
+    }
+    
+    return resultArray;
+}
+
+
+#pragma mark - MyInfo
+
+- (void) clearExperiences {
+    NSArray* allExperiences = [self allExperiences];
+    
+    for (id object in allExperiences) {
+        [self.managedObjectContext deleteObject:object];
+    }
+}
+
+- (NSArray*) allExperiences {
+    
+    NSFetchRequest* request = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription* description =
+    [NSEntityDescription entityForName:@"Experiences"
                 inManagedObjectContext:self.managedObjectContext];
     
     [request setEntity:description];

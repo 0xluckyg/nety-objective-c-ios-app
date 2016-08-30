@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ChatRooms (CoreDataProperties)
 
-@property (nullable, nonatomic, retain) NSString *charRoomID;
+@property (nullable, nonatomic, retain) NSString *chatRoomID;
 @property (nullable, nonatomic, retain) NSString *fullName;
 @property (nullable, nonatomic, retain) NSNumber *online;
 @property (nullable, nonatomic, retain) NSString *profileImageUrl;

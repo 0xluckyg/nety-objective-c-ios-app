@@ -135,18 +135,6 @@
     
 }
 
-#pragma mark - View Disappear
-//---------------------------------------------------------
-
-
-
-
-
-#pragma mark - Custom methods
-//---------------------------------------------------------
-
-
-
 - (IBAction)loginWithFacebookButton:(id)sender {
     FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
     [login
@@ -179,6 +167,17 @@
          }
      }];
 }
+
+#pragma mark - View Disappear
+//---------------------------------------------------------
+
+
+
+
+
+#pragma mark - Custom methods
+//---------------------------------------------------------
+
 
 #pragma mark -
 

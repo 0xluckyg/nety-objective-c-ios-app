@@ -30,9 +30,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     //If no experiences visible, show noContent header
-    if ([[MY_USER.experiences allObjects] count] == 0) {
-        
-        self.experienceArray = [[NSMutableArray alloc] init];
+    NSInteger experiencesCount = [[MY_USER.experiences allObjects] count];
+    
+    if (experiencesCount == 0) {
         
         UIImage *contentImage = [[UIImage imageNamed:@"LightBulb"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
@@ -41,7 +41,27 @@
         }
     } else {
         [self.UIPrinciple removeNoContent:self.noContentController];
+        
     }
+    
+    if (self.fromMyInfo) {
+        
+        for (int i = 0; i < experiencesCount; i ++) {
+            
+            Experiences* expir = [[MY_USER.experiences allObjects] objectAtIndex:i];
+            
+            NSDictionary *expirDictionary = @{kExperienceName:expir.name,
+                                              kExperienceStartDate: expir.startDate,
+                                              kExperienceEndDate: expir.endDate,
+                                              kExperienceDescription: expir.descript};
+            
+            [self.experienceArray addObject:expirDictionary];
+            
+            NSLog(@"created, %lu", experiencesCount);
+            
+        }
+    }
+    
     
     MyInfoEditExperience *experienceDataVC = [[MyInfoEditExperience alloc] init];
     [experienceDataVC setDelegate:self];
@@ -59,6 +79,8 @@
 
 
 - (void)initializeSettings {
+    
+    self.experienceArray = [[NSMutableArray alloc] init];
     
     self.noContentController = [[NoContent alloc] init];
     
@@ -101,28 +123,32 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[MY_USER.experiences allObjects] count];
+    return [self.experienceArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    Experiences* expir = [[MY_USER.experiences allObjects] objectAtIndex:indexPath.row];
+    NSDictionary* expir = [self.experienceArray objectAtIndex:indexPath.row];
     
     //Initialize cell
     MyInfoEditTableCell *experienceCell = [tableView dequeueReusableCellWithIdentifier:@"MyInfoEditTableCell"];
     
     
-    if ([[MY_USER.experiences allObjects] count] != 0) {
+    if ([self.experienceArray count] != 0) {
         
         //Change format of date
         NSString *experienceDate = @"";
-        if (![expir.startDate isEqualToString:@""]) {
-            experienceDate = [NSString stringWithFormat:@"%@ to %@", expir.startDate, expir.endDate];
+        NSString *startDate = [expir objectForKey:kExperienceStartDate];
+        NSString *endDate = [expir objectForKey:kExperienceEndDate];
+        NSString *name = [expir objectForKey:kExperienceName];
+        NSString *description = [expir objectForKey:kExperienceDescription];
+        if (![startDate isEqualToString:@""]) {
+            experienceDate = [NSString stringWithFormat:@"%@ to %@", startDate, endDate];
         }
         
-        experienceCell.experienceName.text = expir.name;
+        experienceCell.experienceName.text = name;
         experienceCell.experienceDate.text = experienceDate;
-        experienceCell.experienceDescription.text = expir.descript;
+        experienceCell.experienceDescription.text = description;
     }
     
     //Set cell style
@@ -149,7 +175,14 @@
     self.add = false;
     self.arrayIndex = indexPath.row;
     
-    [self performSegueWithIdentifier:@"experienceDetailSegue" sender:self];
+    MyInfoEditExperience *experienceDataVC = [self.storyboard instantiateViewControllerWithIdentifier:@"MyInfoEditExperience"];
+    
+    experienceDataVC.experienceArray = self.experienceArray;
+    experienceDataVC.add = self.add;
+    experienceDataVC.arrayIndex = indexPath.row;
+    
+    [self.navigationController pushViewController:experienceDataVC animated:YES];
+    
 }
 
 -(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -198,7 +231,13 @@
     //Indicate that user is going to add an experience instead of editing
     self.add = true;
     
-    [self performSegueWithIdentifier:@"experienceDetailSegue" sender:self];
+    MyInfoEditExperience *experienceDataVC = [self.storyboard instantiateViewControllerWithIdentifier:@"MyInfoEditExperience"];
+    
+    experienceDataVC.experienceArray = self.experienceArray;
+    experienceDataVC.add = self.add;
+    
+    [self.navigationController pushViewController:experienceDataVC animated:YES];
+    
 }
 
 
@@ -209,16 +248,6 @@
 - (void)viewWillDisappear:(BOOL)animated {
     
     [self.tableView reloadData];
-    
-    //Save to database
-    NSMutableDictionary *experiences = [[NSMutableDictionary alloc] init];
-    
-    for (int i = 0; i < [self.experienceArray count]; i ++) {
-        NSString *experienceKey = [NSString stringWithFormat:@"experience%@",[@(i) stringValue]];
-        [experiences setObject:[self.experienceArray objectAtIndex:i] forKey:experienceKey];
-    }
-    
-    [[[[self.firdatabase child:kUsers] child:MY_USER.userID] child:kExperiences] setValue:experiences];
     
 }
 
@@ -243,6 +272,45 @@
 //---------------------------------------------------------
 
 -(void) backButtonPressed {
+    
+    //Save to database
+    NSMutableDictionary *experiences = [[NSMutableDictionary alloc] init];
+    
+    //Delete
+    NSMutableSet *mutableSet = [NSMutableSet setWithSet:MY_USER.experiences];
+    [mutableSet removeAllObjects];
+    MY_USER.experiences = mutableSet;
+    NSArray *allExperiences = [MY_USER.experiences allObjects];
+    for (id object in allExperiences) {
+        [MY_USER.managedObjectContext deleteObject:object];
+    }
+    [MY_USER.managedObjectContext save:nil];
+    
+    for (int i = 0; i < [self.experienceArray count]; i ++) {
+        
+        NSDictionary *experienceDict = [self.experienceArray objectAtIndex:i];
+        
+        NSString *experienceKey = [NSString stringWithFormat:@"experience%@",[@(i) stringValue]];
+        [experiences setObject:experienceDict forKey:experienceKey];
+        
+        Experiences* expir = [NSEntityDescription insertNewObjectForEntityForName:@"Experiences" inManagedObjectContext:MY_USER.managedObjectContext];
+        for (NSString* keyExp in experienceDict) {
+            if ([keyExp isEqualToString:@"description"])
+            {
+                [expir setValue:[experienceDict objectForKey:keyExp] forKey:@"descript"];
+            }
+            else
+            {
+                [expir setValue:[experienceDict objectForKey:keyExp] forKey:keyExp];
+            }
+        }
+        
+    }
+    
+//    NSLog(@"count %lu",[[MY_USER.experiences allObjects] count]);
+    
+    [[[[self.firdatabase child:kUsers] child:MY_USER.userID] child:kExperiences] setValue:experiences];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
