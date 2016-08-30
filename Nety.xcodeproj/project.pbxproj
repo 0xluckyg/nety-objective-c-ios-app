@@ -63,6 +63,7 @@
 		E155F52A1D761ABA001C1134 /* Users.m in Sources */ = {isa = PBXBuildFile; fileRef = E155F5261D761ABA001C1134 /* Users.m */; };
 		E155F52F1D763279001C1134 /* Experiences+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E155F52C1D763279001C1134 /* Experiences+CoreDataProperties.m */; };
 		E155F5301D763279001C1134 /* Experiences.m in Sources */ = {isa = PBXBuildFile; fileRef = E155F52E1D763279001C1134 /* Experiences.m */; };
+		E155F5321D763854001C1134 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E155F5311D763854001C1134 /* FBSDKShareKit.framework */; };
 		E163EFB31D6C671E004374E3 /* linkedin-sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E163EFB21D6C671D004374E3 /* linkedin-sdk.framework */; };
 		E163EFC41D6C9325004374E3 /* FacebookSDKStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E163EFBA1D6C9325004374E3 /* FacebookSDKStrings.bundle */; };
 		E163EFC71D6C9325004374E3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E163EFBD1D6C9325004374E3 /* FBSDKCoreKit.framework */; };
@@ -184,6 +185,7 @@
 		E155F52C1D763279001C1134 /* Experiences+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Experiences+CoreDataProperties.m"; path = "CoreData/Experiences+CoreDataProperties.m"; sourceTree = "<group>"; };
 		E155F52D1D763279001C1134 /* Experiences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Experiences.h; path = CoreData/Experiences.h; sourceTree = "<group>"; };
 		E155F52E1D763279001C1134 /* Experiences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Experiences.m; path = CoreData/Experiences.m; sourceTree = "<group>"; };
+		E155F5311D763854001C1134 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../FBSDKShareKit.framework; sourceTree = "<group>"; };
 		E163EFB21D6C671D004374E3 /* linkedin-sdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "linkedin-sdk.framework"; sourceTree = "<group>"; };
 		E163EFBA1D6C9325004374E3 /* FacebookSDKStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKStrings.bundle; sourceTree = "<group>"; };
 		E163EFBD1D6C9325004374E3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				E163EFCC1D6C9C88004374E3 /* Bolts.framework in Frameworks */,
 				97677F0633DE3705741AEB8E /* libPods-Nety.a in Frameworks */,
 				E163EFB31D6C671E004374E3 /* linkedin-sdk.framework in Frameworks */,
+				E155F5321D763854001C1134 /* FBSDKShareKit.framework in Frameworks */,
 				E163EFC71D6C9325004374E3 /* FBSDKCoreKit.framework in Frameworks */,
 				E188C3FD1D6E461300CCFD0F /* MapKit.framework in Frameworks */,
 				E163EFC81D6C9325004374E3 /* FBSDKLoginKit.framework in Frameworks */,
@@ -231,6 +234,7 @@
 		673338F81D2098D200A8009F /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				E155F5311D763854001C1134 /* FBSDKShareKit.framework */,
 				E163EFB21D6C671D004374E3 /* linkedin-sdk.framework */,
 				67CD9C2D1D3C75E800823701 /* NoContent.xib */,
 				67CD9C2F1D3C795600823701 /* NoContent.h */,
@@ -907,6 +911,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Nety/Lib",
 					"$(PROJECT_DIR)/Nety/Lib/FacebookSDKStrings.bundle",
+					"$(PROJECT_DIR)/Nety",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "${SRCROOT}/Nety/PrefixHeader.pch";
@@ -930,6 +935,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Nety/Lib",
 					"$(PROJECT_DIR)/Nety/Lib/FacebookSDKStrings.bundle",
+					"$(PROJECT_DIR)/Nety",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "${SRCROOT}/Nety/PrefixHeader.pch";

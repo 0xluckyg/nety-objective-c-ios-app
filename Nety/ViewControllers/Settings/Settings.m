@@ -8,8 +8,10 @@
 
 #import "Settings.h"
 #import "AppDelegate.h"
+@import FBSDKShareKit;
+#import <linkedin-sdk/LISDK.h>
 
-@interface Settings ()
+@interface Settings ()<FBSDKSharingDelegate>
 
 @end
 
@@ -127,11 +129,83 @@
         }
     }
     
+    if (indexPath.section == 2) {
+        switch (indexPath.row) {
+            case 0://Share on Facebook
+            {
+                //Share Photo
+                FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
+                photo.image = [UIImage imageNamed:@"Logo"];
+                photo.userGenerated = YES;
+                FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
+                content.photos = @[photo];
+                //OR
+                //Share Photo
+                FBSDKShareLinkContent *contentURL = [[FBSDKShareLinkContent alloc] init];
+                contentURL.contentURL = [NSURL URLWithString:@"https://developers.facebook.com"];
+                
+                FBSDKShareDialog* shareDialog = [FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
+                
+                [shareDialog show];
+                
+            }
+                break;
+            case 1:
+            {
+//                [LISDKSessionManager createSessionWithAuth:[NSArray arrayWithObjects:LISDK_BASIC_PROFILE_PERMISSION, LISDK_EMAILADDRESS_PERMISSION, nil]
+//                                                     state:@"some state"
+//                                    showGoToAppStoreDialog:YES
+//                                              successBlock:^(NSString *returnState) {
+//                                                  
+//                                                  NSString *url = @"https://api.linkedin.com/v1/people/~/shares";
+//                                                  
+//                                                  NSString *payload = @"{\"comment\":\"Check out developer.linkedin.com! http://linkd.in/1FC2PyG\",\"visibility\":{ \"code\":\"anyone\" }}";
+//                                                  
+//                                                  if ([LISDKSessionManager hasValidSession]) {
+//                                                      [[LISDKAPIHelper sharedInstance] postRequest:url stringBody:payload
+//                                                                                           success:^(LISDKAPIResponse *response) {
+//                                                                                               // do something with response
+//                                                                                           }
+//                                                                                             error:^(LISDKAPIError *apiError) {
+//                                                                                                 // do something with error
+//                                                                                                 NSLog(@"Error: %@",apiError.localizedDescription);
+//                                                                                             }];
+//                                                  }
+//                                                  
+//                                                  
+//                                              }
+//                                                errorBlock:^(NSError *error) {
+//                                                    NSLog(@"%s %@","error called! ", [error description]);
+//                                                    
+//                                                }
+//                 ];
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
 
+#pragma mark - FBSDKSharingDelegate
 
+- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results
+{
+    
+}
+
+- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error
+{
+    
+}
+
+- (void)sharerDidCancel:(id<FBSDKSharing>)sharer
+{
+    
+}
 #pragma mark - Buttons
 //---------------------------------------------------------
 
