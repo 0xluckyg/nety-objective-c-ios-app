@@ -236,9 +236,18 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
         
         cell.networkUserDescription.text = summaryString;
         
-    } else {
+    } else if ([statusString isEqualToString:@""] &&
+               [summaryString isEqualToString:@""]){
         
-        cell.networkUserDescription.text = @"";
+        cell.networkUserName.text = @"";
+        
+        NSMutableAttributedString *nameAttributed = [[NSMutableAttributedString alloc] initWithString:fullName];
+        
+        [nameAttributed addAttribute:NSFontAttributeName
+                      value:[UIFont fontWithName:@"HelveticaNeue" size:14.0]
+                      range:NSMakeRange(0, fullName.length)];
+        
+        cell.networkUserDescription.attributedText = nameAttributed;
         
     }
     

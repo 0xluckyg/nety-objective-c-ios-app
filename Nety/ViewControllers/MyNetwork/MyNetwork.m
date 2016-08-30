@@ -9,7 +9,7 @@
 #import "MyNetwork.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe left on your chats to add people!";
+NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe left on your new chats to add the person you talked to!";
 
 @interface MyNetwork ()
 
@@ -168,9 +168,18 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
         
         cell.myNetworkUserDescription.text = summaryString;
         
-    } else {
+    } else if ([statusString isEqualToString:@""] &&
+               [summaryString isEqualToString:@""]){
         
-        cell.myNetworkUserDescription.text = @"";
+        cell.myNetworkUserName.text = @"";
+        
+        NSMutableAttributedString *nameAttributed = [[NSMutableAttributedString alloc] initWithString:fullName];
+        
+        [nameAttributed addAttribute:NSFontAttributeName
+                               value:[UIFont fontWithName:@"HelveticaNeue" size:14.0]
+                               range:NSMakeRange(0, fullName.length)];
+        
+        cell.myNetworkUserDescription.attributedText = nameAttributed;
         
     }
     

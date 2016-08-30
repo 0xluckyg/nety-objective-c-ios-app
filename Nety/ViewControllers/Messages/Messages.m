@@ -290,20 +290,37 @@
 
 -(void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text senderId:(NSString *)senderId senderDisplayName:(NSString *)senderDisplayName date:(NSDate *)date {
     
-    NSNumber *secondsSince1970 = [NSNumber numberWithInt: -1 * [[NSDate date] timeIntervalSince1970]];
+    NSString *firstMessageSender = [self getMessageObject:0].senderId;
     
-    
-    NSDictionary *messageData = @{ kSenderId: senderId,
-                                   kSenderDisplayName: senderDisplayName,
-                                   kDate: secondsSince1970,
-                                   kText: text};
-    
-    FIRDatabaseReference *messageRef = [[[self.firdatabase child:kChatRooms] child:self.chatroomID] child:kMessages ];
-    [[messageRef childByAutoId] setValue:messageData];
-    
-    [self editChatRoomInfo:text date:secondsSince1970];
-    
-    [self finishSendingMessageAnimated:YES];
+    //User can only send up to 1 message to a person
+    if (numberOfMessages == 1 && [self.senderId isEqualToString:firstMessageSender]) {
+        
+        UIAlertAction *okay = [UIAlertAction actionWithTitle:@"OKAY" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            
+        }];
+        
+        [self.UIPrinciple twoButtonAlert:okay rightButton:okay controller:@"You can only send up to 1 message" message:@"Creeper free :)" viewController:self];
+        
+        
+    } else {
+        
+        NSNumber *secondsSince1970 = [NSNumber numberWithInt: -1 * [[NSDate date] timeIntervalSince1970]];
+        
+        
+        NSDictionary *messageData = @{ kSenderId: senderId,
+                                       kSenderDisplayName: senderDisplayName,
+                                       kDate: secondsSince1970,
+                                       kText: text};
+        
+        FIRDatabaseReference *messageRef = [[[self.firdatabase child:kChatRooms] child:self.chatroomID] child:kMessages ];
+        [[messageRef childByAutoId] setValue:messageData];
+        
+        [self editChatRoomInfo:text date:secondsSince1970];
+        
+        [self finishSendingMessageAnimated:YES];
+        
+    }
+
 }
 
 

@@ -40,9 +40,11 @@
 
 - (void)initializeSettings {
     
-//    self.imageCache = [[NSCache alloc] init];
+    self.firdatabase = [[FIRDatabase database] reference];
+    self.senderId = MY_USER.userID;
+    self.senderDisplayName = [NSString stringWithFormat:@"%@ %@",MY_USER.firstName, MY_USER.lastName];
     
-    if (![self.selectedUser.security isEqual:@"3"]) {
+    if (![self.selectedUser.security isEqual:@(3)]) {
         numberOfComponents = 8 + (int)[[self.selectedUser.experiences allObjects] count];
     } else {
         numberOfComponents = 7 + (int)[[self.selectedUser.experiences allObjects] count];
@@ -131,7 +133,11 @@
     if (indexPath.row == indexCount) {
         ChatButtonCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChatButtonCell" forIndexPath:indexPath];
         
-        [cell.buttonOutlet setTitle:@"Chat Now!" forState:UIControlStateNormal];
+        if ([self.selectedUser.security isEqual:@(2)]) {
+            [cell.buttonOutlet setTitle:@"Send a chat request!" forState:UIControlStateNormal];
+        } else {
+            [cell.buttonOutlet setTitle:@"Chat now!" forState:UIControlStateNormal];
+        }
         
         return cell;
     } else if (indexPath.row == indexCount + 1) {
@@ -240,14 +246,52 @@
 
 - (IBAction)chatNowButton:(id)sender {
     
-    UIStoryboard *messagesStoryboard = [UIStoryboard storyboardWithName:@"Messages" bundle:nil];
-    Messages *messagesVC = [messagesStoryboard instantiateViewControllerWithIdentifier:@"Messages"];
+    if ([self.selectedUser.security isEqual:@(2)]) {
     
-    messagesVC.selectedUserID = _selectedUser.userID;
-    messagesVC.selectedUserProfileImageString = _selectedUser.profileImageUrl;
-    messagesVC.selectedUserName = [NSString stringWithFormat:@"%@ %@", _selectedUser.firstName, _selectedUser.lastName];
-    
-    [self.navigationController pushViewController:messagesVC animated:YES];
+        NSString *chatRequestText = [NSString stringWithFormat:@"%@ sent a chat request", self.senderDisplayName];
+        NSString *chatRequestTextFromMyUser = @"You sent a chat request";
+        
+        NSMutableDictionary *chatRoomInformation = [self makeChatRoomID];
+        
+        NSNumber *secondsSince1970 = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970] * -1];
+        
+        //Room setup
+        [[[self.firdatabase child:kChatRooms] child:self.chatroomID] setValue:chatRoomInformation];
+        
+        //Add information to both the user and selected user
+        FIRDatabaseReference *userChatRoomRef = [[[[[self firdatabase] child:kUserChats] child:self.senderId] child:kChats] child:self.chatroomID];
+        [[[userChatRoomRef child:kMembers] child:@"member1"] setValue:self.selectedUserID];
+        [[userChatRoomRef child:kRecentMessage] setValue:chatRequestText];
+        [[userChatRoomRef child:kType] setValue:@0];
+        [[userChatRoomRef child:kUnread] setValue:@1];
+        [userChatRoomRef updateChildValues:@{kUpdateTime:secondsSince1970}];
+        
+        FIRDatabaseReference *selectedUserChatRoomRef = [[[[[self firdatabase] child:kUserChats] child:self.selectedUserID] child:kChats] child:self.chatroomID];
+        [[[selectedUserChatRoomRef child:kMembers] child:@"member1"] setValue:self.senderId];
+        [[selectedUserChatRoomRef child:kRecentMessage] setValue:chatRequestTextFromMyUser];
+        [[selectedUserChatRoomRef child:kType] setValue:@0];
+        [[selectedUserChatRoomRef child:kUnread] setValue:@0];
+        [selectedUserChatRoomRef updateChildValues:@{kUpdateTime:secondsSince1970}];
+        
+        NSDictionary *messageData = @{ kSenderId: self.senderId,
+                                       kSenderDisplayName: self.senderDisplayName,
+                                       kDate: secondsSince1970,
+                                       kText: chatRequestText};
+        
+        FIRDatabaseReference *messageRef = [[[self.firdatabase child:kChatRooms] child:self.chatroomID] child:kMessages ];
+        [[messageRef childByAutoId] setValue:messageData];
+        
+    } else {
+        
+        UIStoryboard *messagesStoryboard = [UIStoryboard storyboardWithName:@"Messages" bundle:nil];
+        Messages *messagesVC = [messagesStoryboard instantiateViewControllerWithIdentifier:@"Messages"];
+        
+        messagesVC.selectedUserID = _selectedUser.userID;
+        messagesVC.selectedUserProfileImageString = _selectedUser.profileImageUrl;
+        messagesVC.selectedUserName = [NSString stringWithFormat:@"%@ %@", _selectedUser.firstName, _selectedUser.lastName];
+        
+        [self.navigationController pushViewController:messagesVC animated:YES];
+    }
 
 }
 
@@ -266,6 +310,36 @@
 -(void) backButtonPressed {
     
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (NSMutableDictionary *)makeChatRoomID {
+    
+    //Making a room
+    NSComparisonResult result = [self.senderId compare:self.selectedUserID];
+    NSMutableDictionary *chatRoomInformation;
+    NSNumber *secondsSince1970 = [NSNumber numberWithInt:[[NSDate date] timeIntervalSince1970] * -1];
+    
+    if (result == NSOrderedAscending) {
+        
+        self.chatroomID = [NSString stringWithFormat:@"%@%@", self.senderId, self.selectedUserID];
+        
+        chatRoomInformation = [[NSMutableDictionary alloc] initWithDictionary: @{kCreated: secondsSince1970,
+                                                                                 kMembers: @{
+                                                                                         @"member1": self.senderId,
+                                                                                         @"member2": self.selectedUserID}}];
+        
+        
+    } else {
+        
+        self.chatroomID = [NSString stringWithFormat:@"%@%@", self.selectedUserID, self.senderId];
+        chatRoomInformation = [[NSMutableDictionary alloc] initWithDictionary: @{kCreated: secondsSince1970,
+                                                                                 kMembers: @{
+                                                                                         @"member1": self.selectedUserID,
+                                                                                         @"member2": self.senderId}}];
+        
+    }
+    
+    return chatRoomInformation;
 }
 
 

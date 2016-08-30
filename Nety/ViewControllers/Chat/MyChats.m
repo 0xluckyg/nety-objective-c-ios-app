@@ -9,7 +9,7 @@
 
 #import "MyChats.h"
 
-NSString *const myChatNoContentString = @"You don't have friends yet. Swipe left on your chats to add people!";
+NSString *const myChatNoContentString = @"You don't have friends yet. Swipe left on your new chats to add people!";
 
 
 @interface MyChats ()

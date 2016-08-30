@@ -20,6 +20,8 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <CoreData/CoreData.h>
 
+@import Firebase;
+
 @interface Profile : UIViewController <UITableViewDelegate, UITableViewDataSource, APParallaxViewDelegate, NSFetchedResultsControllerDelegate> {
     int numberOfComponents;
 }
@@ -29,7 +31,14 @@
 //VARIABLES----------------------------------------
 
 @property (strong,nonatomic) Users* selectedUser;
+
 @property (strong,nonatomic) NSString* selectedUserID;
+
+@property (strong, nonatomic) NSString *senderId;
+
+@property (strong, nonatomic) NSString *senderDisplayName;
+
+@property (strong, nonatomic) NSString *chatroomID;
 
 //UTIL CLASSES----------------------------------------
 
@@ -39,6 +48,8 @@
 
 //LIB CLASSES----------------------------------------
 
+
+@property (strong, nonatomic) FIRDatabaseReference *firdatabase;
 
 
 //IBOUTLETS----------------------------------------

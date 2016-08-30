@@ -10,7 +10,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "ChatRooms.h"
 
-NSString *const newChatNoContentString = @"You don't have friends yet. Swipe left on your chats to add people!";
+NSString *const newChatNoContentString = @"You haven't talked to anyone yet. Checkout the first tab!";
 
 @interface NewChats ()
 

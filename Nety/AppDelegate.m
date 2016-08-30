@@ -253,9 +253,9 @@
         
         if ([snapshot exists]) {
             NSDictionary *usersDictionary = snapshot.value;
-            NSString *otherUserID = snapshot.key;
+            NSString *userID = snapshot.key;
             
-            [MY_API addNewUser:usersDictionary UserID:otherUserID FlagMy:YES];
+            [MY_API addNewUser:usersDictionary UserID:userID FlagMy:YES];
         }
         else
         {
