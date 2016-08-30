@@ -18,7 +18,8 @@
 
 @import Firebase;
 
-@interface Messages : JSQMessagesViewController <NSFetchedResultsControllerDelegate>{
+@interface Messages : JSQMessagesViewController <NSFetchedResultsControllerDelegate>
+{
     NSInteger readcount;
     NSInteger otherUserStatus;
 }

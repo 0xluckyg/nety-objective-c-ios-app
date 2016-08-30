@@ -138,12 +138,6 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
     {
         predicate = [NSPredicate predicateWithFormat:@"itIsMe != YES  AND distance < %f AND isBlocked == NO",_sliderDistanceValue];
     }
-//    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(Users *user, NSDictionary *bindings)
-//    {
-//        NSArray* tempLocationArray = [NSArray arrayWithArray:[user.geocoordinate componentsSeparatedByString:@":"]];
-//        CLLocation* tempLocation = [[CLLocation alloc] initWithLatitude:[tempLocationArray[0] floatValue] longitude:[tempLocationArray[1] floatValue]];
-//        return (([tempLocation distanceFromLocation:MY_API.locationManager.location] <= _sliderDistanceValue) && _searchBar.text.length>0?([user.firstName containsString:_searchBar.text] || [user.lastName containsString:_searchBar.text]):YES && !user.itIsMe);
-//    }];
 
     [fetchRequest setPredicate:predicate];
     

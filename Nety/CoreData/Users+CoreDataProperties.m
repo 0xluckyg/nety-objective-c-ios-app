@@ -2,7 +2,7 @@
 //  Users+CoreDataProperties.m
 //  Nety
 //
-//  Created by Alex Agarkov on 26.08.16.
+//  Created by Alex Agarkov on 30.08.16.
 //  Copyright © 2016 Scott Cho. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -23,10 +23,10 @@
 @dynamic itIsMe;
 @dynamic lastName;
 @dynamic profileImageUrl;
+@dynamic security;
 @dynamic status;
 @dynamic summary;
 @dynamic userID;
-@dynamic security;
 @dynamic experiences;
 
 @end

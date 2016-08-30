@@ -285,6 +285,8 @@
                     }
                     if (![user.experiences containsObject:expir]) {
                         NSLog(@"expir added %@", expir);
+                        [expir setUser:user];
+                        [expir setExperienceKey:[NSString stringWithFormat:@"experience%i",[user.experiences count]]];
                         [user addExperiencesObject:expir];
                     }
                     

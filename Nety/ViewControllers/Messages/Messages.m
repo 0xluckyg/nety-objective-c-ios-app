@@ -762,7 +762,6 @@
 
 - (void)configureCell:(JSQMessagesCollectionViewCell*)cell withObject:(JSQMessage *)object
 {
-    
     if (!object.isMediaMessage) {
         
         if ([object.senderId isEqualToString:self.senderId]) {

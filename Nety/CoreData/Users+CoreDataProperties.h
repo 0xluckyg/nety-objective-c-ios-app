@@ -2,7 +2,7 @@
 //  Users+CoreDataProperties.h
 //  Nety
 //
-//  Created by Alex Agarkov on 26.08.16.
+//  Created by Alex Agarkov on 30.08.16.
 //  Copyright © 2016 Scott Cho. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -25,10 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *itIsMe;
 @property (nullable, nonatomic, retain) NSString *lastName;
 @property (nullable, nonatomic, retain) NSString *profileImageUrl;
+@property (nullable, nonatomic, retain) NSNumber *security;
 @property (nullable, nonatomic, retain) NSString *status;
 @property (nullable, nonatomic, retain) NSString *summary;
 @property (nullable, nonatomic, retain) NSString *userID;
-@property (nullable, nonatomic, retain) NSNumber *security;
 @property (nullable, nonatomic, retain) NSSet<Experiences *> *experiences;
 
 @end

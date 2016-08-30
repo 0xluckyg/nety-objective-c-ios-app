@@ -42,13 +42,13 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     
-    numberOfComponents = 7 + (int)[[MY_USER.experiences allObjects] count];
+    ///numberOfComponents = 7 + (int)[[MY_USER.experiences allObjects] count];
     
-    NSLog(@"allExp %@",[MY_USER.experiences allObjects]);
+    //NSLog(@"allExp %@",[MY_USER.experiences allObjects]);
     
     [self initializeSettings];
     
-    [self.tableView reloadData];
+    //[self.tableView reloadData];
     
 }
 
@@ -110,8 +110,13 @@
 #pragma mark - Protocols and Delegates
 //---------------------------------------------------------
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return numberOfComponents;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return [[self.fetchedResultsController sections] count];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
+    return [sectionInfo numberOfObjects]+6;
 }
 
 
@@ -130,7 +135,7 @@
     NSString *status = MY_USER.status;
     NSString *summary = MY_USER.summary;
     NSString *identity = MY_USER.identity;
-    NSArray *experiences = [MY_USER.experiences allObjects];
+//    NSArray *experiences = [MY_USER.experiences allObjects];
     
     if (indexPath.row == 0) {
         
@@ -217,7 +222,7 @@
         
         cell.mainInfoLabel.textColor = self.UIPrinciple.netyBlue;
         
-        if ([experiences count] == 0) {
+        if ([MY_USER.experiences allObjects].count == 0) {
             cell.mainInfoLabel.text = @"No experiences";
         } else {
             cell.mainInfoLabel.text = @"Experiences";
@@ -231,7 +236,7 @@
         
         MyInfoExperienceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyInfoExperienceCell" forIndexPath:indexPath];
         
-        Experiences* expir = [[MY_USER.experiences allObjects] objectAtIndex:indexPath.row-7];
+        Experiences* expir = [_fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row+6 inSection:indexPath.section]];
         
         NSLog(@"Ex: %@",expir);
         
@@ -283,7 +288,7 @@
         case 6: {
             MyInfoEditTable *editTableVC = [self.storyboard instantiateViewControllerWithIdentifier:@"MyInfoEditTable"];
             
-            editTableVC.fromMyInfo = true;
+            editTableVC.user = MY_USER;
             
             [self.navigationController pushViewController:editTableVC animated:YES];
             
@@ -414,5 +419,49 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (NSFetchedResultsController *)fetchedResultsController
+{
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    // Edit the entity name as appropriate.
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Users" inManagedObjectContext:MY_API.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"userID == %@",MY_USER.userID];
+    [fetchRequest setPredicate:predicate];
+    
+    // Set the batch size to a suitable number.
+    [fetchRequest setFetchBatchSize:10];
+    
+    // Edit the sort key as appropriate.
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"userID" ascending:YES];
+    
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    // Edit the section name key path and cache name if appropriate.
+    // nil for section name key path means "no sections".
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:MY_API.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    aFetchedResultsController.delegate = self;
+    self.fetchedResultsController = aFetchedResultsController;
+    
+    NSError *error = nil;
+    if (![self.fetchedResultsController performFetch:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    
+    return _fetchedResultsController;
+}
 
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject atIndexPath:(nullable NSIndexPath *)indexPath
+     forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(nullable NSIndexPath *)newIndexPath
+{
+    [self.tableView reloadData];
+}
 @end
