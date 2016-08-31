@@ -52,15 +52,16 @@
 
 //@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (strong, nonatomic) IBOutlet UIView *sliderView;
-
 @property (weak, nonatomic) IBOutlet UISlider *slider;
+
+@property (weak, nonatomic) IBOutlet UIView *sliderView;
 
 
 //IBACTIONS----------------------------------------
 
 
 - (IBAction)sliderAction:(id)sender;
+
 
 
 //-------------------------------------------------

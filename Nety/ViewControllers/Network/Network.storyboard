@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XnD-77-aw2">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="632"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search by name, email or interest!" id="a8v-lc-Bcl">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -91,19 +91,42 @@
                                     <outlet property="delegate" destination="Xle-fU-KTy" id="xA3-0y-4Wy"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bov-Jk-iaw">
+                                <rect key="frame" x="0.0" y="632" width="414" height="40"/>
+                                <subviews>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="nXj-PG-fij">
+                                        <rect key="frame" x="-2" y="5" width="418" height="31"/>
+                                        <connections>
+                                            <action selector="sliderAction:" destination="Xle-fU-KTy" eventType="valueChanged" id="bz7-hS-aFf"/>
+                                        </connections>
+                                    </slider>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="nXj-PG-fij" firstAttribute="leading" secondItem="Bov-Jk-iaw" secondAttribute="leading" id="Fo2-JT-Vm3"/>
+                                    <constraint firstAttribute="trailing" secondItem="nXj-PG-fij" secondAttribute="trailing" id="KMp-4D-4MO"/>
+                                    <constraint firstAttribute="bottom" secondItem="nXj-PG-fij" secondAttribute="bottom" constant="5" id="aGb-wj-rv7"/>
+                                    <constraint firstItem="nXj-PG-fij" firstAttribute="top" secondItem="Bov-Jk-iaw" secondAttribute="top" constant="5" id="ga7-Yw-NGe"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="dJ0-l7-ug1" firstAttribute="top" secondItem="XnD-77-aw2" secondAttribute="bottom" id="0TU-Gd-HAX"/>
                             <constraint firstAttribute="trailing" secondItem="XnD-77-aw2" secondAttribute="trailing" id="1Kj-m5-kvb"/>
+                            <constraint firstItem="Bov-Jk-iaw" firstAttribute="leading" secondItem="K7V-wx-apM" secondAttribute="leading" id="5Yn-lu-yKr"/>
+                            <constraint firstItem="dJ0-l7-ug1" firstAttribute="top" secondItem="Bov-Jk-iaw" secondAttribute="bottom" id="Ceh-0P-iBC"/>
                             <constraint firstItem="XnD-77-aw2" firstAttribute="top" secondItem="2BK-w8-PYh" secondAttribute="bottom" id="IHG-DT-jgq"/>
                             <constraint firstItem="XnD-77-aw2" firstAttribute="leading" secondItem="K7V-wx-apM" secondAttribute="leading" id="abU-fT-McA"/>
+                            <constraint firstItem="Bov-Jk-iaw" firstAttribute="top" secondItem="XnD-77-aw2" secondAttribute="bottom" id="sY4-k9-7W9"/>
+                            <constraint firstAttribute="trailing" secondItem="Bov-Jk-iaw" secondAttribute="trailing" id="zhn-CP-P69"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="YlJ-BB-kFs"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="searchBar" destination="a8v-lc-Bcl" id="G95-Nd-17I"/>
+                        <outlet property="slider" destination="nXj-PG-fij" id="xlt-5S-PZ3"/>
+                        <outlet property="sliderView" destination="Bov-Jk-iaw" id="5q3-YC-cZx"/>
                         <outlet property="table" destination="XnD-77-aw2" id="Rea-XI-SUu"/>
                         <segue destination="c9v-nA-9vW" kind="presentation" identifier="ShowProfileSegue" id="Dco-Sq-htd"/>
                     </connections>

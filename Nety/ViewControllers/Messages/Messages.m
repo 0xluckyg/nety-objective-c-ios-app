@@ -47,6 +47,7 @@
     self.firdatabase = [[FIRDatabase database] reference];
     
     self.senderId = MY_USER.userID;
+    NSLog(@"senderId %@", self.senderId);
     self.senderDisplayName = [NSString stringWithFormat:@"%@ %@",MY_USER.firstName, MY_USER.lastName];
     
     [self createRoomAndObserveMessages];
@@ -122,6 +123,8 @@
 
 -(id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath {
     //JSQMessage *data = self.messages[indexPath.row];
+    NSLog(@"%@ mData", [self getMessageObject:indexPath]);
+    NSLog(@"%lu indexPath", indexPath.row);
     return [self getMessageObject:indexPath];
 }
 
@@ -290,22 +293,23 @@
 
 -(void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text senderId:(NSString *)senderId senderDisplayName:(NSString *)senderDisplayName date:(NSDate *)date {
     
-    NSString *firstMessageSender = [self getMessageObject:0].senderId;
+    NSString *firstMessageSender = [[NSString alloc] init];
+    
+    if (numberOfMessages >= 1) {
+        
+        NSIndexPath *index = [NSIndexPath indexPathForRow:0 inSection:0];
+        
+        firstMessageSender = [self getMessageObject:index].senderId;
+    }
     
     //User can only send up to 1 message to a person
-    if (numberOfMessages == 1 && [self.senderId isEqualToString:firstMessageSender]) {
+    if (numberOfMessages == 1 && [senderId isEqualToString:firstMessageSender]) {
         
-        UIAlertAction *okay = [UIAlertAction actionWithTitle:@"OKAY" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            
-        }];
-        
-        [self.UIPrinciple twoButtonAlert:okay rightButton:okay controller:@"You can only send up to 1 message" message:@"Creeper free :)" viewController:self];
-        
+        [self.UIPrinciple oneButtonAlert:@"OKAY" controllerTitle:@"You can only send up to 1 message" message:@"Creeper free :)" viewController:self];
         
     } else {
         
         NSNumber *secondsSince1970 = [NSNumber numberWithInt: -1 * [[NSDate date] timeIntervalSince1970]];
-        
         
         NSDictionary *messageData = @{ kSenderId: senderId,
                                        kSenderDisplayName: senderDisplayName,

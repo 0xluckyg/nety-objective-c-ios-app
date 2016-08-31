@@ -454,7 +454,7 @@
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"ChatRooms" inManagedObjectContext:self.managedObjectContext];
         [fetchRequest setEntity:entity];
         
-        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"charRoomID == %@",chatRoomKey]];
+        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"chatRoomID == %@",chatRoomKey]];
         NSError *error = nil;
         NSMutableArray* findUserArray = [NSMutableArray arrayWithArray:[self.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
         ChatRooms* rooms;

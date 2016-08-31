@@ -36,11 +36,6 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
     
     self.slider.value = self.sliderValue;
     
-    if (![self.sliderView isDescendantOfView:self.view]) {
-        NSLog(@"added");
-        [self addSlider:self.sliderView slider:self.slider];
-    }
-    
     self.navigationItem.title = [NSString stringWithFormat:@"%@ Near Me", [self calculateDistanceToDescription]];
     
     //If no experiences visible, show noContent header
@@ -63,8 +58,6 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
 //---------------------------------------------------------
 
 - (void)initializeSettings {
-    
-    self.sliderView = [[[NSBundle mainBundle] loadNibNamed:@"CustomSlider" owner:self options:nil] objectAtIndex:0];
     
     self.noContentController = [[NoContent alloc] init];
 
@@ -94,12 +87,19 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
     
     self.sliderValue = (0.3);
     
+    [self.slider setTintColor:self.UIPrinciple.netyBlue];
+    
     self.slider.value = self.sliderValue;
-    NSLog(@"slidervalue set? %f", self.sliderValue);
+    
+    float sliderViewWidth = self.sliderView.frame.size.width;
+    
+    UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, sliderViewWidth, 1)];/// change size as you need.
+    separatorLineView.backgroundColor = self.UIPrinciple.netyGray;
+    [self.sliderView addSubview:separatorLineView];
     
     [self calculateSliderDistanceValue];
     
-    navItem.title = @"Near Me";
+    navItem.title = [self calculateDistanceToDescription];
     
     //Style navbar
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
