@@ -21,12 +21,12 @@
 
 @import Firebase;
 
-@interface MyInfo : UIViewController <UITableViewDelegate, UITableViewDataSource, APParallaxViewDelegate, NSFetchedResultsControllerDelegate> {
+@interface MyInfo : UIViewController <UITableViewDelegate, UITableViewDataSource, APParallaxViewDelegate> {
     int numberOfComponents;
 }
 
 //VARIABLES----------------------------------------
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+
 
 @property (strong, nonatomic) NSMutableDictionary *userData;
 

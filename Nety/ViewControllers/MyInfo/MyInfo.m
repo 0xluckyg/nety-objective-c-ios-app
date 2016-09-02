@@ -9,12 +9,12 @@
 #import "MyInfo.h"
 #import "Experiences.h"
 
-@interface MyInfo ()
-
+@interface MyInfo ()<NSFetchedResultsControllerDelegate>
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @end
 
 @implementation MyInfo
-
+@synthesize fetchedResultsController = _fetchedResultsController;
 
 #pragma mark - View Load
 //---------------------------------------------------------
@@ -25,30 +25,20 @@
     // Do any additional setup after loading the view.
     
     [self initializeDesign];
-    [self initializeSettings];
-//    NSMutableSet *mutableSet = [NSMutableSet setWithSet:MY_USER.experiences];
-//    [mutableSet removeAllObjects];
-//    MY_USER.experiences = mutableSet;
-//    NSArray *allExperiences = [MY_USER.experiences allObjects];
-//    for (id object in allExperiences) {
-//        [MY_USER.managedObjectContext deleteObject:object];
-//    }
-
     
-    
-//    NSLog(@"%@", MY_USER);
+    NSLog(@"%@", MY_USER);
     
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     
-    ///numberOfComponents = 7 + (int)[[MY_USER.experiences allObjects] count];
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][0];
     
-    //NSLog(@"allExp %@",[MY_USER.experiences allObjects]);
+    numberOfComponents = 7 + (int)[sectionInfo numberOfObjects];
     
     [self initializeSettings];
     
-    //[self.tableView reloadData];
+    [self.tableView reloadData];
     
 }
 
@@ -61,9 +51,14 @@
     
     self.firdatabase = [[FIRDatabase database] reference];
     
+}
+
+- (void)initializeDesign {
+    
+    self.UIPrinciple = [[UIPrinciples alloc] init];
+    
     //Color for the small view
     NSString *name = [NSString stringWithFormat:@"%@ %@", MY_USER.firstName, MY_USER.lastName];
-    NSLog(@"myinfo name %@", name);
     
     //Style navbar
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -72,11 +67,6 @@
     self.navigationItem.title = name;
     
     [self.navigationController.navigationBar setTitleTextAttributes:attributes];
-}
-
-- (void)initializeDesign {
-    
-    self.UIPrinciple = [[UIPrinciples alloc] init];
     
     //If image is not NetyBlueLogo, start downloading and caching the image
     NSString *photoUrl = MY_USER.profileImageUrl;
@@ -110,13 +100,8 @@
 #pragma mark - Protocols and Delegates
 //---------------------------------------------------------
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [[self.fetchedResultsController sections] count];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
-    return [sectionInfo numberOfObjects]+6;
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return numberOfComponents;
 }
 
 
@@ -135,7 +120,9 @@
     NSString *status = MY_USER.status;
     NSString *summary = MY_USER.summary;
     NSString *identity = MY_USER.identity;
-//    NSArray *experiences = [MY_USER.experiences allObjects];
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][0];
+    
+    NSArray *experiences = [sectionInfo objects];
     
     if (indexPath.row == 0) {
         
@@ -162,7 +149,7 @@
                 } else {
                     cell.mainInfoLabel.text = identity;
                 }
-            
+                
                 break;
             case 2: {
                 cell.mainInfoImage.image = [[UIImage imageNamed:@"Status"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -222,7 +209,7 @@
         
         cell.mainInfoLabel.textColor = self.UIPrinciple.netyBlue;
         
-        if ([MY_USER.experiences allObjects].count == 0) {
+        if ([experiences count] == 0) {
             cell.mainInfoLabel.text = @"No experiences";
         } else {
             cell.mainInfoLabel.text = @"Experiences";
@@ -236,7 +223,7 @@
         
         MyInfoExperienceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyInfoExperienceCell" forIndexPath:indexPath];
         
-        Experiences* expir = [_fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row+6 inSection:indexPath.section]];
+        Experiences* expir = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row-7 inSection:0]];
         
         NSLog(@"Ex: %@",expir);
         
@@ -259,7 +246,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     switch(indexPath.row) {
-        
+            
         case 1: {
             MyInfoEditType1 *editNameAndIdentity = [self.storyboard instantiateViewControllerWithIdentifier:@"MyInfoEditType1"];
             
@@ -287,14 +274,27 @@
         }
         case 6: {
             MyInfoEditTable *editTableVC = [self.storyboard instantiateViewControllerWithIdentifier:@"MyInfoEditTable"];
+            id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][0];
             
-            editTableVC.user = MY_USER;
+            NSMutableArray* array = [NSMutableArray array];
+            for (Experiences* expir in [sectionInfo objects])
+            {
+                NSMutableDictionary *rowData = [NSMutableDictionary dictionary];
+                
+                [rowData setObject:expir.descript forKey:@"description"];
+                [rowData setObject:expir.endDate forKey:@"endDate"];
+                [rowData setObject:expir.name forKey:@"name"];
+                [rowData setObject:expir.startDate forKey:@"startDate"];
+                [array addObject:rowData];
+            }
+            
+            editTableVC.experienceArray = array;
             
             [self.navigationController pushViewController:editTableVC animated:YES];
             
             break;
         }
-    
+            
     }
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -358,7 +358,7 @@
 
 
 -(void)changeImage: (UIImagePickerController *)picker getInfo:(NSDictionary *)info {
-
+    
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     
     UIImage *editedimage = [info objectForKey:UIImagePickerControllerEditedImage];
@@ -419,6 +419,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - CoreData
+
 - (NSFetchedResultsController *)fetchedResultsController
 {
     if (_fetchedResultsController != nil) {
@@ -427,17 +429,20 @@
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     // Edit the entity name as appropriate.
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Users" inManagedObjectContext:MY_API.managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Experiences" inManagedObjectContext:MY_API.managedObjectContext];
     [fetchRequest setEntity:entity];
     
-    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"userID == %@",MY_USER.userID];
+    
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"user == %@",MY_USER];
+
+    
     [fetchRequest setPredicate:predicate];
     
     // Set the batch size to a suitable number.
     [fetchRequest setFetchBatchSize:10];
     
     // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"userID" ascending:YES];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     
     [fetchRequest setSortDescriptors:@[sortDescriptor]];
     // Edit the section name key path and cache name if appropriate.
@@ -445,7 +450,6 @@
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:MY_API.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
-    
     NSError *error = nil;
     if (![self.fetchedResultsController performFetch:&error]) {
         // Replace this implementation with code to handle the error appropriately.
@@ -457,11 +461,12 @@
     return _fetchedResultsController;
 }
 
-- (void)controller:(NSFetchedResultsController *)controller
-   didChangeObject:(id)anObject atIndexPath:(nullable NSIndexPath *)indexPath
-     forChangeType:(NSFetchedResultsChangeType)type
-      newIndexPath:(nullable NSIndexPath *)newIndexPath
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath
 {
-    [self.tableView reloadData];
+    
+    [_tableView reloadData];
 }
+
 @end

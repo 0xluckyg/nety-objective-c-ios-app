@@ -29,7 +29,11 @@
     [self initializeDesign];
 }
 
-
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[[[[[FIRDatabase database] reference] child:kUsers] child:MY_USER.userID] child:kIAmDiscoverable] setValue:[NSString stringWithFormat:@"%f",self.sliderValue]];
+}
 #pragma mark - Initialization
 //---------------------------------------------------------
 
@@ -152,33 +156,43 @@
                 break;
             case 1:
             {
-//                [LISDKSessionManager createSessionWithAuth:[NSArray arrayWithObjects:LISDK_BASIC_PROFILE_PERMISSION, LISDK_EMAILADDRESS_PERMISSION, nil]
-//                                                     state:@"some state"
-//                                    showGoToAppStoreDialog:YES
-//                                              successBlock:^(NSString *returnState) {
-//                                                  
-//                                                  NSString *url = @"https://api.linkedin.com/v1/people/~/shares";
-//                                                  
-//                                                  NSString *payload = @"{\"comment\":\"Check out developer.linkedin.com! http://linkd.in/1FC2PyG\",\"visibility\":{ \"code\":\"anyone\" }}";
-//                                                  
-//                                                  if ([LISDKSessionManager hasValidSession]) {
-//                                                      [[LISDKAPIHelper sharedInstance] postRequest:url stringBody:payload
-//                                                                                           success:^(LISDKAPIResponse *response) {
-//                                                                                               // do something with response
-//                                                                                           }
-//                                                                                             error:^(LISDKAPIError *apiError) {
-//                                                                                                 // do something with error
-//                                                                                                 NSLog(@"Error: %@",apiError.localizedDescription);
-//                                                                                             }];
-//                                                  }
-//                                                  
-//                                                  
-//                                              }
-//                                                errorBlock:^(NSError *error) {
-//                                                    NSLog(@"%s %@","error called! ", [error description]);
-//                                                    
-//                                                }
-//                 ];
+                NSString *url = @"https://api.linkedin.com/v1/people/~/shares";
+                
+                NSString *payload = @"{\"comment\":\"Check out developer.linkedin.com! http://linkd.in/1FC2PyG\",\"visibility\":{ \"code\":\"anyone\" }}";
+                
+                if ([LISDKSessionManager hasValidSession]) {
+                    [[LISDKAPIHelper sharedInstance] postRequest:url stringBody:payload
+                                                         success:^(LISDKAPIResponse *response) {
+                                                             // do something with response
+                                                         }
+                                                           error:^(LISDKAPIError *apiError) {
+                                                               // do something with error
+                                                               NSLog(@"Error: %@",apiError.localizedDescription);
+                                                           }];
+                }
+                else
+                {
+                    [LISDKSessionManager createSessionWithAuth:[NSArray arrayWithObjects:LISDK_BASIC_PROFILE_PERMISSION, LISDK_EMAILADDRESS_PERMISSION,LISDK_W_SHARE_PERMISSION, nil]
+                                                         state:@"some state"
+                                        showGoToAppStoreDialog:YES
+                                                  successBlock:^(NSString *returnState) {
+                                                      
+                                                      [[LISDKAPIHelper sharedInstance] postRequest:url stringBody:payload
+                                                                                           success:^(LISDKAPIResponse *response) {
+                                                                                               // do something with response
+                                                                                           }
+                                                                                             error:^(LISDKAPIError *apiError) {
+                                                                                                 // do something with error
+                                                                                                 NSLog(@"Error: %@",apiError.localizedDescription);
+                                                                                             }];
+                                                      
+                                                  }
+                                                    errorBlock:^(NSError *error) {
+                                                        NSLog(@"%s %@","error called! ", [error description]);
+                                                        
+                                                    }
+                     ];
+                }
             }
                 break;
                 

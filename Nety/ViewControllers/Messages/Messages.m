@@ -124,7 +124,7 @@
 -(id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath {
     //JSQMessage *data = self.messages[indexPath.row];
     NSLog(@"%@ mData", [self getMessageObject:indexPath]);
-    NSLog(@"%lu indexPath", indexPath.row);
+    NSLog(@"%lu indexPath", (long)indexPath.row);
     return [self getMessageObject:indexPath];
 }
 
@@ -549,9 +549,6 @@
     if (tempMessage.text) {
         jsqMsg = [[JSQMessage alloc] initWithSenderId:senderIdFromDatabase senderDisplayName:senderDisplaynameFromDatabase date:messageDate text:textFromDatabase];
         
-        
-//        [self scrollToBottomAnimated:YES];
-        
     } else {
         
         UIImageView *chatImage = [[UIImageView alloc] init];
@@ -726,6 +723,7 @@
         switch(type) {
             case NSFetchedResultsChangeInsert:
                 [self.collectionView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]];
+                [self scrollToBottomAnimated:YES];
                 break;
                 
             case NSFetchedResultsChangeDelete:

@@ -33,8 +33,8 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
 -(void)viewWillAppear:(BOOL)animated {
     
     //[self.tableView reloadData];
-    
-    self.slider.value = self.sliderValue;
+    NSUserDefaults* userDef = [NSUserDefaults standardUserDefaults];
+    self.slider.value = [[userDef objectForKey:@"sliderNetwork"] integerValue];
     
     self.navigationItem.title = [NSString stringWithFormat:@"%@ Near Me", [self calculateDistanceToDescription]];
     
@@ -132,11 +132,11 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
     NSPredicate* predicate;
     if (_searchBar.text.length)
     {
-        predicate = [NSPredicate predicateWithFormat:@"firstName CONTAINS[c]%@ OR lastName CONTAINS[c] %@ AND itIsMe != YES AND distance < %f AND isBlocked == NO",_searchBar.text,_searchBar.text,_sliderDistanceValue];
+        predicate = [NSPredicate predicateWithFormat:@"firstName CONTAINS[c]%@ OR lastName CONTAINS[c] %@ AND itIsMe != YES AND distance < %f AND isBlocked == NO AND imdiscoverable > distance",_searchBar.text,_searchBar.text,_sliderDistanceValue];
     }
     else
     {
-        predicate = [NSPredicate predicateWithFormat:@"itIsMe != YES  AND distance < %f AND isBlocked == NO",_sliderDistanceValue];
+        predicate = [NSPredicate predicateWithFormat:@"itIsMe != YES  AND distance < %f AND isBlocked == NO AND imdiscoverable > distance",_sliderDistanceValue];
     }
 
     [fetchRequest setPredicate:predicate];
@@ -362,6 +362,9 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
     _fetchedResultsController = nil;
     _fetchedResultsController.delegate = nil;
     [self.table reloadData];
+    
+    NSUserDefaults* userDef = [NSUserDefaults standardUserDefaults];
+    [userDef setObject:[NSNumber numberWithInteger:_slider.value] forKey:@"sliderNetwork"];
     
 }
 

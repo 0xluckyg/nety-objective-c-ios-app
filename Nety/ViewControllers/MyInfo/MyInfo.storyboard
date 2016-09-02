@@ -209,7 +209,7 @@
                     <navigationItem key="navigationItem" id="PQs-wv-Kr4"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
-                        <outlet property="table" destination="AUk-hv-tna" id="0gU-cX-ffX"/>
+                        <outlet property="tableView" destination="AUk-hv-tna" id="Hhr-Pq-h2j"/>
                         <segue destination="hzx-7e-tkL" kind="show" identifier="experienceDetailSegue" id="fVc-hs-G21"/>
                     </connections>
                 </viewController>

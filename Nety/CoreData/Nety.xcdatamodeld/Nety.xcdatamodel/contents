@@ -35,6 +35,7 @@
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="geocoordinate" optional="YES" attributeType="String" defaultValueString="0:0" syncable="YES"/>
         <attribute name="identity" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imdiscoverable" optional="YES" attributeType="Integer 64" minValueString="30" defaultValueString="30" syncable="YES"/>
         <attribute name="isBlocked" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="isFriend" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="itIsMe" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
@@ -51,6 +52,6 @@
         <element name="ChatRooms" positionX="-5456" positionY="-574" width="128" height="195"/>
         <element name="Experiences" positionX="-5949" positionY="-450" width="128" height="133"/>
         <element name="Msg" positionX="-5139" positionY="-648" width="128" height="133"/>
-        <element name="Users" positionX="-5661" positionY="-540" width="128" height="270"/>
+        <element name="Users" positionX="-5661" positionY="-540" width="128" height="283"/>
     </elements>
 </model>

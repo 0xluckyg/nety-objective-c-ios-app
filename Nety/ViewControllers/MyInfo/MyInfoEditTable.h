@@ -15,26 +15,24 @@
 #import "MyInfoEditTableCell.h"
 #import "MyInfoEditExperience.h"
 #import "Constants.h"
-#import "Experiences.h"
-#import "N_CoreDataTableViewController.h"
+
 
 @import Firebase;
 
-@interface MyInfoEditTable : N_CoreDataTableViewController <experienceDataDelegate> {
+@interface MyInfoEditTable : UIViewController <UITableViewDelegate, UITableViewDataSource, experienceDataDelegate> {
     bool editButtonClicked;
 }
 
 
 //VARIABLES----------------------------------------
-@property (strong, nonatomic) Users *user;
 
-//@property (strong, nonatomic) NSMutableArray *experienceArray;
-//
-//@property (nonatomic) bool add;
-//
-//@property (nonatomic) NSUInteger arrayIndex;
-//
-//@property (nonatomic) bool fromMyInfo;
+
+@property (strong, nonatomic) NSMutableArray *experienceArray;
+
+@property (nonatomic) bool add;
+
+@property (nonatomic) NSUInteger arrayIndex;
+
 
 //UTIL CLASSES----------------------------------------
 
@@ -52,8 +50,8 @@
 
 //IBOUTLETS----------------------------------------
 
-//
-//@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 
 //IBACTIONS----------------------------------------

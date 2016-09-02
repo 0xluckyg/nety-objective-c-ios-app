@@ -49,6 +49,7 @@ NSString *const kUserDetails = @"userDetails";
 
 NSString *const kDefaultUserLogoName = @"NetyBlueLogo";
 NSString *const kGeoCoordinate = @"geocoordinate";
+NSString *const kIAmDiscoverable = @"imdiscoverable";
 @implementation Constants
 
 @end

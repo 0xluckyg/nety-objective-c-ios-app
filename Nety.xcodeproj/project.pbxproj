@@ -58,11 +58,11 @@
 		67DD1AB61D17E04F00FBEA0F /* NetworkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DD1AB51D17E04F00FBEA0F /* NetworkCell.m */; };
 		67DD1AB91D17E39B00FBEA0F /* NetworkData.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DD1AB81D17E39B00FBEA0F /* NetworkData.m */; };
 		97677F0633DE3705741AEB8E /* libPods-Nety.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F5D56FDB372FC5465929EE /* libPods-Nety.a */; };
-		E155F5291D761ABA001C1134 /* Users+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E155F5241D761ABA001C1134 /* Users+CoreDataProperties.m */; };
-		E155F52A1D761ABA001C1134 /* Users.m in Sources */ = {isa = PBXBuildFile; fileRef = E155F5261D761ABA001C1134 /* Users.m */; };
 		E155F52F1D763279001C1134 /* Experiences+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E155F52C1D763279001C1134 /* Experiences+CoreDataProperties.m */; };
 		E155F5301D763279001C1134 /* Experiences.m in Sources */ = {isa = PBXBuildFile; fileRef = E155F52E1D763279001C1134 /* Experiences.m */; };
 		E155F5321D763854001C1134 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E155F5311D763854001C1134 /* FBSDKShareKit.framework */; };
+		E16004661D7981530098DFB1 /* Users+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E16004631D7981530098DFB1 /* Users+CoreDataProperties.m */; };
+		E16004671D7981530098DFB1 /* Users.m in Sources */ = {isa = PBXBuildFile; fileRef = E16004651D7981530098DFB1 /* Users.m */; };
 		E163EFB31D6C671E004374E3 /* linkedin-sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E163EFB21D6C671D004374E3 /* linkedin-sdk.framework */; };
 		E163EFC41D6C9325004374E3 /* FacebookSDKStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E163EFBA1D6C9325004374E3 /* FacebookSDKStrings.bundle */; };
 		E163EFC71D6C9325004374E3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E163EFBD1D6C9325004374E3 /* FBSDKCoreKit.framework */; };
@@ -175,15 +175,15 @@
 		67DD1AB51D17E04F00FBEA0F /* NetworkCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkCell.m; sourceTree = "<group>"; };
 		67DD1AB71D17E39B00FBEA0F /* NetworkData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkData.h; sourceTree = "<group>"; };
 		67DD1AB81D17E39B00FBEA0F /* NetworkData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkData.m; sourceTree = "<group>"; };
-		E155F5231D761ABA001C1134 /* Users+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Users+CoreDataProperties.h"; path = "CoreData/Users+CoreDataProperties.h"; sourceTree = "<group>"; };
-		E155F5241D761ABA001C1134 /* Users+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Users+CoreDataProperties.m"; path = "CoreData/Users+CoreDataProperties.m"; sourceTree = "<group>"; };
-		E155F5251D761ABA001C1134 /* Users.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Users.h; path = CoreData/Users.h; sourceTree = "<group>"; };
-		E155F5261D761ABA001C1134 /* Users.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Users.m; path = CoreData/Users.m; sourceTree = "<group>"; };
 		E155F52B1D763279001C1134 /* Experiences+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Experiences+CoreDataProperties.h"; path = "CoreData/Experiences+CoreDataProperties.h"; sourceTree = "<group>"; };
 		E155F52C1D763279001C1134 /* Experiences+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Experiences+CoreDataProperties.m"; path = "CoreData/Experiences+CoreDataProperties.m"; sourceTree = "<group>"; };
 		E155F52D1D763279001C1134 /* Experiences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Experiences.h; path = CoreData/Experiences.h; sourceTree = "<group>"; };
 		E155F52E1D763279001C1134 /* Experiences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Experiences.m; path = CoreData/Experiences.m; sourceTree = "<group>"; };
 		E155F5311D763854001C1134 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../FBSDKShareKit.framework; sourceTree = "<group>"; };
+		E16004621D7981530098DFB1 /* Users+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Users+CoreDataProperties.h"; sourceTree = "<group>"; };
+		E16004631D7981530098DFB1 /* Users+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Users+CoreDataProperties.m"; sourceTree = "<group>"; };
+		E16004641D7981530098DFB1 /* Users.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Users.h; sourceTree = "<group>"; };
+		E16004651D7981530098DFB1 /* Users.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Users.m; sourceTree = "<group>"; };
 		E163EFB21D6C671D004374E3 /* linkedin-sdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "linkedin-sdk.framework"; sourceTree = "<group>"; };
 		E163EFBA1D6C9325004374E3 /* FacebookSDKStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKStrings.bundle; sourceTree = "<group>"; };
 		E163EFBD1D6C9325004374E3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -578,6 +578,10 @@
 		E1E0B92F1D68A64400295133 /* NetyUsersModel */ = {
 			isa = PBXGroup;
 			children = (
+				E16004621D7981530098DFB1 /* Users+CoreDataProperties.h */,
+				E16004631D7981530098DFB1 /* Users+CoreDataProperties.m */,
+				E16004641D7981530098DFB1 /* Users.h */,
+				E16004651D7981530098DFB1 /* Users.m */,
 				E188C40A1D6F89F400CCFD0F /* ALL.h */,
 				E188C40B1D6F89F400CCFD0F /* ALL.m */,
 				E188C40C1D6F89F400CCFD0F /* ALL+CoreDataProperties.h */,
@@ -590,10 +594,6 @@
 				E18405B21D73078E00919656 /* Msg+CoreDataProperties.m */,
 				E18405B31D73078E00919656 /* Msg.h */,
 				E18405B41D73078E00919656 /* Msg.m */,
-				E155F5231D761ABA001C1134 /* Users+CoreDataProperties.h */,
-				E155F5241D761ABA001C1134 /* Users+CoreDataProperties.m */,
-				E155F5251D761ABA001C1134 /* Users.h */,
-				E155F5261D761ABA001C1134 /* Users.m */,
 				E155F52B1D763279001C1134 /* Experiences+CoreDataProperties.h */,
 				E155F52C1D763279001C1134 /* Experiences+CoreDataProperties.m */,
 				E155F52D1D763279001C1134 /* Experiences.h */,
@@ -745,7 +745,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E155F5291D761ABA001C1134 /* Users+CoreDataProperties.m in Sources */,
+				E16004661D7981530098DFB1 /* Users+CoreDataProperties.m in Sources */,
 				67DD1AB31D17D40D00FBEA0F /* UIPrinciples.m in Sources */,
 				67606C6E1D24888700AD127E /* MyInfoEditExperience.m in Sources */,
 				673E2BB91D6E657100AB139F /* ExperienceCell.m in Sources */,
@@ -757,8 +757,8 @@
 				67602F501D2EC75F00DA2F3A /* Messages.m in Sources */,
 				6733390E1D20B5ED00A8009F /* ChatCell.m in Sources */,
 				673E2BB61D6E656800AB139F /* MainInfoCell.m in Sources */,
+				E16004671D7981530098DFB1 /* Users.m in Sources */,
 				67391DEA1D27ED0200A50C03 /* Signup.m in Sources */,
-				E155F52A1D761ABA001C1134 /* Users.m in Sources */,
 				67D4AD651D265A7E00F42B7F /* Login.m in Sources */,
 				E18405A91D72FE5000919656 /* ChatRooms+CoreDataProperties.m in Sources */,
 				67391DEF1D27FBB900A50C03 /* SignupProcess1.m in Sources */,

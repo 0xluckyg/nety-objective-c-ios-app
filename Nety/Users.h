@@ -2,7 +2,7 @@
 //  Users.h
 //  Nety
 //
-//  Created by Alex Agarkov on 30.08.16.
+//  Created by Alex Agarkov on 02.09.16.
 //  Copyright © 2016 Scott Cho. All rights reserved.
 //
 
