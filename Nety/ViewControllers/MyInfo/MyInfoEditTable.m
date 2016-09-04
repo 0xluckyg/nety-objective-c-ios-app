@@ -109,7 +109,6 @@
     //Initialize cell
     MyInfoEditTableCell *experienceCell = [tableView dequeueReusableCellWithIdentifier:@"MyInfoEditTableCell"];
     
-    
     if ([self.experienceArray count] != 0) {
         
         //Set cell data
@@ -119,13 +118,13 @@
         
         //Change format of date
         NSString *experienceDate = @"";
-        if (![[rowData objectForKey:@"startDate"] isEqualToString:@""]) {
-            experienceDate = [NSString stringWithFormat:@"%@ to %@", [rowData objectForKey:@"startDate"], [rowData objectForKey:@"endDate"]];
+        if (![[rowData objectForKey:kExperienceStartDate] isEqualToString:@""]) {
+            experienceDate = [NSString stringWithFormat:@"%@ to %@", [rowData objectForKey:kExperienceStartDate], [rowData objectForKey:kExperienceEndDate]];
         }
         
-        experienceCell.experienceName.text = [rowData objectForKey: @"name"];
+        experienceCell.experienceName.text = [rowData objectForKey: kExperienceName];
         experienceCell.experienceDate.text = experienceDate;
-        experienceCell.experienceDescription.text = [rowData objectForKey: @"description"];
+        experienceCell.experienceDescription.text = [rowData objectForKey: kExperienceDescription];
     }
     
     //Set cell style
@@ -143,7 +142,6 @@
     experienceCell.experienceDate.highlightedTextColor = [UIColor whiteColor];
     experienceCell.experienceDescription.highlightedTextColor = [UIColor whiteColor];
     
-    
     return experienceCell;
 }
 
@@ -153,15 +151,6 @@
     self.arrayIndex = indexPath.row;
     
     [self performSegueWithIdentifier:@"experienceDetailSegue" sender:self];
-}
-
--(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-
--(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
-    [self.experienceArray exchangeObjectAtIndex:sourceIndexPath.row withObjectAtIndex:destinationIndexPath.row];
-    
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -191,7 +180,7 @@
         [self.tableView setEditing:YES animated:YES];
         editButtonClicked = NO;
     } else {
-        [self.tableView setEditing:NO animated:NO];
+        [self.tableView setEditing:NO animated:YES];
         editButtonClicked = YES;
     }
     
@@ -212,17 +201,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     
     [self.tableView reloadData];
-    
-    //Save to database
-    NSMutableDictionary *experiences = [[NSMutableDictionary alloc] init];
-    
-    for (int i = 0; i < [self.experienceArray count]; i ++) {
-        NSString *experienceKey = [NSString stringWithFormat:@"experience%@",[@(i) stringValue]];
-        [experiences setObject:[self.experienceArray objectAtIndex:i] forKey:experienceKey];
-    }
-    
-    [[[[self.firdatabase child:kUsers] child:MY_USER.userID] child:kExperiences] setValue:experiences];
-    
+
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -247,6 +226,16 @@
 
 -(void) backButtonPressed {
     [self.navigationController popViewControllerAnimated:YES];
+    
+    NSMutableDictionary *experiences = [[NSMutableDictionary alloc] init];
+    
+    for (int i = 0; i < [self.experienceArray count]; i ++) {
+        NSString *experienceKey = [NSString stringWithFormat:@"experience%@",[@(i) stringValue]];
+        [experiences setObject:[self.experienceArray objectAtIndex:i] forKey:experienceKey];
+    }
+    
+    [[[[self.firdatabase child:kUsers] child:MY_USER.userID] child:kExperiences] setValue:experiences];
+    
 }
 
 //To receive data

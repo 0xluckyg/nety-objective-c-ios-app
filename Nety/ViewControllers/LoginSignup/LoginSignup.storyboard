@@ -158,13 +158,6 @@
                                             </mask>
                                         </variation>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z50-sX-lBN" customClass="FBSDKLoginButton">
-                                        <rect key="frame" x="83" y="296" width="119" height="35"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="35" id="FYj-IO-s4i"/>
-                                            <constraint firstAttribute="width" constant="119" id="kGh-Av-6qu"/>
-                                        </constraints>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AN5-wS-k4M">
                                         <rect key="frame" x="28" y="225" width="230" height="40"/>
                                         <constraints>
@@ -201,13 +194,11 @@
                                     <constraint firstItem="Rb2-WJ-mSA" firstAttribute="centerX" secondItem="yaJ-kx-Dyw" secondAttribute="centerX" id="4BH-f8-qDH"/>
                                     <constraint firstAttribute="height" constant="339" id="74d-nL-YdR"/>
                                     <constraint firstAttribute="width" constant="285" id="MMr-HM-d6a"/>
-                                    <constraint firstItem="z50-sX-lBN" firstAttribute="centerX" secondItem="yaJ-kx-Dyw" secondAttribute="centerX" id="O5x-ZM-I1V"/>
                                     <constraint firstItem="AN5-wS-k4M" firstAttribute="top" secondItem="Rb2-WJ-mSA" secondAttribute="bottom" constant="56" id="Oy9-Xp-dOt"/>
                                     <constraint firstItem="AN5-wS-k4M" firstAttribute="top" secondItem="Rb2-WJ-mSA" secondAttribute="bottom" constant="66" id="XLj-YC-Jom"/>
                                     <constraint firstItem="Rb2-WJ-mSA" firstAttribute="top" secondItem="lVg-7z-32W" secondAttribute="bottom" constant="26" id="XU2-5A-5YZ"/>
                                     <constraint firstItem="Rb2-WJ-mSA" firstAttribute="centerX" secondItem="yaJ-kx-Dyw" secondAttribute="centerX" id="Zwk-Ql-9s4"/>
                                     <constraint firstItem="lVg-7z-32W" firstAttribute="top" secondItem="yaJ-kx-Dyw" secondAttribute="top" constant="73" id="aUW-pr-HaF"/>
-                                    <constraint firstAttribute="bottom" secondItem="z50-sX-lBN" secondAttribute="bottom" constant="8" id="f3D-DS-x8Z"/>
                                     <constraint firstItem="AN5-wS-k4M" firstAttribute="centerX" secondItem="yaJ-kx-Dyw" secondAttribute="centerX" id="qsE-b2-9We"/>
                                     <constraint firstItem="Rb2-WJ-mSA" firstAttribute="top" secondItem="lVg-7z-32W" secondAttribute="bottom" constant="16" id="ujf-RA-1Ue"/>
                                     <constraint firstItem="lVg-7z-32W" firstAttribute="top" secondItem="yaJ-kx-Dyw" secondAttribute="top" constant="46" id="utg-O1-N56"/>

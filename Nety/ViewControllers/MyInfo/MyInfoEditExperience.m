@@ -221,10 +221,10 @@
     }
     
     NSDictionary *experienceDict = @{
-                                     @"name": self.experienceNameTextField.text,
-                                     @"startDate": self.dateFromTextField.text,
-                                     @"endDate": self.dateToTextField.text,
-                                     @"description": experienceDescription
+                                     kExperienceName: self.experienceNameTextField.text,
+                                     kExperienceStartDate: self.dateFromTextField.text,
+                                     kExperienceEndDate: self.dateToTextField.text,
+                                     kExperienceDescription: experienceDescription
                                      };
     
     //If adding, then put it in the array.

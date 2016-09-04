@@ -111,13 +111,13 @@
         NSDictionary *rowData = [self.experienceArray objectAtIndex:indexPath.row];
         //Change format of date
         NSString *experienceDate = @"";
-        if (![[rowData objectForKey:@"startDate"] isEqualToString:@""]) {
-            experienceDate = [NSString stringWithFormat:@"%@ to %@", [rowData objectForKey:@"startDate"], [rowData objectForKey:@"endDate"]];
+        if (![[rowData objectForKey:kExperienceStartDate] isEqualToString:@""]) {
+            experienceDate = [NSString stringWithFormat:@"%@ to %@", [rowData objectForKey:kExperienceStartDate], [rowData objectForKey:kExperienceEndDate]];
         }
         
-        experienceCell.experienceName.text = [rowData objectForKey: @"name"];
+        experienceCell.experienceName.text = [rowData objectForKey: kExperienceName];
         experienceCell.experienceDate.text = experienceDate;
-        experienceCell.experienceDescription.text = [rowData objectForKey: @"description"];
+        experienceCell.experienceDescription.text = [rowData objectForKey: kExperienceDescription];
     }
     
     //Set cell style

@@ -21,7 +21,7 @@
     float cellHeight = self.contentView.frame.size.height;
     float cellWidth = self.contentView.frame.size.width;
     
-    UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(0, cellHeight - 1, cellWidth, 1)];/// change size as you need.
+    UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(0, cellHeight - 2, cellWidth, 1)];/// change size as you need.
     separatorLineView.backgroundColor = self.UIPrinciple.netyBlue;
     [self.contentView addSubview:separatorLineView];
 }

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "Users.h"
-
+#import "Constants.h"
 #import <CoreLocation/CoreLocation.h>
 
 @import Firebase;

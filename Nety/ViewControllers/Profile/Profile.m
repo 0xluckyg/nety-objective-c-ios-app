@@ -195,7 +195,7 @@
             float cellHeight = cell.contentView.frame.size.height;
             float cellWidth = cell.contentView.frame.size.width;
             
-            UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(0, cellHeight - 1, cellWidth, 0.3)];/// change size as you need.
+            UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(0, cellHeight - 2, cellWidth, 0.3)];/// change size as you need.
             separatorLineView.backgroundColor = self.UIPrinciple.netyBlue;
             [cell.contentView addSubview:separatorLineView];
             
@@ -234,8 +234,15 @@
         
         cell.experienceName.text = expir.name;
         cell.experienceDate.text = expir.endDate;
-        
         cell.experienceDescription.text = expir.descript;
+        
+        float cellHeight = cell.contentView.frame.size.height;
+        float cellWidth = cell.contentView.frame.size.width;
+        
+        UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(40, cellHeight - 2, cellWidth, 0.5)];/// change size as you need.
+        separatorLineView.backgroundColor = self.UIPrinciple.netyBlue;
+        [cell.contentView addSubview:separatorLineView];
+        
         return cell;
         
     }

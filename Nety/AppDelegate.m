@@ -65,6 +65,8 @@
     
         [[FIRAuth auth] addAuthStateDidChangeListener:^(FIRAuth *_Nonnull auth,
                                                         FIRUser *_Nullable user) {
+            
+            NSLog(@"user %@", user.email);
             if (user != nil) {
                 
                 if (userIsSigningIn == false) {
@@ -78,14 +80,14 @@
                     
                 }
                 
-            } else {
+            } else  {
                 
                     NSLog(@"App Delegate detected user not signed in");
                     UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"LoginSignup" bundle:nil];
-                    UIViewController *myNetworkViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"MainPageNav"];
+                    UIViewController *mainViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"MainPageNav"];
                     
                     //Set root view controller to login page
-                    [self.window setRootViewController:myNetworkViewController];
+                    [self.window setRootViewController:mainViewController];
             }
         }];
     

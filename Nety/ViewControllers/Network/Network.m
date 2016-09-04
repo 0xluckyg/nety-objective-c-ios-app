@@ -99,7 +99,7 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
     
     [self calculateSliderDistanceValue];
     
-    navItem.title = [self calculateDistanceToDescription];
+    navItem.title = [NSString stringWithFormat:@"%@ Near Me", [self calculateDistanceToDescription]];
     
     //Style navbar
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:

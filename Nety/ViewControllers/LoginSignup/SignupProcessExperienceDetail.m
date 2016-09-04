@@ -95,12 +95,12 @@
         NSDictionary *experienceDict = [self.experienceArray objectAtIndex:self.arrayIndex];
         
         //name
-        self.experienceNameTextField.text = [experienceDict objectForKey:@"name"];
+        self.experienceNameTextField.text = [experienceDict objectForKey:kExperienceName];
         //date
-        self.dateFromTextField.text = [experienceDict objectForKey:@"startDate"];
-        self.dateToTextField.text = [experienceDict objectForKey:@"endDate"];
+        self.dateFromTextField.text = [experienceDict objectForKey:kExperienceStartDate];
+        self.dateToTextField.text = [experienceDict objectForKey:kExperienceEndDate];
         //description
-        self.experienceDescriptionTextField.text = [experienceDict objectForKey:@"description"];
+        self.experienceDescriptionTextField.text = [experienceDict objectForKey:kExperienceDescription];
         
     }
     
@@ -234,10 +234,10 @@
     }
     
     NSDictionary *experienceDict = @{
-                                     @"name": self.experienceNameTextField.text,
-                                     @"startDate": self.dateFromTextField.text,
-                                     @"endDate": self.dateToTextField.text,
-                                     @"description": experienceDescription
+                                     kExperienceName: self.experienceNameTextField.text,
+                                     kExperienceStartDate: self.dateFromTextField.text,
+                                     kExperienceEndDate: self.dateToTextField.text,
+                                     kExperienceDescription: experienceDescription
                                      };
     
     //If adding, then put it in the array.

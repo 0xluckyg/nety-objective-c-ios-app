@@ -20,7 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *name;
 @property (nullable, nonatomic, retain) NSString *startDate;
 @property (nullable, nonatomic, retain) NSString *experienceKey;
+@property (nullable, nonatomic, retain) NSString *userID;
 @property (nullable, nonatomic, retain) Users *user;
+
 
 @end
 

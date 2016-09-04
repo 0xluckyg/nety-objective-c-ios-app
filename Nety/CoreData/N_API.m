@@ -271,62 +271,34 @@
         @try {
             if ([keys isEqualToString:@"experiences"]) {
                 for (NSString* expKey in [[userInfo objectForKey:keys] allKeys]) {
+                    NSLog(@"expKey %@", expKey);
                     NSDictionary* expDict = [NSDictionary dictionaryWithDictionary:[[userInfo objectForKey:keys] objectForKey:expKey]];
-//                    Experiences* expir = [NSEntityDescription insertNewObjectForEntityForName:@"Experiences" inManagedObjectContext:self.managedObjectContext];
-//
+                    
                     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
                     // Edit the entity name as appropriate.
-                    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Experiences" inManagedObjectContext:MY_API.managedObjectContext];
+                    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Experiences" inManagedObjectContext:self.managedObjectContext];
                     [fetchRequest setEntity:entity];
                     
                     
-                    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"experienceKey == %@",expKey];
+                    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"userID == %@", userID];
                     [fetchRequest setPredicate:predicate];
                     
                     NSMutableArray* findExpirArray = [NSMutableArray arrayWithArray:[self.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
                     
-                    Experiences* expir;
-                    if (findExpirArray.count == 0) {
+                    if ([self containsExperience:findExpirArray exp:expDict] == false) {
                         
+                        Experiences *expir;
                         expir = [NSEntityDescription insertNewObjectForEntityForName:@"Experiences" inManagedObjectContext:self.managedObjectContext];
-
+                        
+                        [expir setValue:userID forKey:@"userID"];
+                        
                         for (NSString* keyExp in [expDict allKeys]) {
-                            if ([keyExp isEqualToString:@"description"])
-                            {
-                                [expir setValue:[expDict objectForKey:keyExp] forKey:@"descript"];
-                            }
-                            else
-                            {
-                                [expir setValue:[expDict objectForKey:keyExp] forKey:keyExp];
-                            }
+                            [expir setValue:[expDict objectForKey:keyExp] forKey:keyExp];
                         }
                         
-                        [expir setUser:user];
-                        [expir setExperienceKey:expKey];
                         [user addExperiencesObject:expir];
+                        
                     }
-                    else
-                    {
-                        expir = [findExpirArray lastObject];
-                        NSLog(@"ПОВТОР");
-                        for (NSString* keyExp in [expDict allKeys]) {
-                            if ([keyExp isEqualToString:@"description"])
-                            {
-                                [expir setValue:[expDict objectForKey:keyExp] forKey:@"descript"];
-                            }
-                            else
-                            {
-                                [expir setValue:[expDict objectForKey:keyExp] forKey:keyExp];
-                            }
-                        }
-                    }
-//                    if (![user.experiences containsObject:expir]) {
-//                        NSLog(@"expir added %@", expir);
-//                        [expir setUser:user];
-//                        [expir setExperienceKey:[NSString stringWithFormat:@"experience%i",[user.experiences count]]];
-//                        [user addExperiencesObject:expir];
-//                    }
-                    
                 }
             }
             else
@@ -351,6 +323,31 @@
     }
     NSLog(@"UserADD");
     [self saveContext];
+}
+
+-(BOOL)containsExperience: (NSMutableArray *)set exp:(NSDictionary *)experience2 {
+    
+    BOOL returnValue = false;
+    NSLog(@"setLength %lu", [set count]);
+    for (Experiences *experience1 in set) {
+        
+        if ([experience1.descript isEqualToString: [experience2 objectForKey:kExperienceDescription]] &&
+            [experience1.name isEqualToString: [experience2 objectForKey:kExperienceName]] &&
+            [experience1.startDate isEqualToString: [experience2 objectForKey:kExperienceStartDate]] &&
+            [experience1.endDate isEqualToString: [experience2 objectForKey:kExperienceEndDate]]) {
+            returnValue = true;
+            break;
+        } else {
+//            NSLog(@"expUserID %@ : %@", experience1.user.userID, experience2.user.userID);
+            NSLog(@"expDecript %@ : %@", experience1.descript,[experience2 objectForKey:kExperienceDescription]);
+            NSLog(@"expName %@ : %@", experience1.name, [experience2 objectForKey:kExperienceName]);
+            NSLog(@"expStart %@ : %@", experience1.startDate, [experience2 objectForKey:kExperienceStartDate]);
+            NSLog(@"expStart %@ : %@", experience1.endDate, [experience2 objectForKey:kExperienceEndDate]);
+            returnValue = false;
+        }
+    }
+    NSLog(returnValue ? @"returnValue true" : @"returnValue false");
+    return returnValue;
 }
 
 - (Users*) getUserrsWithID:(NSString*)userID

@@ -25,18 +25,32 @@
     // Do any additional setup after loading the view.
     
     [self initializeDesign];
-    
-    NSLog(@"%@", MY_USER);
+    [self initializeSettings];
     
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     
-    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][0];
+    self.navigationItem.title = [NSString stringWithFormat:@"%@ %@", MY_USER.firstName, MY_USER.lastName];
     
-    numberOfComponents = 7 + (int)[sectionInfo numberOfObjects];
+    //If image is not NetyBlueLogo, start downloading and caching the image
+    NSString *photoUrl = MY_USER.profileImageUrl;
+    self.profileImageView = [[UIImageView alloc] init];
     
-    [self initializeSettings];
+    if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
+        NSURL *profileImageUrl = [NSURL URLWithString:photoUrl];
+        [self.profileImageView sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
+    } else {
+        self.profileImageView.image = [UIImage imageNamed:kDefaultUserLogoName];
+    }
+    
+    float width = self.view.frame.size.width;
+    float height = self.view.frame.size.height / 2.2;
+    
+    [self.profileImageView setFrame:CGRectMake(0, 0, width, height)];
+    [self.profileImageView setContentMode:UIViewContentModeScaleAspectFill];
+    
+    [self.tableView addParallaxWithView:self.profileImageView andHeight:height];
     
     [self.tableView reloadData];
     
@@ -51,6 +65,9 @@
     
     self.firdatabase = [[FIRDatabase database] reference];
     
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][0];
+    
+    numberOfComponents = 7 + (int)[sectionInfo numberOfObjects];
 }
 
 - (void)initializeDesign {
@@ -66,18 +83,11 @@
                                 [UIColor whiteColor], NSForegroundColorAttributeName, nil];
     self.navigationItem.title = name;
     
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"Camera"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:normal target:self action:@selector(cameraButtonSelected)];
+    
+    self.navigationItem.rightBarButtonItem = rightButton;
+    
     [self.navigationController.navigationBar setTitleTextAttributes:attributes];
-    
-    //If image is not NetyBlueLogo, start downloading and caching the image
-    NSString *photoUrl = MY_USER.profileImageUrl;
-    self.profileImageView = [[UIImageView alloc] init];
-    
-    if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
-        NSURL *profileImageUrl = [NSURL URLWithString:photoUrl];
-        [self.profileImageView sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
-    } else {
-        self.profileImageView.image = [UIImage imageNamed:kDefaultUserLogoName];
-    }
     
     float width = self.view.frame.size.width;
     float height = self.view.frame.size.height / 2.2;
@@ -189,7 +199,7 @@
             float cellHeight = cell.contentView.frame.size.height;
             float cellWidth = cell.contentView.frame.size.width;
             
-            UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(0, cellHeight - 1, cellWidth, 1)];/// change size as you need.
+            UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(0, cellHeight - 2, cellWidth, 1)];/// change size as you need.
             separatorLineView.backgroundColor = self.UIPrinciple.netyBlue;
             [cell.contentView addSubview:separatorLineView];
             
@@ -223,9 +233,9 @@
         
         MyInfoExperienceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyInfoExperienceCell" forIndexPath:indexPath];
         
-        Experiences* expir = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row-7 inSection:0]];
+        NSMutableArray *experiences = [NSMutableArray arrayWithArray:[MY_USER.experiences allObjects]];
         
-        NSLog(@"Ex: %@",expir);
+        Experiences* expir = [experiences objectAtIndex:indexPath.row-7];
         
         cell.experienceName.textColor = self.UIPrinciple.netyBlue;
         cell.experienceDate.textColor = self.UIPrinciple.netyBlue;
@@ -237,6 +247,13 @@
         cell.experienceDescription.text = expir.descript;
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        float cellHeight = cell.contentView.frame.size.height;
+        float cellWidth = cell.contentView.frame.size.width;
+        
+        UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(40, cellHeight - 2, cellWidth, 0.5)];/// change size as you need.
+        separatorLineView.backgroundColor = self.UIPrinciple.netyBlue;
+        [cell.contentView addSubview:separatorLineView];
         
         return cell;
         
@@ -279,12 +296,12 @@
             NSMutableArray* array = [NSMutableArray array];
             for (Experiences* expir in [sectionInfo objects])
             {
-                NSMutableDictionary *rowData = [NSMutableDictionary dictionary];
+                NSMutableDictionary *rowData = [NSMutableDictionary dictionary];                                
                 
-                [rowData setObject:expir.descript forKey:@"description"];
-                [rowData setObject:expir.endDate forKey:@"endDate"];
-                [rowData setObject:expir.name forKey:@"name"];
-                [rowData setObject:expir.startDate forKey:@"startDate"];
+                [rowData setObject:expir.descript forKey:kExperienceDescription];
+                [rowData setObject:expir.endDate forKey:kExperienceEndDate];
+                [rowData setObject:expir.name forKey:kExperienceName];
+                [rowData setObject:expir.startDate forKey:kExperienceStartDate];
                 [array addObject:rowData];
             }
             
@@ -357,6 +374,43 @@
 //---------------------------------------------------------
 
 
+-(void)cameraButtonSelected {
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Image Source"
+                                                                   message:@"How would you like to choose your photo?"
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *camera = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * action) {
+                                                       UIImagePickerController *pickerLibrary = [[UIImagePickerController alloc] init];
+                                                       pickerLibrary.delegate = (id)self;
+                                                       pickerLibrary.allowsEditing = YES;
+                                                       pickerLibrary.sourceType = UIImagePickerControllerSourceTypeCamera;
+                                                       [self presentViewController:pickerLibrary animated:YES completion:nil];
+                                                   }];
+    
+    UIAlertAction *library = [UIAlertAction actionWithTitle:@"Library" style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * action) {
+                                                        UIImagePickerController *pickerLibrary = [[UIImagePickerController alloc] init];
+                                                        pickerLibrary.delegate = (id)self;
+                                                        pickerLibrary.allowsEditing = YES;
+                                                        pickerLibrary.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+                                                        [self presentViewController:pickerLibrary animated:YES completion:nil];
+                                                    }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction * action) {
+                                                       
+                                                   }];
+    
+    [alert addAction:camera];
+    [alert addAction:library];
+    [alert addAction:cancel];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+    
+}
+
 -(void)changeImage: (UIImagePickerController *)picker getInfo:(NSDictionary *)info {
     
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
@@ -395,7 +449,30 @@
                 
                 NSLog(@"image url saved");
                 
-                [[[[self.firdatabase child:kUsers] child:userID] child:kProfilePhoto] setValue: [[metadata downloadURL] absoluteString]];
+                NSString *profileImageUrl = [[metadata downloadURL] absoluteString];
+                
+                [[[[self.firdatabase child:kUsers] child:userID] child:kProfilePhoto] setValue: profileImageUrl];
+                
+                [MY_USER setValue:profileImageUrl forKey:kProfilePhoto];
+                
+                //If image is not NetyBlueLogo, start downloading and caching the image
+                NSString *photoUrl = MY_USER.profileImageUrl;
+                self.profileImageView = [[UIImageView alloc] init];
+                
+                if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
+                    NSURL *profileImageUrl = [NSURL URLWithString:photoUrl];
+                    [self.profileImageView sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
+                } else {
+                    self.profileImageView.image = [UIImage imageNamed:kDefaultUserLogoName];
+                }
+                
+                float width = self.view.frame.size.width;
+                float height = self.view.frame.size.height / 2.2;
+                
+                [self.profileImageView setFrame:CGRectMake(0, 0, width, height)];
+                [self.profileImageView setContentMode:UIViewContentModeScaleAspectFill];
+                
+                [self.tableView addParallaxWithView:self.profileImageView andHeight:height];
                 
                 [picker dismissViewControllerAnimated:YES completion:nil];
             }

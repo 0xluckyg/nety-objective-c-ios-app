@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15G31" minimumToolsVersion="Xcode 7.0">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15D21" minimumToolsVersion="Xcode 7.0">
     <entity name="ALL" representedClassName="ALL" syncable="YES"/>
     <entity name="ChatRooms" representedClassName="ChatRooms" parentEntity="ALL" syncable="YES">
         <attribute name="chatRoomID" optional="YES" attributeType="String" syncable="YES"/>
@@ -19,6 +19,7 @@
         <attribute name="experienceKey" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="startDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userID" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Users" inverseName="experiences" inverseEntity="Users" syncable="YES"/>
     </entity>
     <entity name="Msg" representedClassName="Msg" parentEntity="ALL" syncable="YES">
@@ -50,7 +51,7 @@
     <elements>
         <element name="ALL" positionX="-5688" positionY="-801" width="128" height="45"/>
         <element name="ChatRooms" positionX="-5456" positionY="-574" width="128" height="195"/>
-        <element name="Experiences" positionX="-5949" positionY="-450" width="128" height="133"/>
+        <element name="Experiences" positionX="-5949" positionY="-450" width="128" height="150"/>
         <element name="Msg" positionX="-5139" positionY="-648" width="128" height="133"/>
         <element name="Users" positionX="-5661" positionY="-540" width="128" height="283"/>
     </elements>

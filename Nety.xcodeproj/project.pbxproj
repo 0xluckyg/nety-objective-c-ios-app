@@ -56,7 +56,6 @@
 		67DD1AAF1D17C3EF00FBEA0F /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1AAE1D17C3EF00FBEA0F /* Profile.storyboard */; };
 		67DD1AB31D17D40D00FBEA0F /* UIPrinciples.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DD1AB21D17D40D00FBEA0F /* UIPrinciples.m */; };
 		67DD1AB61D17E04F00FBEA0F /* NetworkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DD1AB51D17E04F00FBEA0F /* NetworkCell.m */; };
-		67DD1AB91D17E39B00FBEA0F /* NetworkData.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DD1AB81D17E39B00FBEA0F /* NetworkData.m */; };
 		97677F0633DE3705741AEB8E /* libPods-Nety.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F5D56FDB372FC5465929EE /* libPods-Nety.a */; };
 		E155F52F1D763279001C1134 /* Experiences+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E155F52C1D763279001C1134 /* Experiences+CoreDataProperties.m */; };
 		E155F5301D763279001C1134 /* Experiences.m in Sources */ = {isa = PBXBuildFile; fileRef = E155F52E1D763279001C1134 /* Experiences.m */; };
@@ -173,8 +172,6 @@
 		67DD1AB21D17D40D00FBEA0F /* UIPrinciples.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPrinciples.m; sourceTree = "<group>"; };
 		67DD1AB41D17E04F00FBEA0F /* NetworkCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkCell.h; sourceTree = "<group>"; };
 		67DD1AB51D17E04F00FBEA0F /* NetworkCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkCell.m; sourceTree = "<group>"; };
-		67DD1AB71D17E39B00FBEA0F /* NetworkData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkData.h; sourceTree = "<group>"; };
-		67DD1AB81D17E39B00FBEA0F /* NetworkData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkData.m; sourceTree = "<group>"; };
 		E155F52B1D763279001C1134 /* Experiences+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Experiences+CoreDataProperties.h"; path = "CoreData/Experiences+CoreDataProperties.h"; sourceTree = "<group>"; };
 		E155F52C1D763279001C1134 /* Experiences+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Experiences+CoreDataProperties.m"; path = "CoreData/Experiences+CoreDataProperties.m"; sourceTree = "<group>"; };
 		E155F52D1D763279001C1134 /* Experiences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Experiences.h; path = CoreData/Experiences.h; sourceTree = "<group>"; };
@@ -519,8 +516,6 @@
 				67DD1AB21D17D40D00FBEA0F /* UIPrinciples.m */,
 				67B2400D1D40594600F011BB /* Constants.h */,
 				67B2400E1D40594600F011BB /* Constants.m */,
-				67DD1AB71D17E39B00FBEA0F /* NetworkData.h */,
-				67DD1AB81D17E39B00FBEA0F /* NetworkData.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -782,7 +777,6 @@
 				E188C40F1D6F89F400CCFD0F /* ALL+CoreDataProperties.m in Sources */,
 				E1E0B9211D689D8600295133 /* Nety.xcdatamodeld in Sources */,
 				67D4AD621D26536000F42B7F /* MainPage.m in Sources */,
-				67DD1AB91D17E39B00FBEA0F /* NetworkData.m in Sources */,
 				673E58731D6AAE7900D28F5B /* MyChats.m in Sources */,
 				673338F71D20937C00A8009F /* MyNetworkCell.m in Sources */,
 				67391DFB1D280A9600A50C03 /* SignupProcessExperienceDetailCell.m in Sources */,

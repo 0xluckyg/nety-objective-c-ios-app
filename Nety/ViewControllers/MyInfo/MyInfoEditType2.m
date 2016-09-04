@@ -120,9 +120,6 @@
     self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y -50., self.view.frame.size.width, self.view.frame.size.height);
     
     [UIView commitAnimations];
-    
-    self.editType2TextField.text = @"";
-    
 }
 
 //Move screen down a bit when Keyboard appears for Description only
@@ -162,13 +159,18 @@
         FIRDatabaseReference *firdatabase = [[FIRDatabase database] reference];
         
         if (self.statusOrSummary == 0) {
-        
+            
+            [MY_USER setValue:self.editType2TextField.text forKey:kStatus];
+            
             [[[[firdatabase child:kUsers]
                             child:MY_USER.userID]
                             child:kStatus]
                             setValue:self.editType2TextField.text];
             
         } else {
+            
+            [MY_USER setValue:self.editType2TextField.text forKey:kSummary];
+            
             [[[[firdatabase child:kUsers]
                             child:MY_USER.userID]
                             child:kSummary]

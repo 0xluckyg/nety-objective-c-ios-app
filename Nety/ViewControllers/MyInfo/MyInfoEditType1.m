@@ -109,12 +109,6 @@
     self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y -50., self.view.frame.size.width, self.view.frame.size.height);
     
     [UIView commitAnimations];
-    
-    //Reset status
-    if (textField.tag == 2) {
-        self.editType1JobTextField.text = @"";
-    }
-    
 }
 
 //Move screen down a bit when Keyboard appears for Description only
@@ -182,6 +176,9 @@
             
             self.firdatabase = [[FIRDatabase database] reference];
             
+            [MY_USER setValue:firstName forKey:kFirstName];
+            [MY_USER setValue:lastName forKey:kFirstName];
+            
             //Save name and age to the database
             [[[[self.firdatabase child:kUsers] child:MY_USER.userID] child:kFirstName] setValue:firstName];
             [[[[self.firdatabase child:kUsers] child:MY_USER.userID] child:kLastName] setValue:lastName];
@@ -197,6 +194,8 @@
         [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Your description is too long" message:@"Please make it shorter than 30 letters" viewController:self];
         
     } else {
+        
+        [MY_USER setValue:identity forKey:kIdentity];
         
         [[[[self.firdatabase child:kUsers]
            child:MY_USER.userID]
