@@ -64,11 +64,8 @@
 - (void)initializeSettings {
     
     self.firdatabase = [[FIRDatabase database] reference];
-    
-    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][0];
-    
-    numberOfComponents = 7 + (int)[sectionInfo numberOfObjects];
 }
+
 
 - (void)initializeDesign {
     
@@ -110,8 +107,10 @@
 #pragma mark - Protocols and Delegates
 //---------------------------------------------------------
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return numberOfComponents;
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][0];
+    return 7 + (int)[sectionInfo numberOfObjects];
 }
 
 
@@ -125,20 +124,13 @@
     
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    NSString *status = MY_USER.status;
-    NSString *summary = MY_USER.summary;
-    NSString *identity = MY_USER.identity;
-    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][0];
-    
-    NSArray *experiences = [sectionInfo objects];
-    
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{    
     if (indexPath.row == 0) {
         
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyInfoSpaceCell" forIndexPath:indexPath];
         
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [self configureCell:cell withObject:nil cellForRowAtIndexPath:indexPath];
         
         return cell;
         
@@ -146,46 +138,7 @@
         
         MyInfoMainCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyInfoMainCell" forIndexPath:indexPath];
         
-        cell.mainInfoLabel.textColor = self.UIPrinciple.netyBlue;
-        
-        [cell.mainInfoImage setTintColor:self.UIPrinciple.netyBlue];
-        
-        switch (indexPath.row) {
-            case 1:
-                cell.mainInfoImage.image = [[UIImage imageNamed:@"Identity"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-                
-                if ([identity isEqualToString:@""]) {
-                    cell.mainInfoLabel.text = @"No description";
-                } else {
-                    cell.mainInfoLabel.text = identity;
-                }
-                
-                break;
-            case 2: {
-                cell.mainInfoImage.image = [[UIImage imageNamed:@"Status"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-                
-                if ([status isEqualToString:@""]) {
-                    cell.mainInfoLabel.text = @"No status";
-                } else {
-                    cell.mainInfoLabel.text = status;
-                }
-                
-                break;
-            }
-            case 3: {
-                cell.mainInfoImage.image = [[UIImage imageNamed:@"Summary"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-                
-                if ([summary isEqualToString:@""]) {
-                    cell.mainInfoLabel.text = @"No summary";
-                } else {
-                    cell.mainInfoLabel.text = summary;
-                }
-                
-                break;
-            }
-        }
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+        [self configureCell:cell withObject:nil cellForRowAtIndexPath:indexPath];
         
         return cell;
         
@@ -194,18 +147,7 @@
         
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyInfoSpaceCell" forIndexPath:indexPath];
         
-        if (indexPath.row == 4) {
-            
-            float cellHeight = cell.contentView.frame.size.height;
-            float cellWidth = cell.contentView.frame.size.width;
-            
-            UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(0, cellHeight - 2, cellWidth, 1)];/// change size as you need.
-            separatorLineView.backgroundColor = self.UIPrinciple.netyBlue;
-            [cell.contentView addSubview:separatorLineView];
-            
-        }
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [self configureCell:cell withObject:nil cellForRowAtIndexPath:indexPath];
         
         return cell;
         
@@ -213,19 +155,7 @@
         
         MyInfoMainCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyInfoMainCell" forIndexPath:indexPath];
         
-        cell.mainInfoImage.image = [[UIImage imageNamed:@"LightBulbSmall"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        
-        [cell.mainInfoImage setTintColor:self.UIPrinciple.netyBlue];
-        
-        cell.mainInfoLabel.textColor = self.UIPrinciple.netyBlue;
-        
-        if ([experiences count] == 0) {
-            cell.mainInfoLabel.text = @"No experiences";
-        } else {
-            cell.mainInfoLabel.text = @"Experiences";
-        }
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+        [self configureCell:cell withObject:nil cellForRowAtIndexPath:indexPath];
         
         return cell;
         
@@ -233,27 +163,7 @@
         
         MyInfoExperienceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyInfoExperienceCell" forIndexPath:indexPath];
         
-        NSMutableArray *experiences = [NSMutableArray arrayWithArray:[MY_USER.experiences allObjects]];
-        
-        Experiences* expir = [experiences objectAtIndex:indexPath.row-7];
-        
-        cell.experienceName.textColor = self.UIPrinciple.netyBlue;
-        cell.experienceDate.textColor = self.UIPrinciple.netyBlue;
-        cell.experienceDescription.textColor = self.UIPrinciple.netyBlue;
-        
-        cell.experienceName.text = expir.name;
-        cell.experienceDate.text = expir.endDate;
-        
-        cell.experienceDescription.text = expir.descript;
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        float cellHeight = cell.contentView.frame.size.height;
-        float cellWidth = cell.contentView.frame.size.width;
-        
-        UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(40, cellHeight - 2, cellWidth, 0.5)];/// change size as you need.
-        separatorLineView.backgroundColor = self.UIPrinciple.netyBlue;
-        [cell.contentView addSubview:separatorLineView];
+        [self configureCell:cell withObject:[self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row-7 inSection:0]] cellForRowAtIndexPath:indexPath];
         
         return cell;
         
@@ -511,7 +421,7 @@
     
     
     NSPredicate* predicate = [NSPredicate predicateWithFormat:@"user == %@",MY_USER];
-
+    
     
     [fetchRequest setPredicate:predicate];
     
@@ -538,12 +448,178 @@
     return _fetchedResultsController;
 }
 
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.tableView beginUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
+           atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
+{
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        default:
+            return;
+    }
+}
+
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath
 {
     
-    [_tableView reloadData];
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:newIndexPath.row+7 inSection:newIndexPath.section]] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.row+7 inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row+7 inSection:indexPath.section]] withObject:[self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row-7 inSection:0]] cellForRowAtIndexPath:indexPath];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [self.tableView moveRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row+7 inSection:indexPath.section] toIndexPath:[NSIndexPath indexPathForRow:newIndexPath.row+7 inSection:newIndexPath.section]];
+            break;
+    }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.tableView endUpdates];
+}
+
+- (void)configureCell:(id)cell withObject:(Experiences*)object cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *status = MY_USER.status;
+    NSString *summary = MY_USER.summary;
+    NSString *identity = MY_USER.identity;
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][0];
+    
+    NSArray *experiences = [sectionInfo objects];
+    
+    if (indexPath.row == 0) {
+        
+        UITableViewCell *mcell = (UITableViewCell*)cell;
+        
+        mcell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        
+    } else if (indexPath.row >= 1 && indexPath.row <= 3) {
+        
+        MyInfoMainCell *mcell = (MyInfoMainCell*)cell;
+        
+        mcell.mainInfoLabel.textColor = self.UIPrinciple.netyBlue;
+        
+        [mcell.mainInfoImage setTintColor:self.UIPrinciple.netyBlue];
+        
+        switch (indexPath.row) {
+            case 1:
+                mcell.mainInfoImage.image = [[UIImage imageNamed:@"Identity"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+                
+                if ([identity isEqualToString:@""]) {
+                    mcell.mainInfoLabel.text = @"No description";
+                } else {
+                    mcell.mainInfoLabel.text = identity;
+                }
+                
+                break;
+            case 2: {
+                mcell.mainInfoImage.image = [[UIImage imageNamed:@"Status"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+                
+                if ([status isEqualToString:@""]) {
+                    mcell.mainInfoLabel.text = @"No status";
+                } else {
+                    mcell.mainInfoLabel.text = status;
+                }
+                
+                break;
+            }
+            case 3: {
+                mcell.mainInfoImage.image = [[UIImage imageNamed:@"Summary"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+                
+                if ([summary isEqualToString:@""]) {
+                    mcell.mainInfoLabel.text = @"No summary";
+                } else {
+                    mcell.mainInfoLabel.text = summary;
+                }
+                
+                break;
+            }
+        }
+        
+        mcell.selectionStyle = UITableViewCellSelectionStyleDefault;
+        
+        
+    } else if (indexPath.row >= 4 && indexPath.row <= 5) {
+        
+        
+        UITableViewCell *mcell = (UITableViewCell*)cell;
+        
+        if (indexPath.row == 4) {
+            
+            float cellHeight = mcell.contentView.frame.size.height;
+            float cellWidth = mcell.contentView.frame.size.width;
+            
+            UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(0, cellHeight - 1, cellWidth, 1)];/// change size as you need.
+            separatorLineView.backgroundColor = self.UIPrinciple.netyBlue;
+            [mcell.contentView addSubview:separatorLineView];
+            
+        }
+        
+        mcell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        
+    } else if (indexPath.row == 6) {
+        
+        MyInfoMainCell *mcell = (MyInfoMainCell*)cell;
+        
+        mcell.mainInfoImage.image = [[UIImage imageNamed:@"LightBulbSmall"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        
+        [mcell.mainInfoImage setTintColor:self.UIPrinciple.netyBlue];
+        
+        mcell.mainInfoLabel.textColor = self.UIPrinciple.netyBlue;
+        
+        if ([experiences count] == 0) {
+            mcell.mainInfoLabel.text = @"No experiences";
+        } else {
+            mcell.mainInfoLabel.text = @"Experiences";
+        }
+        
+        mcell.selectionStyle = UITableViewCellSelectionStyleDefault;
+        
+        
+    } else {
+        
+        MyInfoExperienceCell *mcell = (MyInfoExperienceCell*)cell;
+        
+        Experiences* expir = object;
+        
+        NSLog(@"Ex: %@",expir);
+        
+        mcell.experienceName.textColor = self.UIPrinciple.netyBlue;
+        mcell.experienceDate.textColor = self.UIPrinciple.netyBlue;
+        mcell.experienceDescription.textColor = self.UIPrinciple.netyBlue;
+        
+        mcell.experienceName.text = expir.name;
+        mcell.experienceDate.text = expir.endDate;
+        
+        mcell.experienceDescription.text = expir.descript;
+        
+        mcell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        
+    }
 }
 
 @end

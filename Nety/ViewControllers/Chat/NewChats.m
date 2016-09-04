@@ -82,7 +82,7 @@ NSString *const newChatNoContentString = @"You haven't talked to anyone yet. Che
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"ChatRooms" inManagedObjectContext:MY_API.managedObjectContext];
     [fetchRequest setEntity:entity];
     
-    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"type == NO"];
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"type == NO AND members == %@",MY_USER];
     [fetchRequest setPredicate:predicate];
     
     // Set the batch size to a suitable number.
@@ -161,7 +161,7 @@ NSString *const newChatNoContentString = @"You haven't talked to anyone yet. Che
         cell.chatNotificationLabel.text = @"";
     } else {
         cell.chatNotificationView.backgroundColor = self.UIPrinciple.netyBlue;
-        cell.chatNotificationLabel.text = [NSString stringWithFormat:@"%lu", [object.unread integerValue]];
+        cell.chatNotificationLabel.text = [NSString stringWithFormat:@"%d", [object.unread integerValue]];
     }
     
     //Set description

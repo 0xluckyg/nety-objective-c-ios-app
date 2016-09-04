@@ -2,7 +2,7 @@
 //  Users+CoreDataProperties.h
 //  Nety
 //
-//  Created by Alex Agarkov on 02.09.16.
+//  Created by Alex Agarkov on 04.09.16.
 //  Copyright © 2016 Scott Cho. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *firstName;
 @property (nullable, nonatomic, retain) NSString *geocoordinate;
 @property (nullable, nonatomic, retain) NSString *identity;
+@property (nullable, nonatomic, retain) NSNumber *imdiscoverable;
 @property (nullable, nonatomic, retain) NSNumber *isBlocked;
 @property (nullable, nonatomic, retain) NSNumber *isFriend;
 @property (nullable, nonatomic, retain) NSNumber *itIsMe;
@@ -29,8 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *status;
 @property (nullable, nonatomic, retain) NSString *summary;
 @property (nullable, nonatomic, retain) NSString *userID;
-@property (nullable, nonatomic, retain) NSNumber *imdiscoverable;
-@property (nullable, nonatomic, retain) NSMutableSet<Experiences *> *experiences;
+@property (nullable, nonatomic, retain) NSSet<Experiences *> *experiences;
+@property (nullable, nonatomic, retain) NSSet<ChatRooms *> *chatrooms;
 
 @end
 
@@ -40,6 +41,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)removeExperiencesObject:(Experiences *)value;
 - (void)addExperiences:(NSSet<Experiences *> *)values;
 - (void)removeExperiences:(NSSet<Experiences *> *)values;
+
+- (void)addChatroomsObject:(ChatRooms *)value;
+- (void)removeChatroomsObject:(ChatRooms *)value;
+- (void)addChatrooms:(NSSet<ChatRooms *> *)values;
+- (void)removeChatrooms:(NSSet<ChatRooms *> *)values;
 
 @end
 

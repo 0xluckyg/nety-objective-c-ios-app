@@ -84,7 +84,7 @@ NSString *const myChatNoContentString = @"You don't have friends yet. Swipe left
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"ChatRooms" inManagedObjectContext:MY_API.managedObjectContext];
     [fetchRequest setEntity:entity];
     
-    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"type == YES"];
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"type == YES AND members == %@",MY_USER];
     [fetchRequest setPredicate:predicate];
     
     // Set the batch size to a suitable number.

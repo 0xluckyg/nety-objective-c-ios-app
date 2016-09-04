@@ -2,7 +2,7 @@
 //  Experiences+CoreDataProperties.h
 //  Nety
 //
-//  Created by Alex Agarkov on 31.08.16.
+//  Created by Alex Agarkov on 04.09.16.
 //  Copyright © 2016 Scott Cho. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -17,12 +17,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nullable, nonatomic, retain) NSString *descript;
 @property (nullable, nonatomic, retain) NSString *endDate;
+@property (nullable, nonatomic, retain) NSString *experienceKey;
 @property (nullable, nonatomic, retain) NSString *name;
 @property (nullable, nonatomic, retain) NSString *startDate;
-@property (nullable, nonatomic, retain) NSString *experienceKey;
 @property (nullable, nonatomic, retain) NSString *userID;
 @property (nullable, nonatomic, retain) Users *user;
-
 
 @end
 

@@ -10,28 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nety/CoreData/N_API.m"
-            timestampString = "494497879.234914"
+            timestampString = "494671395.7651"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "373"
-            endingLineNumber = "373"
+            startingLineNumber = "411"
+            endingLineNumber = "411"
             landmarkName = "-setMyUser:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Nety/AppDelegate.m"
-            timestampString = "493920910.995312"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "268"
-            endingLineNumber = "268"
-            landmarkName = "-fetchUserInformation:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -122,7 +106,7 @@
                   moduleName = "Nety"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/HDD_All/Xcode/Nety/Nety/ViewControllers/Messages/Messages.m"
-                  timestampString = "494504595.23752"
+                  timestampString = "494673333.198309"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "533"
@@ -137,7 +121,7 @@
                   moduleName = "Nety"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/HDD_All/Xcode/Nety/Nety/ViewControllers/Messages/Messages.m"
-                  timestampString = "494504595.237624"
+                  timestampString = "494673333.198435"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "533"
@@ -152,7 +136,7 @@
                   moduleName = "Nety"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/HDD_All/Xcode/Nety/Nety/ViewControllers/Messages/Messages.m"
-                  timestampString = "494504595.237734"
+                  timestampString = "494673333.198515"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "533"
@@ -167,7 +151,7 @@
                   moduleName = "Nety"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/HDD_All/Xcode/Nety/Nety/ViewControllers/Messages/Messages.m"
-                  timestampString = "494504595.237826"
+                  timestampString = "494673333.198598"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "533"
@@ -216,12 +200,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Nety/CoreData/N_API.m"
-            timestampString = "494497879.234914"
+            timestampString = "494671395.7651"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "336"
-            endingLineNumber = "336"
-            landmarkName = "-addNewUser:UserID:FlagMy:"
+            startingLineNumber = "374"
+            endingLineNumber = "374"
+            landmarkName = "-containsExperience:exp:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -308,22 +292,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Nety/ViewControllers/MyInfo/MyInfo.m"
-            timestampString = "494500584.135061"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "468"
-            endingLineNumber = "468"
-            landmarkName = "-controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -333,54 +301,6 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "259"
             endingLineNumber = "259"
-            landmarkName = "-addNewUser:UserID:FlagMy:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Nety/ViewControllers/MyInfo/MyInfo.m"
-            timestampString = "494443319.167103"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "-viewWillAppear:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Nety/ViewControllers/MyInfo/MyInfo.m"
-            timestampString = "494444205.780359"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "226"
-            endingLineNumber = "226"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Nety/CoreData/N_API.m"
-            timestampString = "494497879.234914"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "290"
-            endingLineNumber = "290"
             landmarkName = "-addNewUser:UserID:FlagMy:"
             landmarkType = "5">
          </BreakpointContent>
@@ -462,6 +382,198 @@
             startingLineNumber = "182"
             endingLineNumber = "182"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Nety/ViewControllers/MyInfo/MyInfoEditExperience.m"
+            timestampString = "494591916.809325"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "-initizlieSetting"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Nety/ViewControllers/MyInfo/MyInfoEditExperience.m"
+            timestampString = "494591970.13499"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "-initializeDesign"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Nety/ViewControllers/Settings/Settings.m"
+            timestampString = "494665340.297595"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Nety/ViewControllers/Settings/Settings.m"
+            timestampString = "494665517.984054"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "318"
+            endingLineNumber = "318"
+            landmarkName = "-listenForSecurityStatus"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[Settings listenForSecurityStatus]"
+                  moduleName = "Nety"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/HDD_All/Xcode/Nety/Nety/ViewControllers/Settings/Settings.m"
+                  timestampString = "494673333.292469"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "318"
+                  endingLineNumber = "318"
+                  offsetFromSymbolStart = "206">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__35-[Settings listenForSecurityStatus]_block_invoke"
+                  moduleName = "Nety"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/HDD_All/Xcode/Nety/Nety/ViewControllers/Settings/Settings.m"
+                  timestampString = "494673333.2926"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "320"
+                  endingLineNumber = "320"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Nety/ViewControllers/MyInfo/MyInfo.m"
+            timestampString = "494673682.813488"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "504"
+            endingLineNumber = "504"
+            landmarkName = "-configureCell:withObject:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Nety/ViewControllers/MyInfo/MyInfo.m"
+            timestampString = "494673682.813488"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Nety/ViewControllers/MyInfo/MyInfo.m"
+            timestampString = "494673682.813488"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "478"
+            endingLineNumber = "478"
+            landmarkName = "-controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Nety/ViewControllers/MyInfo/MyInfo.m"
+            timestampString = "494673682.813488"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "453"
+            endingLineNumber = "453"
+            landmarkName = "-controllerWillChangeContent:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Nety/ViewControllers/MyInfo/MyInfo.m"
+            timestampString = "494673682.813488"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "499"
+            endingLineNumber = "499"
+            landmarkName = "-controllerDidChangeContent:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Nety/ViewControllers/MyInfo/MyInfo.m"
+            timestampString = "494673682.813488"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

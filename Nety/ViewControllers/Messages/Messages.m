@@ -352,7 +352,7 @@
     [onlineRef updateChildValues:@{kOnline: @0}];
     
     //If no messages, delete chat rooms
-    NSLog(@"%lu message count", numberOfMessages);
+    NSLog(@"%lu message count", (long)numberOfMessages);
     
     if (numberOfMessages == 0) {
         
@@ -688,7 +688,7 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Msg" inManagedObjectContext:MY_API.managedObjectContext];
     [fetchRequest setEntity:entity];
     
-    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"chatroomID == %@",_chatroomID];
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"chatroomID == %@ AND members == %@",_chatroomID,MY_USER];
     [fetchRequest setPredicate:predicate];
     
     // Set the batch size to a suitable number.

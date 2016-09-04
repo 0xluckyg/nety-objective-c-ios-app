@@ -314,6 +314,7 @@
 
 - (void)listenForSecurityStatus {
 
+    NSLog(@"%@",MY_USER.userID);
     [[[[self.firdatabase child:kUsers] child:MY_USER.userID] child:kSecurity] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
         if (snapshot != nil) {

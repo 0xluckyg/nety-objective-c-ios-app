@@ -2,14 +2,14 @@
 //  Users.h
 //  Nety
 //
-//  Created by Alex Agarkov on 02.09.16.
+//  Created by Alex Agarkov on 04.09.16.
 //  Copyright © 2016 Scott Cho. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import "ALL.h"
 
-@class Experiences;
+@class ChatRooms, Experiences;
 
 NS_ASSUME_NONNULL_BEGIN
 
