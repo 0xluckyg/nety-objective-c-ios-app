@@ -47,7 +47,6 @@
     self.firdatabase = [[FIRDatabase database] reference];
     
     self.senderId = MY_USER.userID;
-    NSLog(@"senderId %@", self.senderId);
     self.senderDisplayName = [NSString stringWithFormat:@"%@ %@",MY_USER.firstName, MY_USER.lastName];
     
     [self createRoomAndObserveMessages];
@@ -123,8 +122,6 @@
 
 -(id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath {
     //JSQMessage *data = self.messages[indexPath.row];
-    NSLog(@"%@ mData", [self getMessageObject:indexPath]);
-    NSLog(@"%lu indexPath", (long)indexPath.row);
     return [self getMessageObject:indexPath];
 }
 
@@ -351,9 +348,6 @@
     FIRDatabaseReference *onlineRef = [[[[self.firdatabase child:kUserChats] child:self.senderId] child:kChats] child:self.chatroomID];
     [onlineRef updateChildValues:@{kOnline: @0}];
     
-    //If no messages, delete chat rooms
-    NSLog(@"%lu message count", (long)numberOfMessages);
-    
     if (numberOfMessages == 0) {
         
         //Remove room
@@ -404,6 +398,16 @@
         if ([snapshot hasChild:self.chatroomID] && snapshot.value != NULL) {
             
             [self observeMessagesFromDatabase];
+            
+            //Changing tabbar badge value
+            NSInteger currentUnreadMessageBadgeValue = [[[self.tabBarController.tabBar.items objectAtIndex:2] badgeValue] integerValue];
+            NSInteger currentRoomUnreadMessage = [[[[[[self.firdatabase child:kUserChats] child:self.senderId] child:kChats] child:self.chatroomID] valueForKey:kUnread] integerValue];
+            
+            if (currentUnreadMessageBadgeValue - currentRoomUnreadMessage == 0) {
+                [self.tabBarController.tabBar.items objectAtIndex:2].badgeValue = nil;
+            } else {
+                [[self.tabBarController.tabBar.items objectAtIndex:2] setBadgeValue:[NSString stringWithFormat:@"%lu", currentUnreadMessageBadgeValue - currentRoomUnreadMessage]];
+            }
             
             //Set user's own readcount to 0 when entering chat room
             [[[[[self.firdatabase child:kUserChats] child:self.senderId] child:kChats] child:self.chatroomID] updateChildValues:@{kUnread: @0}];
@@ -505,8 +509,7 @@
             
             for (NSString* keys in [messagesDictionary allKeys]) {
                 @try {
-                    NSLog(@"key: %@", keys);
-                    NSLog(@"value?: %@",[messagesDictionary objectForKey:keys]);
+                    
                     if ([keys isEqualToString:@"date"]) {
                         [msgObj setValue:msgDate forKey:keys];
                     }
@@ -688,7 +691,7 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Msg" inManagedObjectContext:MY_API.managedObjectContext];
     [fetchRequest setEntity:entity];
     
-    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"chatroomID == %@ AND members == %@",_chatroomID,MY_USER];
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"chatroomID == %@",_chatroomID];
     [fetchRequest setPredicate:predicate];
     
     // Set the batch size to a suitable number.

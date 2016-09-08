@@ -15,7 +15,8 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate> {
     
     bool userIsSigningIn;
-
+    int numberOfUnreadChats;
+    
 }
 
 @property (strong, nonatomic) UIWindow *window;
@@ -27,6 +28,8 @@
 @property (strong, nonatomic) NSString * stringLatitude;
 
 @property (strong, nonatomic) NSString * stringLongitude;
+
+@property (strong, nonatomic) FIRDatabaseReference *firdatabase;
 
 -(NSString*)returnLatLongString;
 

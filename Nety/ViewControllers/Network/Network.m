@@ -31,10 +31,18 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    
-    //[self.tableView reloadData];
+        
     NSUserDefaults* userDef = [NSUserDefaults standardUserDefaults];
-    self.slider.value = [[userDef objectForKey:@"sliderNetwork"] integerValue];
+    if ([userDef objectForKey:@"sliderNetwork"] == nil) {
+        self.sliderValue = 0.3;
+        self.slider.value = self.sliderValue;
+    } else {
+        NSLog(@"userDef %lu",[[userDef objectForKey:@"sliderNetwork"] integerValue]);
+        self.sliderValue = [[userDef objectForKey:@"sliderNetwork"] integerValue];
+        self.slider.value = self.sliderValue;
+    }
+    
+    NSLog(@"slider val %f", self.slider.value);
     
     self.navigationItem.title = [NSString stringWithFormat:@"%@ Near Me", [self calculateDistanceToDescription]];
     
@@ -59,17 +67,18 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
 
 - (void)initializeSettings {
     
+    NSUserDefaults* userDef = [NSUserDefaults standardUserDefaults];
+    if ([userDef objectForKey:@"sliderNetwork"] == nil) {
+        self.sliderValue = 0.3;
+        self.slider.value = self.sliderValue;
+    } else {
+        self.sliderValue = [[userDef objectForKey:@"sliderNetwork"] integerValue];
+        self.slider.value = self.sliderValue;
+    }
+    
+    [self calculateSliderDistanceValue];
+    
     self.noContentController = [[NoContent alloc] init];
-
-    //Set up notifications
-    [[self.tabBarController.tabBar.items objectAtIndex:2] setBadgeValue:@"4"];
-    
-    //Get location?
-    //    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    //    NSString *str = [appDelegate returnLatLongString];
-    //
-    //    NSLog(@"%@", str);
-    
 }
 
 - (void)initializeDesign {
@@ -85,19 +94,13 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
     
     self.slider.continuous = YES;
     
-    self.sliderValue = (0.3);
-    
     [self.slider setTintColor:self.UIPrinciple.netyBlue];
-    
-    self.slider.value = self.sliderValue;
     
     float sliderViewWidth = self.sliderView.frame.size.width;
     
     UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, sliderViewWidth, 1)];/// change size as you need.
     separatorLineView.backgroundColor = self.UIPrinciple.netyGray;
     [self.sliderView addSubview:separatorLineView];
-    
-    [self calculateSliderDistanceValue];
     
     navItem.title = [NSString stringWithFormat:@"%@ Near Me", [self calculateDistanceToDescription]];
     
@@ -142,7 +145,7 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
     [fetchRequest setPredicate:predicate];
     
     // Set the batch size to a suitable number.
-    [fetchRequest setFetchBatchSize:10];
+    [fetchRequest setFetchBatchSize:50];
     
     // Edit the sort key as appropriate.
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"userID" ascending:YES];
@@ -322,20 +325,6 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
 #pragma mark - Custom methods
 //---------------------------------------------------------
 
--(void)addSlider:(UIView *)customSlider slider:(UISlider *)slider{
-    
-    float tabbarHeight = self.tabBarController.tabBar.frame.size.height;
-    float sliderHeight = slider.frame.size.height;
-    
-    customSlider.frame = CGRectMake(0, self.view.frame.size.height-tabbarHeight - sliderHeight - 10, self.view.frame.size.width, slider.frame.size.height);
-    
-    slider.tintColor = self.UIPrinciple.netyBlue;
-    
-    customSlider.backgroundColor = [UIColor clearColor];
-    
-    [self.view addSubview:customSlider];
-}
-
 -(void) calculateSliderDistanceValue {
     
     if (self.sliderValue >= 0 && self.sliderValue <= 0.1) {
@@ -353,10 +342,9 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
     }  else if (self.sliderValue > 0.60 && self.sliderValue <= 0.70) {
         self.sliderDistanceValue = 5280 * 5;
     }  else if (self.sliderValue > 0.70 && self.sliderValue <= 0.80) {
-        self.sliderDistanceValue = 5280 * 10;
+        self.sliderDistanceValue = 5280 * 7;
     } else if (self.sliderValue > 0.80) {
-        self.sliderDistanceValue = 5280 * 200000;
-#warning       self.sliderDistanceValue = 5280 * 20;
+        self.sliderDistanceValue = 5280 * 10;
     }
     
     _fetchedResultsController = nil;

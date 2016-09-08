@@ -352,7 +352,7 @@
     NSArray* tempLocationArray = [NSArray arrayWithArray:[user.geocoordinate componentsSeparatedByString:@":"]];
     CLLocation* tempLocation = [[CLLocation alloc] initWithLatitude:[tempLocationArray[0] floatValue] longitude:[tempLocationArray[1] floatValue]];
     double distance = [tempLocation distanceFromLocation:MY_API.locationManager.location];
-    //NSLog(@"distance %f",distance);
+    NSLog(@"distance %f",distance);
     [user setValue:[NSNumber numberWithDouble:distance] forKey:@"distance"];
     if (flagMy) {
         user.itIsMe = [NSNumber numberWithBool:YES];

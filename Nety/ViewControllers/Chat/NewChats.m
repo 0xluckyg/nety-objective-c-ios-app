@@ -82,7 +82,7 @@ NSString *const newChatNoContentString = @"You haven't talked to anyone yet. Che
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"ChatRooms" inManagedObjectContext:MY_API.managedObjectContext];
     [fetchRequest setEntity:entity];
     
-    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"type == NO AND members == %@",MY_USER];
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"type == NO"];
     [fetchRequest setPredicate:predicate];
     
     // Set the batch size to a suitable number.

@@ -97,6 +97,7 @@
     [self.chatSwitch setOnTintColor:self.UIPrinciple.netyBlue];
 
     //Set slider
+    self.locationRangeSlider.value = 1;
     self.sliderValue = self.locationRangeSlider.value;
     [self calculateSliderDistanceValue];
     NSString *distanceString = [self calculateDistanceToDescription];
@@ -343,9 +344,9 @@
     }  else if (self.sliderValue > 0.60 && self.sliderValue <= 0.70) {
         self.sliderDistanceValue = 5280 * 5;
     }  else if (self.sliderValue > 0.70 && self.sliderValue <= 0.80) {
-        self.sliderDistanceValue = 5280 * 10;
+        self.sliderDistanceValue = 5280 * 7;
     } else if (self.sliderValue > 0.80) {
-        self.sliderDistanceValue = 5280 * 20;
+        self.sliderDistanceValue = 5280 * 10;
     }
     
 }

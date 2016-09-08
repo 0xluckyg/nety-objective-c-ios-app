@@ -45,6 +45,8 @@
     [self initializeDesign];
     [self initializeTabBar];
     
+    self.firdatabase = [[FIRDatabase database] reference];
+    
     return YES;
 }
 
@@ -85,7 +87,7 @@
                     NSLog(@"App Delegate detected user not signed in");
                     UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"LoginSignup" bundle:nil];
                     UIViewController *mainViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"MainPageNav"];
-                    
+                
                     //Set root view controller to login page
                     [self.window setRootViewController:mainViewController];
             }
@@ -160,13 +162,9 @@
     [settingsViewController.tabBarItem setTitle:@"Settings"];
     
     //Set tabBar style
-//    [[UITabBar appearance] setBackgroundColor:self.UIPrinciple.netyBlue];
-//    [[UITabBar appearance] setBackgroundImage:[[UIImage alloc] init]];
-//    [[UITabBar appearance] setShadowImage:[[UIImage alloc] init]];
+
     [[UITabBar appearance] setTintColor:self.UIPrinciple.netyBlue];
-    
-//    [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor]}
-//                                                 forState:UIControlStateNormal];
+
     
     //Connect tabBar and view controllers together
     NSArray* controllers = [NSArray arrayWithObjects:networkViewController,
@@ -176,7 +174,6 @@
                             settingsViewController, nil];
     
     self.tabBarRootController.viewControllers = controllers;
-    
 }
 
 
@@ -258,11 +255,27 @@
             NSString *userID = snapshot.key;
             
             [MY_API addNewUser:usersDictionary UserID:userID FlagMy:YES];
+            
+            NSLog(@"%@", kUserChats);
+            NSLog(@"%@", MY_USER.userID);
+            NSLog(@"%@", kChats);
+            [[[[self.firdatabase child:kUserChats] child:MY_USER.userID] child:kChats] observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+                
+                NSDictionary *chatDictionary = snapshot.value;
+                numberOfUnreadChats += [[chatDictionary objectForKey:kUnread] integerValue];
+                
+            } withCancelBlock:nil];
+            
+            if (numberOfUnreadChats == 0) {
+                [self.tabBarRootController.tabBar.items objectAtIndex:2].badgeValue = nil;
+            } else {
+                [[self.tabBarRootController.tabBar.items objectAtIndex:2] setBadgeValue:[NSString stringWithFormat:@"%i", numberOfUnreadChats]];
+            }
+            
         }
         else
         {
-            NSLog(@"User not found");
-            #warning Reg NEW USER HERE
+            NSLog(@"User not found");            
         }
         
         

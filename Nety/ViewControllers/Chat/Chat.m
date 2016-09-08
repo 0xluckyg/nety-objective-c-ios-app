@@ -56,7 +56,7 @@
     
     
     // Initialize page menu with controller array, frame, and optional parameters
-    _pageMenu = [[CAPSPageMenu alloc] initWithViewControllers:controllerArray frame:CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height) options:parameters];
+    _pageMenu = [[CAPSPageMenu alloc] initWithViewControllers:controllerArray frame:CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height - 50.0) options:parameters];
     
     // Lastly add page menu as subview of base view controller view
     // or use pageMenu controller in you view hierachy as desired

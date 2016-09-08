@@ -612,7 +612,7 @@
         mcell.experienceDescription.textColor = self.UIPrinciple.netyBlue;
         
         mcell.experienceName.text = expir.name;
-        mcell.experienceDate.text = expir.endDate;
+        mcell.experienceDate.text = [NSString stringWithFormat:@"%@ - %@",expir.startDate, expir.endDate];
         
         mcell.experienceDescription.text = expir.descript;
         

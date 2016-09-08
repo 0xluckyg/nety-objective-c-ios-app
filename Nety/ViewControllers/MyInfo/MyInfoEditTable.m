@@ -190,7 +190,13 @@
     //Indicate that user is going to add an experience instead of editing
     self.add = true;
     
-    [self performSegueWithIdentifier:@"experienceDetailSegue" sender:self];
+    if ([self.experienceArray count] >= 10) {
+        
+        [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Too many!" message:@"You can not add more than 10 experiences" viewController:self];
+        
+    } else {
+        [self performSegueWithIdentifier:@"experienceDetailSegue" sender:self];
+    }
 }
 
 

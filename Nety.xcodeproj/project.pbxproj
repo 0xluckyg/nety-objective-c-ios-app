@@ -69,7 +69,6 @@
 		E16004841D7C0AE10098DFB1 /* Users+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E16004791D7C0AE10098DFB1 /* Users+CoreDataProperties.m */; };
 		E16004851D7C0AE10098DFB1 /* Users.m in Sources */ = {isa = PBXBuildFile; fileRef = E160047B1D7C0AE10098DFB1 /* Users.m */; };
 		E163EFB31D6C671E004374E3 /* linkedin-sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E163EFB21D6C671D004374E3 /* linkedin-sdk.framework */; };
-		E163EFC41D6C9325004374E3 /* FacebookSDKStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E163EFBA1D6C9325004374E3 /* FacebookSDKStrings.bundle */; };
 		E163EFC71D6C9325004374E3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E163EFBD1D6C9325004374E3 /* FBSDKCoreKit.framework */; };
 		E163EFC81D6C9325004374E3 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E163EFBE1D6C9325004374E3 /* FBSDKLoginKit.framework */; };
 		E163EFCC1D6C9C88004374E3 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E163EFCB1D6C9C88004374E3 /* Bolts.framework */; };
@@ -676,7 +675,6 @@
 				67DD1AA41D17BFCC00FBEA0F /* Chat.storyboard in Resources */,
 				67D4AD5F1D26333D00F42B7F /* LoginSignup.storyboard in Resources */,
 				67DD1AA91D17C00600FBEA0F /* MyInfo.storyboard in Resources */,
-				E163EFC41D6C9325004374E3 /* FacebookSDKStrings.bundle in Resources */,
 				E18CB8B51D6D9C0400742CCE /* GoogleService-Info.plist in Resources */,
 				678138A81D33A94E00BFBF48 /* Settings.storyboard in Resources */,
 				67DD1AAF1D17C3EF00FBEA0F /* Profile.storyboard in Resources */,

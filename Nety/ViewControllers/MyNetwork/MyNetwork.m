@@ -236,7 +236,7 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
     [fetchRequest setPredicate:predicate];
     
     // Set the batch size to a suitable number.
-    [fetchRequest setFetchBatchSize:10];
+    [fetchRequest setFetchBatchSize:100];
     
     // Edit the sort key as appropriate.
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"userID" ascending:YES];

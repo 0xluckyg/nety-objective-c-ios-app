@@ -235,9 +235,9 @@
                            kIdentity: [self.userInfo objectAtIndex:5],
                            kSummary: [self.userInfo objectAtIndex:6],
                            kExperiences: experiences,
+                           kIAmDiscoverable: @(1),
                            kProfilePhoto: metaDataBigUid,
                            kSecurity: @(0)};
-    
     
     //Set user information inside global variables
     [MY_API addNewUser:post UserID:userID FlagMy:YES];

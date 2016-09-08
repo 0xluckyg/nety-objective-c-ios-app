@@ -233,7 +233,7 @@
         cell.experienceDescription.textColor = self.UIPrinciple.netyBlue;
         
         cell.experienceName.text = expir.name;
-        cell.experienceDate.text = expir.endDate;
+        cell.experienceDate.text = [NSString stringWithFormat:@"%@ - %@",expir.startDate, expir.endDate];
         cell.experienceDescription.text = expir.descript;
         
         float cellHeight = cell.contentView.frame.size.height;
