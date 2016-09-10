@@ -9,7 +9,6 @@
 #import "MyNetwork.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe left on your new chats to add the person you talked to!";
 
 @interface MyNetwork ()
 
@@ -34,7 +33,7 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
 
 - (void)viewWillAppear:(BOOL)animated {
     
-    self.navigationItem.title = @"My Network";
+    self.navigationItem.title = NSLocalizedString(@"myNetworkTitle", nil);
     
     
     //If no experiences visible, show noContent header
@@ -43,7 +42,7 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
         UIImage *contentImage = [[UIImage imageNamed:@"Friend"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
         if (![self.noContentController isDescendantOfView:self.view]) {
-            [self.UIPrinciple addNoContent:self setText:myNetworkNoContentString setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
+            [self.UIPrinciple addNoContent:self setText:NSLocalizedString(@"myNetworkNoContent", nil) setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
         }
     } else {
         [self.UIPrinciple removeNoContent:self.noContentController];
@@ -72,7 +71,7 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
     
     //Style the navigation bar
     UINavigationItem *navItem= [[UINavigationItem alloc] init];
-    navItem.title = @"My Network";
+    navItem.title = NSLocalizedString(@"myNetworkTitle", nil);
     
     //Style navbar
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -87,6 +86,7 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
     
     //Set searchbar
     [self.searchBar setBarTintColor:[UIColor whiteColor]];
+    [self.searchBar setPlaceholder:NSLocalizedString(@"myNetworkSearchbar", nil)];
 }
 
 - (void) initializeUsers {
@@ -106,7 +106,7 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
         UIImage *contentImage = [[UIImage imageNamed:@"Friend"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
         if (![self.noContentController isDescendantOfView:self.view]) {
-            [self.UIPrinciple addNoContent:self setText:myNetworkNoContentString setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
+            [self.UIPrinciple addNoContent:self setText:NSLocalizedString(@"myNetworkNoContent", nil) setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
         }
     } else {
         [self.UIPrinciple removeNoContent:self.noContentController];
@@ -131,7 +131,7 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
         UIImage *contentImage = [[UIImage imageNamed:@"Friend"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
         if (![self.noContentController isDescendantOfView:self.view]) {
-            [self.UIPrinciple addNoContent:self setText:myNetworkNoContentString setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
+            [self.UIPrinciple addNoContent:self setText:NSLocalizedString(@"myNetworkNoContent", nil) setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
         }
     } else {
         [self.UIPrinciple removeNoContent:self.noContentController];
@@ -188,10 +188,10 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
     
     [myNetworkRightUtilityButtons sw_addUtilityButtonWithColor:
      self.UIPrinciple.netyBlue
-                                                         title:@"Block"];
+                                                         title:NSLocalizedString(@"block", nil)];
     [myNetworkRightUtilityButtons sw_addUtilityButtonWithColor:
      self.UIPrinciple.netyRed
-                                                         title:@"Delete"];
+                                                         title:NSLocalizedString(@"delete", nil)];
     
     cell.rightUtilityButtons = myNetworkRightUtilityButtons;
     cell.delegate = self;
@@ -207,7 +207,6 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
     
     __weak typeof(self) weakSelf = self;
     [self.UIPrinciple setTabBarVisible:![self.UIPrinciple tabBarIsVisible:self] animated:YES sender:self completion:^(BOOL finished) {
-        NSLog(@"animation done");
         weakSelf.tabBarController.tabBar.hidden = YES;
     }];
     
@@ -274,7 +273,7 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
     switch (index) {
         case 0: {
             
-            UIAlertAction *cont = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            UIAlertAction *cont = [UIAlertAction actionWithTitle:NSLocalizedString(@"yes", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                 
                 //BLOCK
                 
@@ -300,17 +299,17 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
                 
             }];
             
-            UIAlertAction *okay = [UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            UIAlertAction *okay = [UIAlertAction actionWithTitle:NSLocalizedString(@"no", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                 
             }];
             
-            [self.UIPrinciple twoButtonAlert:cont rightButton:okay controller:@"Block?" message:@"You will not see this person on this app, and all the chats will be deleted. Are you sure to block?" viewController:self];
+            [self.UIPrinciple twoButtonAlert:cont rightButton:okay controller:NSLocalizedString(@"myNetBlockTitle", nil) message:NSLocalizedString(@"myNetBlockDescription", nil) viewController:self];
             
             break;
         }
         case 1: {
             
-            UIAlertAction *cont = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            UIAlertAction *cont = [UIAlertAction actionWithTitle:NSLocalizedString(@"yes", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                 
                 //DELETE
                 
@@ -332,13 +331,12 @@ NSString *const myNetworkNoContentString = @"You don't have friends yet. Swipe l
                 
             }];
             
-            UIAlertAction *okay = [UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            UIAlertAction *okay = [UIAlertAction actionWithTitle:NSLocalizedString(@"no", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                 
             }];
             
-            [self.UIPrinciple twoButtonAlert:cont rightButton:okay controller:@"Leave?" message:@"Are you sure? All the chats will be deleted." viewController:self];
-            
-            
+            [self.UIPrinciple twoButtonAlert:cont rightButton:okay controller:NSLocalizedString(@"myNetDeleteTitle", nil) message:NSLocalizedString(@"myNetDeleteDescription", nil) viewController:self];
+                        
             break;
             
         }

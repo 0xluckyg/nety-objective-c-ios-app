@@ -9,8 +9,6 @@
 
 #import "MyChats.h"
 
-NSString *const myChatNoContentString = @"You don't have friends yet. Swipe left on your new chats to add people!";
-
 
 @interface MyChats ()
 
@@ -39,7 +37,7 @@ NSString *const myChatNoContentString = @"You don't have friends yet. Swipe left
         UIImage *contentImage = [[UIImage imageNamed:@"SpeechBubble"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
         if (![self.noContentController isDescendantOfView:self.view]) {
-            [self customAddNoContent:self setText:myChatNoContentString setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
+            [self customAddNoContent:self setText:NSLocalizedString(@"myChatNoContent", nil) setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
         }
     } else {
         [self.UIPrinciple removeNoContent:self.noContentController];
@@ -128,7 +126,7 @@ NSString *const myChatNoContentString = @"You don't have friends yet. Swipe left
         UIImage *contentImage = [[UIImage imageNamed:@"SpeechBubble"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
         if (![self.noContentController isDescendantOfView:self.view]) {
-            [self customAddNoContent:self setText:myChatNoContentString setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor: self.UIPrinciple.defaultGray noContentController:self.noContentController];
+            [self customAddNoContent:self setText:NSLocalizedString(@"myChatNoContent", nil) setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor: self.UIPrinciple.defaultGray noContentController:self.noContentController];
         }
     } else {
         [self.UIPrinciple removeNoContent:self.noContentController];
@@ -178,8 +176,8 @@ NSString *const myChatNoContentString = @"You don't have friends yet. Swipe left
     //SWTableViewCell configuration
     NSMutableArray *chatRightUtilityButtons = [[NSMutableArray alloc] init];
     
-    [chatRightUtilityButtons sw_addUtilityButtonWithColor: self.UIPrinciple.netyBlue title:@"Block"];
-    [chatRightUtilityButtons sw_addUtilityButtonWithColor: self.UIPrinciple.netyRed title:@"Leave"];
+    [chatRightUtilityButtons sw_addUtilityButtonWithColor: self.UIPrinciple.netyBlue title:NSLocalizedString(@"block", nil)];
+    [chatRightUtilityButtons sw_addUtilityButtonWithColor: self.UIPrinciple.netyRed title:NSLocalizedString(@"leave", nil)];
     
     cell.rightUtilityButtons = chatRightUtilityButtons;
     cell.delegate = self;
@@ -218,7 +216,7 @@ NSString *const myChatNoContentString = @"You don't have friends yet. Swipe left
     switch (index) {
         case 0: {
             
-            UIAlertAction *cont = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            UIAlertAction *cont = [UIAlertAction actionWithTitle:NSLocalizedString(@"yes", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                 
                 //BLOCK
                 
@@ -238,17 +236,17 @@ NSString *const myChatNoContentString = @"You don't have friends yet. Swipe left
                 
             }];
             
-            UIAlertAction *okay = [UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            UIAlertAction *okay = [UIAlertAction actionWithTitle:NSLocalizedString(@"no", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                 
             }];
             
-            [self.UIPrinciple twoButtonAlert:cont rightButton:okay controller:@"Block?" message:@"You will not see this person on this app, and all the chats will be deleted. Are you sure to block?" viewController:self];
+            [self.UIPrinciple twoButtonAlert:cont rightButton:okay controller:NSLocalizedString(@"myNetBlockTitle", nil) message:NSLocalizedString(@"myNetBlockDescription", nil) viewController:self];
             
             break;
         }
         case 1: {
             
-            UIAlertAction *cont = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            UIAlertAction *cont = [UIAlertAction actionWithTitle:NSLocalizedString(@"yes", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                 //DELETE
 
                 
@@ -262,11 +260,11 @@ NSString *const myChatNoContentString = @"You don't have friends yet. Swipe left
                 [[roomRef child:roomID] removeValue];
             }];
             
-            UIAlertAction *okay = [UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            UIAlertAction *okay = [UIAlertAction actionWithTitle:NSLocalizedString(@"no", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                 
             }];
             
-            [self.UIPrinciple twoButtonAlert:cont rightButton:okay controller:@"Leave?" message:@"Are you sure? All the chats will be deleted." viewController:self];
+            [self.UIPrinciple twoButtonAlert:cont rightButton:okay controller:NSLocalizedString(@"chatsDeleteTitle", nil) message:NSLocalizedString(@"myNetDeleteDescription", nil) viewController:self];
             
             break;
         }

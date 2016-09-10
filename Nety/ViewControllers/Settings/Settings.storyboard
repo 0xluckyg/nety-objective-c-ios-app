@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -260,14 +260,21 @@
                     <navigationItem key="navigationItem" id="wHz-ca-9J2"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
+                        <outlet property="chatNotificationsOutlet" destination="8X8-1Y-8I8" id="Y5l-nb-HZK"/>
+                        <outlet property="chatOutlet" destination="d0R-5m-cOf" id="Ygt-mk-ez3"/>
+                        <outlet property="chatRequestOutlet" destination="93d-dd-3fy" id="7Yp-t7-cTf"/>
                         <outlet property="chatRequestSwitch" destination="0Uz-VO-U8V" id="DUV-f5-hBL"/>
                         <outlet property="chatSwitch" destination="Ygh-Go-aPo" id="Vqx-mr-zba"/>
                         <outlet property="discoverabilitySwitch" destination="1qh-PG-dq7" id="wxF-7Q-laZ"/>
+                        <outlet property="discoverableOutlet" destination="RRN-rz-n4P" id="7An-bf-dxM"/>
                         <outlet property="facebookImage" destination="DOd-RL-R3t" id="HVu-c2-scS"/>
                         <outlet property="linkedInImage" destination="zd3-MQ-jbl" id="Amu-mX-hlP"/>
                         <outlet property="locationRangeLabel" destination="VNI-Bi-Mqy" id="FRV-do-Km6"/>
                         <outlet property="locationRangeSlider" destination="bOm-QC-f3U" id="YHt-2K-DcG"/>
+                        <outlet property="logOutButtonOutlet" destination="2qO-EJ-Lrh" id="rgK-7f-mh4"/>
                         <outlet property="notificationSwitch" destination="Q1v-Np-9Zd" id="3dR-hO-mHX"/>
+                        <outlet property="shareOnFacebookOutlet" destination="hXM-VE-Tel" id="Vxp-5h-Jdh"/>
+                        <outlet property="shareOnLinkedInOutlet" destination="FJo-ZS-QRf" id="OUJ-mG-q8L"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aAN-F1-0E0" userLabel="First Responder" sceneMemberID="firstResponder"/>

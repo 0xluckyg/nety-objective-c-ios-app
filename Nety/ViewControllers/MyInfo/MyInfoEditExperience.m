@@ -37,10 +37,6 @@
 
 - (void)initizlieSetting {
     
-    namePlacementText = @"Where did you work at, or what did you do?";
-    dateToPlacementText = @"Present";
-    descriptionPlacementText = @"How was the experience?";
-    
     //This is for name section
     self.experienceNameTextField.tag = 0;
     
@@ -112,7 +108,17 @@
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
                                 [UIColor whiteColor], NSForegroundColorAttributeName, nil];
-    self.navigationItem.title = @"Edit experience";
+    self.navigationItem.title = NSLocalizedString(@"myInfoEditExperience", nil);
+    
+    self.experienceNameLabel.text = NSLocalizedString(@"experienceNameLabel", nil);
+    self.dateLabel.text = NSLocalizedString(@"dateLabel", nil);
+    self.dateToLabel.text = NSLocalizedString(@"dateToLabel", nil);
+    self.experienceDescriptionLabel.text =NSLocalizedString(@"experienceDescriptionLabel", nil);
+    [self.saveButtonOutlet setTitle:NSLocalizedString(@"saveButton", nil) forState:UIControlStateNormal];
+    
+    namePlacementText = NSLocalizedString(@"experienceNamePlaceholder", nil);
+    dateToPlacementText = NSLocalizedString(@"present", nil);
+    descriptionPlacementText = NSLocalizedString(@"experienceDescriptionPlaceholder", nil);
     
     [self.navigationController.navigationBar setTitleTextAttributes:attributes];
     

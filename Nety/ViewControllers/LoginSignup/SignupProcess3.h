@@ -27,6 +27,9 @@
 
 @property (strong, nonatomic) NSMutableArray *userInfo;
 
+@property (weak, nonatomic) IBOutlet UILabel *process3Title;
+
+
 - (IBAction)addProfileImage:(id)sender;
 
 - (IBAction)doneButton:(id)sender;

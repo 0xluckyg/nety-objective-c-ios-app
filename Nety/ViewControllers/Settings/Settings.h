@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "UIPrinciples.h"
 #import "Constants.h"
-
+#import "AppDelegate.h"
+#import <linkedin-sdk/LISDK.h>
 #import "N_CoreDataTableViewController.h"
 
 @import Firebase;
+@import FBSDKShareKit;
 
 @interface Settings : UITableViewController
 
@@ -58,6 +60,22 @@
 @property (weak, nonatomic) IBOutlet UIImageView *facebookImage;
 
 @property (weak, nonatomic) IBOutlet UIImageView *linkedInImage;
+
+
+@property (weak, nonatomic) IBOutlet UILabel *discoverableOutlet;
+
+@property (weak, nonatomic) IBOutlet UILabel *chatRequestOutlet;
+
+@property (weak, nonatomic) IBOutlet UILabel *chatOutlet;
+
+@property (weak, nonatomic) IBOutlet UILabel *chatNotificationsOutlet;
+
+@property (weak, nonatomic) IBOutlet UILabel *shareOnFacebookOutlet;
+
+@property (weak, nonatomic) IBOutlet UILabel *shareOnLinkedInOutlet;
+
+@property (weak, nonatomic) IBOutlet UILabel *logOutButtonOutlet;
+
 
 
 //IBACTIONS----------------------------------------

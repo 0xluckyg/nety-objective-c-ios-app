@@ -35,6 +35,8 @@
 //IBOUTLETS----------------------------------------
 
 
+@property (weak, nonatomic) IBOutlet UILabel *process1title;
+
 @property (weak, nonatomic) IBOutlet UILabel *jobLabel;
 
 @property (weak, nonatomic) IBOutlet UITextField *jobTextField;

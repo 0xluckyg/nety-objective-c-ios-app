@@ -48,6 +48,11 @@
     
     [self.doneButtonOutlet setTintColor:[UIColor whiteColor]];
     [self.addProfileImageOutlet setTintColor:[UIColor whiteColor]];
+    
+    
+    self.process3Title.text = NSLocalizedString(@"process3Title", nil);
+    [self.doneButtonOutlet setTitle:NSLocalizedString(@"signupDoneButton", nil) forState:UIControlStateNormal];
+    [self.addProfileImageOutlet setTitle:NSLocalizedString(@"addProfileImage", nil) forState:UIControlStateNormal];
 }
 
 

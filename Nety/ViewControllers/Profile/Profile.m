@@ -57,8 +57,6 @@
     
     NSString *name = [NSString stringWithFormat:@"%@ %@", _selectedUser.firstName, _selectedUser.lastName];
     
-    NSLog(@"%@", self.selectedUser);
-    
     //Style navbar
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
@@ -134,9 +132,9 @@
         ChatButtonCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChatButtonCell" forIndexPath:indexPath];
         
         if ([self.selectedUser.security isEqual:@(2)]) {
-            [cell.buttonOutlet setTitle:@"Send a chat request!" forState:UIControlStateNormal];
+            [cell.buttonOutlet setTitle:NSLocalizedString(@"chatRequest", nil) forState:UIControlStateNormal];
         } else {
-            [cell.buttonOutlet setTitle:@"Chat now!" forState:UIControlStateNormal];
+            [cell.buttonOutlet setTitle:NSLocalizedString(@"chatNow", nil) forState:UIControlStateNormal];
         }
         
         return cell;
@@ -162,7 +160,7 @@
             cell.mainInfoImage.image = [[UIImage imageNamed:@"Identity"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
             
             if ([identity isEqualToString:@""]) {
-                cell.mainInfoLabel.text = @"No description";
+                cell.mainInfoLabel.text = NSLocalizedString(@"noDescription", nil);
             } else {
                 cell.mainInfoLabel.text = identity;
             }
@@ -170,7 +168,7 @@
             cell.mainInfoImage.image = [[UIImage imageNamed:@"Status"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
             
             if ([status isEqualToString:@""]) {
-                cell.mainInfoLabel.text = @"No status";
+                cell.mainInfoLabel.text = NSLocalizedString(@"noStatus", nil);
             } else {
                 cell.mainInfoLabel.text = status;
             }
@@ -178,7 +176,7 @@
             cell.mainInfoImage.image = [[UIImage imageNamed:@"Summary"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
             
             if ([summary isEqualToString:@""]) {
-                cell.mainInfoLabel.text = @"No summary";
+                cell.mainInfoLabel.text = NSLocalizedString(@"noSummary", nil);
             } else {
                 cell.mainInfoLabel.text = summary;
             }
@@ -214,9 +212,9 @@
         cell.mainInfoLabel.textColor = self.UIPrinciple.netyBlue;
         
         if ([experiences count] == 0) {
-            cell.mainInfoLabel.text = @"No experiences";
+            cell.mainInfoLabel.text = NSLocalizedString(@"noExperience", nil);
         } else {
-            cell.mainInfoLabel.text = @"Experiences";
+            cell.mainInfoLabel.text = NSLocalizedString(@"experiences", nil);
         }
         
         return cell;
@@ -225,8 +223,6 @@
         
         ExperienceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ExperienceCell" forIndexPath:indexPath];
         Experiences* expir = [[self.selectedUser.experiences allObjects] objectAtIndex:indexPath.row-8];
-        
-        NSLog(@"Ex: %@",expir);
         
         cell.experienceName.textColor = self.UIPrinciple.netyBlue;
         cell.experienceDate.textColor = self.UIPrinciple.netyBlue;
@@ -256,7 +252,7 @@
     if ([self.selectedUser.security isEqual:@(2)]) {
     
         NSString *chatRequestText = [NSString stringWithFormat:@"%@ sent a chat request", self.senderDisplayName];
-        NSString *chatRequestTextFromMyUser = @"You sent a chat request";
+        NSString *chatRequestTextFromMyUser = NSLocalizedString(@"chatRequestSent", nil);
         
         NSMutableDictionary *chatRoomInformation = [self makeChatRoomID];
         

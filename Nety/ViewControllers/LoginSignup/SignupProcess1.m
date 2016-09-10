@@ -33,16 +33,12 @@
 
 
 - (void)initializeSettings {
-    
-    NSLog(@"%@, %@, %@, %@, %@", self.userInfo[0], self.userInfo[1], self.userInfo[2], self.userInfo[3] ,self.userInfo[4]);
+    [self.navigationController.navigationBar setHidden:NO];
     
 }
 
 - (void)initializeDesign {
     self.UIPrinciple = [[UIPrinciples alloc] init];
-    
-    //Set placeholder for the big box
-    summaryPlaceholder = @"Please decribe yourself!";
     
     //Background of page
     self.view.backgroundColor = self.UIPrinciple.netyBlue;
@@ -52,12 +48,15 @@
     self.summaryLabel.textColor = [UIColor whiteColor];
     
     //textfield
-    self.summaryTextField.text = summaryPlaceholder;
+    self.summaryTextField.text = NSLocalizedString(@"userDescriptionPlaceHolder", nil);
+    self.jobLabel.text = NSLocalizedString(@"userIdentity", nil);
+    self.summaryLabel.text = NSLocalizedString(@"userDescription", nil);
     self.summaryTextField.textColor = self.UIPrinciple.netyBlue;
     self.summaryTextField.layer.cornerRadius = 8;
     self.jobTextField.textColor = self.UIPrinciple.netyBlue;
-    self.jobTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"What do you do?" attributes:@{NSForegroundColorAttributeName: self.UIPrinciple.netyBlue}];
-
+    self.jobTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"userIdentityPlaceHolder", nil) attributes:@{NSForegroundColorAttributeName: self.UIPrinciple.netyBlue}];
+    
+    self.process1title.text = NSLocalizedString(@"signupProcess1Title", nil);
     
     //save button
     [self.nextButtonOutlet setTintColor:[UIColor whiteColor]];

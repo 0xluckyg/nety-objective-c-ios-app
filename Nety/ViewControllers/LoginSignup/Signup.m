@@ -66,7 +66,12 @@
     [self.name.layer setCornerRadius:self.name.frame.size.height/2];
     self.name.textColor = self.UIPrinciple.netyBlue;
     
+    self.email.placeholder = NSLocalizedString(@"email", nil);
+    self.password.placeholder = NSLocalizedString(@"password", nil);
+    self.name.placeholder = NSLocalizedString(@"name", nil);
+    self.age.placeholder = NSLocalizedString(@"age", nil);
     
+    [self.signupButtonOutlet setTitle:NSLocalizedString(@"signup", nil) forState:UIControlStateNormal];
 }
 
 
@@ -95,23 +100,23 @@
     
     if (self.email.text.length < 10) {
         
-        [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Please enter a valid email" message:@"Your email is too short!" viewController:self];
+        [self.UIPrinciple oneButtonAlert:NSLocalizedString(@"ok", nil) controllerTitle:NSLocalizedString(@"invalidEmailTitle", nil) message:NSLocalizedString(@"invalidEmailDescription", nil) viewController:self];
         
     } else if (self.password.text.length > 15 || self.password.text.length < 6) {
         
-        [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Please enter a valid password" message:@"Your password has to be between 6 to 15 characters" viewController:self];
+        [self.UIPrinciple oneButtonAlert:NSLocalizedString(@"ok", nil) controllerTitle:NSLocalizedString(@"invalidPasswordTitle", nil) message:NSLocalizedString(@"invalidPasswordDescription", nil) viewController:self];
         
     } else if (!valid || self.age.text.integerValue < 5 || self.age.text.integerValue > 100) {
         
-        [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Please enter a valid age" message:@"ex. 24" viewController:self];
+        [self.UIPrinciple oneButtonAlert:NSLocalizedString(@"ok", nil) controllerTitle:NSLocalizedString(@"invalidAgeTitle", nil) message:NSLocalizedString(@"invalidAgeDescription", nil) viewController:self];
         
     } else if (self.name.text.length < 2 || self.name.text.length > 30 || [[self.name.text componentsSeparatedByString:@" "] count] > 2 ) {
         
-        [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Please enter a valid name" message:@"ex. Firstname Lastname" viewController:self];
+        [self.UIPrinciple oneButtonAlert:NSLocalizedString(@"ok", nil) controllerTitle:NSLocalizedString(@"invalidNameTitle", nil) message:NSLocalizedString(@"invalidNameDescription", nil) viewController:self];
         
     } else if ([self.name.text rangeOfString:@" "].location == NSNotFound){
         
-        [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Please enter a valid name" message:@"Please separate your first and last name with a space" viewController:self];
+        [self.UIPrinciple oneButtonAlert:NSLocalizedString(@"ok", nil) controllerTitle:NSLocalizedString(@"invalidNameTitle", nil) message:NSLocalizedString(@"invalidNameDescription2", nil) viewController:self];
         
     } else {
         
@@ -142,7 +147,7 @@
                  
                  NSLog(@"%@", error.localizedDescription);
                  
-                 [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Problem signing up" message:error.localizedDescription viewController:self];
+                 [self.UIPrinciple oneButtonAlert:NSLocalizedString(@"ok", nil) controllerTitle:NSLocalizedString(@"problemSigningUp", nil) message:error.localizedDescription viewController:self];
                  
              } else {
                  

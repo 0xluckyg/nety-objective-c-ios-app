@@ -49,13 +49,13 @@
         if (![MY_USER.status isEqualToString:@""]) {
             editType2PlacementText = MY_USER.status;
         } else {
-            editType2PlacementText = @"Write a status for everyone to see!";
+            editType2PlacementText = NSLocalizedString(@"statusEdit", nil);
         }
     } else {
         if (![MY_USER.summary isEqualToString:@""]) {
             editType2PlacementText = MY_USER.summary;
         } else {
-            editType2PlacementText = @"Write a summary about yourself!";
+            editType2PlacementText = NSLocalizedString(@"summaryEdit", nil);
         }
     }
     
@@ -85,11 +85,11 @@
                                 [UIColor whiteColor], NSForegroundColorAttributeName, nil];
     
     if (self.statusOrSummary == 0) {
-        self.editType2Label.text = @"Status";
-        self.navigationItem.title = @"Set Status";
+        self.editType2Label.text = NSLocalizedString(@"statusEditLabel", nil);
+        self.navigationItem.title = NSLocalizedString(@"statusEditTitle", nil);
     } else {
-        self.editType2Label.text = @"Summary";
-        self.navigationItem.title = @"Set Summary";
+        self.editType2Label.text = NSLocalizedString(@"summaryEditLabel", nil);
+        self.navigationItem.title = NSLocalizedString(@"summaryEditTitle", nil);
     }
     
     [self.navigationController.navigationBar setTitleTextAttributes:attributes];

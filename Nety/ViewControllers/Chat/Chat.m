@@ -71,7 +71,7 @@
     
     //Style the navigation bar
     UINavigationItem *navItem= [[UINavigationItem alloc] init];
-    navItem.title = @"Chats";
+    navItem.title = NSLocalizedString(@"chatsTitle", nil);
     
     //Style navbar
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:

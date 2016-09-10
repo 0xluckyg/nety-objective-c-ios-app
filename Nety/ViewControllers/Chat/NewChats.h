@@ -13,6 +13,8 @@
 #import "ChatCell.h"
 #import "NoContent.h"
 #import "N_CoreDataTableViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "ChatRooms.h"
 
 @protocol pushViewControllerProtocolFromNewChats <NSObject>
 

@@ -1,0 +1,169 @@
+/* 
+  Localizable.strings
+  Nety
+
+  Created by Scott Cho on 9/9/16.
+  Copyright © 2016 Scott Cho. All rights reserved.
+*/
+
+//General
+ok = "OK";
+okay = "Okay";
+block = "Block";
+delete = "Delete";
+add = "Add";
+leave = "Leave";
+yes = "YES";
+no = "NO";
+cancel = "Cancel";
+
+//Main
+login = "Login";
+signup = "Signup";
+
+//For both Login and Signup
+invalidEmailTitle = "Please enter a valid email";
+invalidEmailDescription = "Your email is too short!";
+invalidPasswordTitle = "Please enter a valid password";
+invalidPasswordDescription = "Your password has to be between 6 to 15 characters";
+email = "Email";
+password = "Password";
+
+//Login
+login = "Login!";
+loggingIn = "Logging in";
+problemSigningIn = "Problem signing in";
+
+//Signup
+name = "Name (First Last)";
+age = "Age";
+signup = "Sign up!";
+invalidAgeTitle = "Please enter a valid age";
+invalidAgeDescription = "ex. 24";
+invalidNameTitle = "Please enter a valid name";
+invalidNameDescription = "Ex. Firstname Lastname";
+invalidNameDescription2 = "Please separate your first and last name with a space";
+problemSigningUp = "Problem signing up";
+
+//Signup Process 1
+signupProcess1Title = "Job and bio";
+userIdentity = "What do you do?";
+userIdentityPlaceHolder = "Ex. Software engineer at Nety";
+userDescription = "Please describe who you are";
+userDescriptionPlaceHolder = "Ex. I like to swim, play piano, and watch Netflix";
+nextStep = "Next step";
+
+
+//Signup Process 2
+signupProcess2Title = "Job Experiences";
+experienceNoContent = "You haven't added an experience or interest yet";
+experienceLimitTextTitle = "Too many experiences!";
+experienceLimitTextDescription = "You can not add more than 10 experiences";
+
+//Example detail
+present = "Present";
+experienceNameLabel = "Experience name";
+experienceNamePlaceholder = "Where did you work at?";
+dateLabel = "Date";
+dateToLabel = "~";
+experienceDescriptionLabel = "Experience description";
+experienceDescriptionPlaceholder = "How was the experience or what did you do?";
+saveButton = "Save";
+
+//Signup Process 3
+process3Title = "Finally,";
+addProfileImage = "Add a profile image!";
+signupDoneButton = "Later";
+
+//Profile page
+noDescription = "No description";
+noStatus = "No status";
+noSummary = "No summary";
+experiences = "Experiences";
+noExperience = "No experiences";
+chatNow = "Chat now!";
+chatRequest = "Send a chat request!";
+chatRequestSent = "You sent a chat request";
+
+//Network
+nobodyNearYou = "Can't find people near you. Maybe try sliding the bar!";
+//{distance} Near Me
+"%@ nearMe" = "%@ Near Me";
+networkSearchbar = "Search by name, email, or interest!";
+
+
+//My Network
+myNetworkNoContent = "You don't have friends yet. Swipe left on your new chats to add the person you talked to!";
+myNetworkTitle = "My Network";
+myNetworkSearchbar = "Search you chats!";
+myNetBlockTitle = "Block?";
+myNetBlockDescription = "You will not see this person on this app, and all the chats will be deleted. Are you sure to block?";
+myNetDeleteTitle = "Leave?";
+myNetDeleteDescription = "Are you sure? All the chats will be deleted.";
+
+//Chats
+chatsTitle = "Chats";
+newChatNoContent = "You haven't talked to anyone yet. Checkout the first tab!";
+chatsDeleteTitle = "Leave?";
+myChatNoContent = "You don't have friends yet. Swipe left on your new chats to add people!";
+
+//Settings
+settings = "Settings";
+//{distance} discoverable
+"%@ discoverable" = "I am discoverable within %@";
+logOut = "Log out";
+logOutDescription = "Are you sure to log out?";
+settingsDiscoverable = "I am discoverable";
+settingsChatRequest = "People can send me request to chat";
+settingsChat = "People can send me chats";
+chatNotifications = "Chat notifications";
+shareOnFacebook = "Share on Facebook!";
+shareOnLinkedIn = "Share on LinkedIn!";
+
+
+//Messages
+send = "Send";
+imageSource = "Image Source";
+imageSourceQuestion = "How would you like to send photo?";
+camera = "Camera";
+library = "Library";
+messageBlockTitle = "You can only send up to 1 message";
+messageBlockDescription = "Creeper free :)";
+uploading = "Uploading";
+imageUploadFailedTitle = "Can not upload image";
+imageUploadFailedDescription = "Please try again at another time";
+
+
+//My Info Edit Type1
+editName = "Name";
+editIdentity = "I am";
+edit1Title = "Edit your name and identity";
+descriptionTooLongTitle = "Your description is too long";
+descriptionTooLongDescription = "Please make it shorter than 30 letters";
+
+//My Info Edit Type2
+statusEdit = "Write a status for everyone to see!";
+summaryEdit = "Write a summary about yourself!";
+statusEditLabel = "Status";
+summaryEditLabel = "Summary";
+statusEditTitle = "Set Status";
+summaryEditTitle = "Set Summary";
+
+//My Info Edit Table
+myInfoEditTableTitle = "Add an experience";
+
+//My Info Edit Experience
+myInfoEditExperience = "Edit experience";
+
+
+
+
+
+
+
+
+
+
+
+
+

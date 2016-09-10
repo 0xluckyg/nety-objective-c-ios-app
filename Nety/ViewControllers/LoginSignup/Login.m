@@ -25,8 +25,8 @@
 
     
 #if DEBUG
-    [_password setText:@"ptest3"];
-    [_email setText:@"test3@gmail.com"];
+//    [_password setText:@"ptest3"];
+//    [_email setText:@"test3@gmail.com"];
 #endif
     
     [self initializeSettings];
@@ -61,6 +61,10 @@
     [self.password.layer setCornerRadius:self.password.frame.size.height/2];
     self.password.textColor = self.UIPrinciple.netyBlue;
     
+    self.email.placeholder = NSLocalizedString(@"email", nil);
+    self.password.placeholder = NSLocalizedString(@"password", nil);
+    [self.loginButtonOutlet setTitle:NSLocalizedString(@"login", nil) forState:UIControlStateNormal];
+    
 }
 
 
@@ -84,17 +88,17 @@
     
     if (self.email.text.length < 10) {
         
-        [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Please enter a valid email" message:@"Your email is too short!" viewController:self];
+        [self.UIPrinciple oneButtonAlert:NSLocalizedString(@"ok", nil) controllerTitle:NSLocalizedString(@"invalidEmailTitle", nil) message:NSLocalizedString(@"invalidEmailDescription", nil) viewController:self];
         
     } else if (self.password.text.length > 15 || self.password.text.length < 6) {
         
-        [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Please enter a valid password" message:@"Your password has to be between 6 to 15 characters" viewController:self];
+        [self.UIPrinciple oneButtonAlert:NSLocalizedString(@"ok", nil)  controllerTitle:NSLocalizedString(@"invalidPasswordTitle", nil)  message:NSLocalizedString(@"invalidPasswordDescription", nil)  viewController:self];
         
     } else {
         
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeIndeterminate;
-        [hud.label setText:@"Logging in"];;
+        [hud.label setText:NSLocalizedString(@"loggingIn", nil)];;
         [hud.bezelView setColor:[self.UIPrinciple.netyBlue colorWithAlphaComponent:0.3f]];
         [hud showAnimated:YES];
         
@@ -103,7 +107,7 @@
             {
                 [hud hideAnimated:YES];
                 
-                [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Problem signing in" message:error.localizedDescription viewController:self];
+                [self.UIPrinciple oneButtonAlert:NSLocalizedString(@"ok", nil)  controllerTitle:NSLocalizedString(@"problemSigningIn", nil)  message:error.localizedDescription viewController:self];
             }
             else
             {

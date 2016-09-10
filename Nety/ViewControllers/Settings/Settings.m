@@ -7,9 +7,6 @@
 //
 
 #import "Settings.h"
-#import "AppDelegate.h"
-@import FBSDKShareKit;
-#import <linkedin-sdk/LISDK.h>
 
 @interface Settings ()<FBSDKSharingDelegate>
 
@@ -73,7 +70,7 @@
     
     //Style the navigation bar
     UINavigationItem *navItem= [[UINavigationItem alloc] init];
-    navItem.title = @"Settings";
+    navItem.title = NSLocalizedString(@"settings", nil);
     
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
@@ -102,7 +99,14 @@
     [self calculateSliderDistanceValue];
     NSString *distanceString = [self calculateDistanceToDescription];
     
-    self.locationRangeLabel.text = [NSString stringWithFormat:@"I am discoverable within %@", distanceString];}
+    self.locationRangeLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ discoverable", @"{distance} discoverable"), distanceString];
+    self.chatRequestOutlet.text = NSLocalizedString(@"settingsChatRequest", nil);
+    self.chatOutlet.text = NSLocalizedString(@"settingsChat", nil);
+    self.chatNotificationsOutlet.text = NSLocalizedString(@"chatNotifications", nil);
+    self.shareOnFacebookOutlet.text = NSLocalizedString(@"shareOnFacebook", nil);
+    self.shareOnLinkedInOutlet.text = NSLocalizedString(@"shareOnLinkedIn", nil);
+    self.logOutButtonOutlet.text = NSLocalizedString(@"logOut", nil);
+}
 
 
 #pragma mark - Protocols and Delegates
@@ -112,7 +116,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     //Set buttons for alert control
-    UIAlertAction *yes = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertAction *yes = [UIAlertAction actionWithTitle:NSLocalizedString(@"yes", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
         NSError *error;
         [[FIRAuth auth] signOut:&error];
@@ -123,13 +127,13 @@
         
     }];
     
-    UIAlertAction *no = [UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertAction *no = [UIAlertAction actionWithTitle:NSLocalizedString(@"no", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     }];
     
     if (indexPath.section == 3) {
         if (indexPath.row == 0) {
             
-            [self.UIPrinciple twoButtonAlert:yes rightButton:no controller:@"Log out" message:@"Are you sure to log out?" viewController:self];
+            [self.UIPrinciple twoButtonAlert:yes rightButton:no controller:NSLocalizedString(@"logOut", nil) message:NSLocalizedString(@"logOutDescription", nil) viewController:self];
             
         }
     }
@@ -231,7 +235,7 @@
     [self calculateSliderDistanceValue];
     NSString *distanceString = [self calculateDistanceToDescription];
     
-    self.locationRangeLabel.text = [NSString stringWithFormat:@"I am discoverable within %@", distanceString];
+    self.locationRangeLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ discoverable", @"{distance} discoverable"), distanceString];
 }
 
 - (IBAction)notificationSwitchAction:(id)sender {
@@ -314,8 +318,7 @@
 }
 
 - (void)listenForSecurityStatus {
-
-    NSLog(@"%@",MY_USER.userID);
+    
     [[[[self.firdatabase child:kUsers] child:MY_USER.userID] child:kSecurity] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
         if (snapshot != nil) {

@@ -8,8 +8,6 @@
 
 #import "Network.h"
 
-NSString *const networkNoContentString = @"Can't find people near you. Maybe try sliding the bar!";
-
 @interface Network ()
 @end
 
@@ -37,14 +35,11 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
         self.sliderValue = 0.3;
         self.slider.value = self.sliderValue;
     } else {
-        NSLog(@"userDef %lu",[[userDef objectForKey:@"sliderNetwork"] integerValue]);
         self.sliderValue = [[userDef objectForKey:@"sliderNetwork"] integerValue];
         self.slider.value = self.sliderValue;
     }
     
-    NSLog(@"slider val %f", self.slider.value);
-    
-    self.navigationItem.title = [NSString stringWithFormat:@"%@ Near Me", [self calculateDistanceToDescription]];
+    self.navigationItem.title = [NSString stringWithFormat:NSLocalizedString(@"%@ nearMe", @"{distance} Near Me"), [self calculateDistanceToDescription]];
     
     //If no experiences visible, show noContent header
     if ([[self fetchedResultsController].fetchedObjects count] == 0) {
@@ -52,7 +47,7 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
         UIImage *contentImage = [[UIImage imageNamed:@"Location"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
         if (![self.noContentController isDescendantOfView:self.view]) {
-            [self.UIPrinciple addNoContent:self setText:networkNoContentString setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
+            [self.UIPrinciple addNoContent:self setText:NSLocalizedString(@"nobodyNearYou", nil) setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
         }
     } else {
         [self.UIPrinciple removeNoContent:self.noContentController];
@@ -102,7 +97,7 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
     separatorLineView.backgroundColor = self.UIPrinciple.netyGray;
     [self.sliderView addSubview:separatorLineView];
     
-    navItem.title = [NSString stringWithFormat:@"%@ Near Me", [self calculateDistanceToDescription]];
+    navItem.title = [NSString stringWithFormat:NSLocalizedString(@"%@ nearMe", @"{distance} Near Me"), [self calculateDistanceToDescription]];
     
     //Style navbar
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -115,8 +110,10 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
     
     [self.searchBar setBarTintColor:[UIColor whiteColor]];
     
-    self.navigationItem.title = [NSString stringWithFormat:@"%@ Near Me", [self calculateDistanceToDescription]];
+    self.navigationItem.title = [NSString stringWithFormat:NSLocalizedString(@"%@ nearMe", @"{distance} Near Me"), [self calculateDistanceToDescription]];
     
+    
+    [self.searchBar setPlaceholder:NSLocalizedString(@"networkSearchbar", nil)];
 }
 
 
@@ -189,7 +186,7 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
         UIImage *contentImage = [[UIImage imageNamed:@"Friend"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
         if (![self.noContentController isDescendantOfView:self.view]) {
-           [self.UIPrinciple addNoContent:self setText:networkNoContentString setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
+           [self.UIPrinciple addNoContent:self setText:NSLocalizedString(@"nobodyNearYou", nil) setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
         }
     } else {
         [self.UIPrinciple removeNoContent:self.noContentController];
@@ -302,13 +299,11 @@ NSString *const networkNoContentString = @"Can't find people near you. Maybe try
 
 - (IBAction)sliderAction:(id)sender {
     
-    NSLog(@"%f", self.slider.value);
-    
     self.sliderValue = self.slider.value;
     
     [self calculateSliderDistanceValue];
     
-    self.title = [NSString stringWithFormat:@"%@ Near", [self calculateDistanceToDescription]];
+    self.title = [NSString stringWithFormat:NSLocalizedString(@"%@ nearMe", @"{distance} Near Me"), [self calculateDistanceToDescription]];
     
 }
 

@@ -45,6 +45,8 @@
 //IBOUTLETS----------------------------------------
 
 
+@property (weak, nonatomic) IBOutlet UILabel *process2Title;
+
 @property (weak, nonatomic) IBOutlet UIButton *editButtonOutlet;
 
 @property (weak, nonatomic) IBOutlet UIButton *addButtonOutlet;

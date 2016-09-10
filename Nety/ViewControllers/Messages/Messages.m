@@ -95,7 +95,7 @@
     [self.inputToolbar.contentView.leftBarButtonItem setImage:[[UIImage imageNamed:@"Camera"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateSelected];
     self.inputToolbar.contentView.leftBarButtonItem.tintColor = self.UIPrinciple.netyGray;
     self.inputToolbar.contentView.textView.font = [self.UIPrinciple netyFontWithSize:15];
-    [self.inputToolbar.contentView.rightBarButtonItem setTitle:@"Send" forState:normal];
+    [self.inputToolbar.contentView.rightBarButtonItem setTitle:NSLocalizedString(@"send", nil) forState:normal];
     
     
     
@@ -255,11 +255,11 @@
 
 - (void)didPressAccessoryButton:(UIButton *)sender
 {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Image Source"
-                                                                   message:@"How would you like to send photo?"
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"imageSource", nil)
+                                                                   message:NSLocalizedString(@"imageSourceQuestion", nil)
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction *camera = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleDefault
+    UIAlertAction *camera = [UIAlertAction actionWithTitle:NSLocalizedString(@"camera", nil) style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * action) {
                                                        UIImagePickerController *pickerLibrary = [[UIImagePickerController alloc] init];
                                                        pickerLibrary.delegate = (id)self;
@@ -268,7 +268,7 @@
                                                        [self presentViewController:pickerLibrary animated:YES completion:nil];
                                                    }];
     
-    UIAlertAction *library = [UIAlertAction actionWithTitle:@"Library" style:UIAlertActionStyleDefault
+    UIAlertAction *library = [UIAlertAction actionWithTitle:NSLocalizedString(@"library", nil) style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction * action) {
                                                         UIImagePickerController *pickerLibrary = [[UIImagePickerController alloc] init];
                                                         pickerLibrary.delegate = (id)self;
@@ -277,7 +277,7 @@
                                                         [self presentViewController:pickerLibrary animated:YES completion:nil];
                                                     }];
     
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * action) {
                                                        
                                                    }];
@@ -302,7 +302,7 @@
     //User can only send up to 1 message to a person
     if (numberOfMessages == 1 && [senderId isEqualToString:firstMessageSender]) {
         
-        [self.UIPrinciple oneButtonAlert:@"OKAY" controllerTitle:@"You can only send up to 1 message" message:@"Creeper free :)" viewController:self];
+        [self.UIPrinciple oneButtonAlert:NSLocalizedString(@"ok", nil) controllerTitle:NSLocalizedString(@"messageBlockTitle", nil) message:NSLocalizedString(@"messageBlockDescription", nil) viewController:self];
         
     } else {
         
@@ -580,7 +580,7 @@
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
-    hud.label.text = @"Uploading";
+    hud.label.text = NSLocalizedString(@"uploading", nil);
     hud.bezelView.color = [self.UIPrinciple.netyBlue colorWithAlphaComponent:0.3f];
     [hud showAnimated:YES];
     
@@ -590,7 +590,7 @@
         if (error) {
             [hud hideAnimated:YES];
             NSLog(@"%@", error.localizedDescription);
-            [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Can not upload image" message:@"Please try again at another time" viewController:self];
+            [self.UIPrinciple oneButtonAlert:NSLocalizedString(@"ok", nil) controllerTitle:NSLocalizedString(@"imageUploadFailedTitle", nil) message:NSLocalizedString(@"imageUploadFailedDescription", nil) viewController:self];
             
         } else {
             

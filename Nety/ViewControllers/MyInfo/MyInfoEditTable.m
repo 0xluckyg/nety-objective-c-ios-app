@@ -37,7 +37,7 @@
         UIImage *contentImage = [[UIImage imageNamed:@"LightBulb"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
         if (![self.noContentController isDescendantOfView:self.view]) {
-            [self.UIPrinciple addNoContent:self setText:@"You haven't added an experience or interest yet" setImage:contentImage setColor:[UIColor whiteColor] setSecondColor:[UIColor whiteColor] noContentController:self.noContentController];
+            [self.UIPrinciple addNoContent:self setText:NSLocalizedString(@"experienceNoContent", nil) setImage:contentImage setColor:[UIColor whiteColor] setSecondColor:[UIColor whiteColor] noContentController:self.noContentController];
         }
     } else {
         [self.UIPrinciple removeNoContent:self.noContentController];
@@ -85,7 +85,7 @@
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
                                 [UIColor whiteColor], NSForegroundColorAttributeName, nil];
-    self.navigationItem.title = @"Add an experience";
+    self.navigationItem.title = NSLocalizedString(@"myInfoEditTableTitle", nil);
     
     [self.navigationController.navigationBar setTitleTextAttributes:attributes];
     
@@ -164,7 +164,7 @@
         
         UIImage *contentImage = [UIImage imageNamed:@"LightBulb"];
         
-        [self.UIPrinciple addNoContent:self setText:@"You haven't added an experience or interest yet" setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
+        [self.UIPrinciple addNoContent:self setText:NSLocalizedString(@"experienceNoContent", nil) setImage:contentImage setColor:[UIColor whiteColor] setSecondColor:[UIColor whiteColor] noContentController:self.noContentController];
     }
     
 }
@@ -192,7 +192,7 @@
     
     if ([self.experienceArray count] >= 10) {
         
-        [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Too many!" message:@"You can not add more than 10 experiences" viewController:self];
+        [self.UIPrinciple oneButtonAlert:NSLocalizedString(@"ok", nil) controllerTitle:NSLocalizedString(@"experienceLimitTextTitle", nil) message:NSLocalizedString(@"experienceLimitTextDescription", nil) viewController:self];
         
     } else {
         [self performSegueWithIdentifier:@"experienceDetailSegue" sender:self];

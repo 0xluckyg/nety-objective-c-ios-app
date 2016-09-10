@@ -375,11 +375,6 @@
             returnValue = true;
             break;
         } else {
-//            NSLog(@"expUserID %@ : %@", experience1.user.userID, experience2.user.userID);
-            NSLog(@"expDecript %@ : %@", experience1.descript,[experience2 objectForKey:kExperienceDescription]);
-            NSLog(@"expName %@ : %@", experience1.name, [experience2 objectForKey:kExperienceName]);
-            NSLog(@"expStart %@ : %@", experience1.startDate, [experience2 objectForKey:kExperienceStartDate]);
-            NSLog(@"expStart %@ : %@", experience1.endDate, [experience2 objectForKey:kExperienceEndDate]);
             returnValue = false;
         }
     }

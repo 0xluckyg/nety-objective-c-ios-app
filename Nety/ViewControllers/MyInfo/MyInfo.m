@@ -271,7 +271,6 @@
     pickerLibrary.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
     [self presentViewController:pickerLibrary animated:YES completion:nil];
     
-    NSLog(@"tapped");
 }
 
 
@@ -286,11 +285,11 @@
 
 -(void)cameraButtonSelected {
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Image Source"
-                                                                   message:@"How would you like to choose your photo?"
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"imageSource", nil)
+                                                                   message:NSLocalizedString(@"imageSourceQuestion", nil)
                                                             preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction *camera = [UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleDefault
+    UIAlertAction *camera = [UIAlertAction actionWithTitle:NSLocalizedString(@"camera", nil) style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * action) {
                                                        UIImagePickerController *pickerLibrary = [[UIImagePickerController alloc] init];
                                                        pickerLibrary.delegate = (id)self;
@@ -299,7 +298,7 @@
                                                        [self presentViewController:pickerLibrary animated:YES completion:nil];
                                                    }];
     
-    UIAlertAction *library = [UIAlertAction actionWithTitle:@"Library" style:UIAlertActionStyleDefault
+    UIAlertAction *library = [UIAlertAction actionWithTitle:NSLocalizedString(@"library", nil) style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction * action) {
                                                         UIImagePickerController *pickerLibrary = [[UIImagePickerController alloc] init];
                                                         pickerLibrary.delegate = (id)self;
@@ -308,7 +307,7 @@
                                                         [self presentViewController:pickerLibrary animated:YES completion:nil];
                                                     }];
     
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * action) {
                                                        
                                                    }];
@@ -353,11 +352,9 @@
             
             if (error) {
                 NSLog(@"%@", error.localizedDescription);
-                [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Can not upload image" message:@"Please try again at another time" viewController:self];
+                [self.UIPrinciple oneButtonAlert:NSLocalizedString(@"ok", nil) controllerTitle:NSLocalizedString(@"imageUploadFailedTitle", nil) message:NSLocalizedString(@"imageUploadFailedDescription", nil) viewController:self];
                 
             } else {
-                
-                NSLog(@"image url saved");
                 
                 NSString *profileImageUrl = [[metadata downloadURL] absoluteString];
                 
@@ -528,7 +525,7 @@
                 mcell.mainInfoImage.image = [[UIImage imageNamed:@"Identity"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
                 
                 if ([identity isEqualToString:@""]) {
-                    mcell.mainInfoLabel.text = @"No description";
+                    mcell.mainInfoLabel.text = NSLocalizedString(@"noDescription", nil);
                 } else {
                     mcell.mainInfoLabel.text = identity;
                 }
@@ -538,7 +535,7 @@
                 mcell.mainInfoImage.image = [[UIImage imageNamed:@"Status"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
                 
                 if ([status isEqualToString:@""]) {
-                    mcell.mainInfoLabel.text = @"No status";
+                    mcell.mainInfoLabel.text = NSLocalizedString(@"noStatus", nil);
                 } else {
                     mcell.mainInfoLabel.text = status;
                 }
@@ -549,7 +546,7 @@
                 mcell.mainInfoImage.image = [[UIImage imageNamed:@"Summary"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
                 
                 if ([summary isEqualToString:@""]) {
-                    mcell.mainInfoLabel.text = @"No summary";
+                    mcell.mainInfoLabel.text = NSLocalizedString(@"noSummary", nil);
                 } else {
                     mcell.mainInfoLabel.text = summary;
                 }
@@ -591,9 +588,9 @@
         mcell.mainInfoLabel.textColor = self.UIPrinciple.netyBlue;
         
         if ([experiences count] == 0) {
-            mcell.mainInfoLabel.text = @"No experiences";
+            mcell.mainInfoLabel.text = NSLocalizedString(@"noExperience", nil);
         } else {
-            mcell.mainInfoLabel.text = @"Experiences";
+            mcell.mainInfoLabel.text = NSLocalizedString(@"experiences", nil);
         }
         
         mcell.selectionStyle = UITableViewCellSelectionStyleDefault;
@@ -604,9 +601,7 @@
         MyInfoExperienceCell *mcell = (MyInfoExperienceCell*)cell;
         
         Experiences* expir = object;
-        
-        NSLog(@"Ex: %@",expir);
-        
+
         mcell.experienceName.textColor = self.UIPrinciple.netyBlue;
         mcell.experienceDate.textColor = self.UIPrinciple.netyBlue;
         mcell.experienceDescription.textColor = self.UIPrinciple.netyBlue;

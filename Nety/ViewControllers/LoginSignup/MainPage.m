@@ -57,8 +57,14 @@
 //    [self.loginWithLinkedinOutlet.layer setBorderColor:[[UIColor whiteColor] CGColor]];
     [self.loginWithLinkedinOutlet.layer setCornerRadius:self.signupButtonOutlet.frame.size.height/2];
     
+    
+    [self.loginButtonOutlet setTitle:NSLocalizedString(@"login", nil) forState:normal];
+    [self.signupButtonOutlet setTitle:NSLocalizedString(@"signup", nil) forState:normal];
+    
     UIImage *facebookImage = [[UIImage imageNamed:@"Facebook"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     UIImage *linkedinImage = [[UIImage imageNamed:@"LinkedIn"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    
+    
     
     [self.loginWithFacebookOutlet setImage:facebookImage forState:UIControlStateNormal];
     [self.loginWithFacebookOutlet setTintColor:self.UIPrinciple.facebookBlue];

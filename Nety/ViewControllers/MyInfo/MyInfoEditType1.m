@@ -56,7 +56,7 @@
     
     //Name Label
     
-    self.editType1NameLabel.text = @"Name";
+    self.editType1NameLabel.text = NSLocalizedString(@"editName", nil);
     self.editType1NameLabel.textColor = [UIColor whiteColor];
     
     //Name textfield
@@ -64,7 +64,8 @@
     self.editType1NameTextField.textColor = self.UIPrinciple.netyBlue;
     
     //Job Label
-    self.editType1JobLabel.text = @"I am";
+    self.editType1JobLabel.text = NSLocalizedString(@"editIdentity", nil);
+
     self.editType1JobLabel.textColor = [UIColor whiteColor];
     
     //Job textfield
@@ -78,7 +79,7 @@
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
                                 [UIColor whiteColor], NSForegroundColorAttributeName, nil];
-    self.navigationItem.title = @"Edit your name and identity";
+    self.navigationItem.title = NSLocalizedString(@"edit1Title", nil);
     
     [self.navigationController.navigationBar setTitleTextAttributes:attributes];
     
@@ -160,11 +161,11 @@
     
     if (name.length < 2 || name.length > 30 || [[name componentsSeparatedByString:@" "] count] > 2 ) {
         
-        [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Please enter a valid name" message:@"ex. Firstname Lastname" viewController:self];
+        [self.UIPrinciple oneButtonAlert:NSLocalizedString(@"ok", nil)  controllerTitle:NSLocalizedString(@"invalidNameTitle", nil)  message:NSLocalizedString(@"invalidNameDescription", nil) viewController:self];
         
     } else if ([name rangeOfString:@" "].location == NSNotFound){
         
-        [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Please enter a valid name" message:@"Please separate your first and last name with a space" viewController:self];
+        [self.UIPrinciple oneButtonAlert:NSLocalizedString(@"ok", nil) controllerTitle:NSLocalizedString(@"invalidNameTitle", nil) message:NSLocalizedString(@"invalidNameDescription2", nil) viewController:self];
         
     } else {
         
@@ -191,7 +192,7 @@
     
     if (identity.length > 30) {
         
-        [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Your description is too long" message:@"Please make it shorter than 30 letters" viewController:self];
+        [self.UIPrinciple oneButtonAlert:NSLocalizedString(@"ok", nil)  controllerTitle:NSLocalizedString(@"descriptionTooLongTitle", nil) message:NSLocalizedString(@"descriptionTooLongDescription", nil) viewController:self];
         
     } else {
         
