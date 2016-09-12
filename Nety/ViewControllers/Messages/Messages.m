@@ -425,6 +425,8 @@
             [[[self.firdatabase child:kChatRooms] child:self.chatroomID] setValue:chatRoomInformation];
             
             //Add information to both the user and selected user
+            
+            //Member1 is the other user, Member2 is supposed to be self
             FIRDatabaseReference *userChatRoomRef = [[[[[self firdatabase] child:kUserChats] child:self.senderId] child:kChats] child:self.chatroomID];
             [[[userChatRoomRef child:kMembers] child:@"member1"] setValue:self.selectedUserID];
             [[userChatRoomRef child:kRecentMessage] setValue:@"Typing..."];

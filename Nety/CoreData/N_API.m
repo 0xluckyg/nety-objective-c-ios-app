@@ -496,6 +496,7 @@
         
     }
     [rooms setMembers:user];
+    [rooms setUserID:MY_USER.userID];
     [rooms setValue:roomID forKey:@"chatRoomID"];
     for (NSString* keys in [userInfo allKeys]) {
         @try {
@@ -535,12 +536,12 @@
 
 -(void)listenForChatsChildChanged {
     
-    //THIS PART CRASHES!!!
     [[[[self.firdatabase child:kUserChats] child:MY_USER.userID] child:kChats] observeEventType:FIRDataEventTypeChildChanged withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
         NSMutableDictionary *chatRoomInfoDict = snapshot.value;
         NSDictionary *members = [snapshot.value objectForKey:kMembers];
         NSString *chatRoomKey = snapshot.key;
+
         Users* tempUser = [self getUserrsWithID:[members objectForKey:@"member1"]];
         [self addNewChatRoom:chatRoomInfoDict WithID:chatRoomKey Members:tempUser];
         

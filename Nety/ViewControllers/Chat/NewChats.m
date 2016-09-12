@@ -78,7 +78,7 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"ChatRooms" inManagedObjectContext:MY_API.managedObjectContext];
     [fetchRequest setEntity:entity];
     
-    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"type == NO"];
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"type == NO AND userID == %@", MY_USER.userID];
     [fetchRequest setPredicate:predicate];
     
     // Set the batch size to a suitable number.
@@ -350,6 +350,10 @@
 
 
 -(void)customAddNoContent: (UIViewController *)viewController setText:(NSString*)text setImage:(UIImage *)contentImage setColor:(UIColor *)color setSecondColor:(UIColor *)secondColor noContentController:(NoContent *)noContentController {
+    
+//    CGRect screenRect = [[UIScreen mainScreen] bounds];
+//    CGFloat screenWidth = screenRect.size.width;
+//    CGFloat screenHeight = screenRect.size.height;
     
     float width = viewController.view.frame.size.width;
     float height = noContentController.view.frame.size.height;

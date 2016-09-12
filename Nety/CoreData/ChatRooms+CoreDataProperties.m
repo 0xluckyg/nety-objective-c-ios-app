@@ -13,6 +13,7 @@
 
 @implementation ChatRooms (CoreDataProperties)
 
+@dynamic userID;
 @dynamic chatRoomID;
 @dynamic fullName;
 @dynamic online;

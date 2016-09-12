@@ -82,7 +82,7 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"ChatRooms" inManagedObjectContext:MY_API.managedObjectContext];
     [fetchRequest setEntity:entity];
     
-    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"type == YES"];
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"type == YES AND userID == %@", MY_USER.userID];
     [fetchRequest setPredicate:predicate];
     
     // Set the batch size to a suitable number.
@@ -318,7 +318,7 @@
     float width = viewController.view.frame.size.width;
     float height = noContentController.view.frame.size.height;
     float xValue = 0;
-    float yValue = (viewController.view.frame.size.height - 40)/2 - height/2;
+    float yValue = (viewController.view.frame.size.height)/2 - height/2;
     
     noContentController.view.frame = CGRectMake(xValue, yValue, width, height);
     
