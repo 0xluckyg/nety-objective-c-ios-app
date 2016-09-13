@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import <linkedin-sdk/LISDK.h>
 #import "N_CoreDataTableViewController.h"
+#import "ChangePassword.h"
 
 @import Firebase;
 @import FBSDKShareKit;
@@ -75,6 +76,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *shareOnLinkedInOutlet;
 
 @property (weak, nonatomic) IBOutlet UILabel *logOutButtonOutlet;
+
+@property (weak, nonatomic) IBOutlet UILabel *changePasswordOutlet;
 
 
 

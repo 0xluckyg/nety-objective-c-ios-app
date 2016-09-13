@@ -106,6 +106,7 @@
     self.shareOnFacebookOutlet.text = NSLocalizedString(@"shareOnFacebook", nil);
     self.shareOnLinkedInOutlet.text = NSLocalizedString(@"shareOnLinkedIn", nil);
     self.logOutButtonOutlet.text = NSLocalizedString(@"logOut", nil);
+    self.changePasswordOutlet.text = @"Change password";
 }
 
 
@@ -131,9 +132,16 @@
     }];
     
     if (indexPath.section == 3) {
-        if (indexPath.row == 0) {
+        if (indexPath.row == 1) {
             
             [self.UIPrinciple twoButtonAlert:yes rightButton:no controller:NSLocalizedString(@"logOut", nil) message:NSLocalizedString(@"logOutDescription", nil) viewController:self];
+            
+        } else {
+            
+            UIStoryboard *changePasswordStoryboard = [UIStoryboard storyboardWithName:@"Settings" bundle:nil];
+            ChangePassword *changePassword = [changePasswordStoryboard instantiateViewControllerWithIdentifier:@"ChangePassword"];
+            
+            [self.navigationController pushViewController:changePassword animated:YES];
             
         }
     }

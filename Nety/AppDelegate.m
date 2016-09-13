@@ -77,8 +77,20 @@
                     NSLog(@"App Delegate detected user signedin");
                     [self fetchUserInformation:user];
                     
-                    //Set root view controller to main app
-                    [self.window setRootViewController:self.tabBarRootController];
+                    if (MY_USER == nil || MY_USER.userID == nil) {
+                        
+                        UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"LoginSignup" bundle:nil];
+                        UIViewController *mainViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"MainPageNav"];
+                        
+                        //Set root view controller to login page
+                        [self.window setRootViewController:mainViewController];
+                        
+                    } else {
+                        
+                        //Set root view controller to main app
+                        [self.window setRootViewController:self.tabBarRootController];
+                        
+                    }
                     
                 }
                 
