@@ -101,46 +101,6 @@
 - (IBAction)signupButton:(id)sender {
 }
 
-#pragma mark - Linkedin
-- (IBAction)loginWithLinkedinButton:(id)sender {
-    
-    //Just set root controller to tabbar
-    //    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    //    [appDelegate.window setRootViewController:appDelegate.tabBarRootController];
-    [LISDKSessionManager createSessionWithAuth:[NSArray arrayWithObjects:LISDK_BASIC_PROFILE_PERMISSION, LISDK_EMAILADDRESS_PERMISSION, nil]
-                                         state:@"some state"
-                        showGoToAppStoreDialog:YES
-                                  successBlock:^(NSString *returnState) {
-                                      
-                                      NSLog(@"%s","success called!");
-                                      LISDKSession *session = [[LISDKSessionManager sharedInstance] session];
-                                      NSLog(@"value=%@ isvalid=%@",[session value],[session isValid] ? @"YES" : @"NO");
-                                      NSMutableString *text = [[NSMutableString alloc] initWithString:[session.accessToken description]];
-                                      [text appendString:[NSString stringWithFormat:@",state=\"%@\"",returnState]];
-                                      NSLog(@"Response label text %@",text);
-                                      
-                                      
-                                      //                                      [[FIRAuth auth] signInWithCustomToken:session.accessToken.accessTokenValue completion:^(FIRUser * _Nullable user, NSError * _Nullable error) {
-                                      //                                              if (error) {
-                                      //                                                  NSLog(@"Error: %@",error.localizedDescription);
-                                      //                                              }
-                                      //                                              else
-                                      //                                              {
-                                      //                                                  NSLog(@"Login OK");
-                                      //                                              }
-                                      //                                      }];
-                                      
-                                  }
-                                    errorBlock:^(NSError *error) {
-                                        NSLog(@"%s %@","error called! ", [error description]);
-                                        
-                                    }
-     ];
-    
-    
-    
-}
-
 - (IBAction)loginWithFacebookButton:(id)sender {
     FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
     [login

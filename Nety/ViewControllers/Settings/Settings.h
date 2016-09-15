@@ -73,7 +73,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *shareOnFacebookOutlet;
 
-@property (weak, nonatomic) IBOutlet UILabel *shareOnLinkedInOutlet;
+@property (weak, nonatomic) IBOutlet UILabel *shareWithFriendsOutlet;
 
 @property (weak, nonatomic) IBOutlet UILabel *logOutButtonOutlet;
 

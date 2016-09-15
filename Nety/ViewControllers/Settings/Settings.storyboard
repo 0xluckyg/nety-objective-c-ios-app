@@ -203,8 +203,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share on LinkedIn!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJo-ZS-QRf">
-                                                    <rect key="frame" x="67.5" y="14" width="137" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share with friends!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJo-ZS-QRf">
+                                                    <rect key="frame" x="67.5" y="14" width="135" height="21"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -295,7 +295,7 @@
                         <outlet property="logOutButtonOutlet" destination="2qO-EJ-Lrh" id="rgK-7f-mh4"/>
                         <outlet property="notificationSwitch" destination="Q1v-Np-9Zd" id="3dR-hO-mHX"/>
                         <outlet property="shareOnFacebookOutlet" destination="hXM-VE-Tel" id="Vxp-5h-Jdh"/>
-                        <outlet property="shareOnLinkedInOutlet" destination="FJo-ZS-QRf" id="OUJ-mG-q8L"/>
+                        <outlet property="shareWithFriendsOutlet" destination="FJo-ZS-QRf" id="YCe-Jy-vpt"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aAN-F1-0E0" userLabel="First Responder" sceneMemberID="firstResponder"/>

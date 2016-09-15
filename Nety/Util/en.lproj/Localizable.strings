@@ -16,6 +16,9 @@ leave = "Leave";
 yes = "YES";
 no = "NO";
 cancel = "Cancel";
+done = "Done";
+errorTitle = "There was an error";
+errorDescription = "Please try again at a later time";
 
 //Main
 login = "Login";
@@ -119,7 +122,17 @@ settingsChat = "People can send me chats";
 chatNotifications = "Chat notifications";
 shareOnFacebook = "Share on Facebook!";
 shareOnLinkedIn = "Share on LinkedIn!";
+shareWithFriends = "Share with friends!";
+changePassword = "Change password";
+invalidChangePasswordTitle = "You have signed in through Facebook";
+invalidChangePasswordDescription = "Please change your password through Facebook";
 
+//Change Password
+passwordOld = "Old password";
+passwordNew = "New password";
+passwordRepeat = "Repeat password";
+incorrectPasswordChange1 = "You repeated an incorrect password";
+incorrectPasswordChange2 = "Your new password can't be same as your old password";
 
 //Messages
 send = "Send";
@@ -154,8 +167,6 @@ myInfoEditTableTitle = "Add an experience";
 
 //My Info Edit Experience
 myInfoEditExperience = "Edit experience";
-
-
 
 
 

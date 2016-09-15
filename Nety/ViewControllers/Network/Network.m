@@ -21,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // Do any additional setup after loading the view.    
     
     [self initializeSettings];
     [self initializeDesign];
@@ -35,9 +35,12 @@
         self.sliderValue = 0.3;
         self.slider.value = self.sliderValue;
     } else {
+        NSLog(@"sLIDER NET %lu", [[userDef objectForKey:@"sliderNetwork"] integerValue]);
         self.sliderValue = [[userDef objectForKey:@"sliderNetwork"] integerValue];
         self.slider.value = self.sliderValue;
     }
+    
+    [self calculateSliderDistanceValue];
     
     self.navigationItem.title = [NSString stringWithFormat:NSLocalizedString(@"%@ nearMe", @"{distance} Near Me"), [self calculateDistanceToDescription]];
     
@@ -52,7 +55,7 @@
     } else {
         [self.UIPrinciple removeNoContent:self.noContentController];
     }
-    
+
     
     
 }
@@ -61,17 +64,6 @@
 //---------------------------------------------------------
 
 - (void)initializeSettings {
-    
-    NSUserDefaults* userDef = [NSUserDefaults standardUserDefaults];
-    if ([userDef objectForKey:@"sliderNetwork"] == nil) {
-        self.sliderValue = 0.3;
-        self.slider.value = self.sliderValue;
-    } else {
-        self.sliderValue = [[userDef objectForKey:@"sliderNetwork"] integerValue];
-        self.slider.value = self.sliderValue;
-    }
-    
-    [self calculateSliderDistanceValue];
     
     self.noContentController = [[NoContent alloc] init];
 }

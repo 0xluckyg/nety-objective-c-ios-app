@@ -33,11 +33,6 @@
     
     userIsSigningIn = false;
     
-//    FIRDatabaseReference *geofireRef = [[FIRDatabase database] reference];
-//    
-//    _geoFire = [[GeoFire alloc] initWithFirebaseRef:geofireRef];
-    
-    
     //[self loginLinkedIn];
     //Check if user is signed in, and move on
     [self initializeSettings];
@@ -77,31 +72,26 @@
                     NSLog(@"App Delegate detected user signedin");
                     [self fetchUserInformation:user];
                     
-                    if (MY_USER == nil || MY_USER.userID == nil) {
-                        
-                        UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"LoginSignup" bundle:nil];
-                        UIViewController *mainViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"MainPageNav"];
-                        
-                        //Set root view controller to login page
-                        [self.window setRootViewController:mainViewController];
-                        
-                    } else {
-                        
+//                    if (MY_USER == nil || MY_USER.userID == nil) {
+//                                                
+//
+//                        UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"LoginSignup" bundle:nil];
+//                        UIViewController *mainViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"MainPageNav"];
+//                        
+//                        //Set root view controller to login page
+//                        [self.window setRootViewController:mainViewController];
+//                        
+//                    } else {
+                    
                         //Set root view controller to main app
-                        [self.window setRootViewController:self.tabBarRootController];
-                        
-                    }
+                    
+//                    }
                     
                 }
                 
             } else  {
-                
-                    NSLog(@"App Delegate detected user not signed in");
-                    UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"LoginSignup" bundle:nil];
-                    UIViewController *mainViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"MainPageNav"];
-                
-                    //Set root view controller to login page
-                    [self.window setRootViewController:mainViewController];
+                [self.window setRootViewController:self.tabBarRootController];
+
             }
         }];
     
@@ -219,30 +209,6 @@
 #pragma mark - Custom methods
 //---------------------------------------------------------
 
-
-- (void) loginLinkedIn
-{
-//    [LISDKSessionManager createSessionWithAuth:[NSArray arrayWithObjects:LISDK_BASIC_PROFILE_PERMISSION, LISDK_EMAILADDRESS_PERMISSION, nil]
-//                                         state:@"some state"
-//                        showGoToAppStoreDialog:YES
-//                                  successBlock:^(NSString *returnState) {
-//                                      
-//                                      NSLog(@"%s","success called!");
-//                                      LISDKSession *session = [[LISDKSessionManager sharedInstance] session];
-//                                      NSLog(@"value=%@ isvalid=%@",[session value],[session isValid] ? @"YES" : @"NO");
-//                                      NSMutableString *text = [[NSMutableString alloc] initWithString:[session.accessToken description]];
-//                                      [text appendString:[NSString stringWithFormat:@",state=\"%@\"",returnState]];
-//                                      NSLog(@"Response label text %@",text);
-//
-//                                      
-//                                  }
-//                                    errorBlock:^(NSError *error) {
-//                                        NSLog(@"%s %@","error called! ", [error description]);
-//
-//                                    }
-//     ];
-    NSLog(@"%s","sync pressed3");
-}
 -(NSString*)returnLatLongString {
     
     NSString *str = [NSString stringWithFormat: @"lat=%@&long=%@", self.stringLatitude, self.stringLongitude];
@@ -284,10 +250,20 @@
                 [[self.tabBarRootController.tabBar.items objectAtIndex:2] setBadgeValue:[NSString stringWithFormat:@"%i", numberOfUnreadChats]];
             }
             
+            NSLog(@"User not found");
+            [self.window setRootViewController:self.tabBarRootController];
+            
         }
         else
         {
-            NSLog(@"User not found");            
+            
+            NSLog(@"App Delegate detected user not signed in");
+            UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"LoginSignup" bundle:nil];
+            UIViewController *mainViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"MainPageNav"];
+            
+            //Set root view controller to login page
+            [self.window setRootViewController:mainViewController];
+
         }
         
         

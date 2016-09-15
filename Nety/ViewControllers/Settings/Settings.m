@@ -104,9 +104,9 @@
     self.chatOutlet.text = NSLocalizedString(@"settingsChat", nil);
     self.chatNotificationsOutlet.text = NSLocalizedString(@"chatNotifications", nil);
     self.shareOnFacebookOutlet.text = NSLocalizedString(@"shareOnFacebook", nil);
-    self.shareOnLinkedInOutlet.text = NSLocalizedString(@"shareOnLinkedIn", nil);
+    self.shareWithFriendsOutlet.text = NSLocalizedString(@"shareWithFriends", nil);
     self.logOutButtonOutlet.text = NSLocalizedString(@"logOut", nil);
-    self.changePasswordOutlet.text = @"Change password";
+    self.changePasswordOutlet.text = NSLocalizedString(@"changePassword", nil);
 }
 
 
@@ -141,8 +141,17 @@
             UIStoryboard *changePasswordStoryboard = [UIStoryboard storyboardWithName:@"Settings" bundle:nil];
             ChangePassword *changePassword = [changePasswordStoryboard instantiateViewControllerWithIdentifier:@"ChangePassword"];
             
-            [self.navigationController pushViewController:changePassword animated:YES];
+            FIRUser *user = [FIRAuth auth].currentUser;
             
+            if (user != nil) {
+                for (id<FIRUserInfo> profile in user.providerData) {
+                    if ([profile.providerID isEqualToString:@"facebook.com"]) {
+                        [self.UIPrinciple oneButtonAlert:NSLocalizedString(@"ok", nil) controllerTitle:NSLocalizedString(@"invalidChangePasswordTitle", nil) message:NSLocalizedString(@"invalidChangePasswordDescription", nil) viewController:self];
+                    } else {
+                        [self.navigationController pushViewController:changePassword animated:YES];
+                    }
+                }
+            }
         }
     }
     
@@ -169,43 +178,43 @@
                 break;
             case 1:
             {
-                NSString *url = @"https://api.linkedin.com/v1/people/~/shares";
-                
-                NSString *payload = @"{\"comment\":\"Check out developer.linkedin.com! http://linkd.in/1FC2PyG\",\"visibility\":{ \"code\":\"anyone\" }}";
-                
-                if ([LISDKSessionManager hasValidSession]) {
-                    [[LISDKAPIHelper sharedInstance] postRequest:url stringBody:payload
-                                                         success:^(LISDKAPIResponse *response) {
-                                                             // do something with response
-                                                         }
-                                                           error:^(LISDKAPIError *apiError) {
-                                                               // do something with error
-                                                               NSLog(@"Error: %@",apiError.localizedDescription);
-                                                           }];
-                }
-                else
-                {
-                    [LISDKSessionManager createSessionWithAuth:[NSArray arrayWithObjects:LISDK_BASIC_PROFILE_PERMISSION, LISDK_EMAILADDRESS_PERMISSION,LISDK_W_SHARE_PERMISSION, nil]
-                                                         state:@"some state"
-                                        showGoToAppStoreDialog:YES
-                                                  successBlock:^(NSString *returnState) {
-                                                      
-                                                      [[LISDKAPIHelper sharedInstance] postRequest:url stringBody:payload
-                                                                                           success:^(LISDKAPIResponse *response) {
-                                                                                               // do something with response
-                                                                                           }
-                                                                                             error:^(LISDKAPIError *apiError) {
-                                                                                                 // do something with error
-                                                                                                 NSLog(@"Error: %@",apiError.localizedDescription);
-                                                                                             }];
-                                                      
-                                                  }
-                                                    errorBlock:^(NSError *error) {
-                                                        NSLog(@"%s %@","error called! ", [error description]);
-                                                        
-                                                    }
-                     ];
-                }
+//                NSString *url = @"https://api.linkedin.com/v1/people/~/shares";
+//                
+//                NSString *payload = @"{\"comment\":\"Check out developer.linkedin.com! http://linkd.in/1FC2PyG\",\"visibility\":{ \"code\":\"anyone\" }}";
+//                
+//                if ([LISDKSessionManager hasValidSession]) {
+//                    [[LISDKAPIHelper sharedInstance] postRequest:url stringBody:payload
+//                                                         success:^(LISDKAPIResponse *response) {
+//                                                             // do something with response
+//                                                         }
+//                                                           error:^(LISDKAPIError *apiError) {
+//                                                               // do something with error
+//                                                               NSLog(@"Error: %@",apiError.localizedDescription);
+//                                                           }];
+//                }
+//                else
+//                {
+//                    [LISDKSessionManager createSessionWithAuth:[NSArray arrayWithObjects:LISDK_BASIC_PROFILE_PERMISSION, LISDK_EMAILADDRESS_PERMISSION,LISDK_W_SHARE_PERMISSION, nil]
+//                                                         state:@"some state"
+//                                        showGoToAppStoreDialog:YES
+//                                                  successBlock:^(NSString *returnState) {
+//                                                      
+//                                                      [[LISDKAPIHelper sharedInstance] postRequest:url stringBody:payload
+//                                                                                           success:^(LISDKAPIResponse *response) {
+//                                                                                               // do something with response
+//                                                                                           }
+//                                                                                             error:^(LISDKAPIError *apiError) {
+//                                                                                                 // do something with error
+//                                                                                                 NSLog(@"Error: %@",apiError.localizedDescription);
+//                                                                                             }];
+//                                                      
+//                                                  }
+//                                                    errorBlock:^(NSError *error) {
+//                                                        NSLog(@"%s %@","error called! ", [error description]);
+//                                                        
+//                                                    }
+//                     ];
+//                }
             }
                 break;
                 
