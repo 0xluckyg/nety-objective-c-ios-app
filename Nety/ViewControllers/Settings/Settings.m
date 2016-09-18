@@ -29,7 +29,7 @@
 - (void) viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [[[[[[FIRDatabase database] reference] child:kUsers] child:MY_USER.userID] child:kIAmDiscoverable] setValue:[NSString stringWithFormat:@"%f",self.sliderValue]];
+    [[[[[[FIRDatabase database] reference] child:kUsers] child:MY_USER.userID] child:kIAmDiscoverable] setValue:[NSString stringWithFormat:@"%f",self.sliderDistanceValue]];
 }
 #pragma mark - Initialization
 //---------------------------------------------------------
@@ -60,6 +60,10 @@
             [self.chatRequestSwitch setOn:NO];
             [self.chatSwitch setOn:NO];
             break;
+    }
+    
+    if (!self.sliderDistanceValue) {
+        self.sliderDistanceValue = 1000 * 20;
     }
     
 }
@@ -350,11 +354,11 @@
 -(void) calculateSliderDistanceValue {
     
     if (self.sliderValue >= 0 && self.sliderValue <= 0.1) {
-        self.sliderDistanceValue = 30;
+        self.sliderDistanceValue = 10;
     } else if (self.sliderValue > 0.10 && self.sliderValue <= 0.20) {
-        self.sliderDistanceValue = 50;
+        self.sliderDistanceValue = 30;
     } else if (self.sliderValue > 0.20 && self.sliderValue <= 0.30) {
-        self.sliderDistanceValue = 100;
+        self.sliderDistanceValue = 50;
     } else if (self.sliderValue > 0.30 && self.sliderValue <= 0.40) {
         self.sliderDistanceValue = 200;
     } else if (self.sliderValue > 0.40 && self.sliderValue <= 0.50) {
@@ -362,19 +366,19 @@
     }  else if (self.sliderValue > 0.50 && self.sliderValue <= 0.60) {
         self.sliderDistanceValue = 500;
     }  else if (self.sliderValue > 0.60 && self.sliderValue <= 0.70) {
-        self.sliderDistanceValue = 5280 * 5;
+        self.sliderDistanceValue = 1000 * 5;
     }  else if (self.sliderValue > 0.70 && self.sliderValue <= 0.80) {
-        self.sliderDistanceValue = 5280 * 7;
+        self.sliderDistanceValue = 1000 * 10;
     } else if (self.sliderValue > 0.80) {
-        self.sliderDistanceValue = 5280 * 10;
+        self.sliderDistanceValue = 1000 * 20;
     }
     
 }
 
 - (NSString *) calculateDistanceToDescription {
     
-    if (self.sliderDistanceValue >= 5280) {
-        return [NSString stringWithFormat:@"%i Miles", (int) self.sliderDistanceValue / 5280];
+    if (self.sliderDistanceValue >= 1000) {
+        return [NSString stringWithFormat:@"%i Miles", (int) self.sliderDistanceValue / 1000];
     } else {
         return [NSString stringWithFormat:@"%ift", (int) self.sliderDistanceValue];
     }

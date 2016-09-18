@@ -49,8 +49,13 @@ extern NSString *const kUserDetails;
 
 extern NSString *const kDefaultUserLogoName;
 extern NSString *const kGeoCoordinate;
-
 extern NSString *const kIAmDiscoverable;
+
+extern NSString *const kProfileImages;
+    extern NSString *const kBig;
+    extern NSString *const kSmall;
+extern NSString *const kChatImages;
+
 @interface Constants : NSObject
 
 @end

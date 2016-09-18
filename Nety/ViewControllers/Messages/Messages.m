@@ -401,7 +401,8 @@
             
             //Changing tabbar badge value
             NSInteger currentUnreadMessageBadgeValue = [[[self.tabBarController.tabBar.items objectAtIndex:2] badgeValue] integerValue];
-            NSInteger currentRoomUnreadMessage = [[[[[[self.firdatabase child:kUserChats] child:self.senderId] child:kChats] child:self.chatroomID] valueForKey:kUnread] integerValue];
+            
+            NSInteger currentRoomUnreadMessage = [[[snapshot.value objectForKey:self.chatroomID] objectForKey:kUnread] integerValue];
             
             if (currentUnreadMessageBadgeValue - currentRoomUnreadMessage == 0) {
                 [self.tabBarController.tabBar.items objectAtIndex:2].badgeValue = nil;
@@ -575,7 +576,7 @@
     
     FIRStorage *storage = [FIRStorage storage];
     FIRStorageReference *chatMediaImageRef = [[[storage reference]
-                                               child:@"ChatImages"]
+                                               child:kChatImages]
                                               child:chatMediaImage];
     
     NSData *pickedImageData = UIImagePNGRepresentation(pickedImage);

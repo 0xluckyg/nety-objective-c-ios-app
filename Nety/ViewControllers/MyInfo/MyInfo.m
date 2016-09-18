@@ -338,7 +338,7 @@
     NSString *uniqueImageID = [[NSUUID UUID] UUIDString];
     
     FIRStorage *storage = [FIRStorage storage];
-    FIRStorageReference *profileImageRef = [[[storage reference] child:@"profileImages"] child:uniqueImageID];
+    FIRStorageReference *profileImageRef = [[[storage reference] child:kProfileImages] child:uniqueImageID];
     
     //If user doesn't set profile image, set it to default image without uploading it.
     NSData *pickedImage = UIImagePNGRepresentation(image);

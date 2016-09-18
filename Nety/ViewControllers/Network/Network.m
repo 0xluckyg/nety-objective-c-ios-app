@@ -29,16 +29,8 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-        
-    NSUserDefaults* userDef = [NSUserDefaults standardUserDefaults];
-    if ([userDef objectForKey:@"sliderNetwork"] == nil) {
-        self.sliderValue = 0.3;
-        self.slider.value = self.sliderValue;
-    } else {
-        NSLog(@"sLIDER NET %lu", [[userDef objectForKey:@"sliderNetwork"] integerValue]);
-        self.sliderValue = [[userDef objectForKey:@"sliderNetwork"] integerValue];
-        self.slider.value = self.sliderValue;
-    }
+    
+    self.slider.value = [self.userLocationRange floatValue];
     
     [self calculateSliderDistanceValue];
     
@@ -65,6 +57,10 @@
 
 - (void)initializeSettings {
     
+    self.userLocationRange = [[NSNumber alloc] initWithFloat:0.3];
+    
+    self.slider.value = [self.userLocationRange floatValue];
+    
     self.noContentController = [[NoContent alloc] init];
 }
 
@@ -77,7 +73,7 @@
     self.UIPrinciple = [[UIPrinciples alloc] init];
     
     //Style the navigation bar
-    UINavigationItem *navItem= [[UINavigationItem alloc] init];
+    self.navItem = [[UINavigationItem alloc] init];
     
     self.slider.continuous = YES;
     
@@ -89,7 +85,11 @@
     separatorLineView.backgroundColor = self.UIPrinciple.netyGray;
     [self.sliderView addSubview:separatorLineView];
     
-    navItem.title = [NSString stringWithFormat:NSLocalizedString(@"%@ nearMe", @"{distance} Near Me"), [self calculateDistanceToDescription]];
+    [self calculateSliderDistanceValue];
+    
+    self.navItem.title = [NSString stringWithFormat:NSLocalizedString(@"%@ nearMe", @"{distance} Near Me"), [self calculateDistanceToDescription]];
+    self.title = [NSString stringWithFormat:NSLocalizedString(@"%@ nearMe", @"{distance} Near Me"), [self calculateDistanceToDescription]];
+
     
     //Style navbar
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -98,12 +98,9 @@
     
     [self.navigationController.navigationBar setTitleTextAttributes:attributes];
     
-    [self.navigationController.navigationBar setItems:@[navItem]];
+    [self.navigationController.navigationBar setItems:@[self.navItem]];
     
     [self.searchBar setBarTintColor:[UIColor whiteColor]];
-    
-    self.navigationItem.title = [NSString stringWithFormat:NSLocalizedString(@"%@ nearMe", @"{distance} Near Me"), [self calculateDistanceToDescription]];
-    
     
     [self.searchBar setPlaceholder:NSLocalizedString(@"networkSearchbar", nil)];
 }
@@ -122,13 +119,14 @@
     
     
     NSPredicate* predicate;
-    if (_searchBar.text.length)
+    if (self.searchBar.text.length)
     {
-        predicate = [NSPredicate predicateWithFormat:@"firstName CONTAINS[c]%@ OR lastName CONTAINS[c] %@ AND itIsMe != YES AND distance < %f AND isBlocked == NO AND imdiscoverable > distance",_searchBar.text,_searchBar.text,_sliderDistanceValue];
+        predicate = [NSPredicate predicateWithFormat:@"firstName CONTAINS[c]%@ OR lastName CONTAINS[c] %@ AND itIsMe != YES AND distance < %f AND isBlocked == NO AND imdiscoverable > distance AND security != 3",self.searchBar.text,self.searchBar.text,self.sliderDistanceValue];
     }
     else
     {
-        predicate = [NSPredicate predicateWithFormat:@"itIsMe != YES  AND distance < %f AND isBlocked == NO AND imdiscoverable > distance",_sliderDistanceValue];
+        NSLog(@"%f sliderDistance", self.sliderDistanceValue);
+        predicate = [NSPredicate predicateWithFormat:@"itIsMe != YES  AND distance < %f AND isBlocked == NO AND imdiscoverable > distance AND security != 3",self.sliderDistanceValue];
     }
 
     [fetchRequest setPredicate:predicate];
@@ -291,12 +289,10 @@
 
 - (IBAction)sliderAction:(id)sender {
     
-    self.sliderValue = self.slider.value;
-    
     [self calculateSliderDistanceValue];
     
     self.title = [NSString stringWithFormat:NSLocalizedString(@"%@ nearMe", @"{distance} Near Me"), [self calculateDistanceToDescription]];
-    
+    self.navItem.title = [NSString stringWithFormat:NSLocalizedString(@"%@ nearMe", @"{distance} Near Me"), [self calculateDistanceToDescription]];
 }
 
 
@@ -314,41 +310,42 @@
 
 -(void) calculateSliderDistanceValue {
     
-    if (self.sliderValue >= 0 && self.sliderValue <= 0.1) {
+    self.userLocationRange = [NSNumber numberWithFloat:self.slider.value];
+
+    if (self.slider.value >= 0 && self.slider.value <= 0.1) {
+        self.sliderDistanceValue = 10;
+    } else if (self.slider.value > 0.10 && self.slider.value <= 0.20) {
         self.sliderDistanceValue = 30;
-    } else if (self.sliderValue > 0.10 && self.sliderValue <= 0.20) {
+    } else if (self.slider.value > 0.20 && self.slider.value <= 0.30) {
         self.sliderDistanceValue = 50;
-    } else if (self.sliderValue > 0.20 && self.sliderValue <= 0.30) {
-        self.sliderDistanceValue = 100;
-    } else if (self.sliderValue > 0.30 && self.sliderValue <= 0.40) {
+    } else if (self.slider.value > 0.30 && self.slider.value <= 0.40) {
         self.sliderDistanceValue = 200;
-    } else if (self.sliderValue > 0.40 && self.sliderValue <= 0.50) {
+    } else if (self.slider.value > 0.40 && self.slider.value <= 0.50) {
         self.sliderDistanceValue = 300;
-    }  else if (self.sliderValue > 0.50 && self.sliderValue <= 0.60) {
+    }  else if (self.slider.value > 0.50 && self.slider.value <= 0.60) {
         self.sliderDistanceValue = 500;
-    }  else if (self.sliderValue > 0.60 && self.sliderValue <= 0.70) {
-        self.sliderDistanceValue = 5280 * 5;
-    }  else if (self.sliderValue > 0.70 && self.sliderValue <= 0.80) {
-        self.sliderDistanceValue = 5280 * 7;
-    } else if (self.sliderValue > 0.80) {
-        self.sliderDistanceValue = 5280 * 10;
+    }  else if (self.slider.value > 0.60 && self.slider.value <= 0.70) {
+        self.sliderDistanceValue = 1000 * 5;
+    }  else if (self.slider.value > 0.70 && self.slider.value <= 0.80) {
+        self.sliderDistanceValue = 1000 * 10;
+    } else if (self.slider.value > 0.80) {
+        self.sliderDistanceValue = 1000 * 20;
     }
     
     _fetchedResultsController = nil;
     _fetchedResultsController.delegate = nil;
-    [self.table reloadData];
+    self.slider.value = [self.userLocationRange floatValue];
     
-    NSUserDefaults* userDef = [NSUserDefaults standardUserDefaults];
-    [userDef setObject:[NSNumber numberWithInteger:_slider.value] forKey:@"sliderNetwork"];
+    [self.table reloadData];
     
 }
 
 - (NSString *) calculateDistanceToDescription {
     
-    if (self.sliderDistanceValue >= 5280) {
-        return [NSString stringWithFormat:@"%i Miles", (int) self.sliderDistanceValue / 5280];
+    if (self.sliderDistanceValue >= 1000) {
+        return [NSString stringWithFormat:@"%ikm", (int) self.sliderDistanceValue / 1000];
     } else {
-        return [NSString stringWithFormat:@"%ift", (int) self.sliderDistanceValue];
+        return [NSString stringWithFormat:@"%im", (int) self.sliderDistanceValue];
     }
     
 }

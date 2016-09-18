@@ -351,14 +351,14 @@
     
     NSArray* tempLocationArray = [NSArray arrayWithArray:[user.geocoordinate componentsSeparatedByString:@":"]];
     CLLocation* tempLocation = [[CLLocation alloc] initWithLatitude:[tempLocationArray[0] floatValue] longitude:[tempLocationArray[1] floatValue]];
-    double distance = [tempLocation distanceFromLocation:MY_API.locationManager.location];
-    NSLog(@"distance %f",distance);
-    [user setValue:[NSNumber numberWithDouble:distance] forKey:@"distance"];
+    CLLocationDistance meters = [tempLocation distanceFromLocation:MY_API.locationManager.location];
+    NSLog(@"my location %@", MY_API.locationManager.location);
+    NSLog(@"distance %f",meters);
+    [user setValue:[NSNumber numberWithDouble:meters] forKey:@"distance"];
     if (flagMy) {
         user.itIsMe = [NSNumber numberWithBool:YES];
         [self setMyUser:user];
     }
-    NSLog(@"UserADD");
     [self saveContext];
 }
 
@@ -554,9 +554,6 @@
 - (void)locationManager: (CLLocationManager *)manager
     didUpdateToLocation: (CLLocation *)newLocation
            fromLocation: (CLLocation *)oldLocation {
-    
-    NSLog(@"location called");
-    
     
     if (MY_USER) {
         FIRDatabaseReference *geo = [[FIRDatabase database] reference];

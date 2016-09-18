@@ -205,11 +205,6 @@
     
     profilePage.selectedUser = user;
     
-    __weak typeof(self) weakSelf = self;
-    [self.UIPrinciple setTabBarVisible:![self.UIPrinciple tabBarIsVisible:self] animated:YES sender:self completion:^(BOOL finished) {
-        weakSelf.tabBarController.tabBar.hidden = YES;
-    }];
-    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     [self.navigationController pushViewController:profilePage animated:YES];
