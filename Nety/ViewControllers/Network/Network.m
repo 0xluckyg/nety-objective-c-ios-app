@@ -151,6 +151,19 @@
         abort();
     }
     
+    //If no experiences visible, show noContent header
+    if ([[self fetchedResultsController].fetchedObjects count] == 0) {
+        
+        UIImage *contentImage = [[UIImage imageNamed:@"Location"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        
+        if (![self.noContentController isDescendantOfView:self.view]) {
+            [self.UIPrinciple addNoContent:self setText:NSLocalizedString(@"nobodyNearYou", nil) setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
+        }
+    } else {
+        [self.UIPrinciple removeNoContent:self.noContentController];
+    }
+
+    
     return _fetchedResultsController;
 }
 

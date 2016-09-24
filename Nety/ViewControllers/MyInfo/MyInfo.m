@@ -33,25 +33,6 @@
     
     self.navigationItem.title = [NSString stringWithFormat:@"%@ %@", MY_USER.firstName, MY_USER.lastName];
     
-    //If image is not NetyBlueLogo, start downloading and caching the image
-    NSString *photoUrl = MY_USER.profileImageUrl;
-    self.profileImageView = [[UIImageView alloc] init];
-    
-    if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
-        NSURL *profileImageUrl = [NSURL URLWithString:photoUrl];
-        [self.profileImageView sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
-    } else {
-        self.profileImageView.image = [UIImage imageNamed:kDefaultUserLogoName];
-    }
-    
-    float width = self.view.frame.size.width;
-    float height = self.view.frame.size.height / 2.2;
-    
-    [self.profileImageView setFrame:CGRectMake(0, 0, width, height)];
-    [self.profileImageView setContentMode:UIViewContentModeScaleAspectFill];
-    
-    [self.tableView addParallaxWithView:self.profileImageView andHeight:height];
-    
     [self.tableView reloadData];
     
 }
@@ -89,6 +70,17 @@
     float width = self.view.frame.size.width;
     float height = self.view.frame.size.height / 2.2;
     
+    //If image is not NetyBlueLogo, start downloading and caching the image
+    NSString *photoUrl = MY_USER.profileImageUrl;
+    self.profileImageView = [[UIImageView alloc] init];
+    
+    if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
+        NSURL *profileImageUrl = [NSURL URLWithString:photoUrl];
+        [self.profileImageView sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
+    } else {
+        self.profileImageView.image = [UIImage imageNamed:kDefaultUserLogoName];
+    }
+    
     [self.profileImageView setFrame:CGRectMake(0, 0, width, height)];
     [self.profileImageView setContentMode:UIViewContentModeScaleAspectFill];
     
@@ -96,6 +88,9 @@
     [self.tableView.parallaxView setDelegate:self];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.tableView setAllowsSelection:YES];
+    
+    [self.tableView addParallaxWithView:self.profileImageView andHeight:height];
+    
     
     //Configure tableview height
     self.tableView.rowHeight = UITableViewAutomaticDimension;

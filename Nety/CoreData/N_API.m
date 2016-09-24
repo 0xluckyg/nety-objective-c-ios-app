@@ -517,6 +517,7 @@
         
         NSString *chatRoomKey = snapshot.key;
         
+        
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"ChatRooms" inManagedObjectContext:self.managedObjectContext];
         [fetchRequest setEntity:entity];

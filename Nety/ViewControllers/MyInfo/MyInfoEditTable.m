@@ -221,7 +221,11 @@
         
         experienceDataVC.experienceArray = self.experienceArray;
         
+        NSLog(@"exp %@", self.experienceArray);
+        
         experienceDataVC.arrayIndex = self.arrayIndex;
+        
+        NSLog(@"eA %lu", self.arrayIndex);
         
     }
 }

@@ -83,15 +83,15 @@
         
     } else {
         
-        Experiences *experienceDict = [self.experienceArray objectAtIndex:self.arrayIndex];
+        NSDictionary *experienceDict = [self.experienceArray objectAtIndex:self.arrayIndex];
         
         //name
-        self.experienceNameTextField.text = experienceDict.name;
+        self.experienceNameTextField.text = [experienceDict objectForKey:kExperienceName];
         //date
-        self.dateFromTextField.text = experienceDict.startDate;
-        self.dateToTextField.text = experienceDict.endDate;
+        self.dateFromTextField.text = [experienceDict objectForKey:kExperienceStartDate];
+        self.dateToTextField.text = [experienceDict objectForKey:kExperienceEndDate];
         //description
-        self.experienceDescriptionTextField.text = experienceDict.descript;
+        self.experienceDescriptionTextField.text = [experienceDict objectForKey:kExperienceDescription];
         
     }
     
