@@ -70,6 +70,7 @@
     float width = self.view.frame.size.width;
     float height = self.view.frame.size.height / 2.2;
     
+    
     //If image is not NetyBlueLogo, start downloading and caching the image
     NSString *photoUrl = MY_USER.profileImageUrl;
     self.profileImageView = [[UIImageView alloc] init];
@@ -89,8 +90,7 @@
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.tableView setAllowsSelection:YES];
     
-    [self.tableView addParallaxWithView:self.profileImageView andHeight:height];
-    
+     [self.tableView addParallaxWithView:self.profileImageView andHeight:height];
     
     //Configure tableview height
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -333,7 +333,7 @@
     NSString *uniqueImageID = [[NSUUID UUID] UUIDString];
     
     FIRStorage *storage = [FIRStorage storage];
-    FIRStorageReference *profileImageRef = [[[storage reference] child:kProfileImages] child:uniqueImageID];
+    FIRStorageReference *profileImageRef = [[[storage reference] child:@"profileImages"] child:uniqueImageID];
     
     //If user doesn't set profile image, set it to default image without uploading it.
     NSData *pickedImage = UIImagePNGRepresentation(image);

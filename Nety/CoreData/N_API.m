@@ -10,6 +10,7 @@
 #import "Constants.h"
 #import "ChatRooms.h"
 #import "Experiences.h"
+#import "AppDelegate.h"
 
 @implementation N_API
 
@@ -351,14 +352,14 @@
     
     NSArray* tempLocationArray = [NSArray arrayWithArray:[user.geocoordinate componentsSeparatedByString:@":"]];
     CLLocation* tempLocation = [[CLLocation alloc] initWithLatitude:[tempLocationArray[0] floatValue] longitude:[tempLocationArray[1] floatValue]];
-    CLLocationDistance meters = [tempLocation distanceFromLocation:MY_API.locationManager.location];
-    NSLog(@"my location %@", MY_API.locationManager.location);
-    NSLog(@"distance %f",meters);
-    [user setValue:[NSNumber numberWithDouble:meters] forKey:@"distance"];
+    double distance = [tempLocation distanceFromLocation:MY_API.locationManager.location];
+//    NSLog(@"distance %f",distance);
+    [user setValue:[NSNumber numberWithDouble:distance] forKey:@"distance"];
     if (flagMy) {
         user.itIsMe = [NSNumber numberWithBool:YES];
         [self setMyUser:user];
     }
+//    NSLog(@"UserADD");
     [self saveContext];
 }
 
@@ -413,6 +414,9 @@
         [self listenForChatsChildRemoved];
         [self listenForChatsChildChanged];
         // [self listenForChatsChildMoved]
+        
+        [self listenForAllChatsChildChanged];
+
     }
     _myUser = myUser;
 }
@@ -464,7 +468,8 @@
         //NSLog(@"Got you: %@", [members objectForKey:@"member1"]);
         
         Users* tempUser = [self getUserrsWithID:[members objectForKey:@"member1"]];
-            
+        if (!tempUser)
+            return ;
             NSString *profilePhotoUrl = tempUser.profileImageUrl;
             NSString *name = [NSString stringWithFormat:@"%@ %@", tempUser.firstName, tempUser.lastName];
             
@@ -517,7 +522,6 @@
         
         NSString *chatRoomKey = snapshot.key;
         
-        
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"ChatRooms" inManagedObjectContext:self.managedObjectContext];
         [fetchRequest setEntity:entity];
@@ -550,18 +554,61 @@
     
 }
 
+-(void)listenForAllChatsChildChanged
+{
+    [[[[self.firdatabase child:kUserChats] child:MY_USER.userID] child:kChats] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot)
+     {
+        
+        NSMutableDictionary *chatRoomInfoDict = snapshot.value;
+
+         AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+         appDelegate.numberOfUnreadChats=0;
+         if (chatRoomInfoDict && [chatRoomInfoDict respondsToSelector:@selector(allKeys)]) {
+             for (NSString* keys in [chatRoomInfoDict allKeys])
+             {
+                 @try {
+                     
+                     NSDictionary *members = [chatRoomInfoDict objectForKey:keys];
+                     
+                     if ([[members objectForKey:kUnread] intValue]>0)
+                     {
+                         appDelegate.numberOfUnreadChats+=[[members objectForKey:kUnread] intValue];
+                     }
+                 } @catch (NSException *exception) {
+                     //NSLog(@"Create user ERROR: %@",exception);
+                 } @finally {
+                     ///
+                 }
+             }
+         }
+         
+         if (appDelegate.numberOfUnreadChats == 0) {
+             [appDelegate.tabBarRootController.tabBar.items objectAtIndex:2].badgeValue = nil;
+         } else {
+             [[appDelegate.tabBarRootController.tabBar.items objectAtIndex:2] setBadgeValue:[NSString stringWithFormat:@"%i", appDelegate.numberOfUnreadChats]];
+         }
+        
+    } withCancelBlock:nil];
+}
 #pragma mark - CLLocationManagerDelegate
 
 - (void)locationManager: (CLLocationManager *)manager
     didUpdateToLocation: (CLLocation *)newLocation
            fromLocation: (CLLocation *)oldLocation {
     
+//    NSLog(@"location called  %@",newLocation);
+    
+    
     if (MY_USER) {
         FIRDatabaseReference *geo = [[FIRDatabase database] reference];
         
-        //Save name and age to the database
+        //Save location to the database
         [[[[geo child:kUsers] child:MY_USER.userID] child:kGeoCoordinate] setValue:[NSString stringWithFormat:@"%f:%f",newLocation.coordinate.latitude, newLocation.coordinate.longitude]];
-        
+     
+        [self.myUser setValue:[NSString stringWithFormat:@"%f:%f",newLocation.coordinate.latitude, newLocation.coordinate.longitude] forKey:kGeoCoordinate];
+
+        [self listenForChildAdded];
+
         NSLog(@"location UDATE OK!!!");
     }
     

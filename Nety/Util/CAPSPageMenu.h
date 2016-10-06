@@ -69,6 +69,8 @@
 
 @property (nonatomic, weak) id <CAPSPageMenuDelegate> delegate;
 
+@property (nonatomic) BOOL didLayoutSubviewsAfterRotation;
+
 - (void)addPageAtIndex:(NSInteger)index;
 - (void)moveToPage:(NSInteger)index;
 

@@ -16,5 +16,6 @@ target 'Nety' do
     pod 'Firebase/Storage'
     pod 'Firebase/AppIndexing'
     pod 'Firebase/Crash'
+pod 'Firebase/Messaging'
 end
 

@@ -26,6 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.collectionView.hidden=YES;
     [self initializeSettings];
     [self initializeDesign];
 }
@@ -33,6 +34,7 @@
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
 }
 
@@ -162,6 +164,14 @@
     JSQMessage *msg = [self getMessageObject:indexPath];
     
     [self configureCell:cell withObject:msg];
+    
+    if (msg.isMediaMessage)
+    {
+        Msg* tempMessage = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+        NSURL *url=[NSURL URLWithString:tempMessage.media];
+        [cell.messageBubbleImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
+    }
+
     return cell;
 }
 
@@ -401,21 +411,51 @@
             
             //Changing tabbar badge value
             NSInteger currentUnreadMessageBadgeValue = [[[self.tabBarController.tabBar.items objectAtIndex:2] badgeValue] integerValue];
+
+            //            NSInteger currentRoomUnreadMessage = [[[[[[self.firdatabase child:kUserChats] child:self.senderId] child:kChats] child:self.chatroomID] valueForKey:kUnread] integerValue];
+         FIRDatabaseReference *fdRUnreadRoomRef=[[[[[self.firdatabase child:kUserChats] child:self.senderId] child:kChats] child:self.chatroomID] child:kUnread];
             
-            NSInteger currentRoomUnreadMessage = [[[snapshot.value objectForKey:self.chatroomID] objectForKey:kUnread] integerValue];
+            [fdRUnreadRoomRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+                
+                
+                NSInteger currentRoomUnreadMessage = [[NSString stringWithFormat:@"%@", snapshot.value] integerValue];
+                
+//                NSInteger currentRoomUnreadMessage = [[snapshot.value objectForKey:kUnread] integerValue];
+
+                if (currentUnreadMessageBadgeValue - currentRoomUnreadMessage <= 0) {
+                    [self.tabBarController.tabBar.items objectAtIndex:2].badgeValue = nil;
+                } else {
+                    [[self.tabBarController.tabBar.items objectAtIndex:2] setBadgeValue:[NSString stringWithFormat:@"%d", currentUnreadMessageBadgeValue - currentRoomUnreadMessage]];
+                }
+                
+                //Set user's own readcount to 0 when entering chat room
+                [[[[[self.firdatabase child:kUserChats] child:self.senderId] child:kChats] child:self.chatroomID] updateChildValues:@{kUnread: @0}];
+                //Set user's online status to 0 when entering chat room
+                [[[[[self.firdatabase child:kUserChats] child:self.senderId] child:kChats] child:self.chatroomID] updateChildValues:@{kOnline: @1}];
+                
+                [self listenForReadCountAndOnlineStatus];
+                
+                [self scrollToTopAnimated:NO];
+                [self performSelector:@selector(scrollToBottomAnimated:) withObject:[NSNumber numberWithBool:NO] afterDelay:0.70];
+                [self performSelector:@selector(showcollectionview) withObject:nil afterDelay:0.70];
+                
+
+            } withCancelBlock:^(NSError * _Nonnull error) {
+                NSLog(@"%@", error.localizedDescription);
+            }];
             
-            if (currentUnreadMessageBadgeValue - currentRoomUnreadMessage == 0) {
-                [self.tabBarController.tabBar.items objectAtIndex:2].badgeValue = nil;
-            } else {
-                [[self.tabBarController.tabBar.items objectAtIndex:2] setBadgeValue:[NSString stringWithFormat:@"%lu", currentUnreadMessageBadgeValue - currentRoomUnreadMessage]];
-            }
-            
-            //Set user's own readcount to 0 when entering chat room
-            [[[[[self.firdatabase child:kUserChats] child:self.senderId] child:kChats] child:self.chatroomID] updateChildValues:@{kUnread: @0}];
-            //Set user's online status to 0 when entering chat room
-            [[[[[self.firdatabase child:kUserChats] child:self.senderId] child:kChats] child:self.chatroomID] updateChildValues:@{kOnline: @1}];
-            
-            [self listenForReadCountAndOnlineStatus];
+//            if (currentUnreadMessageBadgeValue - currentRoomUnreadMessage == 0) {
+//                [self.tabBarController.tabBar.items objectAtIndex:2].badgeValue = nil;
+//            } else {
+//                [[self.tabBarController.tabBar.items objectAtIndex:2] setBadgeValue:[NSString stringWithFormat:@"%lu", currentUnreadMessageBadgeValue - currentRoomUnreadMessage]];
+//            }
+//            
+//            //Set user's own readcount to 0 when entering chat room
+//            [[[[[self.firdatabase child:kUserChats] child:self.senderId] child:kChats] child:self.chatroomID] updateChildValues:@{kUnread: @0}];
+//            //Set user's online status to 0 when entering chat room
+//            [[[[[self.firdatabase child:kUserChats] child:self.senderId] child:kChats] child:self.chatroomID] updateChildValues:@{kOnline: @1}];
+//            
+//            [self listenForReadCountAndOnlineStatus];
         
         //If room doesn't exist
         } else {
@@ -447,13 +487,16 @@
             
             [self observeMessagesFromDatabase];
             [self listenForReadCountAndOnlineStatus];
-            
+            self.collectionView.hidden=NO;
         }
         
     } withCancelBlock:nil];
     
 }
-
+-(void)showcollectionview
+{
+    self.collectionView.hidden=NO;
+}
 - (void)listenForReadCountAndOnlineStatus {
     
     //Listen for other person's read count
@@ -562,6 +605,10 @@
         [chatImage sd_setImageWithURL:[NSURL URLWithString:tempMessage.media] placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
         JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithImage:chatImage.image];
         
+        if (![tempMessage.senderId isEqualToString:self.senderId]) {
+            photoItem.appliesMediaViewMaskAsOutgoing=NO;
+
+        }
         jsqMsg = [[JSQMessage alloc] initWithSenderId:senderIdFromDatabase senderDisplayName:senderDisplaynameFromDatabase date:messageDate media:photoItem];
         
         
@@ -576,7 +623,7 @@
     
     FIRStorage *storage = [FIRStorage storage];
     FIRStorageReference *chatMediaImageRef = [[[storage reference]
-                                               child:kChatImages]
+                                               child:@"ChatImages"]
                                               child:chatMediaImage];
     
     NSData *pickedImageData = UIImagePNGRepresentation(pickedImage);
@@ -612,11 +659,15 @@
             [self editChatRoomInfo:@"Photo" date:secondsSince1970];
             
             [hud hideAnimated:YES];
+            
+            [self scrollToBottomAnimated:YES];
+            [self.collectionView performSelector:@selector(reloadData) withObject:nil afterDelay:5.0];
         }
         
     }];
     
 }
+
 
 - (NSDate *)convertDoubleToDate: (double)timeIntervalDouble {
     NSNumber *timeIntervalInNumber = [NSNumber numberWithInt:timeIntervalDouble];
@@ -765,7 +816,11 @@
                 [self.collectionView moveItemAtIndexPath:indexPath toIndexPath:newIndexPath];
                 break;
         }
-    } completion:nil];
+    } completion:^(BOOL finished) {
+
+        [self scrollToBottomAnimated:YES];
+    
+    }];
 }
 
 - (void)configureCell:(JSQMessagesCollectionViewCell*)cell withObject:(JSQMessage *)object
@@ -782,6 +837,13 @@
         cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : cell.textView.textColor,
                                               NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
     }
+    else
+    {
+        Msg* tempMessage = [[self fetchedResultsController] objectAtIndexPath:[self.collectionView indexPathForCell:cell]];
+        NSURL *url=[NSURL URLWithString:tempMessage.media];
+        [cell.messageBubbleImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
+    }
+
 
 }
 @end

@@ -50,12 +50,6 @@ NSString *const kUserDetails = @"userDetails";
 NSString *const kDefaultUserLogoName = @"NetyBlueLogo";
 NSString *const kGeoCoordinate = @"geocoordinate";
 NSString *const kIAmDiscoverable = @"imdiscoverable";
-
-NSString *const kProfileImages = @"ProfileImages";
-    NSString *const kBig = @"Big";
-    NSString *const kSmall = @"Small";
-NSString *const kChatImages = @"ChatImages";
-
 @implementation Constants
 
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="MXR-kz-CZQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="MXR-kz-CZQ">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -72,8 +72,23 @@
                                     <constraint firstAttribute="width" constant="282" id="nyc-ae-i1i"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dj0-ZW-owM">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9OY-Wq-wvu">
                                 <rect key="frame" x="344" y="666" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="6HX-ge-8xW"/>
+                                    <constraint firstAttribute="height" constant="50" id="fYk-LY-F2H"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="loginWithLinkedinButton:" destination="j8U-Cs-uLi" eventType="touchUpInside" id="WMG-mr-Puk"/>
+                                    <action selector="signupButton:" destination="j8U-Cs-uLi" eventType="touchUpInside" id="g0F-hT-2ma"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dj0-ZW-owM">
+                                <rect key="frame" x="274" y="666" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="5Hm-0O-mxJ"/>
                                     <constraint firstAttribute="height" constant="50" id="gKn-BZ-faU"/>
@@ -90,9 +105,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="9OY-Wq-wvu" firstAttribute="leading" secondItem="Dj0-ZW-owM" secondAttribute="trailing" constant="20" id="2Oj-cF-Q59"/>
+                            <constraint firstItem="NSq-04-PUU" firstAttribute="top" secondItem="9OY-Wq-wvu" secondAttribute="bottom" constant="20" id="VCr-vG-lSX"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9OY-Wq-wvu" secondAttribute="trailing" id="X7g-BR-dDb"/>
                             <constraint firstItem="dzw-h8-dqd" firstAttribute="centerX" secondItem="lKd-TK-LJw" secondAttribute="centerX" id="fL3-7b-0tP"/>
                             <constraint firstItem="NSq-04-PUU" firstAttribute="top" secondItem="Dj0-ZW-owM" secondAttribute="bottom" constant="20" id="fnV-DE-AxZ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Dj0-ZW-owM" secondAttribute="trailing" id="x9Q-J3-bLZ"/>
                             <constraint firstItem="dzw-h8-dqd" firstAttribute="centerY" secondItem="lKd-TK-LJw" secondAttribute="centerY" id="yMs-Vb-gj0"/>
                         </constraints>
                     </view>
@@ -102,6 +119,7 @@
                         <outlet property="holdingView" destination="dzw-h8-dqd" id="GYl-3D-lzd"/>
                         <outlet property="loginButtonOutlet" destination="XJ5-h9-g37" id="tbf-ot-Sx7"/>
                         <outlet property="loginWithFacebookOutlet" destination="Dj0-ZW-owM" id="OeF-ES-Bsh"/>
+                        <outlet property="loginWithLinkedinOutlet" destination="9OY-Wq-wvu" id="Gsl-xL-0dH"/>
                         <outlet property="logoImage" destination="Ohl-8S-SdE" id="5vh-r1-Dlh"/>
                         <outlet property="signupButtonOutlet" destination="2lL-8E-NXk" id="tm8-vQ-bkr"/>
                     </connections>
@@ -491,7 +509,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="95"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UHx-KP-t83" id="xIV-fW-ENi">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="94.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="94"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LG5-Hy-dzh">
@@ -507,7 +525,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RgG-xO-L81">
-                                                    <rect key="frame" x="35" y="34" width="28.5" height="14.5"/>
+                                                    <rect key="frame" x="35" y="34" width="29" height="15"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -596,7 +614,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Work Experiences" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3DC-2C-l0g">
-                                <rect key="frame" x="140.5" y="44" width="133" height="21"/>
+                                <rect key="frame" x="141" y="44" width="133" height="21"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>

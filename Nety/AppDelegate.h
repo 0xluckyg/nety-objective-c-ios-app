@@ -31,9 +31,14 @@
 
 @property (strong, nonatomic) FIRDatabaseReference *firdatabase;
 
+@property int numberOfUnreadChats;
+
 -(NSString*)returnLatLongString;
 
 -(void)setUserIsSigningIn: (bool)boolean;
+
+-(void)initializeTabBar;
+-(void)initializeLoginView;
 
 @end
 

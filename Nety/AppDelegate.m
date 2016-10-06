@@ -13,6 +13,10 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @import FirebaseDatabase;
+@import FirebaseInstanceID;
+@import FirebaseMessaging;
+
+#define NSFoundationVersionNumber_iOS_9_x_Max 1299
 
 @interface AppDelegate ()
 
@@ -21,7 +25,7 @@
 @end
 
 @implementation AppDelegate
-
+@synthesize numberOfUnreadChats;
 
 #pragma mark - View Load
 //---------------------------------------------------------
@@ -33,6 +37,11 @@
     
     userIsSigningIn = false;
     
+//    FIRDatabaseReference *geofireRef = [[FIRDatabase database] reference];
+//    
+//    _geoFire = [[GeoFire alloc] initWithFirebaseRef:geofireRef];
+    
+    
     //[self loginLinkedIn];
     //Check if user is signed in, and move on
     [self initializeSettings];
@@ -41,9 +50,37 @@
     [self initializeTabBar];
     
     self.firdatabase = [[FIRDatabase database] reference];
-    
+    // Add observer for InstanceID token refresh callback.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tokenRefreshNotification:)
+                                                 name:kFIRInstanceIDTokenRefreshNotification object:nil];
+
     return YES;
 }
+
+- (void)tokenRefreshNotification:(NSNotification *)notification {
+    // Note that this callback will be fired everytime a new token is generated, including the first
+    // time. So if you need to retrieve the token as soon as it is available this is where that
+    // should be done.
+    NSString *refreshedToken = [[FIRInstanceID instanceID] token];
+    NSLog(@"InstanceID token: %@", refreshedToken);
+    
+    // Connect to FCM since connection may have failed when attempted before having a token.
+    [self connectToFcm];
+    
+    // TODO: If necessary send token to application server.
+}
+- (void)connectToFcm {
+    [[FIRMessaging messaging] connectWithCompletion:^(NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Unable to connect to FCM. %@", error);
+        } else {
+            NSLog(@"Connected to FCM.");
+        }
+    }];
+}
+// [END connect_to_fcm]
+
+// [START disconnect_from_fcm]
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
@@ -51,6 +88,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [self connectToFcm];
 }
 
 
@@ -58,7 +96,8 @@
 //---------------------------------------------------------
 
 
--(void)initializeLoginView {
+-(void)initializeLoginView
+{
     
         [[FIRAuth auth] addAuthStateDidChangeListener:^(FIRAuth *_Nonnull auth,
                                                         FIRUser *_Nullable user) {
@@ -71,23 +110,26 @@
                     // User is signed in.
                     NSLog(@"App Delegate detected user signedin");
                     [self fetchUserInformation:user];
-                    
-//                    if (MY_USER == nil || MY_USER.userID == nil) {
-//                                                
-//
-//
-//                    } else {
-                    
-                        //Set root view controller to main app
-                    
-//                    }
+                    userIsSigningIn=true;
+                    //Set root view controller to main app
+                    self.firdatabase = nil;
+                    self.firdatabase = [[FIRDatabase database] reference];
+
+                    if (self.tabBarRootController==nil)
+                        [self initializeTabBar];
+                    [self.window setRootViewController:self.tabBarRootController];
                     
                 }
                 
             } else  {
-                UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"LoginSignup" bundle:nil];
-                UIViewController *mainViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"MainPageNav"];
-                [self.window setRootViewController:mainViewController];
+                userIsSigningIn=false;
+
+                    NSLog(@"App Delegate detected user not signed in");
+                    UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"LoginSignup" bundle:nil];
+                    UIViewController *mainViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"MainPageNav"];
+                
+                    //Set root view controller to login page
+                    [self.window setRootViewController:mainViewController];
             }
         }];
     
@@ -118,7 +160,59 @@
     [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
     [[UIApplication sharedApplication] registerForRemoteNotifications];
     
+    
+    
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_9_x_Max) {
+        UIUserNotificationType allNotificationTypes =
+        (UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge);
+        UIUserNotificationSettings *settings =
+        [UIUserNotificationSettings settingsForTypes:allNotificationTypes categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    } else {
+        // iOS 10 or later
+#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
+        UNAuthorizationOptions authOptions =
+        UNAuthorizationOptionAlert
+        | UNAuthorizationOptionSound
+        | UNAuthorizationOptionBadge;
+        [[UNUserNotificationCenter currentNotificationCenter]
+         requestAuthorizationWithOptions:authOptions
+         completionHandler:^(BOOL granted, NSError * _Nullable error) {
+         }
+         ];
+        
+        // For iOS 10 display notification (sent via APNS)
+        [[UNUserNotificationCenter currentNotificationCenter] setDelegate:self];
+        // For iOS 10 data message (sent via FCM)
+        [[FIRMessaging messaging] setRemoteMessageDelegate:self];
+#endif
+    }
+    
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+
+    
 }
+
+// Receive displayed notifications for iOS 10 devices.
+#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center
+       willPresentNotification:(UNNotification *)notification
+         withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
+    // Print message ID.
+    NSDictionary *userInfo = notification.request.content.userInfo;
+    NSLog(@"Message ID: %@", userInfo[@"gcm.message_id"]);
+    
+    // Print full message.
+    NSLog(@"%@", userInfo);
+}
+
+// Receive data message on iOS 10 devices.
+- (void)applicationReceivedRemoteMessage:(FIRMessagingRemoteMessage *)remoteMessage {
+    // Print full message
+    NSLog(@"%@", [remoteMessage appData]);
+}
+#endif
+
 
 -(void)initializeTabBar {
     //Create a tabBar instance
@@ -183,7 +277,6 @@
 #pragma mark - View Disappear
 //---------------------------------------------------------
 
-
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -192,6 +285,8 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [[FIRMessaging messaging] disconnect];
+    NSLog(@"Disconnected from FCM");
 }
 
 
@@ -205,6 +300,30 @@
 #pragma mark - Custom methods
 //---------------------------------------------------------
 
+
+- (void) loginLinkedIn
+{
+//    [LISDKSessionManager createSessionWithAuth:[NSArray arrayWithObjects:LISDK_BASIC_PROFILE_PERMISSION, LISDK_EMAILADDRESS_PERMISSION, nil]
+//                                         state:@"some state"
+//                        showGoToAppStoreDialog:YES
+//                                  successBlock:^(NSString *returnState) {
+//                                      
+//                                      NSLog(@"%s","success called!");
+//                                      LISDKSession *session = [[LISDKSessionManager sharedInstance] session];
+//                                      NSLog(@"value=%@ isvalid=%@",[session value],[session isValid] ? @"YES" : @"NO");
+//                                      NSMutableString *text = [[NSMutableString alloc] initWithString:[session.accessToken description]];
+//                                      [text appendString:[NSString stringWithFormat:@",state=\"%@\"",returnState]];
+//                                      NSLog(@"Response label text %@",text);
+//
+//                                      
+//                                  }
+//                                    errorBlock:^(NSError *error) {
+//                                        NSLog(@"%s %@","error called! ", [error description]);
+//
+//                                    }
+//     ];
+    NSLog(@"%s","sync pressed3");
+}
 -(NSString*)returnLatLongString {
     
     NSString *str = [NSString stringWithFormat: @"lat=%@&long=%@", self.stringLatitude, self.stringLongitude];
@@ -230,15 +349,20 @@
             
             [MY_API addNewUser:usersDictionary UserID:userID FlagMy:YES];
             
-            NSLog(@"%@", kUserChats);
-            NSLog(@"%@", MY_USER.userID);
-            NSLog(@"%@", kChats);
+//            NSLog(@"%@", kUserChats);
+//            NSLog(@"%@", MY_USER.userID);
+//            NSLog(@"%@", kChats);
             [[[[self.firdatabase child:kUserChats] child:MY_USER.userID] child:kChats] observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
                 
-                NSDictionary *chatDictionary = snapshot.value;
-                numberOfUnreadChats += [[chatDictionary objectForKey:kUnread] integerValue];
-                
-            } withCancelBlock:nil];
+//                NSDictionary *chatDictionary = snapshot.value;
+//                numberOfUnreadChats += [[chatDictionary objectForKey:kUnread] integerValue];
+//                
+//                if (numberOfUnreadChats == 0) {
+//                    [self.tabBarRootController.tabBar.items objectAtIndex:2].badgeValue = nil;
+//                } else {
+//                    [[self.tabBarRootController.tabBar.items objectAtIndex:2] setBadgeValue:[NSString stringWithFormat:@"%i", numberOfUnreadChats]];
+//                }
+           } withCancelBlock:nil];
             
             if (numberOfUnreadChats == 0) {
                 [self.tabBarRootController.tabBar.items objectAtIndex:2].badgeValue = nil;
@@ -246,20 +370,10 @@
                 [[self.tabBarRootController.tabBar.items objectAtIndex:2] setBadgeValue:[NSString stringWithFormat:@"%i", numberOfUnreadChats]];
             }
             
-            NSLog(@"User not found");
-            [self.window setRootViewController:self.tabBarRootController];
-            
         }
         else
         {
-            
-            NSLog(@"App Delegate detected user not signed in");
-            UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"LoginSignup" bundle:nil];
-            UIViewController *mainViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"MainPageNav"];
-            
-            //Set root view controller to login page
-            [self.window setRootViewController:mainViewController];
-
+            NSLog(@"User not found");            
         }
         
         
@@ -288,6 +402,12 @@
                                                            annotation:annotation];
     }
     return YES;
+}
+
+- (void)application:(UIApplication *)application
+didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    [[FIRInstanceID instanceID] setAPNSToken:deviceToken type:FIRInstanceIDAPNSTokenTypeSandbox];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo

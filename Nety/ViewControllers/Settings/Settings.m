@@ -25,11 +25,27 @@
     [self initializeSettings];
     [self initializeDesign];
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    NSUserDefaults* userDef = [NSUserDefaults standardUserDefaults];
+    if ([userDef objectForKey:@"sliderNetwork"] == nil) {
+        self.sliderValue = 0.3;
+        self.locationRangeSlider.value = self.sliderValue;
+    } else {
+        self.sliderValue = [[userDef objectForKey:@"sliderNetwork"] floatValue];
+        self.locationRangeSlider.value = self.sliderValue;
+    }
+    [self calculateSliderDistanceValue];
+    NSString *distanceString = [self calculateDistanceToDescription];
+    self.locationRangeLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ discoverable", @"{distance} discoverable"), distanceString];
+  
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [[appDelegate.tabBarRootController.tabBar.items objectAtIndex:0] setTitle:[NSString stringWithFormat:NSLocalizedString(@"%@ nearMe", @"{distance} Near Me"), distanceString]];
+}
 - (void) viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [[[[[[FIRDatabase database] reference] child:kUsers] child:MY_USER.userID] child:kIAmDiscoverable] setValue:[NSString stringWithFormat:@"%f",self.sliderDistanceValue]];
+    [[[[[[FIRDatabase database] reference] child:kUsers] child:MY_USER.userID] child:kIAmDiscoverable] setValue:[NSString stringWithFormat:@"%f",self.sliderValue]];
 }
 #pragma mark - Initialization
 //---------------------------------------------------------
@@ -62,10 +78,19 @@
             break;
     }
     
-    if (!self.sliderDistanceValue) {
-        self.sliderDistanceValue = 1000 * 20;
+    NSUserDefaults* userDef = [NSUserDefaults standardUserDefaults];
+    if ([userDef objectForKey:@"sliderNetwork"] == nil) {
+        self.sliderValue = 0.3;
+        self.locationRangeSlider.value = self.sliderValue;
+    } else {
+        self.sliderValue = [[userDef objectForKey:@"sliderNetwork"] floatValue];
+        self.locationRangeSlider.value = self.sliderValue;
     }
+    [self calculateSliderDistanceValue];
+    NSString *distanceString = [self calculateDistanceToDescription];
     
+    self.locationRangeLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ discoverable", @"{distance} discoverable"), distanceString];
+
 }
 
 -(void)initializeDesign {
@@ -98,8 +123,8 @@
     [self.chatSwitch setOnTintColor:self.UIPrinciple.netyBlue];
 
     //Set slider
-    self.locationRangeSlider.value = 1;
-    self.sliderValue = self.locationRangeSlider.value;
+//    self.locationRangeSlider.value = 1;
+//    self.sliderValue = self.locationRangeSlider.value;
     [self calculateSliderDistanceValue];
     NSString *distanceString = [self calculateDistanceToDescription];
     
@@ -108,9 +133,8 @@
     self.chatOutlet.text = NSLocalizedString(@"settingsChat", nil);
     self.chatNotificationsOutlet.text = NSLocalizedString(@"chatNotifications", nil);
     self.shareOnFacebookOutlet.text = NSLocalizedString(@"shareOnFacebook", nil);
-    self.shareWithFriendsOutlet.text = NSLocalizedString(@"shareWithFriends", nil);
+    self.shareOnLinkedInOutlet.text = NSLocalizedString(@"shareOnLinkedIn", nil);
     self.logOutButtonOutlet.text = NSLocalizedString(@"logOut", nil);
-    self.changePasswordOutlet.text = NSLocalizedString(@"changePassword", nil);
 }
 
 
@@ -136,26 +160,10 @@
     }];
     
     if (indexPath.section == 3) {
-        if (indexPath.row == 1) {
+        if (indexPath.row == 0) {
             
             [self.UIPrinciple twoButtonAlert:yes rightButton:no controller:NSLocalizedString(@"logOut", nil) message:NSLocalizedString(@"logOutDescription", nil) viewController:self];
             
-        } else {
-            
-            UIStoryboard *changePasswordStoryboard = [UIStoryboard storyboardWithName:@"Settings" bundle:nil];
-            ChangePassword *changePassword = [changePasswordStoryboard instantiateViewControllerWithIdentifier:@"ChangePassword"];
-            
-            FIRUser *user = [FIRAuth auth].currentUser;
-            
-            if (user != nil) {
-                for (id<FIRUserInfo> profile in user.providerData) {
-                    if ([profile.providerID isEqualToString:@"facebook.com"]) {
-                        [self.UIPrinciple oneButtonAlert:NSLocalizedString(@"ok", nil) controllerTitle:NSLocalizedString(@"invalidChangePasswordTitle", nil) message:NSLocalizedString(@"invalidChangePasswordDescription", nil) viewController:self];
-                    } else {
-                        [self.navigationController pushViewController:changePassword animated:YES];
-                    }
-                }
-            }
         }
     }
     
@@ -182,43 +190,43 @@
                 break;
             case 1:
             {
-//                NSString *url = @"https://api.linkedin.com/v1/people/~/shares";
-//                
-//                NSString *payload = @"{\"comment\":\"Check out developer.linkedin.com! http://linkd.in/1FC2PyG\",\"visibility\":{ \"code\":\"anyone\" }}";
-//                
-//                if ([LISDKSessionManager hasValidSession]) {
-//                    [[LISDKAPIHelper sharedInstance] postRequest:url stringBody:payload
-//                                                         success:^(LISDKAPIResponse *response) {
-//                                                             // do something with response
-//                                                         }
-//                                                           error:^(LISDKAPIError *apiError) {
-//                                                               // do something with error
-//                                                               NSLog(@"Error: %@",apiError.localizedDescription);
-//                                                           }];
-//                }
-//                else
-//                {
-//                    [LISDKSessionManager createSessionWithAuth:[NSArray arrayWithObjects:LISDK_BASIC_PROFILE_PERMISSION, LISDK_EMAILADDRESS_PERMISSION,LISDK_W_SHARE_PERMISSION, nil]
-//                                                         state:@"some state"
-//                                        showGoToAppStoreDialog:YES
-//                                                  successBlock:^(NSString *returnState) {
-//                                                      
-//                                                      [[LISDKAPIHelper sharedInstance] postRequest:url stringBody:payload
-//                                                                                           success:^(LISDKAPIResponse *response) {
-//                                                                                               // do something with response
-//                                                                                           }
-//                                                                                             error:^(LISDKAPIError *apiError) {
-//                                                                                                 // do something with error
-//                                                                                                 NSLog(@"Error: %@",apiError.localizedDescription);
-//                                                                                             }];
-//                                                      
-//                                                  }
-//                                                    errorBlock:^(NSError *error) {
-//                                                        NSLog(@"%s %@","error called! ", [error description]);
-//                                                        
-//                                                    }
-//                     ];
-//                }
+                NSString *url = @"https://api.linkedin.com/v1/people/~/shares";
+                
+                NSString *payload = @"{\"comment\":\"Check out developer.linkedin.com! http://linkd.in/1FC2PyG\",\"visibility\":{ \"code\":\"anyone\" }}";
+                
+                if ([LISDKSessionManager hasValidSession]) {
+                    [[LISDKAPIHelper sharedInstance] postRequest:url stringBody:payload
+                                                         success:^(LISDKAPIResponse *response) {
+                                                             // do something with response
+                                                         }
+                                                           error:^(LISDKAPIError *apiError) {
+                                                               // do something with error
+                                                               NSLog(@"Error: %@",apiError.localizedDescription);
+                                                           }];
+                }
+                else
+                {
+                    [LISDKSessionManager createSessionWithAuth:[NSArray arrayWithObjects:LISDK_BASIC_PROFILE_PERMISSION, LISDK_EMAILADDRESS_PERMISSION,LISDK_W_SHARE_PERMISSION, nil]
+                                                         state:@"some state"
+                                        showGoToAppStoreDialog:YES
+                                                  successBlock:^(NSString *returnState) {
+                                                      
+                                                      [[LISDKAPIHelper sharedInstance] postRequest:url stringBody:payload
+                                                                                           success:^(LISDKAPIResponse *response) {
+                                                                                               // do something with response
+                                                                                           }
+                                                                                             error:^(LISDKAPIError *apiError) {
+                                                                                                 // do something with error
+                                                                                                 NSLog(@"Error: %@",apiError.localizedDescription);
+                                                                                             }];
+                                                      
+                                                  }
+                                                    errorBlock:^(NSError *error) {
+                                                        NSLog(@"%s %@","error called! ", [error description]);
+                                                        
+                                                    }
+                     ];
+                }
             }
                 break;
                 
@@ -257,6 +265,10 @@
     NSString *distanceString = [self calculateDistanceToDescription];
     
     self.locationRangeLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ discoverable", @"{distance} discoverable"), distanceString];
+    
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [[appDelegate.tabBarRootController.tabBar.items objectAtIndex:0] setTitle:[NSString stringWithFormat:NSLocalizedString(@"%@ nearMe", @"{distance} Near Me"), distanceString]];
+
 }
 
 - (IBAction)notificationSwitchAction:(id)sender {
@@ -334,7 +346,9 @@
          [appDelegate.window setRootViewController:myNetworkViewController];
          [UIView setAnimationsEnabled:oldState];
      }
-     completion:nil];
+     completion:^(BOOL finished) {
+         appDelegate.tabBarRootController=nil;
+     }];
     
 }
 
@@ -354,11 +368,11 @@
 -(void) calculateSliderDistanceValue {
     
     if (self.sliderValue >= 0 && self.sliderValue <= 0.1) {
-        self.sliderDistanceValue = 10;
-    } else if (self.sliderValue > 0.10 && self.sliderValue <= 0.20) {
         self.sliderDistanceValue = 30;
-    } else if (self.sliderValue > 0.20 && self.sliderValue <= 0.30) {
+    } else if (self.sliderValue > 0.10 && self.sliderValue <= 0.20) {
         self.sliderDistanceValue = 50;
+    } else if (self.sliderValue > 0.20 && self.sliderValue <= 0.30) {
+        self.sliderDistanceValue = 100;
     } else if (self.sliderValue > 0.30 && self.sliderValue <= 0.40) {
         self.sliderDistanceValue = 200;
     } else if (self.sliderValue > 0.40 && self.sliderValue <= 0.50) {
@@ -366,19 +380,22 @@
     }  else if (self.sliderValue > 0.50 && self.sliderValue <= 0.60) {
         self.sliderDistanceValue = 500;
     }  else if (self.sliderValue > 0.60 && self.sliderValue <= 0.70) {
-        self.sliderDistanceValue = 1000 * 5;
+        self.sliderDistanceValue = 5280 * 5;
     }  else if (self.sliderValue > 0.70 && self.sliderValue <= 0.80) {
-        self.sliderDistanceValue = 1000 * 10;
+        self.sliderDistanceValue = 5280 * 7;
     } else if (self.sliderValue > 0.80) {
-        self.sliderDistanceValue = 1000 * 20;
+        self.sliderDistanceValue = 5280 * 10;
     }
+      
+    NSUserDefaults* userDef = [NSUserDefaults standardUserDefaults];
+    [userDef setObject:[NSNumber numberWithFloat:_locationRangeSlider.value] forKey:@"sliderNetwork"];
     
 }
 
 - (NSString *) calculateDistanceToDescription {
     
-    if (self.sliderDistanceValue >= 1000) {
-        return [NSString stringWithFormat:@"%i Miles", (int) self.sliderDistanceValue / 1000];
+    if (self.sliderDistanceValue >= 5280) {
+        return [NSString stringWithFormat:@"%i Miles", (int) self.sliderDistanceValue / 5280];
     } else {
         return [NSString stringWithFormat:@"%ift", (int) self.sliderDistanceValue];
     }

@@ -93,6 +93,8 @@
 
 - (IBAction)signupButton:(id)sender;
 
+- (IBAction)loginWithLinkedinButton:(id)sender;
+
 - (IBAction)loginWithFacebookButton:(id)sender;
 
 

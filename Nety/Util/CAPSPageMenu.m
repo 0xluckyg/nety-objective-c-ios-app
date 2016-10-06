@@ -56,7 +56,7 @@ typedef NS_ENUM(NSUInteger, CAPSPageMenuScrollDirection) {
 
 @property (nonatomic) BOOL currentOrientationIsPortrait;
 @property (nonatomic) NSInteger pageIndexForOrientationChange;
-@property (nonatomic) BOOL didLayoutSubviewsAfterRotation;
+//@property (nonatomic) BOOL didLayoutSubviewsAfterRotation;
 @property (nonatomic) BOOL didScrollAlready;
 
 @property (nonatomic) CGFloat lastControllerScrollViewContentOffset;

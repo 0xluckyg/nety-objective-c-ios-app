@@ -196,6 +196,8 @@
 - (void)changeRoot {
     //Set root controller to tabbar with cross dissolve animation
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [appDelegate initializeTabBar];
+    [appDelegate initializeLoginView];
     
     [UIView
      transitionWithView:self.view.window
