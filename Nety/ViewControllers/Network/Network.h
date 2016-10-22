@@ -19,17 +19,19 @@
 
 @interface Network : N_CoreDataTableViewController <UISearchBarDelegate>
 
-
+{
+    UINavigationItem *navItem;
+}
 //VARIABLES----------------------------------------
 
 
 //@property (strong, nonatomic) NSMutableArray *usersArray;
 
+@property (strong, nonatomic) NSMutableArray *userIDArray;
+
+@property (nonatomic) float sliderValue;
+
 @property (nonatomic) float sliderDistanceValue;
-
-@property (nonatomic) NSNumber *userLocationRange;
-
-@property (strong, nonatomic) UINavigationItem *navItem;
 
 //UTIL CLASSES----------------------------------------
 

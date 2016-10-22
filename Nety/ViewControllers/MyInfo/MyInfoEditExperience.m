@@ -86,7 +86,7 @@
         NSDictionary *experienceDict = [self.experienceArray objectAtIndex:self.arrayIndex];
         
         //name
-        self.experienceNameTextField.text = [experienceDict objectForKey:kExperienceName];
+        self.experienceNameTextField.text = [experienceDict objectForKey:kExperienceStartDate];
         //date
         self.dateFromTextField.text = [experienceDict objectForKey:kExperienceStartDate];
         self.dateToTextField.text = [experienceDict objectForKey:kExperienceEndDate];

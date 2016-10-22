@@ -268,6 +268,12 @@
  */
 - (void)scrollToBottomAnimated:(BOOL)animated;
 
+/**RAMPRAKASH
+ *  Scrolls the collection view such that the top most cell is completely visible, above the `inputToolbar`.
+ *
+ *  @param animated Pass `YES` if you want to animate scrolling, `NO` if it should be immediate.
+ */
+- (void)scrollToTopAnimated:(BOOL)animated;
 /**
  * Used to decide if a message is incoming or outgoing.
  *

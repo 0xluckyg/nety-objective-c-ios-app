@@ -158,12 +158,12 @@
     
     FIRStorage *storage = [FIRStorage storage];
     FIRStorageReference *profileImageBigRef = [[[[storage reference]
-                                             child:kProfileImages]
-                                            child:kBig ]
+                                             child:@"ProfileImages"]
+                                            child:@"Big" ]
                                             child:uniqueImageIDBig];
     FIRStorageReference *profileImageSmallRef = [[[[storage reference]
-                                              child:kProfileImages]
-                                             child:kSmall ]
+                                              child:@"ProfileImages"]
+                                             child:@"Small" ]
                                             child:uniqueImageIDSmall];
     
     //If user doesn't set profile image, set it to default image without uploading it.

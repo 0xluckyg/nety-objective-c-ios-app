@@ -7,6 +7,7 @@
 //
 
 #import "NewChats.h"
+#import "AppDelegate.h"
 
 @interface NewChats ()
 
@@ -117,7 +118,7 @@
     
     //Setting cell data as recent chats
     ChatRooms* chat = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-   
+   chatCell.chatNotificationLabel.text=@"";
     [self configureCell:chatCell withObject:chat];
     
     //If no experiences visible, show noContent header
@@ -358,7 +359,7 @@
     float width = viewController.view.frame.size.width;
     float height = noContentController.view.frame.size.height;
     float xValue = 0;
-    float yValue = (viewController.view.frame.size.height - 144)/2 - height/2;
+    float yValue = (viewController.view.frame.size.height)/2 - height/2-40;
     
     noContentController.view.frame = CGRectMake(xValue, yValue, width, height);
     

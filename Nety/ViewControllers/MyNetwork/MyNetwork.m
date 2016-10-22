@@ -205,6 +205,11 @@
     
     profilePage.selectedUser = user;
     
+    __weak typeof(self) weakSelf = self;
+    [self.UIPrinciple setTabBarVisible:![self.UIPrinciple tabBarIsVisible:self] animated:YES sender:self completion:^(BOOL finished) {
+        weakSelf.tabBarController.tabBar.hidden = YES;
+    }];
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     [self.navigationController pushViewController:profilePage animated:YES];
@@ -249,7 +254,18 @@
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
+    if ([[self fetchedResultsController].fetchedObjects count] == 0) {
+        
+        UIImage *contentImage = [[UIImage imageNamed:@"Location"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        
+        if (![self.noContentController isDescendantOfView:self.view]) {
+            [self.UIPrinciple addNoContent:self setText:NSLocalizedString(@"nobodyNearYou", nil) setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
+        }
+    } else {
+        [self.UIPrinciple removeNoContent:self.noContentController];
+    }
     
+
     return _fetchedResultsController;
 }
 
