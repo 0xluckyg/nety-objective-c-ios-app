@@ -134,8 +134,6 @@
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         [appDelegate setUserIsSigningIn:true];
         [appDelegate initializeTabBar];
-        [appDelegate initializeLoginView];
-        
         
         
         //Sign up the user

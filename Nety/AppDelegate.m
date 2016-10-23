@@ -120,8 +120,7 @@
                     [self.window setRootViewController:self.tabBarRootController];
                     
                 }
-                
-            } else  {
+        } else  {
                 userIsSigningIn=false;
 
                     NSLog(@"App Delegate detected user not signed in");
