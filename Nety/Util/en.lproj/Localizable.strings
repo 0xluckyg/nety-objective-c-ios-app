@@ -18,8 +18,8 @@ no = "NO";
 cancel = "Cancel";
 
 //Main
-login = "Login";
-signup = "Signup";
+loginMain = "Already have an account?";
+signupMain = "Get started!";
 
 //For both Login and Signup
 invalidEmailTitle = "Please enter a valid email";

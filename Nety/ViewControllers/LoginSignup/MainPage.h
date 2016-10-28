@@ -17,6 +17,8 @@
 
 @interface MainPage : UIViewController {
     NSInteger loginOrSignup;
+    NSTimer *timer;
+    NSInteger backgroundImageCounter;
 }
 
 //VARIABLES----------------------------------------
@@ -85,6 +87,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *loginWithLinkedinOutlet;
 
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
 
 //IBACTIONS----------------------------------------
 

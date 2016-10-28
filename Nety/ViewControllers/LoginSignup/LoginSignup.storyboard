@@ -19,108 +19,81 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dzw-h8-dqd">
-                                <rect key="frame" x="66" y="92" width="282" height="552"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ohl-8S-SdE">
-                                        <rect key="frame" x="21" y="43" width="240" height="240"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="240" id="BtO-Fz-crk"/>
-                                            <constraint firstAttribute="height" constant="240" id="caV-uw-J2D"/>
-                                        </constraints>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2lL-8E-NXk">
-                                        <rect key="frame" x="26" y="367" width="230" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="230" id="V55-ts-oJC"/>
-                                            <constraint firstAttribute="height" constant="40" id="dbM-yi-Kju"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
-                                        <state key="normal" title="s">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="signupButton:" destination="j8U-Cs-uLi" eventType="touchUpInside" id="fJ1-iG-RAY"/>
-                                            <segue destination="tVr-X4-ba6" kind="show" identifier="singUp" id="a19-bO-e5E"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XJ5-h9-g37">
-                                        <rect key="frame" x="26" y="309" width="230" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="Iem-0q-m6i"/>
-                                            <constraint firstAttribute="width" constant="230" id="suZ-sa-JHH"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
-                                        <state key="normal" title="l">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="loginButton:" destination="j8U-Cs-uLi" eventType="touchUpInside" id="qeV-dQ-8Ki"/>
-                                            <segue destination="z0J-bM-jSS" kind="show" id="ZD8-td-TAc"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.43521448759999998" green="0.56477015090000005" blue="0.90839741490000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2P7-4Z-nZw">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XJ5-h9-g37">
+                                <rect key="frame" x="44" y="621" width="336" height="40"/>
                                 <constraints>
-                                    <constraint firstItem="XJ5-h9-g37" firstAttribute="centerX" secondItem="dzw-h8-dqd" secondAttribute="centerX" id="05S-Oy-vZl"/>
-                                    <constraint firstItem="2lL-8E-NXk" firstAttribute="top" secondItem="XJ5-h9-g37" secondAttribute="bottom" constant="18" id="0GF-4m-hNu"/>
-                                    <constraint firstAttribute="height" constant="552" id="4Fh-BO-nDT"/>
-                                    <constraint firstItem="2lL-8E-NXk" firstAttribute="centerX" secondItem="dzw-h8-dqd" secondAttribute="centerX" id="aCL-ze-grn"/>
-                                    <constraint firstItem="XJ5-h9-g37" firstAttribute="top" secondItem="Ohl-8S-SdE" secondAttribute="bottom" constant="26" id="fny-Cc-npj"/>
-                                    <constraint firstItem="Ohl-8S-SdE" firstAttribute="centerX" secondItem="dzw-h8-dqd" secondAttribute="centerX" id="hwk-FN-iT8"/>
-                                    <constraint firstItem="Ohl-8S-SdE" firstAttribute="top" secondItem="dzw-h8-dqd" secondAttribute="top" constant="43" id="k7L-yK-I2x"/>
-                                    <constraint firstAttribute="width" constant="282" id="nyc-ae-i1i"/>
-                                </constraints>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9OY-Wq-wvu">
-                                <rect key="frame" x="344" y="666" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="6HX-ge-8xW"/>
-                                    <constraint firstAttribute="height" constant="50" id="fYk-LY-F2H"/>
+                                    <constraint firstAttribute="width" constant="336" id="42T-h9-F8X"/>
+                                    <constraint firstAttribute="height" constant="40" id="Iem-0q-m6i"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
-                                <state key="normal">
+                                <state key="normal" title="l">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="loginWithLinkedinButton:" destination="j8U-Cs-uLi" eventType="touchUpInside" id="WMG-mr-Puk"/>
-                                    <action selector="signupButton:" destination="j8U-Cs-uLi" eventType="touchUpInside" id="g0F-hT-2ma"/>
+                                    <action selector="loginButton:" destination="j8U-Cs-uLi" eventType="touchUpInside" id="qeV-dQ-8Ki"/>
+                                    <segue destination="z0J-bM-jSS" kind="show" id="ZD8-td-TAc"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dj0-ZW-owM">
-                                <rect key="frame" x="274" y="666" width="50" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2lL-8E-NXk">
+                                <rect key="frame" x="44" y="669" width="336" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="5Hm-0O-mxJ"/>
-                                    <constraint firstAttribute="height" constant="50" id="gKn-BZ-faU"/>
+                                    <constraint firstAttribute="height" constant="40" id="dbM-yi-Kju"/>
+                                    <constraint firstAttribute="width" constant="336" id="tXT-eA-KQR"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
-                                <state key="normal">
+                                <state key="normal" title="s">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="loginWithFacebookButton:" destination="j8U-Cs-uLi" eventType="touchUpInside" id="Bsb-kd-ElF"/>
-                                    <action selector="signupButton:" destination="j8U-Cs-uLi" eventType="touchUpInside" id="NAv-Zb-r7G"/>
+                                    <action selector="signupButton:" destination="j8U-Cs-uLi" eventType="touchUpInside" id="fJ1-iG-RAY"/>
+                                    <segue destination="tVr-X4-ba6" kind="show" identifier="singUp" id="a19-bO-e5E"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qdi-1g-3GM">
+                                <rect key="frame" x="132" y="127" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="D8i-18-r8F"/>
+                                    <constraint firstAttribute="height" constant="150" id="ein-XL-EAK"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NETY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcv-dM-GUj">
+                                <rect key="frame" x="132" y="276" width="150" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="QGc-Ww-bdE"/>
+                                    <constraint firstAttribute="width" constant="150" id="aPJ-6N-lVD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="40"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="9OY-Wq-wvu" firstAttribute="leading" secondItem="Dj0-ZW-owM" secondAttribute="trailing" constant="20" id="2Oj-cF-Q59"/>
-                            <constraint firstItem="NSq-04-PUU" firstAttribute="top" secondItem="9OY-Wq-wvu" secondAttribute="bottom" constant="20" id="VCr-vG-lSX"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="9OY-Wq-wvu" secondAttribute="trailing" id="X7g-BR-dDb"/>
-                            <constraint firstItem="dzw-h8-dqd" firstAttribute="centerX" secondItem="lKd-TK-LJw" secondAttribute="centerX" id="fL3-7b-0tP"/>
-                            <constraint firstItem="NSq-04-PUU" firstAttribute="top" secondItem="Dj0-ZW-owM" secondAttribute="bottom" constant="20" id="fnV-DE-AxZ"/>
-                            <constraint firstItem="dzw-h8-dqd" firstAttribute="centerY" secondItem="lKd-TK-LJw" secondAttribute="centerY" id="yMs-Vb-gj0"/>
+                            <constraint firstItem="XJ5-h9-g37" firstAttribute="leading" secondItem="lKd-TK-LJw" secondAttribute="leadingMargin" constant="24" id="2xP-e0-IRk"/>
+                            <constraint firstItem="2P7-4Z-nZw" firstAttribute="top" secondItem="lKd-TK-LJw" secondAttribute="top" id="3MB-Rl-HKn"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2lL-8E-NXk" secondAttribute="trailing" constant="14" id="6XU-g5-ccA"/>
+                            <constraint firstItem="2lL-8E-NXk" firstAttribute="top" secondItem="XJ5-h9-g37" secondAttribute="bottom" constant="8" id="Bht-av-EkM"/>
+                            <constraint firstItem="mcv-dM-GUj" firstAttribute="top" secondItem="qdi-1g-3GM" secondAttribute="bottom" constant="-1" id="EeE-Qe-bCl"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XJ5-h9-g37" secondAttribute="trailing" constant="14" id="O3m-yC-Mss"/>
+                            <constraint firstItem="2P7-4Z-nZw" firstAttribute="top" secondItem="qdi-1g-3GM" secondAttribute="bottom" constant="-277" id="VY6-ke-WT3"/>
+                            <constraint firstItem="qdi-1g-3GM" firstAttribute="centerX" secondItem="2P7-4Z-nZw" secondAttribute="centerX" id="aKm-fL-De8"/>
+                            <constraint firstItem="2P7-4Z-nZw" firstAttribute="leading" secondItem="lKd-TK-LJw" secondAttribute="leading" id="fNz-VC-D05"/>
+                            <constraint firstItem="2lL-8E-NXk" firstAttribute="leading" secondItem="lKd-TK-LJw" secondAttribute="leadingMargin" constant="24" id="g3p-fQ-n34"/>
+                            <constraint firstItem="NSq-04-PUU" firstAttribute="top" secondItem="2lL-8E-NXk" secondAttribute="bottom" constant="27" id="i9v-k4-ldH"/>
+                            <constraint firstItem="mcv-dM-GUj" firstAttribute="centerX" secondItem="2P7-4Z-nZw" secondAttribute="centerX" id="iS8-Ql-dQp"/>
+                            <constraint firstItem="NSq-04-PUU" firstAttribute="top" secondItem="2P7-4Z-nZw" secondAttribute="bottom" id="kUu-OI-xfc"/>
+                            <constraint firstAttribute="trailing" secondItem="2P7-4Z-nZw" secondAttribute="trailing" id="mrT-X6-Rxw"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="R92-8I-CKL"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
-                        <outlet property="holdingView" destination="dzw-h8-dqd" id="GYl-3D-lzd"/>
+                        <outlet property="backgroundImage" destination="2P7-4Z-nZw" id="bll-mg-Dd3"/>
                         <outlet property="loginButtonOutlet" destination="XJ5-h9-g37" id="tbf-ot-Sx7"/>
-                        <outlet property="loginWithFacebookOutlet" destination="Dj0-ZW-owM" id="OeF-ES-Bsh"/>
-                        <outlet property="loginWithLinkedinOutlet" destination="9OY-Wq-wvu" id="Gsl-xL-0dH"/>
-                        <outlet property="logoImage" destination="Ohl-8S-SdE" id="5vh-r1-Dlh"/>
+                        <outlet property="logoImage" destination="qdi-1g-3GM" id="1zF-lo-TbE"/>
                         <outlet property="signupButtonOutlet" destination="2lL-8E-NXk" id="tm8-vQ-bkr"/>
                     </connections>
                 </viewController>

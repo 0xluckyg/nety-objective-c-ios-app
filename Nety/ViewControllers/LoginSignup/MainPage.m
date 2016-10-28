@@ -29,14 +29,16 @@
     [self initializeSettings];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    timer = [NSTimer scheduledTimerWithTimeInterval: 6.0 target:self selector:@selector(changeBackgroundImage) userInfo:nil repeats:YES];
+}
+
 #pragma mark - Initialization
 //---------------------------------------------------------
 
 
 - (void)initializeDesign {
     self.UIPrinciple = [[UIPrinciples alloc] init];
-    
-    self.view.backgroundColor = self.UIPrinciple.netyBlue;
     self.holdingView.backgroundColor = self.UIPrinciple.netyBlue;
     
     self.logoImage.image = [UIImage imageNamed:@"LogoTransparent"];
@@ -49,17 +51,13 @@
     [self.signupButtonOutlet.layer setBorderColor:[[UIColor whiteColor] CGColor]];
     [self.signupButtonOutlet.layer setCornerRadius:self.signupButtonOutlet.frame.size.height/2];
     
-//    [self.loginWithFacebookOutlet.layer setBorderWidth:1.0];
-//    [self.loginWithFacebookOutlet.layer setBorderColor:[[UIColor whiteColor] CGColor]];
     [self.loginWithFacebookOutlet.layer setCornerRadius:self.signupButtonOutlet.frame.size.height/2];
     
-//    [self.loginWithLinkedinOutlet.layer setBorderWidth:1.0];
-//    [self.loginWithLinkedinOutlet.layer setBorderColor:[[UIColor whiteColor] CGColor]];
     [self.loginWithLinkedinOutlet.layer setCornerRadius:self.signupButtonOutlet.frame.size.height/2];
     
     
-    [self.loginButtonOutlet setTitle:NSLocalizedString(@"login", nil) forState:normal];
-    [self.signupButtonOutlet setTitle:NSLocalizedString(@"signup", nil) forState:normal];
+    [self.loginButtonOutlet setTitle:NSLocalizedString(@"loginMain", nil) forState:normal];
+    [self.signupButtonOutlet setTitle:NSLocalizedString(@"signupMain", nil) forState:normal];
     
     UIImage *facebookImage = [[UIImage imageNamed:@"Facebook"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     UIImage *linkedinImage = [[UIImage imageNamed:@"LinkedIn"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -76,6 +74,11 @@
     self.loginWithLinkedinOutlet.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
     self.loginWithLinkedinOutlet.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
     
+    
+    self.backgroundImage.image = [UIImage imageNamed:@"MainPicture1"];
+    self.view.backgroundColor = [UIColor blackColor];
+    [self.backgroundImage.layer setOpacity:0.7];
+    backgroundImageCounter = 1;
     
 }
 
@@ -178,14 +181,36 @@
 //---------------------------------------------------------
 
 
-
+-(void)viewWillDisappear:(BOOL)animated {
+    [timer invalidate];
+}
 
 
 #pragma mark - Custom methods
 //---------------------------------------------------------
 
+- (void)changeBackgroundImage {
+    
+    NSString *backgroundImageName;
+    
+    if (backgroundImageCounter < 9) {
+        backgroundImageCounter ++;
+        backgroundImageName = [NSString stringWithFormat:@"MainPicture%li", backgroundImageCounter];
+    } else {
+        backgroundImageCounter = 1;
+        backgroundImageName = [NSString stringWithFormat:@"MainPicture%li", backgroundImageCounter];
+    }
+    
+    UIImage * toImage = [UIImage imageNamed:backgroundImageName];
+    [UIView transitionWithView:self.backgroundImage
+                      duration:2.0f
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        self.backgroundImage.image = toImage;
+                    } completion:nil];
+    
+}
 
-#pragma mark -
 
 - (void)fetchUserInformation: (FIRUser *)user {
     
