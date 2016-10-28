@@ -45,7 +45,8 @@
 - (void) viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [[[[[[FIRDatabase database] reference] child:kUsers] child:MY_USER.userID] child:kIAmDiscoverable] setValue:[NSString stringWithFormat:@"%f",self.sliderValue]];
+    //DELETED DISCOVERABILITY SETTING
+    //    [[[[[[FIRDatabase database] reference] child:kUsers] child:MY_USER.userID] child:kIAmDiscoverable] setValue:[NSString stringWithFormat:@"%f",self.sliderValue]];
 }
 #pragma mark - Initialization
 //---------------------------------------------------------
@@ -293,17 +294,18 @@
     }
 }
 
-- (IBAction)chatRequestSwitchAction:(id)sender {
-    NSString *userID = MY_USER.userID;
-
-    if (self.chatRequestSwitch.isOn == true) {
-        [self.discoverabilitySwitch setOn:YES animated:YES];
-        [[[[self.firdatabase child:kUsers] child:userID] child:kSecurity] setValue:@1];
-    } else {
-        [self.chatSwitch setOn:NO animated:YES];
-        [[[[self.firdatabase child:kUsers] child:userID] child:kSecurity] setValue:@2];
-    }
-}
+//DELETED FOR VERSION 1 
+//- (IBAction)chatRequestSwitchAction:(id)sender {
+//    NSString *userID = MY_USER.userID;
+//
+//    if (self.chatRequestSwitch.isOn == true) {
+//        [self.discoverabilitySwitch setOn:YES animated:YES];
+//        [[[[self.firdatabase child:kUsers] child:userID] child:kSecurity] setValue:@1];
+//    } else {
+//        [self.chatSwitch setOn:NO animated:YES];
+//        [[[[self.firdatabase child:kUsers] child:userID] child:kSecurity] setValue:@2];
+//    }
+//}
 
 - (IBAction)chatSwitchAction:(id)sender {
     NSString *userID = MY_USER.userID;
@@ -313,7 +315,7 @@
         [self.discoverabilitySwitch setOn:YES animated:YES];
         [[[[self.firdatabase child:kUsers] child:userID] child:kSecurity] setValue:@0];
     } else {
-        [[[[self.firdatabase child:kUsers] child:userID] child:kSecurity] setValue:@1];
+        [[[[self.firdatabase child:kUsers] child:userID] child:kSecurity] setValue:@2];
     }
 }
 

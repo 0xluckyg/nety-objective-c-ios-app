@@ -240,7 +240,7 @@
                            kIdentity: [self.userInfo objectAtIndex:5],
                            kSummary: [self.userInfo objectAtIndex:6],
                            kExperiences: experiences,
-                           kIAmDiscoverable: @(1),
+                           kIAmDiscoverable: @(20000),
                            kProfilePhoto: metaDataBigUid,
                            kSecurity: @(0)};
     

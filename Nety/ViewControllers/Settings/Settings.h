@@ -81,7 +81,7 @@
 //IBACTIONS----------------------------------------
 
 
-- (IBAction)locationRangeSliderAction:(id)sender;
+//- (IBAction)locationRangeSliderAction:(id)sender;
 
 - (IBAction)notificationSwitchAction:(id)sender;
 

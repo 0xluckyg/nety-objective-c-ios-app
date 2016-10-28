@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -18,10 +18,10 @@
                             <tableViewSection headerTitle="Security settings" id="UwR-PP-HqW">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="44" id="Ckn-2c-JIc">
-                                        <rect key="frame" x="0.0" y="50" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="49.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ckn-2c-JIc" id="4rw-gs-eyD">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I am discoverable" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RRN-rz-n4P">
@@ -45,39 +45,11 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="44" id="hM2-wI-Ir7">
-                                        <rect key="frame" x="0.0" y="94" width="414" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hM2-wI-Ir7" id="JwA-Yz-EKq">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="People can send me request to chat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="93d-dd-3fy">
-                                                    <rect key="frame" x="16" y="11" width="266" height="21"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Uz-VO-U8V">
-                                                    <rect key="frame" x="349" y="6" width="51" height="31"/>
-                                                    <connections>
-                                                        <action selector="chatRequestSwitchAction:" destination="ACB-hd-31X" eventType="valueChanged" id="OjC-ho-BIL"/>
-                                                    </connections>
-                                                </switch>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="93d-dd-3fy" firstAttribute="leading" secondItem="JwA-Yz-EKq" secondAttribute="leading" constant="16" id="Dot-4q-LLC"/>
-                                                <constraint firstItem="0Uz-VO-U8V" firstAttribute="centerY" secondItem="JwA-Yz-EKq" secondAttribute="centerY" id="Km6-O0-Nql"/>
-                                                <constraint firstItem="93d-dd-3fy" firstAttribute="centerY" secondItem="JwA-Yz-EKq" secondAttribute="centerY" id="U1V-nL-g6j"/>
-                                                <constraint firstAttribute="trailing" secondItem="0Uz-VO-U8V" secondAttribute="trailing" constant="16" id="gvZ-yZ-rPr"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="44" id="tJX-aJ-AdN">
-                                        <rect key="frame" x="0.0" y="138" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="93.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tJX-aJ-AdN" id="e1t-mr-OiT">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="People can send me chats" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d0R-5m-cOf">
@@ -101,45 +73,15 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="77" id="XIY-wH-ThD">
-                                        <rect key="frame" x="0.0" y="182" width="414" height="77"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XIY-wH-ThD" id="vxk-n6-m2X">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="76"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I am discoverable" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VNI-Bi-Mqy">
-                                                    <rect key="frame" x="16" y="11" width="129" height="21"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="bOm-QC-f3U">
-                                                    <rect key="frame" x="-2" y="35" width="418" height="31"/>
-                                                    <connections>
-                                                        <action selector="locationRangeSliderAction:" destination="ACB-hd-31X" eventType="valueChanged" id="dXi-wc-wWm"/>
-                                                    </connections>
-                                                </slider>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="bOm-QC-f3U" firstAttribute="leading" secondItem="vxk-n6-m2X" secondAttribute="leading" id="5Ur-Il-vtK"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="bOm-QC-f3U" secondAttribute="bottom" constant="3.5" id="ANr-gf-UKJ"/>
-                                                <constraint firstItem="VNI-Bi-Mqy" firstAttribute="top" secondItem="vxk-n6-m2X" secondAttribute="topMargin" constant="3" id="QiQ-ex-zRU"/>
-                                                <constraint firstAttribute="trailing" secondItem="bOm-QC-f3U" secondAttribute="trailing" id="ZbF-sF-MyC"/>
-                                                <constraint firstItem="VNI-Bi-Mqy" firstAttribute="leading" secondItem="vxk-n6-m2X" secondAttribute="leading" constant="16" id="jZZ-05-s7H"/>
-                                                <constraint firstItem="bOm-QC-f3U" firstAttribute="top" secondItem="VNI-Bi-Mqy" secondAttribute="bottom" constant="3" id="qeC-X3-jbe"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Notifications" id="9Dp-n0-6WY">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="qgP-sh-iui">
-                                        <rect key="frame" x="0.0" y="310" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="187.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qgP-sh-iui" id="jvI-KU-smI">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q1v-Np-9Zd">
@@ -168,10 +110,10 @@
                             <tableViewSection headerTitle="Share" id="ScR-ZW-FpH">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="50" id="Kbi-qu-w8w">
-                                        <rect key="frame" x="0.0" y="405" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="281.5" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kbi-qu-w8w" id="Rk4-Zs-qE1">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share on Facebook!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hXM-VE-Tel">
@@ -197,10 +139,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="50" id="hs3-LV-Mo7">
-                                        <rect key="frame" x="0.0" y="455" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="331.5" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hs3-LV-Mo7" id="fAx-cH-0jU">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Share on LinkedIn!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJo-ZS-QRf">
@@ -230,10 +172,10 @@
                             <tableViewSection headerTitle="Account" id="iD4-b8-Fa3">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="P2H-aW-ZYd">
-                                        <rect key="frame" x="0.0" y="556" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="431.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="P2H-aW-ZYd" id="b3B-lJ-7CK">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2qO-EJ-Lrh">
@@ -262,15 +204,11 @@
                     <connections>
                         <outlet property="chatNotificationsOutlet" destination="8X8-1Y-8I8" id="Y5l-nb-HZK"/>
                         <outlet property="chatOutlet" destination="d0R-5m-cOf" id="Ygt-mk-ez3"/>
-                        <outlet property="chatRequestOutlet" destination="93d-dd-3fy" id="7Yp-t7-cTf"/>
-                        <outlet property="chatRequestSwitch" destination="0Uz-VO-U8V" id="DUV-f5-hBL"/>
                         <outlet property="chatSwitch" destination="Ygh-Go-aPo" id="Vqx-mr-zba"/>
                         <outlet property="discoverabilitySwitch" destination="1qh-PG-dq7" id="wxF-7Q-laZ"/>
                         <outlet property="discoverableOutlet" destination="RRN-rz-n4P" id="7An-bf-dxM"/>
                         <outlet property="facebookImage" destination="DOd-RL-R3t" id="HVu-c2-scS"/>
                         <outlet property="linkedInImage" destination="zd3-MQ-jbl" id="Amu-mX-hlP"/>
-                        <outlet property="locationRangeLabel" destination="VNI-Bi-Mqy" id="FRV-do-Km6"/>
-                        <outlet property="locationRangeSlider" destination="bOm-QC-f3U" id="YHt-2K-DcG"/>
                         <outlet property="logOutButtonOutlet" destination="2qO-EJ-Lrh" id="rgK-7f-mh4"/>
                         <outlet property="notificationSwitch" destination="Q1v-Np-9Zd" id="3dR-hO-mHX"/>
                         <outlet property="shareOnFacebookOutlet" destination="hXM-VE-Tel" id="Vxp-5h-Jdh"/>

@@ -118,7 +118,7 @@
                     if (self.tabBarRootController==nil)
                         [self initializeTabBar];
                     [self.window setRootViewController:self.tabBarRootController];
-                    
+                    self.tabBarRootController.selectedIndex = 2;
                 }
         } else  {
                 userIsSigningIn=false;
