@@ -45,6 +45,8 @@
 
 - (void)initializeSettings {
     
+    securityCheck = false;
+    
     self.tabBarController.tabBar.hidden = YES;
     self.firdatabase = [[FIRDatabase database] reference];
     
@@ -99,13 +101,11 @@
     self.inputToolbar.contentView.textView.font = [self.UIPrinciple netyFontWithSize:15];
     [self.inputToolbar.contentView.rightBarButtonItem setTitle:NSLocalizedString(@"send", nil) forState:normal];
     
-    
-    
     //Style the navigation bar
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"Back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:normal target:self action:@selector(backButtonPressed)];
     
     self.navigationItem.leftBarButtonItem = leftButton;
-    
+    [self.navigationItem.rightBarButtonItem setTitleTextAttributes:attributes forState:normal];
 }
 
 
@@ -119,12 +119,44 @@
     
     id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
     numberOfMessages = [sectionInfo numberOfObjects];
+    
+    if (numberOfMessages == 0) {
+        
+        UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"30" style:UIBarButtonItemStylePlain target:self action:nil];
+        
+        [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil]
+         setTitleTextAttributes:
+         @{NSForegroundColorAttributeName:[UIColor whiteColor],
+           NSFontAttributeName:                                    [self.UIPrinciple netyFontWithSize:18]
+           }
+         forState:UIControlStateNormal];
+        
+        self.navigationItem.rightBarButtonItem = rightButton;
+
+    }
+    
     return numberOfMessages;
 }
 
 -(id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath {
     //JSQMessage *data = self.messages[indexPath.row];
-    return [self getMessageObject:indexPath];
+    
+    NSLog(@"%lu", indexPath.row);
+    
+    JSQMessage *messageData = [self getMessageObject:indexPath];
+    
+    if (securityCheck == false) {
+        if ([messageData.senderId isEqualToString:self.selectedUserID]) {
+            self.navigationItem.rightBarButtonItem.title = nil;
+            securityCheck = true;
+        } else {
+            securityCheck = false;
+        }
+    }
+    
+    NSLog(securityCheck ? @"Yes" : @"No");
+    
+    return messageData;
 }
 
 -(void)collectionView:(JSQMessagesCollectionView *)collectionView didDeleteMessageAtIndexPath:(NSIndexPath *)indexPath
@@ -300,17 +332,12 @@
 
 -(void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text senderId:(NSString *)senderId senderDisplayName:(NSString *)senderDisplayName date:(NSDate *)date {
     
-    NSString *firstMessageSender = [[NSString alloc] init];
-    
-    if (numberOfMessages >= 1) {
-        
-        NSIndexPath *index = [NSIndexPath indexPathForRow:0 inSection:0];
-        
-        firstMessageSender = [self getMessageObject:index].senderId;
+    if (numberOfMessages == 0) {
+        [self timerStart];
     }
     
     //User can only send up to 1 message to a person
-    if (numberOfMessages == 1 && [senderId isEqualToString:firstMessageSender]) {
+    if (securityCheck == false) {
         
         [self.UIPrinciple oneButtonAlert:NSLocalizedString(@"ok", nil) controllerTitle:NSLocalizedString(@"messageBlockTitle", nil) message:NSLocalizedString(@"messageBlockDescription", nil) viewController:self];
         
@@ -425,7 +452,7 @@
                 if (currentUnreadMessageBadgeValue - currentRoomUnreadMessage <= 0) {
                     [self.tabBarController.tabBar.items objectAtIndex:2].badgeValue = nil;
                 } else {
-                    [[self.tabBarController.tabBar.items objectAtIndex:2] setBadgeValue:[NSString stringWithFormat:@"%d", currentUnreadMessageBadgeValue - currentRoomUnreadMessage]];
+                    [[self.tabBarController.tabBar.items objectAtIndex:2] setBadgeValue:[NSString stringWithFormat:@"%lu", currentUnreadMessageBadgeValue - currentRoomUnreadMessage]];
                 }
                 
                 //Set user's own readcount to 0 when entering chat room
@@ -724,6 +751,31 @@
         }
     }];
 }
+
+
+//Implementing 30 second security rule
+-(void)timerStart
+{
+    timerSeconds = 30;
+    securityCheck = true;
+    timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
+    
+}
+
+-(void)timerStop {
+    [timer invalidate];
+    securityCheck = false;
+}
+
+-(void)timerFired
+{
+    timerSeconds -= 1;
+    self.navigationItem.rightBarButtonItem.title = [NSString stringWithFormat:@"%lu", timerSeconds];
+    if (timerSeconds < 1) {
+        [self timerStop];
+    }
+}
+
 
 
 //---------------------------------------------------------

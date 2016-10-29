@@ -20,8 +20,11 @@
 
 @interface Messages : JSQMessagesViewController <NSFetchedResultsControllerDelegate>
 {
+    NSTimer *timer;
+    NSInteger timerSeconds;
     NSInteger readcount;
     NSInteger otherUserStatus;
+    bool securityCheck;
 }
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
