@@ -79,11 +79,14 @@
 	<array>
 		<string>MKDirectionsModeOther</string>
 	</array>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Location is required</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>App requires location services to find your nearby people</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>NSLocationAlwaysUsageDescription</string>
+		<string>fetch</string>
 		<string>location</string>
 		<string>remote-notification</string>
 	</array>

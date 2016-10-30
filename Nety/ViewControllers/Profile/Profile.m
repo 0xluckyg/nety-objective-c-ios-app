@@ -134,7 +134,9 @@
         if ([self.selectedUser.security isEqual:@(2)]) {
             [cell.buttonOutlet setTitle:NSLocalizedString(@"chatRequest", nil) forState:UIControlStateNormal];
         } else {
+            [cell setBackgroundColor:self.UIPrinciple.netyBlue];
             [cell.buttonOutlet setTitle:NSLocalizedString(@"chatNow", nil) forState:UIControlStateNormal];
+            cell.buttonOutlet.tintColor = [UIColor whiteColor];
         }
         
         return cell;

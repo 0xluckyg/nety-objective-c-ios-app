@@ -29,6 +29,7 @@ typedef void (^N_APIBlockArray)(NSArray* array, NSError* error);
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
+
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 

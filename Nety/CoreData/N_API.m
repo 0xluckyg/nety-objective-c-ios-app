@@ -592,12 +592,18 @@
 }
 #pragma mark - CLLocationManagerDelegate
 
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+
+    
+    
+}
+
 - (void)locationManager: (CLLocationManager *)manager
     didUpdateToLocation: (CLLocation *)newLocation
            fromLocation: (CLLocation *)oldLocation {
     
-//    NSLog(@"location called  %@",newLocation);
-    
+//    NSLog(@"location called  %@",newLocation)
     
     if (MY_USER) {
         FIRDatabaseReference *geo = [[FIRDatabase database] reference];
@@ -617,8 +623,12 @@
 - (void)initializeLocationManager {
     
     self.locationManager = [[CLLocationManager alloc] init];
-    [self.locationManager requestWhenInUseAuthorization];
     self.locationManager.delegate = self;
+    // Code to check if the app can respond to the new selector found in iOS 8. If so, request it.
+    if([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+        [self.locationManager requestAlwaysAuthorization];
+        [self.locationManager requestWhenInUseAuthorization];
+    }
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     //whenever user moves
     self.locationManager.distanceFilter = 10;//10m
