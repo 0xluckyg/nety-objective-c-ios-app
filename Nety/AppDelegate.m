@@ -12,6 +12,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
+@import UserNotifications;
 @import FirebaseDatabase;
 @import FirebaseInstanceID;
 @import FirebaseMessaging;
