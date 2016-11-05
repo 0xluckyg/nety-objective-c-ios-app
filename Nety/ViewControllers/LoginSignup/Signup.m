@@ -106,7 +106,7 @@
         
         [self.UIPrinciple oneButtonAlert:NSLocalizedString(@"ok", nil) controllerTitle:NSLocalizedString(@"invalidPasswordTitle", nil) message:NSLocalizedString(@"invalidPasswordDescription", nil) viewController:self];
         
-    } else if (!valid || self.age.text.integerValue < 5 || self.age.text.integerValue > 100) {
+    } else if (!valid || self.age.text.integerValue < 5 || self.age.text.integerValue > 85) {
         
         [self.UIPrinciple oneButtonAlert:NSLocalizedString(@"ok", nil) controllerTitle:NSLocalizedString(@"invalidAgeTitle", nil) message:NSLocalizedString(@"invalidAgeDescription", nil) viewController:self];
         
