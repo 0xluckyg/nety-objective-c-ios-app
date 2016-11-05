@@ -27,23 +27,6 @@
     [self initializeDesign];
 }
 
-
-#pragma mark - Initialization
-//---------------------------------------------------------
-
-
-
-#pragma mark - Protocols and Delegates
-//---------------------------------------------------------
-
-
-//Touching on sceen will make keyboard disappear
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [self.view endEditing:YES];
-}
-
-
 #pragma mark - Buttons
 //---------------------------------------------------------
 
@@ -165,10 +148,8 @@
     }
 }
 
-
-#pragma mark - Custom methods
+#pragma mark - Initialization
 //---------------------------------------------------------
-
 
 - (void)initializeSettings {
     
@@ -213,6 +194,20 @@
     [self.signupButtonOutlet setTitle:NSLocalizedString(@"signup", nil) forState:UIControlStateNormal];
 }
 
+
+#pragma mark - Protocols and Delegates
+//---------------------------------------------------------
+
+
+//Touching on sceen will make keyboard disappear
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
+
+
+#pragma mark - Custom methods
+//---------------------------------------------------------
 
 
 //---------------------------------------------------------
