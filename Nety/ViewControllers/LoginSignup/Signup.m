@@ -31,48 +31,6 @@
 #pragma mark - Initialization
 //---------------------------------------------------------
 
-- (void)initializeSettings {
-    
-    self.firdatabase = [[FIRDatabase database] reference];
-    
-}
-
-- (void)initializeDesign {
-    self.UIPrinciple = [[UIPrinciples alloc] init];
-    
-    self.view.backgroundColor = self.UIPrinciple.netyBlue;
-    self.holdingView.backgroundColor = self.UIPrinciple.netyBlue;
-    
-    [self.signupButtonOutlet.layer setBorderWidth:1.0];
-    [self.signupButtonOutlet.layer setBorderColor:[[UIColor whiteColor] CGColor]];
-    [self.signupButtonOutlet.layer setCornerRadius:self.signupButtonOutlet.frame.size.height/2];
-    
-    self.signupWithLinkedinButtonOutlet.backgroundColor = self.UIPrinciple.linkedInBlue;
-    [self.signupWithLinkedinButtonOutlet.layer setCornerRadius:self.signupWithLinkedinButtonOutlet.frame.size.height/2];
-    
-    [self.email setBackgroundColor:[UIColor whiteColor]];
-    [self.email.layer setCornerRadius:self.email.frame.size.height/2];
-    self.email.textColor = self.UIPrinciple.netyBlue;
-    
-    [self.password setBackgroundColor:[UIColor whiteColor]];
-    [self.password.layer setCornerRadius:self.password.frame.size.height/2];
-    self.password.textColor = self.UIPrinciple.netyBlue;
-    
-    [self.age setBackgroundColor:[UIColor whiteColor]];
-    [self.age.layer setCornerRadius:self.age.frame.size.height/2];
-    self.age.textColor = self.UIPrinciple.netyBlue;
-    
-    [self.name setBackgroundColor:[UIColor whiteColor]];
-    [self.name.layer setCornerRadius:self.name.frame.size.height/2];
-    self.name.textColor = self.UIPrinciple.netyBlue;
-    
-    self.email.placeholder = NSLocalizedString(@"email", nil);
-    self.password.placeholder = NSLocalizedString(@"password", nil);
-    self.name.placeholder = NSLocalizedString(@"name", nil);
-    self.age.placeholder = NSLocalizedString(@"age", nil);
-    
-    [self.signupButtonOutlet setTitle:NSLocalizedString(@"signup", nil) forState:UIControlStateNormal];
-}
 
 
 #pragma mark - Protocols and Delegates
@@ -212,6 +170,48 @@
 //---------------------------------------------------------
 
 
+- (void)initializeSettings {
+    
+    self.firdatabase = [[FIRDatabase database] reference];
+    
+}
+
+- (void)initializeDesign {
+    self.UIPrinciple = [[UIPrinciples alloc] init];
+    
+    self.view.backgroundColor = self.UIPrinciple.netyBlue;
+    self.holdingView.backgroundColor = self.UIPrinciple.netyBlue;
+    
+    [self.signupButtonOutlet.layer setBorderWidth:1.0];
+    [self.signupButtonOutlet.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    [self.signupButtonOutlet.layer setCornerRadius:self.signupButtonOutlet.frame.size.height/2];
+    
+    self.signupWithLinkedinButtonOutlet.backgroundColor = self.UIPrinciple.linkedInBlue;
+    [self.signupWithLinkedinButtonOutlet.layer setCornerRadius:self.signupWithLinkedinButtonOutlet.frame.size.height/2];
+    
+    [self.email setBackgroundColor:[UIColor whiteColor]];
+    [self.email.layer setCornerRadius:self.email.frame.size.height/2];
+    self.email.textColor = self.UIPrinciple.netyBlue;
+    
+    [self.password setBackgroundColor:[UIColor whiteColor]];
+    [self.password.layer setCornerRadius:self.password.frame.size.height/2];
+    self.password.textColor = self.UIPrinciple.netyBlue;
+    
+    [self.age setBackgroundColor:[UIColor whiteColor]];
+    [self.age.layer setCornerRadius:self.age.frame.size.height/2];
+    self.age.textColor = self.UIPrinciple.netyBlue;
+    
+    [self.name setBackgroundColor:[UIColor whiteColor]];
+    [self.name.layer setCornerRadius:self.name.frame.size.height/2];
+    self.name.textColor = self.UIPrinciple.netyBlue;
+    
+    self.email.placeholder = NSLocalizedString(@"email", nil);
+    self.password.placeholder = NSLocalizedString(@"password", nil);
+    self.name.placeholder = NSLocalizedString(@"name", nil);
+    self.age.placeholder = NSLocalizedString(@"age", nil);
+    
+    [self.signupButtonOutlet setTitle:NSLocalizedString(@"signup", nil) forState:UIControlStateNormal];
+}
 
 
 

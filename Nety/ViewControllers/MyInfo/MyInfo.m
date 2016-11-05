@@ -413,15 +413,13 @@
     
     
     NSPredicate* predicate = [NSPredicate predicateWithFormat:@"user == %@",MY_USER];
-    
-    
     [fetchRequest setPredicate:predicate];
     
     // Set the batch size to a suitable number.
     [fetchRequest setFetchBatchSize:10];
     
     // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"endDate" ascending:YES];
     
     [fetchRequest setSortDescriptors:@[sortDescriptor]];
     // Edit the section name key path and cache name if appropriate.
