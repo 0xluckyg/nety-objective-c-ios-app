@@ -224,7 +224,27 @@
     } else {
         
         ExperienceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ExperienceCell" forIndexPath:indexPath];
-        Experiences* expir = [[self.selectedUser.experiences allObjects] objectAtIndex:indexPath.row-8];
+        
+        NSArray *experiences = [self.selectedUser.experiences allObjects];
+        experiences = [experiences sortedArrayUsingComparator:^NSComparisonResult(Experiences *a, Experiences *b) {
+            NSArray *aArray = [a.endDate componentsSeparatedByString:@"/"];
+            NSArray *bArray = [b.endDate componentsSeparatedByString:@"/"];
+            
+            NSComparisonResult yearCompare = [[aArray lastObject] compare:[bArray lastObject]];
+            if (yearCompare == 0) {
+                NSComparisonResult monthCompare = [[aArray objectAtIndex:0] compare:[bArray objectAtIndex:0]];
+                if (monthCompare == 0) {
+                    NSComparisonResult dayCompare = [[aArray objectAtIndex:1] compare:[bArray objectAtIndex:1]];
+                    return -dayCompare;
+                } else {
+                    return -monthCompare;
+                }
+            } else {
+                return -yearCompare;
+            }
+        }];
+        
+        Experiences* expir = [experiences objectAtIndex:indexPath.row-8];
         
         cell.experienceName.textColor = self.UIPrinciple.netyBlue;
         cell.experienceDate.textColor = self.UIPrinciple.netyBlue;
