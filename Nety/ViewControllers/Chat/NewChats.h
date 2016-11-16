@@ -24,7 +24,7 @@
 
 @import Firebase;
 
-@interface NewChats : N_CoreDataTableViewController <SWTableViewCellDelegate>
+@interface NewChats : N_CoreDataTableViewController <SWTableViewCellDelegate, UISearchBarDelegate>
 
 
 
@@ -45,6 +45,8 @@
 
 
 //IBOUTLETS----------------------------------------
+
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 
 //IBACTIONS----------------------------------------

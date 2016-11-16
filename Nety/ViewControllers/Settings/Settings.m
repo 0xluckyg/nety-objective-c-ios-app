@@ -40,7 +40,6 @@
     self.locationRangeLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ discoverable", @"{distance} discoverable"), distanceString];
   
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [[appDelegate.tabBarRootController.tabBar.items objectAtIndex:0] setTitle:[NSString stringWithFormat:NSLocalizedString(@"%@ nearMe", @"{distance} Near Me"), distanceString]];
 }
 - (void) viewWillDisappear:(BOOL)animated
 {
@@ -266,11 +265,7 @@
     NSString *distanceString = [self calculateDistanceToDescription];
     
     self.locationRangeLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ discoverable", @"{distance} discoverable"), distanceString];
-    
-    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [[appDelegate.tabBarRootController.tabBar.items objectAtIndex:0] setTitle:[NSString stringWithFormat:NSLocalizedString(@"%@ nearMe", @"{distance} Near Me"), distanceString]];
-
-}
+    }
 
 - (IBAction)notificationSwitchAction:(id)sender {
     

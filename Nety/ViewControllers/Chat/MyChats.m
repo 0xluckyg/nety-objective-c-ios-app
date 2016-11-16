@@ -43,7 +43,6 @@
         [self.UIPrinciple removeNoContent:self.noContentController];
     }
     
-    
 }
 
 #pragma mark - Initialization
@@ -61,6 +60,10 @@
     
     // UIPrinciples class from Util folder
     self.UIPrinciple = [[UIPrinciples alloc] init];
+    
+    //Set searchbar
+    [self.searchBar setBarTintColor:[UIColor whiteColor]];
+    [self.searchBar setPlaceholder:NSLocalizedString(@"chatSearchBar", nil)];
 }
 
 
@@ -84,7 +87,10 @@
     
     NSPredicate* predicate = [NSPredicate predicateWithFormat:@"type == YES AND userID == %@", MY_USER.userID];
     [fetchRequest setPredicate:predicate];
-    
+    if (_searchBar.text.length)
+    {
+        predicate = [NSPredicate predicateWithFormat:@"(userID CONTAINS[c]%@ OR fullName CONTAINS[c]%@ OR recentMessage CONTAINS[c]%@ OR updateTime CONTAINS[c]%@ OR ANY mesages.text CONTAINS[c]%@)",_searchBar.text,_searchBar.text,_searchBar.text,_searchBar.text,_searchBar.text];
+    }
     // Set the batch size to a suitable number.
     [fetchRequest setFetchBatchSize:10];
     
@@ -274,10 +280,30 @@
     }
 }
 
-//Hide keyboard when search button pressed
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [searchBar endEditing:YES];
+    _fetchedResultsController = nil;
+    _fetchedResultsController.delegate = nil;
+    [self.table reloadData];
 }
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar endEditing:YES];
+    [_searchBar setText:@""];
+    _fetchedResultsController = nil;
+    _fetchedResultsController.delegate = nil;
+    [self.table reloadData];
+}
+
+-(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:YES animated:YES];
+}
+
+-(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:NO animated:YES];
+}
+
 
 
 #pragma mark - Buttons

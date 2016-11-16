@@ -16,7 +16,8 @@
 {
     self = [super init];
     if (self) {
-        _netyBlue = [UIColor colorWithRed:73.0f/255.0f green:101.0f/255.0f blue:146.0f/255.0f alpha:1.0f];
+//        _netyBlue = [UIColor colorWithRed:73.0f/255.0f green:101.0f/255.0f blue:146.0f/255.0f alpha:1.0f];
+        _netyBlue = [UIColor colorWithRed:60.0f/255.0f green:60.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
 //        _netyBlue = [UIColor colorWithRed:226.0f/255.0f green:150.0f/255.0f blue:75.0f/255.0f alpha:1.0f];
 //        _netyBlue = [UIColor colorWithRed:122.0f/255.0f green:118.0f/255.0f blue: 193.0f/255.0f alpha:1.0f];
         _netyRed = [UIColor colorWithRed:220.0f/255.0f green:68.0f/255.0f blue:55.0f/255.0f alpha:1.0f];

@@ -235,32 +235,32 @@
     //Set title and image of each tabBar item
     [networkViewController.tabBarItem setImage:[UIImage imageNamed:@"NetworkEmpty"]];
     [networkViewController.tabBarItem setSelectedImage:[[UIImage imageNamed:@"Network"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
-//    networkViewController.tabBarItem.imageInsets = UIEdgeInsetsMake(6.0, 0.0, -6.0, 0.0);
+    [networkViewController.tabBarItem setTitle:nil];
+    networkViewController.tabBarItem.imageInsets = UIEdgeInsetsMake(6,0,-6,0);
 
-//    [networkViewController.tabBarItem setTitle:@"Net"];
     
     [myNetworkViewController.tabBarItem setImage:[UIImage imageNamed:@"MyNetworkEmpty"]];
     [myNetworkViewController.tabBarItem setSelectedImage:[[UIImage imageNamed:@"MyNetwork"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
-//    [myNetworkViewController.tabBarItem setTitle:@"My Net"];
-    
+    [myNetworkViewController.tabBarItem setTitle:nil];
+    myNetworkViewController.tabBarItem.imageInsets = UIEdgeInsetsMake(6,0,-6,0);
+
     [chatViewController.tabBarItem setImage:[UIImage imageNamed:@"ChatEmpty"]];
     [chatViewController.tabBarItem setSelectedImage:[[UIImage imageNamed:@"Chat"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
-//    [chatViewController.tabBarItem setTitle:@"Chat"];
+    [chatViewController.tabBarItem setTitle:nil];
+    chatViewController.tabBarItem.imageInsets = UIEdgeInsetsMake(6,0,-6,0);
     
     [myInfoViewController.tabBarItem setImage:[UIImage imageNamed:@"ProfileEmpty"]];
     [myInfoViewController.tabBarItem setSelectedImage:[[UIImage imageNamed:@"Profile"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
-//    [myInfoViewController.tabBarItem setTitle:@"Me"];
+    [myInfoViewController.tabBarItem setTitle:nil];
+    myInfoViewController.tabBarItem.imageInsets = UIEdgeInsetsMake(6,0,-6,0);
     
     [settingsViewController.tabBarItem setImage:[UIImage imageNamed:@"SettingsEmpty"]];
     [settingsViewController.tabBarItem setSelectedImage:[[UIImage imageNamed:@"Settings"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
-//    [settingsViewController.tabBarItem setTitle:@"Settings"];
+    [settingsViewController.tabBarItem setTitle:nil];
+    settingsViewController.tabBarItem.imageInsets = UIEdgeInsetsMake(6,0,-6,0);
     
     //Set tabBar style
     [[UITabBar appearance] setTintColor:self.UIPrinciple.netyBlue];
-
-    
-    self.tabBarRootController.tabBarItem.title = nil;
-    self.tabBarRootController.tabBarItem.imageInsets = UIEdgeInsetsMake(6,0,-6,0);
     
     //Connect tabBar and view controllers together
     NSArray* controllers = [NSArray arrayWithObjects:networkViewController,

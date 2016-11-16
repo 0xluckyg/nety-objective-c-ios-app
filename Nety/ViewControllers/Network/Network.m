@@ -42,8 +42,6 @@
 
     NSString *distanceString = [self calculateDistanceToDescription];
    
-    self.title = [NSString stringWithFormat:NSLocalizedString(@"%@ nearMe", @"{distance} Near Me"), distanceString];
-
     self.navigationItem.title = [NSString stringWithFormat:NSLocalizedString(@"%@ nearMe", @"{distance} Near Me"), distanceString];
 
     navItem.title = [NSString stringWithFormat:NSLocalizedString(@"%@ nearMe", @"{distance} Near Me"), distanceString];
@@ -141,7 +139,7 @@
     NSPredicate* predicate;
     if (_searchBar.text.length)
     {
-        predicate = [NSPredicate predicateWithFormat:@"firstName CONTAINS[c]%@ OR lastName CONTAINS[c] %@ AND itIsMe != YES AND distance < %f AND isBlocked == NO AND imdiscoverable > distance",_searchBar.text,_searchBar.text,_sliderDistanceValue];
+        predicate = [NSPredicate predicateWithFormat:@"(firstName CONTAINS[c]%@ OR lastName CONTAINS[c]%@ OR status CONTAINS[c]%@ OR summary CONTAINS[c]%@ OR ANY experiences.descript CONTAINS[c]%@ OR ANY experiences.name CONTAINS[c]%@) AND itIsMe != YES AND distance < %f AND isBlocked == NO AND imdiscoverable > distance",_searchBar.text,_searchBar.text,_searchBar.text,_searchBar.text,_searchBar.text,_searchBar.text,_sliderDistanceValue];
     }
     else
     {
@@ -312,7 +310,6 @@
     
     [self calculateSliderDistanceValue];
     
-    self.title = [NSString stringWithFormat:NSLocalizedString(@"%@ nearMe", @"{distance} Near Me"), [self calculateDistanceToDescription]];
     navItem.title = [NSString stringWithFormat:NSLocalizedString(@"%@ nearMe", @"{distance} Near Me"), [self calculateDistanceToDescription]];
 
 }

@@ -230,7 +230,7 @@
     NSPredicate* predicate = [NSPredicate predicateWithFormat:@"isFriend == YES AND isBlocked == NO"];
     if (_searchBar.text.length)
     {
-        predicate = [NSPredicate predicateWithFormat:@"(firstName CONTAINS[c]%@ OR lastName CONTAINS[c] %@) AND itIsMe != YES AND isFriend == YES AND isBlocked == NO",_searchBar.text,_searchBar.text];
+        predicate = [NSPredicate predicateWithFormat:@"(firstName CONTAINS[c]%@ OR lastName CONTAINS[c]%@ OR status CONTAINS[c]%@ OR summary CONTAINS[c]%@ OR ANY experiences.descript CONTAINS[c]%@ OR ANY experiences.name CONTAINS[c]%@) AND itIsMe != YES AND isFriend == YES AND isBlocked == NO",_searchBar.text,_searchBar.text,_searchBar.text,_searchBar.text,_searchBar.text,_searchBar.text];
     }
     [fetchRequest setPredicate:predicate];
     

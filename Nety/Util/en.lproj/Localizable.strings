@@ -95,7 +95,7 @@ networkSearchbar = "Search by name, email, or interest!";
 //My Network
 myNetworkNoContent = "You don't have friends yet. Swipe left on your new chats to add the person you talked to!";
 myNetworkTitle = "My Network";
-myNetworkSearchbar = "Search you chats!";
+myNetworkSearchbar = "Search you network!";
 myNetBlockTitle = "Block?";
 myNetBlockDescription = "You will not see this person on this app, and all the chats will be deleted. Are you sure to block?";
 myNetDeleteTitle = "Leave?";
@@ -106,7 +106,7 @@ chatsTitle = "Chats";
 newChatNoContent = "You haven't talked to anyone yet. Checkout the first tab!";
 chatsDeleteTitle = "Leave?";
 myChatNoContent = "You don't have friends yet. Swipe left on your new chats to add people!";
-
+chatSearchBar = "Search your chats!";
 //Settings
 settings = "Settings";
 //{distance} discoverable
