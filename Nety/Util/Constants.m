@@ -47,6 +47,8 @@ NSString *const kUserDetails = @"userDetails";
     NSString *const kBlockedUsers = @"blockedUsers";
     NSString *const kAddedUsers = @"addedUsers";
 
+NSString *const kReports = @"reports";
+
 NSString *const kDefaultUserLogoName = @"NetyBlueLogo";
 NSString *const kGeoCoordinate = @"geocoordinate";
 NSString *const kIAmDiscoverable = @"imdiscoverable";

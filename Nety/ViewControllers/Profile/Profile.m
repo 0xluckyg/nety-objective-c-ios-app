@@ -69,6 +69,17 @@
     
     self.navigationItem.leftBarButtonItem = leftButton;
     
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Report" style:UIBarButtonItemStylePlain target:self action:@selector(reportUser)];
+    
+    [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil]
+     setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[UIColor whiteColor],
+       NSFontAttributeName:                                    [self.UIPrinciple netyFontWithSize:18]
+       }
+     forState:UIControlStateNormal];
+    
+    self.navigationItem.rightBarButtonItem = rightButton;
+    
     //If image is not NetyBlueLogo, start downloading and caching the image
     NSString *photoUrl = _selectedUser.profileImageUrl;
     UIImageView *profileImageView = [[UIImageView alloc] init];
@@ -226,22 +237,31 @@
         ExperienceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ExperienceCell" forIndexPath:indexPath];
         
         NSArray *experiences = [self.selectedUser.experiences allObjects];
+        
         experiences = [experiences sortedArrayUsingComparator:^NSComparisonResult(Experiences *a, Experiences *b) {
-            NSArray *aArray = [a.endDate componentsSeparatedByString:@"/"];
-            NSArray *bArray = [b.endDate componentsSeparatedByString:@"/"];
             
-            NSComparisonResult yearCompare = [[aArray lastObject] compare:[bArray lastObject]];
-            if (yearCompare == 0) {
-                NSComparisonResult monthCompare = [[aArray objectAtIndex:0] compare:[bArray objectAtIndex:0]];
-                if (monthCompare == 0) {
-                    NSComparisonResult dayCompare = [[aArray objectAtIndex:1] compare:[bArray objectAtIndex:1]];
-                    return -dayCompare;
-                } else {
-                    return -monthCompare;
-                }
+            if ([a.endDate isEqualToString:@"Present"]) {
+                return -1;
+            } else if ([b.endDate isEqualToString:@"Present"]) {
+                return 1;
             } else {
-                return -yearCompare;
+                NSArray *aArray = [a.endDate componentsSeparatedByString:@"/"];
+                NSArray *bArray = [b.endDate componentsSeparatedByString:@"/"];
+                
+                NSComparisonResult yearCompare = [[aArray lastObject] compare:[bArray lastObject]];
+                if (yearCompare == 0) {
+                    NSComparisonResult monthCompare = [[aArray objectAtIndex:0] compare:[bArray objectAtIndex:0]];
+                    if (monthCompare == 0) {
+                        NSComparisonResult dayCompare = [[aArray objectAtIndex:1] compare:[bArray objectAtIndex:1]];
+                        return -dayCompare;
+                    } else {
+                        return -monthCompare;
+                    }
+                } else {
+                    return -yearCompare;
+                }
             }
+
         }];
         
         Experiences* expir = [experiences objectAtIndex:indexPath.row-8];
@@ -367,6 +387,56 @@
     return chatRoomInformation;
 }
 
+-(void) reportUser {
+    
+    FIRDatabaseReference *reportRef = [[[self.firdatabase child:kReports] child:self.selectedUser.userID] child:self.senderId];
+    
+    UIAlertController *alertController = [UIAlertController
+                                          alertControllerWithTitle:@"Report"
+                                          message:@"Please report why"
+                                          preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField)
+     {
+         textField.placeholder = @"Ex. inappropriate photo";
+     }];
+    UIAlertAction *cancelAction = [UIAlertAction
+                               actionWithTitle:@"CANCEL"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction *action)
+                               {
+                               }];
+    
+    UIAlertAction *okAction = [UIAlertAction
+                               actionWithTitle:@"OK"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction *action)
+                               {
+                                   UITextField *reportText = alertController.textFields.firstObject;
+                                   UIAlertAction *okAction = alertController.actions.lastObject;
+                                   okAction.enabled = reportText.text.length > 5;
+                                   [reportRef setValue:reportText.text];
+                               }];
+    
+    [alertController addAction:cancelAction];
+    [alertController addAction:okAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+    
+    
+}
+
+- (void)alertTextFieldDidChange:(UITextField *)sender
+{
+    UIAlertController *alertController = (UIAlertController *)self.presentedViewController;
+    if (alertController)
+    {
+        UITextField *reportText = alertController.textFields.firstObject;
+        UIAlertAction *okAction = alertController.actions.lastObject;
+        okAction.enabled = reportText.text.length > 10;
+    }
+}
 
 //---------------------------------------------------------
 

@@ -47,6 +47,8 @@ extern NSString *const kUserDetails;
     extern NSString *const kBlockedUsers;
     extern NSString *const kAddedUsers;
 
+extern NSString *const kReports;
+
 extern NSString *const kDefaultUserLogoName;
 extern NSString *const kGeoCoordinate;
 

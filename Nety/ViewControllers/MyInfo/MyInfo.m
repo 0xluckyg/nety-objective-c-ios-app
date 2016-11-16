@@ -161,21 +161,29 @@
         id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][0];
         NSArray *experiences = [sectionInfo objects];
         experiences = [experiences sortedArrayUsingComparator:^NSComparisonResult(Experiences *a, Experiences *b) {
-            NSArray *aArray = [a.endDate componentsSeparatedByString:@"/"];
-            NSArray *bArray = [b.endDate componentsSeparatedByString:@"/"];
             
-            NSComparisonResult yearCompare = [[aArray lastObject] compare:[bArray lastObject]];
-            if (yearCompare == 0) {
-                NSComparisonResult monthCompare = [[aArray objectAtIndex:0] compare:[bArray objectAtIndex:0]];
-                if (monthCompare == 0) {
-                    NSComparisonResult dayCompare = [[aArray objectAtIndex:1] compare:[bArray objectAtIndex:1]];
-                    return -dayCompare;
-                } else {
-                    return -monthCompare;
-                }
+            if ([a.endDate isEqualToString:@"Present"]) {
+                return -1;
+            } else if ([b.endDate isEqualToString:@"Present"]) {
+                return 1;
             } else {
-                return -yearCompare;
+                NSArray *aArray = [a.endDate componentsSeparatedByString:@"/"];
+                NSArray *bArray = [b.endDate componentsSeparatedByString:@"/"];
+                
+                NSComparisonResult yearCompare = [[aArray lastObject] compare:[bArray lastObject]];
+                if (yearCompare == 0) {
+                    NSComparisonResult monthCompare = [[aArray objectAtIndex:0] compare:[bArray objectAtIndex:0]];
+                    if (monthCompare == 0) {
+                        NSComparisonResult dayCompare = [[aArray objectAtIndex:1] compare:[bArray objectAtIndex:1]];
+                        return -dayCompare;
+                    } else {
+                        return -monthCompare;
+                    }
+                } else {
+                    return -yearCompare;
+                }
             }
+            
         }];
         
         [self configureCell:cell withObject:[experiences objectAtIndex:indexPath.row-7] cellForRowAtIndexPath:indexPath];
