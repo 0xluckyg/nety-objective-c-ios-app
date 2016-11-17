@@ -57,22 +57,22 @@
     self.UIPrinciple = [[UIPrinciples alloc] init];
     
     //View color
-    self.view.backgroundColor = self.UIPrinciple.netyBlue;
+    self.view.backgroundColor = self.UIPrinciple.netyTheme;
     
     //Name section
     self.experienceNameLabel.textColor = [UIColor whiteColor];
-    self.experienceNameTextField.textColor = self.UIPrinciple.netyBlue;
+    self.experienceNameTextField.textColor = self.UIPrinciple.netyTheme;
     
     //Date section
     self.dateLabel.textColor = [UIColor whiteColor];
     self.dateToLabel.textColor = [UIColor whiteColor];
-    self.dateFromTextField.textColor = self.UIPrinciple.netyBlue;
-    self.dateToTextField.textColor = self.UIPrinciple.netyBlue;
+    self.dateFromTextField.textColor = self.UIPrinciple.netyTheme;
+    self.dateToTextField.textColor = self.UIPrinciple.netyTheme;
     
     //Description section
     self.experienceDescriptionLabel.textColor = [UIColor whiteColor];
     self.experienceDescriptionTextField.layer.cornerRadius = 8;
-    self.experienceDescriptionTextField.textColor = self.UIPrinciple.netyBlue;
+    self.experienceDescriptionTextField.textColor = self.UIPrinciple.netyTheme;
     
     if (self.add == true) {
         

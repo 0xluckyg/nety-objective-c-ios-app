@@ -41,7 +41,7 @@
     self.UIPrinciple = [[UIPrinciples alloc] init];
     
     //Background of page
-    self.view.backgroundColor = self.UIPrinciple.netyBlue;
+    self.view.backgroundColor = self.UIPrinciple.netyTheme;
     
     //Label
     self.jobLabel.textColor = [UIColor whiteColor];
@@ -51,10 +51,10 @@
     self.summaryTextField.text = NSLocalizedString(@"userDescriptionPlaceHolder", nil);
     self.jobLabel.text = NSLocalizedString(@"userIdentity", nil);
     self.summaryLabel.text = NSLocalizedString(@"userDescription", nil);
-    self.summaryTextField.textColor = self.UIPrinciple.netyBlue;
+    self.summaryTextField.textColor = self.UIPrinciple.netyTheme;
     self.summaryTextField.layer.cornerRadius = 8;
-    self.jobTextField.textColor = self.UIPrinciple.netyBlue;
-    self.jobTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"userIdentityPlaceHolder", nil) attributes:@{NSForegroundColorAttributeName: self.UIPrinciple.netyBlue}];
+    self.jobTextField.textColor = self.UIPrinciple.netyTheme;
+    self.jobTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"userIdentityPlaceHolder", nil) attributes:@{NSForegroundColorAttributeName: self.UIPrinciple.netyTheme}];
     
     self.process1title.text = NSLocalizedString(@"signupProcess1Title", nil);
     
@@ -73,7 +73,7 @@
 - (BOOL)textViewShouldBeginEditing:(UITextField *)textView
 {
     textView.attributedText = nil;
-    textView.textColor = self.UIPrinciple.netyBlue;
+    textView.textColor = self.UIPrinciple.netyTheme;
     return YES;
 }
 

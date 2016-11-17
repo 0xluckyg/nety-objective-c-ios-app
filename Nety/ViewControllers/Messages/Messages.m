@@ -75,7 +75,7 @@
     JSQMessagesBubbleImageFactory *outgoingImage = [[JSQMessagesBubbleImageFactory alloc] initWithBubbleImage:[UIImage jsq_bubbleRegularImage] capInsets:UIEdgeInsetsZero];
     
     
-    self.outgoingBubbleImageView = [outgoingImage outgoingMessagesBubbleImageWithColor:self.UIPrinciple.netyBlue];
+    self.outgoingBubbleImageView = [outgoingImage outgoingMessagesBubbleImageWithColor:self.UIPrinciple.netyTheme];
     self.incomingBubbleImageView = [incomingImage incomingMessagesBubbleImageWithColor:self.UIPrinciple.netyGray];
     
     
@@ -255,7 +255,7 @@
 //When photo choosing screen shows, customize nav controller
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
     //Customizing view controller here
-    [viewController.navigationController.navigationBar setBackgroundColor:self.UIPrinciple.netyBlue];
+    [viewController.navigationController.navigationBar setBackgroundColor:self.UIPrinciple.netyTheme];
     [viewController.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     [viewController.navigationController.navigationBar setTranslucent:NO];
     [self.UIPrinciple addTopbarColor:viewController];
@@ -658,7 +658,7 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.label.text = NSLocalizedString(@"uploading", nil);
-    hud.bezelView.color = [self.UIPrinciple.netyBlue colorWithAlphaComponent:0.3f];
+    hud.bezelView.color = [self.UIPrinciple.netyTheme colorWithAlphaComponent:0.3f];
     [hud showAnimated:YES];
     
     //Uploading big profile picture first

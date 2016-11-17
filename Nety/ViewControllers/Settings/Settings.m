@@ -108,19 +108,19 @@
     [self.navigationController.navigationBar setTitleTextAttributes:attributes];
     
     [self.navigationController.navigationBar setItems:@[navItem]];
-    [self.navigationController.navigationBar setBarTintColor:self.UIPrinciple.netyBlue];
-    [self.navigationController.navigationBar setBackgroundColor:self.UIPrinciple.netyBlue];
+    [self.navigationController.navigationBar setBarTintColor:self.UIPrinciple.netyTheme];
+    [self.navigationController.navigationBar setBackgroundColor:self.UIPrinciple.netyTheme];
     
     self.facebookImage.image = [[UIImage imageNamed:@"Facebook"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.facebookImage.tintColor = self.UIPrinciple.facebookBlue;
     self.linkedInImage.image = [[UIImage imageNamed:@"LinkedIn"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.linkedInImage.tintColor = self.UIPrinciple.linkedInBlue;
     
-    self.locationRangeSlider.tintColor = self.UIPrinciple.netyBlue;
-    [self.notificationSwitch setOnTintColor:self.UIPrinciple.netyBlue];
-    [self.discoverabilitySwitch setOnTintColor:self.UIPrinciple.netyBlue];
-    [self.chatRequestSwitch setOnTintColor:self.UIPrinciple.netyBlue];
-    [self.chatSwitch setOnTintColor:self.UIPrinciple.netyBlue];
+    self.locationRangeSlider.tintColor = self.UIPrinciple.netyTheme;
+    [self.notificationSwitch setOnTintColor:self.UIPrinciple.netyTheme];
+    [self.discoverabilitySwitch setOnTintColor:self.UIPrinciple.netyTheme];
+    [self.chatRequestSwitch setOnTintColor:self.UIPrinciple.netyTheme];
+    [self.chatSwitch setOnTintColor:self.UIPrinciple.netyTheme];
 
     //Set slider
 //    self.locationRangeSlider.value = 1;

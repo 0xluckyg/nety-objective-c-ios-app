@@ -39,7 +39,7 @@
 
 - (void)initializeDesign {
     self.UIPrinciple = [[UIPrinciples alloc] init];
-    self.holdingView.backgroundColor = self.UIPrinciple.netyBlue;
+    self.holdingView.backgroundColor = self.UIPrinciple.netyTheme;
     
     self.logoImage.image = [UIImage imageNamed:@"LogoTransparent"];
     

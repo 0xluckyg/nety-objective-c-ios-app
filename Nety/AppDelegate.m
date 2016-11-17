@@ -139,10 +139,10 @@
 
 -(void)initializeDesign {
     [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
-    [[UINavigationBar appearance] setBarTintColor:self.UIPrinciple.netyBlue];
+    [[UINavigationBar appearance] setBarTintColor:self.UIPrinciple.netyTheme];
     [[UINavigationBar appearance] setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     
-    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys: [self.UIPrinciple netyFontWithSize:15], NSFontAttributeName, self.UIPrinciple.netyBlue, NSForegroundColorAttributeName, nil];
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys: [self.UIPrinciple netyFontWithSize:15], NSFontAttributeName, self.UIPrinciple.netyTheme, NSForegroundColorAttributeName, nil];
     
     [[UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil] setTitleTextAttributes:attributes forState:UIControlStateNormal];
 
@@ -260,7 +260,7 @@
     settingsViewController.tabBarItem.imageInsets = UIEdgeInsetsMake(6,0,-6,0);
     
     //Set tabBar style
-    [[UITabBar appearance] setTintColor:self.UIPrinciple.netyBlue];
+    [[UITabBar appearance] setTintColor:self.UIPrinciple.netyTheme];
     
     //Connect tabBar and view controllers together
     NSArray* controllers = [NSArray arrayWithObjects:networkViewController,

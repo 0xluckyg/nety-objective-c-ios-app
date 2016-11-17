@@ -45,8 +45,8 @@
 - (void)initializeDesign {
     self.UIPrinciple = [[UIPrinciples alloc] init];
     
-    self.view.backgroundColor = self.UIPrinciple.netyBlue;
-    self.holdingView.backgroundColor = self.UIPrinciple.netyBlue;
+    self.view.backgroundColor = self.UIPrinciple.netyTheme;
+    self.holdingView.backgroundColor = self.UIPrinciple.netyTheme;
     
     [self.loginButtonOutlet.layer setBorderWidth:1.0];
     [self.loginButtonOutlet.layer setBorderColor:[[UIColor whiteColor] CGColor]];
@@ -54,12 +54,12 @@
     
     [self.email setBackgroundColor:[UIColor whiteColor]];
     [self.email.layer setCornerRadius:self.email.frame.size.height/2];
-    self.email.textColor = self.UIPrinciple.netyBlue;
+    self.email.textColor = self.UIPrinciple.netyTheme;
     
     
     [self.password setBackgroundColor:[UIColor whiteColor]];
     [self.password.layer setCornerRadius:self.password.frame.size.height/2];
-    self.password.textColor = self.UIPrinciple.netyBlue;
+    self.password.textColor = self.UIPrinciple.netyTheme;
     
     self.email.placeholder = NSLocalizedString(@"email", nil);
     self.password.placeholder = NSLocalizedString(@"password", nil);
@@ -99,7 +99,7 @@
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeIndeterminate;
         [hud.label setText:NSLocalizedString(@"loggingIn", nil)];;
-        [hud.bezelView setColor:[self.UIPrinciple.netyBlue colorWithAlphaComponent:0.3f]];
+        [hud.bezelView setColor:[self.UIPrinciple.netyTheme colorWithAlphaComponent:0.3f]];
         [hud showAnimated:YES];
         
         [MY_API loginToAcc:self.email.text pass:self.password.text DoneBlock:^(NSDictionary *dict, NSError *error) {

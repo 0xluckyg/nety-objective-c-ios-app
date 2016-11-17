@@ -187,7 +187,7 @@
     NSMutableArray *myNetworkRightUtilityButtons = [[NSMutableArray alloc] init];
     
     [myNetworkRightUtilityButtons sw_addUtilityButtonWithColor:
-     self.UIPrinciple.netyBlue
+     self.UIPrinciple.netyTheme
                                                          title:NSLocalizedString(@"block", nil)];
     [myNetworkRightUtilityButtons sw_addUtilityButtonWithColor:
      self.UIPrinciple.netyRed

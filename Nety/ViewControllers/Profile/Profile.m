@@ -80,7 +80,7 @@
     
     self.navigationItem.rightBarButtonItem = rightButton;
     
-    //If image is not NetyBlueLogo, start downloading and caching the image
+    //If image is not netyThemeLogo, start downloading and caching the image
     NSString *photoUrl = _selectedUser.profileImageUrl;
     UIImageView *profileImageView = [[UIImageView alloc] init];
     
@@ -145,7 +145,7 @@
         if ([self.selectedUser.security isEqual:@(2)]) {
             [cell.buttonOutlet setTitle:NSLocalizedString(@"chatRequest", nil) forState:UIControlStateNormal];
         } else {
-            [cell setBackgroundColor:self.UIPrinciple.netyBlue];
+            [cell setBackgroundColor:self.UIPrinciple.netyTheme];
             [cell.buttonOutlet setTitle:NSLocalizedString(@"chatNow", nil) forState:UIControlStateNormal];
             cell.buttonOutlet.tintColor = [UIColor whiteColor];
         }
@@ -161,9 +161,9 @@
         
         MainInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MainInfoCell" forIndexPath:indexPath];
         
-        cell.mainInfoLabel.textColor = self.UIPrinciple.netyBlue;
+        cell.mainInfoLabel.textColor = self.UIPrinciple.netyTheme;
         
-        [cell.mainInfoImage setTintColor:self.UIPrinciple.netyBlue];
+        [cell.mainInfoImage setTintColor:self.UIPrinciple.netyTheme];
         
         int one = indexCount + 2;
         int two = indexCount + 3;
@@ -207,7 +207,7 @@
             float cellWidth = cell.contentView.frame.size.width;
             
             UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(0, cellHeight - 2, cellWidth, 0.3)];/// change size as you need.
-            separatorLineView.backgroundColor = self.UIPrinciple.netyBlue;
+            separatorLineView.backgroundColor = self.UIPrinciple.netyTheme;
             [cell.contentView addSubview:separatorLineView];
             
         }
@@ -220,9 +220,9 @@
         
         cell.mainInfoImage.image = [[UIImage imageNamed:@"LightBulbSmall"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
-        [cell.mainInfoImage setTintColor:self.UIPrinciple.netyBlue];
+        [cell.mainInfoImage setTintColor:self.UIPrinciple.netyTheme];
         
-        cell.mainInfoLabel.textColor = self.UIPrinciple.netyBlue;
+        cell.mainInfoLabel.textColor = self.UIPrinciple.netyTheme;
         
         if ([experiences count] == 0) {
             cell.mainInfoLabel.text = NSLocalizedString(@"noExperience", nil);
@@ -266,9 +266,9 @@
         
         Experiences* expir = [experiences objectAtIndex:indexPath.row-8];
         
-        cell.experienceName.textColor = self.UIPrinciple.netyBlue;
-        cell.experienceDate.textColor = self.UIPrinciple.netyBlue;
-        cell.experienceDescription.textColor = self.UIPrinciple.netyBlue;
+        cell.experienceName.textColor = self.UIPrinciple.netyTheme;
+        cell.experienceDate.textColor = self.UIPrinciple.netyTheme;
+        cell.experienceDescription.textColor = self.UIPrinciple.netyTheme;
         
         cell.experienceName.text = expir.name;
         cell.experienceDate.text = [NSString stringWithFormat:@"%@ - %@",expir.startDate, expir.endDate];
@@ -278,7 +278,7 @@
         float cellWidth = cell.contentView.frame.size.width;
         
         UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(40, cellHeight - 2, cellWidth, 0.5)];/// change size as you need.
-        separatorLineView.backgroundColor = self.UIPrinciple.netyBlue;
+        separatorLineView.backgroundColor = self.UIPrinciple.netyTheme;
         [cell.contentView addSubview:separatorLineView];
         
         return cell;

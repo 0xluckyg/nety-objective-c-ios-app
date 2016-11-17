@@ -150,7 +150,7 @@
     cell.chatUserImage.image = [UIImage imageNamed: kDefaultUserLogoName];
     NSString *photoUrl = object.profileImageUrl;
     
-    //If image is not NetyBlueLogo, start downloading and caching the image
+    //If image is not netyThemeLogo, start downloading and caching the image
     if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
         NSURL *profileImageUrl = [NSURL URLWithString:photoUrl];
         //[self loadAndCacheImage:chatCell photoUrl:profileImageUrl cache:self.imageCache];
@@ -165,7 +165,7 @@
         cell.chatNotificationView.backgroundColor = [UIColor clearColor];
         cell.chatNotificationLabel.text = @"";
     } else {
-        cell.chatNotificationView.backgroundColor = self.UIPrinciple.netyBlue;
+        cell.chatNotificationView.backgroundColor = self.UIPrinciple.netyTheme;
         cell.chatNotificationLabel.text = [NSString stringWithFormat:@"%lu", [object.unread integerValue]];
     }
     
@@ -192,7 +192,7 @@
                                                     title:NSLocalizedString(@"block", nil)];
     
     [chatRightUtilityButtons sw_addUtilityButtonWithColor:
-     self.UIPrinciple.netyBlue
+     self.UIPrinciple.netyTheme
                                                     title:NSLocalizedString(@"add", nil)];
     [chatRightUtilityButtons sw_addUtilityButtonWithColor:
      self.UIPrinciple.netyRed

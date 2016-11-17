@@ -75,8 +75,8 @@
     self.UIPrinciple = [[UIPrinciples alloc] init];
     
     //Background blue
-    self.view.backgroundColor = self.UIPrinciple.netyBlue;
-    self.tableView.backgroundColor = self.UIPrinciple.netyBlue;
+    self.view.backgroundColor = self.UIPrinciple.netyTheme;
+    self.tableView.backgroundColor = self.UIPrinciple.netyTheme;
     
     //No separator
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -128,14 +128,14 @@
     }
     
     //Set cell style
-    experienceCell.backgroundColor = self.UIPrinciple.netyBlue;
+    experienceCell.backgroundColor = self.UIPrinciple.netyTheme;
     experienceCell.experienceName.textColor = [UIColor whiteColor];
     experienceCell.experienceDate.textColor = [UIColor whiteColor];
     experienceCell.experienceDescription.textColor = [UIColor whiteColor];
     
     //Set selection color to blue
     UIView *bgColorView = [[UIView alloc] init];
-    bgColorView.backgroundColor = self.UIPrinciple.netyBlue;
+    bgColorView.backgroundColor = self.UIPrinciple.netyTheme;
     [experienceCell setSelectedBackgroundView:bgColorView];
     //Set highlighted color to white
     experienceCell.experienceName.highlightedTextColor = [UIColor whiteColor];

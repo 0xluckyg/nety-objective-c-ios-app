@@ -67,14 +67,14 @@
     self.UIPrinciple = [[UIPrinciples alloc] init];
     
     //Background of page
-    self.view.backgroundColor = self.UIPrinciple.netyBlue;
+    self.view.backgroundColor = self.UIPrinciple.netyTheme;
 
     self.editType2Label.textColor = [UIColor whiteColor];
     
     //textfield
     self.editType2TextField.text = editType2PlacementText;
     self.editType2TextField.layer.cornerRadius = 8;
-    self.editType2TextField.textColor = self.UIPrinciple.netyBlue;
+    self.editType2TextField.textColor = self.UIPrinciple.netyTheme;
     
     //save button
     [self.saveButtonOutlet setTintColor:[UIColor whiteColor]];

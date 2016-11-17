@@ -39,7 +39,7 @@
 
 - (void)initializeDesign {
     self.UIPrinciple = [[UIPrinciples alloc] init];
-    self.view.backgroundColor = self.UIPrinciple.netyBlue;
+    self.view.backgroundColor = self.UIPrinciple.netyTheme;
     
     self.profileImage.image = [UIImage imageNamed:kDefaultUserLogoName];
     self.profileImage.layer.cornerRadius = self.profileImage.frame.size.height /2;
@@ -63,7 +63,7 @@
 //When photo choosing screen shows, customize nav controller
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
     //Customizing view controller here
-    [viewController.navigationController.navigationBar setBackgroundColor:self.UIPrinciple.netyBlue];
+    [viewController.navigationController.navigationBar setBackgroundColor:self.UIPrinciple.netyTheme];
     [viewController.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     [viewController.navigationController.navigationBar setTranslucent:NO];
     [self.UIPrinciple addTopbarColor:viewController];
@@ -186,7 +186,7 @@
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.mode = MBProgressHUDModeIndeterminate;
         hud.label.text = @"Uploading";
-        hud.bezelView.color = [self.UIPrinciple.netyBlue colorWithAlphaComponent:0.3f];
+        hud.bezelView.color = [self.UIPrinciple.netyTheme colorWithAlphaComponent:0.3f];
         [hud showAnimated:YES];
         
         //Uploading big profile picture first

@@ -42,7 +42,7 @@
     // Customize page menu to your liking (optional) or use default settings by sending nil for 'options' in the init
     // Example:
     NSDictionary *parameters = @{
-                                 CAPSPageMenuOptionScrollMenuBackgroundColor: self.UIPrinciple.netyBlue,
+                                 CAPSPageMenuOptionScrollMenuBackgroundColor: self.UIPrinciple.netyTheme,
                                  CAPSPageMenuOptionBottomMenuHairlineColor: [UIColor clearColor],
                                  CAPSPageMenuOptionSelectedMenuItemLabelColor: [UIColor whiteColor],
                                  CAPSPageMenuOptionUnselectedMenuItemLabelColor:[UIColor whiteColor],
@@ -69,7 +69,7 @@
 -(void)initializeDesign {
     self.UIPrinciple = [[UIPrinciples alloc] init];
     
-    self.view.backgroundColor = self.UIPrinciple.netyBlue;
+    self.view.backgroundColor = self.UIPrinciple.netyTheme;
 }
 
 -(void)viewWillAppear:(BOOL)animated {

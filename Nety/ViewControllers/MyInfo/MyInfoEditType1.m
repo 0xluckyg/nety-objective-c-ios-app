@@ -52,7 +52,7 @@
     self.UIPrinciple = [[UIPrinciples alloc] init];
     
     //Background of page
-    self.view.backgroundColor = self.UIPrinciple.netyBlue;
+    self.view.backgroundColor = self.UIPrinciple.netyTheme;
     
     //Name Label
     
@@ -61,7 +61,7 @@
     
     //Name textfield
     self.editType1NameTextField.text = editType1NamePlacementText;
-    self.editType1NameTextField.textColor = self.UIPrinciple.netyBlue;
+    self.editType1NameTextField.textColor = self.UIPrinciple.netyTheme;
     
     //Job Label
     self.editType1JobLabel.text = NSLocalizedString(@"editIdentity", nil);
@@ -70,7 +70,7 @@
     
     //Job textfield
     self.editType1JobTextField.text = editType1JobPlacementText;
-    self.editType1JobTextField.textColor = self.UIPrinciple.netyBlue;
+    self.editType1JobTextField.textColor = self.UIPrinciple.netyTheme;
     
     //save button
     [self.saveButtonOutlet setTintColor:[UIColor whiteColor]];

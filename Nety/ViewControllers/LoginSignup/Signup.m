@@ -160,8 +160,8 @@
 - (void)initializeDesign {
     self.UIPrinciple = [[UIPrinciples alloc] init];
     
-    self.view.backgroundColor = self.UIPrinciple.netyBlue;
-    self.holdingView.backgroundColor = self.UIPrinciple.netyBlue;
+    self.view.backgroundColor = self.UIPrinciple.netyTheme;
+    self.holdingView.backgroundColor = self.UIPrinciple.netyTheme;
     
     [self.signupButtonOutlet.layer setBorderWidth:1.0];
     [self.signupButtonOutlet.layer setBorderColor:[[UIColor whiteColor] CGColor]];
@@ -172,19 +172,19 @@
     
     [self.email setBackgroundColor:[UIColor whiteColor]];
     [self.email.layer setCornerRadius:self.email.frame.size.height/2];
-    self.email.textColor = self.UIPrinciple.netyBlue;
+    self.email.textColor = self.UIPrinciple.netyTheme;
     
     [self.password setBackgroundColor:[UIColor whiteColor]];
     [self.password.layer setCornerRadius:self.password.frame.size.height/2];
-    self.password.textColor = self.UIPrinciple.netyBlue;
+    self.password.textColor = self.UIPrinciple.netyTheme;
     
     [self.age setBackgroundColor:[UIColor whiteColor]];
     [self.age.layer setCornerRadius:self.age.frame.size.height/2];
-    self.age.textColor = self.UIPrinciple.netyBlue;
+    self.age.textColor = self.UIPrinciple.netyTheme;
     
     [self.name setBackgroundColor:[UIColor whiteColor]];
     [self.name.layer setCornerRadius:self.name.frame.size.height/2];
-    self.name.textColor = self.UIPrinciple.netyBlue;
+    self.name.textColor = self.UIPrinciple.netyTheme;
     
     self.email.placeholder = NSLocalizedString(@"email", nil);
     self.password.placeholder = NSLocalizedString(@"password", nil);

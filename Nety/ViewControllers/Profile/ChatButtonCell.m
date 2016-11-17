@@ -16,13 +16,13 @@
     
     self.UIPrinciple = [[UIPrinciples alloc] init];
     
-    self.buttonOutlet.tintColor = self.UIPrinciple.netyBlue;
+    self.buttonOutlet.tintColor = self.UIPrinciple.netyTheme;
     
     float cellHeight = self.contentView.frame.size.height;
     float cellWidth = self.contentView.frame.size.width;
     
     UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(0, cellHeight - 2, cellWidth, 1)];/// change size as you need.
-    separatorLineView.backgroundColor = self.UIPrinciple.netyBlue;
+    separatorLineView.backgroundColor = self.UIPrinciple.netyTheme;
     [self.contentView addSubview:separatorLineView];
 }
 

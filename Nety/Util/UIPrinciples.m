@@ -16,10 +16,10 @@
 {
     self = [super init];
     if (self) {
-//        _netyBlue = [UIColor colorWithRed:73.0f/255.0f green:101.0f/255.0f blue:146.0f/255.0f alpha:1.0f];
-        _netyBlue = [UIColor colorWithRed:60.0f/255.0f green:60.0f/255.0f blue:60.0f/255.0f alpha:1.0f];
+//        _netyTheme = [UIColor colorWithRed:73.0f/255.0f green:101.0f/255.0f blue:146.0f/255.0f alpha:1.0f];
+        _netyTheme = [UIColor colorWithRed:73.0f/255.0f green:101.0f/255.0f blue:146.0f/255.0f alpha:1.0f];
 //        _netyBlue = [UIColor colorWithRed:226.0f/255.0f green:150.0f/255.0f blue:75.0f/255.0f alpha:1.0f];
-//        _netyBlue = [UIColor colorWithRed:122.0f/255.0f green:118.0f/255.0f blue: 193.0f/255.0f alpha:1.0f];
+//        _netyTheme = [UIColor colorWithRed:122.0f/255.0f green:118.0f/255.0f blue: 193.0f/255.0f alpha:1.0f];
         _netyRed = [UIColor colorWithRed:220.0f/255.0f green:68.0f/255.0f blue:55.0f/255.0f alpha:1.0f];
         _netyGray = [UIColor colorWithRed:220.0f/255.0f green:220.0f/255.0f blue:220.0f/255.0f alpha:1.0f];
         _netyTransparent = [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:0.3f];
@@ -95,7 +95,7 @@
 
 -(void)addTopbarColor: (UIViewController *)viewController {
     UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, 0,[UIScreen mainScreen].bounds.size.width, 20)];
-    view.backgroundColor=self.netyBlue;
+    view.backgroundColor=self.netyTheme;
     [viewController.view addSubview:view];
 }
 
@@ -103,7 +103,7 @@
     
     //Set navbar
     UINavigationBar *navbar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0, 20, [UIScreen mainScreen].bounds.size.width, 50)];
-    navbar.backgroundColor = self.netyBlue;
+    navbar.backgroundColor = self.netyTheme;
     [navbar setTranslucent:NO];
     
     //Set navbar items

@@ -29,7 +29,7 @@
     self.chatNotificationView.layer.borderWidth = 0;
     
     UIPrinciples *UIPrinciple = [[UIPrinciples alloc] init];
-    [self.chatNotificationView setBackgroundColor:UIPrinciple.netyBlue];
+    [self.chatNotificationView setBackgroundColor:UIPrinciple.netyTheme];
     
 }
 

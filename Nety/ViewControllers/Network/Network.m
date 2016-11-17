@@ -94,7 +94,7 @@
     
     self.slider.continuous = YES;
     
-    [self.slider setTintColor:self.UIPrinciple.netyBlue];
+    [self.slider setTintColor:self.UIPrinciple.netyTheme];
     
     float sliderViewWidth = self.sliderView.frame.size.width;
     
@@ -206,7 +206,7 @@
     //Setting cell data
     cell.networkUserImage.image = [UIImage imageNamed:kDefaultUserLogoName];
     
-    //If image is not NetyBlueLogo, start downloading and caching the image
+    //If image is not netyThemeLogo, start downloading and caching the image
     NSString *photoUrl = object.profileImageUrl;
     
     if (![photoUrl isEqualToString:kDefaultUserLogoName]) {

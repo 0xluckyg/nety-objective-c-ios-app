@@ -71,7 +71,7 @@
     float height = self.view.frame.size.height / 2.2;
     
     
-    //If image is not NetyBlueLogo, start downloading and caching the image
+    //If image is not netyThemeLogo, start downloading and caching the image
     NSString *photoUrl = MY_USER.profileImageUrl;
     self.profileImageView = [[UIImageView alloc] init];
     
@@ -255,7 +255,7 @@
 //When photo choosing screen shows, customize nav controller
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
     //Customizing view controller here
-    [viewController.navigationController.navigationBar setBackgroundColor:self.UIPrinciple.netyBlue];
+    [viewController.navigationController.navigationBar setBackgroundColor:self.UIPrinciple.netyTheme];
     [viewController.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     [viewController.navigationController.navigationBar setTranslucent:NO];
     [self.UIPrinciple addTopbarColor:viewController];
@@ -385,7 +385,7 @@
                 
                 [MY_USER setValue:profileImageUrl forKey:kProfilePhoto];
                 
-                //If image is not NetyBlueLogo, start downloading and caching the image
+                //If image is not netyThemeLogo, start downloading and caching the image
                 NSString *photoUrl = MY_USER.profileImageUrl;
                 self.profileImageView = [[UIImageView alloc] init];
                 
@@ -544,9 +544,9 @@
         
         MyInfoMainCell *mcell = (MyInfoMainCell*)cell;
         
-        mcell.mainInfoLabel.textColor = self.UIPrinciple.netyBlue;
+        mcell.mainInfoLabel.textColor = self.UIPrinciple.netyTheme;
         
-        [mcell.mainInfoImage setTintColor:self.UIPrinciple.netyBlue];
+        [mcell.mainInfoImage setTintColor:self.UIPrinciple.netyTheme];
         
         switch (indexPath.row) {
             case 1:
@@ -597,7 +597,7 @@
             float cellWidth = mcell.contentView.frame.size.width;
             
             UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(0, cellHeight - 1, cellWidth, 1)];/// change size as you need.
-            separatorLineView.backgroundColor = self.UIPrinciple.netyBlue;
+            separatorLineView.backgroundColor = self.UIPrinciple.netyTheme;
             [mcell.contentView addSubview:separatorLineView];
             
         }
@@ -611,9 +611,9 @@
         
         mcell.mainInfoImage.image = [[UIImage imageNamed:@"LightBulbSmall"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         
-        [mcell.mainInfoImage setTintColor:self.UIPrinciple.netyBlue];
+        [mcell.mainInfoImage setTintColor:self.UIPrinciple.netyTheme];
         
-        mcell.mainInfoLabel.textColor = self.UIPrinciple.netyBlue;
+        mcell.mainInfoLabel.textColor = self.UIPrinciple.netyTheme;
         
         if ([experiences count] == 0) {
             mcell.mainInfoLabel.text = NSLocalizedString(@"noExperience", nil);
@@ -630,9 +630,9 @@
         
         Experiences* expir = object;
 
-        mcell.experienceName.textColor = self.UIPrinciple.netyBlue;
-        mcell.experienceDate.textColor = self.UIPrinciple.netyBlue;
-        mcell.experienceDescription.textColor = self.UIPrinciple.netyBlue;
+        mcell.experienceName.textColor = self.UIPrinciple.netyTheme;
+        mcell.experienceDate.textColor = self.UIPrinciple.netyTheme;
+        mcell.experienceDescription.textColor = self.UIPrinciple.netyTheme;
         
         mcell.experienceName.text = expir.name;
         mcell.experienceDate.text = [NSString stringWithFormat:@"%@ - %@",expir.startDate, expir.endDate];
