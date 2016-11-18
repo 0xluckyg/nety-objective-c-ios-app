@@ -38,13 +38,9 @@
     
     userIsSigningIn = false;
     
-//    FIRDatabaseReference *geofireRef = [[FIRDatabase database] reference];
-//    
-//    _geoFire = [[GeoFire alloc] initWithFirebaseRef:geofireRef];
-    
-    
     //[self loginLinkedIn];
     //Check if user is signed in, and move on
+    [self locationUpdateSettingAlert];
     [self initializeSettings];
     [self initializeLoginView];    
     [self initializeDesign];
@@ -100,6 +96,8 @@
 -(void)initializeLoginView
 {
     
+        self.locationTracker = [[LocationTracker alloc]init];
+    
         [[FIRAuth auth] addAuthStateDidChangeListener:^(FIRAuth *_Nonnull auth,
                                                         FIRUser *_Nullable user) {
             
@@ -107,7 +105,7 @@
             if (user != nil) {
                 
                 if (userIsSigningIn == false) {
-                
+                    
                     // User is signed in.
                     NSLog(@"App Delegate detected user signedin");
                     [self fetchUserInformation:user];
@@ -121,9 +119,23 @@
                     [self.window setRootViewController:self.tabBarRootController];
                     self.tabBarRootController.selectedIndex = 2;
                 }
+                
+                [self.locationTracker startLocationTracking];
+                
+                //Send the best location to server every 60 seconds
+                //You may adjust the time interval depends on the need of your app.
+                NSTimeInterval time = 60.0;
+                self.locationUpdateTimer =
+                [NSTimer scheduledTimerWithTimeInterval:time
+                                                 target:self
+                                               selector:@selector(updateLocation)
+                                               userInfo:nil
+                                                repeats:YES];
         } else  {
                 userIsSigningIn=false;
-
+            
+                    [self.locationTracker startLocationTracking];
+            
                     NSLog(@"App Delegate detected user not signed in");
                     UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"LoginSignup" bundle:nil];
                     UIViewController *mainViewController = [loginStoryboard instantiateViewControllerWithIdentifier:@"MainPageNav"];
@@ -304,6 +316,38 @@
 #pragma mark - Custom methods
 //---------------------------------------------------------
 
+-(void)locationUpdateSettingAlert {
+    
+    UIAlertView * alert;
+    
+    //We have to make sure that the Background App Refresh is enable for the Location updates to work in the background.
+    if([[UIApplication sharedApplication] backgroundRefreshStatus] == UIBackgroundRefreshStatusDenied){
+        
+        alert = [[UIAlertView alloc]initWithTitle:@""
+                                          message:@"The app doesn't work without the Background App Refresh enabled. To turn it on, go to Settings > General > Background App Refresh"
+                                         delegate:nil
+                                cancelButtonTitle:@"Ok"
+                                otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }else if([[UIApplication sharedApplication] backgroundRefreshStatus] == UIBackgroundRefreshStatusRestricted){
+        
+        alert = [[UIAlertView alloc]initWithTitle:@""
+                                          message:@"The functions of this app are limited because the Background App Refresh is disable."
+                                         delegate:nil
+                                cancelButtonTitle:@"Ok"
+                                otherButtonTitles:nil, nil];
+        [alert show];
+        
+    }
+
+}
+
+-(void)updateLocation {
+    NSLog(@"updateLocation");
+    
+    [self.locationTracker updateLocationToServer];
+}
 
 - (void) loginLinkedIn
 {
@@ -345,27 +389,14 @@
     [[[firdatabase child:kUsers] child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         // Get user value
         
-        NSLog(@"this is user's dictionary %@", snapshot.value);
-        
         if ([snapshot exists]) {
             NSDictionary *usersDictionary = snapshot.value;
             NSString *userID = snapshot.key;
             
             [MY_API addNewUser:usersDictionary UserID:userID FlagMy:YES];
             
-//            NSLog(@"%@", kUserChats);
-//            NSLog(@"%@", MY_USER.userID);
-//            NSLog(@"%@", kChats);
             [[[[self.firdatabase child:kUserChats] child:MY_USER.userID] child:kChats] observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
                 
-//                NSDictionary *chatDictionary = snapshot.value;
-//                numberOfUnreadChats += [[chatDictionary objectForKey:kUnread] integerValue];
-//                
-//                if (numberOfUnreadChats == 0) {
-//                    [self.tabBarRootController.tabBar.items objectAtIndex:2].badgeValue = nil;
-//                } else {
-//                    [[self.tabBarRootController.tabBar.items objectAtIndex:2] setBadgeValue:[NSString stringWithFormat:@"%i", numberOfUnreadChats]];
-//                }
            } withCancelBlock:nil];
             
             if (numberOfUnreadChats == 0) {

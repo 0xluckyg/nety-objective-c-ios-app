@@ -40,7 +40,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>1.1</string>
 	<key>FacebookAppID</key>
 	<string>1041631552618462</string>
 	<key>FacebookDisplayName</key>
@@ -83,9 +83,10 @@
 	<string>Location is required</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>App requires location services to find your nearby people</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>App requires access to your photos</string>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>NSLocationAlwaysUsageDescription</string>
 		<string>fetch</string>
 		<string>location</string>
 		<string>remote-notification</string>

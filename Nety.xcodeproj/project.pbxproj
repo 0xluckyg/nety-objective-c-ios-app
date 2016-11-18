@@ -41,6 +41,9 @@
 		67D4AD5F1D26333D00F42B7F /* LoginSignup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67D4AD5E1D26333D00F42B7F /* LoginSignup.storyboard */; };
 		67D4AD621D26536000F42B7F /* MainPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D4AD611D26536000F42B7F /* MainPage.m */; };
 		67D4AD651D265A7E00F42B7F /* Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D4AD641D265A7E00F42B7F /* Login.m */; };
+		67DA188E1DDF9400000F9318 /* BackgroundTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DA188D1DDF9400000F9318 /* BackgroundTaskManager.m */; };
+		67DA18911DDF9443000F9318 /* LocationShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DA18901DDF9443000F9318 /* LocationShareModel.m */; };
+		67DA18941DDF9465000F9318 /* LocationTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DA18931DDF9465000F9318 /* LocationTracker.m */; };
 		67DD1A7C1D17BEB500FBEA0F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DD1A7B1D17BEB500FBEA0F /* main.m */; };
 		67DD1A7F1D17BEB500FBEA0F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DD1A7E1D17BEB500FBEA0F /* AppDelegate.m */; };
 		67DD1A871D17BEB500FBEA0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1A861D17BEB500FBEA0F /* Assets.xcassets */; };
@@ -152,6 +155,13 @@
 		67D4AD611D26536000F42B7F /* MainPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPage.m; sourceTree = "<group>"; };
 		67D4AD631D265A7E00F42B7F /* Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Login.h; sourceTree = "<group>"; };
 		67D4AD641D265A7E00F42B7F /* Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Login.m; sourceTree = "<group>"; };
+		67DA18871DDF912F000F9318 /* Nety.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nety.entitlements; sourceTree = "<group>"; };
+		67DA188C1DDF9400000F9318 /* BackgroundTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundTaskManager.h; sourceTree = "<group>"; };
+		67DA188D1DDF9400000F9318 /* BackgroundTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundTaskManager.m; sourceTree = "<group>"; };
+		67DA188F1DDF9443000F9318 /* LocationShareModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationShareModel.h; sourceTree = "<group>"; };
+		67DA18901DDF9443000F9318 /* LocationShareModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationShareModel.m; sourceTree = "<group>"; };
+		67DA18921DDF9465000F9318 /* LocationTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTracker.h; sourceTree = "<group>"; };
+		67DA18931DDF9465000F9318 /* LocationTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTracker.m; sourceTree = "<group>"; };
 		67DD1A771D17BEB500FBEA0F /* Nety.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nety.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67DD1A7B1D17BEB500FBEA0F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		67DD1A7D1D17BEB500FBEA0F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -388,6 +398,19 @@
 			path = LoginSignup;
 			sourceTree = "<group>";
 		};
+		67DA188B1DDF93EB000F9318 /* LocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				67DA188C1DDF9400000F9318 /* BackgroundTaskManager.h */,
+				67DA188D1DDF9400000F9318 /* BackgroundTaskManager.m */,
+				67DA188F1DDF9443000F9318 /* LocationShareModel.h */,
+				67DA18901DDF9443000F9318 /* LocationShareModel.m */,
+				67DA18921DDF9465000F9318 /* LocationTracker.h */,
+				67DA18931DDF9465000F9318 /* LocationTracker.m */,
+			);
+			path = LocationManager;
+			sourceTree = "<group>";
+		};
 		67DD1A6E1D17BEB500FBEA0F = {
 			isa = PBXGroup;
 			children = (
@@ -409,6 +432,7 @@
 		67DD1A791D17BEB500FBEA0F /* Nety */ = {
 			isa = PBXGroup;
 			children = (
+				67DA18871DDF912F000F9318 /* Nety.entitlements */,
 				673338F81D2098D200A8009F /* Lib */,
 				67DD1AB01D17D3DF00FBEA0F /* Util */,
 				67DD1A911D17BEF200FBEA0F /* ViewControllers */,
@@ -516,6 +540,7 @@
 		67DD1AB01D17D3DF00FBEA0F /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				67DA188B1DDF93EB000F9318 /* LocationManager */,
 				673E58741D6AAFA300D28F5B /* CAPSPageMenu.h */,
 				673E58751D6AAFA300D28F5B /* CAPSPageMenu.m */,
 				67DD1AB11D17D40D00FBEA0F /* UIPrinciples.h */,
@@ -770,9 +795,11 @@
 				673E2BB91D6E657100AB139F /* ExperienceCell.m in Sources */,
 				678138AB1D33B2DD00BFBF48 /* Settings.m in Sources */,
 				E16004841D7C0AE10098DFB1 /* Users+CoreDataProperties.m in Sources */,
+				67DA18941DDF9465000F9318 /* LocationTracker.m in Sources */,
 				673E2BB31D6E64C000AB139F /* ChatButtonCell.m in Sources */,
 				E16004801D7C0AE10098DFB1 /* ALL+CoreDataProperties.m in Sources */,
 				67DD1AA21D17BFC300FBEA0F /* Chat.m in Sources */,
+				67DA18911DDF9443000F9318 /* LocationShareModel.m in Sources */,
 				67602F501D2EC75F00DA2F3A /* Messages.m in Sources */,
 				6733390E1D20B5ED00A8009F /* ChatCell.m in Sources */,
 				673E2BB61D6E656800AB139F /* MainInfoCell.m in Sources */,
@@ -797,6 +824,7 @@
 				67391DF21D27FBC400A50C03 /* SignupProcess2.m in Sources */,
 				67DD1A9D1D17BF6900FBEA0F /* MyNetwork.m in Sources */,
 				67DD1A7C1D17BEB500FBEA0F /* main.m in Sources */,
+				67DA188E1DDF9400000F9318 /* BackgroundTaskManager.m in Sources */,
 				679B9EEA1D236E0A00C426F2 /* MyInfoEditType2.m in Sources */,
 				E1E0B9211D689D8600295133 /* Nety.xcdatamodeld in Sources */,
 				E160047E1D7C0AE10098DFB1 /* ChatRooms+CoreDataProperties.m in Sources */,
@@ -933,6 +961,7 @@
 			baseConfigurationReference = 0A3CCF7D46442EF40346F17A /* Pods-Nety.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Nety/Nety.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Scott Cho (54WUEJ883V)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Scott Cho (54WUEJ883V)";
 				ENABLE_BITCODE = NO;
@@ -958,6 +987,7 @@
 			baseConfigurationReference = 35F89FE34D38A372A0738678 /* Pods-Nety.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Nety/Nety.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Scott Cho (54WUEJ883V)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Scott Cho (54WUEJ883V)";
 				ENABLE_BITCODE = NO;

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Login.h"
 #import "UIPrinciples.h"
+#import "LocationTracker.h"
 
 @import Firebase;
 
@@ -18,6 +19,10 @@
     int numberOfUnreadChats;
     
 }
+
+@property LocationTracker * locationTracker;
+
+@property (nonatomic) NSTimer* locationUpdateTimer;
 
 @property (strong, nonatomic) UIWindow *window;
 

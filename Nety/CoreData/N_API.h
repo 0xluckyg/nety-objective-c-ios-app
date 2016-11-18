@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "Users.h"
 #import "Constants.h"
-#import <CoreLocation/CoreLocation.h>
+#import "LocationShareModel.h"
 
 @import Firebase;
 
@@ -19,16 +19,15 @@ typedef void (^N_APIBlockArray)(NSArray* array, NSError* error);
 
 #define TARGET_NAME [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"]
 
-@interface N_API : NSObject <CLLocationManagerDelegate>
+@interface N_API : NSObject
+
+@property (strong,nonatomic) LocationShareModel * shareModel;
 
 @property (strong, nonatomic) Users* myUser;
 #pragma mark - Core Data stack
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-
-@property (strong, nonatomic) CLLocationManager *locationManager;
-
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;

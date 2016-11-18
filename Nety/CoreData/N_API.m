@@ -34,8 +34,6 @@
     [FIRDatabase database].persistenceEnabled = YES;
     self.firdatabase = [[FIRDatabase database] reference];
     
-    [self initializeLocationManager];
-    
 }
 
 #pragma mark - Core Data stack
@@ -310,7 +308,6 @@
                     else
                     {
                         expir = [findExpirArray lastObject];
-                        NSLog(@"ПОВТОР");
                         for (NSString* keyExp in [expDict allKeys]) {
                             if ([keyExp isEqualToString:@"description"])
                             {
@@ -322,13 +319,6 @@
                             }
                         }
                     }
-                    //                    if (![user.experiences containsObject:expir]) {
-                    //                        NSLog(@"expir added %@", expir);
-                    //                        [expir setUser:user];
-                    //                        [expir setExperienceKey:[NSString stringWithFormat:@"experience%i",[user.experiences count]]];
-                    //                        [user addExperiencesObject:expir];
-                    //                    }
-                    
                 }
             }
             else if ([keys isEqualToString:@"imdiscoverable"])
@@ -350,16 +340,20 @@
         }
     }
     
-    NSArray* tempLocationArray = [NSArray arrayWithArray:[user.geocoordinate componentsSeparatedByString:@":"]];
-    CLLocation* tempLocation = [[CLLocation alloc] initWithLatitude:[tempLocationArray[0] floatValue] longitude:[tempLocationArray[1] floatValue]];
-    double distance = [tempLocation distanceFromLocation:MY_API.locationManager.location];
-//    NSLog(@"distance %f",distance);
-    [user setValue:[NSNumber numberWithDouble:distance] forKey:@"distance"];
+    //Set distance
+    if ([self.shareModel.myLocationArray count] != 0) {
+        CLLocation* myLocation = [[CLLocation alloc] initWithLatitude:[self.shareModel.myLocationArray[0] floatValue] longitude:[self.shareModel.myLocationArray[1] floatValue]];
+        NSArray* userLocationArray = [NSArray arrayWithArray:[user.geocoordinate componentsSeparatedByString:@":"]];
+        CLLocation* userLocation = [[CLLocation alloc] initWithLatitude:[userLocationArray[0] floatValue] longitude:[userLocationArray[1] floatValue]];
+        double distance = [userLocation distanceFromLocation:myLocation];
+        [user setValue:[NSNumber numberWithDouble:distance] forKey:@"distance"];
+    }
+    
     if (flagMy) {
         user.itIsMe = [NSNumber numberWithBool:YES];
         [self setMyUser:user];
     }
-//    NSLog(@"UserADD");
+    
     [self saveContext];
 }
 
@@ -589,54 +583,6 @@
          }
         
     } withCancelBlock:nil];
-}
-#pragma mark - CLLocationManagerDelegate
-
-
--(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-
-    
-    
-}
-
-- (void)locationManager: (CLLocationManager *)manager
-    didUpdateToLocation: (CLLocation *)newLocation
-           fromLocation: (CLLocation *)oldLocation {
-    
-//    NSLog(@"location called  %@",newLocation)
-    
-    if (MY_USER) {
-        FIRDatabaseReference *geo = [[FIRDatabase database] reference];
-        
-        //Save location to the database
-        [[[[geo child:kUsers] child:MY_USER.userID] child:kGeoCoordinate] setValue:[NSString stringWithFormat:@"%f:%f",newLocation.coordinate.latitude, newLocation.coordinate.longitude]];
-     
-        [self.myUser setValue:[NSString stringWithFormat:@"%f:%f",newLocation.coordinate.latitude, newLocation.coordinate.longitude] forKey:kGeoCoordinate];
-
-        [self listenForChildAdded];
-
-        NSLog(@"location UDATE OK!!!");
-    }
-    
-}
-
-- (void)initializeLocationManager {
-    
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    // Code to check if the app can respond to the new selector found in iOS 8. If so, request it.
-    if([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
-        [self.locationManager requestAlwaysAuthorization];
-        [self.locationManager requestWhenInUseAuthorization];
-    }
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    //whenever user moves
-    self.locationManager.distanceFilter = 10;//10m
-    
-    [self.locationManager startUpdatingLocation];
-    
-    NSLog(@"location initialized");
-    
 }
 
 - (void) logOut
