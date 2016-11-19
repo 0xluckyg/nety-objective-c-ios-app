@@ -340,13 +340,32 @@
         }
     }
     
+    self.shareModel = [LocationShareModel sharedModel];
+    NSLog(@"%lu count", [self.shareModel.myLocationArray count]);
+    
     //Set distance
     if ([self.shareModel.myLocationArray count] != 0) {
-        CLLocation* myLocation = [[CLLocation alloc] initWithLatitude:[self.shareModel.myLocationArray[0] floatValue] longitude:[self.shareModel.myLocationArray[1] floatValue]];
+        //Pick best location accuracy
+        CLLocation *myLocation = [CLLocation alloc];
+        int bestAccuracy = 0;
+        int bestLocationIndex = 0;
+        for (int i = 0; i < [self.shareModel.myLocationArray count]; i ++) {
+            if ([[self.shareModel.myLocationArray[i] objectForKey:@"theAccuracy"] floatValue] > bestAccuracy) {
+                bestAccuracy = [[self.shareModel.myLocationArray[i] objectForKey:@"theAccuracy"] floatValue];
+                bestLocationIndex = i;
+            }
+        }
+        
+        myLocation = [myLocation initWithLatitude:[[self.shareModel.myLocationArray[bestLocationIndex] objectForKey:@"latitude"] floatValue] longitude:[[self.shareModel.myLocationArray[bestLocationIndex] objectForKey:@"longitude"] floatValue]];
+        
         NSArray* userLocationArray = [NSArray arrayWithArray:[user.geocoordinate componentsSeparatedByString:@":"]];
         CLLocation* userLocation = [[CLLocation alloc] initWithLatitude:[userLocationArray[0] floatValue] longitude:[userLocationArray[1] floatValue]];
         double distance = [userLocation distanceFromLocation:myLocation];
+        NSLog(@"%f userDistance", distance);
         [user setValue:[NSNumber numberWithDouble:distance] forKey:@"distance"];
+    } else {
+        //NAN
+        [user setValue:@(100000) forKey:@"distance"];
     }
     
     if (flagMy) {
