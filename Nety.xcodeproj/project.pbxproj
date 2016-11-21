@@ -10,11 +10,6 @@
 		60A7558738488CC025076173 /* Pods_Nety.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EF861BBC72529E816531A8D /* Pods_Nety.framework */; };
 		673338F71D20937C00A8009F /* MyNetworkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 673338F61D20937C00A8009F /* MyNetworkCell.m */; };
 		6733390E1D20B5ED00A8009F /* ChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6733390D1D20B5ED00A8009F /* ChatCell.m */; };
-		67391DEA1D27ED0200A50C03 /* Signup.m in Sources */ = {isa = PBXBuildFile; fileRef = 67391DE91D27ED0200A50C03 /* Signup.m */; };
-		67391DEF1D27FBB900A50C03 /* SignupProcess1.m in Sources */ = {isa = PBXBuildFile; fileRef = 67391DEE1D27FBB900A50C03 /* SignupProcess1.m */; };
-		67391DF21D27FBC400A50C03 /* SignupProcess2.m in Sources */ = {isa = PBXBuildFile; fileRef = 67391DF11D27FBC400A50C03 /* SignupProcess2.m */; };
-		67391DF51D27FBD800A50C03 /* SignupProcessExperienceDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 67391DF41D27FBD800A50C03 /* SignupProcessExperienceDetail.m */; };
-		67391DFB1D280A9600A50C03 /* SignupProcessExperienceDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 67391DFA1D280A9600A50C03 /* SignupProcessExperienceDetailCell.m */; };
 		673E2BB31D6E64C000AB139F /* ChatButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 673E2BB21D6E64C000AB139F /* ChatButtonCell.m */; };
 		673E2BB61D6E656800AB139F /* MainInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 673E2BB51D6E656800AB139F /* MainInfoCell.m */; };
 		673E2BB91D6E657100AB139F /* ExperienceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 673E2BB81D6E657100AB139F /* ExperienceCell.m */; };
@@ -25,7 +20,6 @@
 		673E58701D6AAE6400D28F5B /* NewChats.m in Sources */ = {isa = PBXBuildFile; fileRef = 673E586F1D6AAE6400D28F5B /* NewChats.m */; };
 		673E58731D6AAE7900D28F5B /* MyChats.m in Sources */ = {isa = PBXBuildFile; fileRef = 673E58721D6AAE7900D28F5B /* MyChats.m */; };
 		673E58761D6AAFA300D28F5B /* CAPSPageMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 673E58751D6AAFA300D28F5B /* CAPSPageMenu.m */; };
-		674918EA1D2D8ACE0015EFE9 /* SignupProcess3.m in Sources */ = {isa = PBXBuildFile; fileRef = 674918E91D2D8ACE0015EFE9 /* SignupProcess3.m */; };
 		67602F501D2EC75F00DA2F3A /* Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = 67602F4F1D2EC75F00DA2F3A /* Messages.m */; };
 		67602F521D2EC76900DA2F3A /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67602F511D2EC76900DA2F3A /* Messages.storyboard */; };
 		67606C6E1D24888700AD127E /* MyInfoEditExperience.m in Sources */ = {isa = PBXBuildFile; fileRef = 67606C6D1D24888700AD127E /* MyInfoEditExperience.m */; };
@@ -106,16 +100,6 @@
 		673338F61D20937C00A8009F /* MyNetworkCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNetworkCell.m; sourceTree = "<group>"; };
 		6733390C1D20B5ED00A8009F /* ChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatCell.h; sourceTree = "<group>"; };
 		6733390D1D20B5ED00A8009F /* ChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatCell.m; sourceTree = "<group>"; };
-		67391DE81D27ED0200A50C03 /* Signup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Signup.h; sourceTree = "<group>"; };
-		67391DE91D27ED0200A50C03 /* Signup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Signup.m; sourceTree = "<group>"; };
-		67391DED1D27FBB900A50C03 /* SignupProcess1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupProcess1.h; sourceTree = "<group>"; };
-		67391DEE1D27FBB900A50C03 /* SignupProcess1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupProcess1.m; sourceTree = "<group>"; };
-		67391DF01D27FBC400A50C03 /* SignupProcess2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupProcess2.h; sourceTree = "<group>"; };
-		67391DF11D27FBC400A50C03 /* SignupProcess2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupProcess2.m; sourceTree = "<group>"; };
-		67391DF31D27FBD800A50C03 /* SignupProcessExperienceDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupProcessExperienceDetail.h; sourceTree = "<group>"; };
-		67391DF41D27FBD800A50C03 /* SignupProcessExperienceDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupProcessExperienceDetail.m; sourceTree = "<group>"; };
-		67391DF91D280A9600A50C03 /* SignupProcessExperienceDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupProcessExperienceDetailCell.h; sourceTree = "<group>"; };
-		67391DFA1D280A9600A50C03 /* SignupProcessExperienceDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupProcessExperienceDetailCell.m; sourceTree = "<group>"; };
 		673E2BB11D6E64C000AB139F /* ChatButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatButtonCell.h; sourceTree = "<group>"; };
 		673E2BB21D6E64C000AB139F /* ChatButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatButtonCell.m; sourceTree = "<group>"; };
 		673E2BB41D6E656800AB139F /* MainInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainInfoCell.h; sourceTree = "<group>"; };
@@ -136,8 +120,6 @@
 		673E58721D6AAE7900D28F5B /* MyChats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyChats.m; sourceTree = "<group>"; };
 		673E58741D6AAFA300D28F5B /* CAPSPageMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAPSPageMenu.h; path = ../Util/CAPSPageMenu.h; sourceTree = "<group>"; };
 		673E58751D6AAFA300D28F5B /* CAPSPageMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CAPSPageMenu.m; path = ../Util/CAPSPageMenu.m; sourceTree = "<group>"; };
-		674918E81D2D8ACE0015EFE9 /* SignupProcess3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupProcess3.h; sourceTree = "<group>"; };
-		674918E91D2D8ACE0015EFE9 /* SignupProcess3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupProcess3.m; sourceTree = "<group>"; };
 		67602F4E1D2EC75F00DA2F3A /* Messages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Messages.h; sourceTree = "<group>"; };
 		67602F4F1D2EC75F00DA2F3A /* Messages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Messages.m; sourceTree = "<group>"; };
 		67602F511D2EC76900DA2F3A /* Messages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
@@ -331,40 +313,6 @@
 			name = Login;
 			sourceTree = "<group>";
 		};
-		67391DEC1D27F76D00A50C03 /* Old Signup */ = {
-			isa = PBXGroup;
-			children = (
-				67391DE81D27ED0200A50C03 /* Signup.h */,
-				67391DE91D27ED0200A50C03 /* Signup.m */,
-				67391DF61D28096800A50C03 /* Process1 */,
-				67391DF71D28097000A50C03 /* Process2 */,
-				674918E41D2D8A6D0015EFE9 /* Process3 */,
-			);
-			name = "Old Signup";
-			sourceTree = "<group>";
-		};
-		67391DF61D28096800A50C03 /* Process1 */ = {
-			isa = PBXGroup;
-			children = (
-				67391DED1D27FBB900A50C03 /* SignupProcess1.h */,
-				67391DEE1D27FBB900A50C03 /* SignupProcess1.m */,
-			);
-			name = Process1;
-			sourceTree = "<group>";
-		};
-		67391DF71D28097000A50C03 /* Process2 */ = {
-			isa = PBXGroup;
-			children = (
-				67391DF01D27FBC400A50C03 /* SignupProcess2.h */,
-				67391DF11D27FBC400A50C03 /* SignupProcess2.m */,
-				67391DF31D27FBD800A50C03 /* SignupProcessExperienceDetail.h */,
-				67391DF41D27FBD800A50C03 /* SignupProcessExperienceDetail.m */,
-				67391DF91D280A9600A50C03 /* SignupProcessExperienceDetailCell.h */,
-				67391DFA1D280A9600A50C03 /* SignupProcessExperienceDetailCell.m */,
-			);
-			name = Process2;
-			sourceTree = "<group>";
-		};
 		673E2BAD1D6D881000AB139F /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -391,15 +339,6 @@
 				673E2BC51D6EC9AB00AB139F /* MyInfoInterestCell.m */,
 			);
 			name = MyInfoCells;
-			sourceTree = "<group>";
-		};
-		674918E41D2D8A6D0015EFE9 /* Process3 */ = {
-			isa = PBXGroup;
-			children = (
-				674918E81D2D8ACE0015EFE9 /* SignupProcess3.h */,
-				674918E91D2D8ACE0015EFE9 /* SignupProcess3.m */,
-			);
-			name = Process3;
 			sourceTree = "<group>";
 		};
 		67602F4A1D2EBEB900DA2F3A /* Messages */ = {
@@ -499,7 +438,6 @@
 				67D4AD601D26536000F42B7F /* MainPage.h */,
 				67D4AD611D26536000F42B7F /* MainPage.m */,
 				67391DEB1D27F75800A50C03 /* Login */,
-				67391DEC1D27F76D00A50C03 /* Old Signup */,
 			);
 			path = LoginSignup;
 			sourceTree = "<group>";
@@ -932,12 +870,10 @@
 				67602F501D2EC75F00DA2F3A /* Messages.m in Sources */,
 				6733390E1D20B5ED00A8009F /* ChatCell.m in Sources */,
 				673E2BB61D6E656800AB139F /* MainInfoCell.m in Sources */,
-				67391DEA1D27ED0200A50C03 /* Signup.m in Sources */,
 				E16004851D7C0AE10098DFB1 /* Users.m in Sources */,
 				8B1D57181DE31DA400E90636 /* AddExperienceSignUpVC.m in Sources */,
 				E160047C1D7C0AE10098DFB1 /* Experiences+CoreDataProperties.m in Sources */,
 				67D4AD651D265A7E00F42B7F /* Login.m in Sources */,
-				67391DEF1D27FBB900A50C03 /* SignupProcess1.m in Sources */,
 				E1E0B9241D689DC800295133 /* N_API.m in Sources */,
 				679B9EF01D2396A700C426F2 /* MyInfoEditTableCell.m in Sources */,
 				8B1D570F1DE31D8B00E90636 /* ExperienceSignUpVC.m in Sources */,
@@ -952,14 +888,12 @@
 				67DD1A981D17BF1700FBEA0F /* Network.m in Sources */,
 				E16004821D7C0AE10098DFB1 /* Msg+CoreDataProperties.m in Sources */,
 				8B1D570C1DE31D8000E90636 /* ImageSignUpVC.m in Sources */,
-				67391DF51D27FBD800A50C03 /* SignupProcessExperienceDetail.m in Sources */,
 				676B51C21DE21AF0002B7B66 /* GFQuery.m in Sources */,
 				673E58761D6AAFA300D28F5B /* CAPSPageMenu.m in Sources */,
 				8B1D57121DE31D9200E90636 /* BaseSignUpViewController.m in Sources */,
 				673E58701D6AAE6400D28F5B /* NewChats.m in Sources */,
 				E1E0B9281D689FA700295133 /* N_CoreDataTableViewController.m in Sources */,
 				676B51C01DE21AF0002B7B66 /* GFGeoHash.m in Sources */,
-				67391DF21D27FBC400A50C03 /* SignupProcess2.m in Sources */,
 				67DD1A9D1D17BF6900FBEA0F /* MyNetwork.m in Sources */,
 				67DD1A7C1D17BEB500FBEA0F /* main.m in Sources */,
 				676B51BE1DE21AF0002B7B66 /* GeoFire.m in Sources */,
@@ -974,7 +908,6 @@
 				E16004811D7C0AE10098DFB1 /* ALL.m in Sources */,
 				E160047D1D7C0AE10098DFB1 /* Experiences.m in Sources */,
 				673338F71D20937C00A8009F /* MyNetworkCell.m in Sources */,
-				67391DFB1D280A9600A50C03 /* SignupProcessExperienceDetailCell.m in Sources */,
 				673E2BBC1D6E657C00AB139F /* InterestCell.m in Sources */,
 				673E2BC61D6EC9AB00AB139F /* MyInfoInterestCell.m in Sources */,
 				67DD1AAD1D17C3E600FBEA0F /* Profile.m in Sources */,
@@ -985,7 +918,6 @@
 				67DD1AB61D17E04F00FBEA0F /* NetworkCell.m in Sources */,
 				679B9EE71D236DF900C426F2 /* MyInfoEditType1.m in Sources */,
 				8B1D56F81DE31C7B00E90636 /* UserData.m in Sources */,
-				674918EA1D2D8ACE0015EFE9 /* SignupProcess3.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

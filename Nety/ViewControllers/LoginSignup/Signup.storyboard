@@ -732,12 +732,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="IMh-V4-7XG" kind="relationship" relationship="rootViewController" id="akb-O2-Kvc"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="dkJ-qY-Dgo"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GwZ-jk-ySM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2702" y="-627"/>
+            <point key="canvasLocation" x="68" y="36"/>
         </scene>
     </scenes>
     <resources>
@@ -745,7 +745,4 @@
         <image name="Plus" width="37" height="37"/>
         <image name="user" width="256" height="256"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="akb-O2-Kvc"/>
-    </inferredMetricsTieBreakers>
 </document>
