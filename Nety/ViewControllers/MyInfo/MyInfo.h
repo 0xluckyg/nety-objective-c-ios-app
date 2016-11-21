@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "UIPrinciples.h"
-#import "SignupProcess3.h"
 #import "Constants.h"
 #import "MyInfoEditTable.h"
 #import "MyInfoEditType2.h"

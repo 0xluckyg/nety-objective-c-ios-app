@@ -33,6 +33,11 @@
     timer = [NSTimer scheduledTimerWithTimeInterval: 6.0 target:self selector:@selector(changeBackgroundImage) userInfo:nil repeats:YES];
 }
 
+
+-(void)viewDidDisappear:(BOOL)animated {
+    NSLog(@"view did disappear");
+}
+
 #pragma mark - Initialization
 //---------------------------------------------------------
 
@@ -102,9 +107,9 @@
 }
 
 - (IBAction)signupButton:(id)sender {
-    UIStoryboard *signupStoryboard = [UIStoryboard storyboardWithName:@"Signup" bundle:nil];
-    UIViewController *signupNavigationController = [signupStoryboard instantiateInitialViewController];
-    [self.navigationController pushViewController:signupNavigationController animated:YES];
+//    UIStoryboard *signupStoryboard = [UIStoryboard storyboardWithName:@"Signup" bundle:nil];
+//    UIViewController *signupNavigationController = [signupStoryboard instantiateInitialViewController];
+//    [self.navigationController pushViewController:signupNavigationController animated:YES];
 }
 
 #pragma mark - Linkedin
@@ -185,6 +190,7 @@
 
 
 -(void)viewWillDisappear:(BOOL)animated {
+    NSLog(@"view will disappear");
     [timer invalidate];
 }
 

@@ -24,6 +24,7 @@
     [self prepareNavigation];
     [self constrainLineThatIsBlue:true];
 
+    NSLog(@"Did load view");
 }
 
 

@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -50,6 +51,7 @@
                                 </state>
                                 <connections>
                                     <action selector="signupButton:" destination="j8U-Cs-uLi" eventType="touchUpInside" id="fJ1-iG-RAY"/>
+                                    <segue destination="7ag-Pa-TeP" kind="show" id="hmv-ce-Ofg"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qdi-1g-3GM">
@@ -98,7 +100,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="psa-H1-xIB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="927" y="221"/>
+            <point key="canvasLocation" x="761" y="273"/>
         </scene>
         <!--Login-->
         <scene sceneID="cik-9x-16P">
@@ -228,10 +230,730 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DUw-GV-Hsk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="353" y="343"/>
+            <point key="canvasLocation" x="7" y="342"/>
+        </scene>
+        <!--Name Sign UpVC-->
+        <scene sceneID="H3u-87-Aqh">
+            <objects>
+                <viewController id="7ag-Pa-TeP" customClass="NameSignUpVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4mR-Ge-sNK"/>
+                        <viewControllerLayoutGuide type="bottom" id="nuf-sD-EW7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Cul-MH-qrf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is your name?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EYa-3Y-VdZ">
+                                <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="25"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Ex. John Doe" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mxh-TR-7dZ" customClass="SignUpTextField">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="WUK-5F-zdO"/>
+                                </constraints>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="floatingLabelTextColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="0.79603987070000004" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="floatingLabelActiveTextColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="titlePlaceholder" value="Name"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="floatingLabelYPadding">
+                                        <real key="value" value="-3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderYPadding">
+                                        <real key="value" value="-17"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mxh-TR-7dZ" firstAttribute="leading" secondItem="EYa-3Y-VdZ" secondAttribute="leading" id="5cv-Mt-f3O"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="mxh-TR-7dZ" secondAttribute="trailing" constant="12" id="96v-2i-opI"/>
+                            <constraint firstItem="mxh-TR-7dZ" firstAttribute="top" secondItem="EYa-3Y-VdZ" secondAttribute="bottom" constant="25" id="FSH-cJ-kmT"/>
+                            <constraint firstItem="EYa-3Y-VdZ" firstAttribute="top" secondItem="4mR-Ge-sNK" secondAttribute="bottom" constant="130" id="Lbp-WL-MiZ"/>
+                            <constraint firstItem="EYa-3Y-VdZ" firstAttribute="leading" secondItem="Cul-MH-qrf" secondAttribute="leadingMargin" constant="12" id="oza-MW-K1d"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="qWL-UE-uGA"/>
+                    <connections>
+                        <outlet property="nameTextField" destination="mxh-TR-7dZ" id="WWw-kD-Y6H"/>
+                        <outlet property="whatIsYourNameLabel" destination="EYa-3Y-VdZ" id="gap-Zk-yMX"/>
+                        <segue destination="P6k-2D-fY7" kind="show" identifier="ToAccountSegue" id="6C9-V5-r1i">
+                            <nil key="action"/>
+                        </segue>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NAY-Vr-uaS" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1550" y="789"/>
+        </scene>
+        <!--Account Sign UpVC-->
+        <scene sceneID="QhC-ft-Esx">
+            <objects>
+                <viewController id="P6k-2D-fY7" customClass="AccountSignUpVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Acq-YJ-Wde"/>
+                        <viewControllerLayoutGuide type="bottom" id="mWl-NC-PDh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="R4S-kD-S4X">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="What is your e-mail?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sr6-5R-Rka">
+                                <frame key="frameInset" minX="33" minY="114" width="221" height="35"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="25"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Ex. sample@example.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x86-Qk-CxI" customClass="SignUpTextField">
+                                <frame key="frameInset" minX="28" minY="187" width="319" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="S1Y-Sr-cy5"/>
+                                </constraints>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="floatingLabelTextColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="0.79603987070000004" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="floatingLabelActiveTextColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="titlePlaceholder" value="E-mail Address"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="floatingLabelYPadding">
+                                        <real key="value" value="-3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderYPadding">
+                                        <real key="value" value="-17"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Ex. sample@example.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c13-wY-oxa" customClass="SignUpTextField">
+                                <frame key="frameInset" minX="28" minY="256" width="319" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="dvj-sH-4i4"/>
+                                </constraints>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="floatingLabelTextColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="0.79603987070000004" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="floatingLabelActiveTextColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="titlePlaceholder" value="E-mail Confirmation"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="floatingLabelYPadding">
+                                        <real key="value" value="-3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderYPadding">
+                                        <real key="value" value="-17"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Create a Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XXK-vw-Zml">
+                                <frame key="frameInset" minX="33" minY="340" width="201" height="35"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="25"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Please don't make it &quot;password&quot;" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JeC-4N-cZY" customClass="SignUpTextField">
+                                <frame key="frameInset" minX="28" minY="397" width="319" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="KkW-bv-jxZ"/>
+                                </constraints>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="floatingLabelTextColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="0.79603987070000004" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="floatingLabelActiveTextColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="titlePlaceholder" value="Password"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="floatingLabelYPadding">
+                                        <real key="value" value="-3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderYPadding">
+                                        <real key="value" value="-17"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Same as the last one, thanks!" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NTR-Hu-grl" customClass="SignUpTextField">
+                                <frame key="frameInset" minX="28" minY="470" width="319" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="TNp-q0-ruO"/>
+                                </constraints>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="floatingLabelTextColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="0.79603987070000004" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="floatingLabelActiveTextColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="floatingLabelYPadding">
+                                        <real key="value" value="-3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderYPadding">
+                                        <real key="value" value="-17"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="titlePlaceholder" value="Password Confirmation"/>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="XXK-vw-Zml" firstAttribute="leading" secondItem="c13-wY-oxa" secondAttribute="leading" id="02A-Hp-GUy"/>
+                            <constraint firstItem="JeC-4N-cZY" firstAttribute="width" secondItem="c13-wY-oxa" secondAttribute="width" id="Bdy-Ac-2a6"/>
+                            <constraint firstItem="c13-wY-oxa" firstAttribute="width" secondItem="x86-Qk-CxI" secondAttribute="width" id="GIF-l1-dPN"/>
+                            <constraint firstItem="NTR-Hu-grl" firstAttribute="height" secondItem="JeC-4N-cZY" secondAttribute="height" id="P82-Ae-UuC"/>
+                            <constraint firstItem="x86-Qk-CxI" firstAttribute="leading" secondItem="sr6-5R-Rka" secondAttribute="leading" id="RMt-aJ-0Tb"/>
+                            <constraint firstItem="JeC-4N-cZY" firstAttribute="top" secondItem="XXK-vw-Zml" secondAttribute="bottom" constant="22" id="RNj-Hf-gf2"/>
+                            <constraint firstItem="sr6-5R-Rka" firstAttribute="top" secondItem="Acq-YJ-Wde" secondAttribute="bottom" constant="130" id="ZDd-Mk-1jd"/>
+                            <constraint firstItem="c13-wY-oxa" firstAttribute="top" secondItem="x86-Qk-CxI" secondAttribute="bottom" constant="30" id="eHq-ME-4Z2"/>
+                            <constraint firstItem="x86-Qk-CxI" firstAttribute="top" secondItem="sr6-5R-Rka" secondAttribute="bottom" constant="25" id="fDb-ky-Roh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="x86-Qk-CxI" secondAttribute="trailing" constant="12" id="jir-X0-28I"/>
+                            <constraint firstItem="XXK-vw-Zml" firstAttribute="top" secondItem="c13-wY-oxa" secondAttribute="bottom" constant="50" id="l9t-yg-wDq"/>
+                            <constraint firstItem="NTR-Hu-grl" firstAttribute="top" secondItem="JeC-4N-cZY" secondAttribute="bottom" constant="30" id="lY5-np-B1a"/>
+                            <constraint firstItem="sr6-5R-Rka" firstAttribute="leading" secondItem="R4S-kD-S4X" secondAttribute="leadingMargin" constant="12" id="mM8-9Y-IWQ"/>
+                            <constraint firstItem="JeC-4N-cZY" firstAttribute="leading" secondItem="XXK-vw-Zml" secondAttribute="leading" id="smq-1g-6wa"/>
+                            <constraint firstItem="NTR-Hu-grl" firstAttribute="leading" secondItem="JeC-4N-cZY" secondAttribute="leading" id="wWK-2H-5sa"/>
+                            <constraint firstItem="c13-wY-oxa" firstAttribute="leading" secondItem="x86-Qk-CxI" secondAttribute="leading" id="y09-Zh-ejB"/>
+                            <constraint firstItem="NTR-Hu-grl" firstAttribute="width" secondItem="JeC-4N-cZY" secondAttribute="width" id="zk6-2l-Vku"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="createAPasswordLabel" destination="XXK-vw-Zml" id="QWc-Cn-QdY"/>
+                        <outlet property="emailConfirmationTextField" destination="c13-wY-oxa" id="rFk-9O-cmZ"/>
+                        <outlet property="emailTextField" destination="x86-Qk-CxI" id="gJ9-Zy-lLj"/>
+                        <outlet property="passwordConfirmationTextField" destination="NTR-Hu-grl" id="KWF-8N-m5W"/>
+                        <outlet property="passwordTextField" destination="JeC-4N-cZY" id="h0d-g8-nz1"/>
+                        <outlet property="whatIsYourEmailLabel" destination="sr6-5R-Rka" id="7k4-dG-hYB"/>
+                        <segue destination="nSa-WX-oPY" kind="show" identifier="ToWhoYouAreSegue" id="Xkf-qn-y4x">
+                            <nil key="action"/>
+                        </segue>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s1D-iL-vU1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2337" y="789"/>
+        </scene>
+        <!--Who You AreVC-->
+        <scene sceneID="r2k-I0-PN6">
+            <objects>
+                <viewController id="nSa-WX-oPY" customClass="WhoYouAreVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dud-Bc-6vi"/>
+                        <viewControllerLayoutGuide type="bottom" id="4Ra-r0-XZO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kTR-VH-2oO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What do you do?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NgO-Qu-2PQ">
+                                <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="25"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Ex. Software Engineer at Nety" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XLT-M4-jye" customClass="SignUpTextField">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="vD1-zx-yN4"/>
+                                </constraints>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="floatingLabelTextColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="0.79603987070000004" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="floatingLabelActiveTextColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="floatingLabelYPadding">
+                                        <real key="value" value="-3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderYPadding">
+                                        <real key="value" value="-17"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="titlePlaceholder" value="Occupation"/>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Tell me more about you" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZX-Qb-APN">
+                                <frame key="frameInset" minX="28" minY="316" width="262" height="35"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="25"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pQ8-5R-hUi" customClass="SignUpTextView">
+                                <frame key="frameInset" minX="28" minY="378" width="319" height="205"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="4gV-Hs-y8Y"/>
+                                </constraints>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Ex. I like to swim, play piano, and watch Netflix."/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="titlePlaceholder" value="Bio"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="floatingLabelTextColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="floatingLabelActiveTextColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderTextColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gZX-Qb-APN" firstAttribute="top" secondItem="XLT-M4-jye" secondAttribute="bottom" constant="50" id="7nm-yO-kyp"/>
+                            <constraint firstItem="pQ8-5R-hUi" firstAttribute="centerX" secondItem="XLT-M4-jye" secondAttribute="centerX" id="8eV-Hf-Dvp"/>
+                            <constraint firstItem="NgO-Qu-2PQ" firstAttribute="top" secondItem="dud-Bc-6vi" secondAttribute="bottom" constant="130" id="Dnf-OU-sA1"/>
+                            <constraint firstItem="pQ8-5R-hUi" firstAttribute="width" secondItem="XLT-M4-jye" secondAttribute="width" id="UaL-h9-fBu"/>
+                            <constraint firstItem="XLT-M4-jye" firstAttribute="leading" secondItem="NgO-Qu-2PQ" secondAttribute="leading" id="XZs-Oc-0Op"/>
+                            <constraint firstItem="pQ8-5R-hUi" firstAttribute="top" secondItem="gZX-Qb-APN" secondAttribute="bottom" constant="27" id="oBg-Kc-HD1"/>
+                            <constraint firstItem="NgO-Qu-2PQ" firstAttribute="leading" secondItem="kTR-VH-2oO" secondAttribute="leadingMargin" constant="12" id="oEE-7U-CnL"/>
+                            <constraint firstItem="XLT-M4-jye" firstAttribute="top" secondItem="NgO-Qu-2PQ" secondAttribute="bottom" constant="25" id="oqm-NA-nw4"/>
+                            <constraint firstItem="gZX-Qb-APN" firstAttribute="leading" secondItem="NgO-Qu-2PQ" secondAttribute="leading" id="tzc-IM-ptb"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XLT-M4-jye" secondAttribute="trailing" constant="12" id="xpA-vG-f4b"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bioTextView" destination="pQ8-5R-hUi" id="yRB-B9-Vox"/>
+                        <outlet property="positionTextField" destination="XLT-M4-jye" id="Dwh-Ph-Grk"/>
+                        <outlet property="tellMeMoreAboutYouLabel" destination="gZX-Qb-APN" id="1RR-3z-znl"/>
+                        <outlet property="whatDoYouDoLabel" destination="NgO-Qu-2PQ" id="70F-uT-Q1C"/>
+                        <segue destination="d2r-fF-sKq" kind="show" identifier="ToExperienceSegue" id="MhE-Om-f1k">
+                            <nil key="action"/>
+                        </segue>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p5J-Ix-q2p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3124" y="789"/>
+        </scene>
+        <!--Experience Sign UpVC-->
+        <scene sceneID="yOy-co-v4j">
+            <objects>
+                <viewController id="d2r-fF-sKq" customClass="ExperienceSignUpVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qWj-H8-Wr9"/>
+                        <viewControllerLayoutGuide type="bottom" id="2fX-3X-MBO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gDD-f1-aim">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's add some experience" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zna-vh-Ihr">
+                                <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="25"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="teS-hV-QqG">
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <state key="normal" title="Skip"/>
+                                <connections>
+                                    <action selector="skipButtonTapped:" destination="d2r-fF-sKq" eventType="touchUpInside" id="jif-1R-9ge"/>
+                                    <action selector="skipButtonWasTapped:" destination="DAo-fb-wol" eventType="touchUpInside" id="djh-hA-HQQ"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wvn-Mw-SNF">
+                                <color key="backgroundColor" red="0.64313725489999995" green="0.64313725489999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="0.5" id="jOh-pb-gTA"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="foT-cz-uc7">
+                                <subviews>
+                                    <button opaque="NO" alpha="0.85000002384185791" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WXN-KT-y9A">
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="WXN-KT-y9A" secondAttribute="height" multiplier="75:37" id="fod-h4-TrO"/>
+                                        </constraints>
+                                        <state key="normal" image="Edit"/>
+                                        <connections>
+                                            <action selector="editButtonTapped:" destination="d2r-fF-sKq" eventType="touchUpInside" id="fMJ-S0-GBV"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" alpha="0.85000002384185791" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J8t-bG-jhr">
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="J8t-bG-jhr" secondAttribute="height" multiplier="75:37" id="H4T-fT-2Y7"/>
+                                        </constraints>
+                                        <state key="normal" image="Plus"/>
+                                        <connections>
+                                            <action selector="addButtonTapped:" destination="d2r-fF-sKq" eventType="touchUpInside" id="IWc-VQ-9QF"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="3WO-yq-4Yb"/>
+                                </constraints>
+                            </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="58" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BuR-LR-s0y">
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="58" id="Blz-v1-N8g">
+                                        <rect key="frame" x="0.0" y="28" width="304" height="58"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Blz-v1-N8g" id="pV9-Xi-d8y">
+                                            <frame key="frameInset" width="304" height="57"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zna-vh-Ihr" firstAttribute="top" secondItem="qWj-H8-Wr9" secondAttribute="bottom" constant="130" id="1QT-ki-ksd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="teS-hV-QqG" secondAttribute="trailing" constant="20" id="8H6-jf-gp4"/>
+                            <constraint firstItem="foT-cz-uc7" firstAttribute="top" secondItem="zna-vh-Ihr" secondAttribute="bottom" constant="8.5" id="ELD-SA-jTa"/>
+                            <constraint firstItem="wvn-Mw-SNF" firstAttribute="width" secondItem="zna-vh-Ihr" secondAttribute="width" id="FO6-Ox-9tR"/>
+                            <constraint firstItem="wvn-Mw-SNF" firstAttribute="top" secondItem="foT-cz-uc7" secondAttribute="bottom" constant="8" id="FZl-CV-Etj"/>
+                            <constraint firstItem="wvn-Mw-SNF" firstAttribute="centerX" secondItem="gDD-f1-aim" secondAttribute="centerX" id="Jw6-WZ-tvc"/>
+                            <constraint firstItem="BuR-LR-s0y" firstAttribute="top" secondItem="wvn-Mw-SNF" secondAttribute="bottom" constant="7.5" id="Ur7-eF-qt6"/>
+                            <constraint firstItem="zna-vh-Ihr" firstAttribute="centerX" secondItem="gDD-f1-aim" secondAttribute="centerX" id="Y6Y-zJ-AuO"/>
+                            <constraint firstItem="BuR-LR-s0y" firstAttribute="width" secondItem="zna-vh-Ihr" secondAttribute="width" id="ZDa-aL-YLj"/>
+                            <constraint firstItem="teS-hV-QqG" firstAttribute="top" secondItem="BuR-LR-s0y" secondAttribute="bottom" id="d2w-M4-vJO"/>
+                            <constraint firstItem="foT-cz-uc7" firstAttribute="centerX" secondItem="zna-vh-Ihr" secondAttribute="centerX" id="tH4-CV-T2y"/>
+                            <constraint firstItem="2fX-3X-MBO" firstAttribute="top" secondItem="teS-hV-QqG" secondAttribute="bottom" constant="80" id="tfY-n6-LgB"/>
+                            <constraint firstItem="foT-cz-uc7" firstAttribute="width" secondItem="zna-vh-Ihr" secondAttribute="width" multiplier="0.4" id="xt8-7V-TE6"/>
+                            <constraint firstItem="BuR-LR-s0y" firstAttribute="centerX" secondItem="gDD-f1-aim" secondAttribute="centerX" id="zVT-Gg-32X"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="l8A-We-MvG"/>
+                    <connections>
+                        <outlet property="addButton" destination="J8t-bG-jhr" id="nm9-9c-8JO"/>
+                        <outlet property="editButton" destination="WXN-KT-y9A" id="zKH-rf-3XH"/>
+                        <outlet property="letsAddExperienceLabel" destination="zna-vh-Ihr" id="YIw-O2-gi9"/>
+                        <outlet property="tableView" destination="BuR-LR-s0y" id="Mzi-R0-kzV"/>
+                        <segue destination="DAo-fb-wol" kind="show" identifier="ToImageSegue" id="CDI-cs-6o8">
+                            <nil key="action"/>
+                        </segue>
+                        <segue destination="kiT-G8-N8W" kind="presentation" identifier="AddExperienceSegue" id="4wR-nz-Hue"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="40f-Ul-KM8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3878" y="789"/>
+        </scene>
+        <!--Image Sign UpVC-->
+        <scene sceneID="uid-Gd-m2t">
+            <objects>
+                <viewController id="DAo-fb-wol" customClass="ImageSignUpVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JHN-4o-OEs"/>
+                        <viewControllerLayoutGuide type="bottom" id="CLO-aG-2Xk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GD3-9h-MeI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Finally" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IsZ-fG-wei">
+                                <frame key="frameInset" minX="78" minY="113" width="191" height="35"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="25"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's get a good look at you" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S6J-pB-U57">
+                                <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="25"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TtR-Yz-XxO">
+                                <frame key="frameInset" minX="63" minY="170" width="249" height="249"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="TtR-Yz-XxO" secondAttribute="height" multiplier="1:1" id="f5O-HX-IuZ"/>
+                                </constraints>
+                                <state key="normal" image="user"/>
+                                <connections>
+                                    <action selector="imageButtonWasTapped:" destination="DAo-fb-wol" eventType="touchUpInside" id="0Zr-BY-naa"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BzU-Ce-hlq">
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <state key="normal" title="Skip"/>
+                                <connections>
+                                    <action selector="skipButtonWasTapped:" destination="DAo-fb-wol" eventType="touchUpInside" id="BQq-l2-itR"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="S6J-pB-U57" firstAttribute="top" secondItem="TtR-Yz-XxO" secondAttribute="bottom" constant="25" id="4Ro-SU-C7X"/>
+                            <constraint firstItem="CLO-aG-2Xk" firstAttribute="top" secondItem="BzU-Ce-hlq" secondAttribute="bottom" constant="80" id="B5J-Vo-bO7"/>
+                            <constraint firstItem="S6J-pB-U57" firstAttribute="centerX" secondItem="GD3-9h-MeI" secondAttribute="centerX" id="IDE-b4-t5e"/>
+                            <constraint firstItem="TtR-Yz-XxO" firstAttribute="top" secondItem="IsZ-fG-wei" secondAttribute="bottom" constant="25" id="PvE-W4-YRB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="BzU-Ce-hlq" secondAttribute="trailing" constant="20" id="SO4-jN-f2G"/>
+                            <constraint firstItem="IsZ-fG-wei" firstAttribute="top" secondItem="JHN-4o-OEs" secondAttribute="bottom" constant="130" id="aoX-0e-zNq"/>
+                            <constraint firstItem="TtR-Yz-XxO" firstAttribute="centerX" secondItem="GD3-9h-MeI" secondAttribute="centerX" id="bMb-MM-1Aj"/>
+                            <constraint firstItem="TtR-Yz-XxO" firstAttribute="width" secondItem="GD3-9h-MeI" secondAttribute="width" multiplier="0.6" id="hkF-U3-RDB"/>
+                            <constraint firstItem="IsZ-fG-wei" firstAttribute="centerX" secondItem="GD3-9h-MeI" secondAttribute="centerX" id="ul2-mb-1fs"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="finallyLabel" destination="IsZ-fG-wei" id="atI-g5-2Jx"/>
+                        <outlet property="goodLookLabel" destination="S6J-pB-U57" id="vJX-e6-Fiq"/>
+                        <outlet property="imageButton" destination="TtR-Yz-XxO" id="OJt-7Y-3Eg"/>
+                        <outlet property="skipButton" destination="BzU-Ce-hlq" id="qPc-EU-aMy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Quw-H5-Y76" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4652" y="788"/>
+        </scene>
+        <!--Add Experience Sign UpVC-->
+        <scene sceneID="teG-W0-xZ3">
+            <objects>
+                <viewController id="kiT-G8-N8W" customClass="AddExperienceSignUpVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dGO-H5-TXA"/>
+                        <viewControllerLayoutGuide type="bottom" id="bOA-o0-r8D"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3M4-0C-fJO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="What did you do?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XNf-34-pZ1">
+                                <frame key="frameInset" minX="28" minY="114" width="197" height="35"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="25"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Ex. Worked at Chipotle" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ewV-3h-bn3" customClass="SignUpTextField">
+                                <frame key="frameInset" minX="28" minY="164" width="319" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="7WP-f5-pp7"/>
+                                </constraints>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="floatingLabelTextColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="0.79603987070000004" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="floatingLabelActiveTextColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="floatingLabelYPadding">
+                                        <real key="value" value="-3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderYPadding">
+                                        <real key="value" value="-17"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="titlePlaceholder" value="Position"/>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Tell me more about it" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Srn-FW-uWc">
+                                <frame key="frameInset" minX="28" minY="350" width="235" height="35"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="25"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xpU-Pz-ROG" customClass="SignUpTextView">
+                                <frame key="frameInset" minX="28" minY="406" width="319" height="134"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="YFp-4s-55F"/>
+                                </constraints>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="- Ex. Increased revenure by 65%"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="titlePlaceholder" value="Bio"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="floatingLabelTextColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="floatingLabelActiveTextColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderTextColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="94c-RY-XW1">
+                                <frame key="frameInset" minX="309" minY="557" width="30" height="30"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <state key="normal" title="Skip"/>
+                                <connections>
+                                    <action selector="skipButtonTapped:" destination="d2r-fF-sKq" eventType="touchUpInside" id="vfC-zA-MkH"/>
+                                    <action selector="skipButtonTapped:" destination="kiT-G8-N8W" eventType="touchUpInside" id="xdL-Er-x1W"/>
+                                    <action selector="skipButtonWasTapped:" destination="DAo-fb-wol" eventType="touchUpInside" id="Vl4-7t-sGs"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="When did you do it?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9nY-mO-iHj">
+                                <frame key="frameInset" minX="33" minY="220" width="225" height="35"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="25"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="MM/DD/YYYY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UuX-0w-ZBf" customClass="SignUpTextField">
+                                <frame key="frameInset" minX="20" minY="287" width="146" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="D20-Y9-tgF"/>
+                                </constraints>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="floatingLabelTextColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="0.79603987070000004" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="floatingLabelActiveTextColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="floatingLabelYPadding">
+                                        <real key="value" value="-3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderYPadding">
+                                        <real key="value" value="-17"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="titlePlaceholder" value="Start Date"/>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="MM/DD/YYYY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1jV-nh-F4p" customClass="SignUpTextField">
+                                <frame key="frameInset" minX="193" minY="287" width="146" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="Jop-8W-Mpg"/>
+                                </constraints>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="floatingLabelTextColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="0.79603987070000004" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="floatingLabelActiveTextColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="floatingLabelYPadding">
+                                        <real key="value" value="-3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderYPadding">
+                                        <real key="value" value="-17"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="titlePlaceholder" value="End Date"/>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oEr-FB-lag">
+                                <frame key="frameInset" minX="174" minY="287" width="23" height="35"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="25"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jha-kj-hh6">
+                                <frame key="frameInset" minX="298" minY="325" width="53" height="30"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <state key="normal" title="Present"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dk0-RI-gJ7">
+                                <frame key="frameInset" minX="19" minY="325" width="64" height="30"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <state key="normal" title="No Dates"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="UuX-0w-ZBf" firstAttribute="top" secondItem="9nY-mO-iHj" secondAttribute="bottom" id="0aG-T3-D8C"/>
+                            <constraint firstItem="ewV-3h-bn3" firstAttribute="top" secondItem="XNf-34-pZ1" secondAttribute="bottom" id="6OJ-kd-Uao"/>
+                            <constraint firstItem="xpU-Pz-ROG" firstAttribute="width" secondItem="ewV-3h-bn3" secondAttribute="width" id="6jW-Df-WF8"/>
+                            <constraint firstItem="9nY-mO-iHj" firstAttribute="leading" secondItem="XNf-34-pZ1" secondAttribute="leading" id="AcW-qi-QCW"/>
+                            <constraint firstItem="dk0-RI-gJ7" firstAttribute="leading" secondItem="UuX-0w-ZBf" secondAttribute="leading" id="Ark-ih-tmU"/>
+                            <constraint firstItem="jha-kj-hh6" firstAttribute="trailing" secondItem="1jV-nh-F4p" secondAttribute="trailing" id="FkO-XR-sZr"/>
+                            <constraint firstItem="xpU-Pz-ROG" firstAttribute="centerX" secondItem="ewV-3h-bn3" secondAttribute="centerX" id="K0d-t7-xLI"/>
+                            <constraint firstItem="XNf-34-pZ1" firstAttribute="top" secondItem="dGO-H5-TXA" secondAttribute="bottom" constant="130" id="KId-Qe-zaA"/>
+                            <constraint firstItem="Srn-FW-uWc" firstAttribute="leading" secondItem="XNf-34-pZ1" secondAttribute="leading" id="Ls6-eb-KXr"/>
+                            <constraint firstItem="oEr-FB-lag" firstAttribute="baseline" secondItem="UuX-0w-ZBf" secondAttribute="baseline" id="MXm-EP-dXB"/>
+                            <constraint firstItem="1jV-nh-F4p" firstAttribute="width" secondItem="UuX-0w-ZBf" secondAttribute="width" id="OkW-q7-5bd"/>
+                            <constraint firstItem="bOA-o0-r8D" firstAttribute="top" secondItem="94c-RY-XW1" secondAttribute="bottom" constant="83" id="Oyn-2Z-rZd"/>
+                            <constraint firstItem="oEr-FB-lag" firstAttribute="centerX" secondItem="ewV-3h-bn3" secondAttribute="centerX" id="RH9-eU-Tvw"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ewV-3h-bn3" secondAttribute="trailing" constant="12" id="RYn-k2-WBS"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="94c-RY-XW1" secondAttribute="trailing" constant="20" id="Sti-Ek-uXR"/>
+                            <constraint firstItem="jha-kj-hh6" firstAttribute="centerY" secondItem="dk0-RI-gJ7" secondAttribute="centerY" id="Uk6-pM-w4Z"/>
+                            <constraint firstItem="94c-RY-XW1" firstAttribute="top" secondItem="xpU-Pz-ROG" secondAttribute="bottom" constant="17" id="VNT-ua-WIn"/>
+                            <constraint firstItem="Srn-FW-uWc" firstAttribute="top" secondItem="dk0-RI-gJ7" secondAttribute="bottom" constant="25" id="Vh5-x9-3ED"/>
+                            <constraint firstItem="xpU-Pz-ROG" firstAttribute="top" secondItem="Srn-FW-uWc" secondAttribute="bottom" constant="13" id="YyH-Pb-atV"/>
+                            <constraint firstItem="UuX-0w-ZBf" firstAttribute="width" secondItem="ewV-3h-bn3" secondAttribute="width" multiplier="0.4" id="a80-Ok-TLS"/>
+                            <constraint firstItem="UuX-0w-ZBf" firstAttribute="leading" secondItem="ewV-3h-bn3" secondAttribute="leading" id="cD8-j1-tbh"/>
+                            <constraint firstItem="9nY-mO-iHj" firstAttribute="top" secondItem="ewV-3h-bn3" secondAttribute="bottom" constant="30" id="eX0-vj-6Hq"/>
+                            <constraint firstItem="1jV-nh-F4p" firstAttribute="trailing" secondItem="ewV-3h-bn3" secondAttribute="trailing" id="k7x-KN-g5H"/>
+                            <constraint firstItem="dk0-RI-gJ7" firstAttribute="top" secondItem="UuX-0w-ZBf" secondAttribute="bottom" constant="6" id="qYP-ys-RwM"/>
+                            <constraint firstItem="1jV-nh-F4p" firstAttribute="centerY" secondItem="UuX-0w-ZBf" secondAttribute="centerY" id="rQw-r7-esf"/>
+                            <constraint firstItem="ewV-3h-bn3" firstAttribute="leading" secondItem="XNf-34-pZ1" secondAttribute="leading" id="u6w-PE-afZ"/>
+                            <constraint firstItem="XNf-34-pZ1" firstAttribute="leading" secondItem="3M4-0C-fJO" secondAttribute="leadingMargin" constant="12" id="yAT-Jn-ZdW"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="detailsTextView" destination="xpU-Pz-ROG" id="BKY-u9-zg5"/>
+                        <outlet property="endTextField" destination="1jV-nh-F4p" id="LWm-aV-cWO"/>
+                        <outlet property="positionTextField" destination="ewV-3h-bn3" id="fBc-c4-jcV"/>
+                        <outlet property="startTextField" destination="UuX-0w-ZBf" id="R9I-ve-pit"/>
+                        <outlet property="tellMeMoreLabel" destination="Srn-FW-uWc" id="CAY-Q0-UvE"/>
+                        <outlet property="whatDidYouDoLabel" destination="XNf-34-pZ1" id="5CJ-OI-Lcf"/>
+                        <outlet property="whenDidYouDoItLabel" destination="9nY-mO-iHj" id="ASy-Mc-65e"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="11g-NT-IlW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3878" y="1576"/>
         </scene>
     </scenes>
     <resources>
         <image name="Back" width="25" height="25"/>
+        <image name="Edit" width="37" height="37"/>
+        <image name="Plus" width="37" height="37"/>
+        <image name="user" width="37" height="37"/>
     </resources>
 </document>

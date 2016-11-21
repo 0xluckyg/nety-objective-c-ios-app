@@ -462,7 +462,8 @@
                 
                 [self listenForReadCountAndOnlineStatus];
                 
-                [self scrollToTopAnimated:NO];
+                // TODO: Figure out if this is needed anywhere
+//                [self scrollToTopAnimated:NO];
                 [self performSelector:@selector(scrollToBottomAnimated:) withObject:[NSNumber numberWithBool:NO] afterDelay:0.70];
                 [self performSelector:@selector(showcollectionview) withObject:nil afterDelay:0.70];
                 
