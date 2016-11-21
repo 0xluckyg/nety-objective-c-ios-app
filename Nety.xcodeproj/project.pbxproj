@@ -28,6 +28,11 @@
 		67602F501D2EC75F00DA2F3A /* Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = 67602F4F1D2EC75F00DA2F3A /* Messages.m */; };
 		67602F521D2EC76900DA2F3A /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67602F511D2EC76900DA2F3A /* Messages.storyboard */; };
 		67606C6E1D24888700AD127E /* MyInfoEditExperience.m in Sources */ = {isa = PBXBuildFile; fileRef = 67606C6D1D24888700AD127E /* MyInfoEditExperience.m */; };
+		676B51BE1DE21AF0002B7B66 /* GeoFire.m in Sources */ = {isa = PBXBuildFile; fileRef = 676B51B51DE21AF0002B7B66 /* GeoFire.m */; };
+		676B51BF1DE21AF0002B7B66 /* GFBase32Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 676B51B71DE21AF0002B7B66 /* GFBase32Utils.m */; };
+		676B51C01DE21AF0002B7B66 /* GFGeoHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 676B51B91DE21AF0002B7B66 /* GFGeoHash.m */; };
+		676B51C11DE21AF0002B7B66 /* GFGeoHashQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 676B51BB1DE21AF0002B7B66 /* GFGeoHashQuery.m */; };
+		676B51C21DE21AF0002B7B66 /* GFQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 676B51BD1DE21AF0002B7B66 /* GFQuery.m */; };
 		678138A81D33A94E00BFBF48 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 678138A71D33A94E00BFBF48 /* Settings.storyboard */; };
 		678138AB1D33B2DD00BFBF48 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 678138AA1D33B2DD00BFBF48 /* Settings.m */; };
 		6792FA7B1D83468300A39111 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6792FA7D1D83468300A39111 /* Localizable.strings */; };
@@ -119,8 +124,8 @@
 		673E586F1D6AAE6400D28F5B /* NewChats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewChats.m; sourceTree = "<group>"; };
 		673E58711D6AAE7900D28F5B /* MyChats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyChats.h; sourceTree = "<group>"; };
 		673E58721D6AAE7900D28F5B /* MyChats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyChats.m; sourceTree = "<group>"; };
-		673E58741D6AAFA300D28F5B /* CAPSPageMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAPSPageMenu.h; sourceTree = "<group>"; };
-		673E58751D6AAFA300D28F5B /* CAPSPageMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAPSPageMenu.m; sourceTree = "<group>"; };
+		673E58741D6AAFA300D28F5B /* CAPSPageMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CAPSPageMenu.h; path = ../Util/CAPSPageMenu.h; sourceTree = "<group>"; };
+		673E58751D6AAFA300D28F5B /* CAPSPageMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CAPSPageMenu.m; path = ../Util/CAPSPageMenu.m; sourceTree = "<group>"; };
 		674918E81D2D8ACE0015EFE9 /* SignupProcess3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupProcess3.h; sourceTree = "<group>"; };
 		674918E91D2D8ACE0015EFE9 /* SignupProcess3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupProcess3.m; sourceTree = "<group>"; };
 		67602F4E1D2EC75F00DA2F3A /* Messages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Messages.h; sourceTree = "<group>"; };
@@ -128,6 +133,21 @@
 		67602F511D2EC76900DA2F3A /* Messages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
 		67606C6C1D24888700AD127E /* MyInfoEditExperience.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoEditExperience.h; sourceTree = "<group>"; };
 		67606C6D1D24888700AD127E /* MyInfoEditExperience.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoEditExperience.m; sourceTree = "<group>"; };
+		676B51AE1DE21AF0002B7B66 /* GeoFire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFire.h; sourceTree = "<group>"; };
+		676B51AF1DE21AF0002B7B66 /* GFCircleQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCircleQuery.h; sourceTree = "<group>"; };
+		676B51B01DE21AF0002B7B66 /* GFQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFQuery.h; sourceTree = "<group>"; };
+		676B51B11DE21AF0002B7B66 /* GFRegionQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFRegionQuery.h; sourceTree = "<group>"; };
+		676B51B21DE21AF0002B7B66 /* GeoFire-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GeoFire-Prefix.pch"; sourceTree = "<group>"; };
+		676B51B41DE21AF0002B7B66 /* GeoFire+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GeoFire+Private.h"; sourceTree = "<group>"; };
+		676B51B51DE21AF0002B7B66 /* GeoFire.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoFire.m; sourceTree = "<group>"; };
+		676B51B61DE21AF0002B7B66 /* GFBase32Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFBase32Utils.h; sourceTree = "<group>"; };
+		676B51B71DE21AF0002B7B66 /* GFBase32Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFBase32Utils.m; sourceTree = "<group>"; };
+		676B51B81DE21AF0002B7B66 /* GFGeoHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFGeoHash.h; sourceTree = "<group>"; };
+		676B51B91DE21AF0002B7B66 /* GFGeoHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFGeoHash.m; sourceTree = "<group>"; };
+		676B51BA1DE21AF0002B7B66 /* GFGeoHashQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFGeoHashQuery.h; sourceTree = "<group>"; };
+		676B51BB1DE21AF0002B7B66 /* GFGeoHashQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFGeoHashQuery.m; sourceTree = "<group>"; };
+		676B51BC1DE21AF0002B7B66 /* GFQuery+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GFQuery+Private.h"; sourceTree = "<group>"; };
+		676B51BD1DE21AF0002B7B66 /* GFQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFQuery.m; sourceTree = "<group>"; };
 		678138A71D33A94E00BFBF48 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		678138A91D33B2DD00BFBF48 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		678138AA1D33B2DD00BFBF48 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
@@ -250,6 +270,9 @@
 				67CD9C2D1D3C75E800823701 /* NoContent.xib */,
 				67CD9C2F1D3C795600823701 /* NoContent.h */,
 				67CD9C301D3C795600823701 /* NoContent.m */,
+				673E58741D6AAFA300D28F5B /* CAPSPageMenu.h */,
+				673E58751D6AAFA300D28F5B /* CAPSPageMenu.m */,
+				676B51AC1DE21AF0002B7B66 /* GeoFire */,
 				E163EFB61D6C9303004374E3 /* FB */,
 			);
 			path = Lib;
@@ -343,6 +366,44 @@
 				67602F511D2EC76900DA2F3A /* Messages.storyboard */,
 			);
 			path = Messages;
+			sourceTree = "<group>";
+		};
+		676B51AC1DE21AF0002B7B66 /* GeoFire */ = {
+			isa = PBXGroup;
+			children = (
+				676B51AD1DE21AF0002B7B66 /* API */,
+				676B51B21DE21AF0002B7B66 /* GeoFire-Prefix.pch */,
+				676B51B31DE21AF0002B7B66 /* Implementation */,
+			);
+			path = GeoFire;
+			sourceTree = "<group>";
+		};
+		676B51AD1DE21AF0002B7B66 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				676B51AE1DE21AF0002B7B66 /* GeoFire.h */,
+				676B51AF1DE21AF0002B7B66 /* GFCircleQuery.h */,
+				676B51B01DE21AF0002B7B66 /* GFQuery.h */,
+				676B51B11DE21AF0002B7B66 /* GFRegionQuery.h */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		676B51B31DE21AF0002B7B66 /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				676B51B41DE21AF0002B7B66 /* GeoFire+Private.h */,
+				676B51B51DE21AF0002B7B66 /* GeoFire.m */,
+				676B51B61DE21AF0002B7B66 /* GFBase32Utils.h */,
+				676B51B71DE21AF0002B7B66 /* GFBase32Utils.m */,
+				676B51B81DE21AF0002B7B66 /* GFGeoHash.h */,
+				676B51B91DE21AF0002B7B66 /* GFGeoHash.m */,
+				676B51BA1DE21AF0002B7B66 /* GFGeoHashQuery.h */,
+				676B51BB1DE21AF0002B7B66 /* GFGeoHashQuery.m */,
+				676B51BC1DE21AF0002B7B66 /* GFQuery+Private.h */,
+				676B51BD1DE21AF0002B7B66 /* GFQuery.m */,
+			);
+			path = Implementation;
 			sourceTree = "<group>";
 		};
 		678138A31D33A92B00BFBF48 /* Settings */ = {
@@ -541,8 +602,6 @@
 			isa = PBXGroup;
 			children = (
 				67DA188B1DDF93EB000F9318 /* LocationManager */,
-				673E58741D6AAFA300D28F5B /* CAPSPageMenu.h */,
-				673E58751D6AAFA300D28F5B /* CAPSPageMenu.m */,
 				67DD1AB11D17D40D00FBEA0F /* UIPrinciples.h */,
 				67DD1AB21D17D40D00FBEA0F /* UIPrinciples.m */,
 				67B2400D1D40594600F011BB /* Constants.h */,
@@ -791,6 +850,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				67DD1AB31D17D40D00FBEA0F /* UIPrinciples.m in Sources */,
+				676B51C11DE21AF0002B7B66 /* GFGeoHashQuery.m in Sources */,
 				67606C6E1D24888700AD127E /* MyInfoEditExperience.m in Sources */,
 				673E2BB91D6E657100AB139F /* ExperienceCell.m in Sources */,
 				678138AB1D33B2DD00BFBF48 /* Settings.m in Sources */,
@@ -818,17 +878,21 @@
 				67DD1A981D17BF1700FBEA0F /* Network.m in Sources */,
 				E16004821D7C0AE10098DFB1 /* Msg+CoreDataProperties.m in Sources */,
 				67391DF51D27FBD800A50C03 /* SignupProcessExperienceDetail.m in Sources */,
+				676B51C21DE21AF0002B7B66 /* GFQuery.m in Sources */,
 				673E58761D6AAFA300D28F5B /* CAPSPageMenu.m in Sources */,
 				673E58701D6AAE6400D28F5B /* NewChats.m in Sources */,
 				E1E0B9281D689FA700295133 /* N_CoreDataTableViewController.m in Sources */,
+				676B51C01DE21AF0002B7B66 /* GFGeoHash.m in Sources */,
 				67391DF21D27FBC400A50C03 /* SignupProcess2.m in Sources */,
 				67DD1A9D1D17BF6900FBEA0F /* MyNetwork.m in Sources */,
 				67DD1A7C1D17BEB500FBEA0F /* main.m in Sources */,
+				676B51BE1DE21AF0002B7B66 /* GeoFire.m in Sources */,
 				67DA188E1DDF9400000F9318 /* BackgroundTaskManager.m in Sources */,
 				679B9EEA1D236E0A00C426F2 /* MyInfoEditType2.m in Sources */,
 				E1E0B9211D689D8600295133 /* Nety.xcdatamodeld in Sources */,
 				E160047E1D7C0AE10098DFB1 /* ChatRooms+CoreDataProperties.m in Sources */,
 				67D4AD621D26536000F42B7F /* MainPage.m in Sources */,
+				676B51BF1DE21AF0002B7B66 /* GFBase32Utils.m in Sources */,
 				673E58731D6AAE7900D28F5B /* MyChats.m in Sources */,
 				E16004811D7C0AE10098DFB1 /* ALL.m in Sources */,
 				E160047D1D7C0AE10098DFB1 /* Experiences.m in Sources */,

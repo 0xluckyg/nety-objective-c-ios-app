@@ -11,6 +11,7 @@
 #import "ChatRooms.h"
 #import "Experiences.h"
 #import "AppDelegate.h"
+#import "GeoFire.h"
 
 @implementation N_API
 
@@ -120,7 +121,36 @@
 
 -(void) listenForChildAdded {
     
+//    GeoFire *geoFire = [[GeoFire alloc] initWithFirebaseRef:[self.firdatabase child:kUsers]];
+//    CLLocation *myLocation = [self getBestLocation];
+//    
+//    if (myLocation != nil) {
+//    
+//        CLLocation *center = [[CLLocation alloc] initWithLatitude:myLocation.coordinate.latitude longitude:myLocation.coordinate.longitude];
+//        // Query locations at current location with a radius of 30km
+//        GFCircleQuery *circleQuery = [geoFire queryAtLocation:center withRadius:30.0];
+//        
+//        [circleQuery observeEventType:GFEventTypeKeyEntered withBlock:^(NSString *key, CLLocation *location) {
+//           [[[self.firdatabase child:kUsers] child:key] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+//               
+//               NSLog(@"%@", snapshot);
+//               NSDictionary *usersDictionary = snapshot.value;
+//               NSString *otherUserID = snapshot.key;
+//               NSString *userID = _myUser.userID;
+//               
+//               [self addNewUser:usersDictionary UserID:otherUserID FlagMy:[otherUserID isEqualToString: userID]];
+//               
+//            }];
+//        }];
+//        
+//    } else {
+//    
+//        NSLog(@"Error fetching user's current location");
+//        
+//    }
+//    
     [[self.firdatabase child:kUsers] observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        //Should query the users in a more efficient way: Ex. compare longitude and latitude.
         
         NSDictionary *usersDictionary = snapshot.value;
         NSString *otherUserID = snapshot.key;
@@ -272,8 +302,7 @@
                 [user removeExperiences:user.experiences];
                 for (NSString* expKey in [[userInfo objectForKey:keys] allKeys]) {
                     NSDictionary* expDict = [NSDictionary dictionaryWithDictionary:[[userInfo objectForKey:keys] objectForKey:expKey]];
-                    //                    Experiences* expir = [NSEntityDescription insertNewObjectForEntityForName:@"Experiences" inManagedObjectContext:self.managedObjectContext];
-                    //
+
                     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
                     // Edit the entity name as appropriate.
                     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Experiences" inManagedObjectContext:MY_API.managedObjectContext];
@@ -332,7 +361,7 @@
             else
             {
                 [user setValue:[userInfo objectForKey:keys] forKey:keys];
-            }
+            };;
         } @catch (NSException *exception) {
             NSLog(@"Create user ERROR: %@",exception);
         } @finally {
@@ -340,31 +369,17 @@
         }
     }
     
-    self.shareModel = [LocationShareModel sharedModel];
-    NSLog(@"%lu count", [self.shareModel.myLocationArray count]);
-    
+
     //Set distance
-    if ([self.shareModel.myLocationArray count] != 0) {
-        //Pick best location accuracy
-        CLLocation *myLocation = [CLLocation alloc];
-        int bestAccuracy = 0;
-        int bestLocationIndex = 0;
-        for (int i = 0; i < [self.shareModel.myLocationArray count]; i ++) {
-            if ([[self.shareModel.myLocationArray[i] objectForKey:@"theAccuracy"] floatValue] > bestAccuracy) {
-                bestAccuracy = [[self.shareModel.myLocationArray[i] objectForKey:@"theAccuracy"] floatValue];
-                bestLocationIndex = i;
-            }
-        }
-        
-        myLocation = [myLocation initWithLatitude:[[self.shareModel.myLocationArray[bestLocationIndex] objectForKey:@"latitude"] floatValue] longitude:[[self.shareModel.myLocationArray[bestLocationIndex] objectForKey:@"longitude"] floatValue]];
-        
+    CLLocation *myLocation = [self getBestLocation];
+    
+    if (myLocation != nil) {
         NSArray* userLocationArray = [NSArray arrayWithArray:[user.geocoordinate componentsSeparatedByString:@":"]];
         CLLocation* userLocation = [[CLLocation alloc] initWithLatitude:[userLocationArray[0] floatValue] longitude:[userLocationArray[1] floatValue]];
         double distance = [userLocation distanceFromLocation:myLocation];
         NSLog(@"%f userDistance", distance);
         [user setValue:[NSNumber numberWithDouble:distance] forKey:@"distance"];
     } else {
-        //NAN
         [user setValue:@(100000) forKey:@"distance"];
     }
     
@@ -665,6 +680,33 @@
     }
     
     return resultArray;
+}
+
+#pragma mark - Custom
+
+- (CLLocation *) getBestLocation {
+    
+    self.shareModel = [LocationShareModel sharedModel];
+    CLLocation *myLocation = [CLLocation alloc];
+
+    //Set distance
+    if ([self.shareModel.myLocationArray count] != 0) {
+        //Pick best location accuracy
+        int bestAccuracy = 0;
+        int bestLocationIndex = 0;
+        for (int i = 0; i < [self.shareModel.myLocationArray count]; i ++) {
+            if ([[self.shareModel.myLocationArray[i] objectForKey:@"theAccuracy"] floatValue] > bestAccuracy) {
+                bestAccuracy = [[self.shareModel.myLocationArray[i] objectForKey:@"theAccuracy"] floatValue];
+                bestLocationIndex = i;
+            }
+        }
+        
+        myLocation = [myLocation initWithLatitude:[[self.shareModel.myLocationArray[bestLocationIndex] objectForKey:@"latitude"] floatValue] longitude:[[self.shareModel.myLocationArray[bestLocationIndex] objectForKey:@"longitude"] floatValue]];
+        
+        return myLocation;
+    } else {
+        return nil;
+    }
 }
 
 @end
