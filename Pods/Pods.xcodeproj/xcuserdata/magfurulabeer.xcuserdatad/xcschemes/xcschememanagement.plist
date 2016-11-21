@@ -34,6 +34,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>JVFloatLabeledTextField.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -57,52 +62,57 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>02FFFAED22EA74C13225D616E5727C0C</key>
+		<key>0E119F43B0B3E72C2C7435D5B5725E1A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0597E693453A9B9EB96A690DAEC03780</key>
+		<key>1D7BA4F223BE72A6E495D1859315626A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0DCB226F9D2CE0F4F7F52D75613DD6B5</key>
+		<key>2A4448146C785C426971111F117D773C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5DF21164C6E1DC7DEE4CA35AD0FD7B25</key>
+		<key>41FA54D12162DAD51D02FC58A2CD5034</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>74030642508E2E8C107212A6248FCED7</key>
+		<key>6D5CEDECD3D8DC52EA507E0431BDA8A0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8C80F913EE213FA1EE3801FF8CEF0DD4</key>
+		<key>93EB81E7FFC6DD50398436E3CC7D0984</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9308FBFAB7AA4B2E1F7E89900FD73EF0</key>
+		<key>C052BEBFBD0AB5218CC64BA3450F6547</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B102F209C1FA58D0EB9EA7852A3527E3</key>
+		<key>C0F66EC21AF4E86F373B282628985CC6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D058B89EB3B3DF45457A2DCD3971AFFE</key>
+		<key>C25DD4ADB8E051B751B6EEFE3C2FF2FE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FA67B972F11F3724C4CFB6B88427CBEC</key>
+		<key>C7DCF2B547F7871B9BFD74DE93B0E173</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D0581AF7BF4A6DA140D280B19ECC7BFF</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -1,8 +1,8 @@
 # Uncomment this line to define a global platform for your project
 
 target 'Nety' do
-  # Uncomment this line if you're using Swift or would like to use dynamic frameworks
-  
+  use_frameworks!
+
   # Pods for Nety
     pod 'JSQMessagesViewController'
     pod 'SWTableViewCell', '~> 0.3.7'
@@ -16,6 +16,7 @@ target 'Nety' do
     pod 'Firebase/Storage'
     pod 'Firebase/AppIndexing'
     pod 'Firebase/Crash'
-pod 'Firebase/Messaging'
+    pod 'JVFloatLabeledTextField'
+    pod 'Firebase/Messaging'
 end
 

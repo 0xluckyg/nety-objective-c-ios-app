@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		60A7558738488CC025076173 /* Pods_Nety.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EF861BBC72529E816531A8D /* Pods_Nety.framework */; };
 		673338F71D20937C00A8009F /* MyNetworkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 673338F61D20937C00A8009F /* MyNetworkCell.m */; };
 		6733390E1D20B5ED00A8009F /* ChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6733390D1D20B5ED00A8009F /* ChatCell.m */; };
 		67391DEA1D27ED0200A50C03 /* Signup.m in Sources */ = {isa = PBXBuildFile; fileRef = 67391DE91D27ED0200A50C03 /* Signup.m */; };
@@ -65,7 +66,18 @@
 		67DD1AAF1D17C3EF00FBEA0F /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1AAE1D17C3EF00FBEA0F /* Profile.storyboard */; };
 		67DD1AB31D17D40D00FBEA0F /* UIPrinciples.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DD1AB21D17D40D00FBEA0F /* UIPrinciples.m */; };
 		67DD1AB61D17E04F00FBEA0F /* NetworkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DD1AB51D17E04F00FBEA0F /* NetworkCell.m */; };
-		97677F0633DE3705741AEB8E /* libPods-Nety.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F5D56FDB372FC5465929EE /* libPods-Nety.a */; };
+		8B1D56F81DE31C7B00E90636 /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D56F71DE31C7B00E90636 /* UserData.m */; };
+		8B1D56FE1DE31CC600E90636 /* SignUpTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D56FB1DE31CC600E90636 /* SignUpTextField.m */; };
+		8B1D56FF1DE31CC600E90636 /* SignUpTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D56FD1DE31CC600E90636 /* SignUpTextView.m */; };
+		8B1D57021DE31CD500E90636 /* Regex.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D57011DE31CD500E90636 /* Regex.m */; };
+		8B1D57061DE31D0800E90636 /* WhoYouAreVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D57051DE31D0800E90636 /* WhoYouAreVC.m */; };
+		8B1D57091DE31D7400E90636 /* NameSignUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D57081DE31D7400E90636 /* NameSignUpVC.m */; };
+		8B1D570C1DE31D8000E90636 /* ImageSignUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D570B1DE31D8000E90636 /* ImageSignUpVC.m */; };
+		8B1D570F1DE31D8B00E90636 /* ExperienceSignUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D570E1DE31D8B00E90636 /* ExperienceSignUpVC.m */; };
+		8B1D57121DE31D9200E90636 /* BaseSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D57111DE31D9200E90636 /* BaseSignUpViewController.m */; };
+		8B1D57171DE31DA400E90636 /* AccountSignUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D57141DE31DA400E90636 /* AccountSignUpVC.m */; };
+		8B1D57181DE31DA400E90636 /* AddExperienceSignUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D57161DE31DA400E90636 /* AddExperienceSignUpVC.m */; };
+		8B1D571A1DE31E1B00E90636 /* Signup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B1D57191DE31E1B00E90636 /* Signup.storyboard */; };
 		E155F5321D763854001C1134 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E155F5311D763854001C1134 /* FBSDKShareKit.framework */; };
 		E160047C1D7C0AE10098DFB1 /* Experiences+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E16004691D7C0AE10098DFB1 /* Experiences+CoreDataProperties.m */; };
 		E160047D1D7C0AE10098DFB1 /* Experiences.m in Sources */ = {isa = PBXBuildFile; fileRef = E160046B1D7C0AE10098DFB1 /* Experiences.m */; };
@@ -89,9 +101,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		01F5D56FDB372FC5465929EE /* libPods-Nety.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Nety.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0A3CCF7D46442EF40346F17A /* Pods-Nety.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nety.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Nety/Pods-Nety.debug.xcconfig"; sourceTree = "<group>"; };
-		35F89FE34D38A372A0738678 /* Pods-Nety.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nety.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nety/Pods-Nety.release.xcconfig"; sourceTree = "<group>"; };
+		4EF861BBC72529E816531A8D /* Pods_Nety.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nety.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		673338F51D20937C00A8009F /* MyNetworkCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNetworkCell.h; sourceTree = "<group>"; };
 		673338F61D20937C00A8009F /* MyNetworkCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNetworkCell.m; sourceTree = "<group>"; };
 		6733390C1D20B5ED00A8009F /* ChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatCell.h; sourceTree = "<group>"; };
@@ -208,6 +218,29 @@
 		67DD1AB21D17D40D00FBEA0F /* UIPrinciples.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPrinciples.m; sourceTree = "<group>"; };
 		67DD1AB41D17E04F00FBEA0F /* NetworkCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkCell.h; sourceTree = "<group>"; };
 		67DD1AB51D17E04F00FBEA0F /* NetworkCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkCell.m; sourceTree = "<group>"; };
+		8B1D56F61DE31C7B00E90636 /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
+		8B1D56F71DE31C7B00E90636 /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
+		8B1D56FA1DE31CC600E90636 /* SignUpTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpTextField.h; sourceTree = "<group>"; };
+		8B1D56FB1DE31CC600E90636 /* SignUpTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpTextField.m; sourceTree = "<group>"; };
+		8B1D56FC1DE31CC600E90636 /* SignUpTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpTextView.h; sourceTree = "<group>"; };
+		8B1D56FD1DE31CC600E90636 /* SignUpTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpTextView.m; sourceTree = "<group>"; };
+		8B1D57001DE31CD500E90636 /* Regex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Regex.h; sourceTree = "<group>"; };
+		8B1D57011DE31CD500E90636 /* Regex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Regex.m; sourceTree = "<group>"; };
+		8B1D57041DE31D0800E90636 /* WhoYouAreVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhoYouAreVC.h; sourceTree = "<group>"; };
+		8B1D57051DE31D0800E90636 /* WhoYouAreVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhoYouAreVC.m; sourceTree = "<group>"; };
+		8B1D57071DE31D7400E90636 /* NameSignUpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameSignUpVC.h; sourceTree = "<group>"; };
+		8B1D57081DE31D7400E90636 /* NameSignUpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameSignUpVC.m; sourceTree = "<group>"; };
+		8B1D570A1DE31D8000E90636 /* ImageSignUpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageSignUpVC.h; sourceTree = "<group>"; };
+		8B1D570B1DE31D8000E90636 /* ImageSignUpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageSignUpVC.m; sourceTree = "<group>"; };
+		8B1D570D1DE31D8B00E90636 /* ExperienceSignUpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExperienceSignUpVC.h; sourceTree = "<group>"; };
+		8B1D570E1DE31D8B00E90636 /* ExperienceSignUpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExperienceSignUpVC.m; sourceTree = "<group>"; };
+		8B1D57101DE31D9200E90636 /* BaseSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseSignUpViewController.h; sourceTree = "<group>"; };
+		8B1D57111DE31D9200E90636 /* BaseSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseSignUpViewController.m; sourceTree = "<group>"; };
+		8B1D57131DE31DA400E90636 /* AccountSignUpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountSignUpVC.h; sourceTree = "<group>"; };
+		8B1D57141DE31DA400E90636 /* AccountSignUpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountSignUpVC.m; sourceTree = "<group>"; };
+		8B1D57151DE31DA400E90636 /* AddExperienceSignUpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddExperienceSignUpVC.h; sourceTree = "<group>"; };
+		8B1D57161DE31DA400E90636 /* AddExperienceSignUpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddExperienceSignUpVC.m; sourceTree = "<group>"; };
+		8B1D57191DE31E1B00E90636 /* Signup.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Signup.storyboard; sourceTree = "<group>"; };
 		E155F5311D763854001C1134 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../FBSDKShareKit.framework; sourceTree = "<group>"; };
 		E16004681D7C0AE10098DFB1 /* Experiences+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Experiences+CoreDataProperties.h"; path = "CoreData/Experiences+CoreDataProperties.h"; sourceTree = "<group>"; };
 		E16004691D7C0AE10098DFB1 /* Experiences+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Experiences+CoreDataProperties.m"; path = "CoreData/Experiences+CoreDataProperties.m"; sourceTree = "<group>"; };
@@ -242,6 +275,8 @@
 		E1E0B9261D689FA700295133 /* N_CoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = N_CoreDataTableViewController.h; path = CoreData/N_CoreDataTableViewController.h; sourceTree = "<group>"; };
 		E1E0B9271D689FA700295133 /* N_CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = N_CoreDataTableViewController.m; path = CoreData/N_CoreDataTableViewController.m; sourceTree = "<group>"; };
 		E1E0B94E1D6A14C900295133 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		F54AA5667C77CDF66580A14B /* Pods-Nety.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nety.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nety/Pods-Nety.release.xcconfig"; sourceTree = "<group>"; };
+		FF528C7AD2D307F687B9C7F0 /* Pods-Nety.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nety.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Nety/Pods-Nety.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,18 +285,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				E163EFCC1D6C9C88004374E3 /* Bolts.framework in Frameworks */,
-				97677F0633DE3705741AEB8E /* libPods-Nety.a in Frameworks */,
 				E163EFB31D6C671E004374E3 /* linkedin-sdk.framework in Frameworks */,
 				E155F5321D763854001C1134 /* FBSDKShareKit.framework in Frameworks */,
 				E163EFC71D6C9325004374E3 /* FBSDKCoreKit.framework in Frameworks */,
 				E188C3FD1D6E461300CCFD0F /* MapKit.framework in Frameworks */,
 				E163EFC81D6C9325004374E3 /* FBSDKLoginKit.framework in Frameworks */,
+				60A7558738488CC025076173 /* Pods_Nety.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03F805C815948FF15789BFA9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FF528C7AD2D307F687B9C7F0 /* Pods-Nety.debug.xcconfig */,
+				F54AA5667C77CDF66580A14B /* Pods-Nety.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		673338F81D2098D200A8009F /* Lib */ = {
 			isa = PBXGroup;
 			children = (
@@ -287,7 +331,7 @@
 			name = Login;
 			sourceTree = "<group>";
 		};
-		67391DEC1D27F76D00A50C03 /* Signup */ = {
+		67391DEC1D27F76D00A50C03 /* Old Signup */ = {
 			isa = PBXGroup;
 			children = (
 				67391DE81D27ED0200A50C03 /* Signup.h */,
@@ -296,7 +340,7 @@
 				67391DF71D28097000A50C03 /* Process2 */,
 				674918E41D2D8A6D0015EFE9 /* Process3 */,
 			);
-			name = Signup;
+			name = "Old Signup";
 			sourceTree = "<group>";
 		};
 		67391DF61D28096800A50C03 /* Process1 */ = {
@@ -450,11 +494,12 @@
 		67D4AD5D1D2632E900F42B7F /* LoginSignup */ = {
 			isa = PBXGroup;
 			children = (
+				8B1D57031DE31CFC00E90636 /* New Signup */,
 				67D4AD5E1D26333D00F42B7F /* LoginSignup.storyboard */,
 				67D4AD601D26536000F42B7F /* MainPage.h */,
 				67D4AD611D26536000F42B7F /* MainPage.m */,
 				67391DEB1D27F75800A50C03 /* Login */,
-				67391DEC1D27F76D00A50C03 /* Signup */,
+				67391DEC1D27F76D00A50C03 /* Old Signup */,
 			);
 			path = LoginSignup;
 			sourceTree = "<group>";
@@ -477,8 +522,8 @@
 			children = (
 				67DD1A791D17BEB500FBEA0F /* Nety */,
 				67DD1A781D17BEB500FBEA0F /* Products */,
-				8FCFFEDB2731DDDE96F8924A /* Pods */,
 				B852F7677337544B123B08BC /* Frameworks */,
+				03F805C815948FF15789BFA9 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -493,6 +538,8 @@
 		67DD1A791D17BEB500FBEA0F /* Nety */ = {
 			isa = PBXGroup;
 			children = (
+				8B1D56F91DE31CBE00E90636 /* Views */,
+				8B1D56F51DE31C6600E90636 /* Models */,
 				67DA18871DDF912F000F9318 /* Nety.entitlements */,
 				673338F81D2098D200A8009F /* Lib */,
 				67DD1AB01D17D3DF00FBEA0F /* Util */,
@@ -601,6 +648,8 @@
 		67DD1AB01D17D3DF00FBEA0F /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				8B1D57001DE31CD500E90636 /* Regex.h */,
+				8B1D57011DE31CD500E90636 /* Regex.m */,
 				67DA188B1DDF93EB000F9318 /* LocationManager */,
 				67DD1AB11D17D40D00FBEA0F /* UIPrinciples.h */,
 				67DD1AB21D17D40D00FBEA0F /* UIPrinciples.m */,
@@ -611,20 +660,53 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
-		8FCFFEDB2731DDDE96F8924A /* Pods */ = {
+		8B1D56F51DE31C6600E90636 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				0A3CCF7D46442EF40346F17A /* Pods-Nety.debug.xcconfig */,
-				35F89FE34D38A372A0738678 /* Pods-Nety.release.xcconfig */,
+				8B1D56F61DE31C7B00E90636 /* UserData.h */,
+				8B1D56F71DE31C7B00E90636 /* UserData.m */,
 			);
-			name = Pods;
+			name = Models;
+			sourceTree = "<group>";
+		};
+		8B1D56F91DE31CBE00E90636 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8B1D56FA1DE31CC600E90636 /* SignUpTextField.h */,
+				8B1D56FB1DE31CC600E90636 /* SignUpTextField.m */,
+				8B1D56FC1DE31CC600E90636 /* SignUpTextView.h */,
+				8B1D56FD1DE31CC600E90636 /* SignUpTextView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		8B1D57031DE31CFC00E90636 /* New Signup */ = {
+			isa = PBXGroup;
+			children = (
+				8B1D57191DE31E1B00E90636 /* Signup.storyboard */,
+				8B1D57101DE31D9200E90636 /* BaseSignUpViewController.h */,
+				8B1D57111DE31D9200E90636 /* BaseSignUpViewController.m */,
+				8B1D57071DE31D7400E90636 /* NameSignUpVC.h */,
+				8B1D57081DE31D7400E90636 /* NameSignUpVC.m */,
+				8B1D57131DE31DA400E90636 /* AccountSignUpVC.h */,
+				8B1D57141DE31DA400E90636 /* AccountSignUpVC.m */,
+				8B1D57041DE31D0800E90636 /* WhoYouAreVC.h */,
+				8B1D57051DE31D0800E90636 /* WhoYouAreVC.m */,
+				8B1D570D1DE31D8B00E90636 /* ExperienceSignUpVC.h */,
+				8B1D570E1DE31D8B00E90636 /* ExperienceSignUpVC.m */,
+				8B1D57151DE31DA400E90636 /* AddExperienceSignUpVC.h */,
+				8B1D57161DE31DA400E90636 /* AddExperienceSignUpVC.m */,
+				8B1D570A1DE31D8000E90636 /* ImageSignUpVC.h */,
+				8B1D570B1DE31D8000E90636 /* ImageSignUpVC.m */,
+			);
+			name = "New Signup";
 			sourceTree = "<group>";
 		};
 		B852F7677337544B123B08BC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				E188C3FC1D6E461300CCFD0F /* MapKit.framework */,
-				01F5D56FDB372FC5465929EE /* libPods-Nety.a */,
+				4EF861BBC72529E816531A8D /* Pods_Nety.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -695,13 +777,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 67DD1A8E1D17BEB500FBEA0F /* Build configuration list for PBXNativeTarget "Nety" */;
 			buildPhases = (
-				025C548BB88FCE5D90F8820E /* [CP] Check Pods Manifest.lock */,
+				86BBFA4D63E3C08387A97EBC /* [CP] Check Pods Manifest.lock */,
 				67DD1A731D17BEB500FBEA0F /* Sources */,
 				67DD1A741D17BEB500FBEA0F /* Frameworks */,
 				67DD1A751D17BEB500FBEA0F /* Resources */,
-				0DCCBF50CAECF70D5D5A83E4 /* [CP] Embed Pods Frameworks */,
-				DB182F33186AD0583C888900 /* [CP] Copy Pods Resources */,
-				FF32CFC29D793EAF310A210B /* Embed Pods Frameworks */,
+				8228A38FC26922036D6B6353 /* [CP] Embed Pods Frameworks */,
+				7809983E8B6066FA7EF37B5B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -763,6 +844,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B1D571A1DE31E1B00E90636 /* Signup.storyboard in Resources */,
 				67DD1A9A1D17BF2100FBEA0F /* Network.storyboard in Resources */,
 				67DD1A8A1D17BEB500FBEA0F /* LaunchScreen.storyboard in Resources */,
 				67602F521D2EC76900DA2F3A /* Messages.storyboard in Resources */,
@@ -782,37 +864,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		025C548BB88FCE5D90F8820E /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		0DCCBF50CAECF70D5D5A83E4 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Nety/Pods-Nety-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DB182F33186AD0583C888900 /* [CP] Copy Pods Resources */ = {
+		7809983E8B6066FA7EF37B5B /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -827,19 +879,34 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Nety/Pods-Nety-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FF32CFC29D793EAF310A210B /* Embed Pods Frameworks */ = {
+		8228A38FC26922036D6B6353 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Nety/Pods-Nety-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		86BBFA4D63E3C08387A97EBC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -853,6 +920,8 @@
 				676B51C11DE21AF0002B7B66 /* GFGeoHashQuery.m in Sources */,
 				67606C6E1D24888700AD127E /* MyInfoEditExperience.m in Sources */,
 				673E2BB91D6E657100AB139F /* ExperienceCell.m in Sources */,
+				8B1D57061DE31D0800E90636 /* WhoYouAreVC.m in Sources */,
+				8B1D57171DE31DA400E90636 /* AccountSignUpVC.m in Sources */,
 				678138AB1D33B2DD00BFBF48 /* Settings.m in Sources */,
 				E16004841D7C0AE10098DFB1 /* Users+CoreDataProperties.m in Sources */,
 				67DA18941DDF9465000F9318 /* LocationTracker.m in Sources */,
@@ -865,21 +934,28 @@
 				673E2BB61D6E656800AB139F /* MainInfoCell.m in Sources */,
 				67391DEA1D27ED0200A50C03 /* Signup.m in Sources */,
 				E16004851D7C0AE10098DFB1 /* Users.m in Sources */,
+				8B1D57181DE31DA400E90636 /* AddExperienceSignUpVC.m in Sources */,
 				E160047C1D7C0AE10098DFB1 /* Experiences+CoreDataProperties.m in Sources */,
 				67D4AD651D265A7E00F42B7F /* Login.m in Sources */,
 				67391DEF1D27FBB900A50C03 /* SignupProcess1.m in Sources */,
 				E1E0B9241D689DC800295133 /* N_API.m in Sources */,
 				679B9EF01D2396A700C426F2 /* MyInfoEditTableCell.m in Sources */,
+				8B1D570F1DE31D8B00E90636 /* ExperienceSignUpVC.m in Sources */,
+				8B1D57021DE31CD500E90636 /* Regex.m in Sources */,
 				E160047F1D7C0AE10098DFB1 /* ChatRooms.m in Sources */,
 				67CD9C311D3C795600823701 /* NoContent.m in Sources */,
 				E16004831D7C0AE10098DFB1 /* Msg.m in Sources */,
 				67B2400F1D40594600F011BB /* Constants.m in Sources */,
+				8B1D56FF1DE31CC600E90636 /* SignUpTextView.m in Sources */,
+				8B1D57091DE31D7400E90636 /* NameSignUpVC.m in Sources */,
 				67DD1A7F1D17BEB500FBEA0F /* AppDelegate.m in Sources */,
 				67DD1A981D17BF1700FBEA0F /* Network.m in Sources */,
 				E16004821D7C0AE10098DFB1 /* Msg+CoreDataProperties.m in Sources */,
+				8B1D570C1DE31D8000E90636 /* ImageSignUpVC.m in Sources */,
 				67391DF51D27FBD800A50C03 /* SignupProcessExperienceDetail.m in Sources */,
 				676B51C21DE21AF0002B7B66 /* GFQuery.m in Sources */,
 				673E58761D6AAFA300D28F5B /* CAPSPageMenu.m in Sources */,
+				8B1D57121DE31D9200E90636 /* BaseSignUpViewController.m in Sources */,
 				673E58701D6AAE6400D28F5B /* NewChats.m in Sources */,
 				E1E0B9281D689FA700295133 /* N_CoreDataTableViewController.m in Sources */,
 				676B51C01DE21AF0002B7B66 /* GFGeoHash.m in Sources */,
@@ -892,6 +968,7 @@
 				E1E0B9211D689D8600295133 /* Nety.xcdatamodeld in Sources */,
 				E160047E1D7C0AE10098DFB1 /* ChatRooms+CoreDataProperties.m in Sources */,
 				67D4AD621D26536000F42B7F /* MainPage.m in Sources */,
+				8B1D56FE1DE31CC600E90636 /* SignUpTextField.m in Sources */,
 				676B51BF1DE21AF0002B7B66 /* GFBase32Utils.m in Sources */,
 				673E58731D6AAE7900D28F5B /* MyChats.m in Sources */,
 				E16004811D7C0AE10098DFB1 /* ALL.m in Sources */,
@@ -907,6 +984,7 @@
 				673E2BC01D6EC98700AB139F /* MyInfoMainCell.m in Sources */,
 				67DD1AB61D17E04F00FBEA0F /* NetworkCell.m in Sources */,
 				679B9EE71D236DF900C426F2 /* MyInfoEditType1.m in Sources */,
+				8B1D56F81DE31C7B00E90636 /* UserData.m in Sources */,
 				674918EA1D2D8ACE0015EFE9 /* SignupProcess3.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1022,7 +1100,7 @@
 		};
 		67DD1A8F1D17BEB500FBEA0F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0A3CCF7D46442EF40346F17A /* Pods-Nety.debug.xcconfig */;
+			baseConfigurationReference = FF528C7AD2D307F687B9C7F0 /* Pods-Nety.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nety/Nety.entitlements;
@@ -1048,7 +1126,7 @@
 		};
 		67DD1A901D17BEB500FBEA0F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 35F89FE34D38A372A0738678 /* Pods-Nety.release.xcconfig */;
+			baseConfigurationReference = F54AA5667C77CDF66580A14B /* Pods-Nety.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nety/Nety.entitlements;

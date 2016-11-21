@@ -1,0 +1,6 @@
+framework module Pods_Nety {
+  umbrella header "Pods-Nety-umbrella.h"
+
+  export *
+  module * { export * }
+}

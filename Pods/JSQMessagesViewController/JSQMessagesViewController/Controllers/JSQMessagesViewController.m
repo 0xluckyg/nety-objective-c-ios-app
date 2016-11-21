@@ -434,15 +434,6 @@ JSQMessagesKeyboardControllerDelegate>
     [self scrollToIndexPath:lastCell animated:animated];
 }
 
-- (void)scrollToTopAnimated:(BOOL)animated
-{
-    if ([self.collectionView numberOfSections] == 0 || [self.collectionView numberOfItemsInSection:0] == 0) {
-        return;
-    }
-    
-    NSIndexPath *lastCell = [NSIndexPath indexPathForItem:0 inSection:0];
-    [self scrollToIndexPath:lastCell animated:animated];
-}
 
 - (void)scrollToIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated
 {
