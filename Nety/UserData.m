@@ -10,5 +10,13 @@
 
 @implementation UserData
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.experiences = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
 
 @end

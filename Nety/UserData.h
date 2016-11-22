@@ -17,7 +17,7 @@
 @property (strong, nonatomic) NSString *password;
 @property (strong, nonatomic) NSString *occupation;
 @property (strong, nonatomic) NSString *bio;
-@property (strong, nonatomic) NSArray *experiences;
+@property (strong, nonatomic) NSMutableArray *experiences;
 @property (strong, nonatomic) UIImage *profilePicture;
 
 @end

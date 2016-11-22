@@ -103,6 +103,7 @@
                                  }];
             } else {
                 self.createAPasswordLabel.text = @"Confirmation doesn't match";
+                [self.passwordConfirmationTextField becomeFirstResponder];
             }
         } else {
             self.createAPasswordLabel.text = @"Password has an error";
@@ -114,18 +115,32 @@
         if (passwordConfirmationIsIdentical) {
             [textField resignFirstResponder];
             
-            NSTextCheckingResult *isValidEmail = [Regex validateEmail:textField.text];
+            NSTextCheckingResult *isValidEmail = [Regex validateEmail:self.emailTextField.text];
             BOOL emailConfirmationIsIdentical = [self.emailTextField.text isEqualToString:self.emailConfirmationTextField.text];
             NSTextCheckingResult *isValidPassword = [Regex validatePassword:textField.text];
 
+            NSLog(@"Ummm still working???????");
             if (isValidEmail && emailConfirmationIsIdentical &&
                 isValidPassword && passwordConfirmationIsIdentical) {
+                
                 self.userData.email = [self.emailTextField.text lowercaseString];
                 self.userData.password = self.passwordTextField.text;
                 [self performSegueWithIdentifier:@"ToWhoYouAreSegue" sender:self];
             } else {
+                if (isValidEmail) {
+                    NSLog(@"valid email");
+                }
+                if (emailConfirmationIsIdentical) {
+                    NSLog(@"valid email conf");
+                }
+                if (isValidPassword) {
+                    NSLog(@"valid password");
+                }
+                if (passwordConfirmationIsIdentical) {
+                    NSLog(@"valid password conf");
+                }
                 self.whatIsYourEmailLabel.text = @"Incomplete input.";
-                self.passwordTextField.text = @"Incomplete input.";
+                self.createAPasswordLabel.text = @"Incomplete input.";
             }
 
             

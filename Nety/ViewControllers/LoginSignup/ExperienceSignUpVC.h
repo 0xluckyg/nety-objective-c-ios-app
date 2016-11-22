@@ -9,7 +9,10 @@
 // display them until a design consultation is done.
 
 #import "BaseSignUpViewController.h"
+#import "AddExperienceSignUpVC.h"
 
-@interface ExperienceSignUpVC : BaseSignUpViewController
+@interface ExperienceSignUpVC : BaseSignUpViewController <AddExperienceVCDelegate, UITableViewDelegate, UITableViewDataSource>
+
+- (void)addExperienceVCDismissedWithExperience: (NSDictionary *)experience;
 
 @end

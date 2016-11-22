@@ -15,13 +15,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *whatDidYouDoLabel;
 @property (weak, nonatomic) IBOutlet UILabel *whenDidYouDoItLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tellMeMoreLabel;
-
 @property (weak, nonatomic) IBOutlet SignUpTextField *positionTextField;
 @property (weak, nonatomic) IBOutlet SignUpTextField *startTextField;
 @property (weak, nonatomic) IBOutlet SignUpTextField *endTextField;
 @property (weak, nonatomic) IBOutlet SignUpTextView *detailsTextView;
-
-
 
 @end
 
@@ -67,5 +64,19 @@
         [field resignFirstResponder];
     }
 }
+
+
+- (IBAction)addButtonTapped:(UIButton *)sender {
+    NSDictionary *experienceDict = @{
+                                     kExperienceName: self.positionTextField.text,
+                                     kExperienceStartDate: self.startTextField.text,
+                                     kExperienceEndDate: self.endTextField.text,
+                                     kExperienceDescription: self.detailsTextView.text
+                                     };
+    [self.delegate addExperienceVCDismissedWithExperience:experienceDict];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 
 @end
