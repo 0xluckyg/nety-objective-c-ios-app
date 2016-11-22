@@ -46,6 +46,8 @@
 
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    NSLog(@"imagepicker finished");
+
     [picker dismissViewControllerAnimated:true completion:^{
         
     }];
@@ -61,6 +63,7 @@
 
 
 - (void)createUser {
+    NSLog(@"create user");
     //Sign up the user
     [[FIRAuth auth]
      createUserWithEmail: self.userData.email
@@ -88,7 +91,7 @@
                                     kStatus: @"",
                                     kIdentity: self.userData.occupation,
                                     kSummary: self.userData.bio,
-                                    kExperiences: self.userData.experiences,
+                                    kExperiences: [self.userData.experiences copy],
                                     kProfilePhoto: kDefaultUserLogoName,
                                     kSecurity: @(0)};
              
@@ -96,19 +99,19 @@
              [MY_API addNewUser:post UserID:userID FlagMy:YES];
              
              [[[self.firdatabase child:kUsers] child:userID] setValue:post];
-             
-             [self performSegueWithIdentifier:@"signupProcess1Segue" sender:self];
          }
          
      }];
 }
 
 -(void)uploadImage: (NSString *)userID {
-    
+    NSLog(@"upload image");
+
     //Uploading profile image
     NSString *uniqueImageIDBig = [[NSUUID UUID] UUIDString];
     NSString *uniqueImageIDSmall = [[NSUUID UUID] UUIDString];
-    
+
+    NSLog(@"Made UUIDs");
     FIRStorage *storage = [FIRStorage storage];
     FIRStorageReference *profileImageBigRef = [[[[storage reference]
                                                  child:@"ProfileImages"]
@@ -118,18 +121,20 @@
                                                    child:@"ProfileImages"]
                                                   child:@"Small" ]
                                                  child:uniqueImageIDSmall];
+    NSLog(@"Made FIRStorageReferences");
     
     //If user doesn't set profile image, set it to default image without uploading it.
-    NSData *logoImage = UIImagePNGRepresentation([UIImage imageNamed:kDefaultUserLogoName]);
-    NSData *pickedImage = UIImagePNGRepresentation(self.chosenImage);
+//    NSData *logoImage = UIImagePNGRepresentation([UIImage imageNamed:kDefaultUserLogoName]);
+//    NSData *pickedImage = UIImagePNGRepresentation(self.chosenImage);
     
-    if ([logoImage isEqualToData:pickedImage]) {
-        
+    NSLog(@"BEFORE IF STATEMENT - %d", !!self.chosenImage);
+    if (!self.chosenImage) {
+        NSLog(@"IF STATEMENT");
         [self registerUserInfo:userID metaDataBigUid:kDefaultUserLogoName metaDataSmallUid:kDefaultUserLogoName];
         [self changeRoot];
         
     } else {
-        
+        NSLog(@"ELSE STATEMENT");
         UIImage *bigProfileImage = self.chosenImage;
         UIImage *smallProfileImage = [self.UIPrinciple scaleDownImage:self.chosenImage];
         
@@ -144,14 +149,16 @@
         
         //Uploading big profile picture first
         [profileImageBigRef putData:uploadDataBig metadata:nil completion:^(FIRStorageMetadata * _Nullable metadataBig, NSError * _Nullable error) {
+            NSLog(@"UPLOAD BLOCK");
             
             if (error) {
+                NSLog(@"ELSE STATEMENT - IF ERROR");
                 [hud hideAnimated:YES];
                 NSLog(@"%@", error.localizedDescription);
                 [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Can not upload image" message:@"Please try again at another time" viewController:self];
                 
             } else {
-                
+                NSLog(@"ELSE STATEMENT - ELSE NO ERROR");
                 //Uploading small profile picture next
                 [profileImageSmallRef putData:uploadDataSmall metadata:nil completion:^(FIRStorageMetadata * _Nullable metadataSmall, NSError * _Nullable error) {
                     if (error) {
@@ -173,11 +180,14 @@
         }];
         
     }
-    
+    NSLog(@"UPLOAD IMAGE DONE");
 }
 
--(void)registerUserInfo: (NSString *)userID metaDataBigUid:(NSString *)metaDataBigUid metaDataSmallUid:(NSString *)metaDataSmallUid {
+-(void)registerUserInfo: (NSString *)userID metaDataBigUid:(NSString *)metaDataBigUid
+metaDataSmallUid:(NSString *)metaDataSmallUid {
     
+    NSLog(@"register user info");
+
     NSMutableDictionary *experiences = [[NSMutableDictionary alloc] init];
     NSMutableArray *experienceArray = self.userData.experiences;
     
@@ -194,7 +204,7 @@
                            kStatus: @"",
                            kIdentity: self.userData.occupation,
                            kSummary: self.userData.bio,
-                           kExperiences: self.userData.experiences,
+                           kExperiences: [self.userData.experiences copy],
                            kIAmDiscoverable: @(20000),
                            kProfilePhoto: metaDataBigUid,
                            kSecurity: @(0)};
@@ -207,7 +217,7 @@
 
 
 -(void)changeRoot {
-    
+    NSLog(@"change root");
     //Set root controller to tabbar with cross dissolve animation
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [appDelegate setUserIsSigningIn:false];
@@ -231,18 +241,23 @@
 #pragma mark - IBActions
 
 - (IBAction)imageButtonWasTapped:(UIButton *)sender {
+    NSLog(@"image button tapped");
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.delegate = self;
     [self presentViewController:imagePicker animated:YES completion:nil];
+    NSLog(@"image button done");
 }
 
 - (IBAction)skipButtonWasTapped:(UIButton *)sender {
-    self.chosenImage = nil;
+    [self createUser];
+    self.chosenImage = [UIImage imageNamed:kDefaultUserLogoName];
     NSString *userID = [[self.userData.email stringByReplacingOccurrencesOfString:@"@" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
-    [self uploadImage:userID];
+//    [self uploadImage:userID];
 }
 
 - (IBAction)doneButtonTapped:(UIButton *)sender {
+    NSLog(@"done button tapped");
+    [self createUser];
     NSString *userID = [[self.userData.email stringByReplacingOccurrencesOfString:@"@" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
     [self uploadImage:userID];
 }

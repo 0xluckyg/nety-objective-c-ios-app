@@ -127,7 +127,7 @@
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     
-    NSLog(@"locationManager didUpdateLocations");
+//    NSLog(@"locationManager didUpdateLocations");
     
     for(int i=0;i<locations.count;i++){
         CLLocation * newLocation = [locations objectAtIndex:i];
