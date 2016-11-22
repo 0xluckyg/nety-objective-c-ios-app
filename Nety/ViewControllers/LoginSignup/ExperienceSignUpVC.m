@@ -27,9 +27,8 @@
     
     self.editButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
     self.addButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    
-    
 }
+
 - (IBAction)addButtonTapped:(UIButton *)sender {
     [self performSegueWithIdentifier:@"AddExperienceSegue" sender:self];
 }
