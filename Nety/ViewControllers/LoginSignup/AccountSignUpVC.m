@@ -119,12 +119,12 @@
             BOOL emailConfirmationIsIdentical = [self.emailTextField.text isEqualToString:self.emailConfirmationTextField.text];
             NSTextCheckingResult *isValidPassword = [Regex validatePassword:textField.text];
 
-            NSLog(@"Ummm still working???????");
             if (isValidEmail && emailConfirmationIsIdentical &&
                 isValidPassword && passwordConfirmationIsIdentical) {
                 
                 self.userData.email = [self.emailTextField.text lowercaseString];
                 self.userData.password = self.passwordTextField.text;
+                [self moveViewsDown];
                 [self performSegueWithIdentifier:@"ToWhoYouAreSegue" sender:self];
             } else {
                 if (isValidEmail) {
@@ -170,13 +170,7 @@
     CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     self.displacement = self.displacement == 0 ? keyboardSize.height : self.displacement;
     if (self.viewNeedsToBeMovedUp) {
-        for (UIView* view in self.baseViews) {
-            if (view == self.passwordConfirmationTextField && view.alpha == 0) {
-                    self.passwordConfirmationTextField.transform = CGAffineTransformMakeTranslation(0, (-self.displacement - 30 - 35));
-            } else {
-                view.transform = CGAffineTransformMakeTranslation(0, -self.displacement);
-            }
-        }
+        [self moveViewsUp];
     }
 
 
@@ -184,12 +178,25 @@
 
 -(void)keyboardDidHide: (NSNotification *)aNotification {
     if (self.viewNeedsToBeMovedUp) {
-        for (UIView* view in self.baseViews) {
-            view.transform = CGAffineTransformIdentity;
-        }
+        [self moveViewsDown];
     }
 }
 
+-(void)moveViewsDown {
+    for (UIView* view in self.baseViews) {
+        view.transform = CGAffineTransformIdentity;
+    }
+}
+
+-(void)moveViewsUp {
+    for (UIView* view in self.baseViews) {
+        if (view == self.passwordConfirmationTextField && view.alpha == 0) {
+            self.passwordConfirmationTextField.transform = CGAffineTransformMakeTranslation(0, (-self.displacement - 30 - 35));
+        } else {
+            view.transform = CGAffineTransformMakeTranslation(0, -self.displacement);
+        }
+    }
+}
 
 @end
 
