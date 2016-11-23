@@ -37,6 +37,12 @@
     if (!self.userData) {
         self.userData = [[UserData alloc] init];
     }
+    
+    // Hides keyboard when view is tapped
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewWasTapped)];
+    [self.view addGestureRecognizer:tapGesture];
+    
+    self.fields = @[];
 }
 
 # pragma mark - Add UI Component Methods
@@ -325,5 +331,11 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     BaseSignUpViewController *vc = segue.destinationViewController;
     vc.userData = self.userData;
+}
+
+- (void)viewWasTapped {
+    for (UIView *field in self.fields) {
+        [field resignFirstResponder];
+    }
 }
 @end

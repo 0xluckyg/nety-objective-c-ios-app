@@ -24,7 +24,7 @@
     [self prepareNavigation];
     [self constrainLineThatIsBlue:true];
 
-    NSLog(@"Did load view");
+    self.fields = @[self.nameTextField];
 }
 
 

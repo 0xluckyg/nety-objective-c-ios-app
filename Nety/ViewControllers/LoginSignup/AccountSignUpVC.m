@@ -36,6 +36,7 @@
     [base addObjectsFromArray:@[self.emailTextField, self.emailConfirmationTextField, self.passwordTextField, self.passwordConfirmationTextField, self.whatIsYourEmailLabel, self.createAPasswordLabel]];
     self.baseViews = [base copy];
     
+    self.fields = @[self.emailTextField, self.emailConfirmationTextField, self.passwordTextField, self.passwordConfirmationTextField];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
