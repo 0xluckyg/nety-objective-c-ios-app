@@ -37,6 +37,8 @@
     if (!self.userData) {
         self.userData = [[UserData alloc] init];
     }
+    
+    [self addSwipeGestures];
 }
 
 # pragma mark - Add UI Component Methods
@@ -267,36 +269,58 @@
 
 
 
-#pragma mark - IBActions
+#pragma mark - Actions
 
 - (void)nameButtonTapped:(UIButton *)sender {
-    if (sender.tag == 5) {
+    if (sender.tag == 5 && self.stepNumber != 1) {
         NSLog(@"Name button tapped");
     }
 }
 
 - (void)accountButtonTapped:(UIButton *)sender {
-    if (sender.tag == 5) {
+    if (sender.tag == 5 && self.stepNumber != 2) {
         NSLog(@"Account button tapped");
     }
 }
 
 - (void)whoYouAreButtonTapped:(UIButton *)sender {
-    if (sender.tag == 5) {
+    if (sender.tag == 5 && self.stepNumber != 3) {
         NSLog(@"WhoYouAre button tapped");
     }
 }
 
 - (void)experienceButtonTapped:(UIButton *)sender {
-    if (sender.tag == 5) {
+    if (sender.tag == 5 && self.stepNumber != 4) {
         NSLog(@"Experience button tapped");
     }
 }
 
 - (void)imageButtonTapped:(UIButton *)sender {
-    if (sender.tag == 5) {
+    if (sender.tag == 5 && self.stepNumber != 5) {
         NSLog(@"Image button tapped");
     }
+}
+
+- (void)swipeLeft {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)swipeRight {
+    if ([self allFieldsAreValidated]) {
+        [self goToNextPage];
+    }
+}
+
+// The swipe methods are switched because it makes more sense to us the other way around
+- (void)addSwipeGestures {
+    UISwipeGestureRecognizer *left = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRight)];
+    left.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:left];
+    
+    UISwipeGestureRecognizer *right = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeft)];
+    right.direction = UISwipeGestureRecognizerDirectionRight;
+    
+    [self.view addGestureRecognizer:right];
 }
 
 
@@ -325,5 +349,13 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     BaseSignUpViewController *vc = segue.destinationViewController;
     vc.userData = self.userData;
+}
+
+-(BOOL)allFieldsAreValidated {
+    return YES;
+}
+
+-(void)goToNextPage {
+    NSLog(@"Go to next page");
 }
 @end

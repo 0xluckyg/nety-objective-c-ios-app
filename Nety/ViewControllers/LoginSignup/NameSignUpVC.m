@@ -44,5 +44,17 @@
     return YES;
 }
 
+-(BOOL)allFieldsAreValidated {
+    NSTextCheckingResult *isValidName = [Regex validateName:self.nameTextField.text];
+
+    if (isValidName) {
+        return YES;
+    }
+    return NO;
+}
+
+-(void)goToNextPage {
+    NSLog(@"Go to next page");
+}
 
 @end

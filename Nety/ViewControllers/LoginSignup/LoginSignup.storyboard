@@ -634,18 +634,18 @@
                                         <rect key="frame" x="0.0" y="28" width="304" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Blz-v1-N8g" id="pV9-Xi-d8y">
-                                            <frame key="frameInset" width="304" height="57"/>
+                                            <frame key="frameInset" width="304" height="57.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Fn9-se-EHK">
-                                                    <frame key="frameInset" minX="15" minY="11" width="34" height="21"/>
+                                                    <frame key="frameInset" minX="15" minY="12" width="33.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="K0X-Ot-jvU">
-                                                    <frame key="frameInset" minX="15" minY="32" width="44" height="15"/>
+                                                    <frame key="frameInset" minX="15" minY="32.5" width="44" height="14.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
@@ -1006,6 +1006,6 @@
         <image name="Back" width="25" height="25"/>
         <image name="Edit" width="37" height="37"/>
         <image name="Plus" width="37" height="37"/>
-        <image name="user" width="37" height="37"/>
+        <image name="user" width="256" height="256"/>
     </resources>
 </document>

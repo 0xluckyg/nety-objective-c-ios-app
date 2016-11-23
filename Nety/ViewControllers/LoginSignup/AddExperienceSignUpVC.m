@@ -19,7 +19,7 @@
 @property (weak, nonatomic) IBOutlet SignUpTextField *startTextField;
 @property (weak, nonatomic) IBOutlet SignUpTextField *endTextField;
 @property (weak, nonatomic) IBOutlet SignUpTextView *detailsTextView;
-
+@property (strong, nonatomic) UIDatePicker *datePicker;
 @end
 
 @implementation AddExperienceSignUpVC
@@ -39,6 +39,14 @@
     // Hides keyboard when view is tapped
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewWasTapped)];
     [self.view addGestureRecognizer:tapGesture];
+    
+    self.datePicker = [[UIDatePicker alloc] init];
+    self.datePicker.datePickerMode = UIDatePickerModeDate;
+    [self.startTextField setInputView:self.datePicker];
+    [self.endTextField setInputView:self.datePicker];
+    
+//    self.dateFromTextField.tag = 1;
+//    self.dateToTextField.tag = 2;
 }
 
 - (IBAction)skipButtonTapped:(UIButton *)sender {
