@@ -36,10 +36,6 @@
     self.endTextField.delegate = self;
     self.detailsTextView.delegate = self;
     
-    // Hides keyboard when view is tapped
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewWasTapped)];
-    [self.view addGestureRecognizer:tapGesture];
-    
     self.datePicker = [[UIDatePicker alloc] init];
     self.datePicker.datePickerMode = UIDatePickerModeDate;
     [self.startTextField setInputView:self.datePicker];
@@ -47,6 +43,9 @@
     
 //    self.dateFromTextField.tag = 1;
 //    self.dateToTextField.tag = 2;
+    
+    self.fields = @[self.positionTextField, self.startTextField, self.endTextField, self.detailsTextView];
+
 }
 
 - (IBAction)skipButtonTapped:(UIButton *)sender {
@@ -66,12 +65,7 @@
     return YES;
 }
 
-- (void)viewWasTapped {
-    NSArray *fields = @[self.positionTextField, self.startTextField, self.endTextField, self.detailsTextView];
-    for (UIView *field in fields) {
-        [field resignFirstResponder];
-    }
-}
+
 
 
 - (IBAction)addButtonTapped:(UIButton *)sender {

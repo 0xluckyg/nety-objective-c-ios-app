@@ -32,13 +32,19 @@
     [base addObjectsFromArray:self.circleButtonStack.arrangedSubviews];
     [base addObjectsFromArray:self.labelButtonStack.arrangedSubviews];
     self.baseViews = [base copy];
-    self.signupStoryboard = [UIStoryboard storyboardWithName:@"Signup" bundle:nil];
     
     if (!self.userData) {
         self.userData = [[UserData alloc] init];
     }
     
     [self addSwipeGestures];
+
+    // Hides keyboard when view is tapped
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewWasTapped)];
+    [self.view addGestureRecognizer:tapGesture];
+    
+    self.fields = @[];
+
 }
 
 # pragma mark - Add UI Component Methods
@@ -351,11 +357,18 @@
     vc.userData = self.userData;
 }
 
+
 -(BOOL)allFieldsAreValidated {
     return YES;
 }
 
 -(void)goToNextPage {
     NSLog(@"Go to next page");
+}
+
+- (void)viewWasTapped {
+    for (UIView *field in self.fields) {
+        [field resignFirstResponder];
+    }
 }
 @end
