@@ -100,18 +100,16 @@
 }
 
 -(void)textFieldDidBeginEditing:(SignUpTextField *)textField {
-    
     NSLog(@"DATE BEFORE: %@", [self.formatter stringFromDate:self.datePicker.date]);
     BOOL isDateField = [self.activeField.titlePlaceholder isEqualToString:@"Start Date"]
     ||
     [self.activeField.titlePlaceholder isEqualToString:@"End Date"];
     NSDate *date = [self.formatter dateFromString:self.activeField.text];
-
     
     if (isDateField && date != nil) {
         [self.datePicker setDate:date animated:NO];
         NSLog(@"DATE AFTER: %@", [self.formatter stringFromDate:self.datePicker.date]);
-    } else {
+    } else if (isDateField) {
         self.activeField.text = [self.formatter stringFromDate:self.datePicker.date];
     }
 }
@@ -119,12 +117,6 @@
 -(void)textViewDidBeginEditing:(UITextView *)textView {
     [super textViewDidBeginEditing:textView];
     self.viewNeedsToBeMovedUp = YES;
-}
-
--(void)textFieldDidEndEditing:(SignUpTextField *)textField {
-    
-    NSLog(@"TEXT FIELD END????");
-    
 }
 
 - (IBAction)addButtonTapped:(UIButton *)sender {
