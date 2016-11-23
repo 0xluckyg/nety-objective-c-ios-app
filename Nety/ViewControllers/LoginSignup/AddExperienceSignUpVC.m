@@ -12,6 +12,11 @@
 #import "Regex.h"
 
 @interface AddExperienceSignUpVC ()
+@property (weak, nonatomic) IBOutlet UIButton *noDatesButton;
+@property (weak, nonatomic) IBOutlet UIButton *presentButton;
+@property (weak, nonatomic) IBOutlet UILabel *toLabel;
+@property (weak, nonatomic) IBOutlet UIButton *addButton;
+@property (weak, nonatomic) IBOutlet UIButton *skipButton;
 @property (weak, nonatomic) IBOutlet UILabel *whatDidYouDoLabel;
 @property (weak, nonatomic) IBOutlet UILabel *whenDidYouDoItLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tellMeMoreLabel;
@@ -20,6 +25,9 @@
 @property (weak, nonatomic) IBOutlet SignUpTextField *endTextField;
 @property (weak, nonatomic) IBOutlet SignUpTextView *detailsTextView;
 @property (strong, nonatomic) UIDatePicker *datePicker;
+@property (assign, nonatomic) CGFloat displacement;
+@property (weak, nonatomic) SignUpTextField *activeField;
+@property (strong, nonatomic) NSDateFormatter *formatter;
 @end
 
 @implementation AddExperienceSignUpVC
@@ -38,6 +46,8 @@
     
     self.datePicker = [[UIDatePicker alloc] init];
     self.datePicker.datePickerMode = UIDatePickerModeDate;
+    [self.datePicker addTarget:self action:@selector(datePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
+
     [self.startTextField setInputView:self.datePicker];
     [self.endTextField setInputView:self.datePicker];
     
@@ -46,6 +56,22 @@
     
     self.fields = @[self.positionTextField, self.startTextField, self.endTextField, self.detailsTextView];
 
+    NSMutableArray *base = [self.baseViews mutableCopy];
+    [base addObjectsFromArray:@[self.positionTextField, self.startTextField, self.endTextField, self.detailsTextView, self.whatDidYouDoLabel, self.whenDidYouDoItLabel, self.tellMeMoreLabel, self.toLabel, self.addButton, self.skipButton, self.noDatesButton, self.presentButton]];
+    self.baseViews = [base copy];
+    
+    self.formatter = [[NSDateFormatter alloc] init];
+    [self.formatter setDateFormat:@"MM/dd/YYYY"];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+}
+
+-(void)viewDidDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
 }
 
 - (IBAction)skipButtonTapped:(UIButton *)sender {
@@ -67,6 +93,39 @@
 
 
 
+-(BOOL)textFieldShouldBeginEditing:(SignUpTextField *)textField {
+    [super textFieldDidBeginEditing:textField];
+    self.activeField = textField;
+    return YES;
+}
+
+-(void)textFieldDidBeginEditing:(SignUpTextField *)textField {
+    
+    NSLog(@"DATE BEFORE: %@", [self.formatter stringFromDate:self.datePicker.date]);
+    BOOL isDateField = [self.activeField.titlePlaceholder isEqualToString:@"Start Date"]
+    ||
+    [self.activeField.titlePlaceholder isEqualToString:@"End Date"];
+    NSDate *date = [self.formatter dateFromString:self.activeField.text];
+
+    
+    if (isDateField && date != nil) {
+        [self.datePicker setDate:date animated:NO];
+        NSLog(@"DATE AFTER: %@", [self.formatter stringFromDate:self.datePicker.date]);
+    } else {
+        self.activeField.text = [self.formatter stringFromDate:self.datePicker.date];
+    }
+}
+
+-(void)textViewDidBeginEditing:(UITextView *)textView {
+    [super textViewDidBeginEditing:textView];
+    self.viewNeedsToBeMovedUp = YES;
+}
+
+-(void)textFieldDidEndEditing:(SignUpTextField *)textField {
+    
+    NSLog(@"TEXT FIELD END????");
+    
+}
 
 - (IBAction)addButtonTapped:(UIButton *)sender {
     NSDictionary *experienceDict = @{
@@ -79,6 +138,44 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+-(void)keyboardDidShow: (NSNotification *)aNotification {
+    NSDictionary* info = [aNotification userInfo];
+    CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    self.displacement = self.displacement == 0 ? keyboardSize.height : self.displacement;
+    if (self.viewNeedsToBeMovedUp) {
+        for (UIView* view in self.baseViews) {
+            view.transform = CGAffineTransformMakeTranslation(0, -self.displacement);
+        }
+    }
+    
+    
+}
 
+-(void)keyboardDidHide: (NSNotification *)aNotification {
+    if (self.viewNeedsToBeMovedUp) {
+        for (UIView* view in self.baseViews) {
+            view.transform = CGAffineTransformIdentity;
+        }
+        self.viewNeedsToBeMovedUp = NO;
+    }
+}
+
+-(void)datePickerValueChanged: (UIDatePicker *)datePicker {
+    if ([self.activeField.titlePlaceholder isEqualToString:@"Start Date"]
+        ||
+        [self.activeField.titlePlaceholder isEqualToString:@"End Date"]) {
+        
+        self.activeField.text = [NSString stringWithFormat:@"%@", [self.formatter stringFromDate:self.datePicker.date]];
+    }
+}
+
+- (IBAction)presentButtonTapped:(UIButton *)sender {
+    self.endTextField.text = @"Present";
+}
+
+- (IBAction)noDatesButtonTapped:(UIButton *)sender {
+    self.startTextField.text = @"";
+    self.endTextField.text = @"";
+}
 
 @end

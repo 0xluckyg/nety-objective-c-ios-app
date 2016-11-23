@@ -47,7 +47,6 @@
 -(void)viewDidDisappear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
-    
 }
 
 - (BOOL)textFieldShouldReturn:(SignUpTextField *)textField {

@@ -251,8 +251,6 @@ metaDataSmallUid:(NSString *)metaDataSmallUid {
 - (IBAction)skipButtonWasTapped:(UIButton *)sender {
     [self createUser];
     self.chosenImage = [UIImage imageNamed:kDefaultUserLogoName];
-    NSString *userID = [[self.userData.email stringByReplacingOccurrencesOfString:@"@" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
-//    [self uploadImage:userID];
 }
 
 - (IBAction)doneButtonTapped:(UIButton *)sender {

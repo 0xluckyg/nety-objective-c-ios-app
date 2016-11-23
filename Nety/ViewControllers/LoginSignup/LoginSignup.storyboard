@@ -634,7 +634,7 @@
                                         <rect key="frame" x="0.0" y="28" width="304" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Blz-v1-N8g" id="pV9-Xi-d8y">
-                                            <frame key="frameInset" width="304" height="57.5"/>
+                                            <frame key="frameInset" width="1000" height="57.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Fn9-se-EHK">
@@ -671,7 +671,7 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="zna-vh-Ihr" firstAttribute="top" secondItem="qWj-H8-Wr9" secondAttribute="bottom" constant="130" id="1QT-ki-ksd"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="teS-hV-QqG" secondAttribute="trailing" constant="20" id="8H6-jf-gp4"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="teS-hV-QqG" secondAttribute="leading" constant="-20" id="8H6-jf-gp4"/>
                             <constraint firstItem="foT-cz-uc7" firstAttribute="top" secondItem="zna-vh-Ihr" secondAttribute="bottom" constant="8.5" id="ELD-SA-jTa"/>
                             <constraint firstItem="wvn-Mw-SNF" firstAttribute="width" secondItem="zna-vh-Ihr" secondAttribute="width" id="FO6-Ox-9tR"/>
                             <constraint firstItem="wvn-Mw-SNF" firstAttribute="top" secondItem="foT-cz-uc7" secondAttribute="bottom" constant="8" id="FZl-CV-Etj"/>
@@ -681,7 +681,7 @@
                             <constraint firstItem="zna-vh-Ihr" firstAttribute="centerX" secondItem="gDD-f1-aim" secondAttribute="centerX" id="Y6Y-zJ-AuO"/>
                             <constraint firstItem="BuR-LR-s0y" firstAttribute="width" secondItem="zna-vh-Ihr" secondAttribute="width" id="ZDa-aL-YLj"/>
                             <constraint firstItem="teS-hV-QqG" firstAttribute="top" secondItem="BuR-LR-s0y" secondAttribute="bottom" id="d2w-M4-vJO"/>
-                            <constraint firstItem="uP3-Bs-z9v" firstAttribute="leading" secondItem="gDD-f1-aim" secondAttribute="leadingMargin" constant="20" id="rdR-QA-x5t"/>
+                            <constraint firstItem="uP3-Bs-z9v" firstAttribute="trailing" secondItem="gDD-f1-aim" secondAttribute="trailingMargin" constant="-20" id="rdR-QA-x5t"/>
                             <constraint firstItem="foT-cz-uc7" firstAttribute="centerX" secondItem="zna-vh-Ihr" secondAttribute="centerX" id="tH4-CV-T2y"/>
                             <constraint firstItem="2fX-3X-MBO" firstAttribute="top" secondItem="teS-hV-QqG" secondAttribute="bottom" constant="80" id="tfY-n6-LgB"/>
                             <constraint firstItem="foT-cz-uc7" firstAttribute="width" secondItem="zna-vh-Ihr" secondAttribute="width" multiplier="0.4" id="xt8-7V-TE6"/>
@@ -762,8 +762,8 @@
                             <constraint firstItem="4gF-y8-7oZ" firstAttribute="centerY" secondItem="BzU-Ce-hlq" secondAttribute="centerY" id="Cez-yN-2kA"/>
                             <constraint firstItem="S6J-pB-U57" firstAttribute="centerX" secondItem="GD3-9h-MeI" secondAttribute="centerX" id="IDE-b4-t5e"/>
                             <constraint firstItem="TtR-Yz-XxO" firstAttribute="top" secondItem="IsZ-fG-wei" secondAttribute="bottom" constant="25" id="PvE-W4-YRB"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="BzU-Ce-hlq" secondAttribute="trailing" constant="20" id="SO4-jN-f2G"/>
-                            <constraint firstItem="4gF-y8-7oZ" firstAttribute="leading" secondItem="GD3-9h-MeI" secondAttribute="leading" constant="20" id="T8z-0F-jme"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="BzU-Ce-hlq" secondAttribute="leading" constant="-20" id="SO4-jN-f2G"/>
+                            <constraint firstItem="4gF-y8-7oZ" firstAttribute="trailing" secondItem="GD3-9h-MeI" secondAttribute="trailing" constant="-20" id="T8z-0F-jme"/>
                             <constraint firstItem="IsZ-fG-wei" firstAttribute="top" secondItem="JHN-4o-OEs" secondAttribute="bottom" constant="130" id="aoX-0e-zNq"/>
                             <constraint firstItem="TtR-Yz-XxO" firstAttribute="centerX" secondItem="GD3-9h-MeI" secondAttribute="centerX" id="bMb-MM-1Aj"/>
                             <constraint firstItem="TtR-Yz-XxO" firstAttribute="width" secondItem="GD3-9h-MeI" secondAttribute="width" multiplier="0.6" id="hkF-U3-RDB"/>
@@ -936,11 +936,17 @@
                                 <frame key="frameInset" minX="298" minY="325" width="53" height="30"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                 <state key="normal" title="Present"/>
+                                <connections>
+                                    <action selector="presentButtonTapped:" destination="kiT-G8-N8W" eventType="touchUpInside" id="ddn-tP-XGK"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dk0-RI-gJ7">
                                 <frame key="frameInset" minX="19" minY="325" width="64" height="30"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                 <state key="normal" title="No Dates"/>
+                                <connections>
+                                    <action selector="noDatesButtonTapped:" destination="kiT-G8-N8W" eventType="touchUpInside" id="wsq-V9-2fb"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V0M-cn-Fjj">
                                 <frame key="frameInset" minX="36" minY="556" width="30" height="33"/>
@@ -970,7 +976,7 @@
                             <constraint firstItem="bOA-o0-r8D" firstAttribute="top" secondItem="94c-RY-XW1" secondAttribute="bottom" constant="83" id="Oyn-2Z-rZd"/>
                             <constraint firstItem="oEr-FB-lag" firstAttribute="centerX" secondItem="ewV-3h-bn3" secondAttribute="centerX" id="RH9-eU-Tvw"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ewV-3h-bn3" secondAttribute="trailing" constant="12" id="RYn-k2-WBS"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="94c-RY-XW1" secondAttribute="trailing" constant="20" id="Sti-Ek-uXR"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="94c-RY-XW1" secondAttribute="leading" constant="-20" id="Sti-Ek-uXR"/>
                             <constraint firstItem="jha-kj-hh6" firstAttribute="centerY" secondItem="dk0-RI-gJ7" secondAttribute="centerY" id="Uk6-pM-w4Z"/>
                             <constraint firstItem="94c-RY-XW1" firstAttribute="top" secondItem="xpU-Pz-ROG" secondAttribute="bottom" constant="17" id="VNT-ua-WIn"/>
                             <constraint firstItem="Srn-FW-uWc" firstAttribute="top" secondItem="dk0-RI-gJ7" secondAttribute="bottom" constant="25" id="Vh5-x9-3ED"/>
@@ -978,7 +984,7 @@
                             <constraint firstItem="UuX-0w-ZBf" firstAttribute="width" secondItem="ewV-3h-bn3" secondAttribute="width" multiplier="0.4" id="a80-Ok-TLS"/>
                             <constraint firstItem="UuX-0w-ZBf" firstAttribute="leading" secondItem="ewV-3h-bn3" secondAttribute="leading" id="cD8-j1-tbh"/>
                             <constraint firstItem="V0M-cn-Fjj" firstAttribute="centerY" secondItem="94c-RY-XW1" secondAttribute="centerY" id="cdU-G4-5ia"/>
-                            <constraint firstItem="V0M-cn-Fjj" firstAttribute="leading" secondItem="3M4-0C-fJO" secondAttribute="leadingMargin" constant="20" id="eVv-Se-nav"/>
+                            <constraint firstItem="V0M-cn-Fjj" firstAttribute="trailing" secondItem="3M4-0C-fJO" secondAttribute="trailingMargin" constant="-20" id="eVv-Se-nav"/>
                             <constraint firstItem="9nY-mO-iHj" firstAttribute="top" secondItem="ewV-3h-bn3" secondAttribute="bottom" constant="30" id="eX0-vj-6Hq"/>
                             <constraint firstItem="1jV-nh-F4p" firstAttribute="trailing" secondItem="ewV-3h-bn3" secondAttribute="trailing" id="k7x-KN-g5H"/>
                             <constraint firstItem="dk0-RI-gJ7" firstAttribute="top" secondItem="UuX-0w-ZBf" secondAttribute="bottom" constant="6" id="qYP-ys-RwM"/>
@@ -988,11 +994,16 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="V0M-cn-Fjj" id="wfK-wK-wOT"/>
                         <outlet property="detailsTextView" destination="xpU-Pz-ROG" id="BKY-u9-zg5"/>
                         <outlet property="endTextField" destination="1jV-nh-F4p" id="LWm-aV-cWO"/>
+                        <outlet property="noDatesButton" destination="dk0-RI-gJ7" id="BHG-qX-pUk"/>
                         <outlet property="positionTextField" destination="ewV-3h-bn3" id="fBc-c4-jcV"/>
+                        <outlet property="presentButton" destination="jha-kj-hh6" id="8JO-ig-JGY"/>
+                        <outlet property="skipButton" destination="94c-RY-XW1" id="o3d-wa-BEo"/>
                         <outlet property="startTextField" destination="UuX-0w-ZBf" id="R9I-ve-pit"/>
                         <outlet property="tellMeMoreLabel" destination="Srn-FW-uWc" id="CAY-Q0-UvE"/>
+                        <outlet property="toLabel" destination="oEr-FB-lag" id="zAf-Ko-if0"/>
                         <outlet property="whatDidYouDoLabel" destination="XNf-34-pZ1" id="5CJ-OI-Lcf"/>
                         <outlet property="whenDidYouDoItLabel" destination="9nY-mO-iHj" id="ASy-Mc-65e"/>
                     </connections>
