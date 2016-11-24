@@ -82,7 +82,7 @@
     
     if ([textField.titlePlaceholder isEqualToString:@"Position"]) {
         // Add validations here
-        if (true) {
+        if (textField.text.length > 3) {
             self.whatDidYouDoLabel.text = @"Nice!";
             [self.startTextField becomeFirstResponder];
         }
