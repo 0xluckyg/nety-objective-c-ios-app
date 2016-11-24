@@ -36,6 +36,7 @@
     self.imageButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
     
     [self initializeSettings];
+    
 }
 
 - (void)initializeSettings {
@@ -87,7 +88,7 @@
              
              NSDictionary *post = @{kFirstName: fullName[0],
                                     kLastName: fullName[1],
-                                    kAge: @(25), // Add age column later?
+                                    kAge: @(self.userData.age), // Add age column later?
                                     kStatus: @"",
                                     kIdentity: self.userData.occupation,
                                     kSummary: self.userData.bio,
@@ -200,7 +201,7 @@ metaDataSmallUid:(NSString *)metaDataSmallUid {
     
     NSDictionary *post = @{kFirstName: fullName[0],
                            kLastName: fullName[1],
-                           kAge: @(25), // TODO: Change later
+                           kAge: @(self.userData.age), // TODO: Change later
                            kStatus: @"",
                            kIdentity: self.userData.occupation,
                            kSummary: self.userData.bio,
