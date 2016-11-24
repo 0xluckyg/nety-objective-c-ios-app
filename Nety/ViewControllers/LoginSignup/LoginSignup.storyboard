@@ -279,7 +279,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Ex. John Doe" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Q8-qN-dXP" customClass="SignUpTextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Ex. 25" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Q8-qN-dXP" customClass="SignUpTextField">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="0Cd-Ik-QGN"/>
                                 </constraints>
@@ -305,6 +305,16 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8RK-mh-b4R">
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <state key="normal" title="Next"/>
+                                <connections>
+                                    <action selector="nextButtonTapped:" destination="7ag-Pa-TeP" eventType="touchUpInside" id="7pj-x6-Js2"/>
+                                    <action selector="nextButtonTapped:" destination="d2r-fF-sKq" eventType="touchUpInside" id="IJn-kF-bUG"/>
+                                    <action selector="skipButtonTapped:" destination="d2r-fF-sKq" eventType="touchUpInside" id="oCE-eH-1cy"/>
+                                    <action selector="skipButtonWasTapped:" destination="DAo-fb-wol" eventType="touchUpInside" id="qtf-Sy-pnC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -314,6 +324,8 @@
                             <constraint firstItem="4Q8-qN-dXP" firstAttribute="top" secondItem="dRw-Fu-AgU" secondAttribute="bottom" constant="25" id="AKZ-we-5nq"/>
                             <constraint firstItem="mxh-TR-7dZ" firstAttribute="top" secondItem="EYa-3Y-VdZ" secondAttribute="bottom" constant="25" id="FSH-cJ-kmT"/>
                             <constraint firstItem="EYa-3Y-VdZ" firstAttribute="top" secondItem="4mR-Ge-sNK" secondAttribute="bottom" constant="130" id="Lbp-WL-MiZ"/>
+                            <constraint firstItem="8RK-mh-b4R" firstAttribute="trailing" secondItem="Cul-MH-qrf" secondAttribute="trailingMargin" constant="-20" id="VwR-5S-De6"/>
+                            <constraint firstItem="nuf-sD-EW7" firstAttribute="top" secondItem="8RK-mh-b4R" secondAttribute="bottom" constant="80" id="X5r-ym-7n1"/>
                             <constraint firstItem="dRw-Fu-AgU" firstAttribute="leading" secondItem="EYa-3Y-VdZ" secondAttribute="leading" id="mNO-L6-QqO"/>
                             <constraint firstItem="EYa-3Y-VdZ" firstAttribute="leading" secondItem="Cul-MH-qrf" secondAttribute="leadingMargin" constant="12" id="oza-MW-K1d"/>
                             <constraint firstItem="4Q8-qN-dXP" firstAttribute="leading" secondItem="mxh-TR-7dZ" secondAttribute="leading" id="rg2-W7-8l4"/>
@@ -325,6 +337,7 @@
                         <outlet property="ageTextField" destination="4Q8-qN-dXP" id="jAE-dF-qDf"/>
                         <outlet property="howOldAreYouLabel" destination="dRw-Fu-AgU" id="PYh-7f-KWC"/>
                         <outlet property="nameTextField" destination="mxh-TR-7dZ" id="WWw-kD-Y6H"/>
+                        <outlet property="nextButton" destination="8RK-mh-b4R" id="SNB-Bf-iPa"/>
                         <outlet property="whatIsYourNameLabel" destination="EYa-3Y-VdZ" id="gap-Zk-yMX"/>
                         <segue destination="P6k-2D-fY7" kind="show" identifier="ToAccountSegue" id="6C9-V5-r1i">
                             <nil key="action"/>

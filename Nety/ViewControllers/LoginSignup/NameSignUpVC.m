@@ -14,6 +14,7 @@
 @interface NameSignUpVC ()
 @property (weak, nonatomic) IBOutlet UILabel *howOldAreYouLabel;
 @property (weak, nonatomic) IBOutlet SignUpTextField *ageTextField;
+@property (weak, nonatomic) IBOutlet UIButton *nextButton;
 
 @end
 
@@ -26,7 +27,7 @@
     self.stepNumber = 1;
     [self prepareNavigation];
     [self constrainLineThatIsBlue:true];
-    self.fields = @[self.nameTextField];
+    self.fields = @[self.nameTextField, self.ageTextField];
 }
 
 
@@ -42,20 +43,7 @@
     }
     
     if ([textField.titlePlaceholder isEqualToString:@"Age"]) {
-        NSTextCheckingResult *isValidName = [Regex validateName:textField.text];
-        NSUInteger age = (NSUInteger)textField.text;
-        BOOL isValidAge = age > 12 && age < 85;
-        if (isValidAge) {
-            self.userData.age = age;
-            if (isValidName) {
-                [textField resignFirstResponder];
-                [self performSegueWithIdentifier:@"ToAccountSegue" sender:self];
-            } else {
-                self.whatIsYourNameLabel.text = @"Invalid: Full name please";
-            }
-        } else {
-            self.howOldAreYouLabel.text = @"Not a valid age";
-        }
+        
     }
     return YES;
 }
@@ -71,6 +59,23 @@
 
 -(void)goToNextPage {
     NSLog(@"Go to next page");
+}
+
+- (IBAction)nextButtonTapped:(UIButton *)sender {
+    NSTextCheckingResult *isValidName = [Regex validateName:self.nameTextField.text];
+    NSUInteger age = [self.ageTextField.text integerValue];
+    NSLog(@"%li", age);
+    BOOL isValidAge = age > 12 && age < 85;
+    if (isValidAge) {
+        self.userData.age = age;
+        if (isValidName) {
+            [self performSegueWithIdentifier:@"ToAccountSegue" sender:self];
+        } else {
+            self.whatIsYourNameLabel.text = @"Invalid: Full name please";
+        }
+    } else {
+        self.howOldAreYouLabel.text = @"Not a valid age";
+    }
 }
 
 @end
