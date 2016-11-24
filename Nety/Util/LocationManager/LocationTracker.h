@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import "LocationShareModel.h"
+#import "GeoFire.h"
 
 @interface LocationTracker : NSObject <CLLocationManagerDelegate>
 

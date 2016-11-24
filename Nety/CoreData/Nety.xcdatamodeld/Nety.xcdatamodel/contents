@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15D21" minimumToolsVersion="Xcode 7.0">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="15G31" minimumToolsVersion="Xcode 7.0" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="ALL" representedClassName="ALL" syncable="YES"/>
     <entity name="ChatRooms" representedClassName="ChatRooms" parentEntity="ALL" syncable="YES">
         <attribute name="chatRoomID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fullName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="online" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="online" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="profileImageUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="recentMessage" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="type" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
-        <attribute name="unread" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="updateTime" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="unread" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="updateTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="userID" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="members" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Users" inverseName="chatrooms" inverseEntity="Users" syncable="YES"/>
         <relationship name="mesages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Msg" inverseName="chatroom" inverseEntity="Msg" syncable="YES"/>
@@ -25,7 +25,7 @@
     </entity>
     <entity name="Msg" representedClassName="Msg" parentEntity="ALL" syncable="YES">
         <attribute name="chatroomID" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="date" optional="YES" attributeType="Date" minDateTimeInterval="473345340" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" minDateTimeInterval="473345340" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="media" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="senderDisplayName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="senderId" optional="YES" attributeType="String" syncable="YES"/>
@@ -34,17 +34,16 @@
     </entity>
     <entity name="Users" representedClassName="Users" parentEntity="ALL" syncable="YES">
         <attribute name="age" optional="YES" attributeType="String" minValueString="0" syncable="YES"/>
-        <attribute name="distance" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="distance" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="geocoordinate" optional="YES" attributeType="String" defaultValueString="0:0" syncable="YES"/>
         <attribute name="identity" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="imdiscoverable" optional="YES" attributeType="Integer 64" defaultValueString="30" syncable="YES"/>
-        <attribute name="isBlocked" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
-        <attribute name="isFriend" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
-        <attribute name="itIsMe" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="imdiscoverable" optional="YES" attributeType="Integer 64" defaultValueString="30" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="isBlocked" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="isFriend" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="itIsMe" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="profileImageUrl" optional="YES" attributeType="String" defaultValueString="NetyBlueLogo" syncable="YES"/>
-        <attribute name="security" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="security" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userID" optional="YES" attributeType="String" syncable="YES"/>
@@ -56,6 +55,6 @@
         <element name="ChatRooms" positionX="-5499" positionY="-537" width="128" height="210"/>
         <element name="Experiences" positionX="-5832" positionY="-540" width="128" height="150"/>
         <element name="Msg" positionX="-5348" positionY="-538" width="128" height="148"/>
-        <element name="Users" positionX="-5661" positionY="-540" width="128" height="300"/>
+        <element name="Users" positionX="-5661" positionY="-540" width="128" height="285"/>
     </elements>
 </model>

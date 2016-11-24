@@ -25,6 +25,8 @@ NSString *const kUsers = @"users";
     NSString *const kProfilePhoto = @"profileImageUrl";
     NSString *const kSecurity = @"security";
 
+NSString *const kUserLocation = @"userLocation";
+
 NSString *const kUserChats = @"userChatRooms";
     NSString *const kChats = @"chats";
         NSString *const kOnline = @"online";
@@ -50,7 +52,6 @@ NSString *const kUserDetails = @"userDetails";
 NSString *const kReports = @"reports";
 
 NSString *const kDefaultUserLogoName = @"NetyBlueLogo";
-NSString *const kGeoCoordinate = @"geocoordinate";
 NSString *const kIAmDiscoverable = @"imdiscoverable";
 @implementation Constants
 

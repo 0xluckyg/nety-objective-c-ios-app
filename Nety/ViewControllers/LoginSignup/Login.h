@@ -20,14 +20,10 @@
 //VARIABLES----------------------------------------
 
 
-
-
-
 //UTIL CLASSES----------------------------------------
 
 
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
-
 
 //LIB CLASSES----------------------------------------
 

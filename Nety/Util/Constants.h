@@ -25,6 +25,8 @@ extern NSString *const kUsers;
     extern NSString *const kProfilePhoto;
     extern NSString *const kSecurity;
 
+extern NSString *const kUserLocation;
+
 extern NSString *const kUserChats;
     extern NSString *const kChats;
         extern NSString *const kOnline;
@@ -50,7 +52,6 @@ extern NSString *const kUserDetails;
 extern NSString *const kReports;
 
 extern NSString *const kDefaultUserLogoName;
-extern NSString *const kGeoCoordinate;
 
 extern NSString *const kIAmDiscoverable;
 @interface Constants : NSObject

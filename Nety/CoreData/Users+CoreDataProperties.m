@@ -16,7 +16,6 @@
 @dynamic age;
 @dynamic distance;
 @dynamic firstName;
-@dynamic geocoordinate;
 @dynamic identity;
 @dynamic imdiscoverable;
 @dynamic isBlocked;

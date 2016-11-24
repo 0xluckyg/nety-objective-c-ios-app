@@ -21,6 +21,7 @@
 @property (strong, nonatomic) UIImage *chosenImage;
 @property (strong, nonatomic) FIRDatabaseReference *firdatabase;
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
+@property (strong,nonatomic) LocationShareModel *shareModel;
 @end
 
 @implementation ImageSignUpVC
@@ -95,10 +96,20 @@
                                     kProfilePhoto: kDefaultUserLogoName,
                                     kSecurity: @(0)};
              
-             //Set user information inside global variables
-             [MY_API addNewUser:post UserID:userID FlagMy:YES];
-             
              [[[self.firdatabase child:kUsers] child:userID] setValue:post];
+             
+             //Set user information inside global variables
+             
+             FIRDatabaseReference *geo = [[[FIRDatabase database] reference] child:kUserLocation];
+             
+             //Save location to the database
+             GeoFire *geoFire = [[GeoFire alloc] initWithFirebaseRef:geo];
+             CLLocation *myLocation = [self getBestLocation];
+             
+             [geoFire setLocation:[[CLLocation alloc] initWithLatitude:myLocation.coordinate.latitude longitude:myLocation.coordinate.longitude] forKey:userID];
+                          
+             [MY_API addNewUser:post UserID:userID Location:myLocation FlagMy:YES];
+             
          }
          
      }];
@@ -210,7 +221,7 @@ metaDataSmallUid:(NSString *)metaDataSmallUid {
                            kSecurity: @(0)};
     
     //Set user information inside global variables
-    [MY_API addNewUser:post UserID:userID FlagMy:YES];
+    [MY_API addNewUser:post UserID:userID Location:nil FlagMy:YES];
     [[[self.firdatabase child:kUsers] child:userID] setValue:post];
     
 }
@@ -260,6 +271,31 @@ metaDataSmallUid:(NSString *)metaDataSmallUid {
     [self createUser];
     NSString *userID = [[self.userData.email stringByReplacingOccurrencesOfString:@"@" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
     [self uploadImage:userID];
+}
+
+- (CLLocation *) getBestLocation {
+    
+    self.shareModel = [LocationShareModel sharedModel];
+    CLLocation *myLocation = [CLLocation alloc];
+    
+    //Set distance
+    if ([self.shareModel.myLocationArray count] != 0) {
+        //Pick best location accuracy
+        int bestAccuracy = 0;
+        int bestLocationIndex = 0;
+        for (int i = 0; i < [self.shareModel.myLocationArray count]; i ++) {
+            if ([[self.shareModel.myLocationArray[i] objectForKey:@"theAccuracy"] floatValue] > bestAccuracy) {
+                bestAccuracy = [[self.shareModel.myLocationArray[i] objectForKey:@"theAccuracy"] floatValue];
+                bestLocationIndex = i;
+            }
+        }
+        
+        myLocation = [myLocation initWithLatitude:[[self.shareModel.myLocationArray[bestLocationIndex] objectForKey:@"latitude"] floatValue] longitude:[[self.shareModel.myLocationArray[bestLocationIndex] objectForKey:@"longitude"] floatValue]];
+        
+        return myLocation;
+    } else {
+        return nil;
+    }
 }
 
 @end

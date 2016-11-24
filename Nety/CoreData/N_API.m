@@ -121,84 +121,122 @@
 
 -(void) listenForChildAdded {
     
-//    GeoFire *geoFire = [[GeoFire alloc] initWithFirebaseRef:[self.firdatabase child:kUsers]];
-//    CLLocation *myLocation = [self getBestLocation];
-//    
-//    if (myLocation != nil) {
-//    
-//        CLLocation *center = [[CLLocation alloc] initWithLatitude:myLocation.coordinate.latitude longitude:myLocation.coordinate.longitude];
-//        // Query locations at current location with a radius of 30km
-//        GFCircleQuery *circleQuery = [geoFire queryAtLocation:center withRadius:30.0];
-//        
-//        [circleQuery observeEventType:GFEventTypeKeyEntered withBlock:^(NSString *key, CLLocation *location) {
-//           [[[self.firdatabase child:kUsers] child:key] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-//               
-//               NSLog(@"%@", snapshot);
-//               NSDictionary *usersDictionary = snapshot.value;
-//               NSString *otherUserID = snapshot.key;
-//               NSString *userID = _myUser.userID;
-//               
-//               [self addNewUser:usersDictionary UserID:otherUserID FlagMy:[otherUserID isEqualToString: userID]];
-//               
-//            }];
-//        }];
-//        
-//    } else {
-//    
-//        NSLog(@"Error fetching user's current location");
-//        
-//    }
-//    
-    [[self.firdatabase child:kUsers] observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-        //Should query the users in a more efficient way: Ex. compare longitude and latitude.
+    GeoFire *geoFire = [[GeoFire alloc] initWithFirebaseRef:[self.firdatabase child:kUserLocation]];
+    CLLocation *myLocation = [self getBestLocation];
+    
+    if (myLocation != nil) {
         
-        NSDictionary *usersDictionary = snapshot.value;
-        NSString *otherUserID = snapshot.key;
-        NSString *userID = _myUser.userID;
+        CLLocation *center = [[CLLocation alloc] initWithLatitude:myLocation.coordinate.latitude longitude:myLocation.coordinate.longitude];
+        // Query locations at current location with a radius of 30km
+        GFCircleQuery *circleQuery = [geoFire queryAtLocation:center withRadius:30.0];
         
-        [self addNewUser:usersDictionary UserID:otherUserID FlagMy:[otherUserID isEqualToString: userID]];
+        [circleQuery observeEventType:GFEventTypeKeyEntered withBlock:^(NSString *key, CLLocation *location) {
+            
+            NSLog(@"%@ circleQuery %@ location", key, location);
+            
+            [[[self.firdatabase child:kUsers] child:key] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+                
+                NSLog(@"%@ snapshot", snapshot);
+                NSDictionary *usersDictionary = snapshot.value;
+                NSString *otherUserID = key;
+                NSString *userID = _myUser.userID;
+                
+                [self addNewUser:usersDictionary UserID:otherUserID Location:location FlagMy:[otherUserID isEqualToString: userID]];
+                
+            }];
+        }];
         
-    } withCancelBlock:nil];
+    } else {
+        
+        NSLog(@"Error fetching user's current location ADDED");
+        
+    }
     
 }
 
 -(void) listenForChildRemoved {
     
-    [[self.firdatabase child:kUsers] observeEventType:FIRDataEventTypeChildRemoved withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    GeoFire *geoFire = [[GeoFire alloc] initWithFirebaseRef:[self.firdatabase child:kUserLocation]];
+    CLLocation *myLocation = [self getBestLocation];
+    
+    if (myLocation != nil) {
         
-        NSString *otherUserID = snapshot.key;
+        CLLocation *center = [[CLLocation alloc] initWithLatitude:myLocation.coordinate.latitude longitude:myLocation.coordinate.longitude];
+        // Query locations at current location with a radius of 30km
+        GFCircleQuery *circleQuery = [geoFire queryAtLocation:center withRadius:30.0];
         
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Users" inManagedObjectContext:self.managedObjectContext];
-        [fetchRequest setEntity:entity];
+        [circleQuery observeEventType:GFEventTypeKeyExited withBlock:^(NSString *key, CLLocation *location) {
+            
+            NSString *otherUserID = key;
+            
+            NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+            NSEntityDescription *entity = [NSEntityDescription entityForName:@"Users" inManagedObjectContext:self.managedObjectContext];
+            [fetchRequest setEntity:entity];
+            
+            NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"userID" ascending:YES];
+            
+            [fetchRequest setSortDescriptors:@[sortDescriptor]];
+            [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"userID == %@",otherUserID]];
+            NSError *error = nil;
+            NSMutableArray* findUserArray = [NSMutableArray arrayWithArray:[self.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
+            if (findUserArray.count>0) {
+                Users* user = [findUserArray lastObject];
+                [self.managedObjectContext deleteObject:user];
+                [self saveContext];
+            }
+            
+        }];
         
-        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"userID" ascending:YES];
+    } else {
         
-        [fetchRequest setSortDescriptors:@[sortDescriptor]];
-        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"userID == %@",otherUserID]];
-        NSError *error = nil;
-        NSMutableArray* findUserArray = [NSMutableArray arrayWithArray:[self.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
-        if (findUserArray.count>0) {
-            Users* user = [findUserArray lastObject];
-            [self.managedObjectContext deleteObject:user];
-            [self saveContext];
-        }
+        NSLog(@"Error fetching user's current location REMOVED");
         
-    } withCancelBlock:nil];
+    }
     
 }
 
 -(void) listenForChildChanged {
     
-    [[self.firdatabase child:kUsers] observeEventType:FIRDataEventTypeChildChanged withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    GeoFire *geoFire = [[GeoFire alloc] initWithFirebaseRef:[self.firdatabase child:kUserLocation]];
+    CLLocation *myLocation = [self getBestLocation];
+    
+    if (myLocation != nil) {
         
-        NSDictionary *usersDictionary = snapshot.value;
-        NSString *otherUserID = snapshot.key;
-        NSString *userID = _myUser.userID;
+        CLLocation *center = [[CLLocation alloc] initWithLatitude:myLocation.coordinate.latitude longitude:myLocation.coordinate.longitude];
+        // Query locations at current location with a radius of 30km
+        GFCircleQuery *circleQuery = [geoFire queryAtLocation:center withRadius:30.0];
         
-        [self addNewUser:usersDictionary UserID:otherUserID FlagMy:[otherUserID isEqualToString: userID]];
+        [circleQuery observeEventType:GFEventTypeKeyMoved withBlock:^(NSString *key, CLLocation *location) {
+            
+            NSLog(@"%@ circleQuery %@ location", key, location);
+            
+            [[[self.firdatabase child:kUsers] child:key] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+                
+                NSLog(@"%@ snapshot", snapshot);
+                NSDictionary *usersDictionary = snapshot.value;
+                NSString *otherUserID = key;
+                NSString *userID = _myUser.userID;
+                
+                [self addNewUser:usersDictionary UserID:otherUserID Location:location FlagMy:[otherUserID isEqualToString: userID]];
+                
+            }];
+        }];
         
-    } withCancelBlock:nil];
+    } else {
+        
+        NSLog(@"Error fetching user's current location CHANGED");
+        
+    }
+    
+//    [[self.firdatabase child:kUsers] observeEventType:FIRDataEventTypeChildChanged withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+//        
+//        NSDictionary *usersDictionary = snapshot.value;
+//        NSString *otherUserID = snapshot.key;
+//        NSString *userID = _myUser.userID;
+//        
+//        [self addNewUser:usersDictionary UserID:otherUserID FlagMy:[otherUserID isEqualToString: userID]];
+//        
+//    } withCancelBlock:nil];
     
 }
 
@@ -277,7 +315,7 @@
 }
 //--------------------------------------------
 
-- (void) addNewUser:(NSDictionary*)userInfo UserID:(NSString*)userID FlagMy:(BOOL)flagMy
+- (void) addNewUser:(NSDictionary*)userInfo UserID:(NSString*)userID Location:(CLLocation*)location FlagMy:(BOOL)flagMy
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Users" inManagedObjectContext:self.managedObjectContext];
@@ -374,13 +412,16 @@
     CLLocation *myLocation = [self getBestLocation];
     
     if (myLocation != nil) {
-        NSArray* userLocationArray = [NSArray arrayWithArray:[user.geocoordinate componentsSeparatedByString:@":"]];
-        CLLocation* userLocation = [[CLLocation alloc] initWithLatitude:[userLocationArray[0] floatValue] longitude:[userLocationArray[1] floatValue]];
+        CLLocation* userLocation = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
         double distance = [userLocation distanceFromLocation:myLocation];
         NSLog(@"%f userDistance", distance);
         [user setValue:[NSNumber numberWithDouble:distance] forKey:@"distance"];
     } else {
-        [user setValue:@(100000) forKey:@"distance"];
+        if (flagMy) {
+            [user setValue:@(0) forKey:@"distance"];
+        } else {
+            [user setValue:@(999999) forKey:@"distance"];
+        }
     }
     
     if (flagMy) {
@@ -467,8 +508,8 @@
                                      // Get user value
                                      
                                      NSDictionary *firebaseUserInfo = snapshot.value;
-                                     
-                                     [self addNewUser:firebaseUserInfo UserID:userID FlagMy:YES];
+                                     CLLocation *userLocation = [self getBestLocation];
+                                     [self addNewUser:firebaseUserInfo UserID:userID Location:userLocation FlagMy:YES];
                                      doneBlock(firebaseUserInfo,nil);
                                  } withCancelBlock:^(NSError * _Nonnull error) {
                                      NSLog(@"%@", error.localizedDescription);
@@ -688,7 +729,7 @@
     
     self.shareModel = [LocationShareModel sharedModel];
     CLLocation *myLocation = [CLLocation alloc];
-
+    
     //Set distance
     if ([self.shareModel.myLocationArray count] != 0) {
         //Pick best location accuracy

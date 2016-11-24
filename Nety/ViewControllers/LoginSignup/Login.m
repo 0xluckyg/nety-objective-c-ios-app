@@ -136,7 +136,7 @@
             NSDictionary *usersDictionary = snapshot.value;
             NSString *otherUserID = snapshot.key;
             
-            [MY_API addNewUser:usersDictionary UserID:otherUserID FlagMy:YES];
+            [MY_API addNewUser:usersDictionary UserID:otherUserID Location:nil FlagMy:YES];
             [self changeRoot];
         }
         else
@@ -168,7 +168,7 @@
     
     
     //Set user information inside global variables
-    [MY_API addNewUser:post UserID:userID FlagMy:YES];
+    [MY_API addNewUser:post UserID:userID Location:nil FlagMy:YES];
     [[[self.firdatabase child:kUsers] child:userID] setValue:post];
     [self changeRoot];
     

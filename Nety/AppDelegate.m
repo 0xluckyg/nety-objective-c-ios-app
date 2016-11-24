@@ -125,6 +125,7 @@
                 //Send the best location to server every 60 seconds
                 //You may adjust the time interval depends on the need of your app.
                 NSTimeInterval time = 60.0;
+                [self updateLocation];
                 self.locationUpdateTimer =
                 [NSTimer scheduledTimerWithTimeInterval:time
                                                  target:self
@@ -393,7 +394,7 @@
             NSDictionary *usersDictionary = snapshot.value;
             NSString *userID = snapshot.key;
             
-            [MY_API addNewUser:usersDictionary UserID:userID FlagMy:YES];
+            [MY_API addNewUser:usersDictionary UserID:userID Location:nil FlagMy:YES];
             
             [[[[self.firdatabase child:kUserChats] child:MY_USER.userID] child:kChats] observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
                 

@@ -274,15 +274,19 @@
     } else {
         
         if (MY_USER) {
-            FIRDatabaseReference *geo = [[FIRDatabase database] reference];
+            FIRDatabaseReference *geo = [[[FIRDatabase database] reference] child:kUserLocation];
             
             //Save location to the database
-            [[[[geo child:kUsers] child:MY_USER.userID] child:kGeoCoordinate] setValue:[NSString stringWithFormat:@"%f:%f",self.myLocation.latitude, self.myLocation.longitude]];
+            GeoFire *geoFire = [[GeoFire alloc] initWithFirebaseRef:geo];
             
-            [MY_API.myUser setValue:[NSString stringWithFormat:@"%f:%f",self.myLocation.latitude, self.myLocation.longitude] forKey:kGeoCoordinate];
-            
-            NSLog(@"location UDATE OK!!!");
+            [geoFire setLocation:[[CLLocation alloc] initWithLatitude:self.myLocation.latitude longitude:self.myLocation.longitude] forKey:MY_USER.userID];
         }
+        
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Users" inManagedObjectContext:MY_API.managedObjectContext];
+        [fetchRequest setEntity:entity];
+        
+        
         
     }
     
@@ -291,7 +295,6 @@
     self.shareModel.myLocationArray = nil;
     self.shareModel.myLocationArray = [[NSMutableArray alloc]init];
 }
-
 
 
 
