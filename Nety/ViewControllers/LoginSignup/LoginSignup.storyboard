@@ -274,18 +274,56 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How old are you?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dRw-Fu-AgU">
+                                <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="25"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" placeholder="Ex. John Doe" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Q8-qN-dXP" customClass="SignUpTextField">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="0Cd-Ik-QGN"/>
+                                </constraints>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="floatingLabelTextColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="0.79603987070000004" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="floatingLabelActiveTextColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="titlePlaceholder" value="Age"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="floatingLabelYPadding">
+                                        <real key="value" value="-3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="placeholderYPadding">
+                                        <real key="value" value="-17"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="mxh-TR-7dZ" firstAttribute="leading" secondItem="EYa-3Y-VdZ" secondAttribute="leading" id="5cv-Mt-f3O"/>
+                            <constraint firstItem="4Q8-qN-dXP" firstAttribute="width" secondItem="mxh-TR-7dZ" secondAttribute="width" id="6Gu-i1-j4B"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mxh-TR-7dZ" secondAttribute="trailing" constant="12" id="96v-2i-opI"/>
+                            <constraint firstItem="4Q8-qN-dXP" firstAttribute="top" secondItem="dRw-Fu-AgU" secondAttribute="bottom" constant="25" id="AKZ-we-5nq"/>
                             <constraint firstItem="mxh-TR-7dZ" firstAttribute="top" secondItem="EYa-3Y-VdZ" secondAttribute="bottom" constant="25" id="FSH-cJ-kmT"/>
                             <constraint firstItem="EYa-3Y-VdZ" firstAttribute="top" secondItem="4mR-Ge-sNK" secondAttribute="bottom" constant="130" id="Lbp-WL-MiZ"/>
+                            <constraint firstItem="dRw-Fu-AgU" firstAttribute="leading" secondItem="EYa-3Y-VdZ" secondAttribute="leading" id="mNO-L6-QqO"/>
                             <constraint firstItem="EYa-3Y-VdZ" firstAttribute="leading" secondItem="Cul-MH-qrf" secondAttribute="leadingMargin" constant="12" id="oza-MW-K1d"/>
+                            <constraint firstItem="4Q8-qN-dXP" firstAttribute="leading" secondItem="mxh-TR-7dZ" secondAttribute="leading" id="rg2-W7-8l4"/>
+                            <constraint firstItem="dRw-Fu-AgU" firstAttribute="top" secondItem="mxh-TR-7dZ" secondAttribute="bottom" constant="50" id="u8N-Pw-hgZ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qWL-UE-uGA"/>
                     <connections>
+                        <outlet property="ageTextField" destination="4Q8-qN-dXP" id="jAE-dF-qDf"/>
+                        <outlet property="howOldAreYouLabel" destination="dRw-Fu-AgU" id="PYh-7f-KWC"/>
                         <outlet property="nameTextField" destination="mxh-TR-7dZ" id="WWw-kD-Y6H"/>
                         <outlet property="whatIsYourNameLabel" destination="EYa-3Y-VdZ" id="gap-Zk-yMX"/>
                         <segue destination="P6k-2D-fY7" kind="show" identifier="ToAccountSegue" id="6C9-V5-r1i">
@@ -634,18 +672,18 @@
                                         <rect key="frame" x="0.0" y="28" width="304" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Blz-v1-N8g" id="pV9-Xi-d8y">
-                                            <frame key="frameInset" width="304" height="57"/>
+                                            <frame key="frameInset" width="304" height="57.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Fn9-se-EHK">
-                                                    <frame key="frameInset" minX="15" minY="11" width="34" height="21"/>
+                                                    <frame key="frameInset" minX="15" minY="12" width="33.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="K0X-Ot-jvU">
-                                                    <frame key="frameInset" minX="15" minY="32" width="44" height="15"/>
+                                                    <frame key="frameInset" minX="15" minY="32.5" width="44" height="14.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
@@ -671,7 +709,7 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="zna-vh-Ihr" firstAttribute="top" secondItem="qWj-H8-Wr9" secondAttribute="bottom" constant="130" id="1QT-ki-ksd"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="teS-hV-QqG" secondAttribute="trailing" constant="20" id="8H6-jf-gp4"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="teS-hV-QqG" secondAttribute="leading" constant="-20" id="8H6-jf-gp4"/>
                             <constraint firstItem="foT-cz-uc7" firstAttribute="top" secondItem="zna-vh-Ihr" secondAttribute="bottom" constant="8.5" id="ELD-SA-jTa"/>
                             <constraint firstItem="wvn-Mw-SNF" firstAttribute="width" secondItem="zna-vh-Ihr" secondAttribute="width" id="FO6-Ox-9tR"/>
                             <constraint firstItem="wvn-Mw-SNF" firstAttribute="top" secondItem="foT-cz-uc7" secondAttribute="bottom" constant="8" id="FZl-CV-Etj"/>
@@ -681,7 +719,7 @@
                             <constraint firstItem="zna-vh-Ihr" firstAttribute="centerX" secondItem="gDD-f1-aim" secondAttribute="centerX" id="Y6Y-zJ-AuO"/>
                             <constraint firstItem="BuR-LR-s0y" firstAttribute="width" secondItem="zna-vh-Ihr" secondAttribute="width" id="ZDa-aL-YLj"/>
                             <constraint firstItem="teS-hV-QqG" firstAttribute="top" secondItem="BuR-LR-s0y" secondAttribute="bottom" id="d2w-M4-vJO"/>
-                            <constraint firstItem="uP3-Bs-z9v" firstAttribute="leading" secondItem="gDD-f1-aim" secondAttribute="leadingMargin" constant="20" id="rdR-QA-x5t"/>
+                            <constraint firstItem="uP3-Bs-z9v" firstAttribute="trailing" secondItem="gDD-f1-aim" secondAttribute="trailingMargin" constant="-20" id="rdR-QA-x5t"/>
                             <constraint firstItem="foT-cz-uc7" firstAttribute="centerX" secondItem="zna-vh-Ihr" secondAttribute="centerX" id="tH4-CV-T2y"/>
                             <constraint firstItem="2fX-3X-MBO" firstAttribute="top" secondItem="teS-hV-QqG" secondAttribute="bottom" constant="80" id="tfY-n6-LgB"/>
                             <constraint firstItem="foT-cz-uc7" firstAttribute="width" secondItem="zna-vh-Ihr" secondAttribute="width" multiplier="0.4" id="xt8-7V-TE6"/>
@@ -762,8 +800,8 @@
                             <constraint firstItem="4gF-y8-7oZ" firstAttribute="centerY" secondItem="BzU-Ce-hlq" secondAttribute="centerY" id="Cez-yN-2kA"/>
                             <constraint firstItem="S6J-pB-U57" firstAttribute="centerX" secondItem="GD3-9h-MeI" secondAttribute="centerX" id="IDE-b4-t5e"/>
                             <constraint firstItem="TtR-Yz-XxO" firstAttribute="top" secondItem="IsZ-fG-wei" secondAttribute="bottom" constant="25" id="PvE-W4-YRB"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="BzU-Ce-hlq" secondAttribute="trailing" constant="20" id="SO4-jN-f2G"/>
-                            <constraint firstItem="4gF-y8-7oZ" firstAttribute="leading" secondItem="GD3-9h-MeI" secondAttribute="leading" constant="20" id="T8z-0F-jme"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="BzU-Ce-hlq" secondAttribute="leading" constant="-20" id="SO4-jN-f2G"/>
+                            <constraint firstItem="4gF-y8-7oZ" firstAttribute="trailing" secondItem="GD3-9h-MeI" secondAttribute="trailing" constant="-20" id="T8z-0F-jme"/>
                             <constraint firstItem="IsZ-fG-wei" firstAttribute="top" secondItem="JHN-4o-OEs" secondAttribute="bottom" constant="130" id="aoX-0e-zNq"/>
                             <constraint firstItem="TtR-Yz-XxO" firstAttribute="centerX" secondItem="GD3-9h-MeI" secondAttribute="centerX" id="bMb-MM-1Aj"/>
                             <constraint firstItem="TtR-Yz-XxO" firstAttribute="width" secondItem="GD3-9h-MeI" secondAttribute="width" multiplier="0.6" id="hkF-U3-RDB"/>
@@ -936,11 +974,17 @@
                                 <frame key="frameInset" minX="298" minY="325" width="53" height="30"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                 <state key="normal" title="Present"/>
+                                <connections>
+                                    <action selector="presentButtonTapped:" destination="kiT-G8-N8W" eventType="touchUpInside" id="ddn-tP-XGK"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dk0-RI-gJ7">
                                 <frame key="frameInset" minX="19" minY="325" width="64" height="30"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                 <state key="normal" title="No Dates"/>
+                                <connections>
+                                    <action selector="noDatesButtonTapped:" destination="kiT-G8-N8W" eventType="touchUpInside" id="wsq-V9-2fb"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V0M-cn-Fjj">
                                 <frame key="frameInset" minX="36" minY="556" width="30" height="33"/>
@@ -970,7 +1014,7 @@
                             <constraint firstItem="bOA-o0-r8D" firstAttribute="top" secondItem="94c-RY-XW1" secondAttribute="bottom" constant="83" id="Oyn-2Z-rZd"/>
                             <constraint firstItem="oEr-FB-lag" firstAttribute="centerX" secondItem="ewV-3h-bn3" secondAttribute="centerX" id="RH9-eU-Tvw"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ewV-3h-bn3" secondAttribute="trailing" constant="12" id="RYn-k2-WBS"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="94c-RY-XW1" secondAttribute="trailing" constant="20" id="Sti-Ek-uXR"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="94c-RY-XW1" secondAttribute="leading" constant="-20" id="Sti-Ek-uXR"/>
                             <constraint firstItem="jha-kj-hh6" firstAttribute="centerY" secondItem="dk0-RI-gJ7" secondAttribute="centerY" id="Uk6-pM-w4Z"/>
                             <constraint firstItem="94c-RY-XW1" firstAttribute="top" secondItem="xpU-Pz-ROG" secondAttribute="bottom" constant="17" id="VNT-ua-WIn"/>
                             <constraint firstItem="Srn-FW-uWc" firstAttribute="top" secondItem="dk0-RI-gJ7" secondAttribute="bottom" constant="25" id="Vh5-x9-3ED"/>
@@ -978,7 +1022,7 @@
                             <constraint firstItem="UuX-0w-ZBf" firstAttribute="width" secondItem="ewV-3h-bn3" secondAttribute="width" multiplier="0.4" id="a80-Ok-TLS"/>
                             <constraint firstItem="UuX-0w-ZBf" firstAttribute="leading" secondItem="ewV-3h-bn3" secondAttribute="leading" id="cD8-j1-tbh"/>
                             <constraint firstItem="V0M-cn-Fjj" firstAttribute="centerY" secondItem="94c-RY-XW1" secondAttribute="centerY" id="cdU-G4-5ia"/>
-                            <constraint firstItem="V0M-cn-Fjj" firstAttribute="leading" secondItem="3M4-0C-fJO" secondAttribute="leadingMargin" constant="20" id="eVv-Se-nav"/>
+                            <constraint firstItem="V0M-cn-Fjj" firstAttribute="trailing" secondItem="3M4-0C-fJO" secondAttribute="trailingMargin" constant="-20" id="eVv-Se-nav"/>
                             <constraint firstItem="9nY-mO-iHj" firstAttribute="top" secondItem="ewV-3h-bn3" secondAttribute="bottom" constant="30" id="eX0-vj-6Hq"/>
                             <constraint firstItem="1jV-nh-F4p" firstAttribute="trailing" secondItem="ewV-3h-bn3" secondAttribute="trailing" id="k7x-KN-g5H"/>
                             <constraint firstItem="dk0-RI-gJ7" firstAttribute="top" secondItem="UuX-0w-ZBf" secondAttribute="bottom" constant="6" id="qYP-ys-RwM"/>
@@ -988,11 +1032,16 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="V0M-cn-Fjj" id="wfK-wK-wOT"/>
                         <outlet property="detailsTextView" destination="xpU-Pz-ROG" id="BKY-u9-zg5"/>
                         <outlet property="endTextField" destination="1jV-nh-F4p" id="LWm-aV-cWO"/>
+                        <outlet property="noDatesButton" destination="dk0-RI-gJ7" id="BHG-qX-pUk"/>
                         <outlet property="positionTextField" destination="ewV-3h-bn3" id="fBc-c4-jcV"/>
+                        <outlet property="presentButton" destination="jha-kj-hh6" id="8JO-ig-JGY"/>
+                        <outlet property="skipButton" destination="94c-RY-XW1" id="o3d-wa-BEo"/>
                         <outlet property="startTextField" destination="UuX-0w-ZBf" id="R9I-ve-pit"/>
                         <outlet property="tellMeMoreLabel" destination="Srn-FW-uWc" id="CAY-Q0-UvE"/>
+                        <outlet property="toLabel" destination="oEr-FB-lag" id="zAf-Ko-if0"/>
                         <outlet property="whatDidYouDoLabel" destination="XNf-34-pZ1" id="5CJ-OI-Lcf"/>
                         <outlet property="whenDidYouDoItLabel" destination="9nY-mO-iHj" id="ASy-Mc-65e"/>
                     </connections>
@@ -1006,6 +1055,6 @@
         <image name="Back" width="25" height="25"/>
         <image name="Edit" width="37" height="37"/>
         <image name="Plus" width="37" height="37"/>
-        <image name="user" width="37" height="37"/>
+        <image name="user" width="256" height="256"/>
     </resources>
 </document>

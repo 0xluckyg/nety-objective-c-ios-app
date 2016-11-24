@@ -28,7 +28,7 @@
 @property (strong, nonatomic) NSArray *baseViews;
 @property (strong, nonatomic) UIStoryboard *signupStoryboard;
 @property (strong, nonatomic) UserData *userData;
-
+@property (strong, nonatomic) NSArray *fields;
 - (void)prepareNavigation;
 - (void)constrainLineThatIsBlue: (BOOL)isBlue;
 @end

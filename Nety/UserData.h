@@ -19,5 +19,6 @@
 @property (strong, nonatomic) NSString *bio;
 @property (strong, nonatomic) NSMutableArray *experiences;
 @property (strong, nonatomic) UIImage *profilePicture;
+@property (assign, nonatomic) NSUInteger age;
 
 @end

@@ -13,7 +13,7 @@
 - (void)addExperienceVCDismissedWithExperience: (NSDictionary *)experience;
 @end
 
-@interface AddExperienceSignUpVC : BaseSignUpViewController
+@interface AddExperienceSignUpVC : BaseSignUpViewController 
 
 @property (weak, nonatomic) id<AddExperienceVCDelegate>delegate;
 

@@ -107,9 +107,6 @@
 }
 
 - (IBAction)signupButton:(id)sender {
-//    UIStoryboard *signupStoryboard = [UIStoryboard storyboardWithName:@"Signup" bundle:nil];
-//    UIViewController *signupNavigationController = [signupStoryboard instantiateInitialViewController];
-//    [self.navigationController pushViewController:signupNavigationController animated:YES];
 }
 
 #pragma mark - Linkedin

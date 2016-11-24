@@ -26,6 +26,7 @@
     self.positionTextField.delegate = self;
     self.bioTextView.delegate = self;
     
+    self.fields = @[self.positionTextField, self.bioTextView];
 }
 
 - (BOOL)textFieldShouldReturn:(SignUpTextField *)textField {

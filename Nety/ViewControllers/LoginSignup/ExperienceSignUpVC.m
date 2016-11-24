@@ -87,7 +87,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     cell.textLabel.text = experience[kExperienceName];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@", experience[kExperienceStartDate], experience[kExperienceEndDate]];
-    
+    cell.detailTextLabel.text = [cell.detailTextLabel.text isEqualToString:@" - "] ? @"" : cell.detailTextLabel.text;
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.detailTextLabel.textColor = [UIColor whiteColor];
     
