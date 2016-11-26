@@ -48,11 +48,15 @@
     if (self.userData.email) {
         self.emailTextField.text = self.userData.email;
         self.emailConfirmationTextField.text = self.userData.email;
+        self.emailConfirmationTextField.alpha = 1;
+        self.emailConfirmationTextField.transform = CGAffineTransformIdentity;
     }
     
     if (self.userData.password) {
         self.passwordTextField.text = self.userData.password;
         self.passwordConfirmationTextField.text = self.userData.password;
+        self.passwordConfirmationTextField.alpha = 1;
+        self.passwordConfirmationTextField.transform = CGAffineTransformIdentity;
     }
 }
 

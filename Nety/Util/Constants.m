@@ -53,6 +53,16 @@ NSString *const kReports = @"reports";
 
 NSString *const kDefaultUserLogoName = @"NetyBlueLogo";
 NSString *const kIAmDiscoverable = @"imdiscoverable";
+
+//returnType (^blockName)(parameterTypes) = ^returnType(parameters) {...};
+CATransition *(^kCrossFadeAnimation)(void) = ^{
+    CATransition* transition = [CATransition animation];
+    transition.duration = 0.2;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = kCATransitionFade;
+    return transition;
+};
+
 @implementation Constants
 
 @end

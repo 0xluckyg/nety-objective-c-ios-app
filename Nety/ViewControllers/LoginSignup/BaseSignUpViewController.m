@@ -9,6 +9,7 @@
 #import "BaseSignUpViewController.h"
 #import "SignUpTextField.h"
 #import "SignUpTextView.h"
+#import "Constants.h"
 
 @interface BaseSignUpViewController ()
 
@@ -308,7 +309,10 @@
 }
 
 - (void)swipeLeft {
-    [self.navigationController popViewControllerAnimated:YES];
+    CATransition *transition = kCrossFadeAnimation();
+    [self.navigationController.view.layer addAnimation:transition
+                                                                forKey:kCATransition];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 - (void)swipeRight {

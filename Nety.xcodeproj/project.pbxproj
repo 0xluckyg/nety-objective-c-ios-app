@@ -60,6 +60,7 @@
 		67DD1AAF1D17C3EF00FBEA0F /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67DD1AAE1D17C3EF00FBEA0F /* Profile.storyboard */; };
 		67DD1AB31D17D40D00FBEA0F /* UIPrinciples.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DD1AB21D17D40D00FBEA0F /* UIPrinciples.m */; };
 		67DD1AB61D17E04F00FBEA0F /* NetworkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 67DD1AB51D17E04F00FBEA0F /* NetworkCell.m */; };
+		8B178C701DE98384001ADA0E /* CrossFadeSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B178C6F1DE98384001ADA0E /* CrossFadeSegue.m */; };
 		8B1D56F81DE31C7B00E90636 /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D56F71DE31C7B00E90636 /* UserData.m */; };
 		8B1D56FE1DE31CC600E90636 /* SignUpTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D56FB1DE31CC600E90636 /* SignUpTextField.m */; };
 		8B1D56FF1DE31CC600E90636 /* SignUpTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D56FD1DE31CC600E90636 /* SignUpTextView.m */; };
@@ -199,6 +200,8 @@
 		67DD1AB21D17D40D00FBEA0F /* UIPrinciples.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPrinciples.m; sourceTree = "<group>"; };
 		67DD1AB41D17E04F00FBEA0F /* NetworkCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkCell.h; sourceTree = "<group>"; };
 		67DD1AB51D17E04F00FBEA0F /* NetworkCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkCell.m; sourceTree = "<group>"; };
+		8B178C6E1DE98384001ADA0E /* CrossFadeSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrossFadeSegue.h; sourceTree = "<group>"; };
+		8B178C6F1DE98384001ADA0E /* CrossFadeSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrossFadeSegue.m; sourceTree = "<group>"; };
 		8B1D56F61DE31C7B00E90636 /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
 		8B1D56F71DE31C7B00E90636 /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
 		8B1D56FA1DE31CC600E90636 /* SignUpTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpTextField.h; sourceTree = "<group>"; };
@@ -584,6 +587,8 @@
 		67DD1AB01D17D3DF00FBEA0F /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				8B178C6E1DE98384001ADA0E /* CrossFadeSegue.h */,
+				8B178C6F1DE98384001ADA0E /* CrossFadeSegue.m */,
 				8B1D57001DE31CD500E90636 /* Regex.h */,
 				8B1D57011DE31CD500E90636 /* Regex.m */,
 				67DA188B1DDF93EB000F9318 /* LocationManager */,
@@ -872,6 +877,7 @@
 				E160047C1D7C0AE10098DFB1 /* Experiences+CoreDataProperties.m in Sources */,
 				67D4AD651D265A7E00F42B7F /* Login.m in Sources */,
 				E1E0B9241D689DC800295133 /* N_API.m in Sources */,
+				8B178C701DE98384001ADA0E /* CrossFadeSegue.m in Sources */,
 				679B9EF01D2396A700C426F2 /* MyInfoEditTableCell.m in Sources */,
 				8B1D570F1DE31D8B00E90636 /* ExperienceSignUpVC.m in Sources */,
 				8B1D57021DE31CD500E90636 /* Regex.m in Sources */,
