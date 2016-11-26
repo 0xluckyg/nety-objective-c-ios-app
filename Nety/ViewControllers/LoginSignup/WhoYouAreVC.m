@@ -29,6 +29,16 @@
     self.fields = @[self.positionTextField, self.bioTextView];
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    if (self.userData.occupation) {
+        self.positionTextField.text = self.userData.occupation;
+    }
+    
+    if (self.userData.bio) {
+        self.bioTextView.text = self.userData.bio;
+    }
+}
+
 - (BOOL)textFieldShouldReturn:(SignUpTextField *)textField {
     
     if ([textField.titlePlaceholder isEqualToString:@"Occupation"]) {

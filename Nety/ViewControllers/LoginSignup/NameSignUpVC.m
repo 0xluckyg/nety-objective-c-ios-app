@@ -30,6 +30,16 @@
     self.fields = @[self.nameTextField, self.ageTextField];
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    if (self.userData.name) {
+        self.nameTextField.text = self.userData.name;
+    }
+    
+    if (self.userData.age > 0) {
+        self.ageTextField.text = [NSString stringWithFormat:@"%lu" ,self.userData.age];
+    }
+}
+
 
 - (BOOL)textFieldShouldReturn:(SignUpTextField *)textField {
     if ([textField.titlePlaceholder isEqualToString:@"Name"]) {

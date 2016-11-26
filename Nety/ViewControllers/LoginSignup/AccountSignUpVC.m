@@ -42,6 +42,14 @@
 -(void)viewDidAppear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+    
+    if (self.userData.email) {
+        self.emailTextField.text = self.userData.email;
+    }
+    
+    if (self.userData.password) {
+        self.passwordTextField.text = self.userData.password;
+    }
 }
 
 -(void)viewDidDisappear:(BOOL)animated {

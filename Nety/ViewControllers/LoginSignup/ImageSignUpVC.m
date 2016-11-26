@@ -40,6 +40,13 @@
     
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    if (self.userData.profilePicture) {
+        [self.imageButton setImage:self.userData.profilePicture forState:UIControlStateNormal];
+        [self.imageButton setImage:self.userData.profilePicture forState:UIControlStateHighlighted];
+    }
+}
+
 - (void)initializeSettings {
     self.firdatabase = [[FIRDatabase database] reference];
     self.UIPrinciple = [[UIPrinciples alloc] init];
