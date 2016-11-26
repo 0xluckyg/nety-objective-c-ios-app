@@ -40,7 +40,7 @@
     
 }
 
--(void)viewDidAppear:(BOOL)animated {
+-(void)viewWillAppear:(BOOL)animated {
     if (self.userData.profilePicture) {
         [self.imageButton setImage:self.userData.profilePicture forState:UIControlStateNormal];
         [self.imageButton setImage:self.userData.profilePicture forState:UIControlStateHighlighted];
@@ -302,6 +302,15 @@ metaDataSmallUid:(NSString *)metaDataSmallUid {
     } else {
         return nil;
     }
+}
+
+-(void)goToNextPage {
+    [self createUser];
+    if (self.chosenImage) {
+        self.chosenImage = [UIImage imageNamed:kDefaultUserLogoName];
+    }
+    NSString *userID = [[self.userData.email stringByReplacingOccurrencesOfString:@"@" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
+    [self uploadImage:userID];
 }
 
 @end

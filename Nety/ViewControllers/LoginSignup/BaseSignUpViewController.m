@@ -312,9 +312,10 @@
 }
 
 - (void)swipeRight {
-    if ([self allFieldsAreValidated]) {
-        [self goToNextPage];
-    }
+    [self goToNextPage];
+//    if ([self allFieldsAreValidated]) {
+//        [self goToNextPage];
+//    }
 }
 
 // The swipe methods are switched because it makes more sense to us the other way around

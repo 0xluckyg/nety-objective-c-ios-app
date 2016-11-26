@@ -30,7 +30,7 @@
     self.fields = @[self.nameTextField, self.ageTextField];
 }
 
--(void)viewDidAppear:(BOOL)animated {
+-(void)viewWillAppear:(BOOL)animated {
     if (self.userData.name) {
         self.nameTextField.text = self.userData.name;
     }
@@ -47,13 +47,14 @@
         
         if (isValidName) {
             self.userData.name = [textField.text capitalizedString];
+            [self.ageTextField becomeFirstResponder];
         } else {
             self.whatIsYourNameLabel.text = @"Full name please";
         }
     }
     
     if ([textField.titlePlaceholder isEqualToString:@"Age"]) {
-        
+        [self goToNextPage];
     }
     return YES;
 }
@@ -68,10 +69,6 @@
 }
 
 -(void)goToNextPage {
-    NSLog(@"Go to next page");
-}
-
-- (IBAction)nextButtonTapped:(UIButton *)sender {
     NSTextCheckingResult *isValidName = [Regex validateName:self.nameTextField.text];
     NSUInteger age = [self.ageTextField.text integerValue];
     NSLog(@"%li", age);
@@ -86,6 +83,10 @@
     } else {
         self.howOldAreYouLabel.text = @"Not a valid age";
     }
+}
+
+- (IBAction)nextButtonTapped:(UIButton *)sender {
+    [self goToNextPage];
 }
 
 @end

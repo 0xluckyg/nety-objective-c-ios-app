@@ -94,6 +94,10 @@
     return cell;
 }
 
+-(void)goToNextPage {
+    [self performSegueWithIdentifier:@"ToImageSegue" sender:self];
+}
+
 
 
 @end

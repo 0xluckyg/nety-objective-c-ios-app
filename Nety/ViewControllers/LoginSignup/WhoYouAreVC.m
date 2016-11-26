@@ -29,7 +29,7 @@
     self.fields = @[self.positionTextField, self.bioTextView];
 }
 
--(void)viewDidAppear:(BOOL)animated {
+-(void)viewWillAppear:(BOOL)animated {
     if (self.userData.occupation) {
         self.positionTextField.text = self.userData.occupation;
     }
@@ -55,16 +55,24 @@
 - (BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if([text isEqualToString:@"\n"]){
         // TODO: Figure out what the minimum is
-        if (self.positionTextField.text.length > 3 && self.bioTextView.text.length > 3) {
-            [textView resignFirstResponder];
-            self.userData.occupation = self.positionTextField.text;
-            self.userData.bio = self.bioTextView.text;
-            [self performSegueWithIdentifier:@"ToExperienceSegue" sender:self];
-        }
+        [self goToNextPage];
         return NO;
     }else{
         return YES;
     }
+}
+
+-(void)goToNextPage {
+    
+    if (self.positionTextField.text.length > 3 && self.bioTextView.text.length > 3) {
+        for (UIControl *field in self.fields) {
+            [field resignFirstResponder];
+        }
+        self.userData.occupation = self.positionTextField.text;
+        self.userData.bio = self.bioTextView.text;
+        [self performSegueWithIdentifier:@"ToExperienceSegue" sender:self];
+    }
+    
 }
 
 

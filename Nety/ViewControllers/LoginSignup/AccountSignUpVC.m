@@ -42,13 +42,17 @@
 -(void)viewDidAppear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
-    
+}
+
+-(void)viewWillAppear:(BOOL)animated {
     if (self.userData.email) {
         self.emailTextField.text = self.userData.email;
+        self.emailConfirmationTextField.text = self.userData.email;
     }
     
     if (self.userData.password) {
         self.passwordTextField.text = self.userData.password;
+        self.passwordConfirmationTextField.text = self.userData.password;
     }
 }
 
@@ -84,8 +88,7 @@
     }
     
     if ([textField.titlePlaceholder isEqualToString:@"E-mail Confirmation"]) {
-        BOOL emailConfirmationIsIdentical = [self.emailTextField.text isEqualToString:self.emailConfirmationTextField.text];
-        
+        BOOL emailConfirmationIsIdentical = [[self.emailTextField.text lowercaseString] isEqualToString:[self.emailConfirmationTextField.text lowercaseString]];
         if (emailConfirmationIsIdentical) {
             [self.passwordTextField becomeFirstResponder];
         } else {
@@ -119,42 +122,7 @@
     }
     
     if ([textField.titlePlaceholder isEqualToString:@"Password Confirmation"]) {
-        BOOL passwordConfirmationIsIdentical = [self.passwordTextField.text isEqualToString:self.passwordConfirmationTextField.text];
-        if (passwordConfirmationIsIdentical) {
-            [textField resignFirstResponder];
-            
-            NSTextCheckingResult *isValidEmail = [Regex validateEmail:self.emailTextField.text];
-            BOOL emailConfirmationIsIdentical = [self.emailTextField.text isEqualToString:self.emailConfirmationTextField.text];
-            NSTextCheckingResult *isValidPassword = [Regex validatePassword:textField.text];
-
-            if (isValidEmail && emailConfirmationIsIdentical &&
-                isValidPassword && passwordConfirmationIsIdentical) {
-                
-                self.userData.email = [self.emailTextField.text lowercaseString];
-                self.userData.password = self.passwordTextField.text;
-                [self moveViewsDown];
-                [self performSegueWithIdentifier:@"ToWhoYouAreSegue" sender:self];
-            } else {
-                if (isValidEmail) {
-                    NSLog(@"valid email");
-                }
-                if (emailConfirmationIsIdentical) {
-                    NSLog(@"valid email conf");
-                }
-                if (isValidPassword) {
-                    NSLog(@"valid password");
-                }
-                if (passwordConfirmationIsIdentical) {
-                    NSLog(@"valid password conf");
-                }
-                self.whatIsYourEmailLabel.text = @"Incomplete input.";
-                self.createAPasswordLabel.text = @"Incomplete input.";
-            }
-
-            
-        } else {
-            self.createAPasswordLabel.text = @"Confirmation doesn't match";
-        }
+        [self goToNextPage];
     }
     
     
@@ -204,6 +172,47 @@
             view.transform = CGAffineTransformMakeTranslation(0, -self.displacement);
         }
     }
+}
+
+-(void)goToNextPage {
+    BOOL passwordConfirmationIsIdentical = [self.passwordTextField.text isEqualToString:self.passwordConfirmationTextField.text];
+    if (passwordConfirmationIsIdentical) {
+        for (UIControl *field in self.fields) {
+            [field resignFirstResponder];
+        }
+        
+        NSTextCheckingResult *isValidEmail = [Regex validateEmail:self.emailTextField.text];
+        BOOL emailConfirmationIsIdentical = [[self.emailTextField.text lowercaseString] isEqualToString:[self.emailConfirmationTextField.text lowercaseString]];
+        NSTextCheckingResult *isValidPassword = [Regex validatePassword:self.passwordTextField.text];
+        
+        if (isValidEmail && emailConfirmationIsIdentical &&
+            isValidPassword && passwordConfirmationIsIdentical) {
+            
+            self.userData.email = [self.emailTextField.text lowercaseString];
+            self.userData.password = self.passwordTextField.text;
+            [self moveViewsDown];
+            [self performSegueWithIdentifier:@"ToWhoYouAreSegue" sender:self];
+        } else {
+            if (isValidEmail) {
+                NSLog(@"valid email");
+            }
+            if (emailConfirmationIsIdentical) {
+                NSLog(@"valid email conf");
+            }
+            if (isValidPassword) {
+                NSLog(@"valid password");
+            }
+            if (passwordConfirmationIsIdentical) {
+                NSLog(@"valid password conf");
+            }
+            self.whatIsYourEmailLabel.text = @"Incomplete input.";
+            self.createAPasswordLabel.text = @"Incomplete input.";
+        }
+        
+    } else {
+        self.createAPasswordLabel.text = @"Confirmation doesn't match";
+    }
+
 }
 
 @end
