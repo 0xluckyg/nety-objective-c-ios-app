@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="15G31" minimumToolsVersion="Xcode 7.0" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="15G1108" minimumToolsVersion="Xcode 7.0" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="ALL" representedClassName="ALL" syncable="YES"/>
     <entity name="ChatRooms" representedClassName="ChatRooms" parentEntity="ALL" syncable="YES">
         <attribute name="chatRoomID" optional="YES" attributeType="String" syncable="YES"/>
@@ -36,6 +36,7 @@
         <attribute name="age" optional="YES" attributeType="String" minValueString="0" syncable="YES"/>
         <attribute name="distance" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="geocoordinate" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="identity" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="imdiscoverable" optional="YES" attributeType="Integer 64" defaultValueString="30" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="isBlocked" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
@@ -55,6 +56,6 @@
         <element name="ChatRooms" positionX="-5499" positionY="-537" width="128" height="210"/>
         <element name="Experiences" positionX="-5832" positionY="-540" width="128" height="150"/>
         <element name="Msg" positionX="-5348" positionY="-538" width="128" height="148"/>
-        <element name="Users" positionX="-5661" positionY="-540" width="128" height="285"/>
+        <element name="Users" positionX="-5661" positionY="-540" width="128" height="300"/>
     </elements>
 </model>

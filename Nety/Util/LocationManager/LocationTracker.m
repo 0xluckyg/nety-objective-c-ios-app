@@ -7,6 +7,7 @@
 //
 
 #import "LocationTracker.h"
+#import "Constants.h"
 
 #define LATITUDE @"latitude"
 #define LONGITUDE @"longitude"
@@ -280,21 +281,24 @@
             GeoFire *geoFire = [[GeoFire alloc] initWithFirebaseRef:geo];
             
             [geoFire setLocation:[[CLLocation alloc] initWithLatitude:self.myLocation.latitude longitude:self.myLocation.longitude] forKey:MY_USER.userID];
+            NSString *myLocationCoreData = [NSString stringWithFormat:@"%f:%f", self.myLocation.latitude, self.myLocation.longitude];
+            [MY_USER setValue:myLocationCoreData forKey:kGeocoordinate];
         }
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"Users" inManagedObjectContext:MY_API.managedObjectContext];
         [fetchRequest setEntity:entity];
         
-        NSMutableArray *installProjectDictionaryArray = [[NSMutableArray alloc] init];
-        
         NSError *error;
         NSArray *fetchedObjects = [MY_API.managedObjectContext executeFetchRequest:fetchRequest error:&error];
         
         for (Users *userData in fetchedObjects) {
-//            double distance = [self.myLocation distanceFromLocation:];
-//            [userData setValue:self.myLocation forKey:@"distance"];
-//            [MY_API saveContext];
+            NSArray *userLocationArray = [userData.geocoordinate componentsSeparatedByString:@":"];
+            CLLocation *userLocation = [[CLLocation alloc] initWithLatitude:[userLocationArray[0] floatValue] longitude:[userLocationArray[1] floatValue]];
+            CLLocation *myLocationCL = [[CLLocation alloc] initWithLatitude:self.myLocation.latitude longitude:self.myLocation.longitude];
+            double distance = [myLocationCL distanceFromLocation:userLocation];
+            [userData setValue:@(distance) forKey:kDistance];
+            [MY_API saveContext];
         }
         
     }

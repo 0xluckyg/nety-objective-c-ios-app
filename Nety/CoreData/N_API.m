@@ -407,6 +407,9 @@
         }
     }
     
+    //Set user location
+    NSString *geocoordinateString = [NSString stringWithFormat:@"%f:%f", location.coordinate.latitude, location.coordinate.longitude];
+    [user setValue:geocoordinateString forKey:kGeocoordinate];
 
     //Set distance
     CLLocation *myLocation = [self getBestLocation];
@@ -415,12 +418,12 @@
         CLLocation* userLocation = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
         double distance = [userLocation distanceFromLocation:myLocation];
         NSLog(@"%f userDistance", distance);
-        [user setValue:[NSNumber numberWithDouble:distance] forKey:@"distance"];
+        [user setValue:[NSNumber numberWithDouble:distance] forKey:kDistance];
     } else {
         if (flagMy) {
-            [user setValue:@(0) forKey:@"distance"];
+            [user setValue:@(0) forKey:kDistance];
         } else {
-            [user setValue:@(999999) forKey:@"distance"];
+            [user setValue:@(999999) forKey:kDistance];
         }
     }
     

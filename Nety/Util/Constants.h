@@ -12,6 +12,8 @@
 extern NSString *const kFullName;
 
 extern NSString *const kUsers;
+    extern NSString *const kDistance;
+    extern NSString *const kGeocoordinate;
     extern NSString *const kFirstName;
     extern NSString *const kLastName;
     extern NSString *const kAge;

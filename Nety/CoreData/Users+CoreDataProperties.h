@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nullable, nonatomic, retain) NSString *age;
 @property (nullable, nonatomic, retain) NSNumber *distance;
+@property (nullable, nonatomic, retain) NSString *geocoordinate;
 @property (nullable, nonatomic, retain) NSString *firstName;
 @property (nullable, nonatomic, retain) NSString *identity;
 @property (nullable, nonatomic, retain) NSNumber *imdiscoverable;

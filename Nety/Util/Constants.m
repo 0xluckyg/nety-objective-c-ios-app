@@ -11,6 +11,8 @@
 NSString *const kFullName = @"fullName";
 
 NSString *const kUsers = @"users";
+    NSString *const kDistance = @"distance";
+    NSString *const kGeocoordinate = @"geocoordinate";
     NSString *const kFirstName = @"firstName";
     NSString *const kLastName = @"lastName";
     NSString *const kAge = @"age";

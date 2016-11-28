@@ -58,8 +58,8 @@
     // Note that this callback will be fired everytime a new token is generated, including the first
     // time. So if you need to retrieve the token as soon as it is available this is where that
     // should be done.
-    NSString *refreshedToken = [[FIRInstanceID instanceID] token];
-    NSLog(@"InstanceID token: %@", refreshedToken);
+//    NSString *refreshedToken = [[FIRInstanceID instanceID] token];
+//    NSLog(@"InstanceID token: %@", refreshedToken);
     
     // Connect to FCM since connection may have failed when attempted before having a token.
     [self connectToFcm];
@@ -101,7 +101,6 @@
         [[FIRAuth auth] addAuthStateDidChangeListener:^(FIRAuth *_Nonnull auth,
                                                         FIRUser *_Nullable user) {
             
-            NSLog(@"user %@", user.email);
             if (user != nil) {
                 
                 if (userIsSigningIn == false) {
@@ -211,18 +210,17 @@
        willPresentNotification:(UNNotification *)notification
          withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
     // Print message ID.
-    NSDictionary *userInfo = notification.request.content.userInfo;
-    NSLog(@"Message ID: %@", userInfo[@"gcm.message_id"]);
-    
-    // Print full message.
-    NSLog(@"%@", userInfo);
+//    NSDictionary *userInfo = notification.request.content.userInfo;
+//    
+//    // Print full message.
+//    NSLog(@"%@", userInfo);
 }
 
 // Receive data message on iOS 10 devices.
-- (void)applicationReceivedRemoteMessage:(FIRMessagingRemoteMessage *)remoteMessage {
-    // Print full message
-    NSLog(@"%@", [remoteMessage appData]);
-}
+//- (void)applicationReceivedRemoteMessage:(FIRMessagingRemoteMessage *)remoteMessage {
+//    // Print full message
+//    NSLog(@"%@", [remoteMessage appData]);
+//}
 #endif
 
 
@@ -302,7 +300,7 @@
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     [[FIRMessaging messaging] disconnect];
-    NSLog(@"Disconnected from FCM");
+//    NSLog(@"Disconnected from FCM");
 }
 
 
@@ -344,34 +342,11 @@
 }
 
 -(void)updateLocationToServer {
-    NSLog(@"updateLocationToServer");
     
     [self.locationTracker updateLocationToServer];
 }
 
-- (void) loginLinkedIn
-{
-//    [LISDKSessionManager createSessionWithAuth:[NSArray arrayWithObjects:LISDK_BASIC_PROFILE_PERMISSION, LISDK_EMAILADDRESS_PERMISSION, nil]
-//                                         state:@"some state"
-//                        showGoToAppStoreDialog:YES
-//                                  successBlock:^(NSString *returnState) {
-//                                      
-//                                      NSLog(@"%s","success called!");
-//                                      LISDKSession *session = [[LISDKSessionManager sharedInstance] session];
-//                                      NSLog(@"value=%@ isvalid=%@",[session value],[session isValid] ? @"YES" : @"NO");
-//                                      NSMutableString *text = [[NSMutableString alloc] initWithString:[session.accessToken description]];
-//                                      [text appendString:[NSString stringWithFormat:@",state=\"%@\"",returnState]];
-//                                      NSLog(@"Response label text %@",text);
-//
-//                                      
-//                                  }
-//                                    errorBlock:^(NSError *error) {
-//                                        NSLog(@"%s %@","error called! ", [error description]);
-//
-//                                    }
-//     ];
-    NSLog(@"%s","sync pressed3");
-}
+
 -(NSString*)returnLatLongString {
     
     NSString *str = [NSString stringWithFormat: @"lat=%@&long=%@", self.stringLatitude, self.stringLongitude];
@@ -426,7 +401,7 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     
-    NSLog(@"%s url=%@","app delegate application openURL called ", [url absoluteString]);
+//    NSLog(@"%s url=%@","app delegate application openURL called ", [url absoluteString]);
     if ([LISDKCallbackHandler shouldHandleUrl:url]) {
         return [LISDKCallbackHandler application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
     } else 
@@ -451,10 +426,10 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     // this callback will not be fired till the user taps on the notification launching the application.
     // TODO: Handle data of notification
     
-    // Print message ID.
-    NSLog(@"Message ID: %@", userInfo[@"gcm.message_id"]);
-    
-    // Pring full message.
-    NSLog(@"%@", userInfo);
+//    // Print message ID.
+//    NSLog(@"Message ID: %@", userInfo[@"gcm.message_id"]);
+//    
+//    // Pring full message.
+//    NSLog(@"%@", userInfo);
 }
 @end

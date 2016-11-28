@@ -15,6 +15,7 @@
 
 @dynamic age;
 @dynamic distance;
+@dynamic geocoordinate;
 @dynamic firstName;
 @dynamic identity;
 @dynamic imdiscoverable;
