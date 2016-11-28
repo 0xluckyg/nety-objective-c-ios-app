@@ -143,7 +143,7 @@
         
         //Select only valid location and also location with good accuracy
         if(newLocation!=nil&&theAccuracy>0
-           &&theAccuracy<2000
+           &&theAccuracy<20000
            &&(!(theLocation.latitude==0.0&&theLocation.longitude==0.0))){
             
             self.myLastLocation = theLocation;
@@ -168,8 +168,8 @@
     self.shareModel.bgTask = [BackgroundTaskManager sharedBackgroundTaskManager];
     [self.shareModel.bgTask beginNewBackgroundTask];
     
-    //Restart the locationMaanger after 1 minute
-    self.shareModel.timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self
+    //Restart the locationMaanger after 40 seconds
+    self.shareModel.timer = [NSTimer scheduledTimerWithTimeInterval:40 target:self
                                                            selector:@selector(restartLocationUpdates)
                                                            userInfo:nil
                                                             repeats:NO];
@@ -286,7 +286,16 @@
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"Users" inManagedObjectContext:MY_API.managedObjectContext];
         [fetchRequest setEntity:entity];
         
+        NSMutableArray *installProjectDictionaryArray = [[NSMutableArray alloc] init];
         
+        NSError *error;
+        NSArray *fetchedObjects = [MY_API.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        
+        for (Users *userData in fetchedObjects) {
+//            double distance = [self.myLocation distanceFromLocation:];
+//            [userData setValue:self.myLocation forKey:@"distance"];
+//            [MY_API saveContext];
+        }
         
     }
     

@@ -22,6 +22,8 @@
 
 @property LocationTracker * locationTracker;
 
+@property (strong,nonatomic) LocationShareModel * shareModel;
+
 @property (nonatomic) NSTimer* locationUpdateTimer;
 
 @property (strong, nonatomic) UIWindow *window;

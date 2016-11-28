@@ -120,16 +120,15 @@
                     self.tabBarRootController.selectedIndex = 2;
                 }
                 
-                [self.locationTracker startLocationTracking];
-                
-                //Send the best location to server every 60 seconds
+                //Send the best location to server every 40 seconds
                 //You may adjust the time interval depends on the need of your app.
-                NSTimeInterval time = 60.0;
-                [self updateLocation];
+                [self.locationTracker startLocationTracking];
+                NSTimeInterval time = 40.0;
+                [self updateLocationToServer];
                 self.locationUpdateTimer =
                 [NSTimer scheduledTimerWithTimeInterval:time
                                                  target:self
-                                               selector:@selector(updateLocation)
+                                               selector:@selector(updateLocationToServer)
                                                userInfo:nil
                                                 repeats:YES];
         } else  {
@@ -344,8 +343,8 @@
 
 }
 
--(void)updateLocation {
-    NSLog(@"updateLocation");
+-(void)updateLocationToServer {
+    NSLog(@"updateLocationToServer");
     
     [self.locationTracker updateLocationToServer];
 }
