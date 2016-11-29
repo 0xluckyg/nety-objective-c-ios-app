@@ -73,12 +73,6 @@
 		8B1D57171DE31DA400E90636 /* AccountSignUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D57141DE31DA400E90636 /* AccountSignUpVC.m */; };
 		8B1D57181DE31DA400E90636 /* AddExperienceSignUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D57161DE31DA400E90636 /* AddExperienceSignUpVC.m */; };
 		8B35F7AB1DED3BE3007CEF94 /* AccountVCStep5.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B35F7AA1DED3BE3007CEF94 /* AccountVCStep5.m */; };
-		8B35F7B91DED58A6007CEF94 /* Signup.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B35F7AE1DED58A6007CEF94 /* Signup.m */; };
-		8B35F7BA1DED58A6007CEF94 /* SignupProcess1.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B35F7B01DED58A6007CEF94 /* SignupProcess1.m */; };
-		8B35F7BB1DED58A6007CEF94 /* SignupProcess2.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B35F7B21DED58A6007CEF94 /* SignupProcess2.m */; };
-		8B35F7BC1DED58A6007CEF94 /* SignupProcess3.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B35F7B41DED58A6007CEF94 /* SignupProcess3.m */; };
-		8B35F7BD1DED58A6007CEF94 /* SignupProcessExperienceDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B35F7B61DED58A6007CEF94 /* SignupProcessExperienceDetail.m */; };
-		8B35F7BE1DED58A6007CEF94 /* SignupProcessExperienceDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B35F7B81DED58A6007CEF94 /* SignupProcessExperienceDetailCell.m */; };
 		8BE1DF151DED150600A34524 /* AccountVCStep1.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1DF141DED150600A34524 /* AccountVCStep1.m */; };
 		8BE1DF191DED169000A34524 /* AccountVCStep2.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1DF161DED169000A34524 /* AccountVCStep2.m */; };
 		8BE1DF1A1DED169000A34524 /* AccountVCStep3.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1DF171DED169000A34524 /* AccountVCStep3.m */; };
@@ -237,18 +231,6 @@
 		8B1D57151DE31DA400E90636 /* AddExperienceSignUpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddExperienceSignUpVC.h; sourceTree = "<group>"; };
 		8B1D57161DE31DA400E90636 /* AddExperienceSignUpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddExperienceSignUpVC.m; sourceTree = "<group>"; };
 		8B35F7AA1DED3BE3007CEF94 /* AccountVCStep5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountVCStep5.m; sourceTree = "<group>"; };
-		8B35F7AD1DED58A6007CEF94 /* Signup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Signup.h; sourceTree = "<group>"; };
-		8B35F7AE1DED58A6007CEF94 /* Signup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Signup.m; sourceTree = "<group>"; };
-		8B35F7AF1DED58A6007CEF94 /* SignupProcess1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupProcess1.h; sourceTree = "<group>"; };
-		8B35F7B01DED58A6007CEF94 /* SignupProcess1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupProcess1.m; sourceTree = "<group>"; };
-		8B35F7B11DED58A6007CEF94 /* SignupProcess2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupProcess2.h; sourceTree = "<group>"; };
-		8B35F7B21DED58A6007CEF94 /* SignupProcess2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupProcess2.m; sourceTree = "<group>"; };
-		8B35F7B31DED58A6007CEF94 /* SignupProcess3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupProcess3.h; sourceTree = "<group>"; };
-		8B35F7B41DED58A6007CEF94 /* SignupProcess3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupProcess3.m; sourceTree = "<group>"; };
-		8B35F7B51DED58A6007CEF94 /* SignupProcessExperienceDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupProcessExperienceDetail.h; sourceTree = "<group>"; };
-		8B35F7B61DED58A6007CEF94 /* SignupProcessExperienceDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupProcessExperienceDetail.m; sourceTree = "<group>"; };
-		8B35F7B71DED58A6007CEF94 /* SignupProcessExperienceDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupProcessExperienceDetailCell.h; sourceTree = "<group>"; };
-		8B35F7B81DED58A6007CEF94 /* SignupProcessExperienceDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupProcessExperienceDetailCell.m; sourceTree = "<group>"; };
 		8BE1DF131DED150600A34524 /* AccountVCSteps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountVCSteps.h; sourceTree = "<group>"; };
 		8BE1DF141DED150600A34524 /* AccountVCStep1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountVCStep1.m; sourceTree = "<group>"; };
 		8BE1DF161DED169000A34524 /* AccountVCStep2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountVCStep2.m; sourceTree = "<group>"; };
@@ -465,7 +447,6 @@
 		67D4AD5D1D2632E900F42B7F /* LoginSignup */ = {
 			isa = PBXGroup;
 			children = (
-				8B35F7AC1DED589A007CEF94 /* Old */,
 				8B1D57031DE31CFC00E90636 /* Signup */,
 				67D4AD5E1D26333D00F42B7F /* LoginSignup.storyboard */,
 				67D4AD601D26536000F42B7F /* MainPage.h */,
@@ -671,25 +652,6 @@
 				8B1D570B1DE31D8000E90636 /* ImageSignUpVC.m */,
 			);
 			name = Signup;
-			sourceTree = "<group>";
-		};
-		8B35F7AC1DED589A007CEF94 /* Old */ = {
-			isa = PBXGroup;
-			children = (
-				8B35F7AD1DED58A6007CEF94 /* Signup.h */,
-				8B35F7AE1DED58A6007CEF94 /* Signup.m */,
-				8B35F7AF1DED58A6007CEF94 /* SignupProcess1.h */,
-				8B35F7B01DED58A6007CEF94 /* SignupProcess1.m */,
-				8B35F7B11DED58A6007CEF94 /* SignupProcess2.h */,
-				8B35F7B21DED58A6007CEF94 /* SignupProcess2.m */,
-				8B35F7B31DED58A6007CEF94 /* SignupProcess3.h */,
-				8B35F7B41DED58A6007CEF94 /* SignupProcess3.m */,
-				8B35F7B51DED58A6007CEF94 /* SignupProcessExperienceDetail.h */,
-				8B35F7B61DED58A6007CEF94 /* SignupProcessExperienceDetail.m */,
-				8B35F7B71DED58A6007CEF94 /* SignupProcessExperienceDetailCell.h */,
-				8B35F7B81DED58A6007CEF94 /* SignupProcessExperienceDetailCell.m */,
-			);
-			name = Old;
 			sourceTree = "<group>";
 		};
 		8BE1DF121DED140500A34524 /* Account */ = {
@@ -923,16 +885,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				67DD1AB31D17D40D00FBEA0F /* UIPrinciples.m in Sources */,
-				8B35F7B91DED58A6007CEF94 /* Signup.m in Sources */,
 				8BE1DF1B1DED169000A34524 /* AccountVCStep4.m in Sources */,
 				676B51C11DE21AF0002B7B66 /* GFGeoHashQuery.m in Sources */,
-				8B35F7BB1DED58A6007CEF94 /* SignupProcess2.m in Sources */,
 				67606C6E1D24888700AD127E /* MyInfoEditExperience.m in Sources */,
 				673E2BB91D6E657100AB139F /* ExperienceCell.m in Sources */,
 				8B1D57061DE31D0800E90636 /* WhoYouAreVC.m in Sources */,
 				8BE1DF1D1DED19F300A34524 /* AccountVCStep.m in Sources */,
-				8B35F7BA1DED58A6007CEF94 /* SignupProcess1.m in Sources */,
-				8B35F7BD1DED58A6007CEF94 /* SignupProcessExperienceDetail.m in Sources */,
 				8B1D57171DE31DA400E90636 /* AccountSignUpVC.m in Sources */,
 				678138AB1D33B2DD00BFBF48 /* Settings.m in Sources */,
 				E16004841D7C0AE10098DFB1 /* Users+CoreDataProperties.m in Sources */,
@@ -960,8 +918,6 @@
 				8BE1DF151DED150600A34524 /* AccountVCStep1.m in Sources */,
 				67B2400F1D40594600F011BB /* Constants.m in Sources */,
 				8B1D56FF1DE31CC600E90636 /* SignUpTextView.m in Sources */,
-				8B35F7BE1DED58A6007CEF94 /* SignupProcessExperienceDetailCell.m in Sources */,
-				8B35F7BC1DED58A6007CEF94 /* SignupProcess3.m in Sources */,
 				8B1D57091DE31D7400E90636 /* NameSignUpVC.m in Sources */,
 				67DD1A7F1D17BEB500FBEA0F /* AppDelegate.m in Sources */,
 				67DD1A981D17BF1700FBEA0F /* Network.m in Sources */,

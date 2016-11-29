@@ -309,10 +309,12 @@
 }
 
 - (void)swipeLeft {
-    CATransition *transition = kCrossFadeAnimation();
-    [self.navigationController.view.layer addAnimation:transition
-                                                                forKey:kCATransition];
-    [self.navigationController popViewControllerAnimated:NO];
+    if (self.stepNumber != 3) {
+        CATransition *transition = kCrossFadeAnimation();
+        [self.navigationController.view.layer addAnimation:transition
+                                                    forKey:kCATransition];
+        [self.navigationController popViewControllerAnimated:NO];
+    }
 }
 
 - (void)swipeRight {
