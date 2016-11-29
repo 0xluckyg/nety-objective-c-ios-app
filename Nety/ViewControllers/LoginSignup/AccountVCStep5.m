@@ -8,6 +8,8 @@
 
 #import "AccountVCSteps.h"
 #import "UserData.h"
+#import "LocationShareModel.h"
+#import "GeoFire.h"
 
 @implementation AccountVCStep5
 
@@ -58,7 +60,16 @@
                                     kSecurity: @(0)};
              
              //Set user information inside global variables
-             [[N_API sharedController] addNewUser:post UserID:userID Location:nil FlagMy:YES];
+             
+             FIRDatabaseReference *geo = [[[FIRDatabase database] reference] child:kUserLocation];
+             
+             //Save location to the database
+             GeoFire *geoFire = [[GeoFire alloc] initWithFirebaseRef:geo];
+             CLLocation *myLocation = [self getBestLocation];
+             
+             [geoFire setLocation:[[CLLocation alloc] initWithLatitude:myLocation.coordinate.latitude longitude:myLocation.coordinate.longitude] forKey:userID];
+             
+             [[N_API sharedController] addNewUser:post UserID:userID Location:myLocation FlagMy:YES];
              [[[self.firdatabase child:kUsers] child:userID] setValue:post];
              
              [self.viewController goToNextPage];
@@ -68,4 +79,28 @@
 
 }
 
+- (CLLocation *) getBestLocation {
+    
+    LocationShareModel *shareModel = [LocationShareModel sharedModel];
+    CLLocation *myLocation = [CLLocation alloc];
+    
+    //Set distance
+    if ([shareModel.myLocationArray count] != 0) {
+        //Pick best location accuracy
+        int bestAccuracy = 0;
+        int bestLocationIndex = 0;
+        for (int i = 0; i < [shareModel.myLocationArray count]; i ++) {
+            if ([[shareModel.myLocationArray[i] objectForKey:@"theAccuracy"] floatValue] > bestAccuracy) {
+                bestAccuracy = [[shareModel.myLocationArray[i] objectForKey:@"theAccuracy"] floatValue];
+                bestLocationIndex = i;
+            }
+        }
+        
+        myLocation = [myLocation initWithLatitude:[[shareModel.myLocationArray[bestLocationIndex] objectForKey:@"latitude"] floatValue] longitude:[[shareModel.myLocationArray[bestLocationIndex] objectForKey:@"longitude"] floatValue]];
+        
+        return myLocation;
+    } else {
+        return nil;
+    }
+}
 @end

@@ -23,32 +23,62 @@
 - (BOOL)emailIsValid {
     NSTextCheckingResult *isValidEmail = [Regex validateEmail:self.viewController.emailTextField.text];
     if (isValidEmail) {
-        if ([self emailIsUnique]) {
-            return YES;
-        }
-        self.viewController.whatIsYourEmailLabel.text = @"E-mail is already registered!";
+        __block BOOL blockCompleted = NO;
+        __block BOOL unique;
+        
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [self emailIsUnique:^void(BOOL isUnique) {
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{ [self.viewController hideActivityIndicator]; }];
+                unique = isUnique;
+                blockCompleted = YES;
+            }];
+        });
+        
+        while (CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0, true) && !blockCompleted) {}
+        
+        if (unique) { return YES; }
+        else { self.viewController.whatIsYourEmailLabel.text = @"E-mail is already registered!"; }
+        
     } else {
         self.viewController.whatIsYourEmailLabel.text = @"Email has an error";
     }
     return NO;
 }
 
-- (BOOL)emailIsUnique {
-    
+- (void)emailIsUnique: (void (^)(BOOL isUnique))completionHandler {
     NSString *userID = [[self.viewController.emailTextField.text stringByReplacingOccurrencesOfString:@"@" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
     
-    self.firdatabase = [[FIRDatabase database] reference];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{ [self.viewController showActivityIndicator]; }];
 
+    self.firdatabase = [[FIRDatabase database] reference];
     
     [[self.firdatabase child:kUsers] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        BOOL isNew;
+        
         if ([snapshot hasChild:userID]) {
             NSLog(@"ALREADY EXISTS");
+            isNew = NO;
         } else {
             NSLog(@"IS NEW");
+            isNew = YES;
         }
+        
+        return completionHandler(isNew);
     }];
-    return NO;
+
 }
+
+
+
+//func findUniqueId(completion:(uniqueId:String)->()) {
+//    self.firDB.child("sessions").observeSingleEventOfType(.Value, withBlock: { snapshot in
+//        var sID = self.genCode()
+//        while snapshot.hasChild(sID) {
+//            sID = self.genCode()
+//        }
+//        completion(uniqueId:sID)
+//    })
+//}
 
 - (BOOL)emailConfirmationIsValid {
     NSString *email = [self.viewController.emailTextField.text lowercaseString];

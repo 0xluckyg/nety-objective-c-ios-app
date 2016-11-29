@@ -18,7 +18,7 @@
 @property (strong, nonatomic) AccountVCStep4 *state4;
 @property (strong, nonatomic) AccountVCStep5 *state5;
 @property (strong, nonatomic) GKStateMachine *stateMachine;
-
+@property (strong, nonatomic) UIActivityIndicatorView *activityView;
 @end
 
 @implementation AccountSignUpVC
@@ -186,6 +186,22 @@
 
 -(void)goToNextPage {
     [self performSegueWithIdentifier:@"ToWhoYouAreSegue" sender:self];
+}
+
+-(void)showActivityIndicator {
+    // Add, constrain, and animate Activity Indicator
+    self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [self.view addSubview:self.activityView];
+    
+    self.activityView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.activityView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = true;
+    [self.activityView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = true;
+    [self.activityView startAnimating];
+}
+
+-(void)hideActivityIndicator {
+    self.activityView.hidesWhenStopped = YES;
+    [self.activityView stopAnimating];
 }
 @end
 

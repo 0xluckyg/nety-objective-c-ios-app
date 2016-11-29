@@ -70,59 +70,6 @@
     self.userData.profilePicture = self.chosenImage;
 }
 
-
-- (void)createUser {
-    NSLog(@"create user");
-    //Sign up the user
-    [[FIRAuth auth]
-     createUserWithEmail: self.userData.email
-     password: self.userData.password
-     completion:^(FIRUser *_Nullable user,
-                  NSError *_Nullable error) {
-         
-         if (error) {
-             
-             NSLog(@"%@", error.localizedDescription);
-             
-             [self.UIPrinciple oneButtonAlert:NSLocalizedString(@"ok", nil) controllerTitle:NSLocalizedString(@"problemSigningUp", nil) message:error.localizedDescription viewController:self];
-             
-         } else {
-             
-             //User ID is supposed to be the email without . and @
-             NSString *userID = [[self.userData.email
-                                 stringByReplacingOccurrencesOfString:@"@" withString:@""]stringByReplacingOccurrencesOfString:@"." withString:@""];
-             
-             NSArray *fullName = [self.userData.name componentsSeparatedByString:@" "];
-             
-             NSDictionary *post = @{kFirstName: fullName[0],
-                                    kLastName: fullName[1],
-                                    kAge: @(self.userData.age), // Add age column later?
-                                    kStatus: @"",
-                                    kIdentity: self.userData.occupation,
-                                    kSummary: self.userData.bio,
-                                    kExperiences: [self.userData.experiences copy],
-                                    kProfilePhoto: kDefaultUserLogoName,
-                                    kSecurity: @(0)};
-             
-             [[[self.firdatabase child:kUsers] child:userID] setValue:post];
-             
-             //Set user information inside global variables
-             
-             FIRDatabaseReference *geo = [[[FIRDatabase database] reference] child:kUserLocation];
-             
-             //Save location to the database
-             GeoFire *geoFire = [[GeoFire alloc] initWithFirebaseRef:geo];
-             CLLocation *myLocation = [self getBestLocation];
-             
-             [geoFire setLocation:[[CLLocation alloc] initWithLatitude:myLocation.coordinate.latitude longitude:myLocation.coordinate.longitude] forKey:userID];
-                          
-             [MY_API addNewUser:post UserID:userID Location:myLocation FlagMy:YES];
-             
-         }
-         
-     }];
-}
-
 -(void)uploadImage: (NSString *)userID {
     NSLog(@"upload image");
 
@@ -268,44 +215,21 @@ metaDataSmallUid:(NSString *)metaDataSmallUid {
 }
 
 - (IBAction)skipButtonWasTapped:(UIButton *)sender {
-    [self createUser];
     self.chosenImage = [UIImage imageNamed:kDefaultUserLogoName];
+    NSString *userID = [[self.userData.email stringByReplacingOccurrencesOfString:@"@" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
+    [self registerUserInfo:userID
+            metaDataBigUid:@""
+          metaDataSmallUid:@""];
 }
 
 - (IBAction)doneButtonTapped:(UIButton *)sender {
     NSLog(@"done button tapped");
-    [self createUser];
     NSString *userID = [[self.userData.email stringByReplacingOccurrencesOfString:@"@" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
     [self uploadImage:userID];
 }
 
-- (CLLocation *) getBestLocation {
-    
-    self.shareModel = [LocationShareModel sharedModel];
-    CLLocation *myLocation = [CLLocation alloc];
-    
-    //Set distance
-    if ([self.shareModel.myLocationArray count] != 0) {
-        //Pick best location accuracy
-        int bestAccuracy = 0;
-        int bestLocationIndex = 0;
-        for (int i = 0; i < [self.shareModel.myLocationArray count]; i ++) {
-            if ([[self.shareModel.myLocationArray[i] objectForKey:@"theAccuracy"] floatValue] > bestAccuracy) {
-                bestAccuracy = [[self.shareModel.myLocationArray[i] objectForKey:@"theAccuracy"] floatValue];
-                bestLocationIndex = i;
-            }
-        }
-        
-        myLocation = [myLocation initWithLatitude:[[self.shareModel.myLocationArray[bestLocationIndex] objectForKey:@"latitude"] floatValue] longitude:[[self.shareModel.myLocationArray[bestLocationIndex] objectForKey:@"longitude"] floatValue]];
-        
-        return myLocation;
-    } else {
-        return nil;
-    }
-}
 
 -(void)goToNextPage {
-    [self createUser];
     if (self.chosenImage) {
         self.chosenImage = [UIImage imageNamed:kDefaultUserLogoName];
     }

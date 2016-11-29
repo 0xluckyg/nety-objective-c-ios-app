@@ -21,4 +21,6 @@
 -(void)moveViewsUp;
 -(void)moveViewsDown;
 -(void)goToNextPage;
+-(void)showActivityIndicator;
+-(void)hideActivityIndicator;
 @end
