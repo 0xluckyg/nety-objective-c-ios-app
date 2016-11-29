@@ -20,7 +20,7 @@ IB_DESIGNABLE
                                       initWithString:self.placeholder
                                       attributes:@{
                                                    NSForegroundColorAttributeName: placeholderColor}];
-//        self.floatingLabel.text = self.titlePlaceholder;
+        
         self.clipsToBounds = NO;
         [self addBorder];
     }
@@ -37,6 +37,11 @@ IB_DESIGNABLE
     [self.border.widthAnchor constraintEqualToAnchor:self.widthAnchor].active = true;
     [self.border.heightAnchor constraintEqualToConstant:0.5].active = true;
     [self.border.centerXAnchor constraintEqualToAnchor:self.centerXAnchor].active = true;
+}
+
+-(void)setText:(NSString *)text {
+    [super setText:text];
+    self.floatingLabel.text = self.titlePlaceholder;
 }
 
 

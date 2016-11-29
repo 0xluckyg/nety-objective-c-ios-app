@@ -29,10 +29,6 @@
     
     [self setUpStates];
     
-    self.emailTextField.delegate = self;
-    self.emailConfirmationTextField.delegate = self;
-    self.passwordTextField.delegate = self;
-    self.passwordConfirmationTextField.delegate = self;
     self.imageView.image = [UIImage imageNamed:@"MainPicture8"];
     self.stepNumber = 2;
     [self prepareNavigation];
@@ -60,6 +56,11 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    self.emailTextField.delegate = self;
+    self.emailConfirmationTextField.delegate = self;
+    self.passwordTextField.delegate = self;
+    self.passwordConfirmationTextField.delegate = self;
+    
     if (self.userData.email) {
         self.emailTextField.text = self.userData.email;
         self.emailConfirmationTextField.text = self.userData.email;
@@ -70,8 +71,10 @@
     if (self.userData.password) {
         self.passwordTextField.text = self.userData.password;
         self.passwordConfirmationTextField.text = self.userData.password;
+        self.passwordTextField.alpha = 1;
         self.passwordConfirmationTextField.alpha = 1;
         self.passwordConfirmationTextField.transform = CGAffineTransformIdentity;
+        self.createAPasswordLabel.alpha = 1;
     }
 }
 
@@ -126,7 +129,6 @@
         self.viewNeedsToBeMovedUp = YES;
     }
 }
-
 
 #pragma mark - Keyboard Response Methods
 
