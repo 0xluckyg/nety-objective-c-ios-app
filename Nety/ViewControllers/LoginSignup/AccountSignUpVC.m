@@ -18,6 +18,7 @@
 @property (strong, nonatomic) AccountVCStep4 *state4;
 @property (strong, nonatomic) AccountVCStep5 *state5;
 @property (strong, nonatomic) GKStateMachine *stateMachine;
+
 @end
 
 @implementation AccountSignUpVC
