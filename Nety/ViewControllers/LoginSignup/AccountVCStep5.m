@@ -16,6 +16,9 @@
 }
 
 -(void)didEnterWithPreviousState:(GKState *)previousState {
+    for (UIControl *field in self.viewController.fields) {
+        [field resignFirstResponder];
+    }
     [self.viewController goToNextPage];
 }
 
