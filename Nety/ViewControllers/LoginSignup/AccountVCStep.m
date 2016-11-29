@@ -23,10 +23,30 @@
 - (BOOL)emailIsValid {
     NSTextCheckingResult *isValidEmail = [Regex validateEmail:self.viewController.emailTextField.text];
     if (isValidEmail) {
-        return YES;
+        if ([self emailIsUnique]) {
+            return YES;
+        }
+        self.viewController.whatIsYourEmailLabel.text = @"E-mail is already registered!";
+    } else {
+        self.viewController.whatIsYourEmailLabel.text = @"Email has an error";
     }
+    return NO;
+}
+
+- (BOOL)emailIsUnique {
     
-    self.viewController.whatIsYourEmailLabel.text = @"Email has an error";
+    NSString *userID = [[self.viewController.emailTextField.text stringByReplacingOccurrencesOfString:@"@" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
+    
+    self.firdatabase = [[FIRDatabase database] reference];
+
+    
+    [[self.firdatabase child:kUsers] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        if ([snapshot hasChild:userID]) {
+            NSLog(@"ALREADY EXISTS");
+        } else {
+            NSLog(@"IS NEW");
+        }
+    }];
     return NO;
 }
 

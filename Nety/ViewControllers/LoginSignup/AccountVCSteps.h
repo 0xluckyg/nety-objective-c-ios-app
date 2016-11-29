@@ -16,6 +16,8 @@
 
 @property (weak, nonatomic) AccountSignUpVC *viewController;
 
+@property (strong, nonatomic) FIRDatabaseReference *firdatabase;
+
 - (instancetype)initWithViewController: (AccountSignUpVC *)viewController;
 - (BOOL)emailIsValid;
 - (BOOL)emailConfirmationIsValid;
@@ -48,7 +50,6 @@
 // Allow segue to next page
 @interface AccountVCStep5 : AccountVCStep
 
-@property (strong, nonatomic) FIRDatabaseReference *firdatabase;
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
 
 @end
