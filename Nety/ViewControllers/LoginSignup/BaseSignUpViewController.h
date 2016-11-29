@@ -31,4 +31,5 @@
 @property (strong, nonatomic) NSArray *fields;
 - (void)prepareNavigation;
 - (void)constrainLineThatIsBlue: (BOOL)isBlue;
+- (void)viewWasTapped;
 @end

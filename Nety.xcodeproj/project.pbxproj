@@ -72,6 +72,12 @@
 		8B1D57121DE31D9200E90636 /* BaseSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D57111DE31D9200E90636 /* BaseSignUpViewController.m */; };
 		8B1D57171DE31DA400E90636 /* AccountSignUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D57141DE31DA400E90636 /* AccountSignUpVC.m */; };
 		8B1D57181DE31DA400E90636 /* AddExperienceSignUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D57161DE31DA400E90636 /* AddExperienceSignUpVC.m */; };
+		8B35F7AB1DED3BE3007CEF94 /* AccountVCStep5.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B35F7AA1DED3BE3007CEF94 /* AccountVCStep5.m */; };
+		8BE1DF151DED150600A34524 /* AccountVCStep1.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1DF141DED150600A34524 /* AccountVCStep1.m */; };
+		8BE1DF191DED169000A34524 /* AccountVCStep2.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1DF161DED169000A34524 /* AccountVCStep2.m */; };
+		8BE1DF1A1DED169000A34524 /* AccountVCStep3.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1DF171DED169000A34524 /* AccountVCStep3.m */; };
+		8BE1DF1B1DED169000A34524 /* AccountVCStep4.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1DF181DED169000A34524 /* AccountVCStep4.m */; };
+		8BE1DF1D1DED19F300A34524 /* AccountVCStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1DF1C1DED19F300A34524 /* AccountVCStep.m */; };
 		E155F5321D763854001C1134 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E155F5311D763854001C1134 /* FBSDKShareKit.framework */; };
 		E160047C1D7C0AE10098DFB1 /* Experiences+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E16004691D7C0AE10098DFB1 /* Experiences+CoreDataProperties.m */; };
 		E160047D1D7C0AE10098DFB1 /* Experiences.m in Sources */ = {isa = PBXBuildFile; fileRef = E160046B1D7C0AE10098DFB1 /* Experiences.m */; };
@@ -224,6 +230,13 @@
 		8B1D57141DE31DA400E90636 /* AccountSignUpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountSignUpVC.m; sourceTree = "<group>"; };
 		8B1D57151DE31DA400E90636 /* AddExperienceSignUpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddExperienceSignUpVC.h; sourceTree = "<group>"; };
 		8B1D57161DE31DA400E90636 /* AddExperienceSignUpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddExperienceSignUpVC.m; sourceTree = "<group>"; };
+		8B35F7AA1DED3BE3007CEF94 /* AccountVCStep5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountVCStep5.m; sourceTree = "<group>"; };
+		8BE1DF131DED150600A34524 /* AccountVCSteps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountVCSteps.h; sourceTree = "<group>"; };
+		8BE1DF141DED150600A34524 /* AccountVCStep1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountVCStep1.m; sourceTree = "<group>"; };
+		8BE1DF161DED169000A34524 /* AccountVCStep2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountVCStep2.m; sourceTree = "<group>"; };
+		8BE1DF171DED169000A34524 /* AccountVCStep3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountVCStep3.m; sourceTree = "<group>"; };
+		8BE1DF181DED169000A34524 /* AccountVCStep4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountVCStep4.m; sourceTree = "<group>"; };
+		8BE1DF1C1DED19F300A34524 /* AccountVCStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountVCStep.m; sourceTree = "<group>"; };
 		E155F5311D763854001C1134 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../FBSDKShareKit.framework; sourceTree = "<group>"; };
 		E16004681D7C0AE10098DFB1 /* Experiences+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Experiences+CoreDataProperties.h"; path = "CoreData/Experiences+CoreDataProperties.h"; sourceTree = "<group>"; };
 		E16004691D7C0AE10098DFB1 /* Experiences+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Experiences+CoreDataProperties.m"; path = "CoreData/Experiences+CoreDataProperties.m"; sourceTree = "<group>"; };
@@ -628,8 +641,7 @@
 				8B1D57111DE31D9200E90636 /* BaseSignUpViewController.m */,
 				8B1D57071DE31D7400E90636 /* NameSignUpVC.h */,
 				8B1D57081DE31D7400E90636 /* NameSignUpVC.m */,
-				8B1D57131DE31DA400E90636 /* AccountSignUpVC.h */,
-				8B1D57141DE31DA400E90636 /* AccountSignUpVC.m */,
+				8BE1DF121DED140500A34524 /* Account */,
 				8B1D57041DE31D0800E90636 /* WhoYouAreVC.h */,
 				8B1D57051DE31D0800E90636 /* WhoYouAreVC.m */,
 				8B1D570D1DE31D8B00E90636 /* ExperienceSignUpVC.h */,
@@ -640,6 +652,22 @@
 				8B1D570B1DE31D8000E90636 /* ImageSignUpVC.m */,
 			);
 			name = Signup;
+			sourceTree = "<group>";
+		};
+		8BE1DF121DED140500A34524 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				8B1D57131DE31DA400E90636 /* AccountSignUpVC.h */,
+				8B1D57141DE31DA400E90636 /* AccountSignUpVC.m */,
+				8BE1DF131DED150600A34524 /* AccountVCSteps.h */,
+				8BE1DF1C1DED19F300A34524 /* AccountVCStep.m */,
+				8BE1DF141DED150600A34524 /* AccountVCStep1.m */,
+				8BE1DF161DED169000A34524 /* AccountVCStep2.m */,
+				8BE1DF171DED169000A34524 /* AccountVCStep3.m */,
+				8BE1DF181DED169000A34524 /* AccountVCStep4.m */,
+				8B35F7AA1DED3BE3007CEF94 /* AccountVCStep5.m */,
+			);
+			name = Account;
 			sourceTree = "<group>";
 		};
 		B852F7677337544B123B08BC /* Frameworks */ = {
@@ -857,13 +885,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				67DD1AB31D17D40D00FBEA0F /* UIPrinciples.m in Sources */,
+				8BE1DF1B1DED169000A34524 /* AccountVCStep4.m in Sources */,
 				676B51C11DE21AF0002B7B66 /* GFGeoHashQuery.m in Sources */,
 				67606C6E1D24888700AD127E /* MyInfoEditExperience.m in Sources */,
 				673E2BB91D6E657100AB139F /* ExperienceCell.m in Sources */,
 				8B1D57061DE31D0800E90636 /* WhoYouAreVC.m in Sources */,
+				8BE1DF1D1DED19F300A34524 /* AccountVCStep.m in Sources */,
 				8B1D57171DE31DA400E90636 /* AccountSignUpVC.m in Sources */,
 				678138AB1D33B2DD00BFBF48 /* Settings.m in Sources */,
 				E16004841D7C0AE10098DFB1 /* Users+CoreDataProperties.m in Sources */,
+				8BE1DF1A1DED169000A34524 /* AccountVCStep3.m in Sources */,
 				67DA18941DDF9465000F9318 /* LocationTracker.m in Sources */,
 				673E2BB31D6E64C000AB139F /* ChatButtonCell.m in Sources */,
 				E16004801D7C0AE10098DFB1 /* ALL+CoreDataProperties.m in Sources */,
@@ -884,11 +915,13 @@
 				E160047F1D7C0AE10098DFB1 /* ChatRooms.m in Sources */,
 				67CD9C311D3C795600823701 /* NoContent.m in Sources */,
 				E16004831D7C0AE10098DFB1 /* Msg.m in Sources */,
+				8BE1DF151DED150600A34524 /* AccountVCStep1.m in Sources */,
 				67B2400F1D40594600F011BB /* Constants.m in Sources */,
 				8B1D56FF1DE31CC600E90636 /* SignUpTextView.m in Sources */,
 				8B1D57091DE31D7400E90636 /* NameSignUpVC.m in Sources */,
 				67DD1A7F1D17BEB500FBEA0F /* AppDelegate.m in Sources */,
 				67DD1A981D17BF1700FBEA0F /* Network.m in Sources */,
+				8BE1DF191DED169000A34524 /* AccountVCStep2.m in Sources */,
 				E16004821D7C0AE10098DFB1 /* Msg+CoreDataProperties.m in Sources */,
 				8B1D570C1DE31D8000E90636 /* ImageSignUpVC.m in Sources */,
 				676B51C21DE21AF0002B7B66 /* GFQuery.m in Sources */,
@@ -896,6 +929,7 @@
 				8B1D57121DE31D9200E90636 /* BaseSignUpViewController.m in Sources */,
 				673E58701D6AAE6400D28F5B /* NewChats.m in Sources */,
 				E1E0B9281D689FA700295133 /* N_CoreDataTableViewController.m in Sources */,
+				8B35F7AB1DED3BE3007CEF94 /* AccountVCStep5.m in Sources */,
 				676B51C01DE21AF0002B7B66 /* GFGeoHash.m in Sources */,
 				67DD1A9D1D17BF6900FBEA0F /* MyNetwork.m in Sources */,
 				67DD1A7C1D17BEB500FBEA0F /* main.m in Sources */,

@@ -8,15 +8,27 @@
 
 #import "AccountSignUpVC.h"
 #import "Regex.h"
+#import <GameKit/GameKit.h>
+#import "AccountVCSteps.h"
 
 @interface AccountSignUpVC ()
-@property (assign, nonatomic) CGFloat displacement;
+@property (strong, nonatomic) AccountVCStep1 *state1;
+@property (strong, nonatomic) AccountVCStep2 *state2;
+@property (strong, nonatomic) AccountVCStep3 *state3;
+@property (strong, nonatomic) AccountVCStep4 *state4;
+@property (strong, nonatomic) AccountVCStep5 *state5;
+@property (strong, nonatomic) GKStateMachine *stateMachine;
 @end
 
 @implementation AccountSignUpVC
 
+#pragma mark - Lifecycle Methods
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setUpStates];
+    
     self.emailTextField.delegate = self;
     self.emailConfirmationTextField.delegate = self;
     self.passwordTextField.delegate = self;
@@ -31,6 +43,8 @@
     self.emailConfirmationTextField.transform = CGAffineTransformMakeTranslation(0, (-30 -35));
     self.emailConfirmationTextField.alpha = 0;
     self.passwordConfirmationTextField.alpha = 0;
+    self.createAPasswordLabel.alpha = 0;
+    self.passwordTextField.alpha = 0;
     
     NSMutableArray *base = [self.baseViews mutableCopy];
     [base addObjectsFromArray:@[self.emailTextField, self.emailConfirmationTextField, self.passwordTextField, self.passwordConfirmationTextField, self.whatIsYourEmailLabel, self.createAPasswordLabel]];
@@ -42,6 +56,7 @@
 -(void)viewDidAppear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+    [self setUpStateMachine];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -65,71 +80,39 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
 }
 
+
+#pragma mark - Setup Methods
+
+-(void)setUpStates {
+    self.state1 = [[AccountVCStep1 alloc] initWithViewController:self];
+    self.state2 = [[AccountVCStep2 alloc] initWithViewController:self];
+    self.state3 = [[AccountVCStep3 alloc] initWithViewController:self];
+    self.state4 = [[AccountVCStep4 alloc] initWithViewController:self];
+    self.state5 = [[AccountVCStep5 alloc] initWithViewController:self];
+}
+
+// Does not automatically enter state 5 because that would cause an auto-segue
+-(void)setUpStateMachine {
+    self.stateMachine = [GKStateMachine stateMachineWithStates:@[self.state1, self.state2, self.state3, self.state4, self.state5]];
+    BOOL emailConfirmationFieldIsVisible = self.emailConfirmationTextField.alpha == 1;
+    BOOL passwordFieldIsVisible = self.passwordTextField.alpha == 1;
+    BOOL passwordConfirmationFieldIsVisible = self.passwordConfirmationTextField.alpha == 1;
+    if (passwordConfirmationFieldIsVisible) {
+        [self.stateMachine enterState:[self.state4 class]];
+    } else if (passwordFieldIsVisible) {
+        [self.stateMachine enterState:[self.state3 class]];
+    } else if (emailConfirmationFieldIsVisible) {
+        [self.stateMachine enterState:[self.state2 class]];
+    } else {
+        [self.stateMachine enterState:[self.state1 class]];
+    }
+}
+
+
+#pragma mark - TextField Delegate Methods
+
 - (BOOL)textFieldShouldReturn:(SignUpTextField *)textField {
-    
-    
-    if ([textField.titlePlaceholder isEqualToString:@"E-mail Address"]) {
-        NSTextCheckingResult *isValidEmail = [Regex validateEmail:textField.text];
-
-        if (isValidEmail) {
-            if (self.emailConfirmationTextField.alpha == 0) {
-                self.whatIsYourEmailLabel.text = @"Confirm just to be sure :)";
-                [UIView animateWithDuration:0.5
-                                      delay:0
-                                    options:UIViewAnimationOptionCurveEaseOut
-                                 animations:^{
-                                     self.emailConfirmationTextField.alpha = 1;
-                                     self.emailConfirmationTextField.transform = CGAffineTransformIdentity;
-                                 } completion:^(BOOL finished) {
-                                     [self.emailConfirmationTextField becomeFirstResponder];
-                                 }];
-            } else {
-                self.whatIsYourEmailLabel.text = @"Confirmation doesn't match";
-            }
-        } else {
-            self.whatIsYourEmailLabel.text = @"Email has an error";
-        }
-    }
-    
-    if ([textField.titlePlaceholder isEqualToString:@"E-mail Confirmation"]) {
-        BOOL emailConfirmationIsIdentical = [[self.emailTextField.text lowercaseString] isEqualToString:[self.emailConfirmationTextField.text lowercaseString]];
-        if (emailConfirmationIsIdentical) {
-            [self.passwordTextField becomeFirstResponder];
-        } else {
-            self.whatIsYourEmailLabel.text = @"Confirmation doesn't match";
-        }
-    }
-    
-    if ([textField.titlePlaceholder isEqualToString:@"Password"]) {
-        NSTextCheckingResult *isValidPassword = [Regex validatePassword:textField.text];
-
-        if (isValidPassword) {
-            if (self.passwordConfirmationTextField.alpha == 0) {
-                self.createAPasswordLabel.text = @"Confirm this one too :)";
-                [UIView animateWithDuration:0.5
-                                      delay:0
-                                    options:UIViewAnimationOptionCurveEaseOut
-                                 animations:^{
-                                     self.passwordConfirmationTextField.alpha = 1;
-                                     self.passwordConfirmationTextField.transform = CGAffineTransformMakeTranslation(0, -self.displacement);
-                                 } completion:^(BOOL finished) {
-                                     [self.passwordConfirmationTextField becomeFirstResponder];
-                                     
-                                 }];
-            } else {
-                self.createAPasswordLabel.text = @"Confirmation doesn't match";
-                [self.passwordConfirmationTextField becomeFirstResponder];
-            }
-        } else {
-            self.createAPasswordLabel.text = @"Password has an error";
-        }
-    }
-    
-    if ([textField.titlePlaceholder isEqualToString:@"Password Confirmation"]) {
-        [self goToNextPage];
-    }
-    
-    
+    [self enterNextStateIfPossible];
     return YES;
 }
 
@@ -145,6 +128,8 @@
 }
 
 
+#pragma mark - Keyboard Response Methods
+
 -(void)keyboardDidShow: (NSNotification *)aNotification {
     NSDictionary* info = [aNotification userInfo];
     CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
@@ -152,8 +137,6 @@
     if (self.viewNeedsToBeMovedUp) {
         [self moveViewsUp];
     }
-
-
 }
 
 -(void)keyboardDidHide: (NSNotification *)aNotification {
@@ -178,46 +161,28 @@
     }
 }
 
--(void)goToNextPage {
-    BOOL passwordConfirmationIsIdentical = [self.passwordTextField.text isEqualToString:self.passwordConfirmationTextField.text];
-    if (passwordConfirmationIsIdentical) {
-        for (UIControl *field in self.fields) {
-            [field resignFirstResponder];
-        }
-        
-        NSTextCheckingResult *isValidEmail = [Regex validateEmail:self.emailTextField.text];
-        BOOL emailConfirmationIsIdentical = [[self.emailTextField.text lowercaseString] isEqualToString:[self.emailConfirmationTextField.text lowercaseString]];
-        NSTextCheckingResult *isValidPassword = [Regex validatePassword:self.passwordTextField.text];
-        
-        if (isValidEmail && emailConfirmationIsIdentical &&
-            isValidPassword && passwordConfirmationIsIdentical) {
-            
-            self.userData.email = [self.emailTextField.text lowercaseString];
-            self.userData.password = self.passwordTextField.text;
-            [self moveViewsDown];
-            [self performSegueWithIdentifier:@"ToWhoYouAreSegue" sender:self];
-        } else {
-            if (isValidEmail) {
-                NSLog(@"valid email");
-            }
-            if (emailConfirmationIsIdentical) {
-                NSLog(@"valid email conf");
-            }
-            if (isValidPassword) {
-                NSLog(@"valid password");
-            }
-            if (passwordConfirmationIsIdentical) {
-                NSLog(@"valid password conf");
-            }
-            self.whatIsYourEmailLabel.text = @"Incomplete input.";
-            self.createAPasswordLabel.text = @"Incomplete input.";
-        }
-        
-    } else {
-        self.createAPasswordLabel.text = @"Confirmation doesn't match";
-    }
+#pragma mark - Progress Methods
 
+// TODO: Refactor
+-(void)enterNextStateIfPossible {
+    if ([self.stateMachine canEnterState:[self.state2 class]]) {
+        [self.stateMachine enterState:[self.state2 class]];
+    } else if ([self.stateMachine canEnterState:[self.state3 class]]) {
+        [self.stateMachine enterState:[self.state3 class]];
+    } else if ([self.stateMachine canEnterState:[self.state4 class]]) {
+        [self.stateMachine enterState:[self.state4 class]];
+    } else if ([self.stateMachine canEnterState:[self.state5 class]]) {
+        [self.stateMachine enterState:[self.state5 class]];
+    }
 }
 
+-(void)viewWasTapped {
+    [super viewWasTapped];
+    [self enterNextStateIfPossible];
+}
+
+-(void)goToNextPage {
+    [self performSegueWithIdentifier:@"ToWhoYouAreSegue" sender:self];
+}
 @end
 

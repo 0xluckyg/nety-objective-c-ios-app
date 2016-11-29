@@ -17,5 +17,8 @@
 @property (weak, nonatomic) IBOutlet SignUpTextField *emailConfirmationTextField;
 @property (weak, nonatomic) IBOutlet SignUpTextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet SignUpTextField *passwordConfirmationTextField;
-
+@property (assign, nonatomic) CGFloat displacement;
+-(void)moveViewsUp;
+-(void)moveViewsDown;
+-(void)goToNextPage;
 @end
