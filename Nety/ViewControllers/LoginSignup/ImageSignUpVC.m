@@ -94,13 +94,8 @@
 //    NSData *pickedImage = UIImagePNGRepresentation(self.chosenImage);
     
     NSLog(@"BEFORE IF STATEMENT - %d", !!self.chosenImage);
-    if (!self.chosenImage) {
+    if (self.chosenImage) {
         NSLog(@"IF STATEMENT");
-        [self registerUserInfo:userID metaDataBigUid:kDefaultUserLogoName metaDataSmallUid:kDefaultUserLogoName];
-        [self changeRoot];
-        
-    } else {
-        NSLog(@"ELSE STATEMENT");
         UIImage *bigProfileImage = self.chosenImage;
         UIImage *smallProfileImage = [self.UIPrinciple scaleDownImage:self.chosenImage];
         
@@ -144,9 +139,9 @@
             }
             
         }];
-        
     }
-    NSLog(@"UPLOAD IMAGE DONE");
+    [self registerUserInfo:userID metaDataBigUid:kDefaultUserLogoName metaDataSmallUid:kDefaultUserLogoName];
+    [self changeRoot];
 }
 
 -(void)registerUserInfo: (NSString *)userID metaDataBigUid:(NSString *)metaDataBigUid
@@ -157,12 +152,14 @@ metaDataSmallUid:(NSString *)metaDataSmallUid {
     NSMutableDictionary *experiences = [[NSMutableDictionary alloc] init];
     NSMutableArray *experienceArray = self.userData.experiences;
     
+    NSLog(@"b4 register loop");
     for (int i = 0; i < [experienceArray count]; i ++) {
         NSString *experienceKey = [NSString stringWithFormat:@"experience%@",[@(i) stringValue]];
-        [experiences setObject:[experienceArray objectAtIndex:i] forKey:experienceKey];
+        [experiences setObject:experienceArray[i] forKey:experienceKey];
     }
+    NSLog(@"after register loop");
     NSArray *fullName = [self.userData.name componentsSeparatedByString:@" "];
-
+    NSLog(@"fullname done");
     
     NSDictionary *post = @{kFirstName: fullName[0],
                            kLastName: fullName[1],
@@ -170,11 +167,11 @@ metaDataSmallUid:(NSString *)metaDataSmallUid {
                            kStatus: @"",
                            kIdentity: self.userData.occupation,
                            kSummary: self.userData.bio,
-                           kExperiences: [self.userData.experiences copy],
+                           kExperiences: [experiences copy],
                            kIAmDiscoverable: @(20000),
                            kProfilePhoto: metaDataBigUid,
                            kSecurity: @(0)};
-    
+    NSLog(@"after post");
     //Set user information inside global variables
     [MY_API addNewUser:post UserID:userID Location:nil FlagMy:YES];
     [[[self.firdatabase child:kUsers] child:userID] setValue:post];
@@ -215,10 +212,10 @@ metaDataSmallUid:(NSString *)metaDataSmallUid {
 }
 
 - (IBAction)skipButtonWasTapped:(UIButton *)sender {
-    self.chosenImage = [UIImage imageNamed:kDefaultUserLogoName];
+//    self.chosenImage = [UIImage imageNamed:kDefaultUserLogoName];
     NSString *userID = [[self.userData.email stringByReplacingOccurrencesOfString:@"@" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
     [self registerUserInfo:userID
-            metaDataBigUid:@""
+            metaDataBigUid:kDefaultUserLogoName
           metaDataSmallUid:@""];
 }
 
