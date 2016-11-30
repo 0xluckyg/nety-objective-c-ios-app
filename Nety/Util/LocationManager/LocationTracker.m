@@ -228,8 +228,6 @@
 //Send the location to Server
 - (void)updateLocationToServer {
     
-    NSLog(@"updateLocationToServer");
-    
     // Find the best location from the array based on accuracy
     NSMutableDictionary * myBestLocation = [[NSMutableDictionary alloc]init];
     
@@ -263,11 +261,9 @@
         self.myLocationAccuracy =[[myBestLocation objectForKey:ACCURACY]floatValue];
     }
     
-    NSLog(@"Send to Server: Latitude(%f) Longitude(%f) Accuracy(%f)",self.myLocation.latitude, self.myLocation.longitude,self.myLocationAccuracy);
-    
     //Code to send the self.myLocation and self.myLocationAccuracy to server
     
-    if (myBestLocation == 0) {
+    if (self.myLocationAccuracy == 0) {
     
         NSLog(@"Something wrong with location update");
         
@@ -278,16 +274,17 @@
         if (self.previousLocationSentToServer != nil) {
             distanceBetweenPrevious = [myLocationCL distanceFromLocation:self.previousLocationSentToServer];
         } else {
-            distanceBetweenPrevious = 0;
+            distanceBetweenPrevious = 5;
         }
         
-        if (distanceBetweenPrevious > 5) {
+        if (distanceBetweenPrevious >= 5) {
             if (MY_USER) {
                 FIRDatabaseReference *geo = [[[FIRDatabase database] reference] child:kUserLocation];
                 
                 //Save location to the database
                 GeoFire *geoFire = [[GeoFire alloc] initWithFirebaseRef:geo];
                 
+                NSLog(@"Send to Server: Latitude(%f) Longitude(%f) Accuracy(%f)",self.myLocation.latitude, self.myLocation.longitude,self.myLocationAccuracy);
                 [geoFire setLocation:[[CLLocation alloc] initWithLatitude:self.myLocation.latitude longitude:self.myLocation.longitude] forKey:MY_USER.userID];
                 self.previousLocationSentToServer = [[CLLocation alloc] initWithLatitude:self.myLocation.latitude longitude:self.myLocation.longitude];
                 NSString *myLocationCoreData = [NSString stringWithFormat:@"%f:%f", self.myLocation.latitude, self.myLocation.longitude];
@@ -309,6 +306,9 @@
                 [userData setValue:@(distance) forKey:kDistance];
                 [MY_API saveContext];
             }
+        } else {
+            self.previousLocationSentToServer = [[CLLocation alloc] initWithLatitude:self.myLocation.latitude longitude:self.myLocation.longitude];
+            NSLog(@"user didn't move");
         }
         
     }

@@ -176,11 +176,7 @@
 //---------------------------------------------------------
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    [self.table beginUpdates];
-}
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    [self.table endUpdates];
+    [self.table reloadData];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
