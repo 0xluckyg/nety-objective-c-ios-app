@@ -11,10 +11,11 @@
 #import "AppDelegate.h"
 #import "Constants.h"
 #import "MBProgressHUD.h"
+#import "BaseSignUpViewController.h"
 
 @import Firebase;
 
-@interface Login : UIViewController
+@interface Login : BaseSignUpViewController
 
 
 //VARIABLES----------------------------------------
@@ -34,7 +35,7 @@
 //IBOUTLETS----------------------------------------
 
 
-@property (weak, nonatomic) IBOutlet UIView *holdingView;
+//@property (weak, nonatomic) IBOutlet UIView *holdingView;
 
 @property (weak, nonatomic) IBOutlet UITextField *email;
 
