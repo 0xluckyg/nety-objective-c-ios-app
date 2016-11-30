@@ -40,9 +40,16 @@ typedef void (^N_APIBlockArray)(NSArray* array, NSError* error);
 
 @property (strong, nonatomic) FIRDatabaseReference *firdatabase;
 
+- (void) listenForChildAdded;
+
+- (void) listenForChildRemoved;
+
+- (void) listenForChildChanged;
+
 - (void) loginToAcc:(NSString*) email pass:(NSString*) password  DoneBlock:(N_APIBlockDict)doneBlock;
 
 - (void) addNewUser:(NSDictionary*)userInfo UserID:(NSString*)userID Location:(CLLocation*)location FlagMy:(BOOL)flagMy;
 
 - (void) logOut;
+
 @end

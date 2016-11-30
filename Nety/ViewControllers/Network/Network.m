@@ -175,7 +175,13 @@
 #pragma mark - Protocols and Delegates
 //---------------------------------------------------------
 
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    [self.table beginUpdates];
+}
 
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self.table endUpdates];
+}
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     

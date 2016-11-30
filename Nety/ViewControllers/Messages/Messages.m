@@ -374,7 +374,7 @@
         self.navigationController.viewControllers = navigationArray;
     }
     
-    self.tabBarController.tabBar.hidden = NO;
+    self.tabBarController.tabBar.hidden = NO;    
     [self.navigationController popViewControllerAnimated:YES];
     
 }

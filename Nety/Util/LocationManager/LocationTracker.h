@@ -18,6 +18,8 @@
 
 @property (strong,nonatomic) LocationShareModel * shareModel;
 
+@property (strong,nonatomic) CLLocation * previousLocationSentToServer;
+
 @property (nonatomic) CLLocationCoordinate2D myLocation;
 @property (nonatomic) CLLocationAccuracy myLocationAccuracy;
 

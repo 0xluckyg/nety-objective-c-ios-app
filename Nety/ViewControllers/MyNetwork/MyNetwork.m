@@ -35,7 +35,6 @@
     
     self.navigationItem.title = NSLocalizedString(@"myNetworkTitle", nil);
     
-    
     //If no experiences visible, show noContent header
     if ([[self fetchedResultsController].fetchedObjects count] == 0) {
         
@@ -205,13 +204,10 @@
     
     profilePage.selectedUser = user;
     
-    __weak typeof(self) weakSelf = self;
-    [self.UIPrinciple setTabBarVisible:![self.UIPrinciple tabBarIsVisible:self] animated:YES sender:self completion:^(BOOL finished) {
-        weakSelf.tabBarController.tabBar.hidden = YES;
-    }];
-    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    profilePage.hidesBottomBarWhenPushed = YES;
+
     [self.navigationController pushViewController:profilePage animated:YES];
     
 }

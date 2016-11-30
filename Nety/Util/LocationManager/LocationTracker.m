@@ -267,38 +267,48 @@
     
     //Code to send the self.myLocation and self.myLocationAccuracy to server
     
-    if ([[NSString stringWithFormat:@"%f", self.myLocation.latitude] isEqualToString:@"0.000000"] &&
-        [[NSString stringWithFormat:@"%f", self.myLocation.longitude] isEqualToString:@"0.000000"]) {
+    if (myBestLocation == 0) {
     
         NSLog(@"Something wrong with location update");
         
     } else {
+        CLLocation *myLocationCL = [[CLLocation alloc] initWithLatitude:self.myLocation.latitude longitude:self.myLocation.longitude];
+        double distanceBetweenPrevious;
         
-        if (MY_USER) {
-            FIRDatabaseReference *geo = [[[FIRDatabase database] reference] child:kUserLocation];
-            
-            //Save location to the database
-            GeoFire *geoFire = [[GeoFire alloc] initWithFirebaseRef:geo];
-            
-            [geoFire setLocation:[[CLLocation alloc] initWithLatitude:self.myLocation.latitude longitude:self.myLocation.longitude] forKey:MY_USER.userID];
-            NSString *myLocationCoreData = [NSString stringWithFormat:@"%f:%f", self.myLocation.latitude, self.myLocation.longitude];
-            [MY_USER setValue:myLocationCoreData forKey:kGeocoordinate];
+        if (self.previousLocationSentToServer != nil) {
+            distanceBetweenPrevious = [myLocationCL distanceFromLocation:self.previousLocationSentToServer];
+        } else {
+            distanceBetweenPrevious = 0;
         }
         
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Users" inManagedObjectContext:MY_API.managedObjectContext];
-        [fetchRequest setEntity:entity];
-        
-        NSError *error;
-        NSArray *fetchedObjects = [MY_API.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-        
-        for (Users *userData in fetchedObjects) {
-            NSArray *userLocationArray = [userData.geocoordinate componentsSeparatedByString:@":"];
-            CLLocation *userLocation = [[CLLocation alloc] initWithLatitude:[userLocationArray[0] floatValue] longitude:[userLocationArray[1] floatValue]];
-            CLLocation *myLocationCL = [[CLLocation alloc] initWithLatitude:self.myLocation.latitude longitude:self.myLocation.longitude];
-            double distance = [myLocationCL distanceFromLocation:userLocation];
-            [userData setValue:@(distance) forKey:kDistance];
-            [MY_API saveContext];
+        if (distanceBetweenPrevious > 5) {
+            if (MY_USER) {
+                FIRDatabaseReference *geo = [[[FIRDatabase database] reference] child:kUserLocation];
+                
+                //Save location to the database
+                GeoFire *geoFire = [[GeoFire alloc] initWithFirebaseRef:geo];
+                
+                [geoFire setLocation:[[CLLocation alloc] initWithLatitude:self.myLocation.latitude longitude:self.myLocation.longitude] forKey:MY_USER.userID];
+                self.previousLocationSentToServer = [[CLLocation alloc] initWithLatitude:self.myLocation.latitude longitude:self.myLocation.longitude];
+                NSString *myLocationCoreData = [NSString stringWithFormat:@"%f:%f", self.myLocation.latitude, self.myLocation.longitude];
+                [MY_USER setValue:myLocationCoreData forKey:kGeocoordinate];
+            }
+            
+            NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+            NSEntityDescription *entity = [NSEntityDescription entityForName:@"Users" inManagedObjectContext:MY_API.managedObjectContext];
+            [fetchRequest setEntity:entity];
+            
+            NSError *error;
+            NSArray *fetchedObjects = [MY_API.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+            
+            
+            for (Users *userData in fetchedObjects) {
+                NSArray *userLocationArray = [userData.geocoordinate componentsSeparatedByString:@":"];
+                CLLocation *userLocation = [[CLLocation alloc] initWithLatitude:[userLocationArray[0] floatValue] longitude:[userLocationArray[1] floatValue]];
+                double distance = [myLocationCL distanceFromLocation:userLocation];
+                [userData setValue:@(distance) forKey:kDistance];
+                [MY_API saveContext];
+            }
         }
         
     }

@@ -66,14 +66,16 @@
     [myChatsController setDelegateFromMyChats:self];
 }
 
+
 -(void)initializeDesign {
     self.UIPrinciple = [[UIPrinciples alloc] init];
     
     self.view.backgroundColor = self.UIPrinciple.netyTheme;
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
