@@ -43,27 +43,18 @@
 }
 
 - (void)initializeDesign {
+    self.labelButtonStack.hidden = YES;
+    self.circleButtonStack.hidden = YES;
+    self.blueLine.hidden = YES;
+    self.greyLine.hidden = YES;
+    self.email.delegate = self;
+    self.password.delegate = self;
+    
     self.UIPrinciple = [[UIPrinciples alloc] init];
     
-    self.view.backgroundColor = self.UIPrinciple.netyTheme;
-    self.holdingView.backgroundColor = self.UIPrinciple.netyTheme;
-    
-    [self.loginButtonOutlet.layer setBorderWidth:1.0];
-    [self.loginButtonOutlet.layer setBorderColor:[[UIColor whiteColor] CGColor]];
-    [self.loginButtonOutlet.layer setCornerRadius:self.loginButtonOutlet.frame.size.height/2];
-    
-    [self.email setBackgroundColor:[UIColor whiteColor]];
-    [self.email.layer setCornerRadius:self.email.frame.size.height/2];
-    self.email.textColor = self.UIPrinciple.netyTheme;
-    
-    
-    [self.password setBackgroundColor:[UIColor whiteColor]];
-    [self.password.layer setCornerRadius:self.password.frame.size.height/2];
-    self.password.textColor = self.UIPrinciple.netyTheme;
-    
-    self.email.placeholder = NSLocalizedString(@"email", nil);
-    self.password.placeholder = NSLocalizedString(@"password", nil);
-    [self.loginButtonOutlet setTitle:NSLocalizedString(@"login", nil) forState:UIControlStateNormal];
+//    self.email.placeholder = NSLocalizedString(@"email", nil);
+//    self.password.placeholder = NSLocalizedString(@"password", nil);
+//    [self.loginButtonOutlet setTitle:NSLocalizedString(@"login", nil) forState:UIControlStateNormal];
     
 }
 
