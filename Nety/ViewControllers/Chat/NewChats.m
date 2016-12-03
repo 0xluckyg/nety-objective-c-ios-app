@@ -28,6 +28,7 @@
     [self initializeSettings];
     [self initializeDesign];
     [self initializeUsers];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {

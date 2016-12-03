@@ -48,7 +48,7 @@
                                  CAPSPageMenuOptionUnselectedMenuItemLabelColor:[UIColor whiteColor],
                                  CAPSPageMenuOptionSelectionIndicatorColor: [UIColor whiteColor],
                                  CAPSPageMenuOptionMenuItemFont: [self.UIPrinciple netyFontWithSize:13],
-                                 CAPSPageMenuOptionMenuHeight: @(40.0),
+                                 CAPSPageMenuOptionMenuHeight: @(44.0),
                                  CAPSPageMenuOptionMenuItemWidth: @((self.view.frame.size.width / 2) - (self.view.frame.size.width / 10)),
                                  CAPSPageMenuOptionCenterMenuItems: @(YES),
                                  CAPSPageMenuOptionScrollAnimationDurationOnMenuItemTap: @(300.0)

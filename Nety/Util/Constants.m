@@ -53,7 +53,7 @@ NSString *const kUserDetails = @"userDetails";
 
 NSString *const kReports = @"reports";
 
-NSString *const kDefaultUserLogoName = @"NetyBlueLogo";
+NSString *const kDefaultUserLogoName = @"UserDefaultImage";
 NSString *const kIAmDiscoverable = @"imdiscoverable";
 
 //returnType (^blockName)(parameterTypes) = ^returnType(parameters) {...};

@@ -48,17 +48,15 @@
     
     self.logoImage.image = [UIImage imageNamed:@"LogoTransparent"];
     
-    [self.loginButtonOutlet.layer setBorderWidth:1.0];
-    [self.loginButtonOutlet.layer setBorderColor:[[UIColor whiteColor] CGColor]];
-    [self.loginButtonOutlet.layer setCornerRadius:self.loginButtonOutlet.frame.size.height/2];
+    [self.loginButtonOutlet setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4]];
+    [self.loginButtonOutlet.layer setCornerRadius:self.loginButtonOutlet.frame.size.height/4];
     
-    [self.signupButtonOutlet.layer setBorderWidth:1.0];
-    [self.signupButtonOutlet.layer setBorderColor:[[UIColor whiteColor] CGColor]];
-    [self.signupButtonOutlet.layer setCornerRadius:self.signupButtonOutlet.frame.size.height/2];
+    [self.signupButtonOutlet setBackgroundColor:[self.UIPrinciple.netyTheme colorWithAlphaComponent:0.6]];
+    [self.signupButtonOutlet.layer setCornerRadius:self.signupButtonOutlet.frame.size.height/4];
     
-    [self.loginWithFacebookOutlet.layer setCornerRadius:self.signupButtonOutlet.frame.size.height/2];
-    
-    [self.loginWithLinkedinOutlet.layer setCornerRadius:self.signupButtonOutlet.frame.size.height/2];
+//    [self.loginWithFacebookOutlet.layer setCornerRadius:self.signupButtonOutlet.frame.size.height/2];
+//    
+//    [self.loginWithLinkedinOutlet.layer setCornerRadius:self.signupButtonOutlet.frame.size.height/2];
     
     
     [self.loginButtonOutlet setTitle:NSLocalizedString(@"loginMain", nil) forState:normal];
@@ -103,7 +101,8 @@
 //---------------------------------------------------------
 
 
-- (IBAction)loginButton:(id)sender {    
+- (IBAction)loginButton:(id)sender {
+    
 }
 
 - (IBAction)signupButton:(id)sender {

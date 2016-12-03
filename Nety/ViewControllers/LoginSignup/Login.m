@@ -54,7 +54,8 @@
     
 //    self.email.placeholder = NSLocalizedString(@"email", nil);
 //    self.password.placeholder = NSLocalizedString(@"password", nil);
-//    [self.loginButtonOutlet setTitle:NSLocalizedString(@"login", nil) forState:UIControlStateNormal];
+    [self.loginButtonOutlet setTitle:NSLocalizedString(@"login", nil) forState:UIControlStateNormal];
+    [self.loginButtonOutlet setTintColor:self.UIPrinciple.netyTheme];
     
 }
 

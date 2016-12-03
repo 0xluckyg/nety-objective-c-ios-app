@@ -71,7 +71,6 @@
 -(void)goToNextPage {
     NSTextCheckingResult *isValidName = [Regex validateName:self.nameTextField.text];
     NSUInteger age = [self.ageTextField.text integerValue];
-    NSLog(@"%li", age);
     BOOL isValidAge = age > 12 && age < 85;
     self.userData.name = [self.nameTextField.text capitalizedString];
     if (isValidAge) {
@@ -79,10 +78,15 @@
         if (isValidName) {
             [self performSegueWithIdentifier:@"ToAccountSegue" sender:self];
         } else {
-            self.whatIsYourNameLabel.text = @"Invalid: Full name please";
+            self.whatIsYourNameLabel.text = @"Not a valid name";
         }
     } else {
-        self.howOldAreYouLabel.text = @"Not a valid age";
+        if (isValidName) {
+            self.howOldAreYouLabel.text = @"Not a valid age";
+        } else {
+            self.whatIsYourNameLabel.text = @"Not a valid name";
+            self.howOldAreYouLabel.text = @"Not a valid age";
+        }
     }
 }
 
