@@ -52,4 +52,6 @@ typedef void (^N_APIBlockArray)(NSArray* array, NSError* error);
 
 - (void) logOut;
 
+- (CLLocation *) getBestLocation;
+
 @end

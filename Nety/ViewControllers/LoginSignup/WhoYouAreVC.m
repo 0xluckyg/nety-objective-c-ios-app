@@ -44,7 +44,7 @@
     if ([textField.titlePlaceholder isEqualToString:@"Occupation"]) {
         
         if (true) {
-            self.whatDoYouDoLabel.text = @"Oh. Interesting ...";
+            self.whatDoYouDoLabel.text = @"Oh. Interesting!";
             [self.bioTextView becomeFirstResponder];
         }
     }
@@ -71,6 +71,8 @@
         self.userData.occupation = self.positionTextField.text;
         self.userData.bio = self.bioTextView.text;
         [self performSegueWithIdentifier:@"ToExperienceSegue" sender:self];
+    } else {
+        self.positionTextField.text = @"Please make the descriptions longer";
     }
     
 }

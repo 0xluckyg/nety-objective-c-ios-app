@@ -10,6 +10,7 @@
 #import "UIPrinciples.h"
 #import "AppDelegate.h"
 #import "Constants.h"
+#import "AppDelegate.h"
 
 @import Firebase;
 
@@ -71,13 +72,11 @@
 }
 
 -(void)uploadImage: (NSString *)userID {
-    NSLog(@"upload image");
 
     //Uploading profile image
     NSString *uniqueImageIDBig = [[NSUUID UUID] UUIDString];
     NSString *uniqueImageIDSmall = [[NSUUID UUID] UUIDString];
-
-    NSLog(@"Made UUIDs");
+    
     FIRStorage *storage = [FIRStorage storage];
     FIRStorageReference *profileImageBigRef = [[[[storage reference]
                                                  child:@"ProfileImages"]
@@ -87,15 +86,12 @@
                                                    child:@"ProfileImages"]
                                                   child:@"Small" ]
                                                  child:uniqueImageIDSmall];
-    NSLog(@"Made FIRStorageReferences");
     
     //If user doesn't set profile image, set it to default image without uploading it.
 //    NSData *logoImage = UIImagePNGRepresentation([UIImage imageNamed:kDefaultUserLogoName]);
 //    NSData *pickedImage = UIImagePNGRepresentation(self.chosenImage);
     
-    NSLog(@"BEFORE IF STATEMENT - %d", !!self.chosenImage);
     if (self.chosenImage) {
-        NSLog(@"IF STATEMENT");
         UIImage *bigProfileImage = self.chosenImage;
         UIImage *smallProfileImage = [self.UIPrinciple scaleDownImage:self.chosenImage];
         
@@ -110,16 +106,13 @@
         
         //Uploading big profile picture first
         [profileImageBigRef putData:uploadDataBig metadata:nil completion:^(FIRStorageMetadata * _Nullable metadataBig, NSError * _Nullable error) {
-            NSLog(@"UPLOAD BLOCK");
             
             if (error) {
-                NSLog(@"ELSE STATEMENT - IF ERROR");
                 [hud hideAnimated:YES];
                 NSLog(@"%@", error.localizedDescription);
                 [self.UIPrinciple oneButtonAlert:@"OK" controllerTitle:@"Can not upload image" message:@"Please try again at another time" viewController:self];
                 
             } else {
-                NSLog(@"ELSE STATEMENT - ELSE NO ERROR");
                 //Uploading small profile picture next
                 [profileImageSmallRef putData:uploadDataSmall metadata:nil completion:^(FIRStorageMetadata * _Nullable metadataSmall, NSError * _Nullable error) {
                     if (error) {
@@ -139,27 +132,23 @@
             }
             
         }];
+    } else {
+        [self registerUserInfo:userID metaDataBigUid:kDefaultUserLogoName metaDataSmallUid:kDefaultUserLogoName];
     }
-    [self registerUserInfo:userID metaDataBigUid:kDefaultUserLogoName metaDataSmallUid:kDefaultUserLogoName];
     [self changeRoot];
 }
 
 -(void)registerUserInfo: (NSString *)userID metaDataBigUid:(NSString *)metaDataBigUid
 metaDataSmallUid:(NSString *)metaDataSmallUid {
     
-    NSLog(@"register user info");
-
     NSMutableDictionary *experiences = [[NSMutableDictionary alloc] init];
     NSMutableArray *experienceArray = self.userData.experiences;
     
-    NSLog(@"b4 register loop");
     for (int i = 0; i < [experienceArray count]; i ++) {
         NSString *experienceKey = [NSString stringWithFormat:@"experience%@",[@(i) stringValue]];
         [experiences setObject:experienceArray[i] forKey:experienceKey];
     }
-    NSLog(@"after register loop");
     NSArray *fullName = [self.userData.name componentsSeparatedByString:@" "];
-    NSLog(@"fullname done");
     
     NSDictionary *post = @{kFirstName: fullName[0],
                            kLastName: fullName[1],
@@ -171,16 +160,18 @@ metaDataSmallUid:(NSString *)metaDataSmallUid {
                            kIAmDiscoverable: @(20000),
                            kProfilePhoto: metaDataBigUid,
                            kSecurity: @(0)};
-    NSLog(@"after post");
     //Set user information inside global variables
-    [MY_API addNewUser:post UserID:userID Location:nil FlagMy:YES];
+    CLLocation *myLocation = [self getBestLocation];
+    
+    NSLog(@"post %@", post);
+    
+    [MY_API addNewUser:post UserID:userID Location:myLocation FlagMy:YES];
     [[[self.firdatabase child:kUsers] child:userID] setValue:post];
     
 }
 
 
 -(void)changeRoot {
-    NSLog(@"change root");
     //Set root controller to tabbar with cross dissolve animation
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [appDelegate setUserIsSigningIn:false];
@@ -204,11 +195,9 @@ metaDataSmallUid:(NSString *)metaDataSmallUid {
 #pragma mark - IBActions
 
 - (IBAction)imageButtonWasTapped:(UIButton *)sender {
-    NSLog(@"image button tapped");
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.delegate = self;
     [self presentViewController:imagePicker animated:YES completion:nil];
-    NSLog(@"image button done");
 }
 
 - (IBAction)skipButtonWasTapped:(UIButton *)sender {
@@ -220,7 +209,6 @@ metaDataSmallUid:(NSString *)metaDataSmallUid {
 }
 
 - (IBAction)doneButtonTapped:(UIButton *)sender {
-    NSLog(@"done button tapped");
     NSString *userID = [[self.userData.email stringByReplacingOccurrencesOfString:@"@" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
     [self uploadImage:userID];
 }
@@ -232,6 +220,33 @@ metaDataSmallUid:(NSString *)metaDataSmallUid {
     }
     NSString *userID = [[self.userData.email stringByReplacingOccurrencesOfString:@"@" withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
     [self uploadImage:userID];
+}
+
+#pragma mark - Custom
+
+- (CLLocation *) getBestLocation {
+    
+    LocationShareModel *shareModel = [LocationShareModel sharedModel];
+    CLLocation *myLocation = [CLLocation alloc];
+    
+    //Set distance
+    if ([shareModel.myLocationArray count] != 0) {
+        //Pick best location accuracy
+        int bestAccuracy = 0;
+        int bestLocationIndex = 0;
+        for (int i = 0; i < [shareModel.myLocationArray count]; i ++) {
+            if ([[shareModel.myLocationArray[i] objectForKey:@"theAccuracy"] floatValue] > bestAccuracy) {
+                bestAccuracy = [[shareModel.myLocationArray[i] objectForKey:@"theAccuracy"] floatValue];
+                bestLocationIndex = i;
+            }
+        }
+        
+        myLocation = [myLocation initWithLatitude:[[shareModel.myLocationArray[bestLocationIndex] objectForKey:@"latitude"] floatValue] longitude:[[shareModel.myLocationArray[bestLocationIndex] objectForKey:@"longitude"] floatValue]];
+        
+        return myLocation;
+    } else {
+        return nil;
+    }
 }
 
 @end

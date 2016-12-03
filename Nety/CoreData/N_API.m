@@ -173,8 +173,7 @@
             Users* user = [findUserArray lastObject];
             [self.managedObjectContext deleteObject:user];
             [self saveContext];
-        }
-        
+        }        
     }];
     
 }

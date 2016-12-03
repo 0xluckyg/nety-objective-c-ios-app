@@ -131,7 +131,7 @@
                                                userInfo:nil
                                                 repeats:YES];
         } else  {
-                userIsSigningIn=false;
+                    userIsSigningIn=false;
             
                     [self.locationTracker startLocationTracking];
             

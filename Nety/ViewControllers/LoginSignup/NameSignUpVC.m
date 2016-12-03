@@ -73,6 +73,7 @@
     NSUInteger age = [self.ageTextField.text integerValue];
     NSLog(@"%li", age);
     BOOL isValidAge = age > 12 && age < 85;
+    self.userData.name = [self.nameTextField.text capitalizedString];
     if (isValidAge) {
         self.userData.age = age;
         if (isValidName) {

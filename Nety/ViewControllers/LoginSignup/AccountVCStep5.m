@@ -10,6 +10,7 @@
 #import "UserData.h"
 #import "LocationShareModel.h"
 #import "GeoFire.h"
+#import "AppDelegate.h"
 
 @implementation AccountVCStep5
 
@@ -21,6 +22,11 @@
     for (UIControl *field in self.viewController.fields) {
         [field resignFirstResponder];
     }
+    
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+    [appDelegate setUserIsSigningIn:true];
+    
+    [self createUser];
     [self.viewController goToNextPage];
 }
 
@@ -69,7 +75,7 @@
              
              [geoFire setLocation:[[CLLocation alloc] initWithLatitude:myLocation.coordinate.latitude longitude:myLocation.coordinate.longitude] forKey:userID];
              
-             [[N_API sharedController] addNewUser:post UserID:userID Location:myLocation FlagMy:YES];
+             [MY_API addNewUser:post UserID:userID Location:myLocation FlagMy:YES];
              [[[self.firdatabase child:kUsers] child:userID] setValue:post];
              
              [self.viewController goToNextPage];
