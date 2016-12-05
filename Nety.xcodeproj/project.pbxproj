@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		60A7558738488CC025076173 /* Pods_Nety.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EF861BBC72529E816531A8D /* Pods_Nety.framework */; };
+		670E5A101DF4DD2700CA37B8 /* BlockedFriends.m in Sources */ = {isa = PBXBuildFile; fileRef = 670E5A0F1DF4DD2700CA37B8 /* BlockedFriends.m */; };
+		670E5A131DF4E3D400CA37B8 /* BlockedFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 670E5A121DF4E3D400CA37B8 /* BlockedFriendsCell.m */; };
 		673338F71D20937C00A8009F /* MyNetworkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 673338F61D20937C00A8009F /* MyNetworkCell.m */; };
 		6733390E1D20B5ED00A8009F /* ChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6733390D1D20B5ED00A8009F /* ChatCell.m */; };
 		673E2BB31D6E64C000AB139F /* ChatButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 673E2BB21D6E64C000AB139F /* ChatButtonCell.m */; };
@@ -102,6 +104,10 @@
 
 /* Begin PBXFileReference section */
 		4EF861BBC72529E816531A8D /* Pods_Nety.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nety.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		670E5A0E1DF4DD2700CA37B8 /* BlockedFriends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockedFriends.h; sourceTree = "<group>"; };
+		670E5A0F1DF4DD2700CA37B8 /* BlockedFriends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockedFriends.m; sourceTree = "<group>"; };
+		670E5A111DF4E3D400CA37B8 /* BlockedFriendsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockedFriendsCell.h; sourceTree = "<group>"; };
+		670E5A121DF4E3D400CA37B8 /* BlockedFriendsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockedFriendsCell.m; sourceTree = "<group>"; };
 		673338F51D20937C00A8009F /* MyNetworkCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNetworkCell.h; sourceTree = "<group>"; };
 		673338F61D20937C00A8009F /* MyNetworkCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNetworkCell.m; sourceTree = "<group>"; };
 		6733390C1D20B5ED00A8009F /* ChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatCell.h; sourceTree = "<group>"; };
@@ -408,6 +414,10 @@
 			children = (
 				678138A91D33B2DD00BFBF48 /* Settings.h */,
 				678138AA1D33B2DD00BFBF48 /* Settings.m */,
+				670E5A0E1DF4DD2700CA37B8 /* BlockedFriends.h */,
+				670E5A0F1DF4DD2700CA37B8 /* BlockedFriends.m */,
+				670E5A111DF4E3D400CA37B8 /* BlockedFriendsCell.h */,
+				670E5A121DF4E3D400CA37B8 /* BlockedFriendsCell.m */,
 				678138A71D33A94E00BFBF48 /* Settings.storyboard */,
 			);
 			path = Settings;
@@ -541,9 +551,9 @@
 				673E586F1D6AAE6400D28F5B /* NewChats.m */,
 				673E58711D6AAE7900D28F5B /* MyChats.h */,
 				673E58721D6AAE7900D28F5B /* MyChats.m */,
-				67DD1AA31D17BFCC00FBEA0F /* Chat.storyboard */,
 				6733390C1D20B5ED00A8009F /* ChatCell.h */,
 				6733390D1D20B5ED00A8009F /* ChatCell.m */,
+				67DD1AA31D17BFCC00FBEA0F /* Chat.storyboard */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -567,9 +577,9 @@
 			children = (
 				67DD1A9B1D17BF6900FBEA0F /* MyNetwork.h */,
 				67DD1A9C1D17BF6900FBEA0F /* MyNetwork.m */,
-				67DD1A9E1D17BF7200FBEA0F /* MyNetwork.storyboard */,
 				673338F51D20937C00A8009F /* MyNetworkCell.h */,
 				673338F61D20937C00A8009F /* MyNetworkCell.m */,
+				67DD1A9E1D17BF7200FBEA0F /* MyNetwork.storyboard */,
 			);
 			path = MyNetwork;
 			sourceTree = "<group>";
@@ -579,9 +589,9 @@
 			children = (
 				67DD1A961D17BF1700FBEA0F /* Network.h */,
 				67DD1A971D17BF1700FBEA0F /* Network.m */,
-				67DD1A991D17BF2100FBEA0F /* Network.storyboard */,
 				67DD1AB41D17E04F00FBEA0F /* NetworkCell.h */,
 				67DD1AB51D17E04F00FBEA0F /* NetworkCell.m */,
+				67DD1A991D17BF2100FBEA0F /* Network.storyboard */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -926,6 +936,8 @@
 				8B1D570C1DE31D8000E90636 /* ImageSignUpVC.m in Sources */,
 				676B51C21DE21AF0002B7B66 /* GFQuery.m in Sources */,
 				673E58761D6AAFA300D28F5B /* CAPSPageMenu.m in Sources */,
+				670E5A131DF4E3D400CA37B8 /* BlockedFriendsCell.m in Sources */,
+				670E5A101DF4DD2700CA37B8 /* BlockedFriends.m in Sources */,
 				8B1D57121DE31D9200E90636 /* BaseSignUpViewController.m in Sources */,
 				673E58701D6AAE6400D28F5B /* NewChats.m in Sources */,
 				E1E0B9281D689FA700295133 /* N_CoreDataTableViewController.m in Sources */,

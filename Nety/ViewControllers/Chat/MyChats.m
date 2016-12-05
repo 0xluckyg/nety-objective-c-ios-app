@@ -121,7 +121,6 @@
     ChatCell *chatCell = [tableView dequeueReusableCellWithIdentifier:@"ChatCell" forIndexPath:indexPath];
     
     //Set images
-    
     ChatRooms* chat = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     
     [self configureCell:chatCell withObject:chat];

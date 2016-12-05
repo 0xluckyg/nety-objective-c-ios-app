@@ -267,7 +267,7 @@
 
 - (void) listenForNetworkBlockChildAdd {
     
-    [[[[self.firdatabase child:kUserDetails] child:_myUser.userID] child:kAddedUsers] observeEventType:FIRDataEventTypeChildRemoved withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    [[[[self.firdatabase child:kUserDetails] child:_myUser.userID] child:kBlockedUsers] observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         
         NSString *otherUserID = snapshot.key;
         
@@ -282,6 +282,7 @@
         if (findUserArray.count>0) {
             Users* user = [findUserArray lastObject];
             [user setIsBlocked:[NSNumber numberWithBool:YES]];
+            NSLog(@"User is BLocked");
             [self saveContext];
         }
         

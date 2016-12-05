@@ -25,22 +25,7 @@
     [self initializeSettings];
     [self initializeDesign];
 }
--(void)viewWillAppear:(BOOL)animated
-{
-    NSUserDefaults* userDef = [NSUserDefaults standardUserDefaults];
-    if ([userDef objectForKey:@"sliderNetwork"] == nil) {
-        self.sliderValue = 0.3;
-        self.locationRangeSlider.value = self.sliderValue;
-    } else {
-        self.sliderValue = [[userDef objectForKey:@"sliderNetwork"] floatValue];
-        self.locationRangeSlider.value = self.sliderValue;
-    }
-    [self calculateSliderDistanceValue];
-    NSString *distanceString = [self calculateDistanceToDescription];
-    self.locationRangeLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ discoverable", @"{distance} discoverable"), distanceString];
-  
-    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-}
+
 - (void) viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -77,20 +62,6 @@
             [self.chatSwitch setOn:NO];
             break;
     }
-    
-    NSUserDefaults* userDef = [NSUserDefaults standardUserDefaults];
-    if ([userDef objectForKey:@"sliderNetwork"] == nil) {
-        self.sliderValue = 0.3;
-        self.locationRangeSlider.value = self.sliderValue;
-    } else {
-        self.sliderValue = [[userDef objectForKey:@"sliderNetwork"] floatValue];
-        self.locationRangeSlider.value = self.sliderValue;
-    }
-    [self calculateSliderDistanceValue];
-    NSString *distanceString = [self calculateDistanceToDescription];
-    
-    self.locationRangeLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ discoverable", @"{distance} discoverable"), distanceString];
-
 }
 
 -(void)initializeDesign {
@@ -121,14 +92,7 @@
     [self.discoverabilitySwitch setOnTintColor:self.UIPrinciple.netyTheme];
     [self.chatRequestSwitch setOnTintColor:self.UIPrinciple.netyTheme];
     [self.chatSwitch setOnTintColor:self.UIPrinciple.netyTheme];
-
-    //Set slider
-//    self.locationRangeSlider.value = 1;
-//    self.sliderValue = self.locationRangeSlider.value;
-    [self calculateSliderDistanceValue];
-    NSString *distanceString = [self calculateDistanceToDescription];
     
-    self.locationRangeLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ discoverable", @"{distance} discoverable"), distanceString];
     self.chatRequestOutlet.text = NSLocalizedString(@"settingsChatRequest", nil);
     self.chatOutlet.text = NSLocalizedString(@"settingsChat", nil);
     self.chatNotificationsOutlet.text = NSLocalizedString(@"chatNotifications", nil);
@@ -159,7 +123,7 @@
     UIAlertAction *no = [UIAlertAction actionWithTitle:NSLocalizedString(@"no", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     }];
     
-    if (indexPath.section == 3) {
+    if (indexPath.section == 4) {
         if (indexPath.row == 0) {
             
             [self.UIPrinciple twoButtonAlert:yes rightButton:no controller:NSLocalizedString(@"logOut", nil) message:NSLocalizedString(@"logOutDescription", nil) viewController:self];
@@ -167,7 +131,7 @@
         }
     }
     
-    if (indexPath.section == 2) {
+    if (indexPath.section == 3) {
         switch (indexPath.row) {
             case 0://Share on Facebook
             {
@@ -234,6 +198,16 @@
                 break;
         }
     }
+    
+    if (indexPath.section == 2) {
+        UIStoryboard *profileStoryboard = [UIStoryboard storyboardWithName:@"Settings" bundle:nil];
+        BlockedFriends *blockedFriends = [profileStoryboard instantiateViewControllerWithIdentifier:@"BlockedFriends"];
+        
+        blockedFriends.hidesBottomBarWhenPushed = YES;
+        
+        [self.navigationController pushViewController:blockedFriends animated:YES];
+    }
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }

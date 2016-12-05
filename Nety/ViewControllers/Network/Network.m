@@ -58,6 +58,9 @@
         [self.UIPrinciple removeNoContent:self.noContentController];
     }
     
+    _fetchedResultsController = nil;
+    _fetchedResultsController.delegate = nil;
+    [self.table reloadData];
     
     
 }
@@ -199,6 +202,13 @@
         }
     } else {
         [self.UIPrinciple removeNoContent:self.noContentController];
+    }
+    
+    if ([user.isFriend isEqualToNumber:[NSNumber numberWithBool:YES]]) {
+        networkCell.networkUserImage.layer.borderWidth = 5;
+        networkCell.networkUserImage.layer.borderColor = self.UIPrinciple.netyTheme.CGColor;
+    } else {
+        networkCell.networkUserImage.layer.borderWidth = 0;
     }
     
     return networkCell;

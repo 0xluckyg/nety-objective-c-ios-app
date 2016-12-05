@@ -10,6 +10,7 @@
 #import "UIPrinciples.h"
 #import "Constants.h"
 #import "AppDelegate.h"
+#import "BlockedFriends.h"
 #import <linkedin-sdk/LISDK.h>
 #import "N_CoreDataTableViewController.h"
 
@@ -33,7 +34,6 @@
 
 
 @property (strong,nonatomic) UIPrinciples *UIPrinciple;
-
 
 //LIB CLASSES----------------------------------------
 
@@ -86,8 +86,6 @@
 - (IBAction)notificationSwitchAction:(id)sender;
 
 - (IBAction)discoverabilitySwitchAction:(id)sender;
-
-- (IBAction)chatRequestSwitchAction:(id)sender;
 
 - (IBAction)chatSwitchAction:(id)sender;
 
