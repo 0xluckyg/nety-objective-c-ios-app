@@ -128,8 +128,11 @@
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     
-//    NSLog(@"locationManager didUpdateLocations");
+    NSLog(@"locationManager didUpdateLocations");
     
+    
+    
+
     for(int i=0;i<locations.count;i++){
         CLLocation * newLocation = [locations objectAtIndex:i];
         CLLocationCoordinate2D theLocation = newLocation.coordinate;
@@ -160,6 +163,11 @@
             [self.shareModel.myLocationArray addObject:dict];
         }
     }
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self updateLocationToServer];
+    });
     
     //If the timer still valid, return it (Will not run the code below)
     if (self.shareModel.timer) {

@@ -138,11 +138,11 @@
     
     [self.circleQuery observeEventType:GFEventTypeKeyEntered withBlock:^(NSString *key, CLLocation *location) {
         
-        NSLog(@"%@ circleQuery %@ location", key, location);
+//        NSLog(@"%@ circleQuery %@ location", key, location);
         
         [[[self.firdatabase child:kUsers] child:key] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
             
-            NSLog(@"%@ snapshot", snapshot);
+//            NSLog(@"%@ snapshot", snapshot);
             NSDictionary *usersDictionary = snapshot.value;
             NSString *otherUserID = key;
             NSString *userID = _myUser.userID;

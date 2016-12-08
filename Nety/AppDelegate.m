@@ -123,7 +123,7 @@
                 //You may adjust the time interval depends on the need of your app.
                 [self.locationTracker startLocationTracking];
                 NSTimeInterval time = 40.0;
-                [self updateLocationToServer];
+//                [self updateLocationToServer];
                 self.locationUpdateTimer =
                 [NSTimer scheduledTimerWithTimeInterval:time
                                                  target:self
