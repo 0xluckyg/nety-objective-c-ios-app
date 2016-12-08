@@ -277,6 +277,10 @@
             distanceBetweenPrevious = 5;
         }
         
+        self.shareModel.center = [[CLLocation alloc] initWithLatitude:self.myLocation.latitude longitude:self.myLocation.longitude];
+        [MY_API updateCircleQuery:self.shareModel.center];
+        
+        
         if (distanceBetweenPrevious >= 5) {
             if (MY_USER) {
                 FIRDatabaseReference *geo = [[[FIRDatabase database] reference] child:kUserLocation];
@@ -287,6 +291,7 @@
                 NSLog(@"Send to Server: Latitude(%f) Longitude(%f) Accuracy(%f)",self.myLocation.latitude, self.myLocation.longitude,self.myLocationAccuracy);
                 [geoFire setLocation:[[CLLocation alloc] initWithLatitude:self.myLocation.latitude longitude:self.myLocation.longitude] forKey:MY_USER.userID];
                 self.previousLocationSentToServer = [[CLLocation alloc] initWithLatitude:self.myLocation.latitude longitude:self.myLocation.longitude];
+                
                 NSString *myLocationCoreData = [NSString stringWithFormat:@"%f:%f", self.myLocation.latitude, self.myLocation.longitude];
                 [MY_USER setValue:myLocationCoreData forKey:kGeocoordinate];
             }
@@ -304,6 +309,7 @@
                 CLLocation *userLocation = [[CLLocation alloc] initWithLatitude:[userLocationArray[0] floatValue] longitude:[userLocationArray[1] floatValue]];
                 double distance = [myLocationCL distanceFromLocation:userLocation];
                 [userData setValue:@(distance) forKey:kDistance];
+                NSLog(@"%f resetted distances", distance);
                 [MY_API saveContext];
             }
         } else {

@@ -11,7 +11,6 @@
 #import "ChatRooms.h"
 #import "Experiences.h"
 #import "AppDelegate.h"
-#import "GeoFire.h"
 
 @implementation N_API
 
@@ -119,16 +118,25 @@
 
 #pragma mark - Firebase - Network
 
+- (void)updateCircleQuery: (CLLocation *) centerLocation;
+{
+    if (self.circleQuery != nil) {
+        self.circleQuery.center = centerLocation;
+    }
+}
+
 -(void) listenForChildAdded {
     
     GeoFire *geoFire = [[GeoFire alloc] initWithFirebaseRef:[self.firdatabase child:kUserLocation]];
     CLLocation *myLocation = [self getBestLocation];
     
-    CLLocation *center = [[CLLocation alloc] initWithLatitude:myLocation.coordinate.latitude longitude:myLocation.coordinate.longitude];
+    self.shareModel.center = [[CLLocation alloc] initWithLatitude:myLocation.coordinate.latitude longitude:myLocation.coordinate.longitude];
     // Query locations at current location with a radius of 30km
-    GFCircleQuery *circleQuery = [geoFire queryAtLocation:center withRadius:30.0];
+    self.circleQuery = [geoFire queryAtLocation:self.shareModel.center withRadius:30.0];
     
-    [circleQuery observeEventType:GFEventTypeKeyEntered withBlock:^(NSString *key, CLLocation *location) {
+    NSLog(@"listenForChildAdded Called with location %@", self.shareModel.center);
+    
+    [self.circleQuery observeEventType:GFEventTypeKeyEntered withBlock:^(NSString *key, CLLocation *location) {
         
         NSLog(@"%@ circleQuery %@ location", key, location);
         
@@ -143,6 +151,8 @@
             
         }];
     }];
+    
+    
     
 }
 
@@ -451,6 +461,8 @@
 {
     if (!_myUser) {
         _myUser = myUser;
+        NSLog(@"SetMyUser called");
+        
         [self listenForChildAdded];
         [self listenForChildChanged];
         [self listenForChildRemoved];

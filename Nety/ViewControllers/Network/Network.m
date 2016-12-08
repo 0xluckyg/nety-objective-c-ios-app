@@ -191,8 +191,7 @@
 //    networkCell.selectionStyle = select
     
     [self configureCell:networkCell withObject:user];
-        
-    //If no experiences visible, show noContent header
+              //If no experiences visible, show noContent header
     if ([[self fetchedResultsController].fetchedObjects count] == 0) {
         
         UIImage *contentImage = [[UIImage imageNamed:@"Friend"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];

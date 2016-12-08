@@ -16,6 +16,7 @@
 @property (nonatomic) NSTimer * delay10Seconds;
 @property (nonatomic) BackgroundTaskManager * bgTask;
 @property (nonatomic) NSMutableArray *myLocationArray;
+@property (nonatomic) CLLocation *center;
 
 +(id)sharedModel;
 
