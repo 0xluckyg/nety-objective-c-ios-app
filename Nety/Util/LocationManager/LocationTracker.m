@@ -309,7 +309,7 @@
                 CLLocation *userLocation = [[CLLocation alloc] initWithLatitude:[userLocationArray[0] floatValue] longitude:[userLocationArray[1] floatValue]];
                 double distance = [myLocationCL distanceFromLocation:userLocation];
                 [userData setValue:@(distance) forKey:kDistance];
-                NSLog(@"%f resetted distances", distance);
+                NSLog(@"%f resetted distances for user %@", distance, userData.userID);
                 [MY_API saveContext];
             }
         } else {

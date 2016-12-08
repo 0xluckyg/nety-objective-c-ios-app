@@ -341,23 +341,23 @@
 -(void) calculateSliderDistanceValue {
     
     if (self.sliderValue >= 0 && self.sliderValue <= 0.1) {
-        self.sliderDistanceValue = 30;
+        self.sliderDistanceValue = 20;
     } else if (self.sliderValue > 0.10 && self.sliderValue <= 0.20) {
         self.sliderDistanceValue = 50;
     } else if (self.sliderValue > 0.20 && self.sliderValue <= 0.30) {
         self.sliderDistanceValue = 100;
     } else if (self.sliderValue > 0.30 && self.sliderValue <= 0.40) {
-        self.sliderDistanceValue = 200;
-    } else if (self.sliderValue > 0.40 && self.sliderValue <= 0.50) {
         self.sliderDistanceValue = 300;
-    }  else if (self.sliderValue > 0.50 && self.sliderValue <= 0.60) {
+    } else if (self.sliderValue > 0.40 && self.sliderValue <= 0.50) {
         self.sliderDistanceValue = 500;
+    }  else if (self.sliderValue > 0.50 && self.sliderValue <= 0.60) {
+        self.sliderDistanceValue = 1000;
     }  else if (self.sliderValue > 0.60 && self.sliderValue <= 0.70) {
-        self.sliderDistanceValue = 5280 * 5;
+        self.sliderDistanceValue = 1000 * 5;
     }  else if (self.sliderValue > 0.70 && self.sliderValue <= 0.80) {
-        self.sliderDistanceValue = 5280 * 7;
+        self.sliderDistanceValue = 1000 * 10;
     } else if (self.sliderValue > 0.80) {
-        self.sliderDistanceValue = 5280 * 10;
+        self.sliderDistanceValue = 1000 * 15;
     }
     
     _fetchedResultsController = nil;
@@ -371,10 +371,10 @@
 
 - (NSString *) calculateDistanceToDescription {
     
-    if (self.sliderDistanceValue >= 5280) {
-        return [NSString stringWithFormat:@"%i Miles", (int) self.sliderDistanceValue / 5280];
+    if (self.sliderDistanceValue >= 1000) {
+        return [NSString stringWithFormat:@"%i KM", (int) self.sliderDistanceValue / 1000];
     } else {
-        return [NSString stringWithFormat:@"%ift", (int) self.sliderDistanceValue];
+        return [NSString stringWithFormat:@"%i Meters", (int) self.sliderDistanceValue];
     }
     
 }
