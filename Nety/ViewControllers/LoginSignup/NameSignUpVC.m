@@ -59,39 +59,67 @@
     return YES;
 }
 
--(BOOL)allFieldsAreValidated {
-    NSTextCheckingResult *isValidName = [Regex validateName:self.nameTextField.text];
-
-    if (isValidName) {
-        return YES;
-    }
-    return NO;
+-(BOOL)allFieldsAreValidated: (BOOL)display {
+    return [self nameIsValid:display] && [self ageIsValid:display];
 }
 
+
 -(void)goToNextPage {
-    NSTextCheckingResult *isValidName = [Regex validateName:self.nameTextField.text];
-    NSUInteger age = [self.ageTextField.text integerValue];
-    BOOL isValidAge = age > 12 && age < 85;
-    self.userData.name = [self.nameTextField.text capitalizedString];
-    if (isValidAge) {
-        self.userData.age = age;
-        if (isValidName) {
-            [self performSegueWithIdentifier:@"ToAccountSegue" sender:self];
-        } else {
-            self.whatIsYourNameLabel.text = @"Not a valid name";
-        }
-    } else {
-        if (isValidName) {
-            self.howOldAreYouLabel.text = @"Not a valid age";
-        } else {
-            self.whatIsYourNameLabel.text = @"Not a valid name";
-            self.howOldAreYouLabel.text = @"Not a valid age";
-        }
-    }
+    self.userData.name = self.nameTextField.text;
+    self.userData.age = [self.ageTextField.text integerValue];
+    [self performSegueWithIdentifier:@"ToAccountSegue" sender:self];
 }
 
 - (IBAction)nextButtonTapped:(UIButton *)sender {
-    [self goToNextPage];
+    if ([self allFieldsAreValidated:YES]) {
+        [self goToNextPage];
+    }
+}
+
+-(void)viewWasTapped {
+    [super viewWasTapped];
+    if ([self allFieldsAreValidated: NO]) {
+        [self goToNextPage];
+    } else if ([self nameIsValid:NO]) {
+        [self.ageTextField becomeFirstResponder];
+    } else {
+        [self.nameTextField becomeFirstResponder];
+    }
+}
+
+-(BOOL)nameIsValid: (BOOL)display {
+    NSTextCheckingResult *isValidName = [Regex validateName:self.nameTextField.text];
+    
+    if (isValidName) {
+        return YES;
+    }
+    if (display) { self.whatIsYourNameLabel.text = @"Full name please"; }
+    return NO;
+}
+
+-(BOOL)ageIsValid: (BOOL)display {
+    NSLog(@"age is valid %@", self.ageTextField.text);
+    if (![Regex validateAge:self.ageTextField.text]) {
+        NSLog(@"failed regex");
+        if (display) { self.howOldAreYouLabel.text = @"Only numbers please!"; }
+        return NO;
+    }
+    
+    NSUInteger age = [self.ageTextField.text integerValue];
+    
+    if (age < 15) {
+        NSLog(@"Failed age low");
+        if (display) { self.howOldAreYouLabel.text = @"Must be at least 15 years old"; }
+        return NO;
+    }
+    if (age > 85) {
+        NSLog(@"Failed age high");
+        if (display) { self.howOldAreYouLabel.text = @"Must be younger than 85"; }
+        return NO;
+    }
+    
+    NSLog(@"Age pasesd");
+    return YES;
 }
 
 @end

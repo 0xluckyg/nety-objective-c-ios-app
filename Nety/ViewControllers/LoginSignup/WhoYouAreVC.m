@@ -22,9 +22,9 @@
     
     [self.bioTextView addBorder];
     self.imageView.image = [UIImage imageNamed:@"MainPicture9"];
-
+    
     self.positionTextField.delegate = self;
-    self.bioTextView.delegate = self;
+    //    self.bioTextView.delegate = self;
     
     self.fields = @[self.positionTextField, self.bioTextView];
 }
@@ -43,8 +43,7 @@
     
     if ([textField.titlePlaceholder isEqualToString:@"Occupation"]) {
         
-        if (true) {
-            self.whatDoYouDoLabel.text = @"Oh. Interesting!";
+        if ([self occupationIsValid:YES]) {
             [self.bioTextView becomeFirstResponder];
         }
     }
@@ -52,29 +51,58 @@
     return YES;
 }
 
-- (BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if([text isEqualToString:@"\n"]){
-        // TODO: Figure out what the minimum is
-        [self goToNextPage];
+//- (BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+//    if([text isEqualToString:@"\n"]){
+//        // TODO: Figure out what the minimum is
+//        [self goToNextPage];
+//        return NO;
+//    }else{
+//        return YES;
+//    }
+//}
+
+
+-(BOOL)occupationIsValid: (BOOL)display {
+    NSString *occupation = self.positionTextField.text;
+    
+    if (occupation.length < 5) {
+        if (display) { self.whatDoYouDoLabel.text = @"Minimum 5 characters"; }
         return NO;
-    }else{
-        return YES;
+    }
+    if (display) { self.whatDoYouDoLabel.text = @"Oh. Interesting!"; }
+    return YES;
+}
+
+-(BOOL)bioIsValid: (BOOL)display {
+    NSString *occupation = self.bioTextView.text;
+    
+    if (occupation.length < 5) {
+        if (display) { self.tellMeMoreAboutYouLabel.text = @"Minimum 5 characters"; }
+        return NO;
+    }
+    if (display) { self.tellMeMoreAboutYouLabel.text = @"Great!"; }
+    return YES;
+}
+
+-(BOOL)allFieldsAreValidated: (BOOL)display {
+    return [self occupationIsValid:display] && [self bioIsValid:display];
+}
+
+-(void)viewWasTapped {
+    [super viewWasTapped];
+    if ([self allFieldsAreValidated: NO]) {
+        [self goToNextPage];
+    } else if ([self occupationIsValid:NO]) {
+        [self.bioTextView becomeFirstResponder];
+    } else {
+        [self.positionTextField becomeFirstResponder];
     }
 }
 
 -(void)goToNextPage {
-    
-    if (self.positionTextField.text.length > 3 && self.bioTextView.text.length > 3) {
-        for (UIControl *field in self.fields) {
-            [field resignFirstResponder];
-        }
-        self.userData.occupation = self.positionTextField.text;
-        self.userData.bio = self.bioTextView.text;
-        [self performSegueWithIdentifier:@"ToExperienceSegue" sender:self];
-    } else {
-        self.positionTextField.text = @"Please make the descriptions longer";
-    }
-    
+    self.userData.occupation = self.positionTextField.text;
+    self.userData.bio = self.bioTextView.text;
+    [self performSegueWithIdentifier:@"ToExperienceSegue" sender:self];
 }
 
 
