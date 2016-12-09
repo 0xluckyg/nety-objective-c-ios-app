@@ -232,6 +232,8 @@
 -(void)initializeTabBar {
     //Create a tabBar instance
     self.tabBarRootController = [[UITabBarController alloc] init];
+    self.tabBarRootController.tabBar.backgroundImage = [[UIImage alloc] init];
+    self.tabBarRootController.tabBar.backgroundColor = [UIColor whiteColor];
     
     //Create storyboard instances
     UIStoryboard *networkStoryboard = [UIStoryboard storyboardWithName:@"Network" bundle:nil];
