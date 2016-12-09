@@ -11,6 +11,7 @@
 #import "Users.h"
 #import "Constants.h"
 #import "LocationShareModel.h"
+#import "GeoFire.h"
 
 @import Firebase;
 
@@ -38,7 +39,11 @@ typedef void (^N_APIBlockArray)(NSArray* array, NSError* error);
 
 #pragma mark - Firebase
 
+@property (strong, nonatomic) GFCircleQuery *circleQuery;
+
 @property (strong, nonatomic) FIRDatabaseReference *firdatabase;
+
+- (void) updateCircleQuery: (CLLocation *) centerLocation;
 
 - (void) listenForChildAdded;
 

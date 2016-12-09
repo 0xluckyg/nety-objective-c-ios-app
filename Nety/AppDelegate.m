@@ -92,6 +92,11 @@
 #pragma mark - Initialization
 //---------------------------------------------------------
 
+-(void)stopUpdatingLocationToServer {
+    [self.locationUpdateTimer invalidate];
+    self.locationUpdateTimer = nil;
+    [self.locationTracker stopLocationTracking];    
+}
 
 -(void)initializeLoginView
 {

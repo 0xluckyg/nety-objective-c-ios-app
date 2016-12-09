@@ -41,7 +41,7 @@
 -(NSString*)returnLatLongString;
 
 -(void)setUserIsSigningIn: (bool)boolean;
-
+-(void)stopUpdatingLocationToServer;
 -(void)initializeTabBar;
 -(void)initializeLoginView;
 

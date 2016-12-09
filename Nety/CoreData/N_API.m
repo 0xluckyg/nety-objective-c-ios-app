@@ -11,7 +11,6 @@
 #import "ChatRooms.h"
 #import "Experiences.h"
 #import "AppDelegate.h"
-#import "GeoFire.h"
 
 @implementation N_API
 
@@ -97,7 +96,7 @@
     if (!coordinator) {
         return nil;
     }
-    _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     return _managedObjectContext;
 }
@@ -119,6 +118,12 @@
 
 #pragma mark - Firebase - Network
 
+-(void) updateCircleQuery: (CLLocation *) centerLocation {
+    if (self.circleQuery != nil) {
+        self.circleQuery.center = centerLocation;
+    }
+}
+
 -(void) listenForChildAdded {
     
     GeoFire *geoFire = [[GeoFire alloc] initWithFirebaseRef:[self.firdatabase child:kUserLocation]];
@@ -126,9 +131,9 @@
     
     CLLocation *center = [[CLLocation alloc] initWithLatitude:myLocation.coordinate.latitude longitude:myLocation.coordinate.longitude];
     // Query locations at current location with a radius of 30km
-    GFCircleQuery *circleQuery = [geoFire queryAtLocation:center withRadius:30.0];
+    self.circleQuery = [geoFire queryAtLocation:center withRadius:30.0];
     
-    [circleQuery observeEventType:GFEventTypeKeyEntered withBlock:^(NSString *key, CLLocation *location) {
+    [self.circleQuery observeEventType:GFEventTypeKeyEntered withBlock:^(NSString *key, CLLocation *location) {
         
         NSLog(@"%@ circleQuery %@ location", key, location);
         
@@ -195,7 +200,7 @@
         
         [[[self.firdatabase child:kUsers] child:key] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
             
-            if (snapshot.exists) {            
+            if (snapshot.exists) {
                 NSLog(@"%@ snapshot", snapshot);
                 NSDictionary *usersDictionary = snapshot.value;
                 NSString *otherUserID = key;
@@ -529,7 +534,7 @@
         
         [self addNewChatRoom:chatRoomInfoDict WithID:chatRoomKey Members:tempUser];
         
-    } withCancelBlock:nil];
+    } withCancelBlock:nil];;
     
 }
 
@@ -647,13 +652,17 @@
     NSArray* allObjects = [self allObjects];
     
     [self.firdatabase removeAllObservers];
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+    [appDelegate stopUpdatingLocationToServer];
+    
     [[FIRAuth auth] signOut:nil];
+    
     self.myUser = nil;
     
     for (id object in allObjects) {
         [self.managedObjectContext deleteObject:object];
     }
-    [self.managedObjectContext save:nil];
+//    [self.managedObjectContext save:nil];
 }
 
 - (NSArray*) allObjects {

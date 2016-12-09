@@ -44,7 +44,7 @@
    
     self.navigationItem.title = [NSString stringWithFormat:NSLocalizedString(@"%@ nearMe", @"{distance} Near Me"), distanceString];
 
-    navItem.title = [NSString stringWithFormat:NSLocalizedString(@"%@ nearMe", @"{distance} Near Me"), distanceString];
+    navItem.title = navItem.title = [self calculateDistanceToDescription];
     
     //If no experiences visible, show noContent header
     if ([[self fetchedResultsController].fetchedObjects count] == 0) {
@@ -322,8 +322,8 @@
     
     [self calculateSliderDistanceValue];
     
-    navItem.title = [NSString stringWithFormat:NSLocalizedString(@"%@ nearMe", @"{distance} Near Me"), [self calculateDistanceToDescription]];
-
+    navItem.title = [self calculateDistanceToDescription];
+    
 }
 
 
@@ -341,23 +341,23 @@
 
 -(void) calculateSliderDistanceValue {
     
-    if (self.sliderValue >= 0 && self.sliderValue <= 0.1) {
-        self.sliderDistanceValue = 30;
-    } else if (self.sliderValue > 0.10 && self.sliderValue <= 0.20) {
-        self.sliderDistanceValue = 50;
+    if (self.sliderValue >= 0 && self.sliderValue <= 0.20) {
+        self.sliderDistanceValue = 80;
     } else if (self.sliderValue > 0.20 && self.sliderValue <= 0.30) {
         self.sliderDistanceValue = 100;
     } else if (self.sliderValue > 0.30 && self.sliderValue <= 0.40) {
         self.sliderDistanceValue = 300;
     } else if (self.sliderValue > 0.40 && self.sliderValue <= 0.50) {
         self.sliderDistanceValue = 500;
-    }  else if (self.sliderValue > 0.50 && self.sliderValue <= 0.60) {
+    } else if (self.sliderValue > 0.50 && self.sliderValue <= 0.60) {
         self.sliderDistanceValue = 1000;
     }  else if (self.sliderValue > 0.60 && self.sliderValue <= 0.70) {
-        self.sliderDistanceValue = 1000 * 5;
+        self.sliderDistanceValue = 1000 * 3;
     }  else if (self.sliderValue > 0.70 && self.sliderValue <= 0.80) {
+        self.sliderDistanceValue = 1000 * 5;
+    }  else if (self.sliderValue > 0.80 && self.sliderValue <= 0.90) {
         self.sliderDistanceValue = 1000 * 10;
-    } else if (self.sliderValue > 0.80) {
+    } else if (self.sliderValue > 0.90) {
         self.sliderDistanceValue = 1000 * 15;
     }
     
@@ -374,8 +374,10 @@
     
     if (self.sliderDistanceValue >= 1000) {
         return [NSString stringWithFormat:@"%i KM", (int) self.sliderDistanceValue / 1000];
+    } else if (self.sliderDistanceValue <= 80) {
+        return @"Current Event";
     } else {
-        return [NSString stringWithFormat:@"%i meters", (int) self.sliderDistanceValue];
+        return [NSString stringWithFormat:@"%i Meters", (int) self.sliderDistanceValue];
     }
     
 }
