@@ -134,12 +134,14 @@
         
         [[[self.firdatabase child:kUsers] child:key] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
             
-            NSLog(@"%@ snapshot", snapshot);
-            NSDictionary *usersDictionary = snapshot.value;
-            NSString *otherUserID = key;
-            NSString *userID = _myUser.userID;
-            
-            [self addNewUser:usersDictionary UserID:otherUserID Location:location FlagMy:[otherUserID isEqualToString: userID]];
+            if (snapshot.exists) {
+                NSLog(@"%@ snapshot", snapshot);
+                NSDictionary *usersDictionary = snapshot.value;
+                NSString *otherUserID = key;
+                NSString *userID = _myUser.userID;
+                
+                [self addNewUser:usersDictionary UserID:otherUserID Location:location FlagMy:[otherUserID isEqualToString: userID]];
+            }
             
         }];
     }];
@@ -193,13 +195,14 @@
         
         [[[self.firdatabase child:kUsers] child:key] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
             
-            NSLog(@"%@ snapshot", snapshot);
-            NSDictionary *usersDictionary = snapshot.value;
-            NSString *otherUserID = key;
-            NSString *userID = _myUser.userID;
+            if (snapshot.exists) {            
+                NSLog(@"%@ snapshot", snapshot);
+                NSDictionary *usersDictionary = snapshot.value;
+                NSString *otherUserID = key;
+                NSString *userID = _myUser.userID;
             
-            [self addNewUser:usersDictionary UserID:otherUserID Location:location FlagMy:[otherUserID isEqualToString: userID]];
-            
+                [self addNewUser:usersDictionary UserID:otherUserID Location:location FlagMy:[otherUserID isEqualToString: userID]];
+            }
         }];
     }];
     
