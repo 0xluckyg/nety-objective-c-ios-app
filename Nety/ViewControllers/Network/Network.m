@@ -110,11 +110,14 @@
     //Style navbar
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
-                                [UIColor whiteColor], NSForegroundColorAttributeName, nil];
+                                [UIColor blackColor], NSForegroundColorAttributeName, nil];
     
     [self.navigationController.navigationBar setTitleTextAttributes:attributes];
     
     [self.navigationController.navigationBar setItems:@[navItem]];
+    
+    kAddBottomBorder(self.navigationController.navigationBar);
+
     
     [self.searchBar setBarTintColor:[UIColor whiteColor]];
     

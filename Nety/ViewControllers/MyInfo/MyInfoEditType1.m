@@ -78,7 +78,7 @@
     //Style navbar
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
-                                [UIColor whiteColor], NSForegroundColorAttributeName, nil];
+                                [UIColor blackColor], NSForegroundColorAttributeName, nil];
     self.navigationItem.title = NSLocalizedString(@"edit1Title", nil);
     
     [self.navigationController.navigationBar setTitleTextAttributes:attributes];

@@ -405,7 +405,7 @@ NSString * const CAPSPageMenuOptionHideTopMenuBar                       = @"hide
     
     // Configure selection indicator view
     CGRect selectionIndicatorFrame;
-    
+    _selectionIndicatorHeight = 1;
     if (_useMenuLikeSegmentedControl) {
         selectionIndicatorFrame = CGRectMake(0.0, _menuHeight - _selectionIndicatorHeight, self.view.frame.size.width / (CGFloat)_controllerArray.count, _selectionIndicatorHeight);
     } else if (_menuItemWidthBasedOnTitleTextWidth) {
@@ -418,8 +418,10 @@ NSString * const CAPSPageMenuOptionHideTopMenuBar                       = @"hide
         }
     }
     
+    selectionIndicatorFrame.origin.y = selectionIndicatorFrame.origin.y - 5;
+    
     _selectionIndicatorView = [[UIView alloc] initWithFrame:selectionIndicatorFrame];
-    _selectionIndicatorView.backgroundColor = _selectionIndicatorColor;
+    _selectionIndicatorView.backgroundColor = [UIColor blackColor];
     [_menuScrollView addSubview:_selectionIndicatorView];
 }
 

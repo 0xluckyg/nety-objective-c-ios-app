@@ -60,10 +60,13 @@
     //Style navbar
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
-                                [UIColor whiteColor], NSForegroundColorAttributeName, nil];
+                                [UIColor blackColor], NSForegroundColorAttributeName, nil];
     self.navigationItem.title = name;
     
     [self.navigationController.navigationBar setTitleTextAttributes:attributes];
+    
+    kAddBottomBorder(self.navigationController.navigationBar);
+
     
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"Back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:normal target:self action:@selector(backButtonPressed)];
     

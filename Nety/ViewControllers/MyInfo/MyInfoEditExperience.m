@@ -7,6 +7,7 @@
 //
 
 #import "MyInfoEditExperience.h"
+#import "Constants.h"
 
 @interface MyInfoEditExperience ()
 
@@ -107,7 +108,7 @@
     //Style navbar
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
-                                [UIColor whiteColor], NSForegroundColorAttributeName, nil];
+                                [UIColor blackColor], NSForegroundColorAttributeName, nil];
     self.navigationItem.title = NSLocalizedString(@"myInfoEditExperience", nil);
     
     self.experienceNameLabel.text = NSLocalizedString(@"experienceNameLabel", nil);

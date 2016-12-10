@@ -155,7 +155,7 @@
 
 -(void)initializeDesign {
     [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
-    [[UINavigationBar appearance] setBarTintColor:self.UIPrinciple.netyTheme];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys: [self.UIPrinciple netyFontWithSize:15], NSFontAttributeName, self.UIPrinciple.netyTheme, NSForegroundColorAttributeName, nil];

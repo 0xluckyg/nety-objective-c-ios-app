@@ -58,7 +58,7 @@
     //Style navbar
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
-                                [UIColor whiteColor], NSForegroundColorAttributeName, nil];
+                                [UIColor blackColor], NSForegroundColorAttributeName, nil];
     self.navigationItem.title = name;
     
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"Camera"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:normal target:self action:@selector(cameraButtonSelected)];
@@ -66,6 +66,10 @@
     self.navigationItem.rightBarButtonItem = rightButton;
     
     [self.navigationController.navigationBar setTitleTextAttributes:attributes];
+    
+    kAddBottomBorder(self.navigationController.navigationBar);
+    
+
     
     float width = self.view.frame.size.width;
     float height = self.view.frame.size.height / 2.2;
@@ -263,7 +267,7 @@
     //Style navbar
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
-                                [UIColor whiteColor], NSForegroundColorAttributeName, nil];
+                                [UIColor blackColor], NSForegroundColorAttributeName, nil];
     
     [viewController.navigationController.navigationBar setTitleTextAttributes:attributes];
     
