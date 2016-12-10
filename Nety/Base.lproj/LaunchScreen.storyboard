@@ -22,7 +22,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QeH-V7-dzp">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
-                                <color key="backgroundColor" red="0.28627450980000002" green="0.39607843139999999" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="Loa-cI-4sL"/>
                                 </constraints>
@@ -36,7 +36,7 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x3v-yJ-Wwu">
                                 <rect key="frame" x="0.0" y="618" width="375" height="49"/>
-                                <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="49" id="IBQ-NN-n5T"/>
                                 </constraints>
@@ -48,11 +48,20 @@
                                     <constraint firstAttribute="height" constant="1" id="stn-uS-mkM"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="erp-dk-QTD">
+                                <rect key="frame" x="0.0" y="64" width="375" height="0.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="fI4-SE-taM"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="QeH-V7-dzp" secondAttribute="trailing" id="15X-ed-paZ"/>
                             <constraint firstItem="x3v-yJ-Wwu" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="3pY-hc-Loo"/>
+                            <constraint firstItem="erp-dk-QTD" firstAttribute="top" secondItem="QeH-V7-dzp" secondAttribute="bottom" id="5b4-kZ-cqa"/>
+                            <constraint firstAttribute="trailing" secondItem="erp-dk-QTD" secondAttribute="trailing" id="99j-DB-Wnm"/>
                             <constraint firstItem="KDg-bq-5fM" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="NTy-Ou-blP"/>
                             <constraint firstAttribute="trailing" secondItem="xD5-U2-7sD" secondAttribute="trailing" id="PJV-ZT-nA6"/>
                             <constraint firstItem="QeH-V7-dzp" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="UCf-A6-IO8"/>
@@ -63,6 +72,7 @@
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="x3v-yJ-Wwu" secondAttribute="bottom" id="cXt-ER-em2"/>
                             <constraint firstItem="QeH-V7-dzp" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="cdF-Jp-Ous"/>
                             <constraint firstItem="KDg-bq-5fM" firstAttribute="top" secondItem="QeH-V7-dzp" secondAttribute="bottom" constant="44" id="dhE-rH-lTR"/>
+                            <constraint firstItem="erp-dk-QTD" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="kqK-aA-mE8"/>
                         </constraints>
                     </view>
                 </viewController>
