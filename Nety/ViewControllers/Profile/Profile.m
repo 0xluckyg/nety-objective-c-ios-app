@@ -89,10 +89,11 @@
     
     if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
         NSURL *profileImageUrl = [NSURL URLWithString:photoUrl];
-        [profileImageView sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
+        [profileImageView sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:@"ProfileDefaultImage"]];
     } else {
-        profileImageView.image = [UIImage imageNamed:kDefaultUserLogoName];
+        profileImageView.image = [UIImage imageNamed:@"ProfileDefaultImage"];
     }
+
     
     float width = self.view.frame.size.width;
     float height = self.view.frame.size.height / 2.2;
