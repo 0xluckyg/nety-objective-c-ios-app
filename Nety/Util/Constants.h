@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
+#import <UIKit/UIKit.h>
 
 extern NSString *const kFullName;
 
@@ -59,6 +60,7 @@ extern NSString *const kDefaultUserLogoName;
 extern NSString *const kIAmDiscoverable;
 
 extern CATransition *(^kCrossFadeAnimation)(void);
+extern void (^kAddBottomBorder)(UIView *view);
 
 @interface Constants : NSObject
 

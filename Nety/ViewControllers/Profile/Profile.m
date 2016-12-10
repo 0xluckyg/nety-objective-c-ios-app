@@ -60,10 +60,13 @@
     //Style navbar
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
-                                [UIColor whiteColor], NSForegroundColorAttributeName, nil];
+                                [UIColor blackColor], NSForegroundColorAttributeName, nil];
     self.navigationItem.title = name;
     
     [self.navigationController.navigationBar setTitleTextAttributes:attributes];
+    
+    kAddBottomBorder(self.navigationController.navigationBar);
+
     
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"Back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:normal target:self action:@selector(backButtonPressed)];
     
@@ -86,10 +89,11 @@
     
     if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
         NSURL *profileImageUrl = [NSURL URLWithString:photoUrl];
-        [profileImageView sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
+        [profileImageView sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:@"ProfileDefaultImage"]];
     } else {
-        profileImageView.image = [UIImage imageNamed:kDefaultUserLogoName];
+        profileImageView.image = [UIImage imageNamed:@"ProfileDefaultImage"];
     }
+
     
     float width = self.view.frame.size.width;
     float height = self.view.frame.size.height / 2.2;

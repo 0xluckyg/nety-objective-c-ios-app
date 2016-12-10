@@ -49,10 +49,10 @@
     self.logoImage.image = [UIImage imageNamed:@"LogoTransparent"];
     
     [self.loginButtonOutlet setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.4]];
-    [self.loginButtonOutlet.layer setCornerRadius:self.loginButtonOutlet.frame.size.height/4];
+    [self.loginButtonOutlet.layer setCornerRadius:15];
     
     [self.signupButtonOutlet setBackgroundColor:[self.UIPrinciple.netyTheme colorWithAlphaComponent:0.6]];
-    [self.signupButtonOutlet.layer setCornerRadius:self.signupButtonOutlet.frame.size.height/4];
+    [self.signupButtonOutlet.layer setCornerRadius:15];
     
 //    [self.loginWithFacebookOutlet.layer setCornerRadius:self.signupButtonOutlet.frame.size.height/2];
 //    

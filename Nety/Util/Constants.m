@@ -65,6 +65,17 @@ CATransition *(^kCrossFadeAnimation)(void) = ^{
     return transition;
 };
 
+void (^kAddBottomBorder)(UIView *view) = ^(UIView *view){
+    CGRect viewBounds = view.bounds;
+    
+    CGFloat lineWidth = 0.3;
+    CALayer *border = [CALayer layer];
+    border.backgroundColor = [[UIColor blackColor] CGColor];
+    
+    //[[UIColor blackColor] CGColor];
+    border.frame = CGRectMake(0, viewBounds.size.height, viewBounds.size.width, lineWidth);
+    [view.layer addSublayer:border];
+};
 @implementation Constants
 
 @end

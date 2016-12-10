@@ -58,7 +58,7 @@
     //Style navbar
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
-                                [UIColor whiteColor], NSForegroundColorAttributeName, nil];
+                                [UIColor blackColor], NSForegroundColorAttributeName, nil];
     self.navigationItem.title = name;
     
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"Camera"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:normal target:self action:@selector(cameraButtonSelected)];
@@ -66,6 +66,10 @@
     self.navigationItem.rightBarButtonItem = rightButton;
     
     [self.navigationController.navigationBar setTitleTextAttributes:attributes];
+    
+    kAddBottomBorder(self.navigationController.navigationBar);
+    
+
     
     float width = self.view.frame.size.width;
     float height = self.view.frame.size.height / 2.2;
@@ -77,9 +81,9 @@
     
     if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
         NSURL *profileImageUrl = [NSURL URLWithString:photoUrl];
-        [self.profileImageView sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
+        [self.profileImageView sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:@"ProfileDefaultImage"]];
     } else {
-        self.profileImageView.image = [UIImage imageNamed:kDefaultUserLogoName];
+        self.profileImageView.image = [UIImage imageNamed:@"ProfileDefaultImage"];
     }
     
     [self.profileImageView setFrame:CGRectMake(0, 0, width, height)];
@@ -263,7 +267,7 @@
     //Style navbar
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                 [self.UIPrinciple netyFontWithSize:18], NSFontAttributeName,
-                                [UIColor whiteColor], NSForegroundColorAttributeName, nil];
+                                [UIColor blackColor], NSForegroundColorAttributeName, nil];
     
     [viewController.navigationController.navigationBar setTitleTextAttributes:attributes];
     
@@ -645,4 +649,8 @@
     }
 }
 
+
+-(UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
+}
 @end
