@@ -13,5 +13,6 @@
 +(NSTextCheckingResult *)validateName: (NSString *)string;
 +(NSTextCheckingResult *)validateEmail: (NSString *)string;
 +(NSTextCheckingResult *)validatePassword: (NSString *)string;
++(NSTextCheckingResult *)validateAge: (NSString *)ageString;
 
 @end

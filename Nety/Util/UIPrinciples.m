@@ -8,7 +8,6 @@
 
 #import "UIPrinciples.h"
 #import "AppDelegate.h"
-#import "NoContent.h"
 
 @implementation UIPrinciples
 
@@ -63,34 +62,6 @@
 
 -(UIFont*)netyFontWithSize: (int)size {
     return [UIFont fontWithName:@"HelveticaNeue-Light" size:size];
-}
-
--(void)removeNoContent: (NoContent *)noContentController {
-    
-    [noContentController.view removeFromSuperview];
-    
-}
-
--(void)addNoContent: (UIViewController *)viewController setText:(NSString*)text setImage:(UIImage *)contentImage setColor:(UIColor *)color setSecondColor:(UIColor *)secondColor noContentController:(NoContent *)noContentController {
-    
-    float width = viewController.view.frame.size.width;
-    float height = noContentController.view.frame.size.height;
-    float xValue = 0;
-    float yValue = viewController.view.frame.size.height/2 - height/2;
-    
-    noContentController.view.frame = CGRectMake(xValue, yValue, width, height);
-    
-    [noContentController.view setBackgroundColor:[UIColor clearColor]];
-    
-    [noContentController.label setTextColor:[UIColor whiteColor]];
-    
-    noContentController.label.text = text;
-    noContentController.label.textColor = secondColor;
-    
-    noContentController.image.image = contentImage;
-    [noContentController.image setTintColor:color];
-    
-    [viewController.view addSubview:noContentController.view];
 }
 
 -(void)addTopbarColor: (UIViewController *)viewController {

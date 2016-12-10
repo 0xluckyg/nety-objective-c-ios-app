@@ -10,16 +10,13 @@
 #import "UIPrinciples.h"
 #import "N_CoreDataTableViewController.h"
 #import "BlockedFriendsCell.h"
-#import "NoContent.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "SWTableViewCell.h"
+#import "UIScrollView+EmptyDataSet.h"
 
-
-@interface BlockedFriends : N_CoreDataTableViewController <UISearchBarDelegate, SWTableViewCellDelegate>
+@interface BlockedFriends : N_CoreDataTableViewController <UISearchBarDelegate, SWTableViewCellDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @property (strong,nonatomic) UIPrinciples *UIPrinciple;
-
-@property (strong, nonatomic) NoContent *noContentController;
 
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 

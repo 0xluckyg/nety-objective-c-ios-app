@@ -25,33 +25,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self initializeSettings];
     [self initializeDesign];
     [self initializeUsers];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    //If no experiences visible, show noContent header
-    if ([[self fetchedResultsController].fetchedObjects count] == 0) {
-        
-        UIImage *contentImage = [[UIImage imageNamed:@"SpeechBubble"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        
-        if (![self.noContentController isDescendantOfView:self.view]) {
-            [self customAddNoContent:self setText:NSLocalizedString(@"myChatNoContent", nil) setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
-        }
-    } else {
-        [self.UIPrinciple removeNoContent:self.noContentController];
-    }
-    
 }
 
 #pragma mark - Initialization
 //---------------------------------------------------------
 
-
-- (void)initializeSettings {
-    self.noContentController = [[NoContent alloc] init];
-}
 
 - (void)initializeDesign {
     
@@ -64,6 +44,10 @@
     //Set searchbar
     [self.searchBar setBarTintColor:[UIColor whiteColor]];
     [self.searchBar setPlaceholder:NSLocalizedString(@"chatSearchBar", nil)];
+    
+    self.table.emptyDataSetSource = self;
+    self.table.emptyDataSetDelegate = self;
+    self.table.tableFooterView = [UIView new];
 }
 
 
@@ -125,20 +109,39 @@
     
     [self configureCell:chatCell withObject:chat];
     
-    //If no experiences visible, show noContent header
-    if ([[self fetchedResultsController].fetchedObjects count] == 0) {
-        
-        UIImage *contentImage = [[UIImage imageNamed:@"SpeechBubble"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        
-        if (![self.noContentController isDescendantOfView:self.view]) {
-            [self customAddNoContent:self setText:NSLocalizedString(@"myChatNoContent", nil) setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor: self.UIPrinciple.defaultGray noContentController:self.noContentController];
-        }
-    } else {
-        [self.UIPrinciple removeNoContent:self.noContentController];
-    }
-    
     return chatCell;
 }
+
+- (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return -self.table.tableHeaderView.frame.size.height/2.0f - 22;
+}
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"NO CHATS";
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],
+                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"You can swipe left";
+    
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14.0f],
+                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                 NSParagraphStyleAttributeName: paragraph};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
 
 - (void)configureCell:(ChatCell*)cell withObject:(ChatRooms*)object
 {
@@ -336,28 +339,6 @@
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
     
     return date;
-}
-
--(void)customAddNoContent: (UIViewController *)viewController setText:(NSString*)text setImage:(UIImage *)contentImage setColor:(UIColor *)color setSecondColor:(UIColor *)secondColor noContentController:(NoContent *)noContentController {
-    
-    float width = viewController.view.frame.size.width;
-    float height = noContentController.view.frame.size.height;
-    float xValue = 0;
-    float yValue = (viewController.view.frame.size.height)/2 - height/2;
-    
-    noContentController.view.frame = CGRectMake(xValue, yValue, width, height);
-    
-    [noContentController.view setBackgroundColor:[UIColor clearColor]];
-    
-    [noContentController.label setTextColor:[UIColor whiteColor]];
-    
-    noContentController.label.text = text;
-    noContentController.label.textColor = secondColor;
-    
-    noContentController.image.image = contentImage;
-    [noContentController.image setTintColor:color];
-    
-    [viewController.view addSubview:noContentController.view];
 }
 
 //---------------------------------------------------------

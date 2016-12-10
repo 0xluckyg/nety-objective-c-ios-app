@@ -26,7 +26,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self initializeSettings];
     [self initializeDesign];
     [self initializeUsers];
 }
@@ -35,30 +34,11 @@
     
     self.navigationItem.title = NSLocalizedString(@"myNetworkTitle", nil);
     
-    //If no experiences visible, show noContent header
-    if ([[self fetchedResultsController].fetchedObjects count] == 0) {
-        
-        UIImage *contentImage = [[UIImage imageNamed:@"Friend"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        
-        if (![self.noContentController isDescendantOfView:self.view]) {
-            [self.UIPrinciple addNoContent:self setText:NSLocalizedString(@"myNetworkNoContent", nil) setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
-        }
-    } else {
-        [self.UIPrinciple removeNoContent:self.noContentController];
-    }
-    
-    
 }
 
 
 #pragma mark - Initialization
 //---------------------------------------------------------
-
-
-- (void)initializeSettings {
-    self.noContentController = [[NoContent alloc] init];
-
-}
 
 - (void)initializeDesign {
     
@@ -81,7 +61,9 @@
     
     [self.navigationController.navigationBar setItems:@[navItem]];
 
-    
+    self.table.emptyDataSetSource = self;
+    self.table.emptyDataSetDelegate = self;
+    self.table.tableFooterView = [UIView new];
     
     //Set searchbar
     [self.searchBar setBarTintColor:[UIColor whiteColor]];
@@ -100,18 +82,6 @@
     
     id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
 
-    if ([sectionInfo numberOfObjects] == 0) {
-        
-        UIImage *contentImage = [[UIImage imageNamed:@"Friend"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        
-        if (![self.noContentController isDescendantOfView:self.view]) {
-            [self.UIPrinciple addNoContent:self setText:NSLocalizedString(@"myNetworkNoContent", nil) setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
-        }
-    } else {
-        [self.UIPrinciple removeNoContent:self.noContentController];
-        
-    }
-    
     return [sectionInfo numberOfObjects];
 }
 
@@ -123,19 +93,7 @@
     Users *user = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     
     [self configureCell:myNetworkCell withObject:user];
-    
-    //If no experiences visible, show noContent header
-    if ([[self fetchedResultsController].fetchedObjects count] == 0) {
-        
-        UIImage *contentImage = [[UIImage imageNamed:@"Friend"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        
-        if (![self.noContentController isDescendantOfView:self.view]) {
-            [self.UIPrinciple addNoContent:self setText:NSLocalizedString(@"myNetworkNoContent", nil) setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
-        }
-    } else {
-        [self.UIPrinciple removeNoContent:self.noContentController];
-    }
-    
+
     return myNetworkCell;
 }
 
@@ -250,19 +208,47 @@
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
-    if ([[self fetchedResultsController].fetchedObjects count] == 0) {
-        
-        UIImage *contentImage = [[UIImage imageNamed:@"Location"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        
-        if (![self.noContentController isDescendantOfView:self.view]) {
-            [self.UIPrinciple addNoContent:self setText:NSLocalizedString(@"nobodyNearYou", nil) setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
-        }
-    } else {
-        [self.UIPrinciple removeNoContent:self.noContentController];
-    }
-    
 
     return _fetchedResultsController;
+}
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"NO CONNECTIONS YET";
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],
+                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"You can swipe right on your recent chats to add people to your contact";
+    
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14.0f],
+                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                 NSParagraphStyleAttributeName: paragraph};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (CAAnimation *)imageAnimationForEmptyDataSet:(UIScrollView *)scrollView
+{
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath: @"transform"];
+    
+    animation.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
+    animation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeRotation(M_PI_2, 0.0, 0.0, 1.0)];
+    
+    animation.duration = 0.25;
+    animation.cumulative = YES;
+    animation.repeatCount = MAXFLOAT;
+    
+    return animation;
 }
 
 //Close cell when other is cell is opened

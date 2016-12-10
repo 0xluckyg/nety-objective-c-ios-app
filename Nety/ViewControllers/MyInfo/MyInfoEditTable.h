@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "UIPrinciples.h"
-#import "NoContent.h"
 #import "MyInfoEditTable.h"
 #import "MyInfoEditExperience.h"
 #import "MyInfoEditTableCell.h"
@@ -37,8 +36,6 @@
 
 
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
-
-@property (strong, nonatomic) NoContent *noContentController;
 
 
 //LIB CLASSES----------------------------------------

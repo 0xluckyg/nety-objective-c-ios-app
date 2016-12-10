@@ -14,6 +14,7 @@
 #import "ChatCell.h"
 #import "ChatRooms.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "UIScrollView+EmptyDataSet.h"
 
 @import Firebase;
 
@@ -23,7 +24,8 @@
 
 @end
 
-@interface MyChats : N_CoreDataTableViewController <UISearchBarDelegate, SWTableViewCellDelegate>
+@interface MyChats : N_CoreDataTableViewController <UISearchBarDelegate, SWTableViewCellDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
+
 
 
 //VARIABLES----------------------------------------
@@ -35,9 +37,6 @@
 
 
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
-
-@property (strong, nonatomic) NoContent *noContentController;
-
 
 //LIB CLASSES----------------------------------------
 

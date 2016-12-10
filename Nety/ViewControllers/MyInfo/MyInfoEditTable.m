@@ -29,20 +29,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     
-    //If no experiences visible, show noContent header
-    if ([self.experienceArray count] == 0) {
-        
-        self.experienceArray = [[NSMutableArray alloc] init];
-        
-        UIImage *contentImage = [[UIImage imageNamed:@"LightBulb"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        
-        if (![self.noContentController isDescendantOfView:self.view]) {
-            [self.UIPrinciple addNoContent:self setText:NSLocalizedString(@"experienceNoContent", nil) setImage:contentImage setColor:[UIColor whiteColor] setSecondColor:[UIColor whiteColor] noContentController:self.noContentController];
-        }
-    } else {
-        [self.UIPrinciple removeNoContent:self.noContentController];
-    }
-    
     MyInfoEditExperience *experienceDataVC = [[MyInfoEditExperience alloc] init];
     [experienceDataVC setDelegate:self];
     
@@ -59,8 +45,6 @@
 
 
 - (void)initializeSettings {
-    
-    self.noContentController = [[NoContent alloc] init];
     
     editButtonClicked = YES;
     
@@ -156,16 +140,6 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.experienceArray removeObjectAtIndex:indexPath.row];
     [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-    
-    if ([self.experienceArray count] == 0) {
-        
-        //If deleted and array is 0
-        self.noContentController = [[NoContent alloc] init];
-        
-        UIImage *contentImage = [UIImage imageNamed:@"LightBulb"];
-        
-        [self.UIPrinciple addNoContent:self setText:NSLocalizedString(@"experienceNoContent", nil) setImage:contentImage setColor:[UIColor whiteColor] setSecondColor:[UIColor whiteColor] noContentController:self.noContentController];
-    }
     
 }
 

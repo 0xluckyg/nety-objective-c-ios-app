@@ -13,11 +13,11 @@
 #import "NetworkCell.h"
 #import "Profile.h"
 #import "MBProgressHUD.h"
-#import "NoContent.h"
-
 #import "N_CoreDataTableViewController.h"
+#import "UIScrollView+EmptyDataSet.h"
 
-@interface Network : N_CoreDataTableViewController <UISearchBarDelegate>
+@interface Network : N_CoreDataTableViewController <UISearchBarDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
+
 
 {
     UINavigationItem *navItem;
@@ -36,9 +36,6 @@
 //UTIL CLASSES----------------------------------------
 
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
-
-@property (strong, nonatomic) NoContent *noContentController;
-
 
 //LIB CLASSES----------------------------------------
 

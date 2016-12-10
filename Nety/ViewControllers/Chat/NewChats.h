@@ -11,10 +11,10 @@
 #import "UIPrinciples.h"
 #import "Messages.h"
 #import "ChatCell.h"
-#import "NoContent.h"
 #import "N_CoreDataTableViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "ChatRooms.h"
+#import "UIScrollView+EmptyDataSet.h"
 
 @protocol pushViewControllerProtocolFromNewChats <NSObject>
 
@@ -24,7 +24,7 @@
 
 @import Firebase;
 
-@interface NewChats : N_CoreDataTableViewController <SWTableViewCellDelegate, UISearchBarDelegate>
+@interface NewChats : N_CoreDataTableViewController <SWTableViewCellDelegate, UISearchBarDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 
 
@@ -37,8 +37,6 @@
 
 
 @property (strong, nonatomic) UIPrinciples *UIPrinciple;
-
-@property (strong, nonatomic) NoContent *noContentController;
 
 
 //LIB CLASSES----------------------------------------

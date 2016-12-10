@@ -1,3 +1,4 @@
+
 # Uncomment this line to define a global platform for your project
 
 target 'Nety' do
@@ -9,6 +10,7 @@ target 'Nety' do
     pod 'MBProgressHUD'
     pod 'APParallaxHeader'
     pod 'BEMCheckBox'
+    pod 'DZNEmptyDataSet'
     pod 'SDWebImage'
     pod 'Firebase/Core'
     pod 'Firebase/Auth'

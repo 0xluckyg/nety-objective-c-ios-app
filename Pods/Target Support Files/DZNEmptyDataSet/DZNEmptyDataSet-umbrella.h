@@ -10,8 +10,8 @@
 #endif
 #endif
 
-#import "UIScrollView+APParallaxHeader.h"
+#import "UIScrollView+EmptyDataSet.h"
 
-FOUNDATION_EXPORT double APParallaxHeaderVersionNumber;
-FOUNDATION_EXPORT const unsigned char APParallaxHeaderVersionString[];
+FOUNDATION_EXPORT double DZNEmptyDataSetVersionNumber;
+FOUNDATION_EXPORT const unsigned char DZNEmptyDataSetVersionString[];
 

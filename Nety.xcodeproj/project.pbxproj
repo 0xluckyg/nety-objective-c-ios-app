@@ -38,8 +38,6 @@
 		679B9EED1D236E1C00C426F2 /* MyInfoEditTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 679B9EEC1D236E1C00C426F2 /* MyInfoEditTable.m */; };
 		679B9EF01D2396A700C426F2 /* MyInfoEditTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 679B9EEF1D2396A700C426F2 /* MyInfoEditTableCell.m */; };
 		67B2400F1D40594600F011BB /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 67B2400E1D40594600F011BB /* Constants.m */; };
-		67CD9C2E1D3C75E800823701 /* NoContent.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67CD9C2D1D3C75E800823701 /* NoContent.xib */; };
-		67CD9C311D3C795600823701 /* NoContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CD9C301D3C795600823701 /* NoContent.m */; };
 		67D4AD5F1D26333D00F42B7F /* LoginSignup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67D4AD5E1D26333D00F42B7F /* LoginSignup.storyboard */; };
 		67D4AD621D26536000F42B7F /* MainPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D4AD611D26536000F42B7F /* MainPage.m */; };
 		67D4AD651D265A7E00F42B7F /* Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D4AD641D265A7E00F42B7F /* Login.m */; };
@@ -171,9 +169,6 @@
 		679B9EEF1D2396A700C426F2 /* MyInfoEditTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoEditTableCell.m; sourceTree = "<group>"; };
 		67B2400D1D40594600F011BB /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		67B2400E1D40594600F011BB /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
-		67CD9C2D1D3C75E800823701 /* NoContent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoContent.xib; sourceTree = "<group>"; };
-		67CD9C2F1D3C795600823701 /* NoContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoContent.h; sourceTree = "<group>"; };
-		67CD9C301D3C795600823701 /* NoContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoContent.m; sourceTree = "<group>"; };
 		67D4AD5E1D26333D00F42B7F /* LoginSignup.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginSignup.storyboard; sourceTree = "<group>"; };
 		67D4AD601D26536000F42B7F /* MainPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPage.h; sourceTree = "<group>"; };
 		67D4AD611D26536000F42B7F /* MainPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPage.m; sourceTree = "<group>"; };
@@ -313,9 +308,6 @@
 			children = (
 				E155F5311D763854001C1134 /* FBSDKShareKit.framework */,
 				E163EFB21D6C671D004374E3 /* linkedin-sdk.framework */,
-				67CD9C2D1D3C75E800823701 /* NoContent.xib */,
-				67CD9C2F1D3C795600823701 /* NoContent.h */,
-				67CD9C301D3C795600823701 /* NoContent.m */,
 				673E58741D6AAFA300D28F5B /* CAPSPageMenu.h */,
 				673E58751D6AAFA300D28F5B /* CAPSPageMenu.m */,
 				676B51AC1DE21AF0002B7B66 /* GeoFire */,
@@ -835,7 +827,6 @@
 				6792FA7B1D83468300A39111 /* Localizable.strings in Resources */,
 				67DD1AAF1D17C3EF00FBEA0F /* Profile.storyboard in Resources */,
 				67DD1A9F1D17BF7200FBEA0F /* MyNetwork.storyboard in Resources */,
-				67CD9C2E1D3C75E800823701 /* NoContent.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -923,7 +914,6 @@
 				8B1D570F1DE31D8B00E90636 /* ExperienceSignUpVC.m in Sources */,
 				8B1D57021DE31CD500E90636 /* Regex.m in Sources */,
 				E160047F1D7C0AE10098DFB1 /* ChatRooms.m in Sources */,
-				67CD9C311D3C795600823701 /* NoContent.m in Sources */,
 				E16004831D7C0AE10098DFB1 /* Msg.m in Sources */,
 				8BE1DF151DED150600A34524 /* AccountVCStep1.m in Sources */,
 				67B2400F1D40594600F011BB /* Constants.m in Sources */,

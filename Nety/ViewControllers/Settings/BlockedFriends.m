@@ -21,27 +21,6 @@
     // Do any additional setup after loading the view.
     
     [self initializeDesign];
-    [self initializeSettings];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    
-    //If no experiences visible, show noContent header
-    if ([[self fetchedResultsController].fetchedObjects count] == 0) {
-        
-        UIImage *contentImage = [[UIImage imageNamed:@"Friend"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        
-        if (![self.noContentController isDescendantOfView:self.view]) {
-            [self.UIPrinciple addNoContent:self setText:@"You do not have any blocked friends" setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
-        }
-    } else {
-        [self.UIPrinciple removeNoContent:self.noContentController];
-    }
-    
-}
-
-- (void)initializeSettings {
-    self.noContentController = [[NoContent alloc] init];
 }
 
 - (void)initializeDesign {
@@ -62,6 +41,10 @@
     
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"Back"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:normal target:self action:@selector(backButtonPressed)];
     self.navigationItem.leftBarButtonItem = leftButton;
+    
+    self.table.emptyDataSetSource = self;
+    self.table.emptyDataSetDelegate = self;
+    self.table.tableFooterView = [UIView new];
 }
 
 #pragma mark - Protocols and Delegates
@@ -70,18 +53,6 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
-    
-    if ([sectionInfo numberOfObjects] == 0) {
-        
-        UIImage *contentImage = [[UIImage imageNamed:@"Friend"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        
-        if (![self.noContentController isDescendantOfView:self.view]) {
-            [self.UIPrinciple addNoContent:self setText:@"You do not have any blocked friends" setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
-        }
-    } else {
-        [self.UIPrinciple removeNoContent:self.noContentController];
-        
-    }
     
     return [sectionInfo numberOfObjects];
 }
@@ -94,18 +65,6 @@
     Users *user = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     
     [self configureCell:blockedFriendsCell withObject:user];
-    
-    //If no experiences visible, show noContent header
-    if ([[self fetchedResultsController].fetchedObjects count] == 0) {
-        
-        UIImage *contentImage = [[UIImage imageNamed:@"Friend"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        
-        if (![self.noContentController isDescendantOfView:self.view]) {
-            [self.UIPrinciple addNoContent:self setText:@"You do not have any blocked friends" setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
-        }
-    } else {
-        [self.UIPrinciple removeNoContent:self.noContentController];
-    }
     
     return blockedFriendsCell;
 }
@@ -175,19 +134,33 @@
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
-    if ([[self fetchedResultsController].fetchedObjects count] == 0) {
-        
-        UIImage *contentImage = [[UIImage imageNamed:@"Location"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        
-        if (![self.noContentController isDescendantOfView:self.view]) {
-            [self.UIPrinciple addNoContent:self setText:@"You do not have any blocked friends" setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
-        }
-    } else {
-        [self.UIPrinciple removeNoContent:self.noContentController];
-    }
-    
     
     return _fetchedResultsController;
+}
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"NO BLOCKED FRIENDS";
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],
+                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"You can swipe right on your chat to block the person";
+    
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14.0f],
+                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                 NSParagraphStyleAttributeName: paragraph};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
 
 //Close cell when other is cell is opened

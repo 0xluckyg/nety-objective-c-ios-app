@@ -46,18 +46,6 @@
 
     navItem.title = navItem.title = [self calculateDistanceToDescription];
     
-    //If no experiences visible, show noContent header
-    if ([[self fetchedResultsController].fetchedObjects count] == 0) {
-        
-        UIImage *contentImage = [[UIImage imageNamed:@"Location"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        
-        if (![self.noContentController isDescendantOfView:self.view]) {
-            [self.UIPrinciple addNoContent:self setText:NSLocalizedString(@"nobodyNearYou", nil) setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
-        }
-    } else {
-        [self.UIPrinciple removeNoContent:self.noContentController];
-    }
-    
     _fetchedResultsController = nil;
     _fetchedResultsController.delegate = nil;
     [self.table reloadData];
@@ -80,8 +68,7 @@
     }
     
     [self calculateSliderDistanceValue];
-    
-    self.noContentController = [[NoContent alloc] init];
+
 }
 
 - (void)initializeDesign {
@@ -123,6 +110,10 @@
 
     
     [self.searchBar setPlaceholder:NSLocalizedString(@"networkSearchbar", nil)];
+    
+    self.table.emptyDataSetSource = self;
+    self.table.emptyDataSetDelegate = self;
+    self.table.tableFooterView = [UIView new];
 }
 
 
@@ -192,18 +183,6 @@
     
     [self configureCell:networkCell withObject:user];
         
-    //If no experiences visible, show noContent header
-    if ([[self fetchedResultsController].fetchedObjects count] == 0) {
-        
-        UIImage *contentImage = [[UIImage imageNamed:@"Friend"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        
-        if (![self.noContentController isDescendantOfView:self.view]) {
-           [self.UIPrinciple addNoContent:self setText:NSLocalizedString(@"nobodyNearYou", nil) setImage:contentImage setColor:self.UIPrinciple.netyGray setSecondColor:self.UIPrinciple.defaultGray noContentController:self.noContentController];
-        }
-    } else {
-        [self.UIPrinciple removeNoContent:self.noContentController];
-    }
-    
     if ([user.isFriend isEqualToNumber:[NSNumber numberWithBool:YES]]) {
         networkCell.networkUserImage.layer.borderWidth = 5;
         networkCell.networkUserImage.layer.borderColor = self.UIPrinciple.netyTheme.CGColor;
@@ -285,6 +264,30 @@
     
 }
 
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"NO PEOPLE AROUND";
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],
+                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"You can try sliding the bar on the bottom.";
+    
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14.0f],
+                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                 NSParagraphStyleAttributeName: paragraph};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
 
 
 //Hide keyboard when search button pressed
