@@ -15,6 +15,7 @@
 #import "MBProgressHUD.h"
 #import "N_CoreDataTableViewController.h"
 #import "UIScrollView+EmptyDataSet.h"
+#import "ThinSlider.h"
 
 @interface Network : N_CoreDataTableViewController <UISearchBarDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 

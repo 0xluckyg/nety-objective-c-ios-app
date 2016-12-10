@@ -73,6 +73,7 @@
 		8B1D57171DE31DA400E90636 /* AccountSignUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D57141DE31DA400E90636 /* AccountSignUpVC.m */; };
 		8B1D57181DE31DA400E90636 /* AddExperienceSignUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D57161DE31DA400E90636 /* AddExperienceSignUpVC.m */; };
 		8B35F7AB1DED3BE3007CEF94 /* AccountVCStep5.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B35F7AA1DED3BE3007CEF94 /* AccountVCStep5.m */; };
+		8BC73AD61DFBA4C3008F48AA /* ThinSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC73AD51DFBA4C3008F48AA /* ThinSlider.m */; };
 		8BE1DF151DED150600A34524 /* AccountVCStep1.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1DF141DED150600A34524 /* AccountVCStep1.m */; };
 		8BE1DF191DED169000A34524 /* AccountVCStep2.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1DF161DED169000A34524 /* AccountVCStep2.m */; };
 		8BE1DF1A1DED169000A34524 /* AccountVCStep3.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE1DF171DED169000A34524 /* AccountVCStep3.m */; };
@@ -232,6 +233,8 @@
 		8B1D57151DE31DA400E90636 /* AddExperienceSignUpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddExperienceSignUpVC.h; sourceTree = "<group>"; };
 		8B1D57161DE31DA400E90636 /* AddExperienceSignUpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddExperienceSignUpVC.m; sourceTree = "<group>"; };
 		8B35F7AA1DED3BE3007CEF94 /* AccountVCStep5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountVCStep5.m; sourceTree = "<group>"; };
+		8BC73AD41DFBA4C3008F48AA /* ThinSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThinSlider.h; sourceTree = "<group>"; };
+		8BC73AD51DFBA4C3008F48AA /* ThinSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThinSlider.m; sourceTree = "<group>"; };
 		8BE1DF131DED150600A34524 /* AccountVCSteps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountVCSteps.h; sourceTree = "<group>"; };
 		8BE1DF141DED150600A34524 /* AccountVCStep1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountVCStep1.m; sourceTree = "<group>"; };
 		8BE1DF161DED169000A34524 /* AccountVCStep2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountVCStep2.m; sourceTree = "<group>"; };
@@ -632,6 +635,8 @@
 				8B1D56FB1DE31CC600E90636 /* SignUpTextField.m */,
 				8B1D56FC1DE31CC600E90636 /* SignUpTextView.h */,
 				8B1D56FD1DE31CC600E90636 /* SignUpTextView.m */,
+				8BC73AD41DFBA4C3008F48AA /* ThinSlider.h */,
+				8BC73AD51DFBA4C3008F48AA /* ThinSlider.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -900,6 +905,7 @@
 				673E2BB31D6E64C000AB139F /* ChatButtonCell.m in Sources */,
 				E16004801D7C0AE10098DFB1 /* ALL+CoreDataProperties.m in Sources */,
 				67DD1AA21D17BFC300FBEA0F /* Chat.m in Sources */,
+				8BC73AD61DFBA4C3008F48AA /* ThinSlider.m in Sources */,
 				67DA18911DDF9443000F9318 /* LocationShareModel.m in Sources */,
 				67602F501D2EC75F00DA2F3A /* Messages.m in Sources */,
 				6733390E1D20B5ED00A8009F /* ChatCell.m in Sources */,

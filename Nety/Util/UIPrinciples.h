@@ -19,6 +19,7 @@
 @property (nonatomic, strong) UIColor *lightGray;
 @property (nonatomic, strong) UIColor *linkedInBlue;
 @property (nonatomic, strong) UIColor *facebookBlue;
+@property (nonatomic, assign) CGFloat thinSliderTrackHeight;
 
 @property (nonatomic, strong) UIFont *netyFont;
 
@@ -35,6 +36,5 @@
 - (void)setTabBarVisible:(BOOL)visible animated:(BOOL)animated sender:(UIViewController *)viewController completion:(void (^)(BOOL))completion;
 
 - (BOOL)tabBarIsVisible: (UIViewController *)viewController;
-
 
 @end

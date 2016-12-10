@@ -29,6 +29,8 @@
         
         _netyFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:18.0f];
         
+        _thinSliderTrackHeight = 1;
+        
     }
     return self;
 }
@@ -127,5 +129,6 @@
     
     return scaledImage;
 }
+
 
 @end
