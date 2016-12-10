@@ -107,4 +107,8 @@
     [self.navigationController pushViewController:messageVC animated:YES];
 }
 
+-(UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
+}
+
 @end
