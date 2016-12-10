@@ -602,11 +602,11 @@
 		67DD1AB01D17D3DF00FBEA0F /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				67DA188B1DDF93EB000F9318 /* LocationManager */,
 				8B178C6E1DE98384001ADA0E /* CrossFadeSegue.h */,
 				8B178C6F1DE98384001ADA0E /* CrossFadeSegue.m */,
 				8B1D57001DE31CD500E90636 /* Regex.h */,
 				8B1D57011DE31CD500E90636 /* Regex.m */,
-				67DA188B1DDF93EB000F9318 /* LocationManager */,
 				67DD1AB11D17D40D00FBEA0F /* UIPrinciples.h */,
 				67DD1AB21D17D40D00FBEA0F /* UIPrinciples.m */,
 				67B2400D1D40594600F011BB /* Constants.h */,

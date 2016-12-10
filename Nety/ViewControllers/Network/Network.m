@@ -84,7 +84,7 @@
     
     self.slider.continuous = YES;
     
-    [self.slider setTintColor:self.UIPrinciple.netyTheme];
+    [self.slider setTintColor:self.UIPrinciple.netyTheme];        
     
     float sliderViewWidth = self.sliderView.frame.size.width;
     

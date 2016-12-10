@@ -72,11 +72,11 @@
     
     self.navigationItem.leftBarButtonItem = leftButton;
     
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Report" style:UIBarButtonItemStylePlain target:self action:@selector(reportUser)];
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"Exclamation"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:normal target:self action:@selector(reportUser)];
     
     [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil]
      setTitleTextAttributes:
-     @{NSForegroundColorAttributeName:[UIColor whiteColor],
+     @{NSForegroundColorAttributeName:[UIColor blackColor],
        NSFontAttributeName:                                    [self.UIPrinciple netyFontWithSize:18]
        }
      forState:UIControlStateNormal];
