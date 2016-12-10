@@ -81,9 +81,9 @@
     
     if (![photoUrl isEqualToString:kDefaultUserLogoName]) {
         NSURL *profileImageUrl = [NSURL URLWithString:photoUrl];
-        [self.profileImageView sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:kDefaultUserLogoName]];
+        [self.profileImageView sd_setImageWithURL:profileImageUrl placeholderImage:[UIImage imageNamed:@"ProfileDefaultImage"]];
     } else {
-        self.profileImageView.image = [UIImage imageNamed:kDefaultUserLogoName];
+        self.profileImageView.image = [UIImage imageNamed:@"ProfileDefaultImage"];
     }
     
     [self.profileImageView setFrame:CGRectMake(0, 0, width, height)];
